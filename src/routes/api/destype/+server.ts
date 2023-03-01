@@ -1,0 +1,61 @@
+import { json } from "@sveltejs/kit";
+import type { RequestHandler } from "./$types";
+
+import français from "./francais.json";
+import english from "./english.json";
+import español from "./espanol.json";
+import italiano from "./italiano.json";
+import Русский from "./Русский.json";
+
+type Language = 'français' | 'english' | 'español' | 'italiano' | 'Русский'
+
+const languages = {
+    'français': français as any[],
+    'español': español as any[],
+    'english': english as any[],
+    'italiano': italiano as any[],
+    'Русский': Русский as any[],
+}
+
+export const GET: RequestHandler = async ({ url }) => {
+    const language:string = url.searchParams.get('language') as string
+    const limit = Number(url.searchParams.get('limit'))
+
+    const words = selectRandomElements(languages[language as Language], limit)
+    // const words = withoutDuplicates(languages[language as Language], limit)
+
+    return json(words)
+}
+
+function selectRandomElements(array: any[], count: number) {
+    const selected = [];
+    let remaining = shuffleArray(array.slice()); // Make a copy of the array to avoid modifying the original
+
+    while (selected.length < count) {
+    if (remaining.length === 0) {
+        // If all elements have been selected, shuffle the original array and start over
+        remaining = shuffleArray(array.slice());
+    }
+
+    const index = Math.floor(Math.random() * remaining.length);
+    const element = remaining.splice(index, 1)[0];
+
+    selected.push(element);
+    }
+
+    return selected;
+}
+
+function shuffleArray(array: any[]) {
+    // Implementation of the Fisher-Yates shuffle algorithm
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
+}
+
+function withoutDuplicates(arr: any[], limit:number) {
+    return arr.filter((value, index) => arr.indexOf(value) === index);
+}

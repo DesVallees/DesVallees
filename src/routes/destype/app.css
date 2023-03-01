@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: tomato;
+    --fg-100: hsl(220 20% 98%);
+    --fg-200: hsl(220 20% 80%);
+    --bg-100: hsl(220 20% 14%);
+}
+
+html,
+body,
+#app {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--fg-100);
+    background: var(--bg-100);
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    color: hsla(210, 20%, 98%, 0.4);
+    background: none;
+    border: none;
+    box-shadow: 0 0 3px hsla(210, 20%, 98%, 0.4);
+    transition: all 0.3s ease;
+    padding: .3rem;
+    border-radius: 5px;
+    user-select: none;
+}
+
+button:hover, 
+button:focus {
+    box-shadow: 0 0 3px hsla(210, 20%, 98%, 1);
+    color: hsla(210, 20%, 98%, 1);
+}
+
+kbd {
+    background-color: var(--fg-100);
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+    color: #333;
+    display: inline-block;
+    font-weight: 700;
+    padding: 2px 5px;
+    white-space: nowrap;
+}
+
+ion-icon {
+    pointer-events: none;
+    font-size: 1.5em;
+    color: inherit;
+    visibility: visible;
+}
