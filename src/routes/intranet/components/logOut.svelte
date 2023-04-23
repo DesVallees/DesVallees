@@ -1,22 +1,13 @@
 <script lang="ts">
-	import { PublicClientApplication } from "@azure/msal-browser";
-	import { PUBLIC_AUTHORITY, PUBLIC_CLIENTID, PUBLIC_CLIENTSECRET, PUBLIC_REDIRECTURI } from "$env/static/public";
+	import { PublicClientApplication, type Configuration } from "@azure/msal-browser";
 	import { username } from "../stores";
+	import { fade } from "svelte/transition";
 
+    export let msalConfig:Configuration;
 
-    const msalConfig = {
-        auth: {
-            clientId: PUBLIC_CLIENTID,
-            authority: PUBLIC_AUTHORITY,
-            redirectUri: PUBLIC_REDIRECTURI,
-            clientSecret: PUBLIC_CLIENTSECRET
-        },
-        cache: {
-            cacheLocation: "localStorage",
-            storeAuthStateInCookie: false,
-        },
-    };
-
+    export let delay:number = 0;
+    export let duration:number | undefined = undefined;
+    
     const myMSALObj = new PublicClientApplication(msalConfig);
     
     function logOut() {
@@ -30,4 +21,4 @@
     }
 </script>
 
-<button on:click={logOut}>Log Out</button>
+<button class="button" in:fade={{delay: delay, duration: duration}} on:click={logOut}>Log Out</button>

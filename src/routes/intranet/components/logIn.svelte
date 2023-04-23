@@ -1,26 +1,14 @@
 <script lang="ts">
-	import { PublicClientApplication } from "@azure/msal-browser";
+	import { PublicClientApplication, type Configuration } from "@azure/msal-browser";
 	import { dictionary, username } from "../stores";
 	import toast from "svelte-french-toast";
-	import { PUBLIC_AUTHORITY, PUBLIC_CLIENTID, PUBLIC_CLIENTSECRET, PUBLIC_REDIRECTURI } from "$env/static/public";
-	import { fade, scale } from "svelte/transition";
+	import { fade } from "svelte/transition";
 
     export let delay:number = 0;
     export let duration:number | undefined = undefined;
 
 
-    const msalConfig = {
-        auth: {
-            clientId: PUBLIC_CLIENTID,
-            authority: PUBLIC_AUTHORITY,
-            redirectUri: PUBLIC_REDIRECTURI,
-            clientSecret: PUBLIC_CLIENTSECRET
-        },
-        cache: {
-            cacheLocation: "localStorage",
-            storeAuthStateInCookie: false,
-        },
-    };
+    export let msalConfig:Configuration;
     
     const myMSALObj = new PublicClientApplication(msalConfig);
     

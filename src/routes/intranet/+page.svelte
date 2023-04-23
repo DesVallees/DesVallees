@@ -3,25 +3,14 @@
 	import Threlte from "./components/threlte.svelte";
 	import LogIn from "./components/logIn.svelte";
 	import { dictionary, sleep, username } from "./stores";
-	import { PUBLIC_AUTHORITY, PUBLIC_CLIENTID, PUBLIC_CLIENTSECRET, PUBLIC_REDIRECTURI } from "$env/static/public";
 	import SetUp from "./components/setUp.svelte";
 	import Typewriter from "./components/typewriter.svelte";
 	import { onMount } from "svelte";
 	import { fade, scale } from "svelte/transition";
-	import BackgroundCircle from "../destype/components/backgroundCircle.svelte";
+	import BackgroundCircle from "./components/backgroundCircle.svelte";
+	import LogOut from "./components/logOut.svelte";
 
-    const msalConfig = {
-        auth: {
-            clientId: PUBLIC_CLIENTID,
-            authority: PUBLIC_AUTHORITY,
-            redirectUri: PUBLIC_REDIRECTURI,
-            clientSecret: PUBLIC_CLIENTSECRET
-        },
-        cache: {
-            cacheLocation: "localStorage",
-            storeAuthStateInCookie: false,
-        },
-    };
+    export let data;
     
     const loginRequest = {
         scopes: ["User.Read"]
@@ -33,7 +22,7 @@
 
 
     
-    const myMSALObj = new PublicClientApplication(msalConfig);
+    const myMSALObj = new PublicClientApplication(data.msalConfig);
     
     function selectAccount() {
         const currentAccounts = myMSALObj.getAllAccounts();
@@ -125,6 +114,7 @@
     {#if $username}
 
         <button on:click={seeProfile}>See Profile</button>
+        <LogOut msalConfig={data.msalConfig} />
 
         {:else}
 
@@ -141,7 +131,7 @@
             />
 
             <section>
-                <LogIn delay={1000} duration={introDuration}/>
+                <LogIn delay={1000} duration={introDuration} msalConfig={data.msalConfig}/>
                 <a in:fade={{delay: 1500, duration:introDuration}} class="button ghost" target="_blank" href="https://cantolegal.com/en/">{$dictionary.goToOurWebsite}</a>
             </section>
             
