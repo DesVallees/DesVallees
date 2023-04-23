@@ -1,0 +1,52 @@
+export const translator = {
+    english: {
+        error: `An error occurred.`,
+        logInWithMicrosoft: 'Log in with Microsoft',
+        copyright: 'Copyright',
+        lawOfficeOfKatherineCanto: 'Law Office Of Katherine Canto',
+        cantoLegalIntranet: 'Canto Legal Intranet',
+        thePlaceWhereYouCanFind: 'The place where you can find ',
+        subtitlePhrases: [
+            'information about your department.',
+            'policies and procedures.',
+            'organization charts.',
+            'announcements.',
+            'your duties and rights.',
+            'the requirements and benefits of our clients.',
+            'labor benefits.',
+            `our team's birthdays.`,
+            'our ethics policy.'
+        ],
+        goToOurWebsite: 'Go to our website',
+        unitedStatesFlag: 'united states flag',
+        spanishFlag: 'spanish flag',
+        multipleAccountsDetected: 'Multiple accounts detected.',
+        logoCantoLegal: 'Logo Canto Legal',
+        logOut: 'Log Out',
+    },
+    español: {
+        error: 'Ha ocurrido un error.',
+        logInWithMicrosoft: 'Iniciar sesión con Microsoft',
+        copyright: 'Derechos de autor',
+        lawOfficeOfKatherineCanto: 'Oficina Legal de Katherine Canto',
+        cantoLegalIntranet: 'Intranet de Canto Legal',
+        thePlaceWhereYouCanFind: 'El lugar donde puedes encontrar ',
+        subtitlePhrases: [
+            'información acerca de tu departamento.',
+            'políticas y procedimientos.',
+            'organigramas.',
+            'anuncios.',
+            'tus deberes y derechos.',
+            'los requisitos y beneficios de nuestros clientes.',
+            'beneficios laborales.',
+            'los cumpleaños de nuestro equipo.',
+            'nuestra política de ética.'
+        ],
+        goToOurWebsite: 'Visita nuestro sitio web',
+        unitedStatesFlag: 'bandera de los Estados Unidos',
+        spanishFlag: 'bandera de España',
+        multipleAccountsDetected: 'Se han detectado varias cuentas.',
+        logoCantoLegal: 'Logo de Canto Legal',
+        logOut: 'Cerrar sesión',
+    }
+}

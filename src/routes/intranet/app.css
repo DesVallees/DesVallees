@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+:root {
+    --main: #1d212a;
+    --content: #F7F7FF;
+    --interative: #D44508;
+    --interativeDim: #d44508b7;
+}
+
+::selection{
+    background-color: var(--interativeDim);
+    color: var(--content);
+}
+
+html,
+body,
+#app {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    color: var(--content);
+    background: var(--main);
+    padding: 0 10vw;
+    position: relative;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+ion-icon {
+    pointer-events: none;
+    font-size: 1.5em;
+    color: inherit;
+    visibility: visible;
+}
+
+button,
+input {
+    outline: none;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 40px;
+    margin: 0 5px;
+    gap: 10px;
+
+    background-color: var(--interativeDim);
+    border-radius: 15px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 35px;
+
+    width: fit-content;
+    height: fit-content;
+
+    transition: all .2s;
+}
+
+.button:hover,
+.button:focus {
+    background-color: var(--interative);
+    padding: 5px 45px;
+    margin: 0;
+}
+
+.button.ghost {
+    background-color: transparent;
+    border: var(--interative) 1px solid;
+}
+
+.button.ghost:hover,
+.button.ghost:focus {
+    background-color: #d4450811;
+}
+
+.link {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 35px;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    border-radius: 4px;
+    background-color: var(--interative);
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
+}
+
+.link:hover::before,
+.link:focus::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    width: fit-content;
+    height: fit-content;
+}
+
+h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 98px;
+    line-height: 123px;
+}
+
+p{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 35px;
+}
+
+img {
+    width: fit-content;
+    height: fit-content;
+}
+
+@media only screen and (max-width: 1024px) {
+    h1 {
+        line-height: 100px;
+    }
+
+    body {
+        padding: 50px;
+    }
+}

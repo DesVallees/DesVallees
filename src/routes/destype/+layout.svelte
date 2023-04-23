@@ -8,6 +8,7 @@
 
 <svelte:head>
     <title>DesType</title>
+    <link rel="icon" href="https://fav.farm/🤓" />
 </svelte:head>
 
 <Toaster/>

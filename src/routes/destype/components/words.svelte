@@ -356,11 +356,11 @@
         transition: all .3s ease;
     }
 
-    .letter:global([data-letter='correct']) {
+    :global(.letter[data-letter='correct']) {
         opacity: 1;
     }
 
-    .letter:global([data-letter='incorrect']) {
+    :global(.letter[data-letter='incorrect']) {
         opacity: 1;
         color: var(--primary);
     }

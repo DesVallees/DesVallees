@@ -1,6 +1,6 @@
 export const translator = {
     français: {
-        loading: `Compter en sens inverse à partir de l'infini...`,
+        loading: `En train de compter en sens inverse à partir de l'infini...`,
         error: `Une erreur s'est produite.`,
         highScore: 'Meilleur Score',
         wpm: 'MPM',
