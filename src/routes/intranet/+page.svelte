@@ -1,39 +1,50 @@
 <script lang="ts">
-    import { PublicClientApplication, InteractionRequiredAuthError } from "@azure/msal-browser";
+    import { InteractionRequiredAuthError, PublicClientApplication } from "@azure/msal-browser";
 	import Threlte from "./components/threlte.svelte";
 	import LogIn from "./components/logIn.svelte";
-	import { dictionary, sleep, username } from "./stores";
+	import { dictionary, profile, username, section } from "./stores";
 	import SetUp from "./components/setUp.svelte";
 	import Typewriter from "./components/typewriter.svelte";
 	import { onMount } from "svelte";
-	import { fade, scale } from "svelte/transition";
-	import BackgroundCircle from "./components/backgroundCircle.svelte";
+	import { fade } from "svelte/transition";
 	import LogOut from "./components/logOut.svelte";
+	import Article from "./components/article.svelte";
+	import Person from "./components/person.svelte";
 
     export let data;
-    
+
+    let body: HTMLBodyElement;
+    $: $section, body ? body.scrollTop = 0 : '';
+
+    const myMSALObj = new PublicClientApplication(data.msalConfig);
+
     const loginRequest = {
         scopes: ["User.Read"]
     };
-
-    const graphConfig = {
-        graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
-    };
-
-
     
-    const myMSALObj = new PublicClientApplication(data.msalConfig);
-    
-    function selectAccount() {
-        const currentAccounts = myMSALObj.getAllAccounts();
-        if (currentAccounts.length === 0) {
-            return;
-        } else if (currentAccounts.length > 1) {
-            console.warn("Multiple accounts detected.")
-        } else if (currentAccounts.length === 1) {
-            $username = currentAccounts[0].username;
+    const currentAccounts = myMSALObj.getAllAccounts();
+    if (currentAccounts.length > 1) {
+        console.warn("Multiple accounts detected.")
+    } else if (currentAccounts.length === 1) {
+        $username = currentAccounts[0].username;
+    }
+
+    $: $username, getProfileInfo();
+
+    function getProfileInfo () {
+        if ($username) {
+            getTokenPopup(loginRequest)
+                .then(response => {
+                    if (response) {
+                        callMSGraph(graphMeEndpoint, response.accessToken, setProfile);
+                    }
+                }).catch(error => {
+                    console.error(error);
+                })
         }
     }
+
+    const graphMeEndpoint:string = "https://graph.microsoft.com/v1.0/me"
 
     async function getTokenPopup(request:any) {
         request.account = myMSALObj.getAccountByUsername($username);
@@ -72,25 +83,12 @@
             .catch(error => console.log(error));
     }
 
-    function seeProfile() {
-        getTokenPopup(loginRequest)
-            .then(response => {
-                if (response) {
-                    callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-                }
-            }).catch(error => {
-                console.error(error);
-            });
-    }
-
-    selectAccount();
-
-    function updateUI(data: any) {
-        const important = {
+    function setProfile(data: any) {
+        $profile = {
             fullName: data.displayName,
             firstName: data.givenName,
             id: data.id,
-            jobTitle: data.jobTitle,
+            jobTitle: data.jobTitle || $dictionary.cantoLegalEmployee,
             mail: data.mail,
             mobilePhone: data.mobilePhone,
             officeLocation: data.officeLocation,
@@ -98,7 +96,33 @@
             surname: data.surname,
             userPrincipalName: data.userPrincipalName,
             businessPhones: data.businessPhones,
+            profilePicture: letterToAvatarUrl(data.givenName.substring(0,1)),
+            state: $dictionary.defaultState
         }
+    }
+
+    function letterToAvatarUrl(letter: string): string {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        canvas.width = 100;
+        canvas.height = 100;
+
+        if (!context) {
+            return ''
+        }
+
+        context.fillStyle = '#D44508';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.font = 'bold 50px Outfit';
+        context.fillStyle = '#F7F7FF';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillText(letter.toUpperCase(), canvas.width / 2, canvas.height / 2);
+
+        const imageDataUrl = canvas.toDataURL();
+
+        return imageDataUrl;
     }
 
     const introDuration:number = 1000;
@@ -108,13 +132,39 @@
 
 </script>
 
+<svelte:body bind:this={body} />
 
 {#if ready}
 
     {#if $username}
 
-        <button on:click={seeProfile}>See Profile</button>
-        <LogOut msalConfig={data.msalConfig} />
+        {#if $section === 'general'}
+            
+            <div class="general" in:fade>
+
+                <Article title={$dictionary.subtitlePhrases[1]} author="Canto Legal" profilePicture="https://clappforms.web.app/favicon-32x32.png" content={$dictionary.articles.policies}/>
+
+            </div>
+
+            {:else if $section === 'people'}
+
+            <div class="people" in:fade>
+
+                {#if $profile}
+                    {#each Array(20) as i}
+                        <Person name={$profile.fullName} profilePicture={$profile.profilePicture} jobTitle={$profile.jobTitle} state={$profile.state}/>
+                    {/each}
+                {/if}
+
+            </div>
+
+            {:else if $section === 'home'}
+
+            <div class="general">
+                <LogOut msalConfig={data.msalConfig} style="display:flex" />
+            </div>
+
+        {/if}
 
         {:else}
 
@@ -147,19 +197,31 @@
 
 {/if}
 
-<BackgroundCircle />
-<BackgroundCircle color="#A2B9B930" coordinates={{left: '1500px', top: '500px'}} />
-
 <style>
     div {
-        display: grid;
+        display: flex;
+        flex-direction: column;
         gap: 1em;
         padding-bottom: 2em;
     }
-
+    
     section {
         display: flex;
         gap: 2em;
         flex-wrap: wrap;
+    }
+    
+    .general {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    .people{
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding-bottom: 0;
     }
 </style>

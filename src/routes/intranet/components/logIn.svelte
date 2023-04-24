@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PublicClientApplication, type Configuration } from "@azure/msal-browser";
-	import { dictionary, username } from "../stores";
+	import { dictionary, profile, username } from "../stores";
 	import toast from "svelte-french-toast";
 	import { fade } from "svelte/transition";
 
@@ -21,6 +21,7 @@
                 style: 'border-radius: 25px; background: var(--fg-200); font-size: 1.1rem; font-family: inherit; text-align: center;',
                 duration: 5000
             })
+            $username = currentAccounts[0].username;
         } else if (currentAccounts.length === 1) {
             $username = currentAccounts[0].username;
         }
