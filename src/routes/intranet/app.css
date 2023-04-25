@@ -9,6 +9,12 @@
     font-family: 'Outfit', sans-serif;
 }
 
+*:focus-visible{
+    outline: solid 4px var(--content);
+    outline-offset: 5px;
+    border-radius: 5px;
+}
+
 :root {
     --main: #1d212a;
     --mainDim: #1d212ab7;
@@ -33,9 +39,8 @@ body,
 body {
     color: var(--content);
     background: var(--main);
-    padding: 0 10vw;
     position: relative;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 ion-icon {
@@ -43,6 +48,10 @@ ion-icon {
     font-size: 1.5rem;
     color: inherit;
     visibility: visible;
+}
+
+button{
+    user-select: none;
 }
 
 button,
@@ -55,13 +64,12 @@ input {
     color: inherit;
     font-size: inherit;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     padding: 5px 40px;
     margin: 0 5px;
     gap: 10px;
@@ -87,22 +95,18 @@ input {
     margin: 0;
 }
 
-.button.ghost {
+.ghost {
     background-color: transparent;
     border: var(--interative) 1px solid;
 }
 
-.button.ghost:hover,
-.button.ghost:focus {
+.ghost:hover,
+.ghost:focus {
     background-color: #d4450811;
 }
 
 .link {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
 
     font-style: normal;
@@ -163,14 +167,4 @@ p{
 img {
     width: fit-content;
     height: fit-content;
-}
-
-@media only screen and (max-width: 1024px) {
-    h1 {
-        line-height: 100px;
-    }
-
-    body {
-        padding: 50px;
-    }
 }

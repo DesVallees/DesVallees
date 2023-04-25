@@ -3,7 +3,7 @@ import { translator } from './translator';
 import { browser } from "$app/environment";
 
 export type Language = 'español' | 'english'
-type Section = 'home' | 'people' | 'general'
+type Section = 'home' | 'people' | 'general' | 'profile'
 
 type Profile = {
     fullName: string,
@@ -18,7 +18,6 @@ type Profile = {
     userPrincipalName: string,
     businessPhones: string,
     profilePicture: string,
-    state: string,
 }
 
 export const username: Writable<string> = writable('');
@@ -33,7 +32,7 @@ if (browser){
     if (localStorage.language === 'español' || localStorage.language === 'english') {
         storedLanguage = localStorage.language  
     }
-    if (sessionStorage.section === 'home' || sessionStorage.section === 'people' || sessionStorage.section === 'general') {
+    if (sessionStorage.section === 'home' || sessionStorage.section === 'people' || sessionStorage.section === 'general' || sessionStorage.section === 'profile') {
         storedSection = sessionStorage.section  
     }
 }

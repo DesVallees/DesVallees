@@ -12,14 +12,14 @@
     
     <button class="link" style="{style}" on:click={() => changeLanguage('english')}>
         English
-        <img src="https://clappforms.web.app/usFlag.jpg" alt="{$dictionary.unitedStatesFlag}">
+        <img src="images/usFlag.jpg" alt="{$dictionary.unitedStatesFlag}">
     </button>
 
     {:else}
 
     <button class="link" style="{style}" on:click={() => changeLanguage('español')}>
         Español
-        <img src="https://clappforms.web.app/spainFlag.jpg" alt="{$dictionary.spanishFlag}">
+        <img src="images/spainFlag.jpg" alt="{$dictionary.spanishFlag}">
     </button>
 
 {/if}
@@ -29,5 +29,6 @@
     img {
         height: 1rem;
         border-radius: .2rem;
+        width: fit-content;
     }
 </style>

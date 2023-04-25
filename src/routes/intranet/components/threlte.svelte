@@ -1,7 +1,8 @@
 <script lang="ts">
     import * as Threlte from '@threlte/core'
     import * as Extra from '@threlte/extras'
-	import { fade, scale } from "svelte/transition";
+	import { fade } from "svelte/transition";
+	import { onMount } from 'svelte';
 
     export let modelName:string;
     export let width:number = 500;
@@ -38,27 +39,60 @@
         },
     }
 
+    let handleWindowResize: (() => void) = () => {}
+    let windowWidth: number;
+    let regenerateTrigger: boolean = false
+    let shrinkNeeded: boolean = false;
+
+    $: windowWidth, handleWindowResize()
+
+    onMount(() => {
+        handleWindowResize = throttle(() => {
+            regenerateTrigger = !regenerateTrigger
+            shrinkNeeded = windowWidth - 100 < width
+        }, 1000)
+
+        handleWindowResize()
+    })
+
+    function throttle(func: () => void, limit: number): () => void {
+        let lastCallTime = 0;
+        return function() {
+        const now = Date.now();
+        if (now - lastCallTime >= limit) {
+            func();
+            lastCallTime = now;
+        }
+    }
+}
+
+
 </script>
-  
-<div in:fade={{delay: delay, duration: duration}} class="scene" style="--width: {width}px; --height: {height}px; {style}">
-    <Threlte.Canvas rendererParameters = {{ antialias: true }}>
-        <!-- Camera -->
-        <Threlte.OrthographicCamera {...dynamicControls.camera}>
-            <Threlte.OrbitControls {autoRotate} {enableRotate} {enablePan} {enableZoom} {enableDamping} />
-        </Threlte.OrthographicCamera>
 
-        <!-- Lights -->
-        <Threlte.AmbientLight {...dynamicControls.ambientLight} />
-        <Threlte.PointLight {...dynamicControls.pointLight} />
+<svelte:window bind:innerWidth={windowWidth} />
 
-        <!-- Models -->
-        <Extra.GLTF url="models/{modelName}.glb" {...dynamicControls.object}/>
-    </Threlte.Canvas>
+{#key regenerateTrigger}
+    
+    <div in:fade={{delay: delay, duration: duration}} class="scene" style="--width: {shrinkNeeded ? windowWidth - 100 : width}px; --height: {shrinkNeeded ? windowWidth - 100 : width}px; {style}">
+        <Threlte.Canvas rendererParameters = {{ antialias: true }}>
+            <!-- Camera -->
+            <Threlte.OrthographicCamera position={dynamicControls.camera.position} zoom={shrinkNeeded ? (windowWidth - 100) / 5 : dynamicControls.camera.zoom}>
+                <Threlte.OrbitControls {autoRotate} {enableRotate} {enablePan} {enableZoom} {enableDamping} />
+            </Threlte.OrthographicCamera>
 
-    <div class="floor"></div>
-</div>
+            <!-- Lights -->
+            <Threlte.AmbientLight {...dynamicControls.ambientLight} />
+            <Threlte.PointLight {...dynamicControls.pointLight} />
 
-  
+            <!-- Models -->
+            <Extra.GLTF url="models/{modelName}.glb" {...dynamicControls.object}/>
+        </Threlte.Canvas>
+
+        <div class="floor"></div>
+    </div>
+
+{/key}
+
 <style>
     .scene {
         width: var(--width);

@@ -22,5 +22,6 @@
         align-items: center;
         flex-direction: column;
         gap: 2em;
+        z-index: 1000;
     }
 </style>

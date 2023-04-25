@@ -11,8 +11,12 @@
 <style>
     button{
         border-radius: 50%;
-        background-size: contain;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        box-shadow: 3px 3px 10px #00000034;
+
+        transition: all .2s;
+        outline-offset: 5px;
     }
 </style>

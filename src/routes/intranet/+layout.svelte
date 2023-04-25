@@ -33,7 +33,6 @@
 
 <Toaster/>
 
-
 <div class:disappearAndAppear>
     <nav>
         <a href="/intranet">
@@ -44,8 +43,8 @@
                 <button class="link {$section === 'home' ? 'active' : ''}" on:click={() => $section = 'home'}>{$dictionary.home}</button>
                 <button class="link {$section === 'people' ? 'active' : ''}" on:click={() => $section = 'people'}>{$dictionary.people}</button>
                 <button class="link {$section === 'general' ? 'active' : ''}" on:click={() => $section = 'general'}>{$dictionary.generalInformation}</button>
-                <Avatar image={$profile.profilePicture} ariaLabel={$dictionary.profile} />
-                <Separator orientation="vertical" margin="0 -0rem"/>
+                <Avatar image={$profile.profilePicture} ariaLabel={$dictionary.profile} callback={() => $section = 'profile'} />
+                <Separator orientation="vertical"/>
                 <ChangeLanguage style="font-size: 1.1rem;"/>
             </section>
 
@@ -54,6 +53,7 @@
             <ChangeLanguage />
 
         {/if}
+        <BackgroundCircle />
     </nav>
 
     <main>
@@ -64,7 +64,6 @@
         {$dictionary.copyright} © {year} • {$dictionary.lawOfficeOfKatherineCanto}
     </footer>
 
-    <BackgroundCircle />
     <BackgroundCircle color="#A2B9B930" coordinates={{left: '1500px', top: '500px'}} />
 </div>
 
@@ -80,36 +79,40 @@
     nav{
         display: flex;
         justify-content: space-between;
-        padding-top: 20px;
-        flex-wrap: wrap; 
+        align-items: center;
         gap: 20px;
         height: fit-content;
-        margin-bottom: 100px;
+        margin-bottom: 70px;
         position: sticky;
         top: 0;
-        background-color: transparent;
-        backdrop-filter: blur(10px);
+        z-index: 10;
+        padding: 20px 10vw;
+        background-color: var(--main);
+        width: 100%;
     }
 
     section {
         width: fit-content;
         height: fit-content;
         display: flex;
-        gap: 4rem;
+        flex-wrap: wrap;
+        gap: 1rem 4rem;
         margin-top: 10px;
     }
 
     button{
         font-size: 1.1rem;
+        white-space: nowrap;
     }
 
     
     main{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         width: 100%;
         height: 100%;
+        padding: 0 10vw;
     }
 
     footer {
@@ -118,13 +121,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-top: 100px;
-    }
-
-    @media only screen and (max-width: 1024px) {
-        main{
-            flex-direction: column;
-        }
+        padding: 100px 10vw 0;
+        text-align: center;
     }
 
     .disappearAndAppear {
@@ -134,6 +132,20 @@
     @keyframes disappearAndAppear {
         0% {opacity: 0;}
         100% {opacity: 1;}
+    }
+
+    @media only screen and (max-width: 1100px) {
+        main{
+            padding: 0 50px;
+        }
+
+        nav {
+            padding: 20px 50px;
+        }
+
+        footer {
+            padding: 100px 50px 0;
+        }
     }
 
 </style>

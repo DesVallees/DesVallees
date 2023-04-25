@@ -51,7 +51,7 @@
     }
 
     async function type () { 
-        await sleep(delay + duration)
+        await sleep(delay * 2)
         if (typeof phrase === 'string') {
             typeChar(); 
         } else if (typeof phrase === 'object') {

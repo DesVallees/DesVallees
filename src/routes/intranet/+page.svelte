@@ -10,11 +10,12 @@
 	import LogOut from "./components/logOut.svelte";
 	import Article from "./components/article.svelte";
 	import Person from "./components/person.svelte";
+	import TeamHeader from "./components/teamHeader.svelte";
+    import Select from "./components/select.svelte";
+
+
 
     export let data;
-
-    let body: HTMLBodyElement;
-    $: $section, body ? body.scrollTop = 0 : '';
 
     const myMSALObj = new PublicClientApplication(data.msalConfig);
 
@@ -88,7 +89,7 @@
             fullName: data.displayName,
             firstName: data.givenName,
             id: data.id,
-            jobTitle: data.jobTitle || $dictionary.cantoLegalEmployee,
+            jobTitle: data.jobTitle,
             mail: data.mail,
             mobilePhone: data.mobilePhone,
             officeLocation: data.officeLocation,
@@ -97,7 +98,6 @@
             userPrincipalName: data.userPrincipalName,
             businessPhones: data.businessPhones,
             profilePicture: letterToAvatarUrl(data.givenName.substring(0,1)),
-            state: $dictionary.defaultState
         }
     }
 
@@ -127,12 +127,22 @@
 
     const introDuration:number = 1000;
     let ready:boolean = false;
+    let optionSelectedIndex:number;
 
-    onMount(() => ready = true);
+    let goTop: (() => void) = () => {}
+    $: $section, goTop()
+
+    onMount(() => {
+        ready = true
+        goTop = () => {
+            if (document) {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        }
+    });
 
 </script>
-
-<svelte:body bind:this={body} />
 
 {#if ready}
 
@@ -151,9 +161,27 @@
             <div class="people" in:fade>
 
                 {#if $profile}
-                    {#each Array(20) as i}
-                        <Person name={$profile.fullName} profilePicture={$profile.profilePicture} jobTitle={$profile.jobTitle} state={$profile.state}/>
-                    {/each}
+                    <TeamHeader />
+                    <Select options={$dictionary.teamNames} bind:optionSelectedIndex />
+                    <div class="cardsContainer">
+                        {#if optionSelectedIndex === 0}
+                            {#each Array(2) as i}
+                                <Person name="Jamie Chen" jobTitle="President of Sales" profilePicture="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80" />
+                                <Person name="Alex Patel" jobTitle="Receptionist" profilePicture="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg" />
+                                <Person name="Hanna Rodriguez" jobTitle="Marketing Coordinator" profilePicture="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg" />
+                                <Person name="Taylor Nguyen" jobTitle="Web Designer" profilePicture="https://media.istockphoto.com/id/1338767515/photo/proud-african-woman-smiling-profile-of-successful-businesswoman-in-red-suit-excited-touching.jpg?s=612x612&w=0&k=20&c=51pi7rGUJps8sfEWtNDfKVw3rHxE_qCNkEFcUXyZ9cI=" />
+                                <Person name="Casey Lee" jobTitle="Project Manager" profilePicture="https://writestylesonline.com/wp-content/uploads/2018/11/Three-Statistics-That-Will-Make-You-Rethink-Your-Professional-Profile-Picture.jpg" />
+                                <Person name="Sarah Singh" jobTitle="Account Executive" profilePicture="https://shotkit.com/wp-content/uploads/bb-plugin/cache/cool-profile-pic-matheus-ferrero-landscape.jpeg" />
+                                <Person name={$profile.fullName} profilePicture={$profile.profilePicture} jobTitle={$profile.jobTitle}/>
+                            {/each}
+
+                            {:else}
+
+                            <Person name="Taylor Nguyen" jobTitle="Web Designer" profilePicture="https://media.istockphoto.com/id/1338767515/photo/proud-african-woman-smiling-profile-of-successful-businesswoman-in-red-suit-excited-touching.jpg?s=612x612&w=0&k=20&c=51pi7rGUJps8sfEWtNDfKVw3rHxE_qCNkEFcUXyZ9cI=" />
+                            <Person name={$profile.fullName} profilePicture={$profile.profilePicture} jobTitle={$profile.jobTitle}/>
+
+                        {/if}
+                    </div>
                 {/if}
 
             </div>
@@ -168,26 +196,30 @@
 
         {:else}
 
-        <div>
+        <div class="landing">
 
-            <h1 in:fade={{duration: introDuration}}>{$dictionary.cantoLegalIntranet}</h1>
-            <Typewriter 
-                basePhrase={$dictionary.thePlaceWhereYouCanFind} 
-                phrase={$dictionary.subtitlePhrases} 
-                delay={500} 
-                duration={introDuration}
-                style="height: 6rem; overflow: hidden; text-overflow: ellipsis;"
-                typingSpeed={70}
-            />
-
-            <section>
-                <LogIn delay={1000} duration={introDuration} msalConfig={data.msalConfig}/>
-                <a in:fade={{delay: 1500, duration:introDuration}} class="button ghost" target="_blank" href="https://cantolegal.com/en/">{$dictionary.goToOurWebsite}</a>
-            </section>
+            <div class="landingContent">
+    
+                <h1 in:fade={{duration: introDuration}}>{$dictionary.cantoLegalIntranet}</h1>
+                <Typewriter 
+                    basePhrase={$dictionary.thePlaceWhereYouCanFind} 
+                    phrase={$dictionary.subtitlePhrases} 
+                    delay={500} 
+                    duration={introDuration}
+                    style="height: 6rem; overflow: hidden; text-overflow: ellipsis;"
+                    typingSpeed={70}
+                />
+    
+                <section>
+                    <LogIn delay={1000} duration={introDuration} msalConfig={data.msalConfig}/>
+                    <a in:fade={{delay: 1000, duration:introDuration}} class="button ghost" target="_blank" href="https://cantolegal.com/en/">{$dictionary.goToOurWebsite}</a>
+                </section>
+                
+            </div>
             
+            <Threlte modelName="balance" delay={1000} duration={introDuration} width={500}/>
+
         </div>
-        
-        <Threlte modelName="balance" delay={1000} duration={introDuration} width={500}/>
 
     {/if}
 
@@ -210,6 +242,14 @@
         gap: 2em;
         flex-wrap: wrap;
     }
+
+    .landing {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 0;
+    }
     
     .general {
         justify-content: center;
@@ -223,5 +263,30 @@
         height: 100%;
         width: 100%;
         padding-bottom: 0;
+    }
+
+    .cardsContainer{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 2em;
+        column-gap: 5em;
+        margin-top: 2em;
+    }
+
+    @media only screen and (max-width: 1100px) {
+        .landing {
+            flex-direction: column;
+        }
+
+        .landingContent {
+            width: 100%;
+        }
+        
+        h1 {
+            line-height: 60px;
+            font-size: 3.5rem;
+            margin-bottom: .2em;
+        }
     }
 </style>
