@@ -28,7 +28,9 @@
 
 <svelte:head>
     <title>{$dictionary.cantoLegalIntranet}</title>
-    <link rel="icon" href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-32x32.png"/>
+    <link rel="icon" href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-32x32.png" sizes="32x32">
+    <link rel="icon" href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-192x192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-180x180.png">
 </svelte:head>
 
 <Toaster/>
@@ -38,13 +40,15 @@
         <a href="/intranet">
             <Logo scale={.8} />
         </a>
+
         {#if $profile}
+        
             <section in:fade>
                 <button class="link {$section === 'home' ? 'active' : ''}" on:click={() => $section = 'home'}>{$dictionary.home}</button>
                 <button class="link {$section === 'people' ? 'active' : ''}" on:click={() => $section = 'people'}>{$dictionary.people}</button>
                 <button class="link {$section === 'general' ? 'active' : ''}" on:click={() => $section = 'general'}>{$dictionary.generalInformation}</button>
                 <Avatar image={$profile.profilePicture} ariaLabel={$dictionary.profile} callback={() => $section = 'profile'} />
-                <Separator orientation="vertical"/>
+                <Separator width="1px" height="35px"/>
                 <ChangeLanguage style="font-size: 1.1rem;"/>
             </section>
 
@@ -53,6 +57,7 @@
             <ChangeLanguage />
 
         {/if}
+
         <BackgroundCircle />
     </nav>
 
@@ -87,14 +92,17 @@
         top: 0;
         z-index: 10;
         padding: 20px 10vw;
-        background-color: var(--main);
+        background-color: var(--mainDimer);
         width: 100%;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
 
     section {
         width: fit-content;
         height: fit-content;
         display: flex;
+        align-items: center;
         flex-wrap: wrap;
         gap: 1rem 4rem;
         margin-top: 10px;
@@ -102,7 +110,6 @@
 
     button{
         font-size: 1.1rem;
-        white-space: nowrap;
     }
 
     
@@ -134,7 +141,7 @@
         100% {opacity: 1;}
     }
 
-    @media only screen and (max-width: 1100px) {
+    @media screen and (max-width: 1100px) {
         main{
             padding: 0 50px;
         }

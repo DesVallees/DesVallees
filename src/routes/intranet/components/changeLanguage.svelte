@@ -26,6 +26,9 @@
 
 
 <style>
+    button {
+        width: fit-content;
+    }
     img {
         height: 1rem;
         border-radius: .2rem;

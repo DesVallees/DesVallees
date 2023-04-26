@@ -12,6 +12,7 @@
 	import Person from "./components/person.svelte";
 	import TeamHeader from "./components/teamHeader.svelte";
     import Select from "./components/select.svelte";
+	import Post from "./components/post.svelte";
 
 
 
@@ -146,69 +147,93 @@
 
 {#if ready}
 
-    {#if $username}
+    {#if $username && $profile}
 
-        {#if $section === 'general'}
+        {#if $section === 'home'}
+
             
+            <div class="home">
+
+                {#each Array(5) as i}
+                    <Post />
+                {/each}
+
+            </div>
+
+
+        {:else if $section === 'people'}
+
+
+            <div class="people" in:fade>
+
+                <TeamHeader />
+                <Select options={$dictionary.teamNames} bind:optionSelectedIndex />
+                <div class="cardsContainer">
+                    {#if optionSelectedIndex === 0}
+                        {#each Array(2) as i}
+                            <Person name="Jamie Chen" jobTitle="President of Sales" profilePicture="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80" />
+                            <Person name="Alex Patel" jobTitle="Receptionist" profilePicture="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg" />
+                            <Person name="Hanna Rodriguez" jobTitle="Marketing Coordinator" profilePicture="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg" />
+                            <Person name="Taylor Nguyen" jobTitle="Web Designer" profilePicture="https://media.istockphoto.com/id/1338767515/photo/proud-african-woman-smiling-profile-of-successful-businesswoman-in-red-suit-excited-touching.jpg?s=612x612&w=0&k=20&c=51pi7rGUJps8sfEWtNDfKVw3rHxE_qCNkEFcUXyZ9cI=" />
+                            <Person name="Casey Lee" jobTitle="Project Manager" profilePicture="https://writestylesonline.com/wp-content/uploads/2018/11/Three-Statistics-That-Will-Make-You-Rethink-Your-Professional-Profile-Picture.jpg" />
+                            <Person name="Sarah Singh" jobTitle="Account Executive" profilePicture="https://shotkit.com/wp-content/uploads/bb-plugin/cache/cool-profile-pic-matheus-ferrero-landscape.jpeg" />
+                            <Person name={$profile.fullName} profilePicture={$profile.profilePicture} jobTitle={$profile.jobTitle}/>
+                        {/each}
+
+                        {:else}
+
+                        <Person name="Taylor Nguyen" jobTitle="Web Designer" profilePicture="https://media.istockphoto.com/id/1338767515/photo/proud-african-woman-smiling-profile-of-successful-businesswoman-in-red-suit-excited-touching.jpg?s=612x612&w=0&k=20&c=51pi7rGUJps8sfEWtNDfKVw3rHxE_qCNkEFcUXyZ9cI=" />
+                        <Person name={$profile.fullName} profilePicture={$profile.profilePicture} jobTitle={$profile.jobTitle}/>
+
+                    {/if}
+                </div>
+
+            </div>
+
+
+        {:else if $section === 'general'}
+
+
             <div class="general" in:fade>
 
                 <Article title={$dictionary.subtitlePhrases[1]} author="Canto Legal" profilePicture="https://clappforms.web.app/favicon-32x32.png" content={$dictionary.articles.policies}/>
 
             </div>
 
-            {:else if $section === 'people'}
 
-            <div class="people" in:fade>
+        {:else if $section === 'profile'}
 
-                {#if $profile}
-                    <TeamHeader />
-                    <Select options={$dictionary.teamNames} bind:optionSelectedIndex />
-                    <div class="cardsContainer">
-                        {#if optionSelectedIndex === 0}
-                            {#each Array(2) as i}
-                                <Person name="Jamie Chen" jobTitle="President of Sales" profilePicture="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80" />
-                                <Person name="Alex Patel" jobTitle="Receptionist" profilePicture="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg" />
-                                <Person name="Hanna Rodriguez" jobTitle="Marketing Coordinator" profilePicture="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg" />
-                                <Person name="Taylor Nguyen" jobTitle="Web Designer" profilePicture="https://media.istockphoto.com/id/1338767515/photo/proud-african-woman-smiling-profile-of-successful-businesswoman-in-red-suit-excited-touching.jpg?s=612x612&w=0&k=20&c=51pi7rGUJps8sfEWtNDfKVw3rHxE_qCNkEFcUXyZ9cI=" />
-                                <Person name="Casey Lee" jobTitle="Project Manager" profilePicture="https://writestylesonline.com/wp-content/uploads/2018/11/Three-Statistics-That-Will-Make-You-Rethink-Your-Professional-Profile-Picture.jpg" />
-                                <Person name="Sarah Singh" jobTitle="Account Executive" profilePicture="https://shotkit.com/wp-content/uploads/bb-plugin/cache/cool-profile-pic-matheus-ferrero-landscape.jpeg" />
-                                <Person name={$profile.fullName} profilePicture={$profile.profilePicture} jobTitle={$profile.jobTitle}/>
-                            {/each}
-
-                            {:else}
-
-                            <Person name="Taylor Nguyen" jobTitle="Web Designer" profilePicture="https://media.istockphoto.com/id/1338767515/photo/proud-african-woman-smiling-profile-of-successful-businesswoman-in-red-suit-excited-touching.jpg?s=612x612&w=0&k=20&c=51pi7rGUJps8sfEWtNDfKVw3rHxE_qCNkEFcUXyZ9cI=" />
-                            <Person name={$profile.fullName} profilePicture={$profile.profilePicture} jobTitle={$profile.jobTitle}/>
-
-                        {/if}
-                    </div>
-                {/if}
-
-            </div>
-
-            {:else if $section === 'home'}
 
             <div class="general">
                 <LogOut msalConfig={data.msalConfig} style="display:flex" />
             </div>
 
+
         {/if}
 
-        {:else}
+    {:else if $username}
+
+
+        <SetUp />
+        
+
+    {:else}
+
 
         <div class="landing">
 
             <div class="landingContent">
     
                 <h1 in:fade={{duration: introDuration}}>{$dictionary.cantoLegalIntranet}</h1>
-                <Typewriter 
-                    basePhrase={$dictionary.thePlaceWhereYouCanFind} 
-                    phrase={$dictionary.subtitlePhrases} 
-                    delay={500} 
-                    duration={introDuration}
-                    style="height: 6rem; overflow: hidden; text-overflow: ellipsis;"
-                    typingSpeed={70}
-                />
+                <div class="landingTypewriter">
+                    <Typewriter 
+                        basePhrase={$dictionary.thePlaceWhereYouCanFind} 
+                        phrase={$dictionary.subtitlePhrases} 
+                        delay={500} 
+                        duration={introDuration}
+                        typingSpeed={70}
+                    />
+                </div>
     
                 <section>
                     <LogIn delay={1000} duration={introDuration} msalConfig={data.msalConfig}/>
@@ -220,6 +245,7 @@
             <Threlte modelName="balance" delay={1000} duration={introDuration} width={500}/>
 
         </div>
+
 
     {/if}
 
@@ -250,21 +276,26 @@
         width: 100%;
         padding-bottom: 0;
     }
-    
-    .general {
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding-bottom: 0;
-    }
 
+    .landingTypewriter {
+        min-height: 6rem; 
+    }   
+    
+    .home {
+        padding-bottom: 0;
+        gap: 2em;
+        width: 100%;
+        max-width: 1000px;
+        align-items: center;
+    }
+    
     .people{
         align-items: center;
         height: 100%;
         width: 100%;
         padding-bottom: 0;
     }
-
+    
     .cardsContainer{
         flex-direction: row;
         flex-wrap: wrap;
@@ -274,7 +305,14 @@
         margin-top: 2em;
     }
 
-    @media only screen and (max-width: 1100px) {
+    .general {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    @media screen and (max-width: 1100px) {
         .landing {
             flex-direction: column;
         }
@@ -287,6 +325,12 @@
             line-height: 60px;
             font-size: 3.5rem;
             margin-bottom: .2em;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .landingTypewriter {
+            min-height: 9rem;
         }
     }
 </style>

@@ -31,6 +31,7 @@
 <style>
     article {
         max-width: 1000px;
+        position: relative;
     }
 
     h1{
@@ -60,5 +61,16 @@
     :global(h2) {
         font-size: 1.7rem;
         color: var(--content);
+    }
+
+    @media screen and (max-width: 1000px) {
+        h1 {
+            line-height: normal;
+            font-size: 3rem;
+        }
+
+        :global(h2) {
+            font-size: 1.5rem;
+        }
     }
 </style>

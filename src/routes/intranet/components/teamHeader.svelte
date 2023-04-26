@@ -2,18 +2,18 @@
 	import { dictionary } from "../stores";
 </script>
 
-<div>
+<section>
     <ion-icon class="logo" name="people-circle-outline"></ion-icon>
     <h2>{$dictionary.teams}</h2>
     <h6>{$dictionary.teamsSubtitle}</h6>
-</div>
+</section>
 
 <style>
     ion-icon {
         font-size: 5rem;
     }
 
-    div {
+    section {
         display: flex;
         justify-content: center;
         align-items: center;

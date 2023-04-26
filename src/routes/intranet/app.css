@@ -18,6 +18,7 @@
 :root {
     --main: #1d212a;
     --mainDim: #1d212ab7;
+    --mainDimer: #1d212a5d;
     --content: #F7F7FF;
     --contentDim: #f7f7ffb7;
     --interative: #D44508;
@@ -40,7 +41,6 @@ body {
     color: var(--content);
     background: var(--main);
     position: relative;
-    /* overflow-x: hidden; */
 }
 
 ion-icon {
@@ -70,7 +70,7 @@ input {
 }
 
 .button {
-    padding: 5px 40px;
+    padding: 10px 40px;
     margin: 0 5px;
     gap: 10px;
 
@@ -80,7 +80,6 @@ input {
     font-style: normal;
     font-weight: 700;
     font-size: 1.25rem;
-    line-height: 35px;
 
     width: fit-content;
     height: fit-content;
@@ -91,7 +90,7 @@ input {
 .button:hover,
 .button:focus {
     background-color: var(--interative);
-    padding: 5px 45px;
+    padding: 10px 45px;
     margin: 0;
 }
 
@@ -112,7 +111,7 @@ input {
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    line-height: 35px;
+    padding: 6px 0;
 
     width: fit-content;
     height: fit-content;
@@ -155,6 +154,7 @@ h1 {
     font-weight: 700;
     font-size: 5.6rem;
     line-height: 123px;
+    max-width: 70vw;
 }
 
 p{
@@ -162,9 +162,4 @@ p{
     font-weight: 700;
     font-size: 1.75rem;
     line-height: 35px;
-}
-
-img {
-    width: fit-content;
-    height: fit-content;
 }
