@@ -9,7 +9,7 @@
 
 
     export let msalConfig:Configuration;
-    
+
     const myMSALObj = new PublicClientApplication(msalConfig);
     
     function selectAccount() {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PublicClientApplication, type Configuration } from "@azure/msal-browser";
-	import { dictionary, username, section } from "../stores";
+	import { dictionary, username } from "../stores";
 	import { fade } from "svelte/transition";
 
     export let msalConfig:Configuration;
@@ -20,8 +20,6 @@
         };
 
         myMSALObj.logoutPopup(logoutRequest);
-
-        $section = 'home';
     }
 </script>
 

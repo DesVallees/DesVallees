@@ -1,7 +1,7 @@
 import { AUTHORITY, CLIENTID, CLIENTSECRET, REDIRECTURI } from '$env/static/private';
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: PageServerLoad = () => {
+export const load: LayoutServerLoad = () => {
     return {
         msalConfig: {
             auth: {

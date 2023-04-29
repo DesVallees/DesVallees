@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
-	import { dictionary, section } from "../stores";
+	import { dictionary } from "../stores";
 	import Avatar from "./avatar.svelte";
 
     export let name: string;
@@ -12,7 +12,7 @@
     <Avatar image={profilePicture} width="5em"/>
     <h3>{name}</h3>
     <h4>{jobTitle || $dictionary.cantoLegalEmployee}</h4>
-    <button class="invisible" on:click={() => $section = 'profile'}>{$dictionary.seeProfile}</button>
+    <a class="invisible" href="/intranet/profile">{$dictionary.seeProfile}</a>
     <button class="fill">{$dictionary.sendAMessage}</button>
 </div>
 
