@@ -32,6 +32,7 @@
     article {
         max-width: 1000px;
         position: relative;
+        margin-top: 50px;
     }
 
     h1{
@@ -52,13 +53,14 @@
         font-size: 1rem;
     }
     
-    section {
+    section, article :global(p), article :global(li) {
         font-size: 1.25rem;
         color: var(--contentDim);
-        line-height: 2rem;
+        line-height: 2.5rem;
+        font-weight: normal;
     }
     
-    :global(h2) {
+    article :global(h2) {
         font-size: 1.7rem;
         color: var(--content);
     }

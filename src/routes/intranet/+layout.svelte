@@ -171,6 +171,7 @@
 <Toaster/>
 
 <div class="intranet" class:disappearAndAppear>
+
     <nav>
         <a href="/intranet">
             <Logo scale={.8} />
@@ -195,13 +196,19 @@
 
         <BackgroundCircle />
     </nav>
+    
 
     <main>
+
         {#if ready}
 
-            {#if $username}
+            {#if $username && $profile}
 
-                <slot/>                
+                <slot/>    
+                
+            {:else if $username}
+
+                <SetUp />
 
             {:else}
 
@@ -240,13 +247,17 @@
             <SetUp />
 
         {/if}
+
     </main>
+
 
     <footer>
         {$dictionary.copyright} © {year} • {$dictionary.lawOfficeOfKatherineCanto}
     </footer>
 
     <BackgroundCircle color="#A2B9B930" coordinates={{left: '1500px', top: '500px'}} />
+
+
 </div>
 
 <style>
@@ -264,7 +275,7 @@
         align-items: center;
         gap: 20px;
         height: fit-content;
-        margin-bottom: 70px;
+        margin-bottom: 20px;
         position: sticky;
         top: 0;
         z-index: 10;

@@ -32,6 +32,6 @@
     img {
         height: 1rem;
         border-radius: .2rem;
-        width: fit-content;
+        width: auto;
     }
 </style>
