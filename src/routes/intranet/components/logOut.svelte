@@ -24,3 +24,9 @@
 </script>
 
 <button style={style} class="button" in:fade={{delay: delay, duration: duration}} on:click={logOut}>{$dictionary.logOut}</button>
+
+<style>
+    button {
+        font-size: 1.1rem;
+    }
+</style>

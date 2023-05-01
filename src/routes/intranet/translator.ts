@@ -98,7 +98,8 @@ export const translator = {
         by: 'By',
         generalTitle: 'Articles',
         generalSubtitle: 'Here you will find an archive with essential information about Canto Legal. Use the search field to filter by title or author.',
-        search: 'Search...'
+        search: 'Search...',
+        unknown: 'Unknown',
     },
     español: {
         error: 'Ha ocurrido un error.',
@@ -197,8 +198,9 @@ export const translator = {
         repliesTo: `Comentarios de:`,
         thisPostDoesNotHaveAnyReplies: 'Este post no tiene comentarios.',
         by: 'Por',
-        generalTitle: 'Articulos',
+        generalTitle: 'Artículos',
         generalSubtitle: 'Aquí encontrarás un archivo con información esencial de Canto Legal. Usa el campo de búsqueda para filtrar por título o autor.',
-        search: 'Buscar...'
+        search: 'Buscar...',
+        unknown: 'Desconocido',
     }
 }

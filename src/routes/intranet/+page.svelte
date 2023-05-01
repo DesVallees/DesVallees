@@ -11,7 +11,7 @@
 
     {#each postsDB.filter((comment) => comment.parentPostID === undefined) as post}
         
-        <Post id={post.id} likes={post.likes} comments={post.comments} name={post.name} date={post.date} content={post.content} profilePicture={post.profilePicture} img={post.img} />
+        <Post id={post.id} likes={post.likes} comments={post.comments} userId={post.userId} date={post.date} content={post.content} img={post.img} />
 
     {/each}
 

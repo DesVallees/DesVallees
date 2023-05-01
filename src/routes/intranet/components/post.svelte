@@ -2,20 +2,27 @@
 	import { fade, slide } from "svelte/transition";
     import { dictionary, language, sleep } from "../stores";
 	import Avatar from "./avatar.svelte";
+	import { profileDB } from "../futureDB";
+	import type { Profile as ProfileType } from "../stores";
 
 
     type ShowMore = 'unnecessary' | 'needed' | 'used'
 
     export let id:number;
-    export let name:string;
+    export let userId:string;
     export let date:string;
-    export let profilePicture:string;
     export let content:string;
     export let img:string = "";
     export let likes:number = 0;
     export let comments:number = 0;
-
+    
     export let originalPost:boolean = false;
+    
+
+    const user = profileDB.find((user:ProfileType) => user.id === userId)
+    
+    let profilePicture:string | undefined = user?.profilePicture;
+    let name:string = user?.fullName || $dictionary.unknown;
 
     let liked:boolean = false;
     let replying:boolean = false;

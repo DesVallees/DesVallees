@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+*:focus-visible{
+    outline: solid 4px var(--content);
+    outline-offset: 2px;
+    border-radius: 5px;
+}
+
+:root {
+    --main: #1d212a;
+    --content: #F7F7FF;
+    --interative: #D44508;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--content);
+    background: var(--main);
+    position: relative;
+    padding: 100px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    background-color: #1d212a;
+}
+
+a {
+    position: relative;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    outline: none;
+    border: none;
+    text-decoration: none;
+    border-radius: 10px;
+
+    background-color: transparent;
+    color: inherit;
+    padding: .5em .7em;
+    width: fit-content;
+    height: fit-content;
+
+    transition: background-color .2s;
+}
+
+a:hover {
+    background-color: #00000030;
+}

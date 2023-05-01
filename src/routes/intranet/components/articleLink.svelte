@@ -54,7 +54,7 @@
         gap: 1em;
         width: 100%;
         max-width: 700px;
-        text-align: justify;
+        text-align: left;
         align-items: baseline;
         border-radius: 2px;
     }

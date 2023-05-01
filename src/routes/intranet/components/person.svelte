@@ -3,6 +3,7 @@
 	import { dictionary } from "../stores";
 	import Avatar from "./avatar.svelte";
 
+    export let id: string;
     export let name: string;
     export let profilePicture: string;
     export let jobTitle: string;
@@ -12,7 +13,7 @@
     <Avatar image={profilePicture} width="5em"/>
     <h3>{name}</h3>
     <h4>{jobTitle || $dictionary.cantoLegalEmployee}</h4>
-    <a class="invisible" href="/intranet/profile">{$dictionary.seeProfile}</a>
+    <a class="invisible" href="/intranet/profile/{id}">{$dictionary.seeProfile}</a>
     <button class="fill">{$dictionary.sendAMessage}</button>
 </div>
 

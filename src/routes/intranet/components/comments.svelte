@@ -15,7 +15,7 @@
 
         <h2>{$dictionary.repliesTo}</h2>
     
-        <Post originalPost={true} likes={originalPost.likes} id={originalPost.id} name={originalPost.name} date={originalPost.date} content={originalPost.content} profilePicture={originalPost.profilePicture} img={originalPost.img} />
+        <Post originalPost={true} likes={originalPost.likes} id={originalPost.id} userId={originalPost.userId} date={originalPost.date} content={originalPost.content} img={originalPost.img} />
 
         <Separator height="2px" width="100%" maxWidth="700px" margin="2em 0" />
 
@@ -23,7 +23,7 @@
 
             {#each comments as post}
                             
-                <Post id={post.id} likes={post.likes} comments={post.comments} name={post.name} date={post.date} content={post.content} profilePicture={post.profilePicture} img={post.img} />
+                <Post id={post.id} likes={post.likes} comments={post.comments} userId={post.userId} date={post.date} content={post.content} img={post.img} />
 
             {/each}
 

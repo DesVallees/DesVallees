@@ -55,7 +55,13 @@
             getTokenPopup(loginRequest)
                 .then(response => {
                     if (response) {
-                        callMSGraph(graphMeEndpoint, response.accessToken, setProfile);
+                        let profileInfo = callMSGraph(profileInfoEndpoint, response.accessToken);
+                        let profilePicture = callMSGraph(profilePictureEndpoint, response.accessToken);
+                        profileInfo.then((info: any) => {
+                            profilePicture.then((picture: any) => {
+                                setProfile(info, picture)
+                            });
+                        });
                     }
                 }).catch(error => {
                     console.error(error);
@@ -63,7 +69,8 @@
         }
     }
 
-    const graphMeEndpoint:string = "https://graph.microsoft.com/v1.0/me"
+    const profileInfoEndpoint:string = "https://graph.microsoft.com/v1.0/me"
+    const profilePictureEndpoint:string = "https://graph.microsoft.com/v1.0/me/photo/$value"
 
     async function getTokenPopup(request:any) {
         request.account = myMSALObj.getAccountByUsername($username);
@@ -85,7 +92,7 @@
         });
     }
 
-    function callMSGraph(endpoint: RequestInfo | URL, token: string, callback: (arg0: any) => any) {
+    async function callMSGraph(endpoint: RequestInfo | URL, token: string) : Promise<any> {
         const headers = new Headers();
         const bearer = `Bearer ${token}`;
 
@@ -96,26 +103,31 @@
             headers: headers
         };
 
-        fetch(endpoint, options)
-            .then(response => response.json())
-            .then(response => callback(response))
-            .catch(error => console.log(error));
+        const response = await fetch(endpoint, options)
+
+        if (endpoint === profileInfoEndpoint) {
+            const data = await response.json()
+            return data
+        } 
+        else {
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            return url;
+        }
     }
 
-    function setProfile(data: any) {
+    async function setProfile(profileInfo: any, profilePicture:any) {
         $profile = {
-            fullName: data.displayName,
-            firstName: data.givenName,
-            id: data.id,
-            jobTitle: data.jobTitle,
-            mail: data.mail,
-            mobilePhone: data.mobilePhone,
-            officeLocation: data.officeLocation,
-            preferredLanguage: data.preferredLanguage,
-            surname: data.surname,
-            userPrincipalName: data.userPrincipalName,
-            businessPhones: data.businessPhones,
-            profilePicture: letterToAvatarUrl(data.givenName.substring(0,1)),
+            fullName: profileInfo.displayName,
+            id: profileInfo.id,
+            jobTitle: profileInfo.jobTitle,
+            department: '',
+            mail: profileInfo.mail,
+            mobilePhone: profileInfo.mobilePhone,
+            officeLocation: profileInfo.officeLocation,
+            preferredLanguage: profileInfo.preferredLanguage,
+            profilePicture: profilePicture || letterToAvatarUrl(profileInfo.displayName.substring(0,1)),
+            birthday: '',
         }
     }
 
@@ -230,7 +242,7 @@
             
                         <div class="landing landingButtons">
                             <LogIn delay={1000} duration={introDuration} msalConfig={data.msalConfig}/>
-                            <a in:fade={{delay: 1000, duration:introDuration}} class="button ghost" target="_blank" href="https://cantolegal.com/en/">{$dictionary.goToOurWebsite}</a>
+                            <a style="text-align: center;" in:fade={{delay: 1000, duration:introDuration}} class="button ghost" target="_blank" href="https://cantolegal.com/en/">{$dictionary.goToOurWebsite}</a>
                         </div>
                         
                     </div>
@@ -313,6 +325,7 @@
         align-items: center;
         width: 100%;
         padding-bottom: 0;
+        margin-top: 20px;
     }
 
     .landingTypewriter {

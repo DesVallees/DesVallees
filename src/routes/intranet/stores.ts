@@ -4,19 +4,17 @@ import { browser } from "$app/environment";
 
 export type Language = 'español' | 'english'
 
-type Profile = {
-    fullName: string,
-    firstName: string,
+export type Profile = {
     id: string,
+    fullName: string,
     jobTitle: string,
+    department: string,
     mail: string,
     mobilePhone: string,
     officeLocation: string,
     preferredLanguage: string,
-    surname: string,
-    userPrincipalName: string,
-    businessPhones: string,
     profilePicture: string,
+    birthday: string,
 }
 
 export const username: Writable<string> = writable('');
