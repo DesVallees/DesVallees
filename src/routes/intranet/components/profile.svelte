@@ -59,4 +59,10 @@
         row-gap: 2.5em;
         column-gap: 5em;
     }
+
+    @media screen and (max-width: 500px) {
+        .data {
+            justify-content: flex-start;
+        }
+    }
 </style>

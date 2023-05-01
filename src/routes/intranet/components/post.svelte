@@ -90,7 +90,7 @@
 
 <div class="post" bind:this={postDiv}>
     <div class="avatar">
-        <Avatar href="/intranet/profile" ariaLabel={$dictionary.seeProfile} image={profilePicture} width="3.5em" />
+        <Avatar href="/intranet/profile/{userId}" ariaLabel={$dictionary.seeProfile} image={profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
     </div>
     <div class="content">
         <header>
@@ -178,7 +178,11 @@
     }
 
     .avatar {
-        padding: 1em;
+        padding: 1em 0;
+        position: relative;
+        width: 5.3em;
+        display: flex;
+        justify-content: center;
     }
 
     .content {
@@ -282,5 +286,53 @@
     textarea:focus {
         outline: none;
         background-color: #00000033;
+    }
+
+    @media screen and (max-width: 500px) {
+        .post {
+            padding: 0;
+        }
+
+        .avatar {
+            width: 4.2em;
+        }
+
+        .content {
+            padding: 1.5em .5em;
+        }
+
+        header {
+            flex-direction: column;
+            gap: .2em;
+            align-items: baseline;
+        }
+
+        header h3 {
+            font-size: 1rem;
+        }
+        
+        header span {
+            font-size: .8rem;
+        }
+        
+        p {
+            font-size: 1rem;
+            line-height: 1.7rem;
+            padding: .5em 0;
+        }
+
+        a, button {
+            font-size: 1rem;
+        }
+        
+        a ion-icon, button ion-icon {
+            font-size: 1.1rem;
+        }
+
+        footer {
+            gap: 2em;
+            margin-top: .5em;
+            margin-right: .5em;
+        }
     }
 </style>

@@ -185,7 +185,7 @@
 <div class="intranet" class:disappearAndAppear>
 
     <nav>
-        <a href="/intranet">
+        <a class="logo" href="/intranet">
             <Logo scale={.8} />
         </a>
 
@@ -396,6 +396,9 @@
     }
 
     @media screen and (max-width: 500px) {
+        .logo {
+            display: none;
+        }
         .landingTypewriter {
             min-height: 9rem;
         }

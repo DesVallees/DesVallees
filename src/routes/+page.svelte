@@ -21,3 +21,8 @@
     <a href="https://tictactoe-b2edd.web.app/">TicTacToe (Sketch)</a>
 
 </div>
+
+<svelte:head>
+    <title>DesVallees</title>
+    <link rel="icon" href="https://fav.farm/👤" />
+</svelte:head>
