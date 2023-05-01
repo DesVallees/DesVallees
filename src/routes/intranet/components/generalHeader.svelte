@@ -45,4 +45,25 @@
         outline: none;
         border: 2px var(--content) solid;
     }
+
+    @media screen and (max-width: 700px) {
+        div {
+            gap: 1.8em;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            line-height: 3rem;
+        }
+
+        h2 {
+            display: none;
+            font-size: 1rem;
+            line-height: 1.75rem;
+        }
+
+        input {
+            font-size: .9rem;
+        }
+    }
 </style>

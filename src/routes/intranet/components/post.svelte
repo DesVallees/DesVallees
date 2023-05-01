@@ -288,7 +288,7 @@
         background-color: #00000033;
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 700px) {
         .post {
             padding: 0;
         }
@@ -298,27 +298,28 @@
         }
 
         .content {
-            padding: 1.5em .5em;
+            padding: 1em 1em 1em 0;
         }
 
         header {
             flex-direction: column;
             gap: .2em;
             align-items: baseline;
+            padding-left: .2em;
         }
 
         header h3 {
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
         
         header span {
-            font-size: .8rem;
+            font-size: .9rem;
         }
         
         p {
             font-size: 1rem;
             line-height: 1.7rem;
-            padding: .5em 0;
+            padding: .5em 0 0 0;
         }
 
         a, button {
@@ -331,7 +332,7 @@
 
         footer {
             gap: 2em;
-            margin-top: .5em;
+            margin-top: 1em;
             margin-right: .5em;
         }
     }

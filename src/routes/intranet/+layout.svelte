@@ -396,6 +396,18 @@
     }
 
     @media screen and (max-width: 500px) {
+        main{
+            padding: 0 20px;
+        }
+
+        nav {
+            padding: 20px 20px;
+        }
+
+        footer {
+            padding: 100px 20px 0;
+        }
+
         .logo {
             display: none;
         }

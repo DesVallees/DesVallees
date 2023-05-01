@@ -85,6 +85,20 @@
         margin-top: 1em;
         line-height: 2rem;
     }
+
+    @media screen and (max-width: 700px) {
+        a {
+            gap: .9em;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        h2 {
+            font-size: .9rem;
+        }
+    }
     
     
 </style>

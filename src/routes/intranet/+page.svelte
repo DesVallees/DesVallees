@@ -21,12 +21,16 @@
     .home {
         display: flex;
         flex-direction: column;
-        gap: 1em;
-        padding-bottom: 2em;
         padding-bottom: 0;
         gap: 2em;
         width: 100%;
         max-width: 1000px;
         align-items: center;
+    }
+
+    @media screen and (max-width: 700px) {
+        .home {
+            gap: 1em;
+        }
     }
 </style>

@@ -2,12 +2,20 @@
 	import { slide } from "svelte/transition";
 
     export let active: boolean = false
+
+    function open() {
+        active = true
+    }
+
+    function close() {
+        active = false
+    }
 </script>
 
 {#if active === true}
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="base" on:click={() => active = false}>
+    <div class="base" on:click={close}>
         <div class="post" transition:slide={{duration:100}}>
             <h2>New Post</h2>
         </div>
@@ -15,7 +23,7 @@
     
     {:else}
     
-    <button class="newPostButton" on:click={() => active = true}><ion-icon name="add-outline"></ion-icon></button>
+    <button class="newPostButton" on:click={open}><ion-icon name="add-outline"></ion-icon></button>
 
 {/if}
 
@@ -59,6 +67,7 @@
         padding: 20px;
         background-color: var(--mainDimer);
         backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         z-index: 11;
     }
 
@@ -77,6 +86,13 @@
         color: var(--content);
         box-shadow: 0 0 5px var(--contentDim);
         background-color: var(--main);
+    }
+
+    @media screen and (max-width: 1024px) {
+        .newPostButton{
+            bottom: 1em;
+            right: 2em;
+        }
     }
 
 </style>
