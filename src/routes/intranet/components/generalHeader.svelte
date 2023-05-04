@@ -49,6 +49,7 @@
     @media screen and (max-width: 700px) {
         div {
             gap: 1.8em;
+            margin-bottom: 4em;
         }
         
         h1 {
@@ -57,7 +58,6 @@
         }
 
         h2 {
-            display: none;
             font-size: 1rem;
             line-height: 1.75rem;
         }

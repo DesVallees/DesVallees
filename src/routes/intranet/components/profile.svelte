@@ -23,7 +23,7 @@
     
     <Separator width="100%" maxWidth="750px" height="1px" margin="3em" />
 
-    <div class="data">
+    <section class="data">
         {#each Object.entries(profile) as [key, value]}
             {#if icons[key]}
                 
@@ -31,7 +31,7 @@
 
             {/if}
         {/each}
-    </div>
+    </section>
 
 </div>
 
@@ -50,19 +50,23 @@
         font-size: 1.6rem;
     }
 
-    .data {
-        flex-direction: row;
+    section {
+        /* flex-direction: row;
         flex-wrap: wrap;
-        align-items: baseline;
+        align-items: baseline; */
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        row-gap: 2.5em;
+        column-gap: 10em;
         width: 100%;
         max-width: 700px;
-        row-gap: 2.5em;
-        column-gap: 5em;
     }
 
-    @media screen and (max-width: 500px) {
-        .data {
-            justify-content: flex-start;
+    @media screen and (max-width: 700px) {
+        section {
+            grid-template-columns: 1fr;
+            padding: 0 20px;
         }
     }
 </style>

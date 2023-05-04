@@ -275,6 +275,11 @@
         background-color: #00000011;
     }
 
+    textarea:focus {
+        outline: none;
+        background-color: #00000033;
+    }
+    
     .replyButtons{
         display: flex;
         gap: 1.5em;
@@ -283,10 +288,6 @@
         margin-right: 1em;
     }
 
-    textarea:focus {
-        outline: none;
-        background-color: #00000033;
-    }
 
     @media screen and (max-width: 700px) {
         .post {

@@ -100,6 +100,9 @@ export const translator = {
         generalSubtitle: 'Here you will find an archive with essential information about Canto Legal. Use the search field to filter by title or author.',
         search: 'Search...',
         unknown: 'Unknown',
+        whatDoYouWantToSay: 'What do you want to say?',
+        addAnImage: 'Add an image',
+        visibleTo: 'Visible to:',
     },
     español: {
         error: 'Ha ocurrido un error.',
@@ -202,5 +205,8 @@ export const translator = {
         generalSubtitle: 'Aquí encontrarás un archivo con información esencial de Canto Legal. Usa el campo de búsqueda para filtrar por título o autor.',
         search: 'Buscar...',
         unknown: 'Desconocido',
+        whatDoYouWantToSay: '¿Qué quieres decir?',
+        addAnImage: 'Añadir una imagen',
+        visibleTo: 'Visible para:',
     }
 }
