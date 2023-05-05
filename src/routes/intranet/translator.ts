@@ -103,6 +103,7 @@ export const translator = {
         whatDoYouWantToSay: 'What do you want to say?',
         addAnImage: 'Add an image',
         visibleTo: 'Visible to:',
+        preview: 'Preview',
     },
     español: {
         error: 'Ha ocurrido un error.',
@@ -208,5 +209,6 @@ export const translator = {
         whatDoYouWantToSay: '¿Qué quieres decir?',
         addAnImage: 'Añadir una imagen',
         visibleTo: 'Visible para:',
+        preview: 'Previsualización',
     }
 }

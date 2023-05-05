@@ -2,6 +2,7 @@
 	import { fade, slide } from "svelte/transition";
 
     export let options: string[];
+    export let button: HTMLButtonElement | undefined = undefined;
 
     let optionsVisible:boolean = false;    
     export let optionSelectedIndex:number = 0
@@ -17,7 +18,7 @@
 </script>
 
 {#key optionSelectedIndex}
-    <button in:fade class="selectedTeam" class:active={optionsVisible} on:click={toggle}>
+    <button in:fade bind:this={button} class="selectedTeam" class:active={optionsVisible} on:click={toggle}>
         {options[optionSelectedIndex]} 
     </button>
 {/key}

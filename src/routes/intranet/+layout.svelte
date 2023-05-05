@@ -185,7 +185,7 @@
 <div class="intranet" class:disappearAndAppear>
 
     <nav>
-        <a class="logo" href="/intranet">
+        <a class="logo" href="/intranet" class:logoNotLanding={$username}>
             <Logo scale={.8} />
         </a>
 
@@ -408,7 +408,7 @@
             padding: 100px 20px 0;
         }
 
-        .logo {
+        .logoNotLanding {
             display: none;
         }
         .landingTypewriter {

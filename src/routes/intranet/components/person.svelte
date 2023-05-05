@@ -2,11 +2,14 @@
 	import { fade } from "svelte/transition";
 	import { dictionary } from "../stores";
 	import Avatar from "./avatar.svelte";
+	import { createEventDispatcher } from "svelte";
 
     export let id: string;
     export let name: string;
     export let profilePicture: string;
     export let jobTitle: string;
+
+    const dispatch = createEventDispatcher();
 </script>
 
 <div in:fade>
@@ -14,7 +17,7 @@
     <h3>{name}</h3>
     <h4>{jobTitle || $dictionary.cantoLegalEmployee}</h4>
     <a class="invisible" href="/intranet/profile/{id}">{$dictionary.seeProfile}</a>
-    <button class="fill">{$dictionary.sendAMessage}</button>
+    <button class="fill" on:click={() => dispatch('sendMessage')}>{$dictionary.sendAMessage}</button>
 </div>
 
 <style>
