@@ -3,11 +3,17 @@
 	import Avatar from "./avatar.svelte";
 	import { dictionary, profile, type Profile } from "../stores";
 	import Picker from "./picker.svelte";
-	import Separator from "./separator.svelte";
 	import { profileDB } from "../futureDB";
+	import PostForm from "./postForm.svelte";
+	import { createEventDispatcher } from "svelte";
 
+    const dispatch = createEventDispatcher();
+
+    export let parentCommentPoster: string = ''
     export let privateReceiverID: string = ''
-    export let active: boolean = privateReceiverID ? true : false
+
+
+    let active: boolean = privateReceiverID || parentCommentPoster ? true : false
 
     let privateReceiverName:string;
 
@@ -16,153 +22,90 @@
     }
 
 
-    let addAnImage:HTMLInputElement;
-    let imageSrc: string;
-
     function open() {
         active = true
+        dispatch('open')
     }
 
     function close() {
         active = false
-    }
-
-
-    function previewImage(event: any): void {
-        const file = event.target.files[0];
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            if (typeof event.target?.result === 'string') {
-                imageSrc = convertDataUrlToUrl(event.target.result);
-            }
-        };
-
-        reader.readAsDataURL(file);
-    }
-
-    function convertDataUrlToUrl(dataUrl: string): string {
-        const byteString = window.atob(dataUrl.split(',')[1]);
-        const mimeString = dataUrl.split(',')[0].split(':')[1].split(';')[0];
-        const ab = new ArrayBuffer(byteString.length);
-        const ia = new Uint8Array(ab);
-
-        for (let i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-        }
-
-        const blob = new Blob([ab], { type: mimeString });
-
-        return URL.createObjectURL(blob);
-    }
-
-    function removeImage() {
-        imageSrc = '';
-    }
-
-    
-    function autoResizeTextarea(element: HTMLTextAreaElement): void {
-        const minHeight = element.offsetHeight;
-
-        const paddingTop = parseInt(window.getComputedStyle(element, null).getPropertyValue("padding-top"));
-        const paddingRight = parseInt(window.getComputedStyle(element, null).getPropertyValue("padding-right"));
-        const paddingBottom = parseInt(window.getComputedStyle(element, null).getPropertyValue("padding-bottom"));
-        const paddingLeft = parseInt(window.getComputedStyle(element, null).getPropertyValue("padding-left"));
-        const border = parseInt(window.getComputedStyle(element, null).getPropertyValue("border"));
-
-        const resize = () => {
-            const oldHeight = element.style.height;
-            element.style.height = "auto";
-            const newHeight = element.scrollHeight - border;
-            element.style.height = Math.max(minHeight, newHeight) + "px";
-            if (oldHeight !== element.style.height) {
-                resize();
-            }
-        };
-
-        element.addEventListener("input", resize);
-        element.addEventListener("focus", resize);
-        element.addEventListener("blur", resize);
-        window.addEventListener("resize", resize);
-
-        element.style.overflow = "hidden";
-        element.style.boxSizing = "border-box";
-        element.style.padding = `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`;
-
-        resize();
+        dispatch('close')
     }
 
 
     let firstFocusableElement:HTMLButtonElement;
+    let textarea:HTMLTextAreaElement;
     let lastFocusableElement:HTMLButtonElement;
+
+    function focusFirstElement () {
+        if (firstFocusableElement) {
+            firstFocusableElement.focus()
+        } else if (textarea) {
+            textarea.focus()
+        }
+    }
+
+    function focusLastElement () {
+        if (lastFocusableElement) {
+            lastFocusableElement.focus()
+        }
+    }
 
 </script>
 
+<svelte:window on:keydown={ (event) => { if (active && event.key === 'Escape') close() } } />
+
 {#if active}
-    <button on:focus={() => lastFocusableElement.focus()}></button>
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="base" in:fade={{duration:100}} out:fade={{duration:100, delay:150}}>
-        <div class="post" transition:slide>
+    <div class="base" in:fade={{duration:100}} out:fade={{duration:100, delay:100}}>
+
+        <button style="position: absolute; opacity: 0;" on:focus={focusLastElement}></button>
+
+
+        <div class="post" transition:slide={{duration: 200}}>
             <div class="avatar">
                 <Avatar image={$profile.profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;"/>
             </div>
             
             <div class="content">
 
-                <header>
-                    {$dictionary.visibleTo}
-
-                    {#if privateReceiverID}
-                        <Picker bind:button={firstFocusableElement} options={[privateReceiverName, ...$dictionary.teamNames]}/>
-                    {:else}
-                        <Picker options={$dictionary.teamNames}/>
-                    {/if}
-
-                </header>
-                
-                <form on:submit|preventDefault={() => {close()}}>
-                    <!-- svelte-ignore a11y-autofocus -->
-                    <textarea use:autoResizeTextarea required rows="2" autofocus autocomplete="off" name="content" placeholder={$dictionary.whatDoYouWantToSay}></textarea>
-
-                    {#if imageSrc}
-
-                        <div style="position: relative;">
-                            <div class="removeImg" on:click={removeImage}><ion-icon name="close-outline"></ion-icon></div>
-                            <a href={imageSrc} target="_blank" aria-label={$dictionary.preview}>
-                                <img src={imageSrc} alt={$dictionary.preview}>
-                            </a>
-                        </div>
-                        
-
-                    {/if}
-
-                    <Separator width="100%" height="1px"/>
+                {#if !parentCommentPoster}
+                    <header>
                     
-                    <div class="buttons">
-                        <div class="addImage">
-                            {#if !imageSrc}
-                                <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-                                <label for="image" tabindex="0" on:keypress={(event) => {(event.key == 'Enter' || event.key == ' ') ? addAnImage.click() : ''}} aria-label={$dictionary.addAnImage}><ion-icon name="image-outline"></ion-icon></label>
-                                <input type="file" id="image" name="image" accept="image/*" style="display: none;" bind:this={addAnImage} on:change={previewImage}>
-                            {/if}
-                        </div>
-                        <div class="rightButtons">
-                            <button type="button" class="link" on:click={close}>{$dictionary.cancel}</button>
-                            <button bind:this={lastFocusableElement} type="submit" class="link" on:click={() => {}}>{$dictionary.submit}</button>
-                        </div>
-                    </div>
-                </form>
+                        {$dictionary.visibleTo}
+
+                        {#if privateReceiverID}
+                            <Picker bind:button={firstFocusableElement} options={[privateReceiverName, ...$dictionary.teamNames]}/>
+                        {:else}
+                            <Picker bind:button={firstFocusableElement} options={$dictionary.teamNames}/>
+                        {/if}
+
+                    </header>
+
+                {:else}
+
+                    <span class="replyingTo">
+
+                        {$dictionary.replyingTo} {parentCommentPoster}...
+
+                    </span>
+
+                {/if}
+
+                
+                <PostForm bind:textarea bind:lastFocusableElement on:submit={close} on:close={close} inputFontSize="1.1rem" />
 
             </div>
 
         </div>
+
+
+        <button style="position: absolute; opacity: 0;" on:focus={focusFirstElement}></button>
+
+
     </div>
     
-
-    <button on:focus={() => firstFocusableElement.focus()}></button>
-
-
     {:else if !privateReceiverID}
     
     <button class="newPostButton" on:click={open}><ion-icon name="add-outline"></ion-icon></button>
@@ -235,6 +178,12 @@
         align-items: center;
         color: var(--contentDim);
     }
+    
+    .replyingTo {
+        font-size: 1.1rem;
+        color: var(--contentDimer);
+        text-align: left;
+    }
 
     .avatar {
         padding: 1em 0;
@@ -251,111 +200,8 @@
         gap: 1em;
     }
 
-    form {
-        display: grid;
-        gap: 1em;
-    }
-
-    textarea {
-        padding: .5em;
-        width: 100%;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        resize: none;
-        line-height: 1.5rem;
-        background-color: transparent;
-        transition: all .2s;
-        font-size: 1.1rem;
-    }
-
-    textarea:focus {
-        outline: none;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 15px;
-        box-shadow: 2px 2px 10px #00000033;
-    }
-
-    .removeImg {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-
-        padding: .4em;
-        border-radius: 50%;
-        background-color: var(--mainDim);
-        backdrop-filter: blur(10px);
-        transition: all .2s;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        cursor: pointer;
-    }
-
-    .removeImg:hover,
-    .removeImg:focus-visible {
-        background-color: var(--main);
-    }
-
-    .removeImg ion-icon {
-        font-size: 1.8rem;
-    }
-
-    .buttons{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        row-gap: 1em;
-        column-gap: 2em;
-        margin-right: 1em;
-        align-items: center;
-    }
-
-    .rightButtons {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        column-gap: 2em;
-        align-items: center;
-    }
-
-    .buttons button {
-        font-size: 1rem;
-        font-weight: normal;
-    }
-
-    .addImage {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 2em;
-        height: 2em;
-        border-radius: 50%;
-        cursor: pointer;
-    }
-
-    .addImage:hover,
-    .addImage:focus-visible {
-        background-color: #ffffff30;
-    }
-    
-    .addImage label {
-        cursor: pointer;
-        transform: translateY(2px);
-    }
-
-    .addImage label ion-icon {
-        font-size: 1.3rem;
-    }
-
     @media screen and (max-width: 700px) {
+
         .newPostButton{
             bottom: 1em;
             right: 2em;
@@ -373,9 +219,6 @@
             padding: 1em 1em 1em 0;
         }
 
-        .removeImg ion-icon {
-            font-size: 1.5rem;
-        }
     }
 
 </style>

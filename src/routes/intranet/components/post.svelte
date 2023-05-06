@@ -4,6 +4,9 @@
 	import Avatar from "./avatar.svelte";
 	import { profileDB } from "../futureDB";
 	import type { Profile as ProfileType } from "../stores";
+	import PostForm from "./postForm.svelte";
+	import Separator from "./separator.svelte";
+	import NewPost from "./newPost.svelte";
 
 
     type ShowMore = 'unnecessary' | 'needed' | 'used'
@@ -145,14 +148,7 @@
         </footer>
 
         {#if replying}
-            <form transition:slide|local on:submit|preventDefault={() => {replying = false}}>
-                <!-- svelte-ignore a11y-autofocus -->
-                <textarea required rows="3" autofocus autocomplete="off" name="reply"></textarea>
-                <div class="replyButtons">
-                    <button type="button" class="link" on:click={() => replying = false}>{$dictionary.cancel}</button>
-                    <button type="submit" class="link">{$dictionary.submit}</button>
-                </div>
-            </form>
+            <NewPost on:close={() => replying = false} parentCommentPoster={name}/>
         {/if}
     </div>
 </div>
@@ -259,33 +255,6 @@
     
     a ion-icon, button ion-icon {
         font-size: 1.25rem;
-    }
-
-    textarea {
-        margin-top: .5em;
-        border-bottom: 5px var(--interative) solid;
-        padding: .5em;
-        width: 100%;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        resize: vertical;
-        line-height: 1.5rem;
-        background-color: transparent;
-        transition: all .2s;
-        background-color: #00000011;
-    }
-
-    textarea:focus {
-        outline: none;
-        background-color: #00000033;
-    }
-    
-    .replyButtons{
-        display: flex;
-        gap: 1.5em;
-        justify-content: end;
-        margin: .5em 0;
-        margin-right: 1em;
     }
 
 

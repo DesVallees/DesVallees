@@ -21,8 +21,10 @@
     --mainDimer: #1d212a5d;
     --content: #F7F7FF;
     --contentDim: #f7f7ffb7;
+    --contentDimer: #f7f7ff81;
     --interative: #D44508;
     --interativeDim: #d44508b7;
+    --interativeDimer: #d4450879;
 }
 
 ::selection{

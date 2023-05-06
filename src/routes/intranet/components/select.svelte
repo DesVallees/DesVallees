@@ -7,19 +7,37 @@
     let optionsVisible:boolean = false;    
     export let optionSelectedIndex:number = 0
 
+    let trigger: HTMLButtonElement;
+
+    function clickOutside(node: any) {
+        const handleClick = (event: any) => {
+            if (!node.contains(event.target) && !trigger.contains(event.target)) {
+                optionsVisible = false
+            }
+        };
+
+        document.addEventListener("click", handleClick, true);
+
+        return {
+            destroy() {
+                document.removeEventListener("click", handleClick, true);
+            }
+        };
+    }
+
 </script>
 
 <nav style="{style}">
     {#key optionSelectedIndex}
-        <button in:fade class="selectedTeam" style="{optionsVisible ? 'gap: 4rem;' : '' }" on:click={() => optionsVisible = !optionsVisible}>
+        <button bind:this={trigger} in:fade class="selectedTeam" style="{optionsVisible ? 'gap: 4rem;' : '' }" on:click={() => optionsVisible = !optionsVisible}>
             {options[optionSelectedIndex]} 
             <div style="{optionsVisible ? 'transform: rotate(180deg);' : 'transform: rotate(0deg);' }"><ion-icon name="chevron-down-outline"></ion-icon></div> 
         </button>
     {/key}
     {#if optionsVisible}
-        <section transition:slide|local>
+        <section transition:slide|local={{duration: 200}} use:clickOutside>
             {#each options as name, i}
-                <button disabled={i === optionSelectedIndex} on:click={() => {optionSelectedIndex = i; optionsVisible = false}}>{name}</button>
+                <button class:selected={i === optionSelectedIndex} tabindex={i === optionSelectedIndex ? -1 : 0} on:click={() => {optionSelectedIndex = i; optionsVisible = false}}>{name}</button>
             {/each}
         </section>
     {/if}
@@ -53,13 +71,19 @@
         gap: 3rem;
     }
 
-    button:disabled {
-        opacity: .6;
+    .selected {
+        opacity: .7;
+        cursor: default;
+        background-color: #0000002a;
     }
 
-    button:hover:not(:disabled),
-    button:focus {
+    button:hover:not(:disabled) {
         background-color: #0000002a;
+    }
+
+    button:focus-visible:not(.selectedTeam) {
+        background-color: var(--interative);
+        color: var(--content);
     }
 
     .selectedTeam {

@@ -1,23 +1,21 @@
 <script lang="ts">
-	import { dictionary } from "../stores";
+	import { dictionary, language } from "../stores";
 
 
     export let key:string;
     export let value:string;
     export let icon:string;
 
-    function camelCaseToSpaced(camel: string): string {
-        return camel.replace(/([a-z])([A-Z])/g, '$1 $2')
-                    .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
-                    .replace(/^./, str => str.toUpperCase());
-    }
+    let property: string;
+    
+    $: $language, property = ($dictionary as any)[key]
 
 </script>
 
 <div>
     <ion-icon name="{icon}-outline"></ion-icon>
     <div class="info">
-        <h2>{camelCaseToSpaced(key)}</h2>
+        <h2>{property}</h2>
         <p>{value || $dictionary.unknown}</p>
     </div>
 </div>

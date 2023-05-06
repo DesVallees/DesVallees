@@ -15,6 +15,7 @@
 	import LogIn from './components/logIn.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { letterToAvatarUrl } from './functions';
 
     const now = new Date();
     const year = now.getFullYear();
@@ -110,9 +111,13 @@
             return data
         } 
         else {
-            const blob = await response.blob();
-            const url = URL.createObjectURL(blob);
-            return url;
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                return url;
+            }else{
+                return ''
+            }
         }
     }
 
@@ -122,37 +127,13 @@
             id: profileInfo.id,
             jobTitle: profileInfo.jobTitle,
             department: '',
-            mail: profileInfo.mail,
+            mail: profileInfo.mail || profileInfo.userPrincipalName,
             mobilePhone: profileInfo.mobilePhone,
             officeLocation: profileInfo.officeLocation,
             preferredLanguage: profileInfo.preferredLanguage,
             profilePicture: profilePicture || letterToAvatarUrl(profileInfo.displayName.substring(0,1)),
             birthday: '',
         }
-    }
-
-    function letterToAvatarUrl(letter: string): string {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-
-        canvas.width = 100;
-        canvas.height = 100;
-
-        if (!context) {
-            return ''
-        }
-
-        context.fillStyle = '#D44508';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.font = 'bold 50px Outfit';
-        context.fillStyle = '#F7F7FF';
-        context.textAlign = 'center';
-        context.textBaseline = 'middle';
-        context.fillText(letter.toUpperCase(), canvas.width / 2, canvas.height / 2);
-
-        const imageDataUrl = canvas.toDataURL();
-
-        return imageDataUrl;
     }
 
     const introDuration:number = 1000;

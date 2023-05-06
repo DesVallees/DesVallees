@@ -15,6 +15,22 @@
         optionsVisible = false;
     }
 
+    function clickOutside(node: any) {
+        const handleClick = (event: any) => {
+            if (!node.contains(event.target) && !button?.contains(event.target)) {
+                close()
+            }
+        };
+
+        document.addEventListener("click", handleClick, true);
+
+        return {
+            destroy() {
+                document.removeEventListener("click", handleClick, true);
+            }
+        };
+    }
+
 </script>
 
 {#key optionSelectedIndex}
@@ -24,9 +40,9 @@
 {/key}
 
 {#if optionsVisible}
-    <section transition:slide|local>
+    <section transition:slide|local use:clickOutside>
         {#each options as name, i}
-            <button disabled={i === optionSelectedIndex} on:click={() => {optionSelectedIndex = i; close()}}>{name}</button>
+            <button class:selected={i === optionSelectedIndex} tabindex={i === optionSelectedIndex ? -1 : 0} on:click={() => {optionSelectedIndex = i; close()}}>{name}</button>
         {/each}
     </section>
 {/if}
@@ -82,14 +98,15 @@
     section button:hover:not(:disabled) {
         background-color: #0000002a;
     }
-
+    
     section button:focus-visible {
         outline-color: black;
     }
 
-    section button:disabled {
-        opacity: .6;
-        cursor: pointer;
+    .selected {
+        opacity: .7;
+        cursor: default;
+        background-color: #0000002a;
     }
     
     @media screen and (max-width: 500px) {

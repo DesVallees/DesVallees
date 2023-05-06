@@ -5,8 +5,8 @@
 </script>
 
 <section out:fade>
-    <Logo scale={1.2}/>
-    <Loading animation="dots"/>
+    <Logo />
+    <Loading scale={.9} animation="dots"/>
 </section>
 
 <style>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { capitalizeWords } from "../functions";
 	import { dictionary } from "../stores";
 	import Avatar from "./avatar.svelte";
 
@@ -8,12 +9,6 @@
     export let content:string;
 
     let minutesRead: number = Math.ceil(content.split(" ").length/150)
-
-    function capitalizeWords(str: string) {
-        return str.split(' ').map(word => {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join(' ');
-    }
 
 </script>
 

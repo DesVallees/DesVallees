@@ -3,6 +3,7 @@
     import * as Extra from '@threlte/extras'
 	import { fade } from "svelte/transition";
 	import { onMount } from 'svelte';
+	import { throttle } from '../functions';
 
     export let modelName:string;
     export let width:number = 500;
@@ -54,17 +55,6 @@
 
         handleWindowResize()
     })
-
-    function throttle(func: () => void, limit: number): () => void {
-        let lastCallTime = 0;
-        return function() {
-        const now = Date.now();
-        if (now - lastCallTime >= limit) {
-            func();
-            lastCallTime = now;
-        }
-    }
-}
 
 
 </script>

@@ -2,6 +2,7 @@
 	import { slide } from "svelte/transition";
 	import { dictionary } from "../stores";
 	import Avatar from "./avatar.svelte";
+	import { capitalizeWords, shortenString } from "../functions";
 
     type Article = {
         title: string;
@@ -12,27 +13,6 @@
     
     export let article:Article;
     export let link:string;
-
-    function shortenString(text: string): string {
-        // Remove HTML tags from the text
-        const cleanedText = text.replace(/(<([^>]+)>)/gi, ' ');
-
-        const words = cleanedText.split(' ');
-        const shortenedWords = words.slice(0, 30);
-        const shortenedText = shortenedWords.join(' ');
-
-        if (words.length > shortenedWords.length) {
-            return shortenedText + '...';
-        }
-
-        return shortenedText;
-    }
-
-    function capitalizeWords(str: string) {
-        return str.split(' ').map(word => {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join(' ');
-    }
 
 </script>
 
