@@ -1,4 +1,4 @@
-import type { Profile } from "./stores";
+import type { Profile, Notification } from "./stores";
 
 export type Post = {
     id: number,
@@ -52,6 +52,7 @@ export const profileDB: Profile[] = [
         preferredLanguage: 'English',
         profilePicture: 'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80',
         birthday: '02/29',
+        notifications: []
     },
     {
         id: '1',
@@ -64,6 +65,7 @@ export const profileDB: Profile[] = [
         preferredLanguage: 'English',
         profilePicture: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg',
         birthday: '05/15',
+        notifications: []
     },
     {
         id: '2',
@@ -76,6 +78,7 @@ export const profileDB: Profile[] = [
         preferredLanguage: 'Español',
         profilePicture: 'https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg',
         birthday: '12/01',
+        notifications: []
     },
     {
         id: '3',
@@ -88,6 +91,7 @@ export const profileDB: Profile[] = [
         preferredLanguage: 'English',
         profilePicture: 'https://media.istockphoto.com/id/1338767515/photo/proud-african-woman-smiling-profile-of-successful-businesswoman-in-red-suit-excited-touching.jpg?s=612x612&w=0&k=20&c=51pi7rGUJps8sfEWtNDfKVw3rHxE_qCNkEFcUXyZ9cI=',
         birthday: '01/30',
+        notifications: []
     },
     {
         id: '4',
@@ -100,6 +104,7 @@ export const profileDB: Profile[] = [
         preferredLanguage: 'Español',
         profilePicture: 'https://writestylesonline.com/wp-content/uploads/2018/11/Three-Statistics-That-Will-Make-You-Rethink-Your-Professional-Profile-Picture.jpg',
         birthday: '08/28',
+        notifications: []
     },
     {
         id: '5',
@@ -112,5 +117,87 @@ export const profileDB: Profile[] = [
         preferredLanguage: 'Español',
         profilePicture: 'https://shotkit.com/wp-content/uploads/bb-plugin/cache/cool-profile-pic-matheus-ferrero-landscape.jpeg',
         birthday: '03/18',
+        notifications: []
     },
 ]
+
+export const notifications: Notification[] = [
+    {
+        id: '0',
+        content: `Today is Sarah Singh's Birthday!`, 
+        seen: true,
+        dismissed: false,
+        date: new Date(2022, 7, 10).toISOString(),
+    },
+    {
+        id: '1',
+        content: 'Monthly assessment reunion starts in 1 hour.', 
+        seen: true,
+        dismissed: false,
+        date: new Date(2022, 9, 15).toISOString(),
+    },
+    {
+        id: '2',
+        content: `Today is Taylor Nguyen's Birthday!`, 
+        seen: true,
+        dismissed: false,
+        date: new Date(2022, 11, 20).toISOString(),
+    },
+    {
+        id: '3',
+        content: 'New announcement: Project deadline extended.',
+        seen: true,
+        dismissed: false,
+        date: new Date(2023, 0, 5).toISOString(),
+    },
+    {
+        id: '4',
+        content: 'Upcoming team meeting on Friday.',
+        seen: true,
+        dismissed: false,
+        date: new Date(2023, 1, 28).toISOString(),
+    },
+    {
+        id: '5',
+        content: 'Important security update: Please update your passwords.',
+        seen: true,
+        dismissed: false,
+        date: new Date(2023, 2, 10).toISOString(),
+    },
+    {
+        id: '6',
+        content: 'New feature release: Real-time collaboration.',
+        seen: true,
+        dismissed: false,
+        date: new Date(2023, 3, 18).toISOString(),
+    },
+    {
+        id: '7',
+        content: 'Celebrating 1000 users milestone!',
+        seen: true,
+        dismissed: false,
+        date: new Date(2023, 3, 15).toISOString(),
+    },
+    {
+        id: '8',
+        content: 'Holiday office closure: December 25th - January 1st.',
+        seen: false,
+        dismissed: false,
+        date: new Date(2023, 2, 27).toISOString(),
+    },
+    {
+        id: '9',
+        content: 'Product roadmap update: New features planned for Q3.',
+        seen: false,
+        dismissed: false,
+        date: new Date(2023, 4, 11).toISOString(),
+    },
+    {
+        id: '10',
+        content: 'Reminder: Submit your monthly reports by end of day.',
+        seen: false,
+        dismissed: false,
+        date: new Date().toISOString(),
+    },
+];
+

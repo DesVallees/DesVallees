@@ -15,7 +15,17 @@ export type Profile = {
     preferredLanguage: string,
     profilePicture: string,
     birthday: string,
+    notifications: Notification[],
 }
+
+export type Notification = {
+    id: string,
+    content: string,
+    seen: boolean,
+    dismissed: boolean,
+    date: string,
+}
+
 
 export const username: Writable<string> = writable('');
 

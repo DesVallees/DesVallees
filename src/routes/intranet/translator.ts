@@ -76,6 +76,7 @@ export const translator = {
         sendAMessage: 'Send a message',
         seeProfile: 'See profile',
         justPublished: 'Just published',
+        lessThatA: 'Less that a',
         minute: 'minute',
         hour: 'hour',
         day: 'day',
@@ -113,6 +114,10 @@ export const translator = {
         officeLocation: 'Office Location',
         preferredLanguage: 'Preferred Language',
         birthday: 'Birthday',
+        notifications: 'Notifications',
+        close: 'Close',
+        new: 'New',
+        noNoticationsToShow: 'No notifications to display',
     },
     español: {
         error: 'Ha ocurrido un error.',
@@ -191,6 +196,7 @@ export const translator = {
         sendAMessage: 'Enviar un mensaje',
         seeProfile: 'Ver perfil',
         justPublished: 'Recién publicado',
+        lessThatA: 'menos de un',
         minute: 'minuto',
         hour: 'hora',
         day: 'día',
@@ -228,5 +234,9 @@ export const translator = {
         officeLocation: 'Ubicación de oficina',
         preferredLanguage: 'Idioma preferido',
         birthday: 'Fecha de nacimiento',
+        notifications: 'Notificaciones',
+        close: 'Cerrar',
+        new: 'Nuevo',
+        noNoticationsToShow: 'No hay notificaciones para mostrar',
     }
 }

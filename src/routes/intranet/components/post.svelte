@@ -83,7 +83,7 @@
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const wwwRegex = /(www\.[^\s]+)/g;
     function checkLinks(text: string): string {
-        return text.replace(urlRegex, '<a style="text-decoration: underline; color: rgb(45, 86, 223);" href="$&" target="_blank">$&</a>').replace(wwwRegex, ' <a style="text-decoration: underline; color: rgb(45, 86, 223);" href="http://$&" target="_blank">$&</a>');
+        return text.replace(urlRegex, '<a style="text-decoration: underline; color: rgb(70, 110, 245);" href="$&" target="_blank">$&</a>').replace(wwwRegex, ' <a style="text-decoration: underline; color: rgb(70, 110, 245);" href="http://$&" target="_blank">$&</a>');
     }
 
 

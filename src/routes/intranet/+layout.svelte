@@ -8,7 +8,7 @@
 	import BackgroundCircle from './components/backgroundCircle.svelte';
 	import Avatar from './components/avatar.svelte';
 	import Separator from './components/separator.svelte';
-	import { fade } from 'svelte/transition';
+	import { fade, scale } from 'svelte/transition';
 	import SetUp from './components/setUp.svelte';
 	import Threlte from './components/threlte.svelte';
 	import Typewriter from './components/typewriter.svelte';
@@ -16,6 +16,8 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { letterToAvatarUrl } from './functions';
+	import { notifications } from './futureDB';
+	import NotificationBar from './components/notificationBar.svelte';
 
     const now = new Date();
     const year = now.getFullYear();
@@ -133,11 +135,41 @@
             preferredLanguage: profileInfo.preferredLanguage,
             profilePicture: profilePicture || letterToAvatarUrl(profileInfo.displayName.substring(0,1)),
             birthday: '',
+            notifications: []
         }
+
+        updateNotifications()
+    }
+
+    $: notifications.length, updateNotifications()
+    
+    function updateNotifications() {
+        if($profile){
+            for (let i = 0; i < notifications.length; i++) {
+                const profileNotificationsIds = new Set($profile.notifications.map(item => item.id));
+                
+                for (const item of notifications) {
+                    if (!profileNotificationsIds.has(item.id)) {
+                        $profile.notifications.push(item)
+                        profileNotificationsIds.add(item.id);
+                    }
+                }
+            }
+        }
+    }
+
+
+    let unseenNotifications = notifications.filter(notification => !notification.seen && !notification.dismissed);
+    $: showNotifications, getUnseenNotifications()
+
+    function getUnseenNotifications () {
+        unseenNotifications = notifications.filter(notification => !notification.seen && !notification.dismissed);
     }
 
     const introDuration:number = 1000;
     let ready:boolean = false;
+
+    let showNotifications: boolean = false;
 
     $: $page.url.pathname, goTop()
     let goTop: (() => void) = () => {}
@@ -156,6 +188,9 @@
 
 <svelte:head>
     <title>{$dictionary.cantoLegalIntranet}</title>
+    <meta name="author" content="The law office of Katherine Canto LLC">
+    <meta name="description" content="The official Canto Legal's Intranet. The place where it's employees can communicate and find information about their company, department and coworkers.">
+    <meta name="keywords" content="Canto Legal, Intranet">
     <link rel="icon" href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-32x32.png" sizes="32x32">
     <link rel="icon" href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-192x192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-180x180.png">
@@ -179,7 +214,17 @@
                 <Avatar image={$profile.profilePicture} ariaLabel={$dictionary.profile} href="/intranet/profile" />
                 <Separator width="1px" height="35px"/>
                 <ChangeLanguage style="font-size: 1.1rem;"/>
+                <button aria-label={$dictionary.notifications} on:click={() => showNotifications = !showNotifications} class="notification" type="button">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    {#key unseenNotifications.length}
+                        <div style="--areNotifications: {unseenNotifications.length > 0 ? 'flex' : 'none'}" in:scale class="notificationCounter">{unseenNotifications.length}</div>
+                    {/key}
+                </button>
             </section>
+
+            {#if showNotifications}
+                <NotificationBar bind:showNotifications />
+            {/if}
 
             {:else}
 
@@ -277,6 +322,37 @@
         width: 100%;
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
+    }
+
+    .notification {
+        position: relative;
+        transition: all .2s;
+        border-radius: 50%;
+        padding: .5em;
+    }
+
+    .notification:hover,
+    .notification:focus-visible {
+        background-color: #ffffff10;
+    }
+
+    .notificationCounter{
+        border-radius: 50%;
+        background-color: var(--interative);
+        aspect-ratio: 1 / 1;
+        height: 50%;
+        padding: .2em;
+        font-size: .85rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: var(--areNotifications);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .notification ion-icon {
+        font-size: 1.5rem;
     }
 
     section {
