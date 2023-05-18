@@ -1,6 +1,7 @@
 <script lang="ts">
     import './app.css'
     import { Toaster } from 'svelte-french-toast';
+    import toast from 'svelte-french-toast';
     import { InteractionRequiredAuthError, PublicClientApplication } from "@azure/msal-browser";
 	import { dictionary, language, profile, sleep, username } from './stores';
 	import Logo from './components/logo.svelte';
@@ -47,6 +48,9 @@
     const currentAccounts = myMSALObj.getAllAccounts();
     if (currentAccounts.length > 1) {
         console.warn("Multiple accounts detected.")
+        toast("Multiple accounts detected.", {
+            icon: '❗',
+        });
     } else if (currentAccounts.length === 1) {
         $username = currentAccounts[0].username;
     }
@@ -80,7 +84,7 @@
     
         return myMSALObj.acquireTokenSilent(request)
             .catch(error => {
-                console.warn("silent token acquisition fails. acquiring token using popup");
+                toast.error("Silent token acquisition failed.")
                 if (error instanceof InteractionRequiredAuthError) {
                     return myMSALObj.acquireTokenPopup(request)
                         .then(tokenResponse => {
@@ -109,8 +113,13 @@
         const response = await fetch(endpoint, options)
 
         if (endpoint === profileInfoEndpoint) {
-            const data = await response.json()
-            return data
+            if (response.ok) {
+                const data = await response.json()
+                return data
+            }else{
+                toast.error(`Error getting profile information`)
+                return ''
+            }
         } 
         else {
             if (response.ok) {
@@ -118,6 +127,7 @@
                 const url = URL.createObjectURL(blob);
                 return url;
             }else{
+                toast.error(`Error getting profile picture`)
                 return ''
             }
         }

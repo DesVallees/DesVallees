@@ -78,7 +78,7 @@
 <style>
     .notification {
         position: relative;
-        padding: 1.5em 1em 2em 0;
+        padding: 2em 1em 2.5em 0;
         border-bottom: var(--content) 1px solid;
     }
 
@@ -86,6 +86,7 @@
         display: flex;
         align-items: center;
         column-gap: 1em;
+        margin-bottom: .5em;
     }
 
     .unseen {

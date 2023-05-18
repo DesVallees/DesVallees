@@ -1,10 +1,7 @@
 <script lang="ts">
-	import { fly, slide } from "svelte/transition";
+	import { fly } from "svelte/transition";
 	import { dictionary, profile, type Notification as NotificationType } from "../stores";
 	import Notification from "./notification.svelte";
-	import Separator from "./separator.svelte";
-	import { onMount } from "svelte";
-	import { element } from "svelte/internal";
 
     export let showNotifications:boolean;
 
@@ -60,10 +57,10 @@
 
 <style>
     section {
-        background-color: #00000020;
         position: fixed;
         top: 0;
         right: 0;
+        max-width: 100%;
         width: 28em;
         height: 100vh;
         height: 100dvh;
@@ -119,6 +116,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    @media (max-width: 700px) {
+        section {
+            width: 100%;
+
+        }
     }
 
 </style>
