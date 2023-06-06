@@ -84,7 +84,7 @@
     
         return myMSALObj.acquireTokenSilent(request)
             .catch(error => {
-                toast.error("Silent token acquisition failed.")
+                toast.error(`${error instanceof InteractionRequiredAuthError ? ': Interaction Required Authentication Error' : 'Silent token acquisition failed.'}`)
                 if (error instanceof InteractionRequiredAuthError) {
                     return myMSALObj.acquireTokenPopup(request)
                         .then(tokenResponse => {
