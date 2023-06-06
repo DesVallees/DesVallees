@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { fade, slide } from "svelte/transition";
 
-    export let options: string[];
+    export let options: {id: number, name: string}[];
     export let button: HTMLButtonElement | undefined = undefined;
 
     let optionsVisible:boolean = false;    
     export let optionSelectedIndex:number = 0
+    export let value:number = options[optionSelectedIndex].id
+
+    $: optionSelectedIndex, value = options[optionSelectedIndex].id
 
     function toggle() {
         optionsVisible = !optionsVisible;
@@ -35,14 +38,14 @@
 
 {#key optionSelectedIndex}
     <button in:fade bind:this={button} class="selectedTeam" class:active={optionsVisible} on:click={toggle}>
-        {options[optionSelectedIndex]} 
+        {options[optionSelectedIndex].name} 
     </button>
 {/key}
 
 {#if optionsVisible}
     <section transition:slide|local use:clickOutside>
         {#each options as name, i}
-            <button class:selected={i === optionSelectedIndex} tabindex={i === optionSelectedIndex ? -1 : 0} on:click={() => {optionSelectedIndex = i; close()}}>{name}</button>
+            <button class:selected={i === optionSelectedIndex} tabindex={i === optionSelectedIndex ? -1 : 0} on:click={() => {optionSelectedIndex = i; close()}}>{name.name}</button>
         {/each}
     </section>
 {/if}

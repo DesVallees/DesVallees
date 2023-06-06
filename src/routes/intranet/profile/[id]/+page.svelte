@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { page } from "$app/stores";
 	import Profile from "../../components/profile.svelte";
-	import { profileDB } from "../../futureDB";
-	import { dictionary, type Profile as ProfileType } from "../../stores";
+	import { dictionary } from "../../stores";
+	import type { PageData } from "./$types";
 
-    let profile = profileDB.find((profile: ProfileType) => profile.id === $page.params.id);
+    export let data: PageData
+    $: ({ profile } = data)
+
 </script>
 
 <div class="profile">

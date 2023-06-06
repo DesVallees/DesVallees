@@ -3,7 +3,7 @@
 
 
     export let key:string;
-    export let value:string;
+    export let value:unknown;
     export let icon:string;
 
     let property: string;

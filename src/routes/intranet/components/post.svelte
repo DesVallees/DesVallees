@@ -2,30 +2,26 @@
 	import { fade, slide } from "svelte/transition";
     import { dictionary, language, sleep } from "../stores";
 	import Avatar from "./avatar.svelte";
-	import { profileDB } from "../futureDB";
-	import type { Profile as ProfileType } from "../stores";
-	import PostForm from "./postForm.svelte";
-	import Separator from "./separator.svelte";
 	import NewPost from "./newPost.svelte";
 
 
     type ShowMore = 'unnecessary' | 'needed' | 'used'
 
     export let id:number;
-    export let userId:string;
-    export let date:string;
+    export let profileId:number;
+    export let date:Date;
     export let content:string;
     export let img:string = "";
     export let likes:number = 0;
     export let comments:number = 0;
+    export let visibility:string;
     
     export let originalPost:boolean = false;
     
 
-    const user = profileDB.find((user:ProfileType) => user.id === userId)
-    
-    let profilePicture:string | undefined = user?.profilePicture;
-    let name:string = user?.fullName || $dictionary.unknown;
+    export let profilePicture:string | undefined
+    export let name:string | undefined
+
 
     let liked:boolean = false;
     let replying:boolean = false;
@@ -93,13 +89,13 @@
 
 <div class="post" bind:this={postDiv}>
     <div class="avatar">
-        <Avatar href="/intranet/profile/{userId}" ariaLabel={$dictionary.seeProfile} image={profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
+        <Avatar href="/intranet/profile/{profileId}" ariaLabel={$dictionary.seeProfile} image={profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
     </div>
     <div class="content">
         <header>
             <h3>{name}</h3>
             {#key $language}
-                <span>{getTimePassed(date)}</span>
+                <span>{getTimePassed(date.toISOString())}</span>
             {/key}
         </header>
 
@@ -148,7 +144,7 @@
         </footer>
 
         {#if replying}
-            <NewPost on:close={() => replying = false} parentCommentPoster={name}/>
+            <NewPost on:close={() => replying = false} parentCommentPoster={name} parentCommentId={id} parentCommentVisibility={visibility}/>
         {/if}
     </div>
 </div>

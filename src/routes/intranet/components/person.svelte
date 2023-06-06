@@ -4,7 +4,7 @@
 	import Avatar from "./avatar.svelte";
 	import { createEventDispatcher } from "svelte";
 
-    export let id: string;
+    export let id: number;
     export let name: string;
     export let profilePicture: string;
     export let jobTitle: string;

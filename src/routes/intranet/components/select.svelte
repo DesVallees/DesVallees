@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade, slide } from "svelte/transition";
 
-    export let options: string[];
+    export let options: {id: number, name: string}[];
     export let style: string = '';
 
     let optionsVisible:boolean = false;    
@@ -30,14 +30,14 @@
 <nav style="{style}">
     {#key optionSelectedIndex}
         <button bind:this={trigger} in:fade class="selectedTeam" style="{optionsVisible ? 'gap: 4rem;' : '' }" on:click={() => optionsVisible = !optionsVisible}>
-            {options[optionSelectedIndex]} 
+            {options[optionSelectedIndex].name} 
             <div style="{optionsVisible ? 'transform: rotate(180deg);' : 'transform: rotate(0deg);' }"><ion-icon name="chevron-down-outline"></ion-icon></div> 
         </button>
     {/key}
     {#if optionsVisible}
         <section transition:slide|local={{duration: 200}} use:clickOutside>
             {#each options as name, i}
-                <button class:selected={i === optionSelectedIndex} tabindex={i === optionSelectedIndex ? -1 : 0} on:click={() => {optionSelectedIndex = i; optionsVisible = false}}>{name}</button>
+                <button class:selected={i === optionSelectedIndex} tabindex={i === optionSelectedIndex ? -1 : 0} on:click={() => {optionSelectedIndex = i; optionsVisible = false}}>{name.name}</button>
             {/each}
         </section>
     {/if}

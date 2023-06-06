@@ -2,18 +2,36 @@
 	import { fade } from "svelte/transition";
 	import Post from "./components/post.svelte";
 	import NewPost from "./components/newPost.svelte";
-	import { postsDB } from "./futureDB";
+	import { dictionary } from "./stores";
+	import type { PageData } from "./$types";
+
+    export let data: PageData
+
+    $: ({ posts } = data)
+    $: ({ profiles } = data)
+
 </script>
 
 <NewPost />
                     
 <div class="home" in:fade>
 
-    {#each postsDB.filter((comment) => comment.parentPostID === undefined) as post}
+    {#key posts}
         
-        <Post id={post.id} likes={post.likes} comments={post.comments} userId={post.userId} date={post.date} content={post.content} img={post.img} />
+        {#if posts.length > 0}
+            {#each posts as post}
+                
+                <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={profiles.find((profile) => profile.id === post.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === post.profileId)?.profilePicture} />
 
-    {/each}
+            {/each}
+        {:else}
+            <div class="welcome">
+                <ion-icon name="chatbubbles"></ion-icon>
+                <h3>{$dictionary.noPostsToShow}</h3>
+            </div>
+        {/if}
+
+    {/key}
 
 </div>
 
@@ -26,6 +44,23 @@
         width: 100%;
         max-width: 1000px;
         align-items: center;
+    }
+
+    .welcome {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        gap: 2em;
+    }
+    
+    .welcome ion-icon {
+        font-size: 4rem;
+    }
+
+    .welcome h3 {
+        font-size: 1.2rem;
     }
 
     @media screen and (max-width: 700px) {

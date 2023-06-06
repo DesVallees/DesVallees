@@ -2,12 +2,13 @@
 	import { createEventDispatcher, onMount } from "svelte";
     import { dictionary, profile } from "../stores";
 	import { slide } from "svelte/transition";
+	import { notifications } from "../futureDB";
 
     const dispatch = createEventDispatcher();
 
     export let notificationID: string;
 
-    let profileNotification = $profile.notifications.find((profileNotification) => profileNotification.id === notificationID)
+    let profileNotification = notifications.find((profileNotification) => profileNotification.id === notificationID)
 
     let seen: boolean = true
     async function seeNotification() {

@@ -6,6 +6,7 @@ export type Language = 'español' | 'english'
 
 export type Profile = {
     id: string,
+    microsoftId: string,
     fullName: string,
     jobTitle: string,
     department: string,
@@ -15,7 +16,6 @@ export type Profile = {
     preferredLanguage: string,
     profilePicture: string,
     birthday: string,
-    notifications: Notification[],
 }
 
 export type Notification = {

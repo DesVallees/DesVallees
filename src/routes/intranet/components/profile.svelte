@@ -4,7 +4,7 @@
 	import ProfileDatum from "./profileDatum.svelte";
 	import Separator from "./separator.svelte";
 
-    export let profile:Profile;
+    export let profile:any;
 
     let icons:{[key: string]: any} = {
         'jobTitle': 'briefcase',

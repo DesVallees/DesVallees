@@ -21,3 +21,9 @@
 {#if loaded}
     <img {src} alt="{$dictionary.logoCantoLegal}" style="transform: scale({scale})">
 {/if}
+
+<style>
+    img {
+        user-select: none;
+    }
+</style>

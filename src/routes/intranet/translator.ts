@@ -70,8 +70,14 @@ export const translator = {
             },
         },
         teamNames: [
-            'My company',
-            'My department'
+            {
+                id: 1,
+                name: 'My company'
+            },
+            {
+                id: 2,
+                name: 'My department'
+            },
         ],
         sendAMessage: 'Send a message',
         seeProfile: 'See profile',
@@ -118,6 +124,8 @@ export const translator = {
         close: 'Close',
         new: 'New',
         noNoticationsToShow: 'No notifications to display',
+        noPostsToShow: 'There are no posts to display',
+        welcome: 'Welcome',
     },
     español: {
         error: 'Ha ocurrido un error.',
@@ -190,8 +198,14 @@ export const translator = {
             },
         },
         teamNames: [
-            'Mi compañía',
-            'Mi departamento'
+            {
+                id: 1,
+                name: 'Mi compañía'
+            },
+            {
+                id: 2,
+                name: 'Mi departamento'
+            },
         ],
         sendAMessage: 'Enviar un mensaje',
         seeProfile: 'Ver perfil',
@@ -238,5 +252,7 @@ export const translator = {
         close: 'Cerrar',
         new: 'Nuevo',
         noNoticationsToShow: 'No hay notificaciones para mostrar',
+        noPostsToShow: 'No hay publicaciones para mostrar',
+        welcome: 'Bienvenido(a)',
     }
 }

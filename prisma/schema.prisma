@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+    id Int @id @default(autoincrement())
+    microsoftId String? @default("") @unique
+    fullName String
+    jobTitle String
+    department String
+    mail String
+    mobilePhone String
+    officeLocation String
+    preferredLanguage String
+    profilePicture String
+    birthday String
+    posts Post[]
+    notifications NotificationToProfile[]
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  profileId Int
+  profile Profile @relation(fields: [profileId], references: [id])
+  date DateTime @default(now())
+  content String
+  img String?
+  parentPostID Int? @unique
+  parentPost Post? @relation("replies", fields: [parentPostID], references: [id])
+  childPosts Post[] @relation("replies")
+  likes Int @default(0)
+  comments Int @default(0)
+  visibility String
+}
+
+model Notification {
+    id Int @id @default(autoincrement())
+    content String
+    date DateTime @default(now())
+    visibility String
+    profiles NotificationToProfile[]
+}
+
+model NotificationToProfile {
+  profileId Int
+  profile Profile @relation(fields: [profileId], references: [id])
+  notificationId Int
+  notification Notification @relation(fields: [notificationId], references: [id])
+  seen Boolean @default(false)
+  dismissed Boolean @default(false)
+
+  @@id([profileId, notificationId])
+}

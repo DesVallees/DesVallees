@@ -135,37 +135,57 @@
 
     async function setProfile(profileInfo: any, profilePicture:any) {
         $profile = {
-            fullName: profileInfo.displayName,
-            id: profileInfo.id,
-            jobTitle: profileInfo.jobTitle,
+            id: '',
+            microsoftId: profileInfo.id,
+            fullName: profileInfo.displayName || "",
+            jobTitle: profileInfo.jobTitle || "",
             department: '',
-            mail: profileInfo.mail || profileInfo.userPrincipalName,
-            mobilePhone: profileInfo.mobilePhone,
-            officeLocation: profileInfo.officeLocation,
-            preferredLanguage: profileInfo.preferredLanguage,
+            mail: profileInfo.mail || (profileInfo.userPrincipalName || ""),
+            mobilePhone: profileInfo.mobilePhone || "",
+            officeLocation: profileInfo.officeLocation || "",
+            preferredLanguage: profileInfo.preferredLanguage || "",
             profilePicture: profilePicture || letterToAvatarUrl(profileInfo.displayName.substring(0,1)),
             birthday: '',
-            notifications: []
         }
 
         updateNotifications()
+
+        const response = await fetch('/api/intranet/createProfile', {
+            method: 'POST',
+            body: JSON.stringify($profile),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            let dbProfile = await response.json()
+            if (dbProfile.id) {
+                $profile.id = dbProfile.id;
+                $profile.department = dbProfile.department;
+                $profile.birthday = dbProfile.birthday;
+            }
+        } else {
+            console.error('Failed to create profile:', response.status);
+            toast.error($dictionary.error)
+        }
     }
 
     $: notifications.length, updateNotifications()
     
     function updateNotifications() {
-        if($profile){
-            for (let i = 0; i < notifications.length; i++) {
-                const profileNotificationsIds = new Set($profile.notifications.map(item => item.id));
+        // if($profile){
+        //     for (let i = 0; i < notifications.length; i++) {
+        //         const profileNotificationsIds = new Set($profile.notifications.map(item => item.id));
                 
-                for (const item of notifications) {
-                    if (!profileNotificationsIds.has(item.id)) {
-                        $profile.notifications.push(item)
-                        profileNotificationsIds.add(item.id);
-                    }
-                }
-            }
-        }
+        //         for (const item of notifications) {
+        //             if (!profileNotificationsIds.has(item.id)) {
+        //                 $profile.notifications.push(item)
+        //                 profileNotificationsIds.add(item.id);
+        //             }
+        //         }
+        //     }
+        // }
     }
 
 

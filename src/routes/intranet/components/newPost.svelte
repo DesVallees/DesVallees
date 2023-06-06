@@ -1,24 +1,28 @@
 <script lang="ts">
 	import { fade, slide } from "svelte/transition";
 	import Avatar from "./avatar.svelte";
-	import { dictionary, profile, type Profile } from "../stores";
+	import { dictionary, profile } from "../stores";
 	import Picker from "./picker.svelte";
-	import { profileDB } from "../futureDB";
 	import PostForm from "./postForm.svelte";
 	import { createEventDispatcher } from "svelte";
 
     const dispatch = createEventDispatcher();
 
     export let parentCommentPoster: string = ''
-    export let privateReceiverID: string = ''
+    export let parentCommentId: number | undefined = undefined
+    export let parentCommentVisibility: string = ''
+
+    export let privateReceiverID: number | undefined = undefined
+    export let privateReceiverName : string = ''
+
+    let pickerValue: number = 1;
 
 
     let active: boolean = privateReceiverID || parentCommentPoster ? true : false
 
-    let privateReceiverName:string;
-
-    if (privateReceiverID) {
-        privateReceiverName = profileDB.find((profile: Profile) => profile.id === privateReceiverID)?.fullName as string;
+    let pickerValueToVisibilities: {[key: string]: string} = {
+        '1': 'all',
+        '2': $profile.department
     }
 
 
@@ -76,9 +80,9 @@
                         {$dictionary.visibleTo}
 
                         {#if privateReceiverID}
-                            <Picker bind:button={firstFocusableElement} options={[privateReceiverName, ...$dictionary.teamNames]}/>
+                            <Picker bind:button={firstFocusableElement} options={[{id: 0, name: privateReceiverName}, ...$dictionary.teamNames]} bind:value={pickerValue}/>
                         {:else}
-                            <Picker bind:button={firstFocusableElement} options={$dictionary.teamNames}/>
+                            <Picker bind:button={firstFocusableElement} options={$dictionary.teamNames} bind:value={pickerValue}/>
                         {/if}
 
                     </header>
@@ -94,7 +98,7 @@
                 {/if}
 
                 
-                <PostForm bind:textarea bind:lastFocusableElement on:submit={close} on:close={close} inputFontSize="1.1rem" />
+                <PostForm bind:textarea bind:lastFocusableElement on:submit={close} on:close={close} inputFontSize="1.1rem" {parentCommentId} visibility={ parentCommentPoster? parentCommentVisibility : privateReceiverID && pickerValue === 0 ? privateReceiverID.toString() : pickerValueToVisibilities[pickerValue.toString()]} />
 
             </div>
 

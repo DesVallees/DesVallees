@@ -2,6 +2,7 @@
 	import { fly } from "svelte/transition";
 	import { dictionary, profile, type Notification as NotificationType } from "../stores";
 	import Notification from "./notification.svelte";
+	import { notifications as dbnot } from "../futureDB";
 
     export let showNotifications:boolean;
 
@@ -25,14 +26,9 @@
         showNotifications = false
     }
 
-    let notifications: NotificationType[] = []
-
-    $: $profile.notifications.length, getNotifications()
-
-    function getNotifications() {
-        notifications = $profile.notifications.filter((notification) => notification.dismissed === false).reverse()
-    }
-
+    
+    let notifications: any[] = dbnot.filter((notification) => notification.dismissed === false).reverse()
+    
     function dismissNotification(dismissedNotificationId:string) {
         notifications = notifications.filter(element => element.id !== dismissedNotificationId)
     }

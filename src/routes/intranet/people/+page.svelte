@@ -4,26 +4,31 @@
 	import TeamHeader from "../components/teamHeader.svelte";
 	import Person from "../components/person.svelte";
     import Select from "../components/select.svelte";
-	import { dictionary, type Profile as ProfileType } from "../stores";
-	import { profileDB } from "../futureDB";
+	import { dictionary } from "../stores";
 	import NewPost from "../components/newPost.svelte";
+	import type { PageData } from "./$types";
 
-    let optionSelectedIndex:number;
+    let optionSelectedIndex:number = 0;
 
     let newMessage: boolean = false;
-    let messageReceiverID: string;
+    let messageReceiverID: number;
+    let messageReceiverName: string;
 
-    function privateMessage(id: string) {
+    function privateMessage(id: number, name: string) {
         messageReceiverID = id
+        messageReceiverName = name
         newMessage = !newMessage
     }
 
-    let filteredPeople: ProfileType[];
+    export let data: PageData
+    $: ({ profiles } = data)
+
+    let filteredPeople: any[];
 
     $: optionSelectedIndex, filterPeople()
 
     function filterPeople() {
-        filteredPeople = profileDB.filter((profile: ProfileType) => profile.department === $dictionary.teamNames[optionSelectedIndex])
+        filteredPeople = profiles.filter((profile) => profile.department === $dictionary.teamNames[optionSelectedIndex].name)
     }
 
 </script>
@@ -34,15 +39,15 @@
     <TeamHeader />
     <Select options={$dictionary.teamNames} bind:optionSelectedIndex />
     <div class="cardsContainer">
-        {#if optionSelectedIndex === 0}
-            {#each profileDB as user}
-                <Person on:sendMessage={() => privateMessage(user.id)} id={user.id} name={user.fullName} profilePicture={user.profilePicture} jobTitle={user.jobTitle}/>
+        {#if optionSelectedIndex === 0 && profiles.length > 0}
+            {#each profiles as user}
+                <Person on:sendMessage={() => privateMessage(user.id, user.fullName)} id={user.id} name={user.fullName} profilePicture={user.profilePicture} jobTitle={user.jobTitle}/>
             {/each}
             
         {:else if filteredPeople.length > 0}
             
             {#each filteredPeople as user}
-                <Person on:sendMessage={() => privateMessage(user.id)} id={user.id} name={user.fullName} profilePicture={user.profilePicture} jobTitle={user.jobTitle}/>
+                <Person on:sendMessage={() => privateMessage(user.id, user.fullName)} id={user.id} name={user.fullName} profilePicture={user.profilePicture} jobTitle={user.jobTitle}/>
             {/each}
 
         {:else}
@@ -56,7 +61,7 @@
 
 {#if messageReceiverID}
     {#key newMessage}
-        <NewPost privateReceiverID={messageReceiverID} />
+        <NewPost privateReceiverID={messageReceiverID} privateReceiverName={messageReceiverName} />
     {/key}
 {/if}
 

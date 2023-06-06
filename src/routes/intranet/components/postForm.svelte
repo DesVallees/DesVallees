@@ -1,10 +1,18 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import { dictionary } from "../stores";
+	import { dictionary, profile } from "../stores";
 	import Separator from "./separator.svelte";
 	import { autoResizeTextarea, convertDataUrlToUrl } from "../functions";
+    import toast from 'svelte-french-toast';
+    import { deserialize } from '$app/forms';
+    import type { ActionResult } from '@sveltejs/kit';
+    import { goto, invalidateAll } from '$app/navigation';
 
     const dispatch = createEventDispatcher();
+
+    export let parentCommentId: number | undefined = undefined
+    export let visibility: string;
+
 
 
     export let inputFontSize: string = '1rem'
@@ -31,9 +39,44 @@
         imageSrc = '';
     }
 
+    async function handleSubmit(this: HTMLFormElement) {
+        const data = new FormData(this);
+
+        data.append('profileID', $profile.id);
+
+        if (imageSrc) {
+            data.append('img', imageSrc);
+        }
+
+        data.append('visibility', visibility);
+
+        if (parentCommentId) {
+            data.append('parentPostID', parentCommentId.toString());
+        }
+        
+
+        const response = await fetch(this.action, {
+            method: 'POST',
+            body: data
+        });
+
+        const result: ActionResult = deserialize(await response.text());
+
+        if (result.type === 'success') {
+            if (parentCommentId) {
+                goto(`/intranet/replies/${parentCommentId}`)
+            }else{
+                invalidateAll()
+            }
+            dispatch('submit')
+        }else {
+            toast.error($dictionary.error)
+        }
+    }
+
 </script>
 
-<form on:submit|preventDefault={() => dispatch('submit')}>
+<form on:submit|preventDefault={handleSubmit} action="?/createPost">
     <!-- svelte-ignore a11y-autofocus -->
     <textarea bind:this={textarea} use:autoResizeTextarea style="font-size: {inputFontSize};" required rows="2" autofocus autocomplete="off" name="content" placeholder={$dictionary.whatDoYouWantToSay}></textarea>
 
@@ -56,7 +99,7 @@
             {#if !imageSrc}
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
                 <label for="image" tabindex="0" on:keypress={(event) => {(event.key == 'Enter' || event.key == ' ') ? addAnImage.click() : ''}} aria-label={$dictionary.addAnImage}><ion-icon name="image-outline"></ion-icon></label>
-                <input type="file" id="image" name="image" accept="image/*" style="display: none;" bind:this={addAnImage} on:change={previewImage}>
+                <input type="file" id="image" accept="image/*" style="display: none;" bind:this={addAnImage} on:change={previewImage}>
             {/if}
         </div>
         <div class="rightButtons">
@@ -64,6 +107,8 @@
             <button bind:this={lastFocusableElement} type="submit" class="link">{$dictionary.submit}</button>
         </div>
     </div>
+
+
 </form>
 
 <style>
