@@ -48,7 +48,7 @@ export const POST: RequestHandler = (async ({ request }) => {
 
         let dbProfile = await prisma.profile.findFirstOrThrow({
             where: {
-                microsoftId: profile.id
+                microsoftId: profile.microsoftId
             }
         })
     
