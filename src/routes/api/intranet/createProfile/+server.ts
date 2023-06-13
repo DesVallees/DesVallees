@@ -19,9 +19,11 @@ export const POST: RequestHandler = (async ({ request }) => {
 
         try {
 
+
+
             await prisma.profile.create({
                 data: {
-                    microsoftId: profile.id,
+                    microsoftId: profile.microsoftId,
                     birthday: profile.birthday,
                     department: profile.department,
                     fullName: profile.fullName,

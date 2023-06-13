@@ -34,6 +34,10 @@ export const actions: Actions = {
 
 export const load: PageServerLoad = async () => {
     return {
-        profiles: await prisma.profile.findMany(),
+        profiles: await prisma.profile.findMany({
+            orderBy: {
+                fullName: 'asc'
+            }
+        }),
     }
 };

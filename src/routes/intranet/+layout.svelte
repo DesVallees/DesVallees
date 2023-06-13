@@ -84,7 +84,7 @@
     
         return myMSALObj.acquireTokenSilent(request)
             .catch(error => {
-                toast.error(`${error instanceof InteractionRequiredAuthError ? ': Interaction Required Authentication Error' : 'Silent token acquisition failed.'}`)
+                toast.error(`${error instanceof InteractionRequiredAuthError ? ': Interaction Required Authentication Error' : `Silent token acquisition failed. - ${error.message}`}`)
                 if (error instanceof InteractionRequiredAuthError) {
                     return myMSALObj.acquireTokenPopup(request)
                         .then(tokenResponse => {
@@ -126,10 +126,9 @@
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
                 return url;
-            }else{
-                toast.error(`Error getting profile picture`)
-                return ''
             }
+            
+            return ''
         }
     }
 
@@ -147,8 +146,6 @@
             profilePicture: profilePicture || letterToAvatarUrl(profileInfo.displayName.substring(0,1)),
             birthday: '',
         }
-
-        updateNotifications()
 
         const response = await fetch('/api/intranet/createProfile', {
             method: 'POST',
@@ -169,23 +166,6 @@
             console.error('Failed to create profile:', response.status);
             toast.error($dictionary.error)
         }
-    }
-
-    $: notifications.length, updateNotifications()
-    
-    function updateNotifications() {
-        // if($profile){
-        //     for (let i = 0; i < notifications.length; i++) {
-        //         const profileNotificationsIds = new Set($profile.notifications.map(item => item.id));
-                
-        //         for (const item of notifications) {
-        //             if (!profileNotificationsIds.has(item.id)) {
-        //                 $profile.notifications.push(item)
-        //                 profileNotificationsIds.add(item.id);
-        //             }
-        //         }
-        //     }
-        // }
     }
 
 
