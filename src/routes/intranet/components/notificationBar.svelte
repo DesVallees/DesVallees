@@ -112,6 +112,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        font-weight: normal;
     }
 
     @media (max-width: 700px) {

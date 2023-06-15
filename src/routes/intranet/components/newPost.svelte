@@ -18,7 +18,7 @@
     let pickerValue: number = 1;
 
 
-    let active: boolean = privateReceiverID || parentCommentPoster ? true : false
+    export let active: boolean = privateReceiverID || parentCommentPoster ? true : false
 
     let pickerValueToVisibilities: {[key: string]: string} = {
         '1': 'all',

@@ -16,7 +16,7 @@
 	import LogIn from './components/logIn.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { letterToAvatarUrl } from './functions';
+	import { isGeneratedAvatarUrl, letterToAvatarUrl } from './functions';
 	import { notifications } from './futureDB';
 	import NotificationBar from './components/notificationBar.svelte';
 
@@ -84,18 +84,9 @@
     
         return myMSALObj.acquireTokenSilent(request)
             .catch(error => {
-                toast.error(`${error instanceof InteractionRequiredAuthError ? ': Interaction Required Authentication Error' : `Silent token acquisition failed. - ${error.message}`}`)
-                if (error instanceof InteractionRequiredAuthError) {
-                    return myMSALObj.acquireTokenPopup(request)
-                        .then(tokenResponse => {
-                            console.log(tokenResponse);
-                            return tokenResponse;
-                        }).catch(error => {
-                            console.error(error);
-                        });
-                } else {
-                    console.warn(error);   
-                }
+                toast.error($dictionary.errorPreviousCredentials)
+                $username = ''
+                throw new Error(error);
         });
     }
 
@@ -161,6 +152,11 @@
                 $profile.id = dbProfile.id;
                 $profile.department = dbProfile.department;
                 $profile.birthday = dbProfile.birthday;
+
+                // Remove if statement when upload pictures available
+                if (isGeneratedAvatarUrl($profile.profilePicture)) {
+                    $profile.profilePicture = dbProfile.profilePicture
+                }
             }
         } else {
             console.error('Failed to create profile:', response.status);

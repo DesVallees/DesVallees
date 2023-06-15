@@ -2,10 +2,8 @@
 	import { createEventDispatcher } from "svelte";
 	import { dictionary, profile } from "../stores";
 	import Separator from "./separator.svelte";
-	import { autoResizeTextarea, convertDataUrlToUrl } from "../functions";
+	import { autoResizeTextarea, convertDataUrlToUrl, escapeHTML } from "../functions";
     import toast from 'svelte-french-toast';
-    import { deserialize } from '$app/forms';
-    import type { ActionResult } from '@sveltejs/kit';
     import { goto, invalidateAll } from '$app/navigation';
 
     const dispatch = createEventDispatcher();
@@ -42,6 +40,10 @@
     async function handleSubmit(this: HTMLFormElement) {
         const data = new FormData(this);
 
+        if (textarea) {
+            data.set('content', escapeHTML(textarea.value).replace(/\n/g, '<br>'));
+        }
+
         data.append('profileID', $profile.id);
 
         if (imageSrc) {
@@ -55,19 +57,21 @@
         }
         
 
-        const response = await fetch(this.action, {
+        const response = await fetch('/api/intranet/createPost', {
             method: 'POST',
             body: data
-        });
+        });        
 
-        const result: ActionResult = deserialize(await response.text());
-
-        if (result.type === 'success') {
-            if (parentCommentId) {
+        if (response.status === 200) {
+            if (location.pathname === '/intranet/people') {
+                toast.success($dictionary.sent)
+            }
+            else if (parentCommentId && location.pathname !== `/intranet/replies/${parentCommentId}`) {
                 goto(`/intranet/replies/${parentCommentId}`)
-            }else{
+            } else {
                 invalidateAll()
             }
+
             dispatch('submit')
         }else {
             toast.error($dictionary.error)

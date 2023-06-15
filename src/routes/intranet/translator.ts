@@ -126,6 +126,8 @@ export const translator = {
         noNoticationsToShow: 'No notifications to display',
         noPostsToShow: 'There are no posts to display',
         welcome: 'Welcome',
+        errorPreviousCredentials: 'Error trying to log in with previous credentials',
+        sent: 'Sent',
     },
     español: {
         error: 'Ha ocurrido un error.',
@@ -254,5 +256,7 @@ export const translator = {
         noNoticationsToShow: 'No hay notificaciones para mostrar',
         noPostsToShow: 'No hay publicaciones para mostrar',
         welcome: 'Bienvenido(a)',
+        errorPreviousCredentials: 'Error al intentar iniciar sesión con las credenciales existentes.',
+        sent: 'Enviado',
     }
 }

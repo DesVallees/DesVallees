@@ -12,10 +12,11 @@
     $: ({ originalPost } = data)
     $: ({ comments } = data)
     $: ({ profiles } = data)
+
 </script>
 
 
-<NewPost />
+<NewPost active={false} parentCommentPoster={profiles.find((profile) => profile.id === originalPost?.profileId)?.fullName} parentCommentId={originalPost?.id} parentCommentVisibility={originalPost?.visibility}/>
                 
 <div class="replies" in:fade>
 
@@ -31,12 +32,16 @@
             <Separator height="2px" width="100%" maxWidth="700px" margin="2em 0" />
 
             {#if comments.length > 0}
+                
+                {#key comments}
+                    
+                    {#each comments as post}
+                                    
+                        <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={profiles.find((profile) => profile.id === post?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === post?.profileId)?.profilePicture} />
 
-                {#each comments as post}
-                                
-                    <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={profiles.find((profile) => profile.id === post?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === post?.profileId)?.profilePicture} />
+                    {/each}
 
-                {/each}
+                {/key}
 
             {:else}
 

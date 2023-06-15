@@ -3,6 +3,8 @@
     import { dictionary, language, sleep } from "../stores";
 	import Avatar from "./avatar.svelte";
 	import NewPost from "./newPost.svelte";
+	import { throttle } from "../functions";
+	import toast from "svelte-french-toast";
 
 
     type ShowMore = 'unnecessary' | 'needed' | 'used'
@@ -83,6 +85,27 @@
     }
 
 
+    async function callLikesEndpoint(nature: 'increment' | 'decrement') {
+        const response = await fetch(`/api/intranet/updateLikes?id=${id}&nature=${nature}`, {
+            method: 'POST',
+        });    
+
+        if (response.status === 500) {
+            toast.error($dictionary.error)
+        }
+    }
+
+    const handleLike = throttle(() => {
+        liked = !liked;
+        if (liked) {
+            likes = likes + 1
+            callLikesEndpoint('increment')
+        } else {
+            likes = likes - 1;
+            callLikesEndpoint('decrement')
+        }
+    }, 1000)
+
 
 </script>
 
@@ -125,7 +148,7 @@
                         <ion-icon in:fade name="arrow-undo{replying ? "" : "-outline"}"></ion-icon>
                     {/key}
                 </button>
-                <button class="link" on:click={() => {liked = !liked; liked ? likes = likes + 1 : likes = likes - 1;}} aria-label={$dictionary.like}>
+                <button class="link" on:click={handleLike} aria-label={$dictionary.like}>
                     {#key liked}
                         <ion-icon in:fade name="heart{liked ? "" : "-outline"}"></ion-icon>
                     {/key}
