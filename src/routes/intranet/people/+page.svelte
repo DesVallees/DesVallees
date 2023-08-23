@@ -77,9 +77,9 @@
     
     .people{
         align-items: center;
-        height: 100%;
         width: 100%;
         padding-bottom: 0em;
+        margin-top: 100px;
     }
     
     .cardsContainer{
@@ -92,7 +92,6 @@
     }
 
     h2 {
-        margin: 2em 0;
         font-size: 1.2rem;
         color: var(--contentDim);
     }

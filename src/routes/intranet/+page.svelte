@@ -4,6 +4,7 @@
 	import NewPost from "./components/newPost.svelte";
 	import { dictionary } from "./stores";
 	import type { PageData } from "./$types";
+	import PostsHeader from "./components/postsHeader.svelte";
 
     export let data: PageData
 
@@ -16,22 +17,22 @@
                     
 <div class="home" in:fade>
 
-    {#key posts}
+    <PostsHeader />
+
+    {#if posts.length > 0}
+
+        {#each posts as post, index(post.id)}
+            
+            <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={profiles.find((profile) => profile.id === post.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === post.profileId)?.profilePicture} />
+
+        {/each}
         
-        {#if posts.length > 0}
-            {#each posts as post}
-                
-                <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={profiles.find((profile) => profile.id === post.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === post.profileId)?.profilePicture} />
-
-            {/each}
-        {:else}
-            <div class="welcome">
-                <ion-icon name="chatbubbles"></ion-icon>
-                <h3>{$dictionary.noPostsToShow}</h3>
-            </div>
-        {/if}
-
-    {/key}
+    {:else}
+        <div class="welcome">
+            <ion-icon name="chatbubbles"></ion-icon>
+            <h3>{$dictionary.noPostsToShow}</h3>
+        </div>
+    {/if}
 
 </div>
 
@@ -40,9 +41,7 @@
         display: flex;
         flex-direction: column;
         padding-bottom: 0;
-        gap: 2em;
         width: 100%;
-        max-width: 1000px;
         align-items: center;
     }
 

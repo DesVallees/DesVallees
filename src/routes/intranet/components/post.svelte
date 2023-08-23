@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { fade, slide } from "svelte/transition";
-    import { dictionary, language, sleep } from "../stores";
+    import { dictionary, language } from "../stores";
 	import Avatar from "./avatar.svelte";
 	import NewPost from "./newPost.svelte";
-	import { throttle } from "../functions";
+	import { sleep, throttle } from "../functions";
 	import toast from "svelte-french-toast";
 
 
@@ -110,7 +110,7 @@
 </script>
 
 
-<div class="post" bind:this={postDiv}>
+<div in:slide|local class="post" bind:this={postDiv}>
     <div class="avatar">
         <Avatar href="/intranet/profile/{profileId}" ariaLabel={$dictionary.seeProfile} image={profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
     </div>
@@ -180,16 +180,12 @@
         grid-template-columns: auto 1fr;
         
         width: 100%;
-        max-width: 700px;
         height: fit-content;
-        border-radius: 20px;
         padding: 0 1em;
         transition: all .3s;
 
-        border: 1px solid var(--content);
+        border-bottom: 1px solid var(--content);
         color: var(--content);
-        box-shadow: 0 0 5px var(--contentDim);
-        background-color: rgba(0, 0, 0, 0.15);
     }
 
     .avatar {

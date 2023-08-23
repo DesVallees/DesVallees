@@ -20,7 +20,8 @@
         justify-content: center;
         align-items: center;
         gap: 1em;
-        width: 100%;
-        margin-top: 50px;
+        width: 90%;
+        margin: auto;
+        margin-top: 100px;
     }
 </style>

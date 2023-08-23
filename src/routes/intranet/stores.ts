@@ -5,7 +5,7 @@ import { browser } from "$app/environment";
 export type Language = 'español' | 'english'
 
 export type Profile = {
-    id: string,
+    id: number,
     microsoftId: string,
     fullName: string,
     jobTitle: string,
@@ -44,7 +44,3 @@ if (browser){
 }
 
 export const dictionary = derived(language, (language) => translator[language]);
-
-export function sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}

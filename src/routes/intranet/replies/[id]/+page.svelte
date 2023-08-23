@@ -6,6 +6,7 @@
 	import { dictionary } from "../../stores";
 	import Post from "../../components/post.svelte";
 	import Separator from "../../components/separator.svelte";
+	import PostsHeader from "../../components/postsHeader.svelte";
 
     export let data: PageData
 
@@ -20,6 +21,8 @@
                 
 <div class="replies" in:fade>
 
+    <PostsHeader />
+
     {#key $page.params.id}
 
         {#if originalPost}
@@ -29,19 +32,15 @@
 
             <Post originalPost={true} id={originalPost.id} visibility={originalPost.visibility} likes={originalPost.likes} comments={originalPost.comments} profileId={originalPost.profileId} date={originalPost.date} content={originalPost.content} img={originalPost.img || undefined} name={profiles.find((profile) => profile.id === originalPost?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === originalPost?.profileId)?.profilePicture} />
 
-            <Separator height="2px" width="100%" maxWidth="700px" margin="2em 0" />
+            <Separator height="3em" width="100%" margin="0 0 30px" borderRadius="0" />
 
             {#if comments.length > 0}
                 
-                {#key comments}
-                    
-                    {#each comments as post}
-                                    
-                        <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={profiles.find((profile) => profile.id === post?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === post?.profileId)?.profilePicture} />
+                {#each comments as post, index(post.id)}
+                                
+                    <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={profiles.find((profile) => profile.id === post?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === post?.profileId)?.profilePicture} />
 
-                    {/each}
-
-                {/key}
+                {/each}
 
             {:else}
 
@@ -68,20 +67,20 @@
     .replies {
         display: flex;
         flex-direction: column;
-        gap: 2em;
         width: 100%;
-        max-width: 1000px;
         align-items: center;
     }
 
     h2 {
         width: 100%;
         max-width: 700px;
+        margin: 2em 0 .5em;
     }
 
     h3 {
         font-size: 1.2rem;
         font-weight: normal;
+        margin: 2em 0 .5em;
     }
     
 </style>

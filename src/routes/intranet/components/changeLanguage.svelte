@@ -2,6 +2,7 @@
 	import { dictionary, language, type Language } from "../stores";
 
     export let style: string = ''
+    export let buttonStyle: string = 'link'
 
     function changeLanguage (language: Language) {
         $language = language
@@ -10,14 +11,14 @@
 
 {#if $language === 'español'}
     
-    <button class="link" style="{style}" on:click={() => changeLanguage('english')}>
+    <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('english')}>
         English
         <img src="/images/usFlag.jpg" alt="{$dictionary.unitedStatesFlag}">
     </button>
 
     {:else}
 
-    <button class="link" style="{style}" on:click={() => changeLanguage('español')}>
+    <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('español')}>
         Español
         <img src="/images/spainFlag.jpg" alt="{$dictionary.spanishFlag}">
     </button>

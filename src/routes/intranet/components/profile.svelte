@@ -51,14 +51,11 @@
     }
 
     section {
-        /* flex-direction: row;
-        flex-wrap: wrap;
-        align-items: baseline; */
         display: grid;
         grid-template-columns: auto auto;
         justify-content: center;
         row-gap: 2.5em;
-        column-gap: 10em;
+        column-gap: 8em;
         width: 100%;
         max-width: 700px;
     }

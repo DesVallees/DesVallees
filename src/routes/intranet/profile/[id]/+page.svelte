@@ -1,10 +1,18 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
 	import Profile from "../../components/profile.svelte";
-	import { dictionary } from "../../stores";
+	import { dictionary, profile as storeProfile } from "../../stores";
 	import type { PageData } from "./$types";
 
     export let data: PageData
     $: ({ profile } = data)
+
+    onMount(() => {
+        if (profile?.id === $storeProfile.id) {
+            goto('/intranet/profile')
+        }
+    })
 
 </script>
 
@@ -27,7 +35,8 @@
         justify-content: center;
         align-items: center;
         gap: 1em;
-        width: 100%;
-        margin-top: 50px;
+        width: 90%;
+        margin: auto;
+        margin-top: 100px;
     }
 </style>

@@ -16,7 +16,7 @@
 }
 
 :root {
-    --main: #1d212a;
+    --main: #17191f;
     --content: #F7F7FF;
     --interative: #D44508;
 }
@@ -41,7 +41,6 @@ div {
     justify-content: center;
     align-items: center;
     gap: 1em;
-    background-color: #1d212a;
 }
 
 a {

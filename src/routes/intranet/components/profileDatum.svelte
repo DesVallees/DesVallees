@@ -43,6 +43,10 @@
     }
 
     p {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        max-width: calc(100vw - 60px - 3rem - 1em); 
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; 
     }
 </style>

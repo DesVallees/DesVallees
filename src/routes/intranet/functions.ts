@@ -1,3 +1,7 @@
+export function sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export function camelCaseToSpaced(camel: string): string {
     return camel.replace(/([a-z])([A-Z])/g, '$1 $2')
                 .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
@@ -73,25 +77,13 @@ export function autoResizeTextarea(element: HTMLTextAreaElement): void {
 
 export function throttle(func: () => void, limit: number): () => void {
     let lastCallTime = 0;
-    let timeout: ReturnType<typeof setTimeout> | null = null;
-
-    return function () {
+    return function() {
         const now = Date.now();
         if (now - lastCallTime >= limit) {
-            if (timeout) {
-                clearTimeout(timeout);
-                timeout = null;
-            }
             func();
             lastCallTime = now;
-        } else if (!timeout) {
-            timeout = setTimeout(() => {
-                timeout = null;
-                func();
-                lastCallTime = Date.now();
-            }, limit - (now - lastCallTime));
         }
-    };
+    }
 }
 
 export function letterToAvatarUrl(letter: string): string {
@@ -116,10 +108,16 @@ export function letterToAvatarUrl(letter: string): string {
     const imageDataUrl = canvas.toDataURL();
 
     return imageDataUrl;
+
 }
 
 export function isGeneratedAvatarUrl(url: string): boolean {
     const prefix = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA';
+    return url.startsWith(prefix);
+}
+
+export function isGeneratedBlobUrl(url: string): boolean {
+    const prefix = 'blob:';
     return url.startsWith(prefix);
 }
 

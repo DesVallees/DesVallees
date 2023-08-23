@@ -3,7 +3,7 @@
     import { Toaster } from 'svelte-french-toast';
     import toast from 'svelte-french-toast';
     import { InteractionRequiredAuthError, PublicClientApplication } from "@azure/msal-browser";
-	import { dictionary, language, profile, sleep, username } from './stores';
+	import { dictionary, language, profile, username } from './stores';
 	import Logo from './components/logo.svelte';
 	import ChangeLanguage from './components/changeLanguage.svelte';
 	import BackgroundCircle from './components/backgroundCircle.svelte';
@@ -16,9 +16,10 @@
 	import LogIn from './components/logIn.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { isGeneratedAvatarUrl, letterToAvatarUrl } from './functions';
+	import { isGeneratedAvatarUrl, isGeneratedBlobUrl, letterToAvatarUrl, sleep } from './functions';
 	import { notifications } from './futureDB';
 	import NotificationBar from './components/notificationBar.svelte';
+	import FeaturedEvents from './components/featuredEvents.svelte';
 
     const now = new Date();
     const year = now.getFullYear();
@@ -48,9 +49,10 @@
     const currentAccounts = myMSALObj.getAllAccounts();
     if (currentAccounts.length > 1) {
         console.warn("Multiple accounts detected.")
-        toast("Multiple accounts detected.", {
+        toast(`Multiple accounts detected (${currentAccounts.length}). Clean browser cookies.`, {
             icon: '❗',
         });
+        $username = currentAccounts[0].username;
     } else if (currentAccounts.length === 1) {
         $username = currentAccounts[0].username;
     }
@@ -125,7 +127,7 @@
 
     async function setProfile(profileInfo: any, profilePicture:any) {
         $profile = {
-            id: '',
+            id: 0,
             microsoftId: profileInfo.id,
             fullName: profileInfo.displayName || "",
             jobTitle: profileInfo.jobTitle || "",
@@ -153,8 +155,8 @@
                 $profile.department = dbProfile.department;
                 $profile.birthday = dbProfile.birthday;
 
-                // Remove if statement when upload pictures available
-                if (isGeneratedAvatarUrl($profile.profilePicture)) {
+                // Modify when upload pictures available
+                if (!isGeneratedAvatarUrl(dbProfile.profilePicture) && !isGeneratedBlobUrl(dbProfile.profilePicture)) {
                     $profile.profilePicture = dbProfile.profilePicture
                 }
             }
@@ -178,6 +180,7 @@
     let showNotifications: boolean = false;
 
     $: $page.url.pathname, goTop()
+    let mainContent: HTMLElement;
     let goTop: (() => void) = () => {}
 
     onMount(() => {
@@ -186,6 +189,7 @@
             if (document) {
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
+                mainContent.scrollTop = 0
             }
         }
     });
@@ -204,51 +208,55 @@
 
 <Toaster/>
 
-<div class="intranet" class:disappearAndAppear>
+{#if showNotifications}
+    <NotificationBar bind:showNotifications />
+{/if}
 
-    <nav>
-        <a class="logo" href="/intranet" class:logoNotLanding={$username}>
-            <Logo scale={.8} />
+<div class="intranet" class:disappearAndAppear class:notLandingPage={$username} class:landingPage={!$username}>
+
+    <nav class="primaryNav">
+        <a class="logo" href="/intranet">
+            <Logo />
         </a>
 
         {#if $profile}
         
             <section in:fade>
-                <a href="/intranet" class="headerLink link {$page.url.pathname === '/intranet' ? 'active' : ''}">{$dictionary.home}</a>
-                <a href="/intranet/people" class="headerLink link {$page.url.pathname === '/intranet/people' ? 'active' : ''}">{$dictionary.people}</a>
-                <a href="/intranet/general" class="headerLink link {$page.url.pathname === '/intranet/general' ? 'active' : ''}">{$dictionary.generalInformation}</a>
-                <Avatar image={$profile.profilePicture} ariaLabel={$dictionary.profile} href="/intranet/profile" />
-                <Separator width="1px" height="35px"/>
-                <ChangeLanguage style="font-size: 1.1rem;"/>
-                <button aria-label={$dictionary.notifications} on:click={() => showNotifications = !showNotifications} class="notification" type="button">
-                    <ion-icon name="notifications-outline"></ion-icon>
-                    {#key unseenNotifications.length}
-                        <div style="--areNotifications: {unseenNotifications.length > 0 ? 'flex' : 'none'}" in:scale class="notificationCounter">{unseenNotifications.length}</div>
-                    {/key}
-                </button>
+                <div>
+                    <a href="/intranet" class="headerLink baseButton {$page.url.pathname === '/intranet' ? 'active' : ''}">{$dictionary.home}</a>
+                    <a href="/intranet/people" class="headerLink baseButton {$page.url.pathname === '/intranet/people' ? 'active' : ''}">{$dictionary.people}</a>
+                    <a href="/intranet/general" class="headerLink baseButton {$page.url.pathname === '/intranet/general' ? 'active' : ''}">{$dictionary.generalInformation}</a>
+                </div>
+                <div>
+                    <Separator height="1px" width="100%" margin="20px 0" />
+                    <ChangeLanguage buttonStyle="baseButton" style="font-size: 1.1rem; width: 100%; justify-content: flex-start;"/>
+                    <a href="/intranet/profile" class="headerLink baseButton {$page.url.pathname === '/intranet/profile' ? 'active' : ''}" aria-label={$dictionary.profile}>
+                        <Avatar image={$profile.profilePicture} borderRadius="10px" width="2rem"/>
+                        <span style="margin-left: 2px;">{$profile.fullName}</span>
+                    </a>
+                </div>
             </section>
 
-            {#if showNotifications}
-                <NotificationBar bind:showNotifications />
-            {/if}
 
-            {:else}
+        {:else}
 
             <ChangeLanguage />
 
         {/if}
 
-        <BackgroundCircle />
     </nav>
     
-
-    <main>
+    <main bind:this={mainContent}>
 
         {#if ready}
 
             {#if $username && $profile}
 
                 <slot/>    
+
+                <footer>
+                    {$dictionary.copyright} © {year} • {$dictionary.lawOfficeOfKatherineCanto}
+                </footer>
                 
             {:else if $username}
 
@@ -294,26 +302,43 @@
 
     </main>
 
+    {#if $username}
 
-    <footer>
-        {$dictionary.copyright} © {year} • {$dictionary.lawOfficeOfKatherineCanto}
-    </footer>
+        <nav class="secondaryNav">
+            <button aria-label={$dictionary.notifications} on:click={() => showNotifications = !showNotifications} class="notification" type="button">
+                <ion-icon name="notifications-outline"></ion-icon>
+                {#key unseenNotifications.length}
+                    <div style="--areNotifications: {unseenNotifications.length > 0 ? 'flex' : 'none'}" in:scale class="notificationCounter">{unseenNotifications.length}</div>
+                {/key}
+            </button>
 
-    <BackgroundCircle color="#A2B9B930" coordinates={{left: '1500px', top: '500px'}} />
+            <FeaturedEvents />
+        </nav>
 
+    {:else}
+    
+        <footer>
+            {$dictionary.copyright} © {year} • {$dictionary.lawOfficeOfKatherineCanto}
+        </footer>
+
+    {/if}
 
 </div>
 
+<BackgroundCircle color="#A2B9B930" coordinates={{left: '1500px', top: '500px'}} />
+
+<BackgroundCircle />
+
 <style>
 
-    .intranet {
+    .landingPage.intranet {
         min-height: 100%;
         display: grid;
         grid-template-rows: auto 1fr auto;
         align-items: center;
     }
 
-    nav{
+    .landingPage .primaryNav{
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -324,10 +349,90 @@
         top: 0;
         z-index: 10;
         padding: 20px 10vw;
-        background-color: var(--mainDimer);
         width: 100%;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+    }
+
+    .landingPage main{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 0 10vw;
+    }
+
+
+    .notLandingPage.intranet {
+        min-height: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        max-width: 1250px;
+        margin: auto;
+    }
+
+    .notLandingPage .primaryNav{
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 20px;
+        height: 100vh;
+        height: 100dvh;
+        width: fit-content;
+        position: sticky;
+        top: 0;
+        padding: 20px 30px 50px;
+        border-right: 1px solid var(--content);
+    }
+
+    .notLandingPage section {
+        width: max-content;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 50px;
+    }
+
+    .notLandingPage section div {
+        display: grid;
+        gap: 1em;
+    }
+
+    .notLandingPage main{
+        display: grid;
+        grid-template-rows: 1fr auto;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 0 0 20px;
+    }
+
+    .notLandingPage .secondaryNav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        height: 100vh;
+        height: 100dvh;
+        width: fit-content;
+        position: sticky;
+        top: 0;
+        padding: 20px 30px 50px;
+        border-left: 1px solid var(--content);
+    }
+
+    .logo {
+        transform: scale(.8) translateX(-20%);
+    }
+
+    footer {
+        height: 200px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 100px 10vw 0;
+        text-align: center;
     }
 
     .notification {
@@ -361,18 +466,11 @@
         font-size: 1.5rem;
     }
 
-    section {
-        width: fit-content;
-        height: fit-content;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem 4rem;
-        margin-top: 10px;
-    }
 
     .headerLink{
         font-size: 1.1rem;
+        width: 100%;
+        justify-content: flex-start;
     }
 
     .landing {
@@ -401,26 +499,6 @@
         flex-wrap: wrap;
     }
 
-    
-    main{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        padding: 0 10vw;
-    }
-
-    footer {
-        height: 200px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 100px 10vw 0;
-        text-align: center;
-    }
-
     .disappearAndAppear {
         animation: disappearAndAppear 1s;
     }
@@ -435,7 +513,7 @@
             padding: 0 50px;
         }
 
-        nav {
+        .primaryNav {
             padding: 20px 50px;
         }
 
@@ -463,7 +541,7 @@
             padding: 0 20px;
         }
 
-        nav {
+        .primaryNav {
             padding: 20px 20px;
         }
 
@@ -471,9 +549,6 @@
             padding: 100px 20px 0;
         }
 
-        .logoNotLanding {
-            display: none;
-        }
         .landingTypewriter {
             min-height: 9rem;
         }

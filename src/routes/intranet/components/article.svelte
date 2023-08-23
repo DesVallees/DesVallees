@@ -28,11 +28,12 @@
         max-width: 1000px;
         position: relative;
         margin-top: 50px;
+        padding: 0 50px;
     }
 
     h1{
         line-height: 5rem;
-        font-size: 5rem;
+        font-size: 4.5rem;
     }
 
     div {

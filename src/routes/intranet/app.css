@@ -16,12 +16,14 @@
 }
 
 :root {
-    --main: #1d212a;
-    --mainDim: #1d212ab7;
-    --mainDimer: #1d212a5d;
+    --main: #17191f;
+    --mainDim: #17191fb7;
+    --mainDimer: #17191f5d;
     --content: #F7F7FF;
     --contentDim: #f7f7ffb7;
     --contentDimer: #f7f7ff81;
+    --contentHover: #f7f7ff38;
+    --contentTransparent: #f7f7ff15;
     --interative: #D44508;
     --interativeDim: #d44508b7;
     --interativeDimer: #d4450879;
@@ -157,6 +159,32 @@ textarea::-webkit-scrollbar-thumb {
 .link.active::before {
     transform-origin: left;
     transform: scaleX(1);
+}
+
+.baseButton {
+    position: relative;
+    gap: 10px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 10px;
+
+    width: max-content;
+    height: fit-content;
+
+    background-color: transparent;
+    transition: background-color .2s;
+}
+
+.baseButton:hover,
+.baseButton:focus-visible {
+    background-color: var(--contentTransparent);
+}
+
+.baseButton.active {
+    background-color: var(--contentHover);
 }
 
 a {

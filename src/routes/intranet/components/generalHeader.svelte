@@ -20,6 +20,7 @@
         flex-direction: column;
         margin-bottom: 3em;
         gap: 2em;
+        padding: 0 30px;
     }
 
     h1 {

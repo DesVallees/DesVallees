@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { fade, slide } from "svelte/transition";
+	import { slide } from "svelte/transition";
 	import Avatar from "./avatar.svelte";
 	import { dictionary, profile } from "../stores";
 	import Picker from "./picker.svelte";
 	import PostForm from "./postForm.svelte";
+	import Base from "./base.svelte";
 	import { createEventDispatcher } from "svelte";
-
-    const dispatch = createEventDispatcher();
 
     export let parentCommentPoster: string = ''
     export let parentCommentId: number | undefined = undefined
@@ -20,11 +19,7 @@
 
     export let active: boolean = privateReceiverID || parentCommentPoster ? true : false
 
-    let pickerValueToVisibilities: {[key: string]: string} = {
-        '1': 'all',
-        '2': $profile.department
-    }
-
+    const dispatch = createEventDispatcher();
 
     function open() {
         active = true
@@ -36,81 +31,60 @@
         dispatch('close')
     }
 
+    let pickerValueToVisibilities: {[key: string]: string} = {
+        '1': 'all',
+        '2': $profile.department
+    }
 
-    let firstFocusableElement:HTMLButtonElement;
+
     let textarea:HTMLTextAreaElement;
+    let firstFocusableElement:HTMLButtonElement;
     let lastFocusableElement:HTMLButtonElement;
-
-    function focusFirstElement () {
-        if (firstFocusableElement) {
-            firstFocusableElement.focus()
-        } else if (textarea) {
-            textarea.focus()
-        }
-    }
-
-    function focusLastElement () {
-        if (lastFocusableElement) {
-            lastFocusableElement.focus()
-        }
-    }
 
 </script>
 
-<svelte:window on:keydown={ (event) => { if (active && event.key === 'Escape') close() } } />
+<Base firstFocusableElement={firstFocusableElement || textarea} lastFocusableElement={lastFocusableElement} bind:active>
 
-{#if active}
+    <div class="post" transition:slide={{duration: 200}}>
+        <div class="avatar">
+            <Avatar image={$profile.profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;"/>
+        </div>
+        
+        <div class="content">
 
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="base" in:fade={{duration:100}} out:fade={{duration:100, delay:100}}>
-
-        <button style="position: absolute; opacity: 0;" on:focus={focusLastElement}></button>
-
-
-        <div class="post" transition:slide={{duration: 200}}>
-            <div class="avatar">
-                <Avatar image={$profile.profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;"/>
-            </div>
-            
-            <div class="content">
-
-                {#if !parentCommentPoster}
-                    <header>
-                    
-                        {$dictionary.visibleTo}
-
-                        {#if privateReceiverID}
-                            <Picker bind:button={firstFocusableElement} options={[{id: 0, name: privateReceiverName}, ...$dictionary.teamNames]} bind:value={pickerValue}/>
-                        {:else}
-                            <Picker bind:button={firstFocusableElement} options={$dictionary.teamNames} bind:value={pickerValue}/>
-                        {/if}
-
-                    </header>
-
-                {:else}
-
-                    <span class="replyingTo">
-
-                        {$dictionary.replyingTo} {parentCommentPoster}...
-
-                    </span>
-
-                {/if}
-
+            {#if !parentCommentPoster}
+                <header>
                 
-                <PostForm bind:textarea bind:lastFocusableElement on:submit={close} on:close={close} inputFontSize="1.1rem" {parentCommentId} visibility={ parentCommentPoster? parentCommentVisibility : privateReceiverID && pickerValue === 0 ? privateReceiverID.toString() : pickerValueToVisibilities[pickerValue.toString()]} />
+                    {$dictionary.visibleTo}
 
-            </div>
+                    {#if privateReceiverID}
+                        <Picker bind:button={firstFocusableElement} options={[{id: 0, name: privateReceiverName}, ...$dictionary.teamNames]} bind:value={pickerValue}/>
+                    {:else}
+                        <Picker bind:button={firstFocusableElement} options={$dictionary.teamNames} bind:value={pickerValue}/>
+                    {/if}
+
+                </header>
+
+            {:else}
+
+                <span class="replyingTo">
+
+                    {$dictionary.replyingTo} {parentCommentPoster}...
+
+                </span>
+
+            {/if}
+
+            
+            <PostForm bind:textarea bind:lastFocusableElement on:submit={close} on:close={close} inputFontSize="1.1rem" {parentCommentId} visibility={ parentCommentPoster? parentCommentVisibility : privateReceiverID && pickerValue === 0 ? privateReceiverID.toString() : pickerValueToVisibilities[pickerValue.toString()]} />
 
         </div>
 
-
-        <button style="position: absolute; opacity: 0;" on:focus={focusFirstElement}></button>
-
-
     </div>
-    
-    {:else if !privateReceiverID}
+
+</Base>
+
+{#if !active && !privateReceiverID}
     
     <button class="newPostButton" on:click={open}><ion-icon name="add-outline"></ion-icon></button>
 
@@ -144,20 +118,6 @@
         font-size: 3rem;
     }
 
-    .base {
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        width: 100vw;
-        height: 100vh;
-        padding: 150px 20px 100px;
-        background-color: #1d212aee;
-        z-index: 11;
-        overflow: auto;
-    }
-
     .post {
         position: relative;
         display: grid;
@@ -180,6 +140,7 @@
         gap: 1rem;
         font-size: 1.2rem;
         align-items: center;
+        user-select: none;
         color: var(--contentDim);
     }
     
@@ -187,6 +148,7 @@
         font-size: 1.1rem;
         color: var(--contentDimer);
         text-align: left;
+        user-select: none;
     }
 
     .avatar {
