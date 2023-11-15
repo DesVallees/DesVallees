@@ -29,7 +29,7 @@
         line-height: 4.8rem;
     }
 
-    @media screen and (max-width: 1025px){
+    @media screen and (max-width: 1100px){
         h3{
             font-size: 1.3rem;
         }
@@ -37,6 +37,17 @@
         h1 {
             font-size: 3.5rem;
             line-height: 4rem;
+        }
+    }
+
+    @media (orientation: portrait) {
+        h3{
+            font-size: clamp(1rem, 4vw, 1.4rem);
+        }
+        
+        h1 {
+            font-size: clamp(1.5rem, 7vw, 3.2rem);
+            line-height: normal;
         }
     }
 

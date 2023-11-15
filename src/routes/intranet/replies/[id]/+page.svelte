@@ -30,9 +30,9 @@
 
             <h2>{$dictionary.repliesTo}</h2>
 
-            <Post originalPost={true} id={originalPost.id} visibility={originalPost.visibility} likes={originalPost.likes} comments={originalPost.comments} profileId={originalPost.profileId} date={originalPost.date} content={originalPost.content} img={originalPost.img || undefined} name={profiles.find((profile) => profile.id === originalPost?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === originalPost?.profileId)?.profilePicture} />
+            <Post style="padding: 0 1em 2em;" originalPost={true} id={originalPost.id} visibility={originalPost.visibility} likes={originalPost.likes} comments={originalPost.comments} profileId={originalPost.profileId} date={originalPost.date} content={originalPost.content} img={originalPost.img || undefined} name={profiles.find((profile) => profile.id === originalPost?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === originalPost?.profileId)?.profilePicture} />
 
-            <Separator height="3em" width="100%" margin="0 0 30px" borderRadius="0" />
+            <Separator height="0" margin="0 0 2em" />
 
             {#if comments.length > 0}
                 

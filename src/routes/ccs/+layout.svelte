@@ -36,10 +36,6 @@
     <main>
         <slot/>
     </main>
-
-    <footer>
-
-    </footer>
 </div>
 
 <style>
@@ -47,7 +43,7 @@
     div {
         min-height: 100%;
         display: grid;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: auto 1fr;
         align-items: center;
     }
 
@@ -56,20 +52,11 @@
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 20px;
+        height: 100px;
     }
 
     main{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
         height: 100%;
-    }
-
-    footer {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
     }
 
     .disappearAndAppear {

@@ -1,5 +1,8 @@
+<!-- Add "on:click|stopPropagation" property to parent div placed in the 'slot' position -->
+
 <script lang="ts">
 	import { fade } from "svelte/transition";
+	import { sleep } from "../functions";
 
     export let firstFocusableElement:HTMLElement;
     export let lastFocusableElement:HTMLElement;
@@ -16,6 +19,18 @@
             lastFocusableElement.focus()
         }
     }
+
+    async function bringFocus () {
+        await sleep(1)
+        
+        if (lastFocusableElement) {
+            lastFocusableElement.focus()
+            lastFocusableElement.blur()
+        }
+    }
+
+    $: active, bringFocus()
+    
 </script>
 
 

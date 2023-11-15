@@ -350,6 +350,8 @@
         z-index: 10;
         padding: 20px 10vw;
         width: 100%;
+
+        backdrop-filter: blur(12px);
     }
 
     .landingPage main{

@@ -9,6 +9,8 @@
     export let guitarNumber : number | undefined = undefined;
     export let guitarFace: GuitarFace | undefined = undefined;
     export let allowSmallSize: boolean = true;
+
+    export let name: string = '';
     
     export let style: string = '';
 
@@ -32,7 +34,7 @@
     let isMobileDevice : boolean = false;
 
     onMount(() => {
-        isMobileDevice = window.innerWidth < 750
+        isMobileDevice = window.innerWidth <= window.innerHeight;
     })
 
     let imageSize : string = (isMobileDevice && allowSmallSize) ? '-small' : ''
@@ -41,12 +43,12 @@
 </script>
 
 
-<svelte:window on:resize={() => isMobileDevice = window.innerWidth < 750}/>
+<svelte:window on:resize={() => isMobileDevice = window.innerWidth <= window.innerHeight}/>
 
 {#key isMobileDevice}
     <button on:click={newImage}>
         {#key currentFile}
-            <img in:fly|local={{y: -100, duration: 700}} style={style} src="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}{imageSize}.{extension}" alt="Guitarre">
+            <img in:fly|local={{y: -100, duration: 700}} style={style} src="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}{imageSize}.{extension}" alt={name}>
         {/key}
     </button>
 {/key}
@@ -56,6 +58,6 @@
         -webkit-user-drag: none;
         z-index: -1;
         max-height: 100%; 
-        max-width: 100%
+        max-width: 100%;
     }
 </style>

@@ -6,9 +6,9 @@
 
 <div>
 
+    <a target="_blank" data-sveltekit-reload href="/ccs">CCS (2023)</a>
     <a target="_blank" data-sveltekit-reload href="/destype">DesType (2023)</a>
     <a target="_blank" data-sveltekit-reload href="/intranet">Canto Legal Intranet (2023)</a>
-    <a target="_blank" data-sveltekit-reload href="/ccs">CCS (2023)</a>
     <a target="_blank" data-sveltekit-reload href="/threlte">Threlte (2023)</a>
     <a target="_blank" href="https://legaloffice.peopleworksservices.com/">Clapp Back Office - Minor features (2023)</a>
     <a target="_blank" href="https://clappforms.web.app/">Clapp Forms (2022)</a>

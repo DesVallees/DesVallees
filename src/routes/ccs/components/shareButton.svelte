@@ -1,13 +1,16 @@
 <script lang="ts">
 
+    export let url: string;
+    export let title: string;
+    export let description: string;
     let shareButton: HTMLButtonElement;
     
     function shareContent() {
         if (navigator.share) {
             navigator.share({
-                title: 'CCS',
-                text: '...',
-                url: window.location.href,
+                title: title,
+                text: description,
+                url: url,
             })
             .catch((error) => console.error('Error sharing:', error));
         } else {
@@ -23,9 +26,6 @@
 <style>
 
     .share{
-        position: absolute;
-        bottom: 30px;
-        right: 30px;
         border-radius: 50px;
         z-index: 1;
     }

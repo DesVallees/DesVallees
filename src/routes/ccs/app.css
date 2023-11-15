@@ -208,3 +208,9 @@ p{
     font-size: 1.75rem;
     line-height: 35px;
 }
+
+@media (orientation: portrait) {
+    button {
+        cursor: default;
+    }
+}

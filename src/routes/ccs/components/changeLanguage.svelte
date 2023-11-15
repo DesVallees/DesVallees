@@ -3,6 +3,8 @@
 	import { language, type Language } from "../stores";
 	import Base from "./base.svelte";
 
+    export let style:string = '';
+
     let languageFlags = {
         'español': 'spainFlag.jpg',
         'english': 'usFlag.jpg',
@@ -23,7 +25,7 @@
     let lastFocusableElement: HTMLButtonElement;
 </script>
 
-<button class="languageControl" on:click={() => {active = true}}>
+<button style="{style}" class="languageControl" on:click={() => {active = true}}>
     <img src="/images/{languageFlags[$language]}" alt={$language}>
     <ion-icon name="caret-down-outline"></ion-icon>
 </button>
@@ -103,6 +105,17 @@
     @media screen and (max-width: 1025px){
         .languageControl {
             margin-left: 25px;
+        }
+    }
+
+    @media screen and (max-width: 500px){
+        .languageControl {
+            gap: .4rem;
+            margin-left: 0;
+        }
+        
+        img {
+            height: 2.2rem;
         }
     }
 </style>

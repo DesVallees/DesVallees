@@ -338,7 +338,6 @@
         --line-height: 1em;
         --lines: 3;
 
-        width: 100%;
         max-width: 1000px;
         height: calc(var(--line-height) * var(--lines) * 1.45);
         display: flex;

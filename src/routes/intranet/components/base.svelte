@@ -1,3 +1,5 @@
+<!-- Add "on:click|stopPropagation" property to parent div placed in the 'slot' position -->
+
 <script lang="ts">
 	import { fade } from "svelte/transition";
 
