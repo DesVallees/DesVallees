@@ -35,19 +35,12 @@
 
 <style>
     nav {
-        position: sticky;
-        top: 0;
-        left: 0;
-        background-color: var(--mainDimer);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         width: 100%;
         height: 100%;
         padding: 20px 100px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        z-index: 2;
     }
 
     .s{

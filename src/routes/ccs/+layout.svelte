@@ -4,6 +4,8 @@
 	import NavigationBar from './components/navigationBar.svelte';
 	import { language } from './stores';
 	import { sleep } from './functions';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
     let disappearAndAppear:boolean = false;
     
@@ -16,6 +18,20 @@
         await sleep(2000)
         disappearAndAppear = false
     }
+
+    $: $page.url.pathname, goTop()
+    let mainContent: HTMLElement;
+    let goTop: (() => void) = () => {}
+
+    onMount(() => {
+        goTop = () => {
+            if (document) {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+                mainContent.scrollTop = 0
+            }
+        }
+    });
 </script>
 
 <svelte:head>
@@ -33,7 +49,7 @@
         <NavigationBar />
     </nav>
 
-    <main>
+    <main bind:this={mainContent}>
         <slot/>
     </main>
 </div>
@@ -48,10 +64,15 @@
     }
 
     nav{
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 20px;
+        z-index: 3;
+        position: sticky;
+        top: 0;
+        left: 0;
+
+        background-color: var(--mainDimer);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        
         height: 100px;
     }
 

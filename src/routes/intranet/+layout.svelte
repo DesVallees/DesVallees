@@ -352,6 +352,7 @@
         width: 100%;
 
         backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
 
     .landingPage main{

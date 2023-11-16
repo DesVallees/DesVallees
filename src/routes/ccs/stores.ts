@@ -16,3 +16,5 @@ if (browser){
 }
 
 export const dictionary = derived(language, (language) => translator[language]);
+
+export const chosenGuitarIndex:Writable<number> = writable(0);

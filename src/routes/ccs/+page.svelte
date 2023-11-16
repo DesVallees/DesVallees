@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { fade, fly, blur } from "svelte/transition";
+	import { fade, fly } from "svelte/transition";
 	import GuitarFooter from "./components/guitarFooter.svelte";
 	import GuitarHeader from "./components/guitarHeader.svelte";
 	import GuitarImage from "./components/guitarImage.svelte";
 	import { throttle } from "./functions";
-	import { guitarStorage, categories } from "./database";
-	import { language } from "./stores";
+	import { guitarStorage } from "./database";
+	import { dictionary, language, chosenGuitarIndex } from "./stores";
 	import { onMount } from "svelte";
+	import CarrouselController from "./components/carrouselController.svelte";
 
-    let chosenGuitarIndex = 0
-    let chosenGuitar = guitarStorage[chosenGuitarIndex]
+    let chosenGuitar = guitarStorage[$chosenGuitarIndex]
     let guitarsArrayLength = guitarStorage.length
 
-    $: chosenGuitarIndex, chosenGuitar = guitarStorage[chosenGuitarIndex]
-    $: chosenGuitarIndex, currentFileIndex = 0
+    $: $chosenGuitarIndex, chosenGuitar = guitarStorage[$chosenGuitarIndex]
+    $: $chosenGuitarIndex, currentFileIndex = 0
 
     type LastMove = 'next' | 'previous'
     let lastMove: LastMove
@@ -21,23 +21,23 @@
     const nextGuitar = throttle(() => {
         lastMove = 'next'
         
-        if (chosenGuitarIndex >= guitarsArrayLength - 1) {
-            chosenGuitarIndex = 0
+        if ($chosenGuitarIndex >= guitarsArrayLength - 1) {
+            $chosenGuitarIndex = 0
             return
         }
 
-        chosenGuitarIndex++
+        $chosenGuitarIndex++
     }, 500)
 
     const previousGuitar = throttle(() => {
         lastMove = 'previous'
         
-        if (chosenGuitarIndex <= 0) {
-            chosenGuitarIndex = guitarsArrayLength - 1
+        if ($chosenGuitarIndex <= 0) {
+            $chosenGuitarIndex = guitarsArrayLength - 1
             return
         }
 
-        chosenGuitarIndex--
+        $chosenGuitarIndex--
     }, 500)
 
     let xDis: number = 500
@@ -62,13 +62,13 @@
 <!-- out:fly|local={{x: (lastMove ? (lastMove === 'next' ? '-2000' : '2000') : '0'), duration: 700}} -->
 <div class="guitars" in:fade>
 
-    {#key chosenGuitarIndex}
+    {#key $chosenGuitarIndex}
         <div class="above" in:fly|local={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}} style="height: {aboveContentHeight}px;">
             <div class="empty"></div>
             <div class="guitarHeader" bind:offsetHeight={aboveContentHeight}>
                 <GuitarHeader 
                     name={chosenGuitar.name[$language]} 
-                    category={categories[chosenGuitar.category][$language]}
+                    category={$dictionary[chosenGuitar.category]}
                 />
             </div>
         </div>
@@ -81,7 +81,7 @@
                 <ion-icon name="chevron-back-outline" style="transform: translateX(-3px);"></ion-icon>
             </button>
 
-            {#key chosenGuitarIndex}
+            {#key $chosenGuitarIndex}
                 <div class="guitarImage" bind:offsetHeight={middleContentHeight} in:fly|local={{x: (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0'), duration: 600, delay: (isMobileDevice ? 0 : 100)}}>
                     <GuitarImage fileNames={chosenGuitar.fileNames} bind:currentFileIndex name={chosenGuitar.name[$language]} />
                 </div>
@@ -94,13 +94,10 @@
         </div>
     </div>
 
-        {#key chosenGuitarIndex}
+        {#key $chosenGuitarIndex}
             <div class="below" in:fly|local={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}}>
-                <div class="carrouselController">
-                    {#each chosenGuitar.fileNames as i, index}
-                    <button on:click={() => currentFileIndex = index} class:active={index === currentFileIndex} tabindex={index === currentFileIndex ? -1 : 0}></button>
-                    {/each}
-                </div>
+                <CarrouselController array={chosenGuitar.fileNames} bind:currentFileIndex/>
+
                 <div class="guitarFooter">
                     <GuitarFooter 
                     name={chosenGuitar.name[$language]}
@@ -174,37 +171,16 @@
     }
 
     .above {
-        transition: height 200ms ease-out;
+        transition: height 500ms ease-out;
         overflow: hidden;
     }
 
-    .carrouselController{
-        display: flex;
-        gap: 1.5em;
-        
-        margin-bottom: 2em;
+    @media screen and (max-width: 1100px){
+        .above, .below {
+            margin: 0 5em 0 10em;
+        }
     }
     
-    .carrouselController button{
-        border-radius: 50px;
-        background-color: var(--contentDimer);
-        height: 12px;
-        width: 20px;
-        transition: all .2s;
-    }
-
-    .carrouselController button:not(.active):hover,
-    .carrouselController button:not(.active):focus-visible{
-        width: 30px;
-        background-color: var(--contentDim);
-    }
-
-    .carrouselController .active{
-        width: 50px;
-        cursor: default;
-        background-color: var(--content);
-    }
-
     @media (orientation: portrait) {
         .guitars {
             padding-top: 0;
@@ -212,12 +188,13 @@
         }
         
         .centralLine {
+            min-height: 532px;
             height: auto;
             margin: 2em 0;
             
             background: transparent;
 
-            transition: height .8s ease-out;
+            transition: height 1s ease-out;
             overflow: hidden;
         }
         
@@ -239,12 +216,6 @@
             align-items: center;
             margin: 0 1.5em;
             gap: 0;
-        }
-
-        .carrouselController{
-            gap: 1em;
-            
-            margin-bottom: 2em;
         }
     }
 

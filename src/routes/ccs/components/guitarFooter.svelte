@@ -30,7 +30,7 @@
 
     <h3>{price}</h3>
     <div class="interactives">
-        <a href="ccs/guitarra/{link}">
+        <a href="ccs/guitarra/{link}" class="button">
             <ion-icon name="information-circle-outline"></ion-icon> 
             {$dictionary.masInformacion}
         </a>
@@ -43,26 +43,26 @@
 <style>
     .container {
         display: grid;
-        text-transform: uppercase;
     }
 
     h4 {
         font-weight: 100;
+        text-transform: uppercase;
         font-size: 1.3rem;
     }
     
     p {
         color: var(--contentDim);
         font-weight: 100;
-        font-size: .9rem;
+        font-size: 1rem;
         line-height: 1.5rem;
         margin-top: .5em;
+        margin-bottom: 2em;
     }
 
     h3 {
         font-weight: 100;
         font-size: 1.4rem;
-        margin-top: 2em;
     }
 
     .interactives {
@@ -72,29 +72,6 @@
         align-items: center;
     }
     
-    a {
-        text-transform: initial;
-        padding: .3rem 1rem .3rem .7rem;
-        background-color: var(--interactiveDim);
-        border: 1px solid var(--interactive);
-        border-radius: 20px;
-        font-weight: 100;
-        font-size: 1.2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-        width: fit-content;
-        white-space: nowrap;
-
-        transition: .2s all;
-    }
-
-    a:hover,
-    a:focus-visible {
-        background-color: var(--interactive);
-    }
-
     a ion-icon {
         font-size: 1.6rem;
     }
@@ -105,12 +82,12 @@
         }
         
         p {
-            font-size: .85rem;
+            font-size: .9rem;
+            margin-bottom: 1.5em;
         }
         
         h3 {
             font-size: 1.2rem;
-            margin-top: 1.5em;
         }
 
         a {
@@ -128,11 +105,11 @@
         
         p {
             text-align: center;
-            text-transform: none;
             color: var(--content);
             font-size: clamp(1.2rem, 4vw, 1.5rem);
             max-width: 600px;
             line-height: normal;
+            margin-bottom: 0;
         }
 
         h3 {

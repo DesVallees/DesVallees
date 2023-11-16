@@ -90,28 +90,25 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .button {
-    padding: 10px 40px;
-    margin: 0 5px;
-    gap: 10px;
-
+    padding: .3rem 1rem .3rem .7rem;
     background-color: var(--interactiveDim);
-    border-radius: 15px;
-
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1.25rem;
-
+    border: 1px solid var(--interactive);
+    border-radius: 20px;
+    font-weight: 100;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     width: fit-content;
-    height: fit-content;
+    white-space: nowrap;
 
-    transition: all .2s;
+    transition: .2s all;
 }
 
 .button:hover,
 .button:focus-visible {
     background-color: var(--interactive);
-    padding: 10px 45px;
-    margin: 0;
 }
 
 .ghost {

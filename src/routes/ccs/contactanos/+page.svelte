@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { fade } from "svelte/transition";
 	import Typewriter from "../components/typewriter.svelte";
 	import { dictionary, language } from "../stores";
 
     
 </script>
 
-<div>
+<div in:fade>
 	{#key $language}
 		<Typewriter phrase="{$dictionary.paginaNoDisponible}..." style="font-size: 2rem; width: 80%;" typingSpeed={50}/>
 	{/key}
