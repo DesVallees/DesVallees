@@ -44,7 +44,7 @@
             data.set('content', escapeHTML(textarea.value).replace(/\n/g, '<br>'));
         }
 
-        data.append('profileID', $profile.id);
+        data.append('profileID', $profile.id.toString());
 
         if (imageSrc) {
             data.append('img', imageSrc);

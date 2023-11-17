@@ -44,3 +44,5 @@ if (browser){
 }
 
 export const dictionary = derived(language, (language) => translator[language]);
+
+export const showNotifications:Writable<boolean> = writable(false);

@@ -6,7 +6,6 @@
 	import { dictionary } from "../../stores";
 	import Post from "../../components/post.svelte";
 	import Separator from "../../components/separator.svelte";
-	import PostsHeader from "../../components/postsHeader.svelte";
 
     export let data: PageData
 
@@ -20,8 +19,6 @@
 <NewPost active={false} parentCommentPoster={profiles.find((profile) => profile.id === originalPost?.profileId)?.fullName} parentCommentId={originalPost?.id} parentCommentVisibility={originalPost?.visibility}/>
                 
 <div class="replies" in:fade>
-
-    <PostsHeader />
 
     {#key $page.params.id}
 
@@ -51,9 +48,7 @@
 
         {:else}
 
-
             <p>{$dictionary.error}</p>
-
 
         {/if}
 
@@ -73,14 +68,16 @@
 
     h2 {
         width: 100%;
-        max-width: 700px;
         margin: 2em 0 .5em;
+        padding: 0 1em;
     }
-
+    
     h3 {
         font-size: 1.2rem;
         font-weight: normal;
         margin: 2em 0 .5em;
+        padding: 0 1em;
+        text-align: center;
     }
     
 </style>

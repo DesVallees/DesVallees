@@ -78,8 +78,9 @@
     .people{
         align-items: center;
         width: 100%;
-        padding-bottom: 0em;
-        margin-top: 100px;
+        min-height: 100%;
+        padding: 0 2em;
+        padding-top: 100px;
     }
     
     .cardsContainer{

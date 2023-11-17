@@ -2,14 +2,10 @@
     import './app.css'
     import { Toaster } from 'svelte-french-toast';
     import toast from 'svelte-french-toast';
-    import { InteractionRequiredAuthError, PublicClientApplication } from "@azure/msal-browser";
-	import { dictionary, language, profile, username } from './stores';
-	import Logo from './components/logo.svelte';
-	import ChangeLanguage from './components/changeLanguage.svelte';
+    import { PublicClientApplication } from "@azure/msal-browser";
+	import { dictionary, language, profile, username, showNotifications } from './stores';
 	import BackgroundCircle from './components/backgroundCircle.svelte';
-	import Avatar from './components/avatar.svelte';
-	import Separator from './components/separator.svelte';
-	import { fade, scale } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import SetUp from './components/setUp.svelte';
 	import Threlte from './components/threlte.svelte';
 	import Typewriter from './components/typewriter.svelte';
@@ -17,9 +13,12 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { isGeneratedAvatarUrl, isGeneratedBlobUrl, letterToAvatarUrl, sleep } from './functions';
-	import { notifications } from './futureDB';
 	import NotificationBar from './components/notificationBar.svelte';
 	import FeaturedEvents from './components/featuredEvents.svelte';
+	import NotificationsButton from './components/notificationsButton.svelte';
+	import PrimaryNav from './components/primaryNav.svelte';
+	import LandingNav from './components/landingNav.svelte';
+	import Header from './components/header.svelte';
 
     const now = new Date();
     const year = now.getFullYear();
@@ -167,17 +166,8 @@
     }
 
 
-    let unseenNotifications = notifications.filter(notification => !notification.seen && !notification.dismissed);
-    $: showNotifications, getUnseenNotifications()
-
-    function getUnseenNotifications () {
-        unseenNotifications = notifications.filter(notification => !notification.seen && !notification.dismissed);
-    }
-
     const introDuration:number = 1000;
     let ready:boolean = false;
-
-    let showNotifications: boolean = false;
 
     $: $page.url.pathname, goTop()
     let mainContent: HTMLElement;
@@ -208,43 +198,23 @@
 
 <Toaster/>
 
-{#if showNotifications}
-    <NotificationBar bind:showNotifications />
+{#if $showNotifications}
+    <NotificationBar />
 {/if}
 
 <div class="intranet" class:disappearAndAppear class:notLandingPage={$username} class:landingPage={!$username}>
 
-    <nav class="primaryNav">
-        <a class="logo" href="/intranet">
-            <Logo />
-        </a>
+    {#if $profile}
 
-        {#if $profile}
-        
-            <section in:fade>
-                <div>
-                    <a href="/intranet" class="headerLink baseButton {$page.url.pathname === '/intranet' ? 'active' : ''}">{$dictionary.home}</a>
-                    <a href="/intranet/people" class="headerLink baseButton {$page.url.pathname === '/intranet/people' ? 'active' : ''}">{$dictionary.people}</a>
-                    <a href="/intranet/general" class="headerLink baseButton {$page.url.pathname === '/intranet/general' ? 'active' : ''}">{$dictionary.generalInformation}</a>
-                </div>
-                <div>
-                    <Separator height="1px" width="100%" margin="20px 0" />
-                    <ChangeLanguage buttonStyle="baseButton" style="font-size: 1.1rem; width: 100%; justify-content: flex-start;"/>
-                    <a href="/intranet/profile" class="headerLink baseButton {$page.url.pathname === '/intranet/profile' ? 'active' : ''}" aria-label={$dictionary.profile}>
-                        <Avatar image={$profile.profilePicture} borderRadius="10px" width="2rem"/>
-                        <span style="margin-left: 2px;">{$profile.fullName}</span>
-                    </a>
-                </div>
-            </section>
+        <div class="primaryNav">
+            <PrimaryNav />
+        </div>
+    
+    {:else}
 
-
-        {:else}
-
-            <ChangeLanguage />
-
-        {/if}
-
-    </nav>
+        <LandingNav />
+    
+    {/if}
     
     <main bind:this={mainContent}>
 
@@ -252,6 +222,8 @@
 
             {#if $username && $profile}
 
+                <Header />
+            
                 <slot/>    
 
                 <footer>
@@ -305,13 +277,7 @@
     {#if $username}
 
         <nav class="secondaryNav">
-            <button aria-label={$dictionary.notifications} on:click={() => showNotifications = !showNotifications} class="notification" type="button">
-                <ion-icon name="notifications-outline"></ion-icon>
-                {#key unseenNotifications.length}
-                    <div style="--areNotifications: {unseenNotifications.length > 0 ? 'flex' : 'none'}" in:scale class="notificationCounter">{unseenNotifications.length}</div>
-                {/key}
-            </button>
-
+            <NotificationsButton />
             <FeaturedEvents />
         </nav>
 
@@ -338,23 +304,6 @@
         align-items: center;
     }
 
-    .landingPage .primaryNav{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-        height: fit-content;
-        margin-bottom: 20px;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        padding: 20px 10vw;
-        width: 100%;
-
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-    }
-
     .landingPage main{
         display: flex;
         align-items: center;
@@ -373,44 +322,16 @@
         margin: auto;
     }
 
-    .notLandingPage .primaryNav{
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-        gap: 20px;
-        height: 100vh;
-        height: 100dvh;
-        width: fit-content;
-        position: sticky;
-        top: 0;
-        padding: 20px 30px 50px;
-        border-right: 1px solid var(--content);
-    }
-
-    .notLandingPage section {
-        width: max-content;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-top: 50px;
-    }
-
-    .notLandingPage section div {
-        display: grid;
-        gap: 1em;
-    }
-
     .notLandingPage main{
         display: grid;
-        grid-template-rows: 1fr auto;
+        grid-template-rows: auto 1fr auto;
         width: 100%;
         min-height: 100vh;
         min-height: 100dvh;
         padding: 0 0 20px;
     }
 
-    .notLandingPage .secondaryNav {
+    .secondaryNav {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -424,10 +345,6 @@
         border-left: 1px solid var(--content);
     }
 
-    .logo {
-        transform: scale(.8) translateX(-20%);
-    }
-
     footer {
         height: 200px;
         width: 100%;
@@ -436,44 +353,6 @@
         align-items: center;
         padding: 100px 10vw 0;
         text-align: center;
-    }
-
-    .notification {
-        position: relative;
-        transition: all .2s;
-        border-radius: 50%;
-        padding: .5em;
-    }
-
-    .notification:hover,
-    .notification:focus-visible {
-        background-color: #ffffff10;
-    }
-
-    .notificationCounter{
-        border-radius: 50%;
-        background-color: var(--interative);
-        aspect-ratio: 1 / 1;
-        height: 50%;
-        padding: .2em;
-        font-size: .85rem;
-        position: absolute;
-        top: 0;
-        right: 0;
-        display: var(--areNotifications);
-        justify-content: center;
-        align-items: center;
-    }
-
-    .notification ion-icon {
-        font-size: 1.5rem;
-    }
-
-
-    .headerLink{
-        font-size: 1.1rem;
-        width: 100%;
-        justify-content: flex-start;
     }
 
     .landing {
@@ -511,13 +390,26 @@
         100% {opacity: 1;}
     }
 
-    @media screen and (max-width: 1100px) {
-        main{
-            padding: 0 50px;
+    @media screen and (max-width: 1300px) {
+        .secondaryNav {
+            padding-left: 15px;
+        }
+    }
+    
+    @media screen and (max-width: 1150px) {
+        .secondaryNav {
+            display: none;
         }
 
-        .primaryNav {
-            padding: 20px 50px;
+        .notLandingPage.intranet {
+            grid-template-columns: auto 1fr;
+        }
+    }
+
+    @media screen and (max-width: 1100px) {
+
+        main{
+            padding: 0 50px;
         }
 
         footer {
@@ -539,17 +431,23 @@
         }
     }
 
+    @media screen and (max-width:850px) {
+        .primaryNav {
+            display: none;
+        }
+
+        .notLandingPage.intranet {
+            grid-template-columns: 1fr;
+        }
+    }
+
     @media screen and (max-width: 500px) {
         main{
             padding: 0 20px;
         }
 
-        .primaryNav {
-            padding: 20px 20px;
-        }
-
         footer {
-            padding: 100px 20px 0;
+            padding: 100px 3em 0;
         }
 
         .landingTypewriter {

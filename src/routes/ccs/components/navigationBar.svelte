@@ -75,13 +75,20 @@
     }
 
     .logo {
-        width: 200px;
-        height: auto;
+        height: 35px;
+        width: auto;
+
+        margin: 0 2em;
+        -webkit-user-drag: none;
     }
     
     @media screen and (max-width: 1200px){
         nav {
             padding: 20px 50px 20px 20px;
+        }
+
+        .logo {
+            height: 32px;
         }
     }
 

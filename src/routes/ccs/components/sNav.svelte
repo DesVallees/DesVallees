@@ -51,13 +51,17 @@
 
     .baseButton {
         font-size: 1.1rem;
+        min-width: 200px;
         width: 100%;
         justify-content: flex-start;
     }
 
     .logo {
-        width: 200px;
-        height: auto;
+        height: 40px;
+        width: auto;
+        
+        margin: 40px auto;
+        -webkit-user-drag: none;
     }
 
     @media screen and (max-width: 500px){

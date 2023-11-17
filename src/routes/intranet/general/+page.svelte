@@ -33,6 +33,7 @@
         align-items: center;
         width: 100%;
         margin-top: 70px;
+        padding: 0 1em;
     }
     
 </style>

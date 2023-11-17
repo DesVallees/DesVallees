@@ -43,7 +43,7 @@
 
 </script>
 
-<Base firstFocusableElement={firstFocusableElement || textarea} lastFocusableElement={lastFocusableElement} bind:active>
+<Base firstFocusableElement={firstFocusableElement || textarea} lastFocusableElement={lastFocusableElement} bind:active autofocus={false}>
 
     <div class="post" transition:slide={{duration: 200}}>
         <div class="avatar">

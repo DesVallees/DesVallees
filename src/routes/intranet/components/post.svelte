@@ -186,8 +186,16 @@
         padding: 0 1em;
         transition: all .3s;
 
-        border-bottom: 1px solid var(--content);
         color: var(--content);
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 2%;
+            width: 96%; 
+            border-bottom: 1px solid var(--content);
+        }
     }
 
     .avatar {
@@ -275,9 +283,17 @@
     }
 
 
+    @media screen and (max-width: 850px) {
+        .post::after {
+            left: 4%;
+            width: 92%;
+            border-bottom: 0.5px solid var(--contentDim);
+        }
+    }
+
     @media screen and (max-width: 700px) {
         .post {
-            padding: 0;
+            padding-bottom: .5em;
         }
 
         .avatar {

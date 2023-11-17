@@ -4,7 +4,6 @@
 	import NewPost from "./components/newPost.svelte";
 	import { dictionary } from "./stores";
 	import type { PageData } from "./$types";
-	import PostsHeader from "./components/postsHeader.svelte";
 
     export let data: PageData
 
@@ -16,8 +15,6 @@
 <NewPost />
                     
 <div class="home" in:fade>
-
-    <PostsHeader />
 
     {#if posts.length > 0}
 

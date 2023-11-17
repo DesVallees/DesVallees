@@ -128,6 +128,7 @@ export const translator = {
         welcome: 'Welcome',
         errorPreviousCredentials: 'Error trying to log in with previous credentials',
         sent: 'Sent',
+        noFeaturedEvents: 'No featured events',
     },
     español: {
         error: 'Ha ocurrido un error.',
@@ -258,5 +259,6 @@ export const translator = {
         welcome: 'Bienvenido(a)',
         errorPreviousCredentials: 'Error al intentar iniciar sesión con las credenciales existentes.',
         sent: 'Enviado',
+        noFeaturedEvents: 'No hay eventos destacados',
     }
 }

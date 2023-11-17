@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { fly } from "svelte/transition";
-	import { dictionary, profile, type Notification as NotificationType } from "../stores";
+	import { dictionary, showNotifications } from "../stores";
 	import Notification from "./notification.svelte";
 	import { notifications as dbnot } from "../futureDB";
-
-    export let showNotifications:boolean;
 
     function clickOutside(node: any) {
         const handleClick = (event: any) => {
@@ -23,7 +21,7 @@
     }
 
     function close() {
-        showNotifications = false
+        $showNotifications = false
     }
 
     
@@ -38,7 +36,8 @@
 <section use:clickOutside transition:fly={{x:"100%", opacity: 1}}>
     <header>
         <h2>{$dictionary.notifications}</h2>
-        <button aria-label={$dictionary.close} on:click={close}><ion-icon name="close-outline"></ion-icon></button>
+        <!-- svelte-ignore a11y-autofocus -->
+        <button autofocus aria-label={$dictionary.close} on:click={close}><ion-icon name="close-outline"></ion-icon></button>
     </header>
     <div>
         {#if notifications.length > 0}

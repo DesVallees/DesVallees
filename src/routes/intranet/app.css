@@ -17,6 +17,7 @@
 
 :root {
     --main: #17191f;
+    --mainOpaque: #1d212aee;
     --mainDim: #17191fb7;
     --mainDimer: #17191f5d;
     --content: #F7F7FF;
