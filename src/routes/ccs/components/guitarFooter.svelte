@@ -35,7 +35,7 @@
             {$dictionary.masInformacion}
         </a>
         <div class="share">
-            <ShareButton url="ccs/guitarra/{link}" title={name} description={description}/>
+            <ShareButton url="ccs/guitarra/{link}" title={name} edition={edition} description={description}/>
         </div>
     </div>
     </div>

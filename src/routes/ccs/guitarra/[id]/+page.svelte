@@ -44,15 +44,15 @@
 			<h1 class="name">{chosenGuitar.name[$language]}</h1>
 			<h2 class="edition">{$dictionary.edicion}: {chosenGuitar.edition[$language]}</h2>
 		</div>
-		<p in:fade={{delay: 1100}}>{chosenGuitar.paragraph[$language]}</p>
+		<p in:fade={{delay: 600}}>{chosenGuitar.paragraph[$language]}</p>
 
-		<div class="features" in:fade={{delay: 1100}}>
+		<div class="features" in:fade={{delay: 600}}>
 			{#each chosenGuitar.features as feature}
 					<GuitarFeature feature={feature} />
 			{/each}
 		</div>
 
-		<table in:fade={{delay: 1100}}>
+		<table in:fade={{delay: 600}}>
 			{#each chosenGuitar.table as datum}
 					<tr>
 					<td>{datum.property[$language]}</td>
@@ -61,9 +61,9 @@
 			{/each}
 		</table>
 
-		<div class="interactives" in:fade={{delay: 1100}}>
+		<div class="interactives" in:fade={{delay: 600}}>
 			<a href="/ccs/contactanos" class="button">{$dictionary.contactanos}</a>
-			<ShareButton justIcon={false} style="color: var(--content); padding: 10px 1.2em;" url="{guitarSpanishName}" title={chosenGuitar.name[$language]} description={chosenGuitar.description[$language]} />
+			<ShareButton justIcon={false} style="color: var(--content); padding: 10px 1.2em;" url="{guitarSpanishName}" title={chosenGuitar.name[$language]} edition={chosenGuitar.edition[$language]} description={chosenGuitar.description[$language]} />
 		</div>
 
 

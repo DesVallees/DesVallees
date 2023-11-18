@@ -5,5 +5,5 @@
     export let color: Three.ColorRepresentation
 
     const { scene } = Threlte.useThrelte()
-    scene.background = new Three.Color(color)
+    $: color, scene.background = new Three.Color(color)
 </script>

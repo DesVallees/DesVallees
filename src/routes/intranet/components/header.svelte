@@ -31,7 +31,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         align-items: center;
-        padding-right: 3em;
+        padding-right: 2.5em;
         padding-left: 2em;
         
         position: sticky;

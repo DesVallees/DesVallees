@@ -4,6 +4,7 @@
 
     export let url: string;
     export let title: string;
+    export let edition: string;
     export let description: string;
 
     export let justIcon: boolean = true;
@@ -15,7 +16,7 @@
         if (navigator.share) {
             navigator.share({
                 title: title,
-                text: description,
+                text: edition + ": " + description,
                 url: url,
             })
             .catch((error) => console.error('Error sharing:', error));
