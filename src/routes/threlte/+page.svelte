@@ -110,6 +110,7 @@
 <svelte:head>
     <title>Threlte</title>
     <link rel="icon" href="https://fav.farm/🎃" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 </svelte:head>
 
 <svelte:window bind:innerWidth={windowWidth} />

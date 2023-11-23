@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
-
 *,
 *::before,
 *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 *:focus-visible{
@@ -16,22 +14,40 @@
 }
 
 :root {
-    --main: rgb( 28,  25,  25);
-    --mainOpaque: rgba(28, 25, 25, 0.932);
-    --mainDim: rgba(28, 25, 25, 0.678);
-    --mainDimer: rgba(28, 25, 25, 0.336);
-    --content: #F7F7FF;
-    --contentDim: #f7f7ffb7;
-    --contentDimer: #f7f7ff81;
-    --contentHover: #f7f7ff38;
-    --contentTransparent: #f7f7ff15;
-    --interactive: #D44508;
-    --interactiveDim: #d44508b7;
-    --interactiveDimer: #d4450879;
+    --main: rgb(24, 26, 32);
+    --main-9: rgba(24, 26, 32, .9);
+    --main-8: rgba(24, 26, 32, .8);
+    --main-7: rgba(24, 26, 32, .7);
+    --main-6: rgba(24, 26, 32, .6);
+    --main-5: rgba(24, 26, 32, .5);
+    --main-4: rgba(24, 26, 32, .4);
+    --main-3: rgba(24, 26, 32, .3);
+    --main-2: rgba(24, 26, 32, .2);
+    --main-1: rgba(24, 26, 32, .1);
+    --content: rgb(245, 245, 255);
+    --content-9: rgba(245, 245, 255, .9);
+    --content-8: rgba(245, 245, 255, .8);
+    --content-7: rgba(245, 245, 255, .7);
+    --content-6: rgba(245, 245, 255, .6);
+    --content-5: rgba(245, 245, 255, .5);
+    --content-4: rgba(245, 245, 255, .4);
+    --content-3: rgba(245, 245, 255, .3);
+    --content-2: rgba(245, 245, 255, .2);
+    --content-1: rgba(245, 245, 255, .1);
+    --interactive: rgb(65, 10, 216);
+    --interactive-9: rgba(65, 10, 216, .9);
+    --interactive-8: rgba(65, 10, 216, .8);
+    --interactive-7: rgba(65, 10, 216, .7);
+    --interactive-6: rgba(65, 10, 216, .6);
+    --interactive-5: rgba(65, 10, 216, .5);
+    --interactive-4: rgba(65, 10, 216, .4);
+    --interactive-3: rgba(65, 10, 216, .3);
+    --interactive-2: rgba(65, 10, 216, .2);
+    --interactive-1: rgba(65, 10, 216, .1);
 }
 
 ::selection{
-    background-color: var(--interactiveDim);
+    background-color: var(--interactive);
     color: var(--content);
 }
 
@@ -55,11 +71,6 @@ ion-icon {
     visibility: visible;
 }
 
-button{
-    user-select: none;
-    cursor: pointer;
-}
-
 button,
 input,
 textarea,
@@ -76,6 +87,17 @@ a {
     align-items: center;
 }
 
+button{
+    user-select: none;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    width: fit-content;
+    height: fit-content;
+}
+
 textarea::-webkit-scrollbar {
     width: .5em;
 }
@@ -90,17 +112,20 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .button {
-    padding: .3rem 1rem .3rem .7rem;
-    background-color: var(--interactiveDim);
-    border: 1px solid var(--interactive);
-    border-radius: 20px;
-    font-weight: 100;
-    font-size: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
+
     width: fit-content;
+    height: fit-content;
+    padding: .325em .75em;
+
+    border-radius: 10px;
+    border: 1px solid var(--interactive);
+    background-color: var(--interactive-7);
+
+    font-weight: 700;
     white-space: nowrap;
 
     transition: .2s all;
@@ -112,23 +137,35 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .ghost {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    width: fit-content;
+    height: fit-content;
+    padding: .325em .75em;
+
+    border-radius: 10px;
+    border: 2px solid var(--interactive);
     background-color: transparent;
-    border: var(--interactive) 1px solid;
+
+    font-weight: 700;
+    white-space: nowrap;
+
+    transition: .2s all;
 }
 
 .ghost:hover,
 .ghost:focus-visible {
-    background-color: #d4450811;
+    background-color: var(--interactive-3);
 }
 
 .link {
     position: relative;
-    gap: 10px;
 
-    font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    padding: 6px 0;
+    padding: .4em 0;
 
     width: fit-content;
     height: fit-content;
@@ -161,12 +198,9 @@ textarea::-webkit-scrollbar-thumb {
 
 .baseButton {
     position: relative;
-    gap: 10px;
 
-    font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    padding: 10px 15px;
+    padding: .625em .95em;
     border-radius: 10px;
 
     width: max-content;
@@ -178,32 +212,11 @@ textarea::-webkit-scrollbar-thumb {
 
 .baseButton:hover,
 .baseButton:focus-visible {
-    background-color: var(--contentTransparent);
+    background-color: var(--content-1);
 }
 
 .baseButton.active {
-    background-color: var(--contentHover);
-}
-
-a {
-    text-decoration: none;
-    width: fit-content;
-    height: fit-content;
-}
-
-h1 {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 5.6rem;
-    line-height: 123px;
-    max-width: 70vw;
-}
-
-p{
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1.75rem;
-    line-height: 35px;
+    background-color: var(--content-5);
 }
 
 @media (orientation: portrait) {

@@ -6,6 +6,7 @@
 
 <div>
 
+    <a data-sveltekit-reload href="/journee">Journée (2023)</a>
     <a data-sveltekit-reload href="/intranet">Canto Legal Intranet (2023)</a>
     <a data-sveltekit-reload href="/ccs">CCS (2023)</a>
     <a data-sveltekit-reload href="/destype">DesType (2023)</a>
