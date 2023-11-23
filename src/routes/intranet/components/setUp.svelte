@@ -4,7 +4,7 @@
 	import Logo from "./logo.svelte";
 </script>
 
-<section out:fade>
+<section out:fade|global>
     <Logo />
     <Loading scale={.9} animation="dots"/>
 </section>

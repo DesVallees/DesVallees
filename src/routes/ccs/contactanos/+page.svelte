@@ -6,7 +6,7 @@
     
 </script>
 
-<div in:fade>
+<div in:fade|global>
 	{#key $language}
 		<Typewriter phrase="{$dictionary.paginaNoDisponible}..." style="font-size: 2rem; width: 80%;" typingSpeed={50}/>
 	{/key}

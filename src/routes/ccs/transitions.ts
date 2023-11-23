@@ -1,4 +1,4 @@
-import { crossfade } from 'svelte/transition';
+import { crossfade, type TransitionConfig } from 'svelte/transition';
 import { quintOut } from 'svelte/easing';
 
 export const [send, receive] = crossfade({
@@ -19,7 +19,6 @@ export const [send, receive] = crossfade({
 	}
 });
 
-import type { TransitionConfig } from 'svelte/types/runtime/transition';
 
 export function typewriter(node: HTMLElement, { speed = 100 }: { speed?: number }): TransitionConfig & { duration: number } {
   const valid = (

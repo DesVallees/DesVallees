@@ -48,4 +48,4 @@
     }
 </script>
 
-<button class="button" in:fade={{delay: delay, duration: duration}} on:click={logIn}>{$dictionary.logInWithMicrosoft}</button>
+<button class="button" in:fade|global={{delay: delay, duration: duration}} on:click={logIn}>{$dictionary.logInWithMicrosoft}</button>

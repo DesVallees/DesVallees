@@ -309,7 +309,7 @@
     on:focus={() => caretAnimation = 'infinite'}
 />
 
-<div in:blur|local class="words" bind:this={wordsEl}>
+<div in:blur class="words" bind:this={wordsEl}>
 
     {#each words as word}
         <span class="word">

@@ -64,7 +64,7 @@
 </script>
 
 {#if profileNotification}
-    <div class="notification" out:slide>
+    <div class="notification" out:slide|global>
         <header>
             <span>{getTimePassed(profileNotification.date)}</span>
             {#if !seen}

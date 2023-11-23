@@ -33,7 +33,7 @@
 
 </script>
 
-<section use:clickOutside transition:fly={{x:"100%", opacity: 1}}>
+<section use:clickOutside transition:fly|global={{x:"100%", opacity: 1}}>
     <header>
         <h2>{$dictionary.notifications}</h2>
         <!-- svelte-ignore a11y-autofocus -->

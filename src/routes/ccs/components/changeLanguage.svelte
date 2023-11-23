@@ -32,7 +32,7 @@
 
 <Base bind:active firstFocusableElement={firstFocusableElement} lastFocusableElement={lastFocusableElement}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div on:click|stopPropagation class="languagesContainer" transition:slide={{duration:200}}>
+    <div on:click|stopPropagation class="languagesContainer" transition:slide|global={{duration:200}}>
         {#each Object.entries(languageFlags) as [languageName, flag], index}
             {#if index === 0}
 

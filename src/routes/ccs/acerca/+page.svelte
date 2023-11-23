@@ -5,7 +5,7 @@
     
 </script>
 
-<div in:fade>
+<div in:fade|global>
 	<figure class="quote">
 		<blockquote>
 			{@html $dictionary.resumenCCS}

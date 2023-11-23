@@ -13,7 +13,7 @@
 
 {#key $page.params.article}
 
-    <div class="general" in:fade>
+    <div class="general" in:fade|global>
 
         {#if article}
 

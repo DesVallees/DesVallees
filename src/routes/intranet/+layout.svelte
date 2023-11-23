@@ -241,7 +241,7 @@
 
                     <div class="landing landingContent">
             
-                        <h1 in:fade={{duration: introDuration}}>{$dictionary.cantoLegalIntranet}</h1>
+                        <h1 in:fade|global={{duration: introDuration}}>{$dictionary.cantoLegalIntranet}</h1>
                         <div class="landing landingTypewriter">
                             <Typewriter 
                                 basePhrase={$dictionary.thePlaceWhereYouCanFind} 
@@ -254,7 +254,7 @@
             
                         <div class="landing landingButtons">
                             <LogIn delay={1000} duration={introDuration} msalConfig={data.msalConfig}/>
-                            <a style="text-align: center;" in:fade={{delay: 1000, duration:introDuration}} class="button ghost" target="_blank" href="https://cantolegal.com/en/">{$dictionary.goToOurWebsite}</a>
+                            <a style="text-align: center;" in:fade|global={{delay: 1000, duration:introDuration}} class="button ghost" target="_blank" href="https://cantolegal.com/en/">{$dictionary.goToOurWebsite}</a>
                         </div>
                         
                     </div>

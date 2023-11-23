@@ -4,7 +4,7 @@
 
     export let scale:number = 1;
 
-    let src = "/images/logoCantoLegal.png"
+    let src = "/images/intranet/logoCantoLegal.png"
     
     let loaded = false;
 

@@ -5,7 +5,7 @@
 </script>
 
 
-<div transition:scale>{content}</div>
+<div transition:scale|global>{content}</div>
 
 <style>
 

@@ -4,7 +4,7 @@
 	import TeamHeader from "../components/teamHeader.svelte";
 	import Person from "../components/person.svelte";
     import Select from "../components/select.svelte";
-	import { dictionary } from "../stores";
+	import { dictionary, type Profile } from "../stores";
 	import NewPost from "../components/newPost.svelte";
 	import type { PageData } from "./$types";
 
@@ -28,13 +28,13 @@
     $: optionSelectedIndex, filterPeople()
 
     function filterPeople() {
-        filteredPeople = profiles.filter((profile) => profile.department === $dictionary.teamNames[optionSelectedIndex].name)
+        filteredPeople = profiles.filter((profile:Profile) => profile.department === $dictionary.teamNames[optionSelectedIndex].name)
     }
 
 </script>
 
 
-<div class="people" in:fade>
+<div class="people" in:fade|global>
 
     <TeamHeader />
     <Select options={$dictionary.teamNames} bind:optionSelectedIndex />

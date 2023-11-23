@@ -27,7 +27,7 @@
     </main>
 
     {#key $dictionary}
-        <footer in:scale>
+        <footer in:scale|global>
             {$dictionary.hold} <kbd>{$dictionary.enter}</kbd> {$dictionary.toRestart}
         </footer>
     {/key}

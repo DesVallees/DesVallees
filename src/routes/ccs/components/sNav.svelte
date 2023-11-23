@@ -21,7 +21,7 @@
 
 <Base bind:active firstFocusableElement={firstFocusableElement} lastFocusableElement={lastFocusableElement}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div on:click|stopPropagation transition:slide={{duration:200, axis: 'x'}}>
+    <div on:click|stopPropagation transition:slide|global={{duration:200, axis: 'x'}}>
         <img class="logo" src="/images/ccs/CCSlogoTransparent.png" alt="CCS Logo">
         
         <a href="/ccs" on:click|preventDefault={() => linkBehaviour('/ccs')} class="baseButton {$page.url.pathname === '/ccs' ? 'active' : ''}" bind:this={firstFocusableElement}>{$dictionary.inicio}</a>

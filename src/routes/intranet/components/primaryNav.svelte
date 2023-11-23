@@ -28,7 +28,7 @@
         <Logo />
     </a>
     
-    <section in:fade>
+    <section in:fade|global>
         <div>
             <a on:click|preventDefault={() => linkBehaviour('/intranet')} href="/intranet" class="headerLink baseButton {$page.url.pathname === '/intranet' ? 'active' : ''}">
                 <span class="headerLinkText">{$dictionary.home}</span>

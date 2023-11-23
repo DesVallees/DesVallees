@@ -29,13 +29,13 @@
 
 <nav style="{style}">
     {#key optionSelectedIndex}
-        <button bind:this={trigger} in:fade class="selectedTeam" style="{optionsVisible ? 'gap: 4rem;' : '' }" on:click={() => optionsVisible = !optionsVisible}>
+        <button bind:this={trigger} in:fade|global class="selectedTeam" style="{optionsVisible ? 'gap: 4rem;' : '' }" on:click={() => optionsVisible = !optionsVisible}>
             {options[optionSelectedIndex].name} 
             <div style="{optionsVisible ? 'transform: rotate(180deg);' : 'transform: rotate(0deg);' }"><ion-icon name="chevron-down-outline"></ion-icon></div> 
         </button>
     {/key}
     {#if optionsVisible}
-        <section transition:slide|local={{duration: 200}} use:clickOutside>
+        <section transition:slide={{duration: 200}} use:clickOutside>
             {#each options as name, i}
                 <button class:selected={i === optionSelectedIndex} tabindex={i === optionSelectedIndex ? -1 : 0} on:click={() => {optionSelectedIndex = i; optionsVisible = false}}>{name.name}</button>
             {/each}

@@ -12,7 +12,7 @@
 
 <Base bind:active firstFocusableElement={firstFocusableElement} lastFocusableElement={lastFocusableElement} hasStopPropagationChild={true}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div on:click|stopPropagation transition:slide={{duration:200, axis: 'x'}}>
+    <div on:click|stopPropagation transition:slide|global={{duration:200, axis: 'x'}}>
         <PrimaryNav linkBehaviourCallback={() => {active = false}} bind:firstFocusableElement bind:lastFocusableElement />
     </div>
 </Base>

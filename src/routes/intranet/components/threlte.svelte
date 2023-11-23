@@ -63,7 +63,7 @@
 
 {#key regenerateTrigger}
     
-    <div in:fade={{delay: delay, duration: duration}} class="scene" style="--width: {shrinkNeeded ? windowWidth - 100 : width}px; --height: {shrinkNeeded ? windowWidth - 100 : width}px; {style}">
+    <div in:fade|global={{delay: delay, duration: duration}} class="scene" style="--width: {shrinkNeeded ? windowWidth - 100 : width}px; --height: {shrinkNeeded ? windowWidth - 100 : width}px; {style}">
         <Threlte.Canvas rendererParameters = {{ antialias: true }}>
             <!-- Camera -->
             <Threlte.OrthographicCamera position={dynamicControls.camera.position} zoom={shrinkNeeded ? (windowWidth - 100) / 5 : dynamicControls.camera.zoom}>

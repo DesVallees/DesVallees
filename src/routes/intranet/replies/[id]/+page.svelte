@@ -3,7 +3,7 @@
 	import NewPost from "../../components/newPost.svelte";
 	import { page } from "$app/stores";
 	import type { PageData } from "./$types";
-	import { dictionary } from "../../stores";
+	import { dictionary, type Profile } from "../../stores";
 	import Post from "../../components/post.svelte";
 	import Separator from "../../components/separator.svelte";
 
@@ -13,12 +13,16 @@
     $: ({ comments } = data)
     $: ({ profiles } = data)
 
+    function findProfile(id:number): Profile | undefined {
+        return profiles.find((profile: Profile) => profile.id === id)
+    }
+
 </script>
 
 
-<NewPost active={false} parentCommentPoster={profiles.find((profile) => profile.id === originalPost?.profileId)?.fullName} parentCommentId={originalPost?.id} parentCommentVisibility={originalPost?.visibility}/>
+<NewPost active={false} parentCommentPoster={findProfile(originalPost?.profileId)?.fullName} parentCommentId={originalPost?.id} parentCommentVisibility={originalPost?.visibility}/>
                 
-<div class="replies" in:fade>
+<div class="replies" in:fade|global>
 
     {#key $page.params.id}
 
@@ -27,7 +31,7 @@
 
             <h2>{$dictionary.repliesTo}</h2>
 
-            <Post style="padding: 0 1em 2em;" originalPost={true} id={originalPost.id} visibility={originalPost.visibility} likes={originalPost.likes} comments={originalPost.comments} profileId={originalPost.profileId} date={originalPost.date} content={originalPost.content} img={originalPost.img || undefined} name={profiles.find((profile) => profile.id === originalPost?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === originalPost?.profileId)?.profilePicture} />
+            <Post style="padding: 0 1em 2em;" originalPost={true} id={originalPost.id} visibility={originalPost.visibility} likes={originalPost.likes} comments={originalPost.comments} profileId={originalPost.profileId} date={originalPost.date} content={originalPost.content} img={originalPost.img || undefined} name={findProfile(originalPost?.profileId)?.fullName} profilePicture={findProfile(originalPost?.profileId)?.profilePicture} />
 
             <Separator height="0" margin="0 0 2em" />
 
@@ -35,7 +39,7 @@
                 
                 {#each comments as post, index(post.id)}
                                 
-                    <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={profiles.find((profile) => profile.id === post?.profileId)?.fullName} profilePicture={profiles.find((profile) => profile.id === post?.profileId)?.profilePicture} />
+                    <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={findProfile(post?.profileId)?.fullName} profilePicture={findProfile(post?.profileId)?.profilePicture} />
 
                 {/each}
 

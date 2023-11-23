@@ -51,7 +51,7 @@
 <div>
     {#each languages as newLanguage, index(newLanguage)}
         <button 
-            in:receive={{ key: newLanguage }} out:send={{ key: newLanguage }}
+            in:receive|global={{ key: newLanguage }} out:send|global={{ key: newLanguage }}
             animate:flip={{duration: 400}}
             class={(newLanguage === $language) ? 'current' : ''} 
             disabled={newLanguage === $language} 

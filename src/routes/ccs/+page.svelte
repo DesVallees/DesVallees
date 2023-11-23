@@ -59,11 +59,11 @@
 
 <svelte:window on:resize={() => isMobileDevice = window.innerWidth <= window.innerHeight}/>
 
-<!-- out:fly|local={{x: (lastMove ? (lastMove === 'next' ? '-2000' : '2000') : '0'), duration: 700}} -->
-<div class="guitars" in:fade>
+<!-- out:fly={{x: (lastMove ? (lastMove === 'next' ? '-2000' : '2000') : '0'), duration: 700}} -->
+<div class="guitars" in:fade|global>
 
     {#key $chosenGuitarIndex}
-        <div class="above" in:fly|local={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}} style="height: {aboveContentHeight}px;">
+        <div class="above" in:fly={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}} style="height: {aboveContentHeight}px;">
             <div class="empty"></div>
             <div class="guitarHeader" bind:offsetHeight={aboveContentHeight}>
                 <GuitarHeader 
@@ -82,7 +82,7 @@
             </button>
 
             {#key $chosenGuitarIndex}
-                <div class="guitarImage" bind:offsetHeight={middleContentHeight} in:fly|local={{x: (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0'), duration: 600, delay: (isMobileDevice ? 0 : 100)}}>
+                <div class="guitarImage" bind:offsetHeight={middleContentHeight} in:fly={{x: (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0'), duration: 600, delay: (isMobileDevice ? 0 : 100)}}>
                     <GuitarImage fileNames={chosenGuitar.fileNames} bind:currentFileIndex name={chosenGuitar.name[$language]} />
                 </div>
             {/key}
@@ -95,7 +95,7 @@
     </div>
 
         {#key $chosenGuitarIndex}
-            <div class="below" in:fly|local={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}}>
+            <div class="below" in:fly={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}}>
                 <CarrouselController array={chosenGuitar.fileNames} bind:currentFileIndex/>
 
                 <div class="guitarFooter">

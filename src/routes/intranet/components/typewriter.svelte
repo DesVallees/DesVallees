@@ -65,4 +65,4 @@
     })
 </script>
 
-<p in:fade={{delay: delay, duration: duration}} style={style}>{basePhrase + typedChar}</p>
+<p in:fade|global={{delay: delay, duration: duration}} style={style}>{basePhrase + typedChar}</p>

@@ -17,7 +17,7 @@
 
 <div>
     {#key $dictionary}
-        <p bind:this={clickToBlur} in:scale>{$dictionary.seconds}: </p>
+        <p bind:this={clickToBlur} in:scale|global>{$dictionary.seconds}: </p>
     {/key}
 
     <input type="number" 

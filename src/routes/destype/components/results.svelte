@@ -60,12 +60,12 @@
 </script>
 
 
-<div in:blur>
+<div in:blur|global>
     <ResultStat title={$dictionary.wpm} tooltip={$dictionary.wordsPerMinute} score={Math.trunc($wordsPerMinute)}/>
     <ResultStat title={$dictionary.accuracy} score={`${Math.trunc($accuracy)}%`}/>
 </div>
 
-<div in:blur>
+<div in:blur|global>
     <button on:click={resetGame} class="play">{$dictionary.playAgain}</button>
 </div>
 

@@ -16,7 +16,7 @@
     <ion-icon name="notifications-outline"></ion-icon>
     
     {#key unseenNotifications.length}
-        <div style="--areNotifications: {unseenNotifications.length > 0 ? 'flex' : 'none'}" in:scale class="notificationCounter">{unseenNotifications.length}</div>
+        <div style="--areNotifications: {unseenNotifications.length > 0 ? 'flex' : 'none'}" in:scale|global class="notificationCounter">{unseenNotifications.length}</div>
     {/key}
 </button>
 

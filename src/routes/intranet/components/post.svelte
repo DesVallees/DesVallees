@@ -112,7 +112,7 @@
 </script>
 
 
-<div in:slide|local class="post" bind:this={postDiv} style="{style}">
+<div in:slide class="post" bind:this={postDiv} style="{style}">
     <div class="avatar">
         <Avatar href="/intranet/profile/{profileId}" ariaLabel={$dictionary.seeProfile} image={profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
     </div>
@@ -128,11 +128,11 @@
 
         {#if showMore === 'needed'}
 
-            <button class="showContent link" in:fade on:click={() => {shownContent = checkLinks(content); showMore = 'used';}}>{$dictionary.showMore}</button>
+            <button class="showContent link" in:fade|global on:click={() => {shownContent = checkLinks(content); showMore = 'used';}}>{$dictionary.showMore}</button>
             
             {:else if showMore === 'used'}
             
-            <button class="showContent link" in:slide on:click={async() => {shownContent = shortenString(content); showMore = 'needed'; await sleep(100); postDiv.scrollIntoView({block: 'center', behavior:"smooth"})}}>{$dictionary.showLess}</button>
+            <button class="showContent link" in:slide|global on:click={async() => {shownContent = shortenString(content); showMore = 'needed'; await sleep(100); postDiv.scrollIntoView({block: 'center', behavior:"smooth"})}}>{$dictionary.showLess}</button>
 
         {/if}
 
@@ -147,12 +147,12 @@
                 <button class="link" on:click={() => replying = !replying}>
                     {$dictionary.reply}
                     {#key replying}
-                        <ion-icon in:fade name="arrow-undo{replying ? "" : "-outline"}"></ion-icon>
+                        <ion-icon in:fade|global name="arrow-undo{replying ? "" : "-outline"}"></ion-icon>
                     {/key}
                 </button>
                 <button class="link" on:click={handleLike} aria-label={$dictionary.like}>
                     {#key liked}
-                        <ion-icon in:fade name="heart{liked ? "" : "-outline"}"></ion-icon>
+                        <ion-icon in:fade|global name="heart{liked ? "" : "-outline"}"></ion-icon>
                     {/key}
                     {likes}
                 </button>

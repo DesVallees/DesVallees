@@ -4,11 +4,11 @@
 </script>
 
 {#key $dictionary}
-    <h1 in:scale|local>
+    <h1 in:scale>
         <span>{$dictionary.highScore}: </span>
 
         {#key $bestWPM}
-            <span in:scale>{$bestWPM}</span>
+            <span in:scale|global>{$bestWPM}</span>
         {/key}
 
         <span>{$dictionary.wpm}</span>

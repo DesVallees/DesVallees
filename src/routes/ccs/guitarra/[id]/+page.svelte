@@ -29,10 +29,10 @@
 
 </script>
 
-<div class="main" in:fade>
+<div class="main" in:fade|global>
 	{#if chosenGuitar}
 
-		<div class="imageContainer" style="height: {imageHeight}px;" in:fade={{delay: 100}}>
+		<div class="imageContainer" style="height: {imageHeight}px;" in:fade|global={{delay: 100}}>
 			<div class="image" bind:offsetHeight={imageHeight}>
 				<GuitarImage fileNames={chosenGuitar.fileNames} bind:currentFileIndex name={chosenGuitar.name[$language]} />
 			</div>
@@ -40,19 +40,19 @@
 		<CarrouselController array={chosenGuitar.fileNames} bind:currentFileIndex/>
 
 		
-		<div class="headers" in:fade={{delay: 600}}>
+		<div class="headers" in:fade|global={{delay: 600}}>
 			<h1 class="name">{chosenGuitar.name[$language]}</h1>
 			<h2 class="edition">{$dictionary.edicion}: {chosenGuitar.edition[$language]}</h2>
 		</div>
-		<p in:fade={{delay: 600}}>{chosenGuitar.paragraph[$language]}</p>
+		<p in:fade|global={{delay: 600}}>{chosenGuitar.paragraph[$language]}</p>
 
-		<div class="features" in:fade={{delay: 600}}>
+		<div class="features" in:fade|global={{delay: 600}}>
 			{#each chosenGuitar.features as feature}
 					<GuitarFeature feature={feature} />
 			{/each}
 		</div>
 
-		<table in:fade={{delay: 600}}>
+		<table in:fade|global={{delay: 600}}>
 			{#each chosenGuitar.table as datum}
 					<tr>
 					<td>{datum.property[$language]}</td>
@@ -61,7 +61,7 @@
 			{/each}
 		</table>
 
-		<div class="interactives" in:fade={{delay: 600}}>
+		<div class="interactives" in:fade|global={{delay: 600}}>
 			<a href="/ccs/contactanos" class="button">{$dictionary.contactanos}</a>
 			<ShareButton justIcon={false} style="color: var(--content); padding: 10px 1.2em;" url="{guitarSpanishName}" title={chosenGuitar.name[$language]} edition={chosenGuitar.edition[$language]} description={chosenGuitar.description[$language]} />
 		</div>

@@ -9,7 +9,7 @@
 </script>
 
 
-<div class="general" in:fade>
+<div class="general" in:fade|global>
 
     <GeneralHeader bind:searchValue />
 

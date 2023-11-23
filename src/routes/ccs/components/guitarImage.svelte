@@ -48,7 +48,7 @@
 {#key isMobileDevice}
     <button on:click={newImage}>
         {#key currentFile}
-            <img in:fly|local={{y: -100, duration: 700}} style={style} src="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}{imageSize}.{extension}" alt={name}>
+            <img in:fly={{y: -100, duration: 700}} style={style} src="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}{imageSize}.{extension}" alt={name}>
         {/key}
     </button>
 {/key}

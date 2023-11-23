@@ -37,13 +37,13 @@
 </script>
 
 {#key optionSelectedIndex}
-    <button in:fade bind:this={button} class="selectedTeam" class:active={optionsVisible} on:click={toggle}>
+    <button in:fade|global bind:this={button} class="selectedTeam" class:active={optionsVisible} on:click={toggle}>
         {options[optionSelectedIndex].name} 
     </button>
 {/key}
 
 {#if optionsVisible}
-    <section transition:slide|local use:clickOutside>
+    <section transition:slide use:clickOutside>
         {#each options as name, i}
             <button class:selected={i === optionSelectedIndex} tabindex={i === optionSelectedIndex ? -1 : 0} on:click={() => {optionSelectedIndex = i; close()}}>{name.name}</button>
         {/each}

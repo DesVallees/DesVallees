@@ -12,7 +12,7 @@
     const dispatch = createEventDispatcher();
 </script>
 
-<div in:fade>
+<div in:fade|global>
     <Avatar image={profilePicture} width="5em"/>
     <h3>{name}</h3>
     <h4>{jobTitle || $dictionary.cantoLegalEmployee}</h4>

@@ -45,7 +45,7 @@
 
 <Base firstFocusableElement={firstFocusableElement || textarea} lastFocusableElement={lastFocusableElement} bind:active autofocus={false}>
 
-    <div class="post" transition:slide={{duration: 200}}>
+    <div class="post" transition:slide|global={{duration: 200}}>
         <div class="avatar">
             <Avatar image={$profile.profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;"/>
         </div>
