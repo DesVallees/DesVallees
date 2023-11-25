@@ -102,6 +102,7 @@
         <div class="addImage">
             {#if !imageSrc}
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                 <label for="image" tabindex="0" on:keypress={(event) => {(event.key == 'Enter' || event.key == ' ') ? addAnImage.click() : ''}} aria-label={$dictionary.addAnImage}><ion-icon name="image-outline"></ion-icon></label>
                 <input type="file" id="image" accept="image/*" style="display: none;" bind:this={addAnImage} on:change={previewImage}>
             {/if}

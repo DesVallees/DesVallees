@@ -5,6 +5,16 @@ import { browser } from "$app/environment";
 type Game = 'waiting for input' | 'in progress' | 'game over'
 export type Language = 'français' | 'español' | 'italiano' | 'english' | 'Русский'
 
+function isLanguage(value: any): value is Language {
+    return (
+        value === 'français' ||
+        value === 'español' ||
+        value === 'italiano' ||
+        value === 'english' ||
+        value === 'Русский'
+    );
+}
+
 export const initialSeconds = writable(30);
 export const seconds = writable(30);
 export const bestWPM = writable(0);
@@ -13,7 +23,9 @@ export const game: Writable<Game> = writable('waiting for input')
 
 let storedLanguage;
 if (browser){
-    storedLanguage = localStorage.language
+    if (isLanguage(localStorage.language)) {
+        storedLanguage = localStorage.language  
+    }
 }
 
 export const language:Writable<Language> = writable(storedLanguage || 'english');

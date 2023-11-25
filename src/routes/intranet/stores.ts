@@ -4,6 +4,13 @@ import { browser } from "$app/environment";
 
 export type Language = 'español' | 'english'
 
+function isLanguage(value: any): value is Language {
+    return (
+        value === 'español' ||
+        value === 'english'
+    );
+}
+
 export type Profile = {
     id: number,
     microsoftId: string,
@@ -32,9 +39,9 @@ export const username: Writable<string> = writable('');
 export const profile: Writable<Profile> = writable();
 
 
-let storedLanguage: Language | undefined;
+let storedLanguage;
 if (browser){
-    if (localStorage.language === 'español' || localStorage.language === 'english') {
+    if (isLanguage(localStorage.language)) {
         storedLanguage = localStorage.language  
     }
 }

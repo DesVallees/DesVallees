@@ -4,12 +4,25 @@ import { browser } from "$app/environment";
 
 export type Language = 'français' | 'español' | 'italiano' | 'english' | 'Русский' | 'deutsch'
 
-let storedLanguage;
-if (browser){
-    storedLanguage = localStorage.language
+function isLanguage(value: any): value is Language {
+    return (
+        value === 'français' ||
+        value === 'español' ||
+        value === 'italiano' ||
+        value === 'english' ||
+        value === 'Русский' ||
+        value === 'deutsch'
+    );
 }
 
-export const language:Writable<Language> = writable(storedLanguage || 'español');
+let storedLanguage;
+if (browser){
+    if (isLanguage(localStorage.language)) {
+        storedLanguage = localStorage.language  
+    }
+}
+
+export const language:Writable<Language> = writable(storedLanguage || 'english');
 
 if (browser){
     language.subscribe((value) => localStorage.language = value)

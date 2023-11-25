@@ -42,6 +42,7 @@
 {#if active}
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="base" in:fade|global={{duration:100}} out:fade|global={{duration:100, delay:100}} on:click={(() => hasStopPropagationChild ? active = false : '')}>
 
         <button style="position: absolute; opacity: 0;" on:focus={focusLastElement}></button>
