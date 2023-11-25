@@ -42,7 +42,8 @@
     <meta name="author" content="Santiago Ovalles">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <link rel="icon" href="" />
+    <!-- <link rel="icon" href="/images/journee/logoWhite.png" /> -->
+    <link rel="icon" href="https://fav.farm/💭" />
 </svelte:head>
 
 <Toaster/>

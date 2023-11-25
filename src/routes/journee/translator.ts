@@ -1,15 +1,21 @@
 export const translator = {
     español: {
+        comingSoon: 'Próximamente',
     },
     english: {
+        comingSoon: 'Coming Soon',
     },
     français: {
+        comingSoon: 'Prochainement',
     },
-    deutsch:{
+    deutsch: {
+        comingSoon: 'Demnächst',
     },
-    italiano:{
+    italiano: {
+        comingSoon: 'Prossimamente',
     },
     Русский: {
+        comingSoon: 'Скоро',
     },
 };
 
