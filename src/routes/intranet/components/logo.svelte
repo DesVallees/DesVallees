@@ -24,6 +24,7 @@
 
 <style>
     img {
+        -webkit-user-drag: none;
         user-select: none;
     }
 </style>

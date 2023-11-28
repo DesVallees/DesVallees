@@ -8,6 +8,7 @@
     
 	import Nav from './components/nav.svelte';
 	import Footer from './components/footer.svelte';
+	import BackgroundCircle from './components/backgroundCircle.svelte';
 
     let disappearAndAppear:boolean = false;
     
@@ -42,11 +43,13 @@
     <meta name="author" content="Santiago Ovalles">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <!-- <link rel="icon" href="/images/journee/logoWhite.png" /> -->
-    <link rel="icon" href="https://fav.farm/💭" />
+    <link rel="icon" href="/images/journee/logoWhite.png" />
 </svelte:head>
 
 <Toaster/>
+
+<BackgroundCircle style="opacity: .5;" />
+<BackgroundCircle coordinates={{left: '30%', top: '70%'}} style="opacity: .8;" />
 
 <div class:disappearAndAppear>
     <nav>
@@ -83,6 +86,7 @@
     }
 
     main{
+        max-width: 100vw;
         align-self: stretch;
     }
 

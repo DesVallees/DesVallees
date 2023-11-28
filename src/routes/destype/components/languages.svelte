@@ -78,7 +78,7 @@
     }
     
     button {
-        width: 102px;
+        width: 6.5rem;
     }
 
     .current{

@@ -32,6 +32,7 @@
 
 <Base bind:active firstFocusableElement={firstFocusableElement} lastFocusableElement={lastFocusableElement}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:click|stopPropagation class="languagesContainer" transition:slide|global={{duration:200}}>
         {#each Object.entries(languageFlags) as [languageName, flag], index}
             {#if index === 0}
@@ -63,59 +64,49 @@
 <style> 
     .languageControl {
         display: flex;
+        align-items: center;
         gap: .5rem;
-        margin-left: 50px;
         border-radius: 50px;
         padding: 5px;
+
+        transition: all .2s;
     }
 
     .languageControl:hover,
     .languageControl:focus-visible {
-        background-color: var(--contentHover);
+        background-color: var(--content-1);
     }
 
     img {
         height: 2.5rem;
         aspect-ratio:  1 / 1;
         border-radius: 50%;
+        -webkit-user-drag: none;
     }
 
     .languagesContainer{
         border-radius: 20px;
-        box-shadow: 0 0 5px var(--contentDim);
+        box-shadow: 0 0 5px var(--content-8);
         background-color: var(--main);
         padding: 2em 2.5em;
         height: fit-content;
 
         display: grid;
-        gap: .8em;
-
+        gap: .8rem;
     }   
 
     .languageOption{
+        width: 100%;
+        padding: .6em .75em;
+
         text-transform: capitalize;
+
         display: flex;
         justify-content: flex-start;
         gap: 1rem;
+
         font-size: 1.15rem; 
         font-weight: 500;
-        width: 100%;
     }
 
-    @media screen and (max-width: 1025px){
-        .languageControl {
-            margin-left: 25px;
-        }
-    }
-
-    @media screen and (max-width: 500px){
-        .languageControl {
-            gap: .4rem;
-            margin-left: 0;
-        }
-        
-        img {
-            height: 2.2rem;
-        }
-    }
 </style>

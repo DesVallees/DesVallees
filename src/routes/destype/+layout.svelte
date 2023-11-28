@@ -18,7 +18,7 @@
 
 <div>
     <nav>
-        <h1>⚡ DesType</h1>
+        <h1>🤓 DesType</h1>
         <HighScore/>
     </nav>
 
@@ -46,8 +46,10 @@
     nav{
         display: flex;
         justify-content: space-between;
+        align-items: center;
         flex-wrap: wrap;
-        gap: 20px;
+        column-gap: 3em;
+        row-gap: 20px;
     }
 
     h1 {
@@ -64,6 +66,18 @@
         gap: 15px;
         opacity: .7;
         color: var(--fg-100);
+    }
+
+    @media screen and (orientation: portrait){
+        footer {
+            visibility: hidden;
+        }
+    }
+
+    @media screen and (max-width: 500px){
+        footer {
+            display: none;
+        }
     }
 
 </style>

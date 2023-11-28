@@ -22,7 +22,7 @@
     .header {
         width: 99%;
         margin: 0 auto;
-        height: 100px;
+        height: fit-content;
         border-bottom: 1px solid var(--content);
         background-color: var(--mainDimer);
         backdrop-filter: blur(12px);
@@ -31,8 +31,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         align-items: center;
-        padding-right: 2.5em;
-        padding-left: 2em;
+        padding: .7em 2.5em .7em 2em;
         
         position: sticky;
         top: 0;
@@ -66,16 +65,25 @@
     .sidebarTrigger ion-icon {
         font-size: 2.2rem;
     }
+    
+    @media screen and (min-width:850px) {
+        .menu button {
+            display: none;
+        }
+        
+        .header {
+            padding: 1em 2.5em 1em 2em;
+        }
+    }
 
     @media screen and (min-width: 1150px){
         .notifications {
             display: none;
         }
-    }
 
-    @media screen and (min-width:850px) {
-        .menu button {
-            display: none;
+        .header {
+            padding: 2em;
         }
     }
+
 </style>

@@ -46,6 +46,7 @@
 
     let aboveContentHeight: number;
     let middleContentHeight: number;
+    let belowContentHeight: number;
 
     let isMobileDevice : boolean = false;
 
@@ -94,10 +95,11 @@
         </div>
     </div>
 
-        {#key $chosenGuitarIndex}
-            <div class="below" in:fly={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}}>
+    {#key $chosenGuitarIndex}
+        <div class="belowWrapper" style="height: {belowContentHeight}px;">
+            <div class="below" in:fly={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}} bind:offsetHeight={belowContentHeight} >
                 <CarrouselController array={chosenGuitar.fileNames} bind:currentFileIndex/>
-
+    
                 <div class="guitarFooter">
                     <GuitarFooter 
                     name={chosenGuitar.name[$language]}
@@ -108,7 +110,8 @@
                     /> 
                 </div>
             </div>
-        {/key}
+        </div>
+    {/key}
 
 </div>
 
@@ -170,7 +173,7 @@
         gap: 2em;
     }
 
-    .above {
+    .above, .belowWrapper {
         transition: height 500ms ease-out;
         overflow: hidden;
     }

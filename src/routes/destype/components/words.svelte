@@ -15,7 +15,7 @@
     let letterIndex = 0
     let caretAnimation: string = 'infinite';
 
-    let timerTick: NodeJS.Timer | undefined;
+    let timerTick: ReturnType<typeof setInterval>;
 
     let wordsEl: HTMLDivElement
     let letterEL: HTMLSpanElement
@@ -61,15 +61,11 @@
         }
 
         if (event.code === 'Space') {
-            event.preventDefault()
-
             if($game === 'in progress'){
                 nextWord()
             }
         }
         else if (event.code === 'Backspace') {
-            event.preventDefault()
-
             if($game === 'in progress'){
                 backspace()
             }
@@ -79,7 +75,7 @@
     function updateGameState() {
         const isWordCompleted = letterIndex > words[wordIndex].length - 1
 
-        if (!isWordCompleted) {
+        if (!isWordCompleted && typedLetter !== ' ') {
             setLetter()
             checkLetter()
         }else{
@@ -124,9 +120,9 @@
         }
         else {
             if (aprovedLetters([
-                'a', 'b', 'v', 'g', 'd', 'ye', 'yo', 'zh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'kh', 'ts', 'ch', 'sh', 'sch', '-', 'y', `'`, 'e', 'yu', 'ya'
+                'a', 'b', 'v', 'g', 'd', 'e', 'ye', 'yo', 'j', 'zh', 'z', 's', 'i', 'i', 'y', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'kh', 'z', 'ts', 'ch', 'sh', 'sh', 'ch', 'sch', '-', `'`, 'i', 'y', `'`, 'e', 'yu', 'ya'
             ],[
-                'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'
+                'а', 'б', 'в', 'г', 'д', 'е', 'е', 'ё', 'ж', 'ж', 'з', 'з', 'и', 'й', 'й', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'х', 'ц', 'ц', 'ч', 'ш', 'щ', 'щ', 'щ', 'ъ', 'ъ', 'ы', 'ы', 'ь', 'э', 'ю', 'я'
             ])) {
                 acceptLetter()
                 return
@@ -180,7 +176,7 @@
         const currentLetter = words[wordIndex][letterIndex]
         if (typedPossibilities && correctPossibilities) {
             if (typedPossibilities.length !== correctPossibilities.length) {
-                throw new Error("This function compares letters one on one. Arrays should have equal lenght");
+                throw new Error("This function compares letters one to one. Arrays should have equal length");
             }
 
             for (let i = 0; i < typedPossibilities.length; i++) {
@@ -338,7 +334,7 @@
         --line-height: 1em;
         --lines: 3;
 
-        max-width: 1000px;
+        max-width: 70ch;
         height: calc(var(--line-height) * var(--lines) * 1.45);
         display: flex;
         flex-wrap: wrap;

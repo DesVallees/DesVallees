@@ -63,7 +63,7 @@
         width: 100vw;
         height: 100vh;
         padding: 150px 20px 100px;
-        background-color: var(--mainOpaque);
+        background-color: var(--main-9);
         overflow: auto;
         z-index: 11;
     }

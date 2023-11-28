@@ -1,21 +1,50 @@
 export const translator = {
     español: {
         comingSoon: 'Próximamente',
+        copyright: 'Derechos de autor ©',
+        allRightsReserved: 'Todos los derechos reservados.',
+        logIn: 'Iniciar sesión',
+        createAnAccount: 'Crear una cuenta',
+        slogan: 'Tus pensamientos, tu espacio, tu tranquilidad.',
     },
     english: {
         comingSoon: 'Coming Soon',
+        copyright: 'Copyright ©',
+        allRightsReserved: 'All rights reserved.',
+        logIn: 'Log In',
+        createAnAccount: 'Create an account',
+        slogan: 'Your Thoughts, Your Space, Your Tranquility.',
     },
     français: {
         comingSoon: 'Prochainement',
+        copyright: 'Droits d\'auteur ©',
+        allRightsReserved: 'Tous droits réservés.',
+        logIn: 'Se connecter',
+        createAnAccount: 'Créer un compte',
+        slogan: 'Vos pensées, votre espace, votre tranquillité.',
     },
     deutsch: {
         comingSoon: 'Demnächst',
+        copyright: 'Urheberrecht ©',
+        allRightsReserved: 'Alle Rechte vorbehalten.',
+        logIn: 'Anmelden',
+        createAnAccount: 'Konto erstellen',
+        slogan: 'Deine Gedanken, dein Raum, deine Ruhe.',
     },
     italiano: {
         comingSoon: 'Prossimamente',
+        copyright: 'Copyright ©',
+        allRightsReserved: 'Tutti i diritti riservati.',
+        logIn: 'Accedi',
+        createAnAccount: 'Crea un account',
+        slogan: 'I tuoi pensieri, il tuo spazio, la tua tranquillità.',
     },
     Русский: {
         comingSoon: 'Скоро',
+        copyright: 'Авторское право ©',
+        allRightsReserved: 'Все права защищены.',
+        logIn: 'Войти',
+        createAnAccount: 'Создать аккаунт',
+        slogan: 'Ваши мысли, ваше пространство, ваша спокойствие.',
     },
 };
-

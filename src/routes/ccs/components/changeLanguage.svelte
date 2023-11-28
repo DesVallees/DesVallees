@@ -79,6 +79,7 @@
         height: 2.5rem;
         aspect-ratio:  1 / 1;
         border-radius: 50%;
+        -webkit-user-drag: none;
     }
 
     .languagesContainer{

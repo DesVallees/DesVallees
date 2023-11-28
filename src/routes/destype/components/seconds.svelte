@@ -55,9 +55,9 @@
     input {
         -moz-appearance: textfield;
         appearance: textfield;
+        box-sizing: content-box;
 
-        height: 40px;
-        width: 50px;
+        width: 3ch;
         outline: none;
         border: none;
 
@@ -68,7 +68,7 @@
         background: none;
         box-shadow: 0 0 3px hsla(210, 20%, 98%, 0.4);
         transition: all 0.3s ease;
-        padding: .3rem;
+        padding: .4em;
         border-radius: 5px;
     }
 
