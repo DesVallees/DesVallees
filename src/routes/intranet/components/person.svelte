@@ -13,7 +13,7 @@
 </script>
 
 <div in:fade|global>
-    <Avatar image={profilePicture} width="5em"/>
+    <Avatar personName={name} image={profilePicture} width="5em"/>
     <h3>{name}</h3>
     <h4>{jobTitle || $dictionary.cantoLegalEmployee}</h4>
     <a class="invisible" href="/intranet/profile/{id}">{$dictionary.seeProfile}</a>

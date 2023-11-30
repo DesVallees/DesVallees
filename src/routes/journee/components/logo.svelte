@@ -4,7 +4,7 @@
     
     export let style: string = ''
 
-    let src = "/images/journee/logoWhite.png";
+    let src = "/images/journee/logoWhite.webp";
     
     let loaded = false;
 
@@ -20,7 +20,7 @@
 </script>
 
 {#if loaded}
-    <img style={style} src={src} alt="Journée">
+    <img style={style} src={src} alt="Journée" loading="lazy">
 {/if}
 
 <style>

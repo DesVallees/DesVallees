@@ -18,7 +18,7 @@
 </script>
 
 <div>
-    <Avatar image={profile.profilePicture}  width="10em" />
+    <Avatar personName={profile.fullName} image={profile.profilePicture}  width="10em" />
     <h2>{profile.fullName || $dictionary.unknown}</h2>
     
     <Separator width="100%" maxWidth="750px" height="1px" margin="3em" />

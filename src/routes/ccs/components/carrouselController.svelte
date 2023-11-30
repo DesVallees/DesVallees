@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { dictionary } from "../stores";
+
 
     export let array:string[];
     export let currentFileIndex: number;
@@ -7,7 +9,7 @@
 
 <div>
     {#each array as i, index}
-        <button on:click={() => currentFileIndex = index} class:active={index === currentFileIndex} tabindex={index === currentFileIndex ? -1 : 0}></button>
+        <button aria-label="{$dictionary.imagen} {index + 1}" on:click={() => currentFileIndex = index} class:active={index === currentFileIndex} tabindex={index === currentFileIndex ? -1 : 0}></button>
     {/each}
 </div>
 

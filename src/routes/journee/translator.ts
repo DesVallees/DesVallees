@@ -6,6 +6,9 @@ export const translator = {
         logIn: 'Iniciar sesión',
         createAnAccount: 'Crear una cuenta',
         slogan: 'Tus pensamientos, tu espacio, tu tranquilidad.',
+        landingOwlAlt: `Búho de Journée usando su computadora portátil.`,
+        journeesHomepage: `Página de inicio de Journée`,
+        language: 'Idioma',
     },
     english: {
         comingSoon: 'Coming Soon',
@@ -14,6 +17,9 @@ export const translator = {
         logIn: 'Log In',
         createAnAccount: 'Create an account',
         slogan: 'Your Thoughts, Your Space, Your Tranquility.',
+        landingOwlAlt: `Journée's Owl Using Its Laptop.`,
+        journeesHomepage: `Journée's Homepage`,
+        language: 'Language',
     },
     français: {
         comingSoon: 'Prochainement',
@@ -22,6 +28,9 @@ export const translator = {
         logIn: 'Se connecter',
         createAnAccount: 'Créer un compte',
         slogan: 'Vos pensées, votre espace, votre tranquillité.',
+        landingOwlAlt: `Chouette de Journée utilisant son ordinateur portable.`,
+        journeesHomepage: `Page d'accueil de Journée`,
+        language: 'Langue',
     },
     deutsch: {
         comingSoon: 'Demnächst',
@@ -30,6 +39,9 @@ export const translator = {
         logIn: 'Anmelden',
         createAnAccount: 'Konto erstellen',
         slogan: 'Deine Gedanken, dein Raum, deine Ruhe.',
+        landingOwlAlt: `Journée's Eule benutzt seinen Laptop.`,
+        journeesHomepage: `Journée's Startseite`,
+        language: 'Sprache',
     },
     italiano: {
         comingSoon: 'Prossimamente',
@@ -38,6 +50,9 @@ export const translator = {
         logIn: 'Accedi',
         createAnAccount: 'Crea un account',
         slogan: 'I tuoi pensieri, il tuo spazio, la tua tranquillità.',
+        landingOwlAlt: `Gufo di Journée che usa il suo laptop.`,
+        journeesHomepage: `Homepage di Journée`,
+        language: 'Lingua',
     },
     Русский: {
         comingSoon: 'Скоро',
@@ -46,5 +61,8 @@ export const translator = {
         logIn: 'Войти',
         createAnAccount: 'Создать аккаунт',
         slogan: 'Ваши мысли, ваше пространство, ваша спокойствие.',
+        landingOwlAlt: `Сова Джурне использует свой ноутбук.`,
+        journeesHomepage: `Домашняя страница Journée`,
+        language: 'Язык',
     },
 };

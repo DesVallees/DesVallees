@@ -2,6 +2,8 @@ export const translator = {
     español: {
         error: "Ha ocurrido un error.",
         paginaNoDisponible: 'Página no disponible',
+        idioma: 'Idioma',
+        imagen: 'Imagen',
 
         masInformacion: 'Más información',
         inicio: 'Inicio',
@@ -24,6 +26,8 @@ export const translator = {
     english: {
         error: "An error has occurred.",
         paginaNoDisponible: 'Page not available',
+        idioma: 'Language',
+        imagen: 'Image',
 
         masInformacion: 'More Info',
         inicio: 'Home',
@@ -46,6 +50,8 @@ export const translator = {
     français: {
         error: "Une erreur s'est produite.",
         paginaNoDisponible: 'Page non disponible',
+        idioma: 'Langue',
+        imagen: 'Image',
 
         masInformacion: 'Plus d\'informations',
         inicio: 'Accueil',
@@ -68,6 +74,8 @@ export const translator = {
     deutsch:{
         error: "Ein Fehler ist aufgetreten.",
         paginaNoDisponible: 'Seite nicht verfügbar',
+        idioma: 'Sprache',
+        imagen: 'Bild',
 
         masInformacion: 'Mehr Info',
         inicio: 'Startseite',
@@ -90,6 +98,8 @@ export const translator = {
     italiano:{
         error: "Si è verificato un errore.",
         paginaNoDisponible: 'Pagina non disponibile',
+        idioma: 'Lingua',
+        imagen: 'Immagine',
 
         masInformacion: 'Ulteriori informazioni',
         inicio: 'Home',
@@ -112,6 +122,8 @@ export const translator = {
     Русский: {
         error: "Произошла ошибка.",
         paginaNoDisponible: 'Страница недоступна',
+        idioma: 'Язык',
+        imagen: 'Изображение',
 
         masInformacion: 'Дополнительная информация',
         inicio: 'Главная',
@@ -132,4 +144,3 @@ export const translator = {
         elEquipoDeCCS: "Команда CCS",
     },
 };
-

@@ -3,8 +3,16 @@
 	import Typewriter from "../components/typewriter.svelte";
 	import { dictionary, language } from "../stores";
 
-
 </script>
+
+<svelte:head>
+    <title>{$dictionary.logIn}</title>
+    <noscript>
+        <title>Log In</title>
+    </noscript>
+    
+    <meta name="description" content="Securely access your mindful haven. Log in to explore A.I.-guided insights, manage to-do lists, seek advice, and nurture your thoughts within our private and tranquil space.">
+</svelte:head>
 
 <div class="logIn" in:fade>
     <form action="">

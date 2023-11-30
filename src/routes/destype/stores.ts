@@ -15,20 +15,35 @@ function isLanguage(value: any): value is Language {
     );
 }
 
+function mapNavigatorLanguage(navigatorLanguage: string): Language | undefined {
+    const languageMappings: Record<string, Language> = {
+        'fr': 'français',
+        'es': 'español',
+        'it': 'italiano',
+        'en': 'english',
+        'ru': 'Русский',
+    };
+
+    const simplifiedLanguage = navigatorLanguage.split('-')[0].toLowerCase();
+    return languageMappings[simplifiedLanguage];
+}
+
 export const initialSeconds = writable(30);
 export const seconds = writable(30);
 export const bestWPM = writable(0);
 
 export const game: Writable<Game> = writable('waiting for input')
 
+let navigatorLanguage;
 let storedLanguage;
 if (browser){
     if (isLanguage(localStorage.language)) {
         storedLanguage = localStorage.language  
     }
+    navigatorLanguage = mapNavigatorLanguage(navigator.language)
 }
 
-export const language:Writable<Language> = writable(storedLanguage || 'english');
+export const language:Writable<Language> = writable(storedLanguage || navigatorLanguage || 'english');
 
 if (browser){
     language.subscribe((value) => localStorage.language = value)

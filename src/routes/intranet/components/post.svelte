@@ -114,7 +114,7 @@
 
 <div in:slide class="post" bind:this={postDiv} style="{style}">
     <div class="avatar">
-        <Avatar href="/intranet/profile/{profileId}" ariaLabel={$dictionary.seeProfile} image={profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
+        <Avatar href="/intranet/profile/{profileId}" ariaLabel={$dictionary.seeProfile} image={profilePicture} personName={name} borderRadius="50%" width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
     </div>
     <div class="content">
         <header>

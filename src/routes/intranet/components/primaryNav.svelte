@@ -44,7 +44,7 @@
             <Separator height="1px" width="100%" margin="20px 0" />
             <ChangeLanguage buttonStyle="baseButton" style="font-size: 1.1rem; width: 100%; justify-content: flex-start;"/>
             <a bind:this={lastFocusableElement} on:click|preventDefault={() => linkBehaviour("/intranet/profile")} href="/intranet/profile" class="headerLink baseButton {$page.url.pathname === '/intranet/profile' ? 'active' : ''}" aria-label={$dictionary.profile}>
-                <Avatar image={$profile.profilePicture} borderRadius="10px" width="2rem"/>
+                <Avatar personName={$profile.fullName} image={$profile.profilePicture} borderRadius="10px" width="2rem" style="cursor: pointer;" />
                 <span class="headerLinkText" style="margin-left: 2px;">{$profile.fullName}</span>
             </a>
         </div>

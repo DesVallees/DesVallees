@@ -1,29 +1,30 @@
 <script lang="ts">
 	import { PublicClientApplication, type Configuration } from "@azure/msal-browser";
-	import { dictionary, username } from "../stores";
-	import { fade } from "svelte/transition";
-
-    export let msalConfig:Configuration;
-
-    export let delay:number = 0;
-    export let duration:number | undefined = undefined;
+	import { dictionary } from "../stores";
+	import toast from "svelte-french-toast";
 
     export let style:string = '';
     
+    export let msalConfig:Configuration;
+    
     const myMSALObj = new PublicClientApplication(msalConfig);
     
-    function logOut() {
-        const logoutRequest = {
-            account: myMSALObj.getAccountByUsername($username),
-            postLogoutRedirectUri: msalConfig.auth.redirectUri,
-            mainWindowRedirectUri: msalConfig.auth.redirectUri
-        };
+    const logoutRequest = {
+        postLogoutRedirectUri: msalConfig.auth.redirectUri,
+        mainWindowRedirectUri: msalConfig.auth.redirectUri
+    };
 
-        myMSALObj.logoutPopup(logoutRequest);
+    function logOut() {
+        myMSALObj.logoutPopup(logoutRequest)
+            .catch(error => {
+                toast.error($dictionary.error)
+                console.error(error);
+            });
     }
+
 </script>
 
-<button style={style} class="button" in:fade|global={{delay: delay, duration: duration}} on:click={logOut}>{$dictionary.logOut}</button>
+<button style={style} class="button" on:click={logOut}>{$dictionary.logOut}</button>
 
 <style>
     button {

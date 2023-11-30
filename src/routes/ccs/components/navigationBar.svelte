@@ -20,7 +20,7 @@
         <ChangeLanguage />
     </div>
 
-    <img class="logo x" src="/images/ccs/CCSlogoTransparent.png" alt="CCS Logo">
+    <img class="logo x" src="/images/ccs/CCSlogoTransparent.webp" alt="CCS Logo">
     
     <section id="xnav" class="x">
         <a href="/ccs" class="link {$page.url.pathname === '/ccs' ? 'active' : ''}">{$dictionary.inicio}</a>

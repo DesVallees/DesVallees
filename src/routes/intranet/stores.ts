@@ -11,6 +11,16 @@ function isLanguage(value: any): value is Language {
     );
 }
 
+function mapNavigatorLanguage(navigatorLanguage: string): Language | undefined {
+    const languageMappings: Record<string, Language> = {
+        'es': 'español',
+        'en': 'english',
+    };
+
+    const simplifiedLanguage = navigatorLanguage.split('-')[0].toLowerCase();
+    return languageMappings[simplifiedLanguage];
+}
+
 export type Profile = {
     id: number,
     microsoftId: string,
@@ -39,13 +49,15 @@ export const username: Writable<string> = writable('');
 export const profile: Writable<Profile> = writable();
 
 
+let navigatorLanguage;
 let storedLanguage;
 if (browser){
     if (isLanguage(localStorage.language)) {
         storedLanguage = localStorage.language  
     }
+    navigatorLanguage = mapNavigatorLanguage(navigator.language)
 }
-export const language:Writable<Language> = writable(storedLanguage || 'english');
+export const language:Writable<Language> = writable(storedLanguage || navigatorLanguage || 'english');
 if (browser){
     language.subscribe((value) => localStorage.language = value)
 }

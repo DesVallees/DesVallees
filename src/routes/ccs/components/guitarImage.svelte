@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { onMount } from "svelte";
 	import { fly } from "svelte/transition";
 
     type GuitarFace = 'front' | 'derriere'
     
     export let fileNames : string[] = []
-    export let extension : string = 'png'
+    export let extension : string = 'webp'
     export let guitarNumber : number | undefined = undefined;
     export let guitarFace: GuitarFace | undefined = undefined;
-    export let allowSmallSize: boolean = true;
 
     export let name: string = '';
     
@@ -29,32 +27,22 @@
             currentFileIndex = 0
         }
     }
-    
 
-    let isMobileDevice : boolean = false;
-
-    onMount(() => {
-        isMobileDevice = window.innerWidth <= window.innerHeight;
-    })
-
-    let imageSize : string = (isMobileDevice && allowSmallSize) ? '-small' : ''
-
-    $: isMobileDevice, imageSize = (isMobileDevice && allowSmallSize) ? '-small' : ''
 </script>
 
-
-<svelte:window on:resize={() => isMobileDevice = window.innerWidth <= window.innerHeight}/>
-
-{#key isMobileDevice}
-    <button on:click={newImage}>
-        {#key currentFile}
-            <img in:fly={{y: -100, duration: 700}} style={style} src="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}{imageSize}.{extension}" alt={name}>
-        {/key}
-    </button>
-{/key}
+<button on:click={newImage}>
+    {#key currentFile}
+        <picture in:fly={{y: -100, duration: 700}}>
+            <source media="(orientation: portrait)" srcset="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}-small.{extension}">
+            <source media="(orientation: landscape)" srcset="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}.{extension}">
+            <img  src="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}.{extension}" alt={name} style={style}>
+        </picture>
+    {/key}
+</button>
 
 <style>
     img {
+        user-select: none;
         -webkit-user-drag: none;
         z-index: -1;
         max-height: 100%; 

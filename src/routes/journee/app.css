@@ -71,6 +71,10 @@ ion-icon {
     visibility: visible;
 }
 
+img {
+    user-select: none;
+}
+
 button,
 input,
 input,

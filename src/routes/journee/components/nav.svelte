@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dictionary } from "../stores";
 	import ChangeLanguage from "./changeLanguage.svelte";
 	import Logo from "./logo.svelte";
 
@@ -6,7 +7,9 @@
 </script>
 
 <div>
-    <Logo />
+    <a href="/journee" aria-label={$dictionary.journeesHomepage}>
+        <Logo />
+    </a>
     <ChangeLanguage />
 </div>
 
@@ -19,6 +22,10 @@
         gap: 3rem;
 
         padding: .8rem 2rem;
+    }
+
+    a {
+        display: flex;
     }
 
     @media screen and (min-width: 650px) {

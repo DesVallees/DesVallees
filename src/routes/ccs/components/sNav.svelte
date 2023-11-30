@@ -23,7 +23,7 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:click|stopPropagation transition:slide|global={{duration:200, axis: 'x'}}>
-        <img class="logo" src="/images/ccs/CCSlogoTransparent.png" alt="CCS Logo">
+        <img class="logo" src="/images/ccs/CCSlogoTransparent.webp" alt="CCS Logo">
         
         <a href="/ccs" on:click|preventDefault={() => linkBehaviour('/ccs')} class="baseButton {$page.url.pathname === '/ccs' ? 'active' : ''}" bind:this={firstFocusableElement}>{$dictionary.inicio}</a>
         <a href="/ccs/acerca" on:click|preventDefault={() => linkBehaviour('/ccs/acerca')} class="baseButton {$page.url.pathname === '/ccs/acerca' ? 'active' : ''}">{$dictionary.acercaDeNosotros}</a>

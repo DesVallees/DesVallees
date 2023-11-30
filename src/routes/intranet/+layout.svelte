@@ -2,7 +2,7 @@
     import './app.css'
     import { Toaster } from 'svelte-french-toast';
     import toast from 'svelte-french-toast';
-    import { PublicClientApplication } from "@azure/msal-browser";
+    import { InteractionRequiredAuthError, PublicClientApplication } from "@azure/msal-browser";
 	import { dictionary, language, profile, username, showNotifications } from './stores';
 	import BackgroundCircle from './components/backgroundCircle.svelte';
 	import { fade } from 'svelte/transition';
@@ -35,36 +35,30 @@
         disappearAndAppear = false
     }
 
-    // landing
-
+    // Auth
     export let data;
 
     const myMSALObj = new PublicClientApplication(data.msalConfig);
 
-    const loginRequest = {
-        scopes: ["User.Read"]
-    };
+    const profileInfoEndpoint:string = "https://graph.microsoft.com/v1.0/me"
+    const profilePictureEndpoint:string = "https://graph.microsoft.com/v1.0/me/photo/$value"
+
     
-    const currentAccounts = myMSALObj.getAllAccounts();
-    if (currentAccounts.length > 1) {
-        console.warn("Multiple accounts detected.")
-        toast(`Multiple accounts detected (${currentAccounts.length}). Clean browser cookies.`, {
-            icon: '❗',
-        });
-        $username = currentAccounts[0].username;
-    } else if (currentAccounts.length === 1) {
-        $username = currentAccounts[0].username;
+    const currentAccount = myMSALObj.getActiveAccount();
+    if (currentAccount) {
+        $username = currentAccount.username;
     }
 
     $: $username, getProfileInfo();
 
     function getProfileInfo () {
         if ($username) {
-            getTokenPopup(loginRequest)
+            getAuthToken()
                 .then(response => {
                     if (response) {
                         let profileInfo = callMSGraph(profileInfoEndpoint, response.accessToken);
                         let profilePicture = callMSGraph(profilePictureEndpoint, response.accessToken);
+
                         profileInfo.then((info: any) => {
                             profilePicture.then((picture: any) => {
                                 setProfile(info, picture)
@@ -77,18 +71,22 @@
         }
     }
 
-    const profileInfoEndpoint:string = "https://graph.microsoft.com/v1.0/me"
-    const profilePictureEndpoint:string = "https://graph.microsoft.com/v1.0/me/photo/$value"
-
-    async function getTokenPopup(request:any) {
-        request.account = myMSALObj.getAccountByUsername($username);
-    
-        return myMSALObj.acquireTokenSilent(request)
+    const tokenRequest = {
+        scopes: ["User.Read"],
+    };
+    async function getAuthToken() {
+        const authtoken = myMSALObj.acquireTokenSilent(tokenRequest)
             .catch(error => {
-                toast.error($dictionary.errorPreviousCredentials)
+                if (error instanceof InteractionRequiredAuthError) {
+                    return myMSALObj.acquireTokenRedirect(tokenRequest)
+                }
+
+                toast.error(`${$dictionary.errorPreviousCredentials} (${$username})`)
                 $username = ''
                 throw new Error(error);
         });
+
+        return await authtoken;
     }
 
     async function callMSGraph(endpoint: RequestInfo | URL, token: string) : Promise<any> {
@@ -164,6 +162,7 @@
             toast.error($dictionary.error)
         }
     }
+    // End of Auth
 
 
     const introDuration:number = 1000;

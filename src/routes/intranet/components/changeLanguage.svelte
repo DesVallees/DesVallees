@@ -13,14 +13,14 @@
     
     <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('english')}>
         English
-        <img src="/images/usFlag.jpg" alt="{$dictionary.unitedStatesFlag}">
+        <img src="/images/usFlag.webp" alt="{$dictionary.unitedStatesFlag}">
     </button>
 
     {:else}
 
     <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('español')}>
         Español
-        <img src="/images/spainFlag.jpg" alt="{$dictionary.spanishFlag}">
+        <img src="/images/spainFlag.webp" alt="{$dictionary.spanishFlag}">
     </button>
 
 {/if}

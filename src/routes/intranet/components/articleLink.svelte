@@ -19,7 +19,7 @@
 
 <a href="/intranet/general/{link}" transition:slide={{duration: 500}}>
     <h1>{capitalizeWords(article.title)}</h1>
-    <h2><Avatar image={article.profilePicture} width="1.5rem"/>{$dictionary.by} {article.author}</h2>
+    <h2><Avatar personName={article.author} image={article.profilePicture} width="1.5rem"/>{$dictionary.by} {article.author}</h2>
     <p>{shortenString(article.content)}</p>
 </a>
 

@@ -39,7 +39,7 @@
     <meta name="author" content="Santiago Ovalles">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <link rel="icon" href="/images/ccs/CCSlogo.png" />
+    <link rel="icon" href="/images/ccs/CCSlogo.webp" />
 </svelte:head>
 
 <Toaster/>

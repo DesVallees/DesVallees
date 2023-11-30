@@ -19,46 +19,49 @@
 
 </script>
 
+{#key $page.params.id}
 
-<NewPost active={false} parentCommentPoster={findProfile(originalPost?.profileId)?.fullName} parentCommentId={originalPost?.id} parentCommentVisibility={originalPost?.visibility}/>
+{#if originalPost}
+    <NewPost active={false} parentCommentPoster={findProfile(originalPost.profileId)?.fullName} parentCommentId={originalPost.id} parentCommentVisibility={originalPost.visibility}/>
+{/if}
                 
-<div class="replies" in:fade|global>
-
-    {#key $page.params.id}
-
-        {#if originalPost}
+<div class="replies" in:fade>
 
 
-            <h2>{$dictionary.repliesTo}</h2>
+    {#if originalPost}
 
-            <Post style="padding: 0 1em 2em;" originalPost={true} id={originalPost.id} visibility={originalPost.visibility} likes={originalPost.likes} comments={originalPost.comments} profileId={originalPost.profileId} date={originalPost.date} content={originalPost.content} img={originalPost.img || undefined} name={findProfile(originalPost?.profileId)?.fullName} profilePicture={findProfile(originalPost?.profileId)?.profilePicture} />
 
-            <Separator height="0" margin="0 0 2em" />
+        <h2>{$dictionary.repliesTo}</h2>
 
-            {#if comments.length > 0}
-                
-                {#each comments as post, index(post.id)}
-                                
-                    <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={findProfile(post?.profileId)?.fullName} profilePicture={findProfile(post?.profileId)?.profilePicture} />
+        <Post style="padding: 0 1em 2em;" originalPost={true} id={originalPost.id} visibility={originalPost.visibility} likes={originalPost.likes} comments={originalPost.comments} profileId={originalPost.profileId} date={originalPost.date} content={originalPost.content} img={originalPost.img || undefined} name={findProfile(originalPost.profileId)?.fullName} profilePicture={findProfile(originalPost.profileId)?.profilePicture} />
 
-                {/each}
+        <Separator height="0" margin="0 0 2em" />
 
-            {:else}
+        {#if comments.length > 0}
+            
+            {#each comments as post, index(post.id)}
+                            
+                <Post id={post.id} visibility={post.visibility} likes={post.likes} comments={post.comments} profileId={post.profileId} date={post.date} content={post.content} img={post.img || undefined} name={findProfile(post.profileId)?.fullName} profilePicture={findProfile(post.profileId)?.profilePicture} />
 
-                <h3>{$dictionary.thisPostDoesNotHaveAnyReplies}</h3>
-
-            {/if}
-
+            {/each}
 
         {:else}
 
-            <p>{$dictionary.error}</p>
+            <h3>{$dictionary.thisPostDoesNotHaveAnyReplies}</h3>
 
         {/if}
 
-    {/key}
 
-</div>    
+    {:else}
+
+        <p>{$dictionary.error}</p>
+
+    {/if}
+
+    
+</div>   
+
+{/key}
 
 
 <style>

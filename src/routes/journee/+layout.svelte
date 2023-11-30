@@ -39,11 +39,8 @@
 </script>
 
 <svelte:head>
-    <title>Journée</title>
     <meta name="author" content="Santiago Ovalles">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="icon" href="/images/journee/logoWhite.png" />
+    <link rel="icon" href="/images/journee/logoWhite.webp" />
 </svelte:head>
 
 <Toaster/>

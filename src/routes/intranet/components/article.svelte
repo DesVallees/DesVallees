@@ -15,7 +15,7 @@
 <article>
     <h1>{capitalizeWords(title)}</h1>
     <div class="sub">
-        <Avatar image={profilePicture} width="25px"/>
+        <Avatar personName={author} image={profilePicture} width="25px"/>
         <h6>{author} • {minutesRead} {$dictionary.minutesRead}</h6>
     </div>
     <section>

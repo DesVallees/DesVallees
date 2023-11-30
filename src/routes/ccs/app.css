@@ -55,6 +55,10 @@ ion-icon {
     visibility: visible;
 }
 
+img {
+    user-select: none;
+}
+
 button{
     user-select: none;
     cursor: pointer;

@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { slide } from "svelte/transition";
-	import { language, type Language } from "../stores";
+	import { dictionary, language, type Language } from "../stores";
 	import Base from "./base.svelte";
 
     export let style:string = '';
 
     let languageFlags = {
-        'español': 'spainFlag.jpg',
-        'english': 'usFlag.jpg',
-        'français': 'franceFlag.png',
-        'deutsch': 'germanyFlag.png',
-        'italiano': 'italyFlag.png',
-        'Русский': 'russiaFlag.png',
+        'español': 'spainFlag.webp',
+        'english': 'usFlag.webp',
+        'français': 'franceFlag.webp',
+        'deutsch': 'germanyFlag.webp',
+        'italiano': 'italyFlag.webp',
+        'Русский': 'russiaFlag.webp',
     }
 
     function changeLanguage(newLanguage: string) {
@@ -25,7 +25,7 @@
     let lastFocusableElement: HTMLButtonElement;
 </script>
 
-<button style="{style}" class="languageControl" on:click={() => {active = true}}>
+<button style="{style}" class="languageControl" on:click={() => {active = true}} aria-label={$dictionary.idioma}>
     <img src="/images/{languageFlags[$language]}" alt={$language}>
     <ion-icon name="caret-down-outline"></ion-icon>
 </button>

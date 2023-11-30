@@ -15,14 +15,30 @@ function isLanguage(value: any): value is Language {
     );
 }
 
+function mapNavigatorLanguage(navigatorLanguage: string): Language | undefined {
+    const languageMappings: Record<string, Language> = {
+        'fr': 'français',
+        'es': 'español',
+        'it': 'italiano',
+        'en': 'english',
+        'ru': 'Русский',
+        'de': 'deutsch',
+    };
+
+    const simplifiedLanguage = navigatorLanguage.split('-')[0].toLowerCase();
+    return languageMappings[simplifiedLanguage];
+}
+
+let navigatorLanguage;
 let storedLanguage;
 if (browser){
     if (isLanguage(localStorage.language)) {
         storedLanguage = localStorage.language  
     }
+    navigatorLanguage = mapNavigatorLanguage(navigator.language)
 }
 
-export const language:Writable<Language> = writable(storedLanguage || 'español');
+export const language:Writable<Language> = writable(storedLanguage || navigatorLanguage || 'español');
 
 if (browser){
     language.subscribe((value) => localStorage.language = value)

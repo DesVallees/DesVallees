@@ -47,7 +47,7 @@
 
     <div class="post" transition:slide|global={{duration: 200}}>
         <div class="avatar">
-            <Avatar image={$profile.profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;"/>
+            <Avatar personName={$profile.fullName} image={$profile.profilePicture} width="70%" style="aspect-ratio: 1 / 1; height: fit-content;"/>
         </div>
         
         <div class="content">
