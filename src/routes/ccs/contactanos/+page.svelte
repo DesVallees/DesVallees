@@ -6,6 +6,15 @@
     
 </script>
 
+<svelte:head>
+    <title>{$dictionary.contactanos}</title>
+    <noscript>
+        <title>CCS - Contáctanos</title>
+    </noscript>
+    
+    <meta name="description" content="">
+</svelte:head>
+
 <div in:fade|global>
 	{#key $language}
 		<Typewriter phrase="{$dictionary.paginaNoDisponible}..." style="font-size: 2rem; width: 80%;" typingSpeed={50}/>

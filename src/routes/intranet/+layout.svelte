@@ -1,24 +1,26 @@
 <script lang="ts">
     import './app.css'
-    import { Toaster } from 'svelte-french-toast';
-    import toast from 'svelte-french-toast';
+	import { isGeneratedAvatarUrl, isGeneratedBlobUrl, letterToAvatarUrl, sleep } from './functions';
     import { InteractionRequiredAuthError, PublicClientApplication } from "@azure/msal-browser";
 	import { dictionary, language, profile, username, showNotifications } from './stores';
-	import BackgroundCircle from './components/backgroundCircle.svelte';
+    import { Toaster } from 'svelte-french-toast';
 	import { fade } from 'svelte/transition';
-	import SetUp from './components/setUp.svelte';
-	import Threlte from './components/threlte.svelte';
-	import Typewriter from './components/typewriter.svelte';
-	import LogIn from './components/logIn.svelte';
-	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { isGeneratedAvatarUrl, isGeneratedBlobUrl, letterToAvatarUrl, sleep } from './functions';
+	import { onMount } from 'svelte';
+	import NotificationsButton from './components/notificationsButton.svelte';
+	import BackgroundCircle from './components/backgroundCircle.svelte';
 	import NotificationBar from './components/notificationBar.svelte';
 	import FeaturedEvents from './components/featuredEvents.svelte';
-	import NotificationsButton from './components/notificationsButton.svelte';
+	import Typewriter from './components/typewriter.svelte';
 	import PrimaryNav from './components/primaryNav.svelte';
 	import LandingNav from './components/landingNav.svelte';
+	import Preloader from './components/preloader.svelte';
+	import Threlte from './components/threlte.svelte';
 	import Header from './components/header.svelte';
+	import LogIn from './components/logIn.svelte';
+    import toast from 'svelte-french-toast';
+	import Logo from './components/logo.svelte';
 
     const now = new Date();
     const year = now.getFullYear();
@@ -166,20 +168,25 @@
 
 
     const introDuration:number = 1000;
-    let ready:boolean = false;
+    let ready: boolean = false;
 
     $: $page.url.pathname, goTop()
     let mainContent: HTMLElement;
     let goTop: (() => void) = () => {}
 
     onMount(() => {
-        ready = true
+        ready = true;
+        
         goTop = () => {
             if (document) {
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
                 mainContent.scrollTop = 0
             }
+        }
+
+        if (!$username) {
+            goto('/intranet')
         }
     });
 
@@ -225,13 +232,15 @@
             
                 <slot/>    
 
-                <footer>
+                <footer class="notLandingFooter">
                     {$dictionary.copyright} © {year} • {$dictionary.lawOfficeOfKatherineCanto}
                 </footer>
                 
             {:else if $username}
 
-                <SetUp />
+                <Preloader animation="dots" scale={.9}>
+                    <Logo />
+                </Preloader>
 
             {:else}
 
@@ -250,6 +259,8 @@
                                 typingSpeed={70}
                             />
                         </div>
+
+                        <p class="staticSubtitle">{$dictionary.slogan}</p>
             
                         <div class="landing landingButtons">
                             <LogIn delay={1000} duration={introDuration} msalConfig={data.msalConfig}/>
@@ -267,7 +278,7 @@
 
         {:else}
 
-            <SetUp />
+            <Preloader animation="dots" />
 
         {/if}
 
@@ -345,20 +356,24 @@
     }
 
     footer {
-        height: 200px;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 100px 10vw 0;
+        padding: 3rem 10vw;
         text-align: center;
+    }
+
+    .notLandingFooter{
+        padding-top: 8rem;
     }
 
     .landing {
         display: flex;
         flex-direction: column;
-        gap: 1em;
-        padding-bottom: 2em;
+        row-gap: 1rem;
+        gap: 1.5rem;
+        padding-bottom: 1.5em;
     }
 
     .landingDiv {
@@ -374,9 +389,16 @@
         min-height: 6rem; 
     }   
 
+    .staticSubtitle {
+        display: none;
+        font-size: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
     .landingButtons {
         flex-direction: row;
-        gap: 2em;
+        column-gap: 2.5rem;
+        row-gap: 1.25rem;
         flex-wrap: wrap;
     }
 
@@ -412,7 +434,7 @@
         }
 
         footer {
-            padding: 100px 50px 0;
+            padding: 5rem 3rem;
         }
 
         .landing {
@@ -422,12 +444,15 @@
         .landingContent {
             width: 100%;
         }
-        
-        h1 {
-            line-height: 60px;
-            font-size: 3.5rem;
-            margin-bottom: .2em;
+
+        .landingTypewriter {
+            padding-bottom: 0;
         }
+
+        h1 {
+            font-size: 3.8rem;
+        }
+
     }
 
     @media screen and (max-width:850px) {
@@ -438,6 +463,14 @@
         .notLandingPage.intranet {
             grid-template-columns: 1fr;
         }
+
+        .landingTypewriter {
+            display: none;
+        }
+
+        .staticSubtitle {
+            display: inline;
+        }
     }
 
     @media screen and (max-width: 500px) {
@@ -446,11 +479,20 @@
         }
 
         footer {
-            padding: 100px 3em 0;
+            height: unset;
+            padding: 3rem;
         }
 
         .landingTypewriter {
             min-height: 9rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+        }
+
+        .staticSubtitle {
+            font-size: 1.4rem;
         }
     }
 

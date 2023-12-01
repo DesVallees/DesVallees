@@ -1,20 +1,51 @@
 <script lang="ts">
+	import { scale } from "svelte/transition";
+
     type Animation = 'default' | 'circle' | 'spinner' | 'dots';
-    export let animation:Animation = 'default';
-    export let scale:number = 1;
+
+    export let style = "";
+    export let animation:Animation = "default";
 </script>
 
-{#if animation === 'default'}
-    <div class="default" style="transform: scale({scale})"><div></div><div></div><div></div><div></div></div>
+<div class="overlay" out:scale {style}>
+    
+    <slot/>
+    
+    {#if animation === 'default'}
+        <div class="default"><div></div><div></div><div></div><div></div></div>
+
     {:else if animation === 'spinner'}
-    <div class="spinner" style="transform: scale({scale})"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
     {:else if animation === 'circle'}
-    <div class="circle" style="transform: scale({scale})"><div></div></div>
+        <div class="circle"><div></div></div>
+
     {:else if animation === 'dots'}
-    <div class="dots" style="transform: scale({scale})"><div></div><div></div><div></div><div></div></div>
-{/if}
+        <div class="dots"><div></div><div></div><div></div><div></div></div>
+
+    {/if}
+    
+</div>
 
 <style>
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        z-index: 1000;
+        
+        background-color: var(--main);
+    }
+
     .default {
         display: inline-block;
         position: relative;
@@ -52,6 +83,7 @@
     }
     .dots {
         position: relative;
+        transform: translateX(-6px);
         width: calc(60/16*1em);
         height: calc(60/16*1em);
     }
@@ -207,4 +239,5 @@
             opacity: 0;
         }
     }
+    
 </style>

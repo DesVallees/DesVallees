@@ -34,7 +34,7 @@
         grid-template-columns: repeat(2, 1fr);
 
         min-height: 100%;
-        padding: 1rem 1.5rem;
+        padding: 1.5rem;
     }
 
     h1 {

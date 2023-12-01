@@ -41,7 +41,6 @@
     .home {
         display: flex;
         flex-direction: column;
-        padding-bottom: 0;
         width: 100%;
         align-items: center;
     }

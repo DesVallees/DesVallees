@@ -25,7 +25,7 @@
 
 <nav class="primaryNav">
     <a class="logo" href="/intranet" bind:this={firstFocusableElement}>
-        <Logo />
+        <Logo style="height: auto; width: 100%;" />
     </a>
     
     <section in:fade|global>

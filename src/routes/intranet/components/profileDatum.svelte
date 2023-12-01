@@ -48,5 +48,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis; 
+        line-height: 2.1rem;
+        color: var(--content);
     }
 </style>

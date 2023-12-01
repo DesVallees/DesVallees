@@ -1,6 +1,5 @@
 export const translator = {
     français: {
-        loading: `En train de compter en sens inverse à partir de l'infini...`,
         error: `Une erreur s'est produite.`,
         highScore: 'Meilleur Score',
         wpm: 'MPM',
@@ -56,7 +55,6 @@ export const translator = {
         toRestart: 'pour redémarrer'
     },
     español: {
-        loading: `Contando en sentido inverso desde el infinito...`,
         error: `Ha ocurrido un error.`,
         highScore: 'Mejor Puntuación',
         wpm: 'PPM',
@@ -112,7 +110,6 @@ export const translator = {
         toRestart: 'para reiniciar'
     },
     italiano: {
-        loading: `Contando al contrario dall'infinito...`,
         error: `Si è verificato un errore.`,
         highScore: 'Miglior Punteggio',
         wpm: 'PAM',
@@ -168,7 +165,6 @@ export const translator = {
         toRestart: 'per riavviare'
     },
     english: {
-        loading: `Counting backwards from Infinity...`,
         error: `An error occurred.`,
         highScore: 'High Score',
         wpm: 'WPM',
@@ -224,7 +220,6 @@ export const translator = {
         toRestart: 'to restart'
     },
     Русский: {
-        loading: `Обратный отсчёт от бесконечности...`,
         error: `Произошла ошибка.`,
         highScore: 'Лучший счет',
         wpm: 'Свм',

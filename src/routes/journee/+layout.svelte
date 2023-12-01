@@ -9,6 +9,7 @@
 	import Nav from './components/nav.svelte';
 	import Footer from './components/footer.svelte';
 	import BackgroundCircle from './components/backgroundCircle.svelte';
+	import Preloader from './components/preloader.svelte';
 
     let disappearAndAppear:boolean = false;
     
@@ -22,11 +23,14 @@
         disappearAndAppear = false
     }
 
+    let ready: boolean = false;
     $: $page.url.pathname, goTop()
     let mainContent: HTMLElement;
     let goTop: (() => void) = () => {}
 
     onMount(() => {
+        ready = true;
+        
         goTop = () => {
             if (document) {
                 document.body.scrollTop = 0;
@@ -55,6 +59,13 @@
 
     <main bind:this={mainContent}>
         <slot/>
+
+        {#if !ready}
+            <Preloader animation="dots">
+                <h1 style="font-size: 3rem;">Journée</h1>
+            </Preloader>
+
+        {/if}
     </main>
 
     <footer>

@@ -1,9 +1,17 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
-	import { dictionary, language } from "../stores";
+	import { dictionary } from "../stores";
 
-    
 </script>
+
+<svelte:head>
+    <title>{$dictionary.acercaDeNosotros}</title>
+    <noscript>
+        <title>CCS - Acerca De Nosotros</title>
+    </noscript>
+    
+    <meta name="description" content={$dictionary.resumenCCS}>
+</svelte:head>
 
 <div in:fade|global>
 	<figure class="quote">

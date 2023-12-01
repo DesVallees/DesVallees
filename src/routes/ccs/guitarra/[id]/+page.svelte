@@ -29,6 +29,15 @@
 
 </script>
 
+<svelte:head>
+    <title>{chosenGuitar?.name[$language] || guitarSpanishName}</title>
+    <noscript>
+        <title>CCS Guitarras</title>
+    </noscript>
+    
+    <meta name="description" content={chosenGuitar?.paragraph[$language]}>
+</svelte:head>
+
 <div class="main" in:fade|global>
 	{#if chosenGuitar}
 

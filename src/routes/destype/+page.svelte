@@ -9,7 +9,7 @@
 	import Timer from './components/timer.svelte';
 	import Words from './components/words.svelte';
 	import Seconds from './components/seconds.svelte';
-	import Loading from './components/loading.svelte';
+	import Preloader from './components/preloader.svelte';
 
 
     let div: HTMLDivElement;
@@ -89,7 +89,9 @@
 
 {#await initialPromise}
 
-    <Loading content={$dictionary.loading} />
+    <Preloader animation="dots">
+        <h1>🤓 DesType</h1>
+    </Preloader>
 
 {:then}
 
@@ -135,7 +137,7 @@
 
 {:catch}
 
-	<Loading content="{$dictionary.error} 😿"/>
+    <p>{$dictionary.error}</p>
 
 {/await}
 

@@ -235,6 +235,7 @@
         font-size: 1.1rem;
         font-weight: normal;
         padding: .5em 0;
+        line-height: 2.1rem;
         color: var(--content);
     }
 

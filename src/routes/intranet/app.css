@@ -94,8 +94,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .button {
-    padding: 10px 40px;
-    margin: 0 5px;
+    padding: .5em 1.5em;
     gap: 10px;
 
     background-color: var(--interativeDim);
@@ -103,7 +102,7 @@ textarea::-webkit-scrollbar-thumb {
 
     font-style: normal;
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: clamp(1.2rem, 4vw, 1.3rem);
 
     width: fit-content;
     height: fit-content;
@@ -114,8 +113,8 @@ textarea::-webkit-scrollbar-thumb {
 .button:hover,
 .button:focus-visible {
     background-color: var(--interative);
-    padding: 10px 45px;
-    margin: 0;
+    padding: .5em 1.8em;
+    margin: 0 -.3em;
 }
 
 .ghost {
@@ -134,7 +133,7 @@ textarea::-webkit-scrollbar-thumb {
 
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1.25rem;
     padding: 6px 0;
 
     width: fit-content;
@@ -201,14 +200,14 @@ a {
 h1 {
     font-style: normal;
     font-weight: 700;
-    font-size: 5.6rem;
-    line-height: 123px;
+    font-size: clamp(5rem, 6vw, 5.5rem);
     max-width: 70vw;
 }
 
 p{
     font-style: normal;
     font-weight: 700;
-    font-size: 1.75rem;
-    line-height: 35px;
+    font-size: clamp(1.6rem, 3vw, 1.75rem);
+
+    color: var(--contentDim);
 }

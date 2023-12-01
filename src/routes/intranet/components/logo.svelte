@@ -2,7 +2,7 @@
 	import { dictionary } from "../stores";
     import { onMount } from 'svelte'
 
-    export let scale:number = 1;
+    export let style:string = "";
 
     let src = "/images/intranet/logoCantoLegal.webp"
     
@@ -19,12 +19,18 @@
 </script>
 
 {#if loaded}
-    <img {src} alt="{$dictionary.logoCantoLegal}" style="transform: scale({scale})">
+    <img {src} alt="{$dictionary.logoCantoLegal}" height="70" {style}>
 {/if}
 
 <style>
     img {
         -webkit-user-drag: none;
         user-select: none;
+    }
+
+    @media (min-width: 600px) {
+        img {
+            height: 5rem;
+        }
     }
 </style>

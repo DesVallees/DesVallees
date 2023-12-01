@@ -75,7 +75,7 @@
             <Threlte.PointLight {...dynamicControls.pointLight} />
 
             <!-- Models -->
-            <Extra.GLTF url="models/{modelName}.glb" {...dynamicControls.object}/>
+            <Extra.GLTF url="/models/{modelName}.glb" {...dynamicControls.object}/>
         </Threlte.Canvas>
 
         <div class="floor"></div>

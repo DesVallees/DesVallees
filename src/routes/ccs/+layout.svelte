@@ -6,6 +6,7 @@
 	import { sleep } from './functions';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import Preloader from './components/preloader.svelte';
 
     let disappearAndAppear:boolean = false;
     
@@ -19,11 +20,14 @@
         disappearAndAppear = false
     }
 
+    let ready: boolean = false;
     $: $page.url.pathname, goTop()
     let mainContent: HTMLElement;
     let goTop: (() => void) = () => {}
 
     onMount(() => {
+        ready = true;
+        
         goTop = () => {
             if (document) {
                 document.body.scrollTop = 0;
@@ -35,24 +39,30 @@
 </script>
 
 <svelte:head>
-    <title>CCS</title>
     <meta name="author" content="Santiago Ovalles">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
     <link rel="icon" href="/images/ccs/CCSlogo.webp" />
 </svelte:head>
 
 <Toaster/>
 
+
 <div class:disappearAndAppear>
     <nav>
         <NavigationBar />
     </nav>
-
+    
     <main bind:this={mainContent}>
         <slot/>
+        
+        {#if !ready}
+            <Preloader animation="dots">
+                <h1 style="font-size: 3rem; line-height: normal;">CCS</h1>
+            </Preloader>
+
+        {/if}
     </main>
 </div>
+
 
 <style>
 

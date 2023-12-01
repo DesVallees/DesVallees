@@ -120,5 +120,6 @@
     p {
         font-size: 1.1rem;
         line-height: normal;
+        color: var(--content);
     }
 </style>

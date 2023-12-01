@@ -18,6 +18,7 @@ export const translator = {
             'our ethics policy.'
         ],
         goToOurWebsite: 'Go to our website',
+        slogan: 'Connecting minds, empowering excellence.',
         unitedStatesFlag: 'united states flag',
         spanishFlag: 'spanish flag',
         multipleAccountsDetected: 'Multiple accounts detected.',
@@ -149,6 +150,7 @@ export const translator = {
             'nuestra política de ética.'
         ],
         goToOurWebsite: 'Visita nuestro sitio web',
+        slogan: 'Conectando mentes, promoviendo excelencia.',
         unitedStatesFlag: 'bandera de los Estados Unidos',
         spanishFlag: 'bandera de España',
         multipleAccountsDetected: 'Se han detectado varias cuentas.',

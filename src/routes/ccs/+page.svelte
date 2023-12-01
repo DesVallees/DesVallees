@@ -58,6 +58,15 @@
 
 </script>
 
+<svelte:head>
+    <title>CCS - {$dictionary.inicio}</title>
+    <noscript>
+        <title>CCS</title>
+    </noscript>
+    
+    <meta name="description" content="{$dictionary.acercaDeNosotros}">
+</svelte:head>
+
 <svelte:window on:resize={() => isMobileDevice = window.innerWidth <= window.innerHeight}/>
 
 <!-- out:fly={{x: (lastMove ? (lastMove === 'next' ? '-2000' : '2000') : '0'), duration: 700}} -->
