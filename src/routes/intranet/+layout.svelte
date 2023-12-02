@@ -1,7 +1,7 @@
 <script lang="ts">
     import './app.css'
 	import { isGeneratedAvatarUrl, isGeneratedBlobUrl, letterToAvatarUrl, sleep } from './functions';
-    import { InteractionRequiredAuthError, PublicClientApplication } from "@azure/msal-browser";
+    import { PublicClientApplication } from "@azure/msal-browser";
 	import { dictionary, language, profile, username, showNotifications } from './stores';
     import { Toaster } from 'svelte-french-toast';
 	import { fade } from 'svelte/transition';
@@ -79,10 +79,6 @@
     async function getAuthToken() {
         const authtoken = myMSALObj.acquireTokenSilent(tokenRequest)
             .catch(error => {
-                if (error instanceof InteractionRequiredAuthError) {
-                    return myMSALObj.acquireTokenRedirect(tokenRequest)
-                }
-
                 toast.error(`${$dictionary.errorPreviousCredentials} (${$username})`);
                 $username = '';
                 throw new Error(error);
