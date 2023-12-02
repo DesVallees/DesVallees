@@ -16,6 +16,10 @@
 
 </script>
 
+<svelte:head>
+    <title>{profile?.fullName || $dictionary.profile}</title>
+</svelte:head>
+
 <div class="profile">
     {#if profile}
 

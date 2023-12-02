@@ -2,10 +2,14 @@
 	import LogOut from "../components/logOut.svelte";
 	import Profile from "../components/profile.svelte";
 	import Separator from "../components/separator.svelte";
-	import { profile } from "../stores";
+	import { dictionary, profile } from "../stores";
 
 	export let data;
 </script>
+
+<svelte:head>
+    <title>{$profile.fullName || $dictionary.profile }</title>
+</svelte:head>
 
 <div class="profile">
     <Profile profile={$profile}/>

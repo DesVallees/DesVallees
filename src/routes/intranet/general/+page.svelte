@@ -8,6 +8,10 @@
 
 </script>
 
+<svelte:head>
+    <title>{$dictionary.generalInformation}</title>
+</svelte:head>
+
 
 <div class="general" in:fade|global>
 

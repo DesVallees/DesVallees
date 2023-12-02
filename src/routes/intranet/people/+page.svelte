@@ -33,6 +33,10 @@
 
 </script>
 
+<svelte:head>
+    <title>{$dictionary.people}</title>
+</svelte:head>
+
 
 <div class="people" in:fade|global>
 

@@ -3,12 +3,17 @@
 	import Article from "../../components/article.svelte";
 	import { dictionary, language } from "../../stores";
 	import { page } from "$app/stores";
+	import { capitalizeWords } from "../../functions";
 
     let article = ($dictionary.articles as any)[$page.params.article]
 
     $: $language, article = ($dictionary.articles as any)[$page.params.article]
 
 </script>
+
+<svelte:head>
+    <title>{capitalizeWords(article.title)}</title>
+</svelte:head>
 
 
 {#key $page.params.article}

@@ -2,6 +2,14 @@ import { derived, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 
+export const chosenGuitarIndex:Writable<number> = writable(0);
+
+
+
+
+
+// Language Management
+
 export type Language = 'français' | 'español' | 'italiano' | 'english' | 'Русский' | 'deutsch'
 
 function isLanguage(value: any): value is Language {
@@ -29,21 +37,42 @@ function mapNavigatorLanguage(navigatorLanguage: string): Language | undefined {
     return languageMappings[simplifiedLanguage];
 }
 
+function setCookie(name: string, value: string, days: number) {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + days);
+
+    const cookieValue = encodeURIComponent(value) + "; expires=" + expirationDate.toUTCString() + "; path=/; SameSite=Lax";
+    document.cookie = name + "=" + cookieValue;
+}
+
+function getCookie(name: string): string | null {
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (const cookie of cookieArray) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName.trim() === name) {
+            return cookieValue;
+        }
+    }
+
+    return null;
+}
+
 let navigatorLanguage;
 let storedLanguage;
-if (browser){
-    if (isLanguage(localStorage.language)) {
-        storedLanguage = localStorage.language  
+if (browser) {
+    let languageCookie = getCookie('lang')
+    if (isLanguage(languageCookie)) {
+        storedLanguage = languageCookie;
     }
     navigatorLanguage = mapNavigatorLanguage(navigator.language)
 }
 
-export const language:Writable<Language> = writable(storedLanguage || navigatorLanguage || 'español');
+export const language: Writable<Language> = writable(storedLanguage || navigatorLanguage || 'english');
 
-if (browser){
-    language.subscribe((value) => localStorage.language = value)
+if (browser) {
+    language.subscribe((value) => setCookie('lang', value, 1000))
 }
 
 export const dictionary = derived(language, (language) => translator[language]);
-
-export const chosenGuitarIndex:Writable<number> = writable(0);

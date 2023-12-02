@@ -25,6 +25,7 @@
         on:keydown={(event) => event.key === 'Enter' ? clickToBlur.click() : ''}
         bind:value
         min=1
+        in:scale
     >
 </div>
 

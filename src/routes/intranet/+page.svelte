@@ -18,6 +18,10 @@
 
 <NewPost />
                     
+<svelte:head>
+    <title>{$dictionary.home}</title>
+</svelte:head>
+
 <div class="home" in:fade|global>
 
     {#if posts.length > 0}

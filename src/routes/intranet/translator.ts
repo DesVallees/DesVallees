@@ -233,7 +233,7 @@ export const translator = {
         showMore: 'Mostrar más',
         showLess: 'Mostrar menos',
         unableToLoad: 'Error cargando imagen',
-        repliesTo: `Comentarios de:`,
+        repliesTo: `Respuestas a:`,
         thisPostDoesNotHaveAnyReplies: 'Este post no tiene comentarios.',
         by: 'Por',
         generalTitle: 'Artículos',

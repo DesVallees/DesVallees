@@ -3,7 +3,7 @@
 	import NewPost from "../../components/newPost.svelte";
 	import { page } from "$app/stores";
 	import type { PageData } from "./$types";
-	import { dictionary, type Profile } from "../../stores";
+	import { dictionary, language, type Profile } from "../../stores";
 	import Post from "../../components/post.svelte";
 	import Separator from "../../components/separator.svelte";
 
@@ -19,17 +19,23 @@
 
 </script>
 
+<svelte:head>
+    {#key $language}
+    {#key $page.params.id}
+        {#if originalPost}
+            <title>{$dictionary.repliesTo} {findProfile(originalPost?.profileId)?.fullName}</title>
+        {/if}
+    {/key}
+    {/key}
+</svelte:head>
+
 {#key $page.params.id}
 
 {#if originalPost}
+
     <NewPost active={false} parentCommentPoster={findProfile(originalPost.profileId)?.fullName} parentCommentId={originalPost.id} parentCommentVisibility={originalPost.visibility}/>
-{/if}
                 
-<div class="replies" in:fade>
-
-
-    {#if originalPost}
-
+    <div class="replies" in:fade>
 
         <h2>{$dictionary.repliesTo}</h2>
 
@@ -50,16 +56,14 @@
             <h3>{$dictionary.thisPostDoesNotHaveAnyReplies}</h3>
 
         {/if}
+        
+    </div>   
 
+{:else}
 
-    {:else}
+    <p>{$dictionary.error}</p>
 
-        <p>{$dictionary.error}</p>
-
-    {/if}
-
-    
-</div>   
+{/if}
 
 {/key}
 
