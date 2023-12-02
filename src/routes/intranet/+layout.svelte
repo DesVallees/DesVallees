@@ -79,6 +79,10 @@
     async function getAuthToken() {
         const authtoken = myMSALObj.acquireTokenSilent(tokenRequest)
             .catch(error => {
+                if (error instanceof InteractionRequiredAuthError) {
+                    return myMSALObj.acquireTokenRedirect(tokenRequest)
+                }
+
                 toast.error(`${$dictionary.errorPreviousCredentials} (${$username})`);
                 $username = '';
                 throw new Error(error);
@@ -181,9 +185,6 @@
             }
         }
 
-        if (!$username) {
-            goto('/intranet')
-        }
     });
 
 </script>
