@@ -35,13 +35,13 @@
         text-decoration: none;
     
         transition: .2s all;
-        border: 1px solid var(--interactive);
-        background-color: var(--interactive-7);
+        border: 1px solid var(--int);
+        background-color: var(--int-7);
         color: inherit;
     }
 
     a:hover,
     a:focus-visible {
-        background-color: var(--interactive);
+        background-color: var(--int);
     }
 </style>

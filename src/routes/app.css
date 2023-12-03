@@ -8,42 +8,42 @@
 }
 
 *:focus-visible:not(input):not(textarea) {
-    outline: solid .25rem var(--content);
+    outline: solid .25rem var(--cn);
     outline-offset: .35rem;
     border-radius: 5px;
 }
 
 :root {
-    --main: rgb(24, 26, 32);
-    --main-9: rgba(24, 26, 32, .9);
-    --main-8: rgba(24, 26, 32, .8);
-    --main-7: rgba(24, 26, 32, .7);
-    --main-6: rgba(24, 26, 32, .6);
-    --main-5: rgba(24, 26, 32, .5);
-    --main-4: rgba(24, 26, 32, .4);
-    --main-3: rgba(24, 26, 32, .3);
-    --main-2: rgba(24, 26, 32, .2);
-    --main-1: rgba(24, 26, 32, .1);
-    --content: rgb(245, 245, 255);
-    --content-9: rgba(245, 245, 255, .9);
-    --content-8: rgba(245, 245, 255, .8);
-    --content-7: rgba(245, 245, 255, .7);
-    --content-6: rgba(245, 245, 255, .6);
-    --content-5: rgba(245, 245, 255, .5);
-    --content-4: rgba(245, 245, 255, .4);
-    --content-3: rgba(245, 245, 255, .3);
-    --content-2: rgba(245, 245, 255, .2);
-    --content-1: rgba(245, 245, 255, .1);
-    --interactive: rgb(65, 10, 216);
-    --interactive-9: rgba(65, 10, 216, .9);
-    --interactive-8: rgba(65, 10, 216, .8);
-    --interactive-7: rgba(65, 10, 216, .7);
-    --interactive-6: rgba(65, 10, 216, .6);
-    --interactive-5: rgba(65, 10, 216, .5);
-    --interactive-4: rgba(65, 10, 216, .4);
-    --interactive-3: rgba(65, 10, 216, .3);
-    --interactive-2: rgba(65, 10, 216, .2);
-    --interactive-1: rgba(65, 10, 216, .1);
+    --bg: rgb(24, 26, 32);
+    --bg-9: rgba(24, 26, 32, .9);
+    --bg-8: rgba(24, 26, 32, .8);
+    --bg-7: rgba(24, 26, 32, .7);
+    --bg-6: rgba(24, 26, 32, .6);
+    --bg-5: rgba(24, 26, 32, .5);
+    --bg-4: rgba(24, 26, 32, .4);
+    --bg-3: rgba(24, 26, 32, .3);
+    --bg-2: rgba(24, 26, 32, .2);
+    --bg-1: rgba(24, 26, 32, .1);
+    --cn: rgb(245, 245, 255);
+    --cn-9: rgba(245, 245, 255, .9);
+    --cn-8: rgba(245, 245, 255, .8);
+    --cn-7: rgba(245, 245, 255, .7);
+    --cn-6: rgba(245, 245, 255, .6);
+    --cn-5: rgba(245, 245, 255, .5);
+    --cn-4: rgba(245, 245, 255, .4);
+    --cn-3: rgba(245, 245, 255, .3);
+    --cn-2: rgba(245, 245, 255, .2);
+    --cn-1: rgba(245, 245, 255, .1);
+    --int: rgb(65, 10, 216);
+    --int-9: rgba(65, 10, 216, .9);
+    --int-8: rgba(65, 10, 216, .8);
+    --int-7: rgba(65, 10, 216, .7);
+    --int-6: rgba(65, 10, 216, .6);
+    --int-5: rgba(65, 10, 216, .5);
+    --int-4: rgba(65, 10, 216, .4);
+    --int-3: rgba(65, 10, 216, .3);
+    --int-2: rgba(65, 10, 216, .2);
+    --int-1: rgba(65, 10, 216, .1);
 }
 
 html,
@@ -54,7 +54,7 @@ body,
 }
 
 body {
-    color: var(--content);
-    background: var(--main);
+    color: var(--cn);
+    background: var(--bg);
     position: relative;
 }

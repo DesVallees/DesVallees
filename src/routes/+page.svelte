@@ -74,11 +74,11 @@
 
     a:hover,
     a:focus-visible {
-        background-color: var(--content-1);
+        background-color: var(--cn-1);
     }
 
     a[aria-disabled="true"] {
-        color: var(--content-6);
+        color: var(--cn-6);
         text-decoration: line-through;
         background-color: transparent !important;
         cursor: default;
