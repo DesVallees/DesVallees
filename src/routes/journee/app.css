@@ -51,6 +51,11 @@
     color: var(--content);
 }
 
+::placeholder {
+    color: var(--content-7);
+    opacity: 1;
+}
+
 html,
 body,
 #app {
@@ -114,7 +119,7 @@ textarea::-webkit-scrollbar-thumb {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: .315em;
+    gap: 1ch;
 
     width: fit-content;
     height: fit-content;
@@ -123,7 +128,7 @@ textarea::-webkit-scrollbar-thumb {
     border-radius: 10px;
 
     font-weight: 700;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 
     transition: .2s all;
 }
@@ -164,7 +169,8 @@ textarea::-webkit-scrollbar-thumb {
 .link {
     position: relative;
 
-    padding: .4em 0;
+    padding: .3em 0;
+    translate: 0 .3em;
 }
 
 .link::before {

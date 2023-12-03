@@ -35,6 +35,15 @@
     --content-2: rgba(245, 245, 255, .2);
     --content-1: rgba(245, 245, 255, .1);
     --interactive: rgb(65, 10, 216);
+    --interactive-9: rgba(65, 10, 216, .9);
+    --interactive-8: rgba(65, 10, 216, .8);
+    --interactive-7: rgba(65, 10, 216, .7);
+    --interactive-6: rgba(65, 10, 216, .6);
+    --interactive-5: rgba(65, 10, 216, .5);
+    --interactive-4: rgba(65, 10, 216, .4);
+    --interactive-3: rgba(65, 10, 216, .3);
+    --interactive-2: rgba(65, 10, 216, .2);
+    --interactive-1: rgba(65, 10, 216, .1);
 }
 
 html,

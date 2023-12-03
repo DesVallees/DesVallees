@@ -21,7 +21,7 @@
         column-gap: .8ch;
         
         width: 100%;
-        padding: 3rem 2rem;
+        padding: 4rem 2rem 3rem;
     }
 
     span {
@@ -30,13 +30,13 @@
         text-wrap: balance;
     }
 
-    @media screen and (min-width: 650px) {
+    @media screen and (min-width: 800px) {
         div {
             padding: 3rem 5rem;
         }
 
         span {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
     }
 </style>

@@ -14,7 +14,7 @@
         <h1>Journée</h1>
         <h2>{$dictionary.slogan}</h2>
 
-        <a href="/journee/logIn" class="button">{$dictionary.logIn}</a>
+        <a href="/journee/log-in" class="button">{$dictionary.logIn}</a>
     </section>
 
     <div class="imgWrapper">
