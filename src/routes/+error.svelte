@@ -20,13 +20,9 @@
         border-radius: 5px;
     }
 
-    :global(body){
+    :global(html){
         color: rgb(245, 245, 255);
         background: rgb(24, 26, 32);
-        
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
     }
     
     div {
