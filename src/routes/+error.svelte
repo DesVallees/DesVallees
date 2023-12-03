@@ -1,7 +1,3 @@
-<script lang="ts">
-    import './app.css'
-</script>
-
 <div>
     <h1>404</h1>
     <h2>Page Not Found</h2>
@@ -9,6 +5,30 @@
 </div>
 
 <style>
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    *:focus-visible {
+        outline: solid .25rem var(--content);
+        outline-offset: .35rem;
+        border-radius: 5px;
+    }
+
+    :global(body){
+        color: rgb(245, 245, 255);
+        background: rgb(24, 26, 32);
+        
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
     div {
         display: grid;
         justify-items: center;
@@ -35,13 +55,13 @@
         text-decoration: none;
     
         transition: .2s all;
-        border: 1px solid var(--int);
-        background-color: var(--int-7);
+        border: 1px solid rgb(65, 10, 216);
+        background-color: rgba(65, 10, 216, 0.7);
         color: inherit;
     }
 
     a:hover,
     a:focus-visible {
-        background-color: var(--int);
+        background-color: rgb(65, 10, 216);
     }
 </style>
