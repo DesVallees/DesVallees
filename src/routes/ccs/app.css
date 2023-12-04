@@ -46,6 +46,23 @@ body {
     color: var(--content);
     background: var(--main);
     position: relative;
+
+    background-image: url('/images/ccs/serp.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -5;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(28, 25, 25, 0.97);
+    z-index: -5;
 }
 
 ion-icon {

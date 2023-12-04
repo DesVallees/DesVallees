@@ -106,9 +106,7 @@
                 
             {:else}
 
-                {#key $game}
-                    <Timer content={($game === 'in progress') ? $seconds : 'Paused'}/>
-                {/key}
+                <Timer {correctLetters}/>
 
             {/if}
 

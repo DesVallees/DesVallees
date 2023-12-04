@@ -222,6 +222,8 @@
         else if (wordIndex > 0){
             // Return to previous word scenario
             wordIndex--
+            totalLetters--
+            correctLetters--
             letterIndex = words[wordIndex].length - 1
             setLetter()
             while (!letterEL.dataset.letter) {
@@ -241,10 +243,12 @@
 
 	function nextWord() {
         const isFirstLetter = letterIndex === 0
-        const isOneLetterWord = words[wordIndex].length === 1
 
-        if (!isFirstLetter || isOneLetterWord) {
+        if (!isFirstLetter) {
+            totalLetters++
+            correctLetters++
             wordIndex++
+
             letterIndex = 0
             setLetter()
             moveCaret()

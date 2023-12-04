@@ -18,7 +18,7 @@
         if ($wordsPerMinute === $bestWPM) {
             const randomIndex = Math.floor(Math.random() * $dictionary.bestScore.length)
             message = $dictionary.bestScore[randomIndex]
-        } else if ($wordsPerMinute > ($bestWPM / 2)) {
+        } else if ($wordsPerMinute > ($bestWPM - 20)) {
             const randomIndex = Math.floor(Math.random() * $dictionary.goodScore.length)
             message = $dictionary.goodScore[randomIndex]
         }else{

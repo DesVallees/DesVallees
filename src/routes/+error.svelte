@@ -20,19 +20,24 @@
         border-radius: 5px;
     }
 
-    :global(html){
-        color: rgb(245, 245, 255);
-        background: rgb(24, 26, 32);
+    :global(body){
+        margin: 0;
+        padding: 0;
     }
     
     div {
         display: grid;
         justify-items: center;
-
-        margin-top: 5rem;
+        align-content: start;
+        min-height: 100vh;
+        min-height: 100dvh;
+        
+        color: rgb(245, 245, 255);
+        background: rgb(24, 26, 32);
     }
 
     h1 {
+        margin-top: 5rem;
         font-size: 5rem;
     }
 

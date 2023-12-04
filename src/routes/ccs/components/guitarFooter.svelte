@@ -7,6 +7,7 @@
     export let edition : string
     export let description : string
     export let price : string
+    export let oldPrice : string | undefined = undefined
 
     let link = transformString(linkName)
 
@@ -28,7 +29,8 @@
     <h4>{edition}</h4>
     <p>{description}</p>
 
-    <h3>{price}</h3>
+    <span class="oldPrice">{oldPrice}</span>
+    <h5>{price}</h5>
     <div class="interactives">
         <a href="ccs/guitarra/{link}" class="button">
             <ion-icon name="information-circle-outline"></ion-icon> 
@@ -60,7 +62,13 @@
         margin-bottom: 2em;
     }
 
-    h3 {
+    .oldPrice {
+        font-size: 1rem;
+        text-decoration: line-through;
+        color: var(--interactive);
+    }
+    
+    h5 {
         font-weight: 100;
         font-size: 1.4rem;
     }
@@ -86,7 +94,7 @@
             margin-bottom: 1.5em;
         }
         
-        h3 {
+        h5 {
             font-size: 1.2rem;
         }
 
@@ -99,7 +107,7 @@
     }
 
     @media (orientation: portrait) {
-        h4 {
+        h4, h5, .oldPrice, .share, a ion-icon {
             display: none;
         }
         
@@ -112,10 +120,6 @@
             margin-bottom: 0;
         }
 
-        h3 {
-            display: none;
-        }
-
         .interactives {
             margin-top: 1em;
             justify-content: center;
@@ -125,14 +129,6 @@
             margin-top: .5em;
             font-size: clamp(1.1rem, 4.1vw, 1.3rem);
             padding: .4rem 1rem;
-        }
-
-        a ion-icon {
-            display: none;
-        }
-
-        .share {
-            display: none;
         }
     }
 

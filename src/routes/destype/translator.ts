@@ -52,7 +52,8 @@ export const translator = {
         ],
         hold: 'Maintenez',
         enter: 'Entrée',
-        toRestart: 'pour redémarrer'
+        toRestart: 'pour redémarrer',
+        pause: 'Pause',
     },
     español: {
         error: `Ha ocurrido un error.`,
@@ -107,7 +108,8 @@ export const translator = {
         ],
         hold: 'Mantén',
         enter: 'Enter',
-        toRestart: 'para reiniciar'
+        toRestart: 'para reiniciar',
+        pause: 'Pausa',
     },
     italiano: {
         error: `Si è verificato un errore.`,
@@ -162,7 +164,8 @@ export const translator = {
         ],
         hold: 'Tieni',
         enter: 'Invio',
-        toRestart: 'per riavviare'
+        toRestart: 'per riavviare',
+        pause: 'Pausa',
     },
     english: {
         error: `An error occurred.`,
@@ -217,7 +220,8 @@ export const translator = {
         ],
         hold: 'Hold',
         enter: 'Enter',
-        toRestart: 'to restart'
+        toRestart: 'to restart',
+        pause: 'Pause',
     },
     Русский: {
         error: `Произошла ошибка.`,
@@ -272,6 +276,7 @@ export const translator = {
         ],
         hold: 'Удерживайте',
         enter: 'Enter',
-        toRestart: 'для перезапуска'
+        toRestart: 'для перезапуска',
+        pause: 'Пауза',
     },
 }
