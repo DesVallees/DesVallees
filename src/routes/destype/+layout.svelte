@@ -9,8 +9,8 @@
 <svelte:head>
     <title>DesType</title>
     <meta name="author" content="Santiago Ovalles">
-    <meta name="description" content="A game to improve your typing skills in five different languages.">
-    <meta name="keywords" content="Typing, Speed, Destype">
+    <meta name="description" content="DesType is a free game / typing test to improve your typing skills in five different languages.">
+    <meta name="keywords" content="Typing, Speed, Destype, Typing Test">
     <link rel="icon" href="https://fav.farm/🤓" />
 </svelte:head>
 

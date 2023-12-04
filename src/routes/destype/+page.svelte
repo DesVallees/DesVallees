@@ -24,14 +24,14 @@
     function restartCounter() {
         $seconds = $initialSeconds
         $game = 'waiting for input'
+        correctLetters = 0
+        totalLetters = 0
     }
 
     function resetGame() {
         restartCounter()
         words = []
         toggleReset = !toggleReset
-        correctLetters = 0
-        totalLetters = 0
         getWords(100)
     }
 
@@ -56,35 +56,35 @@
     });
 
 
-    let spaceDown:number | undefined = 0;
+    let enterDown:number | undefined = 0;
     let timeHeld:number;
 
-	function setSpaceTimer(event: KeyboardEvent): void {
+	function setEnterTimer(event: KeyboardEvent): void {
         if (event.code === 'Enter') {
-            if (spaceDown === 0) {
-                spaceDown = Date.now();
+            if (enterDown === 0) {
+                enterDown = Date.now();
             } 
-            else if (spaceDown) {
-                timeHeld = Date.now() - spaceDown;
+            else if (enterDown) {
+                timeHeld = Date.now() - enterDown;
                 
                 if (timeHeld > 500) {
                     resetGame()
-                    spaceDown = undefined
+                    enterDown = undefined
                 }
             }
         }
 	}
     
-	function resetSpaceTimer(event: KeyboardEvent): void {
+	function resetEnterTimer(event: KeyboardEvent): void {
         if (event.code === 'Enter') {
-            spaceDown = 0
+            enterDown = 0
         }
 	}
 
 </script>
 
 
-<svelte:window on:keydown={setSpaceTimer} on:keyup={resetSpaceTimer} />
+<svelte:window on:keydown={setEnterTimer} on:keyup={resetEnterTimer} />
 
 
 {#await initialPromise}

@@ -3,8 +3,7 @@
 	import { scale } from "svelte/transition";
 
     let value:number = $initialSeconds;
-    let clickToBlur:HTMLParagraphElement;
-    // $: value, setTimer()  <-- Great way to keep constant watch of a variable and executing a function whenever it changes
+    let clickToBlur:HTMLDivElement;
 
 	function setTimer() {
         value > 0 ? value = Math.ceil(value) : value = $initialSeconds
@@ -16,16 +15,19 @@
 </script>
 
 <div>
+    <div style="display: none;" bind:this={clickToBlur}></div>
+    
     {#key $dictionary}
-        <p bind:this={clickToBlur} in:scale|global>{$dictionary.seconds}: </p>
+        <label for="seconds" in:scale|global>{$dictionary.seconds}: </label>
     {/key}
 
     <input type="number" 
         on:blur={setTimer}
         on:keydown={(event) => event.key === 'Enter' ? clickToBlur.click() : ''}
         bind:value
-        min=1
         in:scale
+        min=1
+        id="seconds"
     >
 </div>
 

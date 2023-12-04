@@ -14,6 +14,7 @@
     let wordIndex = 0
     let letterIndex = 0
     let caretAnimation: string = 'infinite';
+    let wordHasACorrectLetter: boolean = false;
 
     let timerTick: ReturnType<typeof setInterval>;
 
@@ -167,6 +168,7 @@
     function acceptLetter() {
         letterEL.dataset.letter = 'correct'
         correctLetters++
+        wordHasACorrectLetter = true
         nextLetter()
         resetLetter()
         moveCaret()
@@ -222,21 +224,33 @@
         else if (wordIndex > 0){
             // Return to previous word scenario
             wordIndex--
-            totalLetters--
-            correctLetters--
-            letterIndex = words[wordIndex].length - 1
-            setLetter()
-            while (!letterEL.dataset.letter) {
-                letterIndex--
+            wordHasACorrectLetter = false
+            
+            letterIndex = 0
+
+            while (letterIndex <= words[wordIndex].length - 1) {
                 setLetter()
+
+                if (letterEL.dataset.letter) {
+                    letterIndex++
+
+                    if (letterEL.dataset.letter === 'correct')
+                        wordHasACorrectLetter = true;
+                } else { break }
             }
+
+            if (wordHasACorrectLetter) {
+                totalLetters--
+                correctLetters--
+            }
+
             moveCaret()
-            letterIndex++
             updateLine()
         }
 
-        if (totalLetters === 0 && $game === 'in progress') {
-            clearInterval(timerTick)
+        if (letterIndex === 0 && wordIndex === 0 && $game === 'in progress') {
+            wordHasACorrectLetter = false;
+            clearInterval(timerTick);
             dispatch('wentBack');
         }
     }
@@ -245,8 +259,11 @@
         const isFirstLetter = letterIndex === 0
 
         if (!isFirstLetter) {
-            totalLetters++
-            correctLetters++
+            if (wordHasACorrectLetter) {
+                totalLetters++
+                correctLetters++
+                wordHasACorrectLetter = false;
+            }
             wordIndex++
 
             letterIndex = 0

@@ -141,7 +141,7 @@
         height: clamp(90px, 12vw, 170px);
         margin: max(2em, calc(5em - 3vw)) 0;
         
-        background: linear-gradient(90deg, rgba( 75,  50,  43, 0.7), rgba(58, 38, 33, 0.7), rgba( 28,  20,  19, 0.7), var(--main));
+        background: linear-gradient(90deg, rgba( 75,  50,  43, 0.7), rgba(58, 38, 33, 0.7), rgba( 28,  20,  19, 0.7), var(--mainDimer));
     }
     
     .centralLineContent {
