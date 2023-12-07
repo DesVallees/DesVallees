@@ -52,14 +52,14 @@
 
 
     function handleKeyDown(event: KeyboardEvent) {
-        if ($game === 'waiting for input' && totalLetters !== 0 && (event.key === 'Backspace' || event.code === 'Space')) {
+        if ($game === 'waiting for input' && totalLetters !== 0 && (event.key === 'Backspace' || event.key === ' ')) {
             startGame()
         }
         
-        if (event.code === 'Space' && $game === 'in progress') {
+        if (event.key === ' ' && $game === 'in progress') {
             nextWord()
         }
-        else if (event.code === 'Backspace' && $game === 'in progress') {
+        else if (event.key === 'Backspace' && $game === 'in progress') {
             backspace()
         }
     }
