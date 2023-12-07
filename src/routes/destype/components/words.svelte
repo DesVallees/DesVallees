@@ -10,7 +10,9 @@
     export let correctLetters: number;
     export let totalLetters: number;
 
+    let inputValue:string = '‎'
     let typedLetter = ''
+
     let wordIndex = 0
     let letterIndex = 0
     let caretAnimation: string = 'infinite';
@@ -51,38 +53,54 @@
 
 
 
-    function handleKeyDown(event: KeyboardEvent) {
-        if ($game === 'waiting for input' && totalLetters !== 0 && event.key === 'Backspace') {
-            startGame()
-        }
-        
-        else if (event.key === 'Backspace' && $game === 'in progress') {
-            event.preventDefault()
-            backspace()
-        }
-    }
+    function handleInput() {
+        getTypedLetter();
 
-    function updateGameState() {
-        if ($game === 'waiting for input' && !(typedLetter === ' ' && totalLetters === 0)) {
-            startGame()
-        }
+        const isSpace:boolean = typedLetter === ' ';
+        const isBackspace:boolean = inputValue === '';
+        const isSpaceOrBackspaceAtStart:boolean = (isSpace || isBackspace) && totalLetters === 0;
         
-        const isWordCompleted = letterIndex > words[wordIndex].length - 1
-        
-        if (!isWordCompleted && typedLetter !== ' ' && $game === 'in progress') {
-            setLetter()
-            checkLetter()
-            nextLetter()
-        }else if (typedLetter === ' ' && $game === 'in progress') {
-            nextWord()
+        if ($game === 'waiting for input' && !isSpaceOrBackspaceAtStart) {
+            startGame();
+        } 
+
+        if ($game === 'in progress') {
+
+            const isWordCompleted:boolean = letterIndex > words[wordIndex].length - 1;
+            
+            if (!isWordCompleted && !isSpace && !isBackspace) {
+                setLetter()
+                checkLetter()
+                nextLetter()
+            } else if (isSpace) {
+                nextWord()
+            } else if (isBackspace) {
+                backspace()
+            }
+
         }
 
-        resetInputValue()
         moveCaret()
+        resetInputValue()
     }
 
 
  
+    function getTypedLetter() {
+        if (inputValue.length > 1) {
+            typedLetter = inputValue.substring(1);
+        } else if (inputValue === ' ') {
+            typedLetter = inputValue;
+        }
+    }
+
+    function resetInputValue() {
+        inputValue = '‎';
+        typedLetter = '';
+	}
+
+
+    
     function setLetter() {
         letterEL = wordsEl.children[wordIndex].children[letterIndex] as HTMLSpanElement
 	}
@@ -138,25 +156,6 @@
         letterEL.dataset.letter = 'incorrect'
 	}
 
-	function nextLetter() {
-        letterIndex++
-        totalLetters++
-	}
-
-    function moveCaret() {  
-        if ($game !== 'game over' && letterEL) {
-            const offset = 4
-            const {offsetLeft, offsetTop, offsetWidth} = letterEL
-    
-            caretEL.style.top = `${offsetTop + offset}px`
-            caretEL.style.left = `${offsetLeft + ((letterEL.dataset.letter) ? offsetWidth : 0)}px`
-        }
-    }
-
-    function resetInputValue() {
-        typedLetter = ''
-	}
-
     function acceptLetter() {
         letterEL.dataset.letter = 'correct'
         correctLetters++
@@ -182,6 +181,21 @@
 
         }else{
             return typedLetter.toLowerCase() === currentLetter.toLowerCase()
+        }
+    }
+
+	function nextLetter() {
+        letterIndex++
+        totalLetters++
+	}
+
+    function moveCaret() {  
+        if ($game !== 'game over' && letterEL) {
+            const offset = 4
+            const {offsetLeft, offsetTop, offsetWidth} = letterEL
+    
+            caretEL.style.top = `${offsetTop + offset}px`
+            caretEL.style.left = `${offsetLeft + ((letterEL.dataset.letter) ? offsetWidth : 0)}px`
         }
     }
 
@@ -285,6 +299,7 @@
     })
 
 
+
     function focusInput(event: { target: any; } | undefined) {
         if (inputEL && (!event || !(event.target instanceof HTMLInputElement))) {
             inputEL.focus()
@@ -306,9 +321,8 @@
 <input 
     type="text" 
     bind:this={inputEL} 
-    bind:value={typedLetter} 
-    on:input={updateGameState}
-    on:keydown={handleKeyDown}
+    bind:value={inputValue} 
+    on:input={handleInput}
     on:blur={inputBlured}
     on:focus={() => caretAnimation = 'infinite'}
 
