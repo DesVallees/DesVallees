@@ -185,7 +185,6 @@
 
     .above, .belowWrapper {
         transition: height 500ms ease-out;
-        overflow: hidden;
     }
 
     @media screen and (max-width: 1100px){
@@ -208,7 +207,6 @@
             background: transparent;
 
             transition: height 1s ease-out;
-            overflow: hidden;
         }
         
         .centralLineContent {

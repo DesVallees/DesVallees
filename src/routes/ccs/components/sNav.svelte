@@ -38,7 +38,7 @@
         left: 0;
         height: 100vh;
         height: 100dvh;
-        z-index: 2;
+        z-index: 3;
         background-color: var(--main);
         border-right: solid 2px var(--content);
         padding: 2em;

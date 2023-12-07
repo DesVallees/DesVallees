@@ -6,7 +6,7 @@
     let clickToBlur:HTMLDivElement;
 
 	function setTimer() {
-        value > 0 ? value = Math.ceil(value) : value = $initialSeconds
+        value > 4 ? value = Math.ceil(value) : value = 5
 
         $initialSeconds = value
         $seconds = value
@@ -26,7 +26,7 @@
         on:keydown={(event) => event.key === 'Enter' ? clickToBlur.click() : ''}
         bind:value
         in:scale
-        min=1
+        min=5
         id="seconds"
     >
 </div>

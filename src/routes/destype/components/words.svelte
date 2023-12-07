@@ -51,38 +51,32 @@
 
 
 
-    function isValidKey(event : KeyboardEvent) {
-        const pattern = /^[a-zA-Z\s]$/;
-        return pattern.test(event.key) || (event.key === 'Backspace' && totalLetters !== 0);
-    }
-    
     function handleKeyDown(event: KeyboardEvent) {
-        if ($game === 'waiting for input' && isValidKey(event)) {
+        if ($game === 'waiting for input' && totalLetters !== 0 && (event.key === 'Backspace' || event.code === 'Space')) {
             startGame()
         }
-
-        if (event.code === 'Space') {
-            if($game === 'in progress'){
-                nextWord()
-            }
+        
+        if (event.code === 'Space' && $game === 'in progress') {
+            nextWord()
         }
-        else if (event.code === 'Backspace') {
-            if($game === 'in progress'){
-                backspace()
-            }
+        else if (event.code === 'Backspace' && $game === 'in progress') {
+            backspace()
         }
     }
 
     function updateGameState() {
+        if ($game === 'waiting for input' && typedLetter !== ' ') {
+            startGame()
+        }
+        
         const isWordCompleted = letterIndex > words[wordIndex].length - 1
-
-        if (!isWordCompleted && typedLetter !== ' ') {
+        
+        if (!isWordCompleted && typedLetter !== ' ' && $game === 'in progress') {
             setLetter()
             checkLetter()
         }else{
             resetLetter()
         }
-
     }
 
 

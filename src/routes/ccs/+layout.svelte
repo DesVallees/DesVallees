@@ -88,6 +88,8 @@
 
     main{
         height: 100%;
+        z-index: 1;
+        padding-top: .5rem;
     }
 
     .disappearAndAppear {

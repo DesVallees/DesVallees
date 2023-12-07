@@ -51,7 +51,7 @@
         color: var(--primary);
 
         display: flex;
-        column-gap: 3rem;
+        column-gap: 4rem;
     }
 
 </style>

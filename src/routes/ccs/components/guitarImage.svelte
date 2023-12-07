@@ -30,7 +30,7 @@
 
 </script>
 
-<button on:click={newImage}>
+<button on:click={newImage} aria-label="{name}" >
     {#key currentFile}
         <picture in:fly={{y: -100, duration: 700}}>
             <source media="(orientation: portrait)" srcset="/images/ccs/{currentFile || 'guitarre' + guitarNumber + guitarFace}-small.{extension}">
@@ -44,7 +44,6 @@
     img {
         user-select: none;
         -webkit-user-drag: none;
-        z-index: -1;
         max-height: 100%; 
         max-width: 100%;
     }

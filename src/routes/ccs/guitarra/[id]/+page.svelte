@@ -101,7 +101,6 @@
 		margin-bottom: 1em;
 		
 		transition: height 1s ease-out;
-		overflow: hidden;
 	}
 
 	.name{
@@ -116,7 +115,7 @@
 
 	p {
 		font-size: clamp(1.1rem, 3vw, 1.25rem);
-		line-height: 2rem;
+		line-height: 2.2rem;
 		text-align: justify;
 
 		margin: 2em 1em;
@@ -182,7 +181,10 @@
 		.imageContainer{min-height: 530px;}
 	}
 	@media(max-width: 450px){
-		p{text-align: initial;}
+		p{
+			text-align: initial;
+			line-height: 2.1rem;
+		}
 	}
 
 </style>

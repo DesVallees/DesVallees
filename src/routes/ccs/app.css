@@ -51,7 +51,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    z-index: -5;
 }
 
 body::before {
@@ -62,7 +61,6 @@ body::before {
     bottom: 0px;
     left: 0px;
     background-color: rgba(28, 25, 25, 0.925);
-    z-index: -5;
 }
 
 ion-icon {
