@@ -9,7 +9,7 @@
     <form action="">
         <div class="inputGroup">
             <ion-icon name="mail"></ion-icon>
-            <input type="email" placeholder="{$dictionary.email}" class="ghostButton" required>
+            <input type="email" placeholder="{$dictionary.email}" class="ghostButton" required autocapitalize="none" autocorrect="false" spellcheck="false">
         </div>
         <div class="inputGroup">
             <ion-icon name="lock-closed"></ion-icon>

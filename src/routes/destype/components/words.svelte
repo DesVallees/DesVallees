@@ -52,20 +52,18 @@
 
 
     function handleKeyDown(event: KeyboardEvent) {
-        if ($game === 'waiting for input' && totalLetters !== 0 && (event.key === 'Backspace' || event.key === ' ')) {
+        if ($game === 'waiting for input' && totalLetters !== 0 && event.key === 'Backspace') {
             startGame()
         }
         
-        if (event.key === ' ' && $game === 'in progress') {
-            nextWord()
-        }
         else if (event.key === 'Backspace' && $game === 'in progress') {
+            event.preventDefault()
             backspace()
         }
     }
 
     function updateGameState() {
-        if ($game === 'waiting for input' && typedLetter !== ' ') {
+        if ($game === 'waiting for input' && !(typedLetter === ' ' && totalLetters === 0)) {
             startGame()
         }
         
@@ -74,9 +72,13 @@
         if (!isWordCompleted && typedLetter !== ' ' && $game === 'in progress') {
             setLetter()
             checkLetter()
-        }else{
-            resetLetter()
+            nextLetter()
+        }else if (typedLetter === ' ' && $game === 'in progress') {
+            nextWord()
         }
+
+        resetInputValue()
+        moveCaret()
     }
 
 
@@ -134,10 +136,6 @@
 
         
         letterEL.dataset.letter = 'incorrect'
-        nextLetter()
-        resetLetter()
-        moveCaret()
-        
 	}
 
 	function nextLetter() {
@@ -155,7 +153,7 @@
         }
     }
 
-    function resetLetter() {
+    function resetInputValue() {
         typedLetter = ''
 	}
 
@@ -163,9 +161,6 @@
         letterEL.dataset.letter = 'correct'
         correctLetters++
         wordHasACorrectLetter = true
-        nextLetter()
-        resetLetter()
-        moveCaret()
 	}
 
     function aprovedLetters(typedPossibilities:string[] | undefined = undefined, correctPossibilities:string[] | undefined = undefined):boolean {
@@ -262,7 +257,6 @@
 
             letterIndex = 0
             setLetter()
-            moveCaret()
             updateLine()
             verifyWordsLeft()
         }
@@ -286,7 +280,6 @@
     }
     
     onDestroy(() => {
-        resetLetter()
         wordIndex = 0
         letterIndex = 0
     })
@@ -318,6 +311,10 @@
     on:keydown={handleKeyDown}
     on:blur={inputBlured}
     on:focus={() => caretAnimation = 'infinite'}
+
+    autocapitalize="none"
+    autocomplete="off"
+    autocorrect="off"
 />
 
 <div in:blur class="words" bind:this={wordsEl}>
