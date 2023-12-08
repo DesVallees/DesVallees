@@ -5,6 +5,7 @@ export const translator = {
         wpm: 'MPM',
         wordsPerMinute: 'Mots Par Minute',
         seconds: 'Secondes',
+        type: 'Tapez',
         accuracy: 'Précision',
         playAgain: 'Rejouer',
         encouragement: [
@@ -61,6 +62,7 @@ export const translator = {
         wpm: 'PPM',
         wordsPerMinute: 'Palabras Por Minuto',
         seconds: 'Segundos',
+        type: 'Escribe',
         accuracy: 'Precisión',
         playAgain: 'Volver A Jugar',
         encouragement: [
@@ -117,6 +119,7 @@ export const translator = {
         wpm: 'PAM',
         wordsPerMinute: 'Parole Al Minuto',
         seconds: 'Secondi',
+        type: 'Digita',
         accuracy: 'Precisione',
         playAgain: 'Rigiocare',
         encouragement: [
@@ -173,6 +176,7 @@ export const translator = {
         wpm: 'WPM',
         wordsPerMinute: 'Words Per Minute',
         seconds: 'Seconds',
+        type: 'Type',
         accuracy: 'Accuracy',
         playAgain: 'Play Again',
         encouragement: [
@@ -229,6 +233,7 @@ export const translator = {
         wpm: 'Свм',
         wordsPerMinute: 'Слов в минуту',
         seconds: 'Секунды',
+        type: 'Введите',
         accuracy: 'Точность',
         playAgain: 'Играть снова',
         encouragement: [

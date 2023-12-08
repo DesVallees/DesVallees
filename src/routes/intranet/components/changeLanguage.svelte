@@ -11,14 +11,14 @@
 
 {#if $language === 'español'}
     
-    <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('english')}>
+    <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('english')} aria-label="English">
         English
         <img src="/images/usFlag.webp" alt="{$dictionary.unitedStatesFlag}">
     </button>
 
     {:else}
 
-    <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('español')}>
+    <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('español')} aria-label="Español">
         Español
         <img src="/images/spainFlag.webp" alt="{$dictionary.spanishFlag}">
     </button>

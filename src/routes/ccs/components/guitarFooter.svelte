@@ -32,7 +32,7 @@
     <span class="oldPrice">{oldPrice}</span>
     <h5>{price}</h5>
     <div class="interactives">
-        <a href="ccs/guitarra/{link}" class="button">
+        <a href="ccs/guitarra/{link}" class="button" aria-label="{$dictionary.masInformacion}">
             <ion-icon name="information-circle-outline"></ion-icon> 
             {$dictionary.masInformacion}
         </a>

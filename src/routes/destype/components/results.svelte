@@ -37,6 +37,8 @@
             style: 'border-radius: 25px; background: var(--fg-200); font-size: 1.1rem; font-family: inherit; text-align: center;',
             duration: 5000
         })
+
+        screenReaderResults.focus()
     })
 
     onDestroy(() => {
@@ -56,9 +58,13 @@
     function getAccuracy() {
         return Math.floor(correctLetters / totalLetters * 100) || 0
     }
-    
+
+    let screenReaderResults: HTMLHeadElement;
+
 </script>
 
+
+<h1 class="screenReaderResults" bind:this={screenReaderResults} tabindex="-1">{$dictionary.wordsPerMinute}: {getWordsPerMinute()}. {$dictionary.accuracy}: {getAccuracy()}.</h1>
 
 <div in:blur|global>
     <ResultStat title={$dictionary.wpm} tooltip={$dictionary.wordsPerMinute} score={Math.trunc($wordsPerMinute)}/>
@@ -66,7 +72,8 @@
 </div>
 
 <div in:blur|global>
-    <button on:click={resetGame} class="play">{$dictionary.playAgain}</button>
+    <!-- svelte-ignore a11y-autofocus -->
+    <button on:click={resetGame} class="play" aria-label="{$dictionary.playAgain}">{$dictionary.playAgain}</button>
 </div>
 
 
@@ -81,6 +88,11 @@
     
     button {
         padding: .3rem 1em;
+    }
+
+    .screenReaderResults {
+        opacity: 0;
+        position: absolute;
     }
 
 </style>

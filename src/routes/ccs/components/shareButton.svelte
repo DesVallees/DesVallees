@@ -26,7 +26,7 @@
     }
 </script>
 
-<button style={style} bind:this={shareButton} class="baseButton share" on:click={shareContent}>
+<button style={style} bind:this={shareButton} class="baseButton share" on:click={shareContent} aria-label="{$dictionary.compartir}">
     {#if !justIcon}
         {$dictionary.compartir}
     {/if}

@@ -20,7 +20,9 @@
         <ChangeLanguage />
     </div>
 
-    <img class="logo x" src="/images/ccs/CCSlogoTransparent.webp" alt="CCS Logo">
+    <a href="/journee" aria-label={$dictionary.inicio}>
+        <img class="logo x" src="/images/ccs/CCSlogoTransparent.webp" alt="CCS Logo">
+    </a>
     
     <section id="xnav" class="x">
         <a href="/ccs" class="link {$page.url.pathname === '/ccs' ? 'active' : ''}">{$dictionary.inicio}</a>

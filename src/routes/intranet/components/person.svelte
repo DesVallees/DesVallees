@@ -16,7 +16,7 @@
     <Avatar personName={name} image={profilePicture} width="5em"/>
     <h3>{name}</h3>
     <h4>{jobTitle || $dictionary.cantoLegalEmployee}</h4>
-    <a class="invisible" href="/intranet/profile/{id}">{$dictionary.seeProfile}</a>
+    <a class="invisible" href="/intranet/profile/{id}">{$dictionary.seeProfile} {name}</a>
     <button class="fill" on:click={() => dispatch('sendMessage')}>{$dictionary.sendAMessage}</button>
 </div>
 

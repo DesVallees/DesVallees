@@ -37,21 +37,21 @@
         {#each Object.entries(languageFlags) as [languageName, flag], index}
             {#if index === 0}
 
-                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)} bind:this={firstFocusableElement}>
+                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)} bind:this={firstFocusableElement} aria-label="{languageName}">
                     <img src="/images/{flag}" alt={languageName}>
                     <span>{languageName}</span>
                 </button>
                 
             {:else if index === Object.keys(languageFlags).length - 1}
 
-                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)} bind:this={lastFocusableElement}>
+                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)} bind:this={lastFocusableElement} aria-label="{languageName}">
                     <img src="/images/{flag}" alt={languageName}>
                     <span>{languageName}</span>
                 </button>
 
             {:else}
 
-                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)}>
+                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)} aria-label="{languageName}">
                     <img src="/images/{flag}" alt={languageName}>
                     <span>{languageName}</span>
                 </button>

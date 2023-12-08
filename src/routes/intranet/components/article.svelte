@@ -18,9 +18,9 @@
         <Avatar personName={author} image={profilePicture} width="25px"/>
         <h6>{author} • {minutesRead} {$dictionary.minutesRead}</h6>
     </div>
-    <section>
+    <p>
         {@html content}
-    </section>
+    </p>
 </article>
 
 <style>
@@ -49,7 +49,7 @@
         font-size: 1rem;
     }
     
-    section, article :global(p), article :global(li) {
+    p, article :global(p), article :global(li) {
         font-size: 1.25rem;
         color: var(--contentDim);
         line-height: 2.5rem;

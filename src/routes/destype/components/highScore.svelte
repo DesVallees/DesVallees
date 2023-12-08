@@ -4,7 +4,7 @@
 </script>
 
 {#key $dictionary}
-    <h1 in:scale>
+    <h2 in:scale>
         <span>{$dictionary.highScore}: </span>
 
         {#key $bestWPM}
@@ -12,11 +12,11 @@
         {/key}
 
         <span>{$dictionary.wpm}</span>
-    </h1>
+    </h2>
 {/key}
 
 <style>
-    h1 {
+    h2 {
         font-family: 'Lexend Deca', sans-serif;
         font-size: 1.2rem;
         color: var(--fg-200);

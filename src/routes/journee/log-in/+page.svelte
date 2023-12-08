@@ -22,11 +22,11 @@
 
     <hr>
 
-    <button type="button" class="button googleLogIn">
+    <button type="button" class="button googleLogIn" aria-label="{$dictionary.logInWithGoogle}">
         <ion-icon name="logo-google"></ion-icon>
         {$dictionary.logInWithGoogle}
     </button>
-    <button type="button" class="button appleLogIn">
+    <button type="button" class="button appleLogIn" aria-label="{$dictionary.logInWithApple}">
         <ion-icon name="logo-apple"></ion-icon>
         {$dictionary.logInWithApple}
     </button>

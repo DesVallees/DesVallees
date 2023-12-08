@@ -114,7 +114,7 @@
 
 <div in:slide class="post" bind:this={postDiv} style="{style}">
     <div class="avatar">
-        <Avatar href="/intranet/profile/{profileId}" ariaLabel={$dictionary.seeProfile} image={profilePicture} personName={name} borderRadius="50%" width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
+        <Avatar href="/intranet/profile/{profileId}" ariaLabel="{$dictionary.seeProfile} {name}" image={profilePicture} personName={name} borderRadius="50%" width="70%" style="aspect-ratio: 1 / 1; height: fit-content;" />
     </div>
     <div class="content">
         <header>
@@ -137,20 +137,20 @@
         {/if}
 
         {#if img}
-            <a href={img} target="_blank">
+            <a href={img} target="_blank" aria-label={$dictionary.openImage}>
                 <img src="{img}" alt="{$dictionary.unableToLoad}">
             </a>
         {/if}
 
         <footer>
             <div class="leftButtons">
-                <button class="link" on:click={() => replying = !replying}>
+                <button class="link" on:click={() => replying = !replying} aria-label={$dictionary.reply}>
                     {$dictionary.reply}
                     {#key replying}
                         <ion-icon in:fade|global name="arrow-undo{replying ? "" : "-outline"}"></ion-icon>
                     {/key}
                 </button>
-                <button class="link" on:click={handleLike} aria-label={$dictionary.like}>
+                <button class="link" on:click={handleLike} aria-label="{likes} {$dictionary.like}. {$dictionary.like}.">
                     {#key liked}
                         <ion-icon in:fade|global name="heart{liked ? "" : "-outline"}"></ion-icon>
                     {/key}

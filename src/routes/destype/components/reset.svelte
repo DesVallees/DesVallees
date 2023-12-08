@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { dictionary } from "../stores";
+
     export let resetGame: () => void;
 </script>
 
 <div>
-    <button aria-label="reset" on:click={resetGame}>
+    <button aria-label="{$dictionary.toRestart}" on:click={resetGame}>
         <ion-icon name="refresh-outline"></ion-icon>
     </button>
 </div>

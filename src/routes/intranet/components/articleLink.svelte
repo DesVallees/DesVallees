@@ -17,7 +17,7 @@
 </script>
 
 
-<a href="/intranet/general/{link}" transition:slide={{duration: 500}}>
+<a href="/intranet/general/{link}" transition:slide={{duration: 500}} aria-label="{article.title}">
     <h1>{capitalizeWords(article.title)}</h1>
     <h2><Avatar personName={article.author} image={article.profilePicture} width="1.5rem"/>{$dictionary.by} {article.author}</h2>
     <p>{shortenString(article.content)}</p>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, createEventDispatcher } from "svelte";
 	import { blur } from "svelte/transition";
-	import { game, language, seconds } from "../stores";
+	import { dictionary, game, language, seconds } from "../stores";
 
     type Game = 'waiting for input' | 'in progress' | 'game over';
     const dispatch = createEventDispatcher();
@@ -34,6 +34,7 @@
     function startGame() {
         setGameState('in progress');
         setGameTimer();
+        updateLine();
     }
 
     function setGameTimer() {
@@ -130,7 +131,8 @@
                 'o','o','o','o',
                 'u','u','u','u',
                 'n',
-                'c'
+                'c',
+                '´', '‘', '`'
             ],[
                 'á','à','â','ä',
                 'é','è','ê','ë',
@@ -138,7 +140,8 @@
                 'ó','ò','ô','ö',
                 'ú','ù','û','ü',
                 'ñ',
-                'ç'
+                'ç',
+                `'`, `'`, `'`
             ])) {
                 acceptLetter();
                 return;
@@ -146,15 +149,17 @@
         }
         else {
             if (isLetterAproved([
-                'a', 'b', 'v', 'g', 'd', 'e', 'ye', 'yo', 'j', 'zh', 'y',
+                'a', 'b', 'v', 'g', 'd', 'e', 'ye', 'o', 'yo', 'j', 'zh', 'y',
                 'z', 's', 'i', 'i', 'y', 'j', 'k', 'l', 'm', 'n', 'o',
                 'p', 'r', 's', 't', 'u', 'f', 'h', 'kh', 'j', 'z', 'ts', 'ch',
-                'sh', 'sh', 'ch', 'sch', '-', `'`, 'i', 'y', `'`, 'e', 'yu', 'u', 'ya', 'a'
+                'sh', 'sh', 'ch', 'sch', 'i', 'y', 'e', 'yu', 'u', 'ya', 'a',
+                '-', '´', '‘', '`', `'`, `'`, '´', '‘', '`'
             ],[
-                'а', 'б', 'в', 'г', 'д', 'е', 'е', 'ё', 'ж', 'ж', 'ж',
+                'а', 'б', 'в', 'г', 'д', 'е', 'е', 'ё', 'ё', 'ж', 'ж', 'ж',
                 'з', 'з', 'и', 'й', 'й', 'й', 'к', 'л', 'м', 'н', 'о',
                 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'х', 'х', 'ц', 'ц', 'ч',
-                'ш', 'щ', 'щ', 'щ', 'ъ', 'ъ', 'ы', 'ы', 'ь', 'э', 'ю', 'ю', 'я', 'я'
+                'ш', 'щ', 'щ', 'щ', 'ы', 'ы', 'э', 'ю', 'ю', 'я', 'я',
+                'ъ', 'ъ', 'ъ', 'ъ', 'ъ', 'ь', 'ь', 'ь', 'ь'
             ])) {
                 acceptLetter();
                 return;
@@ -353,6 +358,9 @@
     on:input={handleInput}
     on:blur={handleInputBlured}
     on:focus={() => caretAnimation = 'infinite'}
+    on:select={() => inputEL.selectionStart = inputEL.selectionEnd}
+
+    aria-label='{$dictionary.type} {words[wordIndex]}'
 
     autocapitalize="none"
     autocomplete="off"

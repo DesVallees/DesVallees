@@ -87,7 +87,7 @@
     <div class="centralLine" style="{isMobileDevice ? `height: ${middleContentHeight}px;` : ''}">
         <div class="centralLineContent">
 
-            <button class="previous baseButton" on:click={previousGuitar}>
+            <button class="previous baseButton" on:click={previousGuitar} aria-label="{$dictionary.guitarraAnterior}">
                 <ion-icon name="chevron-back-outline" style="transform: translateX(-3px);"></ion-icon>
             </button>
 
@@ -97,7 +97,7 @@
                 </div>
             {/key}
 
-            <button class="next baseButton" on:click={nextGuitar}>
+            <button class="next baseButton" on:click={nextGuitar} aria-label="{$dictionary.guitarraSiguiente}">
                 <ion-icon name="chevron-forward-outline"></ion-icon>
             </button>
                 

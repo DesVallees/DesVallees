@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fade, slide } from "svelte/transition";
+	import { dictionary } from "../stores";
 
     export let options: {id: number, name: string}[];
     export let style: string = '';
@@ -29,7 +30,7 @@
 
 <nav style="{style}">
     {#key optionSelectedIndex}
-        <button bind:this={trigger} in:fade|global class="selectedTeam" style="{optionsVisible ? 'gap: 4rem;' : '' }" on:click={() => optionsVisible = !optionsVisible}>
+        <button bind:this={trigger} in:fade|global class="selectedTeam" style="{optionsVisible ? 'gap: 4rem;' : '' }" on:click={() => optionsVisible = !optionsVisible} aria-label="{$dictionary.selectedOption}: {options[optionSelectedIndex].name}">
             {options[optionSelectedIndex].name} 
             <div style="{optionsVisible ? 'transform: rotate(180deg);' : 'transform: rotate(0deg);' }"><ion-icon name="chevron-down-outline"></ion-icon></div> 
         </button>

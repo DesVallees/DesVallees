@@ -86,7 +86,7 @@
 
 {#if !active && !privateReceiverID}
     
-    <button class="newPostButton" on:click={open}><ion-icon name="add-outline"></ion-icon></button>
+    <button class="newPostButton" on:click={open} aria-label="{$dictionary.createNewPost}"><ion-icon name="add-outline"></ion-icon></button>
 
 {/if}
 

@@ -130,6 +130,9 @@ export const translator = {
         errorPreviousCredentials: 'Error trying to log in with previous credentials',
         sent: 'Sent',
         noFeaturedEvents: 'No featured events',
+        createNewPost: 'Create new post',
+        openImage: 'Open Image',
+        selectedOption: 'Selected Option',
     },
     español: {
         error: 'Ha ocurrido un error.',
@@ -262,5 +265,8 @@ export const translator = {
         errorPreviousCredentials: 'Error al intentar iniciar sesión con las credenciales existentes.',
         sent: 'Enviado',
         noFeaturedEvents: 'No hay eventos destacados',
+        createNewPost: 'Nueva Publicación',
+        openImage: 'Abrir Imagen',
+        selectedOption: 'Opción Seleccionada',
     }
 }

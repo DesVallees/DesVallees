@@ -11,6 +11,8 @@ export const translator = {
         contactanos: 'Contáctanos',
         edicion: 'Edición',
         compartir: 'Compartir',
+        guitarraAnterior: 'Guitarra Anterior',
+        guitarraSiguiente: 'Siguiente Guitarra',
 
         restauracion: 'Restauración',
         fabricacion: 'Fabricación',
@@ -35,6 +37,8 @@ export const translator = {
         contactanos: 'Contact Us',
         edicion: 'Edition',
         compartir: 'Share',
+        guitarraAnterior: 'Previous Guitar',
+        guitarraSiguiente: 'Next Guitar',
 
         restauracion: 'Restoration',
         fabricacion: 'Manufacturing',
@@ -59,6 +63,8 @@ export const translator = {
         contactanos: 'Contactez-nous',
         edicion: 'Édition',
         compartir: 'Partager',
+        guitarraAnterior: 'Guitare précédente',
+        guitarraSiguiente: 'Guitare suivante',
 
         restauracion: 'Restauration',
         fabricacion: 'Fabrication',
@@ -83,6 +89,8 @@ export const translator = {
         contactanos: 'Kontaktiere uns',
         edicion: 'Ausgabe',
         compartir: 'Teilen',
+        guitarraAnterior: 'Vorherige Gitarre',
+        guitarraSiguiente: 'Nächste Gitarre',
 
         restauracion: 'Restaurierung',
         fabricacion: 'Herstellung',
@@ -107,6 +115,8 @@ export const translator = {
         contactanos: 'Contattaci',
         edicion: 'Edizione',
         compartir: 'Condividi',
+        guitarraAnterior: 'Chitarra precedente',
+        guitarraSiguiente: 'Prossima chitarra',
 
         restauracion: 'Restauro',
         fabricacion: 'Produzione',
@@ -131,6 +141,8 @@ export const translator = {
         contactanos: 'Свяжитесь с нами',
         edicion: 'Издание',
         compartir: 'Поделиться',
+        guitarraAnterior: 'Предыдущая гитара',
+        guitarraSiguiente: 'Следующая гитара',
 
         restauracion: 'Реставрация',
         fabricacion: 'Производство',
