@@ -5,7 +5,7 @@
 </script>
 
 <div>
-    <button aria-label="{$dictionary.toRestart}" on:click={resetGame}>
+    <button aria-label="{$dictionary.restart}" on:click={resetGame}>
         <ion-icon name="refresh-outline"></ion-icon>
     </button>
 </div>

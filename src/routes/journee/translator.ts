@@ -1,5 +1,5 @@
 export const translator = {
-    español: {
+    es: {
         comingSoon: 'Próximamente',
         copyright: 'Derechos de autor ©',
         allRightsReserved: 'Todos los derechos reservados.',
@@ -21,7 +21,7 @@ export const translator = {
         alreadyHaveAnAccount: '¿Ya tienes una cuenta?',
         logYouIn: 'Inicia sesión',
     },
-    english: {
+    en: {
         comingSoon: 'Coming Soon',
         copyright: 'Copyright ©',
         allRightsReserved: 'All rights reserved.',
@@ -43,7 +43,7 @@ export const translator = {
         alreadyHaveAnAccount: 'Already have an account?',
         logYouIn: 'Log in',
     },
-    français: {
+    fr: {
         comingSoon: 'Prochainement',
         copyright: 'Droits d\'auteur ©',
         allRightsReserved: 'Tous droits réservés.',
@@ -65,7 +65,7 @@ export const translator = {
         alreadyHaveAnAccount: 'Vous avez déjà un compte ?',
         logYouIn: 'Connectez-vous',
     },
-    deutsch: {
+    de: {
         comingSoon: 'Demnächst',
         copyright: 'Urheberrecht ©',
         allRightsReserved: 'Alle Rechte vorbehalten.',
@@ -87,7 +87,7 @@ export const translator = {
         alreadyHaveAnAccount: 'Haben Sie bereits ein Konto?',
         logYouIn: 'Melden Sie sich an',
     },
-    italiano: {
+    it: {
         comingSoon: 'Prossimamente',
         copyright: 'Copyright ©',
         allRightsReserved: 'Tutti i diritti riservati.',
@@ -109,7 +109,7 @@ export const translator = {
         alreadyHaveAnAccount: 'Hai già un account?',
         logYouIn: 'Accedi',
     },
-    Русский: {
+    ru: {
         comingSoon: 'Скоро',
         copyright: 'Авторское право ©',
         allRightsReserved: 'Все права защищены.',

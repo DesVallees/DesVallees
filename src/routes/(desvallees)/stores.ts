@@ -2,19 +2,13 @@ import { derived, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 
-type Game = 'waiting for input' | 'in progress' | 'game over'
 
-export const initialSeconds = writable(30);
-export const seconds = writable(30);
-export const bestWPM = writable(0);
-
-export const game: Writable<Game> = writable('waiting for input')
 
 
 
 // Language Management
 
-export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru';
+export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de';
 
 export function isLanguage(value: any): value is Language {
     return (
@@ -22,7 +16,8 @@ export function isLanguage(value: any): value is Language {
         value === 'es' ||
         value === 'it' ||
         value === 'en' ||
-        value === 'ru'
+        value === 'ru' ||
+        value === 'de'
     );
 }
 
@@ -66,7 +61,7 @@ export const language: Writable<Language> = writable(storedLanguage || navigator
 
 if (browser) {
     language.subscribe((value) => {
-        document.documentElement.lang = value || 'en';
+        document.documentElement.lang = value || 'en'
         setCookie('lang', value, 1000);
     })
 }

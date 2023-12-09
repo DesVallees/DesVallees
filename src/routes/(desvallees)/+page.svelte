@@ -1,6 +1,7 @@
 <script lang="ts">
     import './app.css'
-	import Separator from "./intranet/components/separator.svelte";
+	import Separator from "../intranet/components/separator.svelte";
+	import { dictionary } from './stores';
 
 </script>
 
@@ -16,15 +17,15 @@
 <div>
 
     <a data-sveltekit-reload href="/journee">Journée (2023)</a>
-    <a data-sveltekit-reload href="/intranet">Canto Legal Intranet (2023)</a>
+    <a data-sveltekit-reload href="/intranet">{$dictionary.intranet} (2023)</a>
     <a data-sveltekit-reload href="/ccs">CCS (2023)</a>
     <a data-sveltekit-reload href="/destype">DesType (2023)</a>
     <a data-sveltekit-reload href="/threlte">Threlte (2023)</a>
     
     <Separator width="90%" maxWidth="500px" height="1px" color="#F7F7FF" margin="3em 0" />
     
-    <a target="_blank" href="https://legaloffice.peopleworksservices.com/">Clapp Back Office - Minor features (2022)</a>
-    <a target="_blank" href="https://clappforms.web.app/">Clapp Forms (2022)</a>
+    <a target="_blank" href="https://legaloffice.peopleworksservices.com/">{$dictionary.backoffice} (2022)</a>
+    <a target="_blank" href="https://clappforms.web.app/">{$dictionary.clappForms} (2022)</a>
     
     <Separator width="90%" maxWidth="500px" height="1px" color="#F7F7FF" margin="3em 0" />
     
@@ -35,10 +36,10 @@
 
     <Separator width="90%" maxWidth="500px" height="1px" color="#F7F7FF" margin="3em 0" />
 
-    <a target="_blank" href="https://deschat-35f5b.web.app/">DesChat (Sketch)</a>
-    <a target="_blank" href="https://clapppdfs.web.app/">PDF Editor (Sketch)</a>
-    <a target="_blank" href="https://tictactoe-b2edd.web.app/">TicTacToe (Sketch)</a>
-    <a target="_blank" href="https://deschat-35f5b.web.app/sketch">Profile Cards (Sketch)</a>
+    <a target="_blank" href="https://deschat-35f5b.web.app/">DesChat ({$dictionary.sketch})</a>
+    <a target="_blank" href="https://clapppdfs.web.app/">{$dictionary.pdfEditor} ({$dictionary.sketch})</a>
+    <a target="_blank" href="https://tictactoe-b2edd.web.app/">{$dictionary.ticTacToe} ({$dictionary.sketch})</a>
+    <a target="_blank" href="https://deschat-35f5b.web.app/sketch">{$dictionary.profileCards} ({$dictionary.sketch})</a>
 
 </div>
 

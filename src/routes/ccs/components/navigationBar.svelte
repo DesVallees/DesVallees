@@ -20,7 +20,7 @@
         <ChangeLanguage />
     </div>
 
-    <a href="/journee" aria-label={$dictionary.inicio}>
+    <a href="/ccs" aria-label={$dictionary.inicio}>
         <img class="logo x" src="/images/ccs/CCSlogoTransparent.webp" alt="CCS Logo">
     </a>
     

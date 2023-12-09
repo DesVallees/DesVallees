@@ -70,7 +70,7 @@
             {#if !seen}
                 <div class="unseen">{$dictionary.new}</div>
             {/if}
-            <button aria-label={$dictionary.close} on:click={dismiss}><ion-icon name="close-outline"></ion-icon></button>
+            <button aria-label={$dictionary.dismissNotification} on:click={dismiss}><ion-icon name="close-outline"></ion-icon></button>
         </header>
         <p>{profileNotification.content}</p>
     </div>

@@ -17,7 +17,7 @@
 		const formattedNameToFind = nameToFind.replace(/-/g, ' ').toLowerCase();
 
 		return guitarStorage.find((item) =>
-			item.name.español.replace(/-/g, ' ').toLowerCase() === formattedNameToFind
+			item.name.es.replace(/-/g, ' ').toLowerCase() === formattedNameToFind
 		);
 	}
 

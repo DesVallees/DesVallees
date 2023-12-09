@@ -37,7 +37,7 @@
     <header>
         <h2>{$dictionary.notifications}</h2>
         <!-- svelte-ignore a11y-autofocus -->
-        <button autofocus aria-label={$dictionary.close} on:click={close}><ion-icon name="close-outline"></ion-icon></button>
+        <button autofocus aria-label="{$dictionary.close} {$dictionary.notifications}" on:click={close}><ion-icon name="close-outline"></ion-icon></button>
     </header>
     <div>
         {#if notifications.length > 0}

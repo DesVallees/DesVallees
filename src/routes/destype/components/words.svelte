@@ -123,7 +123,7 @@
             acceptLetter();
             return;
         }
-        else if ($language !== 'Русский'){
+        else if ($language !== 'ru'){
             if (isLetterAproved([
                 'a','a','a','a',
                 'e','e','e','e',
@@ -360,7 +360,7 @@
     on:focus={() => caretAnimation = 'infinite'}
     on:select={() => inputEL.selectionStart = inputEL.selectionEnd}
 
-    aria-label='{$dictionary.type} {words[wordIndex]}'
+    aria-label='{words[wordIndex] ? `${$dictionary.type} ${words[wordIndex]}` : `${$dictionary.gettingWords}`}'
 
     autocapitalize="none"
     autocomplete="off"

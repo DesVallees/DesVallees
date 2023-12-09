@@ -64,7 +64,7 @@
 </script>
 
 
-<h1 class="screenReaderResults" bind:this={screenReaderResults} tabindex="-1">{$dictionary.wordsPerMinute}: {getWordsPerMinute()}. {$dictionary.accuracy}: {getAccuracy()}.</h1>
+<h1 class="screenReaderResults" bind:this={screenReaderResults} tabindex="-1">{$dictionary.wordsPerMinute}: {getWordsPerMinute()}. {$dictionary.accuracy}: {getAccuracy()}%.</h1>
 
 <div in:blur|global>
     <ResultStat title={$dictionary.wpm} tooltip={$dictionary.wordsPerMinute} score={Math.trunc($wordsPerMinute)}/>

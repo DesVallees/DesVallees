@@ -53,14 +53,14 @@
     
     <main bind:this={mainContent}>
         <slot/>
-        
-        {#if !ready}
-            <Preloader animation="dots">
-                <h1 style="font-size: 3rem; line-height: normal;">CCS</h1>
-            </Preloader>
-
-        {/if}
     </main>
+
+    {#if !ready}
+        <Preloader animation="dots">
+            <h1 style="font-size: 3rem; line-height: normal;">CCS</h1>
+        </Preloader>
+
+    {/if}
 </div>
 
 

@@ -112,7 +112,7 @@
                 <div class="guitarFooter">
                     <GuitarFooter 
                         name={chosenGuitar.name[$language]}
-                        linkName={chosenGuitar.name.español}
+                        linkName={chosenGuitar.name.es}
                         edition={chosenGuitar.edition[$language]}
                         description={chosenGuitar.description[$language]}
                         price={chosenGuitar.price}

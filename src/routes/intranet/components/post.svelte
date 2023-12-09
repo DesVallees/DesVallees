@@ -150,7 +150,7 @@
                         <ion-icon in:fade|global name="arrow-undo{replying ? "" : "-outline"}"></ion-icon>
                     {/key}
                 </button>
-                <button class="link" on:click={handleLike} aria-label="{likes} {$dictionary.like}. {$dictionary.like}.">
+                <button class="link" on:click={handleLike} aria-label="{$dictionary.like}. {$dictionary.currentLikes}: {likes}.">
                     {#key liked}
                         <ion-icon in:fade|global name="heart{liked ? "" : "-outline"}"></ion-icon>
                     {/key}
@@ -159,7 +159,7 @@
                 
                 {#if !originalPost}
     
-                    <a class="link" href="/intranet/replies/{id}" aria-label={$dictionary.comments}>
+                    <a class="link" href="/intranet/replies/{id}" aria-label="{$dictionary.comments}. {$dictionary.currentComments}: {comments}.">
                         <ion-icon name="chatbubbles-outline"></ion-icon> {comments}
                     </a>
                     

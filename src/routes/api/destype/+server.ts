@@ -7,14 +7,14 @@ import español from "./espanol.json";
 import italiano from "./italiano.json";
 import Русский from "./Русский.json";
 
-type Language = 'français' | 'english' | 'español' | 'italiano' | 'Русский'
+type Language = 'fr' | 'en' | 'es' | 'it' | 'ru'
 
 const languages = {
-    'français': français as any[],
-    'español': español as any[],
-    'english': english as any[],
-    'italiano': italiano as any[],
-    'Русский': Русский as any[],
+    'fr': français as any[],
+    'es': español as any[],
+    'en': english as any[],
+    'it': italiano as any[],
+    'ru': Русский as any[],
 }
 
 export const GET: RequestHandler = async ({ url }) => {

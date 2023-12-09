@@ -1,5 +1,5 @@
 export const translator = {
-    español: {
+    es: {
         error: "Ha ocurrido un error.",
         paginaNoDisponible: 'Página no disponible',
         idioma: 'Idioma',
@@ -25,7 +25,7 @@ export const translator = {
         resumenCCS: 'CSS-Guitars es una marca colombiana de instrumentos musicales, inspirada en la biodiversidad y riqueza presentes en este lado del mundo. El proyecto surge de la necesidad de muchos músicos de adquirir instrumentos de gran calidad a precios cómodos. Son guitarras artesanales, y en cada modelo se mezcla la potencia del sonido y la importancia de la fauna silvestre, por eso las referencias de cada instrumento se inspiran en especies emblemáticas y de gran importancia ecológica para los bosques. <br><br> Cada instrumento que se fabrique bajo nuestra marca será único, y el cliente podrá disfrutar de una pieza exclusiva en su colección.',
         elEquipoDeCCS: "El equipo de CCS",
     },
-    english: {
+    en: {
         error: "An error has occurred.",
         paginaNoDisponible: 'Page not available',
         idioma: 'Language',
@@ -51,7 +51,7 @@ export const translator = {
         resumenCCS: 'CSS-Guitars is a Colombian brand of musical instruments, inspired by the biodiversity and richness found on this side of the world. The project arises from the need of many musicians to acquire high-quality instruments at comfortable prices. They are handmade guitars, and in each model, the power of sound is blended with the importance of wildlife. That\'s why the references for each instrument are inspired by emblematic species with great ecological significance for the forests. <br><br> Every instrument manufactured under our brand will be unique, and the customer will enjoy an exclusive piece in their collection.',
         elEquipoDeCCS: "The CCS Team",
     },
-    français: {
+    fr: {
         error: "Une erreur s'est produite.",
         paginaNoDisponible: 'Page non disponible',
         idioma: 'Langue',
@@ -77,7 +77,7 @@ export const translator = {
         resumenCCS: "CSS-Guitars est une marque colombienne d'instruments de musique, inspirée par la biodiversité et la richesse présentes de ce côté du monde. Le projet naît du besoin de nombreux musiciens d'acquérir des instruments de grande qualité à des prix confortables. Ce sont des guitares artisanales, et dans chaque modèle, la puissance du son se mêle à l'importance de la faune sauvage. C'est pourquoi les références de chaque instrument s'inspirent d'espèces emblématiques et d'une grande importance écologique pour les forêts. <br><br> Chaque instrument fabriqué sous notre marque sera unique, et le client pourra profiter d'une pièce exclusive dans sa collection.",
         elEquipoDeCCS: "L'équipe de CCS",
     },
-    deutsch:{
+    de:{
         error: "Ein Fehler ist aufgetreten.",
         paginaNoDisponible: 'Seite nicht verfügbar',
         idioma: 'Sprache',
@@ -103,7 +103,7 @@ export const translator = {
         resumenCCS: "CSS-Guitars ist eine kolumbianische Marke für Musikinstrumente, inspiriert von der Biodiversität und dem Reichtum, die auf dieser Seite der Welt zu finden sind. Das Projekt entstand aus dem Bedarf vieler Musiker, hochwertige Instrumente zu erschwinglichen Preisen zu erwerben. Es handelt sich um handgefertigte Gitarren, und in jedem Modell verbindet sich die Kraft des Klangs mit der Bedeutung der Wildfauna. Daher lassen sich die Referenzen jedes Instruments von emblematischen Arten inspirieren, die für die Wälder von großer ökologischer Bedeutung sind. <br><br> Jedes unter unserer Marke hergestellte Instrument wird einzigartig sein, und der Kunde wird Freude an einem exklusiven Stück in seiner Sammlung haben.",
         elEquipoDeCCS: "Das CCS-Team",
     },
-    italiano:{
+    it:{
         error: "Si è verificato un errore.",
         paginaNoDisponible: 'Pagina non disponibile',
         idioma: 'Lingua',
@@ -129,7 +129,7 @@ export const translator = {
         resumenCCS: "CSS-Guitars è un marchio colombiano di strumenti musicali, ispirato dalla biodiversità e dalla ricchezza presenti da questo lato del mondo. Il progetto nasce dalla necessità di molti musicisti di acquisire strumenti di alta qualità a prezzi comodi. Sono chitarre artigianali, e in ogni modello si mescola la potenza del suono con l'importanza della fauna selvatica. Per questo le referenze di ogni strumento si ispirano a specie emblematiche di grande importanza ecologica per le foreste. <br><br> Ogni strumento fabbricato sotto il nostro marchio sarà unico, e il cliente potrà godere di un pezzo esclusivo nella sua collezione.",
         elEquipoDeCCS: "Il team di CCS",
     },
-    Русский: {
+    ru: {
         error: "Произошла ошибка.",
         paginaNoDisponible: 'Страница недоступна',
         idioma: 'Язык',

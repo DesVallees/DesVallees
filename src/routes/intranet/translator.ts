@@ -1,5 +1,5 @@
 export const translator = {
-    english: {
+    en: {
         error: `An error occurred.`,
         logInWithMicrosoft: 'Log in with Microsoft',
         copyright: 'Copyright',
@@ -94,8 +94,10 @@ export const translator = {
         ago: 'ago',
         and: 'and',
         reply: 'Reply',
-        like: 'Like',
-        comments: 'Comments',
+        currentLikes: 'Current Likes',
+        like: 'Like post',
+        currentComments: 'Amount of Comments',
+        comments: 'View Comments',
         cancel: 'Cancel',
         submit: 'Submit',
         showMore: 'Show more',
@@ -123,6 +125,7 @@ export const translator = {
         birthday: 'Birthday',
         notifications: 'Notifications',
         close: 'Close',
+        dismissNotification: 'Dismiss Notification',
         new: 'New',
         noNoticationsToShow: 'No notifications to display',
         noPostsToShow: 'There are no posts to display',
@@ -133,8 +136,9 @@ export const translator = {
         createNewPost: 'Create new post',
         openImage: 'Open Image',
         selectedOption: 'Selected Option',
+        post: 'Post',
     },
-    español: {
+    es: {
         error: 'Ha ocurrido un error.',
         logInWithMicrosoft: 'Iniciar sesión con Microsoft',
         copyright: 'Derechos de autor',
@@ -229,8 +233,10 @@ export const translator = {
         ago: '',
         and: 'y',
         reply: 'Responder',
-        like: 'Me gusta',
-        comments: 'Comentarios',
+        currentLikes: 'Número de Me Gusta',
+        like: 'Dar un Me gusta',
+        currentComments: 'Número de Comentarios',
+        comments: 'Abrir Comentarios',
         cancel: 'Cancelar',
         submit: 'Confirmar',
         showMore: 'Mostrar más',
@@ -258,6 +264,7 @@ export const translator = {
         birthday: 'Fecha de nacimiento',
         notifications: 'Notificaciones',
         close: 'Cerrar',
+        dismissNotification: 'Descartar Notificación',
         new: 'Nuevo',
         noNoticationsToShow: 'No hay notificaciones para mostrar',
         noPostsToShow: 'No hay publicaciones para mostrar',
@@ -268,5 +275,6 @@ export const translator = {
         createNewPost: 'Nueva Publicación',
         openImage: 'Abrir Imagen',
         selectedOption: 'Opción Seleccionada',
+        post: 'Publicación',
     }
 }

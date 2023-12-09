@@ -8,31 +8,17 @@ import { browser } from "$app/environment";
 
 // Language Management
 
-export type Language = 'français' | 'español' | 'italiano' | 'english' | 'Русский' | 'deutsch';
+export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de';
 
-function isLanguage(value: any): value is Language {
+export function isLanguage(value: any): value is Language {
     return (
-        value === 'français' ||
-        value === 'español' ||
-        value === 'italiano' ||
-        value === 'english' ||
-        value === 'Русский' ||
-        value === 'deutsch'
+        value === 'fr' ||
+        value === 'es' ||
+        value === 'it' ||
+        value === 'en' ||
+        value === 'ru' ||
+        value === 'de'
     );
-}
-
-function mapNavigatorLanguage(navigatorLanguage: string): Language | undefined {
-    const languageMappings: Record<string, Language> = {
-        'fr': 'français',
-        'es': 'español',
-        'it': 'italiano',
-        'en': 'english',
-        'ru': 'Русский',
-        'de': 'deutsch',
-    };
-
-    const simplifiedLanguage = navigatorLanguage.split('-')[0].toLowerCase();
-    return languageMappings[simplifiedLanguage];
 }
 
 function setCookie(name: string, value: string, days: number) {
@@ -60,17 +46,24 @@ function getCookie(name: string): string | null {
 let navigatorLanguage;
 let storedLanguage;
 if (browser) {
-    let languageCookie = getCookie('lang')
+    const languageCookie = getCookie('lang')
     if (isLanguage(languageCookie)) {
         storedLanguage = languageCookie;
     }
-    navigatorLanguage = mapNavigatorLanguage(navigator.language)
+
+    const navigatorLanguageCode = navigator.language.split('-')[0].toLowerCase();
+    if (isLanguage(navigatorLanguageCode)) {
+        navigatorLanguage = navigatorLanguageCode;
+    }
 }
 
-export const language: Writable<Language> = writable(storedLanguage || navigatorLanguage || 'english');
+export const language: Writable<Language> = writable(storedLanguage || navigatorLanguage || 'en');
 
 if (browser) {
-    language.subscribe((value) => setCookie('lang', value, 1000))
+    language.subscribe((value) => {
+        document.documentElement.lang = value || 'en';
+        setCookie('lang', value, 1000);
+    })
 }
 
 export const dictionary = derived(language, (language) => translator[language]);

@@ -1,11 +1,12 @@
 export const translator = {
-    français: {
+    fr: {
         error: `Une erreur s'est produite.`,
         highScore: 'Meilleur Score',
         wpm: 'MPM',
         wordsPerMinute: 'Mots Par Minute',
         seconds: 'Secondes',
         type: 'Tapez',
+        gettingWords: 'Obtention des mots. Les instructions doivent être lues en quelques secondes. Sinon, essayez de cliquer quelque part au hasard, ou vérifiez votre connexion Internet.',
         accuracy: 'Précision',
         playAgain: 'Rejouer',
         encouragement: [
@@ -53,16 +54,18 @@ export const translator = {
         ],
         hold: 'Maintenez',
         enter: 'Entrée',
+        restart: 'Redémarrer',
         toRestart: 'pour redémarrer',
         pause: 'Pause',
     },
-    español: {
+    es: {
         error: `Ha ocurrido un error.`,
         highScore: 'Mejor Puntuación',
         wpm: 'PPM',
         wordsPerMinute: 'Palabras Por Minuto',
         seconds: 'Segundos',
         type: 'Escribe',
+        gettingWords: 'Obteniendo palabras. La instrucción debe leerse en unos segundos. Si no, intenta hacer clic en algún lugar al azar o verifica tu conexión a Internet.',
         accuracy: 'Precisión',
         playAgain: 'Volver A Jugar',
         encouragement: [
@@ -110,16 +113,18 @@ export const translator = {
         ],
         hold: 'Mantén',
         enter: 'Enter',
+        restart: 'Reiniciar',
         toRestart: 'para reiniciar',
         pause: 'Pausa',
     },
-    italiano: {
+    it: {
         error: `Si è verificato un errore.`,
         highScore: 'Miglior Punteggio',
         wpm: 'PAM',
         wordsPerMinute: 'Parole Al Minuto',
         seconds: 'Secondi',
         type: 'Digita',
+        gettingWords: 'Ottenere parole. Le istruzioni dovrebbero essere lette entro qualche secondo. Se non è così, prova a fare clic in un punto qualsiasi o controlla la tua connessione Internet.',
         accuracy: 'Precisione',
         playAgain: 'Rigiocare',
         encouragement: [
@@ -167,16 +172,18 @@ export const translator = {
         ],
         hold: 'Tieni',
         enter: 'Invio',
+        restart: 'Riavvia',
         toRestart: 'per riavviare',
         pause: 'Pausa',
     },
-    english: {
+    en: {
         error: `An error occurred.`,
         highScore: 'High Score',
         wpm: 'WPM',
         wordsPerMinute: 'Words Per Minute',
         seconds: 'Seconds',
         type: 'Type',
+        gettingWords: 'Getting Words. Instruction should be read within a couple seconds. If not, try clicking somewhere random, or check your internet connection.',
         accuracy: 'Accuracy',
         playAgain: 'Play Again',
         encouragement: [
@@ -224,16 +231,18 @@ export const translator = {
         ],
         hold: 'Hold',
         enter: 'Enter',
+        restart: 'Restart',
         toRestart: 'to restart',
         pause: 'Pause',
     },
-    Русский: {
+    ru: {
         error: `Произошла ошибка.`,
         highScore: 'Лучший счет',
         wpm: 'Свм',
         wordsPerMinute: 'Слов в минуту',
         seconds: 'Секунды',
         type: 'Введите',
+        gettingWords: 'Получение слов. Инструкция должна быть прочитана в течение нескольких секунд. Если нет, попробуйте щелкнуть где-нибудь случайно или проверьте ваше интернет-соединение.',
         accuracy: 'Точность',
         playAgain: 'Играть снова',
         encouragement: [
@@ -281,6 +290,7 @@ export const translator = {
         ],
         hold: 'Удерживайте',
         enter: 'Enter',
+        restart: 'Перезагрузка',
         toRestart: 'для перезапуска',
         pause: 'Пауза',
     },

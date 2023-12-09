@@ -1,22 +1,35 @@
 <script lang="ts">
 	import { slide } from "svelte/transition";
-	import { dictionary, language, type Language } from "../stores";
+	import { dictionary, language, type Language, isLanguage } from "../stores";
 	import Base from "./base.svelte";
 
     export let style:string = '';
 
-    let languageFlags = {
-        'español': 'spainFlag.webp',
-        'english': 'usFlag.webp',
-        'français': 'franceFlag.webp',
-        'deutsch': 'germanyFlag.webp',
-        'italiano': 'italyFlag.webp',
-        'Русский': 'russiaFlag.webp',
+    let languageFlags: Record<Language, string> = {
+        'es': 'spainFlag.webp',
+        'en': 'usFlag.webp',
+        'fr': 'franceFlag.webp',
+        'de': 'germanyFlag.webp',
+        'it': 'italyFlag.webp',
+        'ru': 'russiaFlag.webp',
+    }
+
+    function getLanguageName(languageCode: Language): string | undefined {
+        const languageMappings: Record<Language, string> = {
+            'es': 'español',
+            'en': 'english',
+            'fr': 'français',
+            'de': 'deutsch',
+            'it': 'italiano',
+            'ru': 'Русский',
+        };
+
+        return languageMappings[languageCode];
     }
 
     function changeLanguage(newLanguage: string) {
-        $language = newLanguage as Language
-        active = false
+        $language = newLanguage as Language;
+        active = false;
     }
 
     let active : boolean = false;
@@ -26,7 +39,7 @@
 </script>
 
 <button style="{style}" class="languageControl" on:click={() => {active = true}} aria-label={$dictionary.language}>
-    <img src="/images/{languageFlags[$language]}" alt={$language} >
+    <img src="/images/{languageFlags[$language]}" alt={getLanguageName($language)}>
     <ion-icon name="caret-down-outline"></ion-icon>
 </button>
 
@@ -34,28 +47,30 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:click|stopPropagation class="languagesContainer" transition:slide|global={{duration:200}}>
-        {#each Object.entries(languageFlags) as [languageName, flag], index}
-            {#if index === 0}
+        {#each Object.entries(languageFlags) as [languageCode, flag], index}
+            {#if isLanguage(languageCode)}
+                {#if index === 0}
 
-                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)} bind:this={firstFocusableElement} aria-label="{languageName}">
-                    <img src="/images/{flag}" alt={languageName}>
-                    <span>{languageName}</span>
-                </button>
-                
-            {:else if index === Object.keys(languageFlags).length - 1}
+                    <button class="languageOption baseButton" on:click={() => changeLanguage(languageCode)} bind:this={firstFocusableElement} lang={languageCode} aria-label="{getLanguageName(languageCode)}">
+                        <img src="/images/{flag}" alt={getLanguageName(languageCode)}>
+                        <span>{getLanguageName(languageCode)}</span>
+                    </button>
+                    
+                {:else if index === Object.keys(languageFlags).length - 1}
 
-                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)} bind:this={lastFocusableElement} aria-label="{languageName}">
-                    <img src="/images/{flag}" alt={languageName}>
-                    <span>{languageName}</span>
-                </button>
+                    <button class="languageOption baseButton" on:click={() => changeLanguage(languageCode)} bind:this={lastFocusableElement} lang={languageCode} aria-label="{getLanguageName(languageCode)}">
+                        <img src="/images/{flag}" alt={getLanguageName(languageCode)}>
+                        <span>{getLanguageName(languageCode)}</span>
+                    </button>
 
-            {:else}
+                {:else}
 
-                <button class="languageOption baseButton" on:click={() => changeLanguage(languageName)} aria-label="{languageName}">
-                    <img src="/images/{flag}" alt={languageName}>
-                    <span>{languageName}</span>
-                </button>
-                
+                    <button class="languageOption baseButton" on:click={() => changeLanguage(languageCode)} lang={languageCode} aria-label="{getLanguageName(languageCode)}">
+                        <img src="/images/{flag}" alt={getLanguageName(languageCode)}>
+                        <span>{getLanguageName(languageCode)}</span>
+                    </button>
+                    
+                {/if}
             {/if}
         {/each}
     </div>

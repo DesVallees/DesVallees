@@ -10,28 +10,40 @@
     const dispatch = createEventDispatcher();
     
     $:languages = [
-        'français',
-        'español',
-        'italiano',
-        'english',
-        'Русский',
-    ]
+        'fr',
+        'es',
+        'it',
+        'en',
+        'ru',
+    ];
+
+    function getLanguageName(languageCode: string): string | undefined {
+        const languageMappings: Record<string, string> = {
+            'es': 'español',
+            'en': 'english',
+            'fr': 'français',
+            'it': 'italiano',
+            'ru': 'Русский',
+        };
+
+        return languageMappings[languageCode];
+    }
 
     function getEncouragementMessage():string {
         const message = $dictionary.encouragement[
             Math.floor(Math.random() * $dictionary.encouragement.length)
-        ]
-        return message
+        ];
+        return message;
     }
 
     function changeLanguage(newLanguage:string) {
-        languages = updateLanguages(newLanguage)
-        $language = newLanguage as Language
-        dispatch("languageChanged")
+        languages = updateLanguages(newLanguage);
+        $language = newLanguage as Language;
+        dispatch("languageChanged");
         toast(getEncouragementMessage(), {
             style: 'border-radius: 50px; background: var(--fg-200); font-size: 1.1rem; font-family: inherit;  text-align: center;',
             duration: 2000
-        })
+        });
     }
 
     function updateLanguages(newLanguage: string): string[] {
@@ -39,7 +51,7 @@
 
         const result = [...languages];
         result.splice(newIndex, 1);
-        result.push(newLanguage)
+        result.push(newLanguage);
 
         return result;
     }
@@ -56,8 +68,9 @@
             class={(newLanguage === $language) ? 'current' : ''} 
             disabled={newLanguage === $language} 
             on:click={() => changeLanguage(newLanguage)}
+            lang={newLanguage}
         >
-            {newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1)}
+            {getLanguageName(newLanguage)}
         </button>
     {/each}
 </div>
@@ -78,6 +91,7 @@
     }
     
     button {
+        text-transform: capitalize;
         width: 6.5rem;
     }
 

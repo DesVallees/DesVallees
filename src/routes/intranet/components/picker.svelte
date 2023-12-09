@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fade, slide } from "svelte/transition";
+	import { dictionary } from "../stores";
 
     export let options: {id: number, name: string}[];
     export let button: HTMLButtonElement | undefined = undefined;
@@ -37,7 +38,7 @@
 </script>
 
 {#key optionSelectedIndex}
-    <button in:fade|global bind:this={button} class="selectedTeam" class:active={optionsVisible} on:click={toggle}>
+    <button in:fade|global bind:this={button} class="selectedTeam" class:active={optionsVisible} on:click={toggle} aria-label="{$dictionary.visibleTo} {options[optionSelectedIndex].name}">
         {options[optionSelectedIndex].name} 
     </button>
 {/key}
