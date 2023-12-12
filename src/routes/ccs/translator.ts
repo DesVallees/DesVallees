@@ -13,6 +13,7 @@ export const translator = {
         compartir: 'Compartir',
         guitarraAnterior: 'Guitarra Anterior',
         guitarraSiguiente: 'Siguiente Guitarra',
+        siteNavigation: 'Navegación del Sitio',
 
         restauracion: 'Restauración',
         fabricacion: 'Fabricación',
@@ -39,6 +40,7 @@ export const translator = {
         compartir: 'Share',
         guitarraAnterior: 'Previous Guitar',
         guitarraSiguiente: 'Next Guitar',
+        siteNavigation: 'Site Navigation',
 
         restauracion: 'Restoration',
         fabricacion: 'Manufacturing',
@@ -65,6 +67,7 @@ export const translator = {
         compartir: 'Partager',
         guitarraAnterior: 'Guitare précédente',
         guitarraSiguiente: 'Guitare suivante',
+        siteNavigation: 'Navigation du Site',
 
         restauracion: 'Restauration',
         fabricacion: 'Fabrication',
@@ -91,6 +94,7 @@ export const translator = {
         compartir: 'Teilen',
         guitarraAnterior: 'Vorherige Gitarre',
         guitarraSiguiente: 'Nächste Gitarre',
+        siteNavigation: 'Seitennavigation',
 
         restauracion: 'Restaurierung',
         fabricacion: 'Herstellung',
@@ -117,6 +121,7 @@ export const translator = {
         compartir: 'Condividi',
         guitarraAnterior: 'Chitarra precedente',
         guitarraSiguiente: 'Prossima chitarra',
+        siteNavigation: 'Navigazione del Sito',
 
         restauracion: 'Restauro',
         fabricacion: 'Produzione',
@@ -143,6 +148,7 @@ export const translator = {
         compartir: 'Поделиться',
         guitarraAnterior: 'Предыдущая гитара',
         guitarraSiguiente: 'Следующая гитара',
+        siteNavigation: 'Навигация по сайту',
 
         restauracion: 'Реставрация',
         fabricacion: 'Производство',

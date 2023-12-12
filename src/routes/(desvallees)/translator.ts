@@ -1,5 +1,7 @@
 export const translator = {
     es: {
+        santiagoOvallesProjects: "Proyectos de Santiago Ovalles",
+        attorneyCollaborativeOnlineService: "Servicio en Línea Colaborativo para Abogados",
         intranet: "Intranet de Canto Legal",
         backoffice: "Clapp Back Office - Características Menores",
         clappForms: "Formularios Clapp",
@@ -7,8 +9,11 @@ export const translator = {
         ticTacToe: "Tres en línea",
         profileCards: "Tarjetas de Perfil",
         sketch: "Bosquejo",
+        comingSoon: 'Próximamente',
     },
     en: {
+        santiagoOvallesProjects: "Santiago Ovalles' Projects",
+        attorneyCollaborativeOnlineService: "Attorney's Collaborative Online Service",
         intranet: "Canto Legal Intranet",
         backoffice: "Clapp Back Office - Minor features",
         clappForms: "Clapp Forms",
@@ -16,8 +21,11 @@ export const translator = {
         ticTacToe: "Tic-tac-toe",
         profileCards: "Profile Cards",
         sketch: "Sketch",
+        comingSoon: 'Coming Soon',
     },
     fr: {
+        santiagoOvallesProjects: "Projets de Santiago Ovalles",
+        attorneyCollaborativeOnlineService: "Service Collaboratif en Ligne pour Avocats",
         intranet: "Intranet de Canto Legal",
         backoffice: "Clapp Back Office - Fonctionnalités Mineures",
         clappForms: "Formulaires Clapp",
@@ -25,8 +33,11 @@ export const translator = {
         ticTacToe: "Morpion",
         profileCards: "Cartes de Profil",
         sketch: "Croquis",
+        comingSoon: 'Prochainement',
     },
     de: {
+        santiagoOvallesProjects: "Santiago Ovalles Projekte",
+        attorneyCollaborativeOnlineService: "Kollaborativer Online-Dienst für Anwälte",
         intranet: "Canto Legal Intranet",
         backoffice: "Clapp Back Office - Kleinere Funktionen",
         clappForms: "Clapp Forms",
@@ -34,8 +45,11 @@ export const translator = {
         ticTacToe: "Tic-tac-toe",
         profileCards: "Profilkarten",
         sketch: "Skizze",
+        comingSoon: 'Demnächst',
     },
     it: {
+        santiagoOvallesProjects: "Progetti di Santiago Ovalles",
+        attorneyCollaborativeOnlineService: "Servizio Online Collaborativo per Avvocati",
         intranet: "Intranet di Canto Legal",
         backoffice: "Clapp Back Office - Funzionalità Minori",
         clappForms: "Moduli Clapp",
@@ -43,8 +57,11 @@ export const translator = {
         ticTacToe: "Tris",
         profileCards: "Carte del Profilo",
         sketch: "Schizzo",
+        comingSoon: 'Prossimamente',
     },
     ru: {
+        santiagoOvallesProjects: "Проекты Сантьяго Овальеса",
+        attorneyCollaborativeOnlineService: "Совместный онлайн-сервис адвокатов",
         intranet: "Внутренняя сеть Canto Legal",
         backoffice: "Clapp Back Office - Мелкие функции",
         clappForms: "Формы Clapp",
@@ -52,5 +69,6 @@ export const translator = {
         ticTacToe: "Крестики-нолики",
         profileCards: "Профильные карты",
         sketch: "Эскиз",
+        comingSoon: 'Скоро',
     },
 };

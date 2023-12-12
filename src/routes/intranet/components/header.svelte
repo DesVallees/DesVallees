@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dictionary } from "../stores";
     import NotificationsButton from "./notificationsButton.svelte";
 	import SNav from "./sNav.svelte";
 
@@ -8,7 +9,7 @@
 
 <div class="header">
     <div class="menu">
-        <button class="sidebarTrigger" aria-label="menu" on:click={() => active = !active}>
+        <button class="sidebarTrigger" aria-label="{$dictionary.siteNavigation}" on:click={() => active = !active}>
             <ion-icon name="menu-outline"></ion-icon>
         </button>
         <SNav bind:active/>

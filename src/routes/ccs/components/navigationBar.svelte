@@ -12,7 +12,7 @@
 <nav>
     <BackgroundCircle color="var(--contentTransparent)"/>
     
-    <button id="snavToggle" class="s" on:click={() => active = !active}>
+    <button id="snavToggle" class="s" on:click={() => active = !active} aria-label="{$dictionary.siteNavigation}">
         <ion-icon name="menu-outline"></ion-icon>
     </button>
     
@@ -20,8 +20,8 @@
         <ChangeLanguage />
     </div>
 
-    <a href="/ccs" aria-label={$dictionary.inicio}>
-        <img class="logo x" src="/images/ccs/CCSlogoTransparent.webp" alt="CCS Logo">
+    <a class="x" href="/ccs" aria-label={$dictionary.inicio}>
+        <img class="logo" src="/images/ccs/CCSlogoTransparent.webp" alt="CCS Logo">
     </a>
     
     <section id="xnav" class="x">

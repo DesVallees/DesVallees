@@ -13,11 +13,7 @@
     border-radius: 5px;
 }
 
-:root {
-    --mainRGB: 24, 26, 32;
-    --contentRGB: 245, 245, 255;
-    --interactiveRGB: 65, 10, 216;
-
+:root {    
     --main: rgb(var(--mainRGB));
     --main-9: rgba(var(--mainRGB), .9);
     --main-8: rgba(var(--mainRGB), .8);
@@ -50,6 +46,18 @@
     --interactive-1: rgba(var(--interactiveRGB), .1);
 }
 
+[data-theme="dark"] {
+    --mainRGB: 32, 32, 32;
+    --contentRGB: 245, 245, 255;
+    --interactiveRGB: 0, 120, 215;
+}
+
+[data-theme="light"] {
+    --mainRGB: 247, 250, 250;
+    --contentRGB: 6, 53, 122;
+    --interactiveRGB: 252, 35, 26;
+}
+
 ::selection{
     background-color: var(--interactive);
     color: var(--content);
@@ -60,6 +68,19 @@
     opacity: 1;
 }
 
+body::-webkit-scrollbar {
+    width: .5rem;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--content);
+  border-radius: 10px;
+}
+
 html,
 body,
 #app {
@@ -68,9 +89,11 @@ body,
 }
 
 body {
-    color: var(--content);
-    background: var(--main);
+    color: var(--content) !important;
+    background-color: var(--main) !important;
     position: relative;
+
+    transition: background-color .5s, color .2s;
 }
 
 ion-icon {
@@ -167,14 +190,13 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .baseButton.active {
-    background-color: var(--content-5);
+    background-color: var(--content-3);
 }
 
 .link {
     position: relative;
 
     padding: .3em 0;
-    translate: 0 .3em;
 }
 
 .link::before {

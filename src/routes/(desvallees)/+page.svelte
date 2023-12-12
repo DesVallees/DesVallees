@@ -16,25 +16,31 @@
 
 <div>
 
-    <a data-sveltekit-reload href="/journee">Journée (2023)</a>
+    <h1>{$dictionary.santiagoOvallesProjects}</h1>
+    
+    <a data-sveltekit-reload href="/journee">Journée ({$dictionary.comingSoon})</a>
+    
+    <Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="1.5rem 0" />
+    
+    <a data-sveltekit-reload href="/lawyer-site">{$dictionary.attorneyCollaborativeOnlineService} (2023)</a>
     <a data-sveltekit-reload href="/intranet">{$dictionary.intranet} (2023)</a>
     <a data-sveltekit-reload href="/ccs">CCS (2023)</a>
     <a data-sveltekit-reload href="/destype">DesType (2023)</a>
     <a data-sveltekit-reload href="/threlte">Threlte (2023)</a>
     
-    <Separator width="90%" maxWidth="500px" height="1px" color="#F7F7FF" margin="3em 0" />
+    <Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
     
-    <a target="_blank" href="https://legaloffice.peopleworksservices.com/">{$dictionary.backoffice} (2022)</a>
     <a target="_blank" href="https://clappforms.web.app/">{$dictionary.clappForms} (2022)</a>
+    <a target="_blank" href="https://legaloffice.peopleworksservices.com/">{$dictionary.backoffice} (2022)</a>
     
-    <Separator width="90%" maxWidth="500px" height="1px" color="#F7F7FF" margin="3em 0" />
+    <Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
     
     <a aria-disabled="true" href="/">Marshall's Care (2021)</a>
     <!--  target="_blank" href="http://marshallscare.com/" -->
     <a target="_blank" href="https://ovaliza.com/">Ovaliza (2021)</a>
     <a target="_blank" href="https://canto-legal.web.app/">DesCalendar (2021)</a>
 
-    <Separator width="90%" maxWidth="500px" height="1px" color="#F7F7FF" margin="3em 0" />
+    <Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
 
     <a target="_blank" href="https://deschat-35f5b.web.app/">DesChat ({$dictionary.sketch})</a>
     <a target="_blank" href="https://clapppdfs.web.app/">{$dictionary.pdfEditor} ({$dictionary.sketch})</a>
@@ -54,6 +60,13 @@
         max-width: 70ch;
         margin: auto;
         padding: 5rem 2rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+        margin-bottom: 2.5rem;
+        text-decoration: underline;
+        text-underline-offset: 4px;
     }
 
     a {

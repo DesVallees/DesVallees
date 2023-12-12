@@ -4,12 +4,11 @@
 	import { page } from '$app/stores';
 	import { language } from './stores';
 	import { sleep } from './functions';
-    import { Toaster } from 'svelte-french-toast';
     
 	import Nav from './components/nav.svelte';
 	import Footer from './components/footer.svelte';
-	import BackgroundCircle from './components/backgroundCircle.svelte';
 	import Preloader from './components/preloader.svelte';
+	import NavigationLinks from './components/navigationLinks.svelte';
 
     let disappearAndAppear:boolean = false;
     
@@ -44,18 +43,18 @@
 
 <svelte:head>
     <meta name="author" content="Santiago Ovalles">
-    <link rel="icon" href="/images/journee/logoWhite.webp" />
+    <link rel="icon" href="/images/lawyers/logoWhite.webp" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
 </svelte:head>
-
-<Toaster/>
-
-<BackgroundCircle style="opacity: .5;" />
-<BackgroundCircle coordinates={{left: '30%', top: '70%'}} style="opacity: .8;" />
 
 <div class:disappearAndAppear>
     <nav>
         <Nav />
     </nav>
+    <section>
+        <NavigationLinks />
+    </section>
 
     <main bind:this={mainContent}>
         <slot/>
@@ -66,9 +65,7 @@
     </footer>
 
     {#if !ready}
-        <Preloader animation="dots">
-            <h1 style="font-size: 3rem;">Journée</h1>
-        </Preloader>
+        <Preloader animation="default"/>
     {/if}
 </div>
 
@@ -77,7 +74,7 @@
     div {
         min-height: 100%;
         display: grid;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: auto auto 1fr auto;
         align-items: center;
     }
 
@@ -87,13 +84,22 @@
         top: 0;
         left: 0;
 
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        border-bottom: solid 1px var(--content-5);
+        background-color: var(--main);
+        transition: background-color .5s;
+    }
+
+    section {
+        z-index: 2;
     }
 
     main{
         max-width: 100vw;
         align-self: stretch;
+    }
+
+    footer {
+        border-top: solid 1px var(--content-5);
     }
 
     .disappearAndAppear {
