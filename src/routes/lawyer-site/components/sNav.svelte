@@ -101,7 +101,7 @@
                 </menu>
             {/if}
 
-            <a href="/lawyer-site/client-portal" on:click|preventDefault={() => linkBehaviour("/lawyer-site/client-portal")} class="baseButton" class:active={$page.url.pathname === '/lawyer-site/client-portal'}>{$dictionary.clientPortal}</a>
+            <button class="baseButton">{$dictionary.clientPortal}</button>
         </div>
         
         <div>
@@ -133,6 +133,7 @@
         height: 100vh;
         height: 100dvh;
         width: 38ch;
+        max-width: 70%;
         z-index: 3;
         background-color: var(--main);
         border-right: solid 2px var(--content);
@@ -156,9 +157,9 @@
 
     .baseButton {
         font-size: 1.1rem;
-        min-width: 200px;
         width: 100%;
         justify-content: flex-start;
+        text-align: left;
     }
 
     li {
@@ -187,7 +188,6 @@
 
     section .baseButton {
         width: fit-content;
-        min-width: unset;
         padding: .3em;
         font-size: 1.2rem;
     }
@@ -212,10 +212,6 @@
         .baseButton {
             font-size: 1.05rem;
             padding: .5em .75em;
-        }
-
-        .baseButton ion-icon {
-            translate: 0 .05em;
         }
     }
 </style>

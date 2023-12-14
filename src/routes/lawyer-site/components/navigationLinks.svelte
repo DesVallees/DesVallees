@@ -105,7 +105,8 @@
                 </menu>
             {/if}
         </button>
-        <a href="/lawyer-site/client-portal" class="button">{$dictionary.clientPortal}</a>
+        
+        <button class="button">{$dictionary.clientPortal}</button>
     </div>
 </nav>
 

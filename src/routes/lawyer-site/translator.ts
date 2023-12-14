@@ -27,6 +27,9 @@ export const translator = {
         joinOurTeam: 'Join Our Team',
         siteMap: 'Sitemap',
         siteNavigation: 'Site Navigation',
+        image: 'Image',
+        divorceProceedings: 'Divorce Proceedings',
+        custodyProceedings: 'Custody Proceedings',
     },
     es: {
         comingSoon: 'Próximamente',
@@ -56,5 +59,8 @@ export const translator = {
         joinOurTeam: 'Únete a Nuestro Equipo',
         siteMap: 'Mapa del sitio',
         siteNavigation: 'Navegación del Sitio',
+        image: 'Imagen',
+        divorceProceedings: 'Procedimientos de Divorcio',
+        custodyProceedings: 'Procedimientos de Custodia',
     },
 };

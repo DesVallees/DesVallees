@@ -67,6 +67,7 @@
         margin-bottom: 2.5rem;
         text-decoration: underline;
         text-underline-offset: 4px;
+        text-align: center;
     }
 
     a {

@@ -170,6 +170,11 @@ textarea::-webkit-scrollbar-thumb {
     background-color: var(--interactive);
 }
 
+[data-theme="light"] .button {
+    background-color: var(--interactive-9);
+    color: var(--main);
+}
+
 .ghostButton {
     border: 2px solid var(--interactive);
     background-color: transparent;
