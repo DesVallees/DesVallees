@@ -1,15 +1,23 @@
 <script lang="ts">
 	import { dictionary } from "../stores";
+    import { createEventDispatcher } from "svelte";
+
+    const dispatch = createEventDispatcher();
 
 
     export let array:any[];
     export let currentFileIndex: number;
 
+    function handleButtonClick(index:number) {
+        currentFileIndex = index;
+        dispatch("interaction")
+    }
+
 </script>
 
 <div>
     {#each array as i, index}
-        <button aria-label="{$dictionary.image} {index + 1}" on:click={() => currentFileIndex = index} class:active={index === currentFileIndex} tabindex={index === currentFileIndex ? -1 : 0}></button>
+        <button aria-label="{$dictionary.image} {index + 1}" on:click={() => handleButtonClick(index)} class:active={index === currentFileIndex} tabindex={index === currentFileIndex ? -1 : 0}></button>
     {/each}
 </div>
 
@@ -17,13 +25,11 @@
     div{
         display: flex;
         gap: 1.5em;
-        
-        margin-bottom: 2em;
     }
     
     div button{
         border-radius: 50px;
-        background-color: var(--contentDimer);
+        background-color: var(--content-7);
         height: 12px;
         width: 20px;
         transition: all .2s;
@@ -32,7 +38,7 @@
     div button:not(.active):hover,
     div button:not(.active):focus-visible{
         width: 30px;
-        background-color: var(--contentDim);
+        background-color: var(--content-9);
     }
 
     div .active{
@@ -41,11 +47,25 @@
         background-color: var(--content);
     }
 
-    @media (orientation: portrait) {
-        div{
+    @media screen and (max-width: 500px) {
+        div {
             gap: 1em;
-            
-            margin-bottom: 2em;
         }
+
+        div button{
+            height: 11px;
+            width: 15px;
+        }
+
+
+        div button:not(.active):hover,
+        div button:not(.active):focus-visible{
+            width: 20px;
+        }
+
+        div .active{
+            width: 40px;
+        }
+
     }
 </style>

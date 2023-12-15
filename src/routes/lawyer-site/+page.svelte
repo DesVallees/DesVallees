@@ -4,94 +4,215 @@
 
 	import Card from './components/card.svelte';
 	import Testimonial from './components/testimonial.svelte';
+	import Carousel from "./components/carousel.svelte";
 
+    let carouselImages = [
+        '/images/lawyers/carousel_un.jpg',
+        '/images/lawyers/carousel_deux.jpg',
+        '/images/lawyers/carousel_trois.jpg',
+        '/images/lawyers/carousel_quatre.jpg',
+        '/images/lawyers/team.jpg',
+    ];
 
 </script>
 
 <svelte:head>
     <title>{$dictionary.homepage}</title>
-    <meta name="description" content="Affordable online legal assistance for divorce and custody proceedings.">
+    <meta name="description" content="{$dictionary.homeDescription}">
 </svelte:head>
 
 <div class="home" in:fade>
-    <section class="background">
+    <section class="initial">
         <div class="left">
-            <h1>Headline</h1>
-            <p>Something something</p>
-            <a class="button" href="/lawyer-site/services">Invitation to view services</a>
+            <h1>LegalCollab</h1>
+            <p>{$dictionary.empoweringYourLegalJourney}</p>
+            <a class="button explore" href="/lawyer-site/services">{$dictionary.exploreOurServices}</a>
         </div>
         <div class="right">
-            <button>Ion icon - Play. Open youtube video.</button>
+            <img src="/images/lawyers/landingImage.webp" width="500px" alt="{$dictionary.lawyersImageDescription}">
         </div>
     </section>
     
     <section class="cards">
         <Card 
-            title="Legal Assistance" 
-            description="Explore our legal assistance services tailored for divorce and custody proceedings. Our team of experienced attorneys is here to guide you through the process." 
-            imageSrc="/images/lawyers/logoWhite.webp"
+            title="{$dictionary.legalAssistance}" 
+            description="{$dictionary.navigateDivorce}" 
+            imageSrc="/images/lawyers/service.jpg"
+            alt={$dictionary.lawyerHelpingClientImageDescription}
             href="/lawyer-site/services"
-            linkText="Explore Services"
+            linkText="{$dictionary.discoverOurServices}"
         />
         <Card 
             title="{$dictionary.contactUs}" 
-            description="Have questions or need assistance? Contact us directly for personalized support. Our team is ready to assist you." 
-            imageSrc="/images/lawyers/logoWhite.webp"
+            description="{$dictionary.haveQuestions}" 
+            imageSrc="/images/lawyers/contact.jpg"
+            alt={$dictionary.lawyerThumbsUpImageDescription}
             href="/lawyer-site/contact"
-            linkText="{$dictionary.contactUs}"
+            linkText="{$dictionary.getInTouch}"
         />
         <Card 
-            title="{$dictionary.ourTeam}" 
-            description="Meet our team of dedicated attorneys with expertise in family law. Learn about their experience and commitment to helping clients." 
-            imageSrc="/images/lawyers/logoWhite.webp"
+            title="{$dictionary.meetOurTeam}" 
+            description="{$dictionary.discoverOurTeam}" 
+            imageSrc="/images/lawyers/team.jpg"
+            alt={$dictionary.legalCollabTeam}
             href="/lawyer-site/team"
-            linkText="Meet Our Team"
+            linkText="{$dictionary.meetOurLegalExperts}"
         />
     </section>
 
     <section class="overview">
-        <div class="left">
-            <h2>We've been doing this for a long time.</h2>
-            <p>This is why...</p>
-        </div>
-        <div class="right">
-            <img src="/images/lawyers/logoWhite.webp" width="80px" alt="Alternate Text">
-        </div>
+        <h2>{$dictionary.decadesOfLegalExpertise}</h2>
+        <p>{$dictionary.withDecadesOfExperience}</p>
     </section>
 
     <section class="testimonials">
-        <h2>What Our Have Clients To Say</h2>
-        <p>Read testimonials from clients who have benefited from our affordable online legal assistance. Your success story could be next!</p>
+        <h2>{$dictionary.whatOurClientsSay}</h2>
+        <p>{$dictionary.readTestimonials}</p>
         
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" location="Carroll County" name="Pepito" text="Fantastic." />
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" location="Carroll County" name="Pepito" text="Fantastic." />
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" location="Carroll County" name="Pepito" text="Fantastic." />
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" location="Carroll County" name="Pepito" text="Fantastic." />
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" location="Carroll County" name="Pepito" text="Fantastic." />
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" location="Carroll County" name="Pepito" text="Fantastic." />
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" location="Carroll County" name="Pepito" text="Fantastic." />
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" location="Carroll County" name="Pepito" text="Fantastic." />
+        <div class="testimonialCards">
+            <Testimonial 
+                photoSrc="/images/lawyers/Marcus_Turner.jpg" 
+                location="{$dictionary.carrollCounty}" 
+                name="Marcus Turner" 
+                text="{$dictionary.incrediblySupportiveTeam}" 
+            />
+            <Testimonial 
+                photoSrc="/images/lawyers/Emily_Davis.jpg" 
+                location="{$dictionary.baltimoreCounty}" 
+                name="Emily Davis" 
+                text="{$dictionary.exceptionalService}" 
+            />
+            <Testimonial 
+                photoSrc="/images/lawyers/Alejandro_Rodriguez.jpg" 
+                location="{$dictionary.howardCounty}" 
+                name="Alejandro Rodríguez" 
+                text="{$dictionary.professionalEfficientUnderstanding}" 
+            />
+        </div>
 
-        <a href="/lawyer-site/testimonials">View more testimonials</a>
+        <a class="button" href="/lawyer-site/testimonials">{$dictionary.viewMoreTestimonials}</a>
     </section>
 
     <section class="carousel">
-        <img src="/images/lawyers/logoWhite.webp" alt="alfdjk">
+        <Carousel images={carouselImages} imageDescriptions={[
+            $dictionary.carouselOneDescription,
+            $dictionary.carouselTwoDescription,
+            $dictionary.carouselThreeDescription,
+            $dictionary.carouselFourDescription,
+            $dictionary.legalCollabTeam,
+        ]} />
     </section>
 </div>
 
 <style>
     .home {
         display: grid;
-        justify-content: center;
+        justify-items: center;
+        gap: 8rem;
 
         min-height: 100%;
-        padding: 1.5rem;
+        padding: 0 1.5rem;
     }
 
-    @media screen and (min-width: 800px) {
+    .initial{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4rem;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        width: 100%;
+        min-height: calc(100vh - 8rem);
+        min-height: calc(100svh - 8rem);
+        padding: 2rem 0 5rem;
+    }
+
+    .initial .left {
+        display: grid;
+        align-content: center;
+        gap: 1rem;
+    }
+
+    h1 {
+        font-size: clamp(3.3rem, 12vw, 5rem);
+    }
+
+    p {
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+        max-width: 65ch;
+        margin: auto;
+        text-wrap: pretty;
+    }
+
+    .explore {
+        margin: 1rem 0;
+        font-size: clamp(1.1rem, 3.5vw, 1.25rem);
+    }
+
+    .initial .right img {
+        border-radius: 20px;
+        aspect-ratio: 1 / 1;
+        box-shadow: 0 0 1.5rem var(--content-1);
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(40ch, 100%), 1fr));
+        column-gap: 3rem;
+        row-gap: 2rem;
+        align-items: stretch;
+        justify-items: center;
+
+        margin: auto;
+        width: min(100%, 1300px);
+    }
+
+    h2 {
+        font-size: clamp(2rem, 7vw, 4rem);
+        margin: 5rem auto 2rem;
+        width: fit-content;
+        text-align: center;
+    }
+
+    .overview {
+        width: min(100%, 1300px);
+        display: grid;
+        justify-items: center;
+    }
+
+    .testimonials {
+        width: min(100%, 1300px);
+        margin: 5rem auto;
+    }
+
+    .testimonialCards {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 1rem;
+        row-gap: 1.5rem;
+        justify-content: center;
+    }
+
+    .testimonials p {
+        margin-bottom: 5rem;
+    }
+
+    .testimonials a {
+        margin: 3rem auto;
+        box-shadow: 0 0 1.5rem var(--content-1);
+        font-size: 1.2rem;
+    }
+
+    .carousel {
+        margin-bottom: 8rem;
+    }
+
+
+
+    @media screen and (min-width: 900px) {
         .home {
-            padding: 1.5rem 5rem;
+            padding: 0 2rem;
         }
     }
 </style>

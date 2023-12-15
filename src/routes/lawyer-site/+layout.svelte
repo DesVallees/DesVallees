@@ -9,6 +9,8 @@
 	import Footer from './components/footer.svelte';
 	import Preloader from './components/preloader.svelte';
 	import NavigationLinks from './components/navigationLinks.svelte';
+	import HelpSpace from './components/helpSpace.svelte';
+	import { Toaster } from 'svelte-french-toast';
 
     let disappearAndAppear:boolean = false;
     
@@ -18,7 +20,7 @@
         disappearAndAppear = false
         await sleep(1)
         disappearAndAppear = true
-        await sleep(2000)
+        await sleep(1100)
         disappearAndAppear = false
     }
 
@@ -39,25 +41,57 @@
         }
     });
 
+
+
+
+    // Assuming you have a variable called timeLeftUntilMidnight
+    let timeLeftUntilMidnight: string = '';
+
+    // Function to update time left until midnight
+    function updateTimeUntilMidnight() {
+        const now = new Date();
+        const midnight = new Date(now);
+        midnight.setHours(24, 0, 0, 0); // Set to midnight of the next day
+
+        const timeDifference = midnight.getTime() - now.getTime();
+
+        const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        timeLeftUntilMidnight = `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    // Call the function every second (adjust the interval as needed)
+    const intervalId = setInterval(() => {
+        updateTimeUntilMidnight();
+    }, 1000);
+
 </script>
 
 <svelte:head>
     <meta name="author" content="Santiago Ovalles">
-    <link rel="icon" href="/images/lawyers/logoWhite.webp" />
+    <link rel="icon" href="/images/lawyers/logoFull.webp" />
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
 </svelte:head>
 
+<Toaster />
+
 <div class:disappearAndAppear>
-    <nav>
-        <Nav />
-    </nav>
-    <section>
+    <header>
+        <div class="nav-main">
+            <Nav />
+        </div>
+
+        <span style="position: fixed; top: 1rem; font-size: 1.25rem; font-weight: bold; left: 50%; translate: -50% 0; border-radius: 10px; background: red; color:white; padding: .3rem .6rem;">{timeLeftUntilMidnight}</span>
+
         <NavigationLinks />
-    </section>
+    </header>
 
     <main bind:this={mainContent}>
         <slot/>
+        <HelpSpace />
     </main>
 
     <footer>
@@ -74,27 +108,28 @@
     div {
         min-height: 100%;
         display: grid;
-        grid-template-rows: auto auto 1fr auto;
+        grid-template-rows: auto 1fr auto;
         align-items: center;
     }
 
-    nav{
+    header{
         z-index: 3;
         position: sticky;
         top: 0;
         left: 0;
 
-        border-bottom: solid 1px var(--content-5);
         background-color: var(--main);
         transition: background-color .5s;
     }
-
-    section {
-        z-index: 2;
+    
+    .nav-main {
+        border-bottom: solid 1px var(--content-5);
+        display: flex;
+        justify-content: center;
     }
 
     main{
-        max-width: 100vw;
+        max-width: 100%;
         align-self: stretch;
     }
 
@@ -102,8 +137,8 @@
         border-top: solid 1px var(--content-5);
     }
 
-    .disappearAndAppear {
-        animation: disappearAndAppear 1.5s;
+    :global(.disappearAndAppear) {
+        animation: disappearAndAppear 1s;
     }
 
     @keyframes disappearAndAppear {

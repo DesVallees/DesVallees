@@ -52,7 +52,7 @@
     }
 
     section {
-        max-width: calc(1500px);
+        max-width: 1500px;
         margin: auto;
         display: grid;
         row-gap: .5rem;
@@ -62,7 +62,7 @@
 
     footer {
         width: fit-content;
-        max-width: calc(1500px);
+        max-width: 1500px;
         margin: auto;
 
         text-align: center;

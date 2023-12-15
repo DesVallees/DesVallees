@@ -4,12 +4,12 @@
 </script>
 
 <svelte:head>
-    <title>{$dictionary.faq}</title>
+    <title>{$dictionary.frequentlyAskedQuestions}</title>
     <meta name="description" content="Frequently Asked Questions about our legal services.">
 </svelte:head>
 
 <div class="faq" in:fade>
-    <h1>{$dictionary.faq}</h1>
+    <h1>{$dictionary.frequentlyAskedQuestions}</h1>
 
     <section>
         <h2>Search FAQs</h2>

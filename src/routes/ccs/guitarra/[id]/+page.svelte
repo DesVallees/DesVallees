@@ -140,6 +140,7 @@
 		background-color: #00000030;
 		border-collapse: collapse;
 		overflow: hidden;
+		overflow: clip;
 
 		box-shadow: 1px 1px 20px rgba(255, 255, 255, 0.062);
 	}

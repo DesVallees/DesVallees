@@ -18,9 +18,27 @@
         activeMenu = undefined;
     }
 
+    let scrollY: number;
+
+    let showNavLinks: boolean = true;
+    const transitionDuration: number = 250;
+
+    let handleScroll = () => {
+        if (scrollY < 50) {
+            showNavLinks = true;
+        }
+        else if (scrollY > 100) {
+            showNavLinks = false;
+        }
+    }
+
 </script>
 
-<nav transition:slide>
+<svelte:window bind:scrollY on:scroll={handleScroll} />
+
+{#if showNavLinks || scrollY === 0}
+
+<nav transition:slide={{duration: transitionDuration}}>
     <div>
         <a href="/lawyer-site" class="baseButton" class:active={$page.url.pathname === '/lawyer-site'}>
             {$dictionary.home} 
@@ -110,6 +128,8 @@
     </div>
 </nav>
 
+{/if}
+
 
 <style>
     nav {
@@ -120,7 +140,7 @@
         gap: 1rem;
 
         padding: .5rem 2rem 0;
-        max-width: calc(1500px - 3rem);
+        max-width: calc(1500px - 2rem);
     }
 
     div {

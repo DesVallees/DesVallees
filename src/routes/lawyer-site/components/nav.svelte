@@ -33,11 +33,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: auto;
         gap: 3rem;
 
         padding: .8rem 2rem;
         max-width: 1500px;
+        width: 100%;
     }
 
     a, div {
