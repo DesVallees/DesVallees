@@ -2,6 +2,7 @@
 	import { slide } from "svelte/transition";
 	import { dictionary } from "../stores";
 	import { page } from "$app/stores";
+	import toast from "svelte-french-toast";
 
     let activeMenu: string | undefined;
 
@@ -30,6 +31,10 @@
         else if (scrollY > 100) {
             showNavLinks = false;
         }
+    }
+
+    function comingSoon() {
+        toast(`${$dictionary.comingSoon}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
     }
 
 </script>
@@ -124,7 +129,7 @@
             {/if}
         </button>
         
-        <button class="button">{$dictionary.clientPortal}</button>
+        <button class="button" on:click={comingSoon}>{$dictionary.clientPortal}</button>
     </div>
 </nav>
 

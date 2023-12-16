@@ -7,6 +7,7 @@
 	import { goto } from "$app/navigation";
 	import Logo from "./logo.svelte";
 	import ThemeSwitcher from "./themeSwitcher.svelte";
+	import toast from "svelte-french-toast";
 
     export let active : boolean = false;
 
@@ -25,6 +26,10 @@
 
         await sleep(2)
         goto(href)
+    }
+
+    function comingSoon() {
+        toast(`${$dictionary.comingSoon}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
     }
 </script>
 
@@ -101,7 +106,7 @@
                 </menu>
             {/if}
 
-            <button class="baseButton">{$dictionary.clientPortal}</button>
+            <button class="baseButton" on:click={comingSoon}>{$dictionary.clientPortal}</button>
         </div>
         
         <div>

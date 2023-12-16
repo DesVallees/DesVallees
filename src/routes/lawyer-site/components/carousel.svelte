@@ -9,8 +9,9 @@
 
     export let images: string[];
     export let imageDescriptions: string[] | undefined = undefined;
+    export let automaticImageChangeTime: number = 5000;
 
-    let currentFileIndex: number = 0;
+    export let currentFileIndex: number = 0;
     let intervalId: number | undefined;
 
     function changeImages() {
@@ -18,7 +19,7 @@
     }
 
     function startAutomaticImageChanges() {
-        intervalId = setInterval(changeImages, 5000);
+        intervalId = setInterval(changeImages, automaticImageChangeTime);
     }
 
     function stopAutomaticImageChanges() {
@@ -61,6 +62,7 @@
         position: relative;
 
         display: grid;
+        margin: auto;
 
         aspect-ratio: 4 / 3;
         width: fit-content;

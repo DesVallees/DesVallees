@@ -5,9 +5,10 @@
     export let alt:string | undefined = undefined;
     export let href:string | undefined = undefined;
     export let linkText:string | undefined = href;
+    export let style:string = '';
 </script>
 
-<div>
+<div {style}>
     {#if imageSrc}
         <img loading="lazy" src={imageSrc} width="300px" alt={alt || title}>
     {/if}
@@ -22,10 +23,10 @@
     div {
         display: grid;
         gap: 1rem;
-        aspect-ratio: 1 / 1;
         
         max-width: 410px;
         width: 100%;
+        min-height: fit-content;
         padding: 1.5rem;
         border-radius: calc(20px + 0rem);
 

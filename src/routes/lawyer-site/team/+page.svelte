@@ -1,65 +1,135 @@
 <script lang="ts">
-	import { fade, fly } from "svelte/transition";
+	import { fade } from "svelte/transition";
 	import { dictionary } from "../stores";
-	import CarrouselController from "../components/carrouselController.svelte";
+	import Carousel from "../components/carousel.svelte";
 
     type Lawyer = {
         imageSrc: string,
         name: string,
-        description: string
+        bioKey: string
     };
     
     const lawyerProfiles: Lawyer[] = [
         {
-            imageSrc: '/images/lawyers/logoWhite.webp',
-            name: 'Arturito',
-            description: 'Arturito is nice'
+            imageSrc: '/images/lawyers/Brian_Mitchell.jpg',
+            name: 'Brian Mitchell',
+            bioKey: 'Brian_Mitchell',
+        },
+        {
+            imageSrc: '/images/lawyers/Alejandro_Rodriguez.jpg',
+            name: 'Alejandro Rodríguez',
+            bioKey: 'Alejandro_Rodriguez',
+        },
+        {
+            imageSrc: '/images/lawyers/Emily_Davis.jpg',
+            name: 'Emily Davis',
+            bioKey: 'Emily_Davis',
+        },
+        {
+            imageSrc: '/images/lawyers/Ji-Yeon_Kim.jpg',
+            name: 'Ji-Yeon Kim',
+            bioKey: 'JiYeon_Kim',
+        },
+        {
+            imageSrc: '/images/lawyers/Rahul_Patel.jpg',
+            name: 'Rahul Patel',
+            bioKey: 'Rahul_Patel',
+        },
+        {
+            imageSrc: '/images/lawyers/Sofia_Lindström.jpg',
+            name: 'Sofia Lindström',
+            bioKey: 'Sofia_Lindström',
         },
     ];
 
+
+    const imageSrcArray: string[] = lawyerProfiles.map((lawyer) => lawyer.imageSrc);
+    const imageNameArray: string[] = lawyerProfiles.map((lawyer) => lawyer.name);
+
     let currentFileIndex = 0;
 
-    let currentLawyer: Lawyer;
-    $: currentFileIndex, currentLawyer = lawyerProfiles[currentFileIndex];
+    $: currentLawyerBio = $dictionary[lawyerProfiles[currentFileIndex].bioKey as keyof typeof $dictionary]
 
 </script>
 
 <svelte:head>
     <title>{$dictionary.ourTeam}</title>
-    <meta name="description" content="Meet the team behind this Lawyer Site.">
+    <meta name="description" content={$dictionary.ourTeamDescription}>
 </svelte:head>
 
 <div class="team" in:fade>
-    <h1>Meet our team</h1>
+    <h1>{$dictionary.meetOurTeam}</h1>
 
     <section class="lawyer">
         <div class="carousel">
-            <button class="previousImage" aria-label="Previous Image">
-            </button>
-    
-            {#key currentFileIndex}
-                <img src={currentLawyer.imageSrc} alt={currentLawyer.name}>
-            {/key}
-            
-            <button class="nextImage" aria-label="Next Image">
-            </button>
+            <Carousel images={imageSrcArray} imageDescriptions={imageNameArray} automaticImageChangeTime={10000} bind:currentFileIndex />
         </div>
-    
-        <CarrouselController array={lawyerProfiles} {currentFileIndex} />
-
-        <h2>{currentLawyer.name}</h2>
-
-        <p>{currentLawyer.description}</p>
+        
+        {#key currentLawyerBio}
+            <div in:fade>
+                <h2>{lawyerProfiles[currentFileIndex].name}</h2>
+                <p>{currentLawyerBio}</p>
+            </div>
+        {/key}
     </section>
 
-    <section class="joinOurTeam">
-        <h2>Are you a lawyer?</h2>
-        <p>Come and join us.</p>
+    <hr>
 
-        <a href="/lawyer-site/join-our-team">{$dictionary.joinOurTeam}</a>
+    <section class="joinOurTeam">
+        <h2>{$dictionary.callingLegalProfessionals}</h2>
+        <p>{$dictionary.embarkOnJourney}</p>
+        <a class="button" href="/lawyer-site/join-our-team">{$dictionary.exploreOpportunities}</a>
     </section>
 </div>
 
 <style>
+    .team {
+        padding: 3rem 2rem 10rem;
+        max-width: 1500px;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        margin: auto;
+        width: fit-content;
+        text-align: center;
+        line-height: 2.5ex;
+    }
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        line-height: 2.5ex;
+        margin-bottom: 1rem;
+    }
     
+    p {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        line-height: 3ex;
+        text-wrap: pretty;
+    }
+
+    .lawyer, .joinOurTeam {
+        max-width: 68ch;
+        margin: auto;
+
+        display: grid;
+        place-items: center;
+    }
+
+    .carousel {
+        width: min(100%, 70ch);
+        margin: 3rem auto;
+    }
+
+    hr {
+        width: min(100%, 70ch);
+        margin: 10rem auto;
+    }
+
+    .joinOurTeam a {
+        font-size: 1.25rem;
+        margin: 3rem 0;
+    }
+
 </style>

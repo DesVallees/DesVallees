@@ -2,6 +2,12 @@
     import { fade } from "svelte/transition";
     import { dictionary } from "../stores";
 	import Testimonial from "../components/testimonial.svelte";
+    import { onMount } from "svelte";
+	import toast from "svelte-french-toast";
+
+    onMount(() => {
+        toast(`${$dictionary.earlyDevelopmentStage}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
+    })
 </script>
 
 <svelte:head>

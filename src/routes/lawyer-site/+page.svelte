@@ -17,7 +17,7 @@
 </script>
 
 <svelte:head>
-    <title>{$dictionary.homepage}</title>
+    <title>LegalCollab - {$dictionary.homepage}</title>
     <meta name="description" content="{$dictionary.homeDescription}">
 </svelte:head>
 
@@ -32,6 +32,8 @@
             <img src="/images/lawyers/landingImage.webp" width="500px" alt="{$dictionary.lawyersImageDescription}">
         </div>
     </section>
+
+    <hr>
     
     <section class="cards">
         <Card 
@@ -41,6 +43,8 @@
             alt={$dictionary.lawyerHelpingClientImageDescription}
             href="/lawyer-site/services"
             linkText="{$dictionary.discoverOurServices}"
+
+            style="flex-basis: 40ch; flex-grow: 1;"
         />
         <Card 
             title="{$dictionary.contactUs}" 
@@ -49,6 +53,8 @@
             alt={$dictionary.lawyerThumbsUpImageDescription}
             href="/lawyer-site/contact"
             linkText="{$dictionary.getInTouch}"
+
+            style="flex-basis: 40ch; flex-grow: 1;"
         />
         <Card 
             title="{$dictionary.meetOurTeam}" 
@@ -57,13 +63,20 @@
             alt={$dictionary.legalCollabTeam}
             href="/lawyer-site/team"
             linkText="{$dictionary.meetOurLegalExperts}"
+
+            style="flex-basis: 40ch; flex-grow: 1;"
         />
     </section>
+
+    <hr>
 
     <section class="overview">
         <h2>{$dictionary.decadesOfLegalExpertise}</h2>
         <p>{$dictionary.withDecadesOfExperience}</p>
+        <a class="button" style="min-width: 200px;" href="/lawyer-site/contact">{$dictionary.contactUs}</a>
     </section>
+
+    <hr>
 
     <section class="testimonials">
         <h2>{$dictionary.whatOurClientsSay}</h2>
@@ -93,7 +106,10 @@
         <a class="button" href="/lawyer-site/testimonials">{$dictionary.viewMoreTestimonials}</a>
     </section>
 
+    <hr>
+
     <section class="carousel">
+        <h2>{$dictionary.bestMoments}</h2>
         <Carousel images={carouselImages} imageDescriptions={[
             $dictionary.carouselOneDescription,
             $dictionary.carouselTwoDescription,
@@ -108,24 +124,29 @@
     .home {
         display: grid;
         justify-items: center;
-        gap: 8rem;
 
         min-height: 100%;
         padding: 0 1.5rem;
     }
 
+    hr {
+        margin: 10rem auto;
+        width: min(100%, 1300px);
+    }
+
     .initial{
         display: flex;
         flex-wrap: wrap;
-        gap: 4rem;
+        column-gap: 4rem;
+        row-gap: 2rem;
         justify-content: center;
         align-items: center;
         align-content: center;
 
         width: 100%;
-        min-height: calc(100vh - 8rem);
-        min-height: calc(100svh - 8rem);
-        padding: 2rem 0 5rem;
+        min-height: calc(100vh - 12rem);
+        min-height: calc(100svh - 12rem);
+        padding: 2rem 0 4rem;
     }
 
     .initial .left {
@@ -157,12 +178,12 @@
     }
 
     .cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(40ch, 100%), 1fr));
+        display: flex;
+        flex-wrap: wrap;
         column-gap: 3rem;
         row-gap: 2rem;
         align-items: stretch;
-        justify-items: center;
+        justify-content: center;
 
         margin: auto;
         width: min(100%, 1300px);
@@ -170,7 +191,7 @@
 
     h2 {
         font-size: clamp(2rem, 7vw, 4rem);
-        margin: 5rem auto 2rem;
+        margin: 0 auto 2rem;
         width: fit-content;
         text-align: center;
     }
@@ -179,11 +200,16 @@
         width: min(100%, 1300px);
         display: grid;
         justify-items: center;
+        margin: auto;
+    }
+
+    .overview p {
+        line-height: 3ex;
     }
 
     .testimonials {
         width: min(100%, 1300px);
-        margin: 5rem auto;
+        margin: auto;
     }
 
     .testimonialCards {
@@ -198,14 +224,21 @@
         margin-bottom: 5rem;
     }
 
-    .testimonials a {
-        margin: 3rem auto;
+    .testimonials a, .overview a {
+        margin: 3rem auto 0;
         box-shadow: 0 0 1.5rem var(--content-1);
         font-size: 1.2rem;
     }
 
     .carousel {
+        width: min(100%, 1300px);
+        margin: auto;
         margin-bottom: 8rem;
+    }
+
+    .carousel h2 {
+        margin: 0 auto 3rem;
+        line-height: 2.5ex;
     }
 
 

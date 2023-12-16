@@ -84,16 +84,20 @@
         bottom: 3rem;
         right: 3rem;
 
-        max-width: 500px;
-        width: 90%;
+        max-height: 100%;
+        max-width: calc(100% - 2rem);
         
-        display: grid;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: end;
         justify-content: end;
-        justify-items: end;
-        gap: 1rem;
+        row-gap: 1rem;
+        z-index: 15;
     }
 
     .menu {
+        max-width: 500px;
         border-radius: 25px;
 
         color: var(--main);
@@ -230,5 +234,29 @@
 
     .trigger:hover ion-icon {
         font-size: 3rem;
+    }
+
+    @media screen and (max-width: 900px) {
+        .helpSpace {
+            bottom: 1rem;
+            right: 1rem;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .menu header {
+            gap: 1rem;
+        }
+
+        .menu img {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 350px) {
+        .menu .close {
+            display: none;
+        }
     }
 </style>

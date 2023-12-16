@@ -8,6 +8,10 @@ export function camelCaseToSpaced(camel: string): string {
                 .replace(/^./, str => str.toUpperCase());
 }
 
+export function spacedToHyphened(input: string): string {
+    return input.toLowerCase().replace(/\s+/g, '-');
+}
+
 export function capitalizeWords(str: string) {
     return str.split(' ').map(word => {
         return word.charAt(0).toUpperCase() + word.slice(1);
