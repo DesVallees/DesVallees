@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { clickOutsideOrChild, spacedToHyphened } from "../functions";
+	import { clickOutsideOrChild } from "../functions";
 	import { slide } from "svelte/transition";
 	import { dictionary } from "../stores";
 	import { sleep } from "../../ccs/functions";
@@ -25,15 +25,34 @@
 
             if (name) {
                 if (!id) {
-                    // If id is not present, generate one based on headerName
-                    id = spacedToHyphened(name)
+                    id = generateValidId(name);
                     header.id = id;
                 }
 
                 links = [...links, { id, name }];
             }
         });
+    }
 
+    function generateValidId(text: string) {
+        // Replace spaces with hyphens
+        let sanitized = text.replace(/\s/g, '-');
+
+        // Remove special characters
+        sanitized = sanitized.replace(/[^\w-]/g, '');
+
+        // Ensure it starts with a letter
+        sanitized = sanitized.replace(/^\d/, '_');
+
+        // Make it unique
+        let id = sanitized;
+        let counter = 1;
+        while (document.getElementById(id)) {
+            id = `${sanitized}-${counter}`;
+            counter++;
+        }
+
+        return id;
     }
 
     onMount(() => {
@@ -70,12 +89,16 @@
 <style>
     button {
         margin-bottom: 1rem;
+        column-gap: 2ch;
+        font-size: 1.05rem;
+        line-height: 1.5;
+
     }
     
     ol {
         display: grid;
         gap: 1rem;
-        font-size: 1rem;
+        font-size: 1.05rem;
         border: 2px solid var(--content);
         border-radius: 10px;
         padding: 1rem;

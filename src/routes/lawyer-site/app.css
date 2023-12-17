@@ -69,16 +69,16 @@
 }
 
 body::-webkit-scrollbar {
-    width: .5rem;
+    width: 1rem;
 }
 
 body::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: var(--content-2);
 }
 
 body::-webkit-scrollbar-thumb {
   background-color: var(--content);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 html,
@@ -156,7 +156,6 @@ textarea::-webkit-scrollbar-thumb {
     border-radius: 10px;
 
     font-weight: 700;
-    /* white-space: nowrap; */
 
     transition: .2s all;
 }
@@ -179,6 +178,7 @@ textarea::-webkit-scrollbar-thumb {
 .ghostButton {
     border: 2px solid var(--interactive);
     background-color: var(--interactive-1);
+    box-shadow: 0 0 .5rem var(--content-2);
 }
 
 .ghostButton:hover,
@@ -229,8 +229,39 @@ textarea::-webkit-scrollbar-thumb {
     transform: scaleX(1);
 }
 
-@media (orientation: portrait) {
-    button {
-        cursor: default;
-    }
+article {
+    margin-top: 3rem;
+    line-height: 1.8;
+    font-size: 1.2rem;
+}
+
+article h1 {
+    font-size: 2rem;
+}
+
+article h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+}
+
+article p {
+    color: var(--content-9);
+}
+
+article section {
+    margin-bottom: 20px;
+}
+
+article a {
+    margin: 5rem auto 2rem;
+    font-size: 1.15rem;
+    text-align: center;
+    min-width: 33%;
+}
+
+article li {
+    margin-top: 2ex;
+    margin-left: 1ch;
+    list-style-position: inside;
+    list-style-type: square;
 }

@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { spacedToHyphened } from "../functions";
 
+    type El = 'input' | 'textarea'
+
+    
+    export let element: El = 'input';
+    
     export let labelText: string;
     export let inputType: string = 'text';
 
@@ -17,13 +22,15 @@
     export let spellcheck: boolean = false;
     export let autocapitalize: string = "on";
 
-    export let inputEl: HTMLInputElement | undefined = undefined;
+    export let rows: number = 5;
+
+    export let inputEl: HTMLElement | undefined = undefined;
     
 </script>
 
 <!-- svelte-ignore a11y-autofocus -->
 <div class="inputGroup" style="--paddingBlock: {paddingBlock}; --paddingInline: {paddingInline}; {containerStyle}">
-    <slot>
+    {#if element === 'input'}
         <input 
             class="{className || 'ghostButton'}" 
             type="{inputType}" 
@@ -41,7 +48,28 @@
 
             bind:this={inputEl}
         >
-    </slot>
+
+    {:else if element === 'textarea'}
+        <textarea 
+            rows="{rows}" 
+
+            class="{className || 'ghostButton'}" 
+            id="{spacedToHyphened(labelText)}" 
+            aria-label="{labelText}" 
+            placeholder="" 
+            style="{inputStyle}"
+
+            {required}
+            {autocomplete}
+            {autofocus}
+            autocorrect={autocorrect.toString()}
+            {spellcheck}
+            {autocapitalize}
+
+            bind:this={inputEl}
+        ></textarea>
+
+    {/if}
     <label for="{spacedToHyphened(labelText)}">{labelText}</label>
 </div>
 
@@ -51,7 +79,7 @@
         margin-top: calc(1em + var(--paddingBlock));
     }
 
-    input {
+    input, textarea {
         width: 100%;
         padding: var(--paddingBlock) var(--paddingInline);
     }
@@ -61,8 +89,13 @@
         top: var(--paddingBlock);
         left: var(--paddingInline);
         color: var(--content-7);
-
+        
         font-weight: bold;
+        text-wrap: nowrap;
+
+        max-width: 100%;
+        overflow: hidden;
+        overflow: clip;
         
         pointer-events: none;
         transition: all 0.2s ease-out;
@@ -74,11 +107,14 @@
         color: var(--content);
     }
 
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    input:-webkit-autofill:active {
-        background-color: var(--main);
+    textarea:focus + label, textarea:not(:placeholder-shown) + label {
+        top: calc(-1em - var(--paddingBlock));
+        left: 5px;
         color: var(--content);
     }
+
+    input:not(:placeholder-shown), textarea:not(:placeholder-shown) {
+        box-shadow: inset 0 0 3rem var(--interactive-3);
+    }
+
 </style>

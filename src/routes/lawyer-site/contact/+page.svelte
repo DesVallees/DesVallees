@@ -59,27 +59,30 @@
                 autocomplete="off"
                 autocorrect={true}
             />
-    
-            <div class="select">
-                <label for="category">{$dictionary.category}</label>
-                <select class="ghostButton" id="category">
-                    <option value="general">{$dictionary.generalInquiry}</option>
-                    <option value="legal">{$dictionary.legalAssistance}</option>
-                    <option value="collaboration">{$dictionary.collaborationOpportunity}</option>
-                </select>
-            </div>
+
+            <FloatingLabel 
+                labelText={$dictionary.preferredLanguage} 
+                required={true} 
+                autocomplete="off"
+                autocorrect={true}
+            />
         </div>
     
-        <div class="textarea">
-            <label for="message">{$dictionary.yourMessage}</label>
-            <textarea rows="5" class="ghostButton" id="message" placeholder="{$dictionary.howCanWeAssistYou}" required></textarea>
+        <div class="yourMessage">
+            <FloatingLabel 
+                element="textarea"
+                labelText={$dictionary.yourMessage}
+                required={true} 
+                autocomplete="off"
+            />
         </div>
 
         <div class="row">
-            <div class="attachment">
-                <label for="attachment" aria-label="{$dictionary.attachment}"><ion-icon name="attach"></ion-icon></label>
-                <input type="file" id="attachment" accept=".pdf, .doc, .jpg, .png" />
-            </div>
+            <label class="attachment" for="attachment" aria-label="{$dictionary.attachment}">
+                <ion-icon name="attach"></ion-icon>
+                <span>{$dictionary.attachment}</span>
+                <input type="file" style="display: none;" id="attachment" accept=".pdf, .doc, .jpg, .png" />
+            </label>
         
             <label for="subscribe" class="checkbox">
                 <input type="checkbox" id="subscribe" />
@@ -90,10 +93,12 @@
                 <span class="radioLabel">
                     {$dictionary.preferredContactMethod}:
                 </span>
-                <input type="radio" id="contactEmail" name="preferredContact" value="email" />
-                <label for="contactEmail">{$dictionary.email}</label>
-                <input type="radio" id="contactPhone" name="preferredContact" value="phone" />
-                <label for="contactPhone">{$dictionary.phoneNumber}</label>
+                <div>
+                    <input type="radio" id="contactEmail" name="preferredContact" value="email" />
+                    <label for="contactEmail">{$dictionary.email}</label>
+                    <input type="radio" id="contactPhone" name="preferredContact" value="phone" />
+                    <label for="contactPhone">{$dictionary.phoneNumber}</label>
+                </div>
             </label>
         </div>
     
@@ -144,7 +149,7 @@
     }
 
     h1 {
-        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
         margin: auto;
         width: fit-content;
         text-align: center;
@@ -184,27 +189,33 @@
         max-width: 700px;
     }
 
-    select, textarea, .radio, .checkbox {
-        color: var(--content);
-        width: 100%;
-        padding: 10px 15px;
-    }
-
-    .textarea, .select {
-        font-weight: 500;
-        display: grid;
-        gap: 1ex;
-        font-size: 1rem;
-    }
-
-    .textarea {
-        margin-top: 1rem;
+    .yourMessage {
+        margin: 1rem 0 .5rem;
     }
 
     .attachment, .radio, .checkbox {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1ch;
+
         width: fit-content;
+        padding: .625rem 0;
+
+        font-weight: 500;
+    }
+
+    .attachment {
+        cursor: pointer;
+    }
+
+    .radio div {
         display: flex;
         gap: 1ch;
+    }
+
+    .radio label {
+        margin-right: 1ch;
     }
 
     .radioLabel {
@@ -231,7 +242,7 @@
     :global(.row > *) {
         flex-grow: 1;
         flex-basis: 30ch;
-    } 
+    }
 
     section {
         display: grid;
