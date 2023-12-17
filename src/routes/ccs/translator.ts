@@ -13,6 +13,7 @@ export const translator = {
         compartir: 'Compartir',
         guitarraAnterior: 'Guitarra Anterior',
         guitarraSiguiente: 'Siguiente Guitarra',
+        girarGuitarra: "Girar guitarra",
         siteNavigation: 'Navegación del Sitio',
 
         restauracion: 'Restauración',
@@ -40,6 +41,7 @@ export const translator = {
         compartir: 'Share',
         guitarraAnterior: 'Previous Guitar',
         guitarraSiguiente: 'Next Guitar',
+        girarGuitarra: "Rotate guitar",
         siteNavigation: 'Site Navigation',
 
         restauracion: 'Restoration',
@@ -67,6 +69,7 @@ export const translator = {
         compartir: 'Partager',
         guitarraAnterior: 'Guitare précédente',
         guitarraSiguiente: 'Guitare suivante',
+        girarGuitarra: "Faire tourner la guitare",
         siteNavigation: 'Navigation du Site',
 
         restauracion: 'Restauration',
@@ -94,6 +97,7 @@ export const translator = {
         compartir: 'Teilen',
         guitarraAnterior: 'Vorherige Gitarre',
         guitarraSiguiente: 'Nächste Gitarre',
+        girarGuitarra: "Gitarre drehen",
         siteNavigation: 'Seitennavigation',
 
         restauracion: 'Restaurierung',
@@ -121,6 +125,7 @@ export const translator = {
         compartir: 'Condividi',
         guitarraAnterior: 'Chitarra precedente',
         guitarraSiguiente: 'Prossima chitarra',
+        girarGuitarra: "Ruotare la chitarra",
         siteNavigation: 'Navigazione del Sito',
 
         restauracion: 'Restauro',
@@ -148,6 +153,7 @@ export const translator = {
         compartir: 'Поделиться',
         guitarraAnterior: 'Предыдущая гитара',
         guitarraSiguiente: 'Следующая гитара',
+        girarGuitarra: "Повернуть гитару",
         siteNavigation: 'Навигация по сайту',
 
         restauracion: 'Реставрация',

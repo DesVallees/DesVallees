@@ -64,7 +64,7 @@ export const guitarStorage: {
             'guitarre2derriere',
         ],
         allowSmallSize: true,
-        filesExtension: 'png',
+        filesExtension: 'webp',
         paragraph: {
             'es': `La guitarra eléctrica CCS-Boa constrictor tiene un diseño neoclásico (tipo Explorer) perfecto para rock pesado. Es una guitarra propia de escenario, con su construcción tipo neck-through y un cuerpo completamente de caoba, madera de las montañas de Colombia. El fretboard de ébano y granadillo tiene 22 trastes a lo largo de una escala de 24,75 pulgadas, estándar, diseñada para brindar velocidad y comodidad. El diseño de la cabeza la hace aún más agresiva en una puesta en escena. Es una guitarra liviana de gran resonancia y sostenimiento, manteniendo así el sonido antes de desvanecerse y finalizar. Cuenta con un Humbucker Dimarzio (DP159FBK) super distortion, con controles de volumen y tono, lo cual proporciona un alto y ajustado rendimiento. Este es nuestro color de lanzamiento: un negro mate con desvanecimiento en la parte anterior del diapasón, efecto propio de la madera utilizada para la fabricación.`,
             'en': `The CCS-Boa constrictor electric guitar has a neoclassical design (Explorer type), perfect for heavy rock. It is a stage-ready guitar, with a neck-through construction and a body entirely made of mahogany, wood from the mountains of Colombia. The ebony and rosewood fretboard has 22 frets along a 24.75-inch scale, standard, designed to provide speed and comfort. The headstock design makes it even more aggressive on stage. It is a lightweight guitar with great resonance and sustain, thus maintaining the sound before fading away. It features a Dimarzio Humbucker (DP159FBK) super distortion, with volume and tone controls, providing a high and tight performance. This is our launch color: a matte black with fading on the front of the fretboard, a unique effect from the wood used in manufacturing.`,
@@ -211,12 +211,12 @@ export const guitarStorage: {
                     'ru': 'Управление',
                 },
                 value: {
-                    'es': '1 volumen y 1 tono',
-                    'en': '1 volume and 1 tone',
-                    'fr': '1 volume et 1 tonalité',
-                    'de': '1 Lautstärke und 1 Ton',
-                    'it': '1 volume e 1 tono',
-                    'ru': '1 громкость и 1 тон',
+                    'es': `1 perilla de volumen y 1 perilla de tono`,
+                    'en': `1 volume knob and 1 tone knob`,
+                    'fr': `1 bouton de volume et 1 bouton de tonalité`,
+                    'de': `1 Lautstärkeregler und 1 Tonregler`,
+                    'it': `1 manopola del volume e 1 manopola del tono`,
+                    'ru': `1 регулятор громкости и 1 регулятор тона`,
                 }
             },
             {
@@ -272,7 +272,7 @@ export const guitarStorage: {
             'guitarre3derriere',
         ],
         allowSmallSize: true,
-        filesExtension: 'png',
+        filesExtension: 'webp',
         paragraph: {
             'es': `La guitarra eléctrica CCS-Asio clamator tiene un diseño neoclásico perfecto para tocar metal (Death-Black). Es una guitarra propia de escenario, con su construcción tipo neck-through y un cuerpo completamente de caoba, madera de las montañas de Colombia. El diapasón de ébano y granadillo tiene 22 trastes a lo largo de una escala de 24,75 pulgadas, estándar, diseñada para brindar velocidad y comodidad. El diseño de la cabeza la hace aún más agresiva en una puesta en escena. Es una guitarra liviana de gran resonancia y sostenimiento, manteniendo así el sonido antes de desvanecerse y finalizar. Cuenta con un Humbucker Dimarzio (DP159FBK) de súper distorsión, con controles de volumen y tono, proporcionando un alto y ajustado rendimiento. Este es nuestro color de lanzamiento natural y con un negro mate, el cual realza las vetas de la madera.`,
             'en': `The CCS-Asio clamator electric guitar features a neoclassical design perfect for playing metal (Death-Black). It's a stage-ready guitar with a neck-through construction and a body entirely made of mahogany, wood from the mountains of Colombia. The ebony and granadillo fretboard has 22 frets along a 24.75-inch scale, standard, designed to offer speed and comfort. The headstock design makes it even more aggressive on stage. It's a lightweight guitar with great resonance and sustain, thus maintaining the sound before fading and finishing. It comes with a Humbucker Dimarzio (DP159FBK) super distortion, with volume and tone controls, providing a high and tight performance. This is our natural launch color and with a matte black, which enhances the wood grain.`,
@@ -419,12 +419,12 @@ export const guitarStorage: {
                     'ru': 'Управление',
                 },
                 value: {
-                    'es': '1 volumen y 1 tono',
-                    'en': '1 volume and 1 tone',
-                    'fr': '1 volume et 1 tonalité',
-                    'de': '1 Lautstärke und 1 Ton',
-                    'it': '1 volume e 1 tono',
-                    'ru': '1 громкость и 1 тон',
+                    'es': `1 perilla de volumen y 1 perilla de tono`,
+                    'en': `1 volume knob and 1 tone knob`,
+                    'fr': `1 bouton de volume et 1 bouton de tonalité`,
+                    'de': `1 Lautstärkeregler und 1 Tonregler`,
+                    'it': `1 manopola del volume e 1 manopola del tono`,
+                    'ru': `1 регулятор громкости и 1 регулятор тона`,
                 }
             },
             {
@@ -443,6 +443,422 @@ export const guitarStorage: {
                     'de': 'Vom gleichen Hersteller wie Grover',
                     'it': 'Dagli stessi produttori di Grover',
                     'ru': 'От тех же производителей, что и Grover',
+                }
+            },            
+        ]
+    },
+    {
+        name: {
+            'es': 'Noctila',
+            'en': 'Noctila',
+            'fr': 'Noctila',
+            'de': 'Noctila',
+            'it': 'Noctila',
+            'ru': 'Noctila',
+        },
+        category: 'fabricacion',
+        edition: {
+            'es': 'CCS-Noctila',
+            'en': 'CCS-Noctila',
+            'fr': 'CCS-Noctila',
+            'de': 'CCS-Noctila',
+            'it': 'CCS-Noctila',
+            'ru': 'CCS-Noctila',
+        },    
+        description: {
+            'es': `¡Experimenta el poder y la elegancia con la guitarra eléctrica CCS-Noctila!`,
+            'en': `Experience the power and elegance with the electric guitar CCS-Noctila!`,
+            'fr': `Expérimentez la puissance et l'élégance avec la guitare électrique CCS-Noctila !`,
+            'de': `Erleben Sie die Kraft und Eleganz mit der E-Gitarre CCS-Noctila!`,
+            'it': `Vivi la potenza e l'eleganza con la chitarra elettrica CCS-Noctila!`,
+            'ru': `Почувствуйте мощь и элегантность с электрогитарой CCS-Noctila!`,
+        },           
+        oldPrice: '3,600,000.00 COP',
+        price: '3,400,000.00 COP',
+        fileNames: [
+            'noctilioFront',
+            'noctilioDerriere',
+        ],
+        allowSmallSize: true,
+        filesExtension: 'webp',
+        paragraph: {
+            'es': `La guitarra eléctrica CCS-Noctila tiene un diseño LP versátil. Es una guitarra propia de escenario, con su construcción tipo neck-through y un cuerpo completamente de caoba, madera de las montañas de Colombia. El fretboard de ébano y granadillo tiene 22 trastes a lo largo de una escala de 24,75 pulgadas, estándar, diseñada para brindar velocidad y comodidad. El diseño de la cabeza la hace aún más agresiva en una puesta en escena. Es una guitarra liviana de gran resonancia y sustain, manteniendo así el sonido antes de desvanecerse y acabar. Cuenta con dos poderosos Humbuckers Seymour Duncan Black Winter, cuenta con volumen y tono, lo cual proporciona un alto y ajustado rendimiento. Este es nuestro color de lanzamiento natural y con un negro mate, el cual realza las vetas de la madera.`,
+            'en': `The electric guitar CCS-Noctila has a versatile LP design. It is a stage-ready guitar, with its neck-through construction and a body made entirely of mahogany, wood from the mountains of Colombia. The ebony and rosewood fretboard has 22 frets along a 24.75-inch scale, standard, designed to provide speed and comfort. The headstock design makes it even more aggressive on stage. It is a lightweight guitar with great resonance and sustain, thus maintaining the sound before fading away. It features two powerful Seymour Duncan Black Winter Humbuckers, with volume and tone controls, providing high and tight performance. This is our natural launch color, and with a matte black finish, which enhances the wood grain.`,
+            'fr': `La guitare électrique CCS-Noctila a un design LP polyvalent. C'est une guitare de scène, avec sa construction à travers le manche et un corps entièrement en acajou, bois des montagnes de Colombie. La touche en ébène et palissandre comporte 22 frettes le long d'une échelle de 24,75 pouces, standard, conçue pour offrir vitesse et confort. La conception de la tête la rend encore plus agressive sur scène. C'est une guitare légère avec une grande résonance et sustain, maintenant ainsi le son avant de s'estomper et de se terminer. Elle est équipée de deux puissants micros Humbuckers Seymour Duncan Black Winter, avec des commandes de volume et de tonalité, offrant des performances élevées et serrées. Il s'agit de notre couleur de lancement naturelle, et avec une finition noire mate, qui rehausse les veines du bois.`,
+            'de': `Die E-Gitarre CCS-Noctila hat ein vielseitiges LP-Design. Es ist eine Bühnen-gerechte Gitarre mit einer durchgehenden Halskonstruktion und einem Korpus aus Mahagoni, Holz aus den Bergen Kolumbiens. Das Ebenholz- und Palisandergriffbrett hat 22 Bünde entlang einer 24,75-Zoll-Skala, Standard, für Geschwindigkeit und Komfort konzipiert. Das Kopfplattendesign macht sie auf der Bühne noch aggressiver. Es ist eine leichte Gitarre mit großer Resonanz und Sustain, wodurch der Klang erhalten bleibt, bevor er verblasst und endet. Sie verfügt über zwei leistungsstarke Seymour Duncan Black Winter-Humbucker mit Lautstärke- und Klangreglern, die eine hohe und straffe Leistung bieten. Dies ist unsere natürliche Einführungsfarbe und mit einem matten Schwarz-Finish, das die Holzmaserung betont.`,
+            'it': `La chitarra elettrica CCS-Noctila ha un design versatile LP. È una chitarra pronta per il palco, con la sua costruzione tipo neck-through e un corpo interamente in mogano, legno delle montagne della Colombia. La tastiera in ebano e palissandro ha 22 tasti lungo una scala di 24,75 pollici, standard, progettata per offrire velocità e comfort. Il design della testa la rende ancora più aggressiva durante una performance. È una chitarra leggera con grande risonanza e sustain, mantenendo quindi il suono prima di dissolversi e finire. È dotata di due potenti Humbucker Seymour Duncan Black Winter, con controlli di volume e tono, offrendo prestazioni elevate e serrate. Questo è il nostro colore di lancio naturale e con un nero opaco, che enfatizza la venatura del legno.`,
+            'ru': `Электрогитара CCS-Noctila имеет универсальный дизайн LP. Это гитара готова к выступлению, с конструкцией грифа типа neck-through и корпусом полностью из красного дерева, дерева из гор Колумбии. Накладка из чёрного дерева и палисандра имеет 22 лада вдоль шкалы 24,75 дюйма, стандарт, создана для обеспечения скорости и комфорта. Дизайн головы делает её ещё более агрессивной на сцене. Это легкая гитара с отличной резонансной и длительной стойкостью, сохраняя звук перед затуханием и окончанием. Она оснащена двумя мощными звукоснимателями Seymour Duncan Black Winter, с регуляторами громкости и тона, обеспечивая высокую и плотную производительность. Это наш естественный цвет запуска и с матово-чёрной отделкой, которая подчёркивает структуру древесины.`,    
+        },
+        features: ["personalizable", "fabricacionCompleta", "conForro", "garantia"],
+        table:[
+            {
+                property: {
+                    'es': 'Tiempo estimado de fabricación',
+                    'en': 'Estimated manufacturing time',
+                    'fr': 'Temps de fabrication estimé',
+                    'de': 'Geschätzte Herstellungszeit',
+                    'it': 'Tempo di produzione stimato',
+                    'ru': 'Предполагаемое время производства',
+                },
+                value: {
+                    'es': '2 meses (60 días de calendario)',
+                    'en': '2 months (60 calendar days)',
+                    'fr': '2 mois (60 jours calendaires)',
+                    'de': '2 Monate (60 Kalendertage)',
+                    'it': '2 mesi (60 giorni di calendario)',
+                    'ru': '2 месяца (60 календарных дней)',
+                }
+            },
+            {
+                property: {
+                    'es': 'Cuerdas',
+                    'en': 'Strings',
+                    'fr': 'Cordes',
+                    'de': 'Saiten',
+                    'it': 'Corde',
+                    'ru': 'Струны',
+                },
+                value: {
+                    'es': '10-46, calibre personalizable.',
+                    'en': '10-46, customizable gauge.',
+                    'fr': '10-46, calibre personnalisable.',
+                    'de': '10-46, anpassbares Kaliber.',
+                    'it': '10-46, calibro personalizzabile.',
+                    'ru': '10-46, настраиваемый калибр.',
+                }
+            },
+            {
+                property: {
+                    'es': 'Puente',
+                    'en': 'Bridge',
+                    'fr': 'Pont',
+                    'de': 'Steg',
+                    'it': 'Ponte',
+                    'ru': 'Мост',
+                },
+                value: {
+                    'es': 'Fijo',
+                    'en': 'Fixed',
+                    'fr': 'Fixe',
+                    'de': 'Fest',
+                    'it': 'Fisso',
+                    'ru': 'Фиксированный',
+                }
+            },
+            {
+                property: {
+                    'es': 'Pastilla del puente',
+                    'en': 'Bridge pickup',
+                    'fr': 'Micro chevalet',
+                    'de': 'Steg-Pickup',
+                    'it': 'Pickup del ponte',
+                    'ru': 'Звукосниматель моста',
+                },
+                value: {
+                    'es': 'Seymour Duncan Black Winter-Bridge',
+                    'en': 'Seymour Duncan Black Winter-Bridge',
+                    'fr': 'Seymour Duncan Black Winter-Bridge',
+                    'de': 'Seymour Duncan Black Winter-Bridge',
+                    'it': 'Seymour Duncan Black Winter-Bridge',
+                    'ru': 'Seymour Duncan Black Winter-Bridge',
+                }
+            },
+            {
+                property: {
+                    'es': 'Pastilla del cuello',
+                    'en': 'Neck pickup',
+                    'fr': 'Micro manche',
+                    'de': 'Hals-Pickup',
+                    'it': 'Pickup del manico',
+                    'ru': 'Звукосниматель грифа',
+                },
+                value: {
+                    'es': 'Seymour Duncan Black Winter-Neck',
+                    'en': 'Seymour Duncan Black Winter-Neck',
+                    'fr': 'Seymour Duncan Black Winter-Neck',
+                    'de': 'Seymour Duncan Black Winter-Neck',
+                    'it': 'Seymour Duncan Black Winter-Neck',
+                    'ru': 'Seymour Duncan Black Winter-Neck',
+                }
+            },
+            {
+                property: {
+                    'es': 'Color',
+                    'en': 'Color',
+                    'fr': 'Couleur',
+                    'de': 'Farbe',
+                    'it': 'Colore',
+                    'ru': 'Цвет',
+                },
+                value: {
+                    'es': 'Negro / Verde',
+                    'en': 'Black / Green',
+                    'fr': 'Noir / Vert',
+                    'de': 'Schwarz / Grün',
+                    'it': 'Nero / Verde',
+                    'ru': 'Черный / Зеленый',
+                }
+            },
+            {
+                property: {
+                    'es': 'País de origen',
+                    'en': 'Country of origin',
+                    'fr': 'Pays d\'origine',
+                    'de': 'Herkunftsland',
+                    'it': 'Paese d\'origine',
+                    'ru': 'Страна происхождения',
+                },
+                value: {
+                    'es': 'Colombia',
+                    'en': 'Colombia',
+                    'fr': 'Colombie',
+                    'de': 'Kolumbien',
+                    'it': 'Colombia',
+                    'ru': 'Колумбия',
+                }
+            },
+            {
+                property: {
+                    'es': 'Controles',
+                    'en': 'Controls',
+                    'fr': 'Contrôles',
+                    'de': 'Regler',
+                    'it': 'Controlli',
+                    'ru': 'Управление',
+                },
+                value: {
+                    'es': '2 perillas de volumen y 2 perillas de tono',
+                    'en': '2 volume knobs and 2 tone knobs',
+                    'fr': '2 boutons de volume et 2 boutons de tonalité',
+                    'de': '2 Lautstärkeregler und 2 Klangregler',
+                    'it': '2 manopole del volume e 2 manopole del tono',
+                    'ru': '2 регулятора громкости и 2 регулятора тона',
+                }
+            },
+            {
+                property: {
+                    'es': 'Clavijas',
+                    'en': 'Tuning pegs',
+                    'fr': 'Accordeurs',
+                    'de': 'Stimmmechaniken',
+                    'it': 'Meccaniche di accordatura',
+                    'ru': 'Колки',
+                },
+                value: {
+                    'es': 'De los mismos fabricantes de Grover',
+                    'en': 'From the same manufacturers as Grover',
+                    'fr': 'Des mêmes fabricants que Grover',
+                    'de': 'Vom gleichen Hersteller wie Grover',
+                    'it': 'Dagli stessi produttori di Grover',
+                    'ru': 'От тех же производителей, что и Grover',
+                }
+            },
+        ]
+    },
+    {
+        name: {
+            'es': 'Argia',
+            'en': 'Argia',
+            'fr': 'Argia',
+            'de': 'Argia',
+            'it': 'Argia',
+            'ru': 'Argia',
+        },
+        category: 'fabricacion',
+        edition: {
+            'es': 'CCS-Argia',
+            'en': 'CCS-Argia',
+            'fr': 'CCS-Argia',
+            'de': 'CCS-Argia',
+            'it': 'CCS-Argia',
+            'ru': 'CCS-Argia',
+        },    
+        description: {
+            'es': `Diseño único, madera exclusiva de Colombia, y potentes pickups para un rendimiento incomparable. ¡Adquiere la CCS-Argia ahora!`,
+            'en': `Unique design, exclusive wood from Colombia, and powerful pickups for unparalleled performance. Get the CCS-Argia now!`,
+            'fr': `Design unique, bois exclusif de Colombie et micros puissants pour des performances inégalées. Procurez-vous la CCS-Argia dès maintenant !`,
+            'de': `Einzigartiges Design, exklusives Holz aus Kolumbien und leistungsstarke Tonabnehmer für eine unvergleichliche Leistung. Holen Sie sich jetzt die CCS-Argia!`,
+            'it': `Design unico, legno esclusivo dalla Colombia e pickup potenti per prestazioni incomparabili. Acquista subito la CCS-Argia!`,
+            'ru': `Уникальный дизайн, эксклюзивная древесина из Колумбии и мощные звукосниматели для непревзойденной производительности. Получите CCS-Argia сейчас!`,
+        },           
+        oldPrice: '2,500,000.00 COP',
+        price: '2,300,000.00 COP',
+        fileNames: [
+            'argiaFront',
+            'argiaDerriere',
+        ],
+        allowSmallSize: true,
+        filesExtension: 'webp',
+        paragraph: {
+            'es': `La guitarra eléctrica CCS-Argia tiene un diseño versátil. Es una traveler guitar, con su construcción tipo neck-through y un cuerpo completamente de Floro morado, madera de las montañas de Colombia. El fretboard de ébano y granadillo, tiene 22 trastes a lo largo de una escala de 24,75 pulgadas, estándar, diseñada para brindar velocidad y comodidad. Es una guitarra liviana de gran resonancia y sustain, manteniendo así el sonido antes de desvanecerse y acabar. Cuenta con un Humbucker de alta potencia en el puente y un Pickup de bobina única, cuenta con un control de volumen lo cual proporciona un alto y ajustado rendimiento. Este es nuestro color de lanzamiento natural y con un negro mate, el cual realza las vetas de la madera.`,
+            'en': `The electric guitar CCS-Argia has a versatile design. It is a traveler guitar, with its neck-through construction and a body made entirely of Colombian Purpleheart wood. The ebony and rosewood fretboard has 22 frets along a 24.75-inch standard scale, designed to provide speed and comfort. It is a lightweight guitar with great resonance and sustain, thus maintaining the sound before fading away. It features a high-power Humbucker at the bridge and a single-coil pickup, with a volume control providing a high and tight performance. This is our natural launch color, and with a matte black, which enhances the wood veins.`,
+            'fr': `La guitare électrique CCS-Argia a un design polyvalent. C'est une traveler guitar, avec sa construction de type neck-through et un corps entièrement en bois de Floro pourpre, provenant des montagnes de Colombie. La touche en ébène et palissandre, avec 22 frettes le long d'une échelle standard de 24,75 pouces, est conçue pour offrir vitesse et confort. C'est une guitare légère avec une grande résonance et sustain, maintenant ainsi le son avant de s'estomper. Elle est équipée d'un Humbucker haute puissance au chevalet et d'un micro à bobine simple, avec un contrôle de volume offrant une performance puissante et précise. Il s'agit de notre couleur de lancement naturelle, avec un noir mat qui rehausse les veines du bois.`,
+            'de': `Die elektrische Gitarre CCS-Argia hat ein vielseitiges Design. Es ist eine Traveler-Gitarre mit Konstruktion vom Typ Neck-through und einem Korpus aus komplett violettem Floro-Holz, einem Holz aus den Bergen Kolumbiens. Das Griffbrett aus Ebenholz und Palisander hat 22 Bünde entlang einer Standardskala von 24,75 Zoll und ist für Geschwindigkeit und Komfort ausgelegt. Es ist eine leichte Gitarre mit großer Resonanz und Sustain, die den Klang erhält, bevor er verblasst und endet. Sie verfügt über einen leistungsstarken Humbucker am Steg und einen Single-Coil-Pickup, mit einem Lautstärkeregler für eine kraftvolle und präzise Leistung. Dies ist unsere natürliche Startfarbe, und mit mattem Schwarz, das die Holzmaserung betont.`,
+            'it': `La chitarra elettrica CCS-Argia ha un design versatile. È una traveler guitar, con la sua costruzione tipo neck-through e un corpo completamente in legno di Floro viola, proveniente dalle montagne della Colombia. La tastiera in ebano e palissandro ha 22 tasti lungo una scala standard di 24,75 pollici, progettata per offrire velocità e comfort. È una chitarra leggera con una grande risonanza e sustain, mantenendo quindi il suono prima di dissolversi e finire. Dispone di un Humbucker ad alta potenza al ponte e di un pickup a bobina singola, con un controllo del volume che garantisce prestazioni alte e precise. Questo è il nostro colore di lancio naturale, e con un nero opaco, che enfatizza le venature del legno.`,
+            'ru': `Электрогитара CCS-Argia имеет универсальный дизайн. Это путешественник-гитара с построением типа neck-through и корпусом полностью из фиолетового дерева Floro, добываемого в горах Колумбии. Накладка из чёрного дерева и палисандра имеет 22 лада вдоль стандартной длины в 24,75 дюйма, создана для обеспечения скорости и комфорта. Это легкая гитара с отличной резонансностью и сустейном, поддерживая звук перед затуханием. В ней установлен высокомощный Humbucker на мостовой части и звукосниматель с одной катушкой, с регулятором громкости, обеспечивающим высокую и точную производительность. Это наш натуральный цвет запуска, а также с матово-чёрным, что подчёркивает вены дерева.`,    
+        },
+        features: ["personalizable", "fabricacionCompleta", "conForro", "garantia"],
+        table:[
+            {
+                property: {
+                    'es': 'Tiempo estimado de fabricación',
+                    'en': 'Estimated manufacturing time',
+                    'fr': 'Temps de fabrication estimé',
+                    'de': 'Geschätzte Herstellungszeit',
+                    'it': 'Tempo di produzione stimato',
+                    'ru': 'Предполагаемое время производства',
+                },
+                value: {
+                    'es': '2 meses (60 días de calendario)',
+                    'en': '2 months (60 calendar days)',
+                    'fr': '2 mois (60 jours calendaires)',
+                    'de': '2 Monate (60 Kalendertage)',
+                    'it': '2 mesi (60 giorni di calendario)',
+                    'ru': '2 месяца (60 календарных дней)',
+                }
+            },
+            {
+                property: {
+                    'es': 'Cuerdas',
+                    'en': 'Strings',
+                    'fr': 'Cordes',
+                    'de': 'Saiten',
+                    'it': 'Corde',
+                    'ru': 'Струны',
+                },
+                value: {
+                    'es': '10-46, calibre personalizable.',
+                    'en': '10-46, customizable gauge.',
+                    'fr': '10-46, calibre personnalisable.',
+                    'de': '10-46, anpassbares Kaliber.',
+                    'it': '10-46, calibro personalizzabile.',
+                    'ru': '10-46, настраиваемый калибр.',
+                }
+            },
+            {
+                property: {
+                    'es': 'Puente',
+                    'en': 'Bridge',
+                    'fr': 'Pont',
+                    'de': 'Steg',
+                    'it': 'Ponte',
+                    'ru': 'Мост',
+                },
+                value: {
+                    'es': 'Fijo',
+                    'en': 'Fixed',
+                    'fr': 'Fixe',
+                    'de': 'Fest',
+                    'it': 'Fisso',
+                    'ru': 'Фиксированный',
+                }
+            },
+            {
+                property: {
+                    'es': 'Pastilla del puente',
+                    'en': 'Bridge pickup',
+                    'fr': 'Micro chevalet',
+                    'de': 'Steg-Pickup',
+                    'it': 'Pickup del ponte',
+                    'ru': 'Звукосниматель моста',
+                },
+                value: {
+                    'es': 'Humbucker de alta potencia',
+                    'en': 'High-power humbucker',
+                    'fr': 'Humbucker haute puissance',
+                    'de': 'Humbucker mit hoher Leistung',
+                    'it': 'Humbucker ad alta potenza',
+                    'ru': 'Хамбакер высокой мощности',
+                }
+            },
+            {
+                property: {
+                    'es': 'Pastilla del cuello',
+                    'en': 'Neck pickup',
+                    'fr': 'Micro manche',
+                    'de': 'Hals-Pickup',
+                    'it': 'Pickup del manico',
+                    'ru': 'Звукосниматель грифа',
+                },
+                value: {
+                    'es': 'Pickup de bobina única',
+                    'en': 'Single-coil pickup',
+                    'fr': 'Micro à simple bobinage',
+                    'de': 'Single-Coil-Tonabnehmer',
+                    'it': 'Pickup a bobina singola',
+                    'ru': 'Звукосниматель с одной катушкой',
+                }
+            },
+            {
+                property: {
+                    'es': 'Color',
+                    'en': 'Color',
+                    'fr': 'Couleur',
+                    'de': 'Farbe',
+                    'it': 'Colore',
+                    'ru': 'Цвет',
+                },
+                value: {
+                    'es': 'Rojo / Negro',
+                    'en': 'Red / Black',
+                    'fr': 'Rouge / Noir',
+                    'de': 'Rot / Schwarz',
+                    'it': 'Rosso / Nero',
+                    'ru': 'Красный / Черный',
+                }
+            },
+            {
+                property: {
+                    'es': 'País de origen',
+                    'en': 'Country of origin',
+                    'fr': 'Pays d\'origine',
+                    'de': 'Herkunftsland',
+                    'it': 'Paese d\'origine',
+                    'ru': 'Страна происхождения',
+                },
+                value: {
+                    'es': 'Colombia',
+                    'en': 'Colombia',
+                    'fr': 'Colombie',
+                    'de': 'Kolumbien',
+                    'it': 'Colombia',
+                    'ru': 'Колумбия',
+                }
+            },
+            {
+                property: {
+                    'es': 'Controles',
+                    'en': 'Controls',
+                    'fr': 'Contrôles',
+                    'de': 'Regler',
+                    'it': 'Controlli',
+                    'ru': 'Управление',
+                },
+                value: {
+                    'es': '1 perilla de volumen',
+                    'en': '1 volume knob',
+                    'fr': '1 bouton de volume',
+                    'de': '1 Lautstärkeregler',
+                    'it': '1 manopola del volume',
+                    'ru': '1 регулятор громкости',
+                }
+            },
+            {
+                property: {
+                    'es': 'Clavijas',
+                    'en': 'Tuning pegs',
+                    'fr': 'Accordeurs',
+                    'de': 'Stimmmechaniken',
+                    'it': 'Meccaniche di accordatura',
+                    'ru': 'Колки',
+                },
+                value: {
+                    'es': 'Multiescala',
+                    'en': 'Multiscale',
+                    'fr': 'Multiescale',
+                    'de': 'Multiscale',
+                    'it': 'Multiscale',
+                    'ru': 'Мультискейл',
                 }
             },            
         ]

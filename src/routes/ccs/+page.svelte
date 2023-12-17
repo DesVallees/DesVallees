@@ -93,7 +93,7 @@
 
             {#key $chosenGuitarIndex}
                 <div class="guitarImage" bind:offsetHeight={middleContentHeight} in:fly={{x: (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0'), duration: 600, delay: (isMobileDevice ? 0 : 100)}}>
-                    <GuitarImage fileNames={chosenGuitar.fileNames} bind:currentFileIndex name={chosenGuitar.name[$language]} />
+                    <GuitarImage fileNames={chosenGuitar.fileNames} bind:currentFileIndex name={chosenGuitar.name[$language]} extension={chosenGuitar.filesExtension} />
                 </div>
             {/key}
 

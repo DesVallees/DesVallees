@@ -53,8 +53,14 @@
 			<h1 class="name">{chosenGuitar.name[$language]}</h1>
 			<h2 class="edition">{$dictionary.edicion}: {chosenGuitar.edition[$language]}</h2>
 		</div>
+
 		<p in:fade|global={{delay: 600}}>{chosenGuitar.paragraph[$language]}</p>
 
+		<div class="price">
+			<span class="oldPrice">{chosenGuitar.oldPrice}</span>
+			<h2 class="currentPrice">{chosenGuitar.price}</h2>
+		</div>
+		
 		<div class="features" in:fade|global={{delay: 600}}>
 			{#each chosenGuitar.features as feature}
 					<GuitarFeature feature={feature} />
@@ -104,24 +110,43 @@
 	}
 
 	.name{
-		font-size: clamp(2rem, 6vw, 3.5rem);
+		font-size: clamp(2.25rem, 6vw, 3.5rem);
 		line-height: normal;
 	}
 
 	.edition {
 		color: var(--interactive);
-		font-size: clamp(1rem, 3vw, 1.3rem);
+		font-size: clamp(1.1rem, 3vw, 1.3rem);
 	}
-
+	
 	p {
 		font-size: clamp(1.1rem, 3vw, 1.25rem);
 		line-height: 2.2rem;
 		text-align: justify;
-
+		
 		margin: 2em 1em;
 		max-width: 70ch;
 	}
 
+	.price {
+		border-radius: 15px;
+		padding: 1.5em 2em;
+		box-shadow: 1px 1px 20px rgba(255, 255, 255, 0.062);
+		margin: 1.5rem 0 1rem;
+		max-width: 100%;
+	}
+	
+	.oldPrice {
+		font-size: clamp(1.05rem, 2.5vw, 1.15rem);
+		text-decoration: line-through;
+		color: var(--interactive);
+	}
+	
+	.currentPrice {
+		font-weight: 100;
+		font-size: clamp(1.25rem, 3vw, 1.4rem);;
+	}
+	
 	.features {
 		display: flex;
 		gap: 3em;
