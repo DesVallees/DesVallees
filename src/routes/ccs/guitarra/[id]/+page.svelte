@@ -69,10 +69,13 @@
 
 		<table in:fade|global={{delay: 600}}>
 			{#each chosenGuitar.table as datum}
-					<tr>
-					<td>{datum.property[$language]}</td>
+				<tr>
+					{#if datum.property}
+						<td>{datum.property[$language]}</td>
+					{/if}
+
 					<td>{datum.value[$language]}</td>
-					</tr>
+				</tr>
 			{/each}
 		</table>
 
@@ -104,7 +107,7 @@
 
 	.imageContainer {
 		min-height: 400px;
-		margin-bottom: 1em;
+		margin-bottom: 1.5rem;
 		
 		transition: height 1s ease-out;
 	}
@@ -176,7 +179,17 @@
 		background-color: #ffffff05;
 	}
 
+	tr {
+		display: flex;
+		width: 100%;
+	}
+
 	td {
+		flex: 1;
+
+		display: grid;
+		place-items: center;
+
 		border: solid rgba(255, 255, 255, 0.082) 1px;
 		padding: 1em;
 		text-align: center;
