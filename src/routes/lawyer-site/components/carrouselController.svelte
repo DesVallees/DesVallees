@@ -53,7 +53,7 @@
         }
 
         div button{
-            height: 11px;
+            height: 10px;
             width: 15px;
         }
 

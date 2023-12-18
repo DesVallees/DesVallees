@@ -4,11 +4,6 @@
 
 </script>
 
-<svelte:head>
-    <title>Journée</title>
-    <meta name="description" content="Discover tranquility with our private space for thoughts. Enhance your daily life with A.I. insights, advice, to-do lists, a secure digital diary, and many more features! Your mindful journey begins here.">
-</svelte:head>
-
 <div class="home" in:fade>
     <section>
         <h1>Journée</h1>
@@ -18,7 +13,7 @@
     </section>
 
     <div class="imgWrapper">
-        <img src="/images/journee/landingOwl.webp" alt={$dictionary.landingOwlAlt} width="200">
+        <img src="/images/journee/landingPic.webp" alt={$dictionary.landingOwlAlt} width="500">
     </div>
 </div>
 
@@ -28,10 +23,8 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        column-gap: 30%;
+        column-gap: 20%;
         row-gap: 1rem;
-
-        grid-template-columns: repeat(2, 1fr);
 
         min-height: 100%;
         padding: 1.5rem;
@@ -55,8 +48,8 @@
 
     .imgWrapper {
         position: relative;
-        width: 18rem;
-        max-width: 70%;
+        width: 22.5rem;
+        max-width: 75%;
     }
 
     .imgWrapper::after {
@@ -84,3 +77,8 @@
         }
     }
 </style>
+
+<svelte:head>
+    <title>Journée - {$dictionary.slogan}</title>
+    <meta name="description" content={$dictionary.discoverTranquility}>
+</svelte:head>

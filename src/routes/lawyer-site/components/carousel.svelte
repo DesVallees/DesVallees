@@ -14,12 +14,21 @@
     export let currentFileIndex: number = 0;
     let intervalId: number | undefined;
 
-    function changeImages() {
+    function nextImage() {
         currentFileIndex = (currentFileIndex + 1) % images.length;
     }
 
+    function previousImage() {
+        const minusOne = currentFileIndex - 1;
+        if (minusOne >= 0) {
+            currentFileIndex = minusOne % images.length
+        } else {
+            currentFileIndex = images.length - 1
+        }
+    }
+
     function startAutomaticImageChanges() {
-        intervalId = setInterval(changeImages, automaticImageChangeTime);
+        intervalId = setInterval(nextImage, automaticImageChangeTime);
     }
 
     function stopAutomaticImageChanges() {
@@ -45,16 +54,31 @@
         disappearAndAppear = false
     }
 
+    function handleKeydown(event:any) {
+        const keyPressed = event.key;
+        
+        if (keyPressed === "ArrowLeft") {
+            previousImage();
+        } else if (keyPressed === "ArrowRight") {
+            nextImage();
+        }
+    }
+
 </script>
 
+<svelte:window on:keydown={handleKeydown}/>
+
 <div class="carousel" {style}>
-    <button aria-label={$dictionary.nextImage} on:click={() => {changeImages(); stopAutomaticImageChanges();}} >
+    <button aria-label={$dictionary.nextImage} style="cursor: default;" on:click={() => {nextImage(); stopAutomaticImageChanges();}} >
         <img class:disappearAndAppear src={images[currentFileIndex]} alt={imageDescriptions ? imageDescriptions[currentFileIndex] : ''}>
     </button>
     
     <div class="controller">
         <CarrouselController on:interaction={stopAutomaticImageChanges} array={images} bind:currentFileIndex />
     </div>
+
+    <button on:click={() => {previousImage(); stopAutomaticImageChanges();}} class="previous arrow" aria-label="{$dictionary.previousImage}"><ion-icon name="chevron-back"></ion-icon></button>
+    <button on:click={() => {nextImage(); stopAutomaticImageChanges();}} class="next arrow" aria-label="{$dictionary.nextImage}"><ion-icon name="chevron-forward"></ion-icon></button>
 </div>
 
 <style>
@@ -76,6 +100,10 @@
     button {
         display: flex;
     }
+
+    img {
+        -webkit-user-drag: none;
+    }
     
     .controller {
         position: absolute;
@@ -92,11 +120,49 @@
         -webkit-backdrop-filter: blur(10px);
     }
 
+    .arrow {
+        --horizontalOffset: .8rem;
+        
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+        
+        padding: .5em;
+        border-radius: 50%;
+        background-color: var(--main-7);
+        transition: background-color .2s;
+    }
+
+    .arrow:hover,
+    .arrow:focus-visible {
+        background-color: var(--main-9);
+    }
+
+    .previous {
+        left: var(--horizontalOffset);
+    }
+
+    .next {
+        right: var(--horizontalOffset);
+    }
+
+    .arrow ion-icon {
+        font-size: 2rem;
+    }
+
     @media screen and (max-width: 600px) {
         .controller {
             top: unset;
             bottom: .5rem;
             padding: .6rem;
+        }
+
+        .arrow {
+            --horizontalOffset: .4rem;
+        }
+
+        .arrow ion-icon {
+            font-size: 1.5rem;
         }
     }
 </style>

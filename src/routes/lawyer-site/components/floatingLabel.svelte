@@ -101,20 +101,28 @@
         transition: all 0.2s ease-out;
     }
 
-    input:focus + label, input:not(:placeholder-shown) + label {
+    input:focus + label, 
+    input:not(:placeholder-shown) + label {
         top: calc(-1em - var(--paddingBlock));
         left: 5px;
         color: var(--content);
     }
 
-    textarea:focus + label, textarea:not(:placeholder-shown) + label {
+    textarea:focus + label, 
+    textarea:not(:placeholder-shown) + label {
         top: calc(-1em - var(--paddingBlock));
         left: 5px;
         color: var(--content);
     }
 
-    input:not(:placeholder-shown), textarea:not(:placeholder-shown) {
-        box-shadow: inset 0 0 3rem var(--interactive-3);
+    input:not(:placeholder-shown), 
+    textarea:not(:placeholder-shown) {
+        box-shadow: inset 0 0 3rem var(--interactive-5);
+    }
+
+    :global([data-theme="light"]) input:not(:placeholder-shown),
+    :global([data-theme="light"]) textarea:not(:placeholder-shown) {
+        box-shadow: inset 0 0 3rem var(--main);
     }
 
 </style>

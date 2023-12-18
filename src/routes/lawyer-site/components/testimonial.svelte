@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { dictionary } from "../stores";
+
 
     export let photoSrc:string | undefined = undefined;
     export let name:string;
@@ -10,7 +12,7 @@
 <div class="testimonial">
     <header>
         {#if photoSrc}
-            <img loading="lazy" width="70px" height="70px" src="{photoSrc}" alt="Profile picture of {name}.">
+            <img loading="lazy" width="70px" height="70px" src="{photoSrc}" alt="{$dictionary.pictureOf} {name}.">
         {/if}
         <div class="mainInfo">
             <h2>{name}</h2>

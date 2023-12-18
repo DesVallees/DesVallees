@@ -158,5 +158,5 @@
         <title>Log In</title>
     </noscript>
     
-    <meta name="description" content="Securely access your mindful haven. Log in to explore A.I.-guided insights, manage to-do lists, seek advice, and nurture your thoughts within our private and tranquil space.">
+    <meta name="description" content={$dictionary.secureAccessMessage}>
 </svelte:head>

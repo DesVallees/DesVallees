@@ -39,9 +39,9 @@
             <h2>{$dictionary.exploreOurServices}</h2>
 
             <menu>
-                <li><a class="link" class:active={$page.url.pathname === "/lawyer-site/services"} href="/lawyer-site/services">{$dictionary.introduction}</a></li>
-                <li><a class="link" class:active={$page.url.pathname === "/lawyer-site/services/divorce-proceedings"} href="/lawyer-site/services/divorce-proceedings">{$dictionary.divorceProceedings}</a></li>
-                <li><a class="link" class:active={$page.url.pathname === "/lawyer-site/services/custody-proceedings"} href="/lawyer-site/services/custody-proceedings">{$dictionary.custodyProceedings}</a></li>
+                <li><a class="link" aria-current={$page.url.pathname === "/lawyer-site/services" ? "page" : "false"} class:active={$page.url.pathname === "/lawyer-site/services"} href="/lawyer-site/services">{$dictionary.introduction}</a></li>
+                <li><a class="link" aria-current={$page.url.pathname === "/lawyer-site/services/divorce-proceedings" ? "page" : "false"} class:active={$page.url.pathname === "/lawyer-site/services/divorce-proceedings"} href="/lawyer-site/services/divorce-proceedings">{$dictionary.divorceProceedings}</a></li>
+                <li><a class="link" aria-current={$page.url.pathname === "/lawyer-site/services/custody-proceedings" ? "page" : "false"} class:active={$page.url.pathname === "/lawyer-site/services/custody-proceedings"} href="/lawyer-site/services/custody-proceedings">{$dictionary.custodyProceedings}</a></li>
             </menu>
         </div>
     </nav>

@@ -20,6 +20,9 @@ export const translator = {
         createAnAccount: 'Crea una cuenta',
         alreadyHaveAnAccount: '¿Ya tienes una cuenta?',
         logYouIn: 'Inicia sesión',
+        discoverTranquility: 'Descubre la tranquilidad con nuestro espacio privado para pensamientos. Mejora tu vida diaria con ideas de inteligencia artificial, consejos, listas de tareas, un diario digital seguro y muchas más funciones. ¡Tu viaje consciente comienza aquí!',
+        signInMessage: 'Inicia sesión para explorar ideas guiadas por inteligencia artificial, gestionar listas de tareas, buscar consejos y cultivar tus pensamientos en nuestro espacio privado y tranquilo.',
+        secureAccessMessage: 'Accede de forma segura a tu refugio consciente. Inicia sesión para explorar ideas guiadas por inteligencia artificial, gestionar listas de tareas, buscar consejos y cultivar tus pensamientos en nuestro espacio privado y tranquilo.',
     },
     en: {
         comingSoon: 'Coming Soon',
@@ -42,6 +45,9 @@ export const translator = {
         createAnAccount: 'Create an account',
         alreadyHaveAnAccount: 'Already have an account?',
         logYouIn: 'Log in',
+        discoverTranquility: 'Discover tranquility with our private space for thoughts. Enhance your daily life with A.I. insights, advice, to-do lists, a secure digital diary, and many more features! Your mindful journey begins here.',
+        signInMessage: 'Sign in to explore A.I.-guided insights, manage to-do lists, seek advice, and nurture your thoughts within our private and tranquil space.',
+        secureAccessMessage: 'Securely access your mindful haven. Log in to explore A.I.-guided insights, manage to-do lists, seek advice, and nurture your thoughts within our private and tranquil space.',
     },
     fr: {
         comingSoon: 'Prochainement',
@@ -64,6 +70,9 @@ export const translator = {
         createAnAccount: 'Créez un compte',
         alreadyHaveAnAccount: 'Vous avez déjà un compte ?',
         logYouIn: 'Connectez-vous',
+        discoverTranquility: 'Découvrez la tranquillité avec notre espace privé pour vos pensées. Améliorez votre vie quotidienne avec des idées d\'intelligence artificielle, des conseils, des listes de tâches, un journal numérique sécurisé et bien d\'autres fonctionnalités ! Votre voyage conscient commence ici.',
+        signInMessage: 'Connectez-vous pour explorer des idées guidées par l\'intelligence artificielle, gérer des listes de tâches, demander des conseils et cultiver vos pensées dans notre espace privé et tranquille.',
+        secureAccessMessage: 'Accédez en toute sécurité à votre havre conscient. Connectez-vous pour explorer des idées guidées par l\'intelligence artificielle, gérer des listes de tâches, demander des conseils et cultiver vos pensées dans notre espace privé et tranquille.',
     },
     de: {
         comingSoon: 'Demnächst',
@@ -86,6 +95,9 @@ export const translator = {
         createAnAccount: 'Erstelle ein Konto',
         alreadyHaveAnAccount: 'Haben Sie bereits ein Konto?',
         logYouIn: 'Melden Sie sich an',
+        discoverTranquility: 'Entdecken Sie die Ruhe in unserem privaten Raum für Gedanken. Verbessern Sie Ihr tägliches Leben mit KI-Einsichten, Ratschlägen, To-Do-Listen, einem sicheren digitalen Tagebuch und vielen weiteren Funktionen! Ihre achtsame Reise beginnt hier.',
+        signInMessage: 'Melden Sie sich an, um KI-geführte Einsichten zu erkunden, To-Do-Listen zu verwalten, Ratschläge zu suchen und Ihre Gedanken in unserem privaten und ruhigen Raum zu pflegen.',
+        secureAccessMessage: 'Greifen Sie sicher auf Ihr achtsames Refugium zu. Melden Sie sich an, um KI-geführte Einsichten zu erkunden, To-Do-Listen zu verwalten, Ratschläge zu suchen und Ihre Gedanken in unserem privaten und ruhigen Raum zu pflegen.',
     },
     it: {
         comingSoon: 'Prossimamente',
@@ -108,6 +120,9 @@ export const translator = {
         createAnAccount: 'Crea un account',
         alreadyHaveAnAccount: 'Hai già un account?',
         logYouIn: 'Accedi',
+        discoverTranquility: 'Scopri la tranquillità con il nostro spazio privato per i pensieri. Migliora la tua vita quotidiana con intuizioni, consigli, liste delle cose da fare, un diario digitale sicuro e molte altre funzionalità! Il tuo viaggio consapevole inizia qui.',
+        signInMessage: 'Accedi per esplorare intuizioni guidate dall\'intelligenza artificiale, gestire liste delle cose da fare, cercare consigli e coltivare i tuoi pensieri nel nostro spazio privato e tranquillo.',
+        secureAccessMessage: 'Accedi in modo sicuro al tuo rifugio consapevole. Accedi per esplorare intuizioni guidate dall\'intelligenza artificiale, gestire liste delle cose da fare, cercare consigli e coltivare i tuoi pensieri nel nostro spazio privato e tranquillo.',
     },
     ru: {
         comingSoon: 'Скоро',
@@ -130,5 +145,8 @@ export const translator = {
         createAnAccount: 'Создайте аккаунт',
         alreadyHaveAnAccount: 'У вас уже есть аккаунт?',
         logYouIn: 'Войдите',
+        discoverTranquility: 'Откройте для себя спокойствие с нашим частным пространством для мыслей. Улучшите свою повседневную жизнь благодаря искусственному интеллекту, советам, спискам дел, безопасному цифровому дневнику и многим другим функциям! Ваше внимательное путешествие начинается здесь.',
+        signInMessage: 'Войдите, чтобы исследовать идеи под руководством искусственного интеллекта, управлять списками дел, искать советы и развивать свои мысли в нашем частном и спокойном пространстве.',
+        secureAccessMessage: 'Безопасный доступ к вашему внимательному убежищу. Войдите, чтобы исследовать идеи под руководством искусственного интеллекта, управлять списками дел, искать советы и развивать свои мысли в нашем частном и спокойном пространстве.',
     },
 };

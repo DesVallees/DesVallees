@@ -112,5 +112,5 @@
         <title>Create an account</title>
     </noscript>
     
-    <meta name="description" content="Sign in to explore A.I.-guided insights, manage to-do lists, seek advice, and nurture your thoughts within our private and tranquil space.">
+    <meta name="description" content={$dictionary.signInMessage}>
 </svelte:head>
