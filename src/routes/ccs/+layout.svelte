@@ -91,7 +91,7 @@
     }
 
     .disappearAndAppear {
-        animation: disappearAndAppear 1.5s;
+        animation: disappearAndAppear 1s;
     }
 
     @keyframes disappearAndAppear {

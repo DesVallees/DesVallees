@@ -8,7 +8,7 @@
     function copyToClipboard() {
 		navigator.clipboard.writeText(ccsEmail);
 
-		toast.success("Email copied to clipboard", {style: "font-size: 1.25rem"})
+		toast.success($dictionary.emailCopied, {style: "font-size: 1.25rem"})
 	}
 </script>
 
@@ -58,7 +58,7 @@
 	div{
 		max-width: 1500px;
         margin: auto;
-		padding: clamp(2rem, 13vw, 8rem) 2rem 8rem;
+		padding: clamp(2rem, 13vw, 8rem) clamp(2rem, 10vw, 4rem) 8rem;
 	}
 	
     section {
@@ -69,7 +69,7 @@
 	h1 {
 		max-width: 25ch;
         width: fit-content;
-		margin: 0 auto 2rem;
+		margin: 0 auto 1.5rem;
 
         font-size: clamp(2.25rem, 9vw, 3.75rem);
         text-align: center;
@@ -97,6 +97,7 @@
 		margin-bottom: 3rem;
 
 		font-size: clamp(1.3rem, 4vw, 1.6rem);
+		font-weight: normal;
 	}
 	
 	p {
@@ -123,7 +124,7 @@
 	}
 
 	button {
-		margin: 1rem 0 3rem;
+		margin: 1rem 0 3.5rem;
 
 		font-size: clamp(1.1rem, 3.25vw, 1.25rem);
 	}

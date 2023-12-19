@@ -112,6 +112,10 @@
 		transition: height 1s ease-out;
 	}
 
+	.headers{
+		margin-top: 2em;
+	}
+
 	.name{
 		font-size: clamp(2.25rem, 6vw, 3.5rem);
 		line-height: normal;

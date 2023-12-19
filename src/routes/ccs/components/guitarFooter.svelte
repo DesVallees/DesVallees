@@ -50,13 +50,13 @@
     h4 {
         font-weight: 100;
         text-transform: uppercase;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
     
     p {
         color: var(--contentDim);
         font-weight: 100;
-        font-size: 1rem;
+        font-size: 1.15rem;
         line-height: 1.5rem;
         margin-top: .5em;
         margin-bottom: 2em;
@@ -86,22 +86,22 @@
 
     @media screen and (max-width: 1100px){
         h4 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
         
         p {
-            font-size: .9rem;
+            font-size: 1.1rem;
             margin-bottom: 1.5em;
         }
         
         h5 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
         a {
             padding: .3rem 1rem .3rem .7rem;
             border-radius: 20px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             gap: 5px;
         }
     }

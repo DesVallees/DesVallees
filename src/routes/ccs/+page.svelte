@@ -107,7 +107,9 @@
     {#key $chosenGuitarIndex}
         <div class="belowWrapper" style="height: {belowContentHeight}px;">
             <div class="below" in:fly={{x: (isMobileDevice ? 0 : (lastMove ? (lastMove === 'next' ? xDis : -xDis) : '0')), y: (isMobileDevice ? 50 : 0), duration: 600}} bind:offsetHeight={belowContentHeight} >
-                <CarrouselController array={chosenGuitar.fileNames} bind:currentFileIndex/>
+                <div class="controller">
+                    <CarrouselController array={chosenGuitar.fileNames} bind:currentFileIndex/>
+                </div>
     
                 <div class="guitarFooter">
                     <GuitarFooter 
@@ -185,6 +187,10 @@
 
     .above, .belowWrapper {
         transition: height 500ms ease-out;
+    }
+
+    .controller {
+        margin-bottom: 2em;
     }
 
     @media screen and (max-width: 1100px){

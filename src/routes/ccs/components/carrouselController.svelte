@@ -17,8 +17,6 @@
     div{
         display: flex;
         gap: 1.5em;
-        
-        margin-bottom: 2em;
     }
     
     div button{
@@ -44,8 +42,6 @@
     @media (orientation: portrait) {
         div{
             gap: 1em;
-            
-            margin-bottom: 2em;
         }
     }
 </style>

@@ -1,6 +1,22 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
 	import { dictionary } from "../stores";
+	import Carousel from "../components/carousel.svelte";
+
+	const baseRoute = '/images/ccs/acerca/'
+	const images = [
+		'carousel01.webp',
+		'carousel02.webp',
+		'carousel03.webp',
+		'carousel04.webp',
+		'carousel05.webp',
+		'carousel06.webp',
+		'carousel07.webp',
+		'carousel08.webp',
+		'carousel09.webp',
+		'carousel10.webp',
+	]
+	const imageDescriptions = ['']
 
 </script>
 
@@ -28,6 +44,10 @@
 			</figcaption>
 		</figure>
 	</article>
+
+	<section>
+		<Carousel {baseRoute} {images} {imageDescriptions} />
+	</section>
 </div>
 
 <style>
@@ -37,8 +57,12 @@
 
 		min-height: 100%;
 		
-		display: grid;
-        place-content: center;
+		display: flex;
+		flex-wrap: wrap;
+        align-items: center;
+		justify-content: center;
+		column-gap: 8rem;
+		row-gap: 3rem;
 	}
 
 	article {
@@ -46,6 +70,8 @@
 		font-size: clamp(1.2rem, 4vw, 1.4rem);
 		line-height: 1.5;
 		padding-bottom: 2rem;
+		flex-basis: 37.5ch;
+		flex-grow: 1;
 	}
 	
 	article h1 {
