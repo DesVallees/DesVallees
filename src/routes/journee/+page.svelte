@@ -13,7 +13,7 @@
     </section>
 
     <div class="imgWrapper">
-        <img src="/images/journee/landingPic.webp" alt={$dictionary.landingOwlAlt} width="500">
+        <img src="/images/journee/gufoLanding.webp" alt={$dictionary.landingOwlAlt} width="368" height="368">
     </div>
 </div>
 
@@ -24,7 +24,7 @@
         justify-content: center;
         align-items: center;
         column-gap: 20%;
-        row-gap: 1rem;
+        row-gap: 2rem;
 
         min-height: 100%;
         padding: 1.5rem;
@@ -48,8 +48,10 @@
 
     .imgWrapper {
         position: relative;
-        width: 22.5rem;
+        width: 23rem;
         max-width: 75%;
+
+        display: flex;
     }
 
     .imgWrapper::after {
@@ -66,6 +68,7 @@
     }
 
     img {
+        height: auto;
         width: 100%;
         user-select: none;
         -webkit-user-drag: none;

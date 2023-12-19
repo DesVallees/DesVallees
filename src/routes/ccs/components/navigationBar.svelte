@@ -39,7 +39,7 @@
     nav {
         width: 100%;
         height: 100%;
-        padding: 20px 100px;
+        padding: 25px 100px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -86,7 +86,7 @@
     
     @media screen and (max-width: 1200px){
         nav {
-            padding: 20px 50px 20px 20px;
+            padding: 25px 50px 25px 20px;
         }
 
         .logo {
@@ -95,6 +95,10 @@
     }
 
     @media screen and (max-width: 900px){
+        nav {
+            padding: 20px 40px;
+        }
+
         .x {
             display: none !important;
         }

@@ -14,42 +14,60 @@
 </svelte:head>
 
 <div in:fade|global>
-	<figure class="quote">
-		<blockquote>
-			{@html $dictionary.resumenCCS}
-		</blockquote>
-		<figcaption>
-			&mdash; {$dictionary.elEquipoDeCCS}, <cite>CCS Guitars</cite>  
-		</figcaption>
-	</figure>
+	<article>
+		<h1>CCS Guitars</h1>
+		<h2>{$dictionary.musicalInstrumentsInspired}</h2>
+
+		<figure>
+			<blockquote>
+				{@html $dictionary.resumenCCS}
+			</blockquote>
+			<br>
+			<figcaption>
+				&mdash; {$dictionary.elEquipoDeCCS}, <cite>CCS Guitars</cite>  
+			</figcaption>
+		</figure>
+	</article>
 </div>
 
 <style>
 	div{
-		padding: 0 3em;
-        padding-bottom: 100px;
+		padding: 2rem;
+		padding-bottom: 5rem;
 
-		height: 100%;
-		display: flex;
-        flex-direction: column;
-        justify-content: center;
-		align-items: center;
+		min-height: 100%;
+		
+		display: grid;
+        place-content: center;
 	}
 
-	.quote {
-		margin: 0;
-		background: #ffffff05;
-		padding: 1em;
-		border: solid 2px var(--content);
-		border-radius: 1em;
-		max-width: 500px;
+	article {
+		max-width: 60ch;
+		font-size: clamp(1.2rem, 4vw, 1.4rem);
+		line-height: 1.5;
+		padding-bottom: 2rem;
 	}
-	.quote figcaption,
-	.quote blockquote {
-		margin: 1em;
-		text-align: center;
-		font-size: clamp(1.1rem, 2.8vw, 1.3rem);
-		line-height: 1.7rem;
+	
+	article h1 {
+		font-size: clamp(2.5rem, 10vw, 3.75rem);
+		line-height: normal;
+	}
+	
+	article h2 {
+		font-size: clamp(1.4rem, 5vw, 1.7rem);
+		line-height: normal;
+
+		margin: .5rem 0 2rem;
+	}
+
+	@media screen and (min-width: 45rem) {
+		div {
+			padding: 5rem 3rem;
+		}
+
+		figure {
+			text-align: justify;
+		}
 	}
 
 </style>

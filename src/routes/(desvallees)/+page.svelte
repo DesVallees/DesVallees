@@ -7,8 +7,8 @@
 
 
 <svelte:head>
-    <title>DesVallees</title>
-    <link rel="icon" href="https://fav.farm/👤" />
+    <title>DesVallees - Santiago Ovalles' Portfolio</title>
+    <link rel="icon" href="/images/journee/logoWhite.webp" />
     <meta name="author" content="Santiago Ovalles">
     <meta name="description" content="Santiago Ovalles' Portfolio. Includes a comprehensive list of the projects and sketches he has made.">
     <meta name="keywords" content="Ovalles, Santiago, Desvallees, Portfolio">

@@ -82,8 +82,6 @@
         background-color: var(--mainDimer);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        
-        height: 100px;
     }
 
     main{

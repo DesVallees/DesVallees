@@ -123,8 +123,9 @@
 	}
 	
 	p {
-		font-size: clamp(1.1rem, 3vw, 1.25rem);
-		line-height: 2.2rem;
+		font-size: clamp(1.15rem, 3vw, 1.3rem);
+		font-weight: normal;
+		line-height: 1.8;
 		text-align: justify;
 		
 		margin: 2em 1em;
@@ -219,7 +220,7 @@
 		.main{padding-top: 0px;}
 		.imageContainer{min-height: 530px;}
 	}
-	@media(max-width: 450px){
+	@media(max-width: 500px){
 		p{
 			text-align: initial;
 			line-height: 2.1rem;

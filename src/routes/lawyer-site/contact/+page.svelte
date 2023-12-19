@@ -180,6 +180,17 @@
         margin: 10rem auto;
     }
 
+    section {
+        display: grid;
+        place-items: center;
+    }
+    
+    .map{
+        margin-top: 3rem;
+        border-radius: 25px;
+        box-shadow: 0 0 .5rem var(--content-1);
+    }
+
     form {
         display: grid;
         row-gap: 1rem;
@@ -242,17 +253,6 @@
     :global(.row > *) {
         flex-grow: 1;
         flex-basis: 30ch;
-    }
-
-    section {
-        display: grid;
-        place-items: center;
-    }
-    
-    .map{
-        margin-top: 3rem;
-        border-radius: 25px;
-        box-shadow: 0 0 .5rem var(--content-1);
     }
 
 </style>
