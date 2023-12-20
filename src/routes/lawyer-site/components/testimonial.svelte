@@ -26,11 +26,16 @@
 <style>
     .testimonial {
         border-radius: 20px;
-        background-color: var(--interactive-1);
-        border: solid 2px var(--interactive-4);
+        background-color: var(--interactive-2);
+        border: solid 2px var(--interactive);
+        box-shadow: 0 0 1.5rem var(--content-1);
         padding: 1.8rem;
-        box-shadow: 0 0 .5rem var(--content-1);
         max-width: 500px;
+    }
+
+    :global([data-theme="light"]) .testimonial {
+        background-color: transparent;
+        box-shadow: 0 0 1.5rem var(--interactive-3);
     }
 
     header {

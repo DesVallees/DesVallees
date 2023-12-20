@@ -22,6 +22,8 @@
         <p>Looking for something specific? Use the search bar below to find answers to your questions:</p>
         <input type="text" name="search" placeholder="Search...">
     </section>
+
+    <hr>
     
     <section>
         <h2>General Questions</h2>
@@ -39,6 +41,8 @@
         </dl>
     </section>
 
+    <hr>
+
     <section>
         <h2>Using LegalCollab</h2>
         <dl>
@@ -55,10 +59,56 @@
         </dl>
     </section>
 
+    <hr>
+
     <section>
         <p>If you can't find the information you're looking for, feel free to <a href="/contact">contact us</a>. Our team is here to help!</p>
     </section>
 </div>
 
 <style>
+    .faq {
+        padding: 3rem 2rem 10rem;
+        max-width: 1500px;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        margin: auto;
+        margin-bottom: 1rem;
+        width: fit-content;
+        text-align: center;
+        line-height: 2.5ex;
+    }
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        line-height: 2.5ex;
+        margin-bottom: 1rem;
+    }
+    
+    p {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        line-height: 3ex;
+        text-wrap: pretty;
+    }
+
+    section {
+        max-width: 75ch;
+        margin: auto;
+
+        display: grid;
+        place-items: center;
+    }
+
+    a {
+        font-size: 1.25rem;
+        margin: 3rem 0;
+    }
+
+    hr {
+        width: min(100%, 70ch);
+        margin: 10rem auto;
+    }
 </style>

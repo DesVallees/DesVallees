@@ -5,16 +5,16 @@
 
 	const baseRoute = '/images/ccs/acerca/'
 	const images = [
-		'carousel01.webp',
 		'carousel02.webp',
-		'carousel03.webp',
-		'carousel04.webp',
-		'carousel05.webp',
 		'carousel06.webp',
 		'carousel07.webp',
-		'carousel08.webp',
 		'carousel09.webp',
+		'carousel03.webp',
+		'carousel04.webp',
+		'carousel01.webp',
+		'carousel08.webp',
 		'carousel10.webp',
+		'carousel05.webp',
 	]
 
 </script>
@@ -47,16 +47,16 @@
 	<section>
 		<Carousel {baseRoute} {images} width="500" height="500"
 			imageDescriptions={[
-				$dictionary.guitarNoctiliaAndArgia,
 				$dictionary.guitarNoctiliaBeforeColor,
+				$dictionary.guitarAsioClamatorBeforeColor,
+				$dictionary.designingHeadsAsioClamatorBoaConstrictor,
+				$dictionary.guitarBoaConstrictorBeforeColor,
 				$dictionary.guitarNoctiliaColorProcess,
 				$dictionary.guitarNoctiliaBeforeAssembly,
 				$dictionary.guitarNoctiliaAndArgia,
-				$dictionary.guitarAsioClamatorBeforeColor,
-				$dictionary.designingHeadsAsioClamatorBoaConstrictor,
 				$dictionary.guitarAsioClamatorColorProcess,
-				$dictionary.guitarBoaConstrictorBeforeColor,
 				$dictionary.guitarBoaConstrictorColorProcess,
+				$dictionary.guitarNoctiliaAndArgia,
 			]}
 		/>
 	</section>

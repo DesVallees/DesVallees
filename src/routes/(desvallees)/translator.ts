@@ -1,7 +1,6 @@
 export const translator = {
     es: {
         santiagoOvallesProjects: "Proyectos de Santiago Ovalles",
-        attorneyCollaborativeOnlineService: "Servicio en Línea Colaborativo para Abogados",
         intranet: "Intranet de Canto Legal",
         backoffice: "Clapp Back Office - Características Menores",
         clappForms: "Formularios Clapp",
@@ -13,7 +12,6 @@ export const translator = {
     },
     en: {
         santiagoOvallesProjects: "Santiago Ovalles' Projects",
-        attorneyCollaborativeOnlineService: "Attorney's Collaborative Online Service",
         intranet: "Canto Legal Intranet",
         backoffice: "Clapp Back Office - Minor features",
         clappForms: "Clapp Forms",
@@ -25,7 +23,6 @@ export const translator = {
     },
     fr: {
         santiagoOvallesProjects: "Projets de Santiago Ovalles",
-        attorneyCollaborativeOnlineService: "Service Collaboratif en Ligne pour Avocats",
         intranet: "Intranet de Canto Legal",
         backoffice: "Clapp Back Office - Fonctionnalités Mineures",
         clappForms: "Formulaires Clapp",
@@ -37,7 +34,6 @@ export const translator = {
     },
     de: {
         santiagoOvallesProjects: "Santiago Ovalles Projekte",
-        attorneyCollaborativeOnlineService: "Kollaborativer Online-Dienst für Anwälte",
         intranet: "Canto Legal Intranet",
         backoffice: "Clapp Back Office - Kleinere Funktionen",
         clappForms: "Clapp Forms",
@@ -49,7 +45,6 @@ export const translator = {
     },
     it: {
         santiagoOvallesProjects: "Progetti di Santiago Ovalles",
-        attorneyCollaborativeOnlineService: "Servizio Online Collaborativo per Avvocati",
         intranet: "Intranet di Canto Legal",
         backoffice: "Clapp Back Office - Funzionalità Minori",
         clappForms: "Moduli Clapp",
@@ -61,7 +56,6 @@ export const translator = {
     },
     ru: {
         santiagoOvallesProjects: "Проекты Сантьяго Овальеса",
-        attorneyCollaborativeOnlineService: "Совместный онлайн-сервис адвокатов",
         intranet: "Внутренняя сеть Canto Legal",
         backoffice: "Clapp Back Office - Мелкие функции",
         clappForms: "Формы Clapp",

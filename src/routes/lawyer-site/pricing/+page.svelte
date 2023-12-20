@@ -28,6 +28,8 @@
         </ul>
     </section>
 
+    <hr>
+
     <section>
         <h2>Payment Options</h2>
         <p>We offer flexible payment options for your convenience.</p>
@@ -38,11 +40,15 @@
         </ul>
     </section>
 
+    <hr>
+
     <section>
         <h2>Promotions</h2>
         <p>Check out our latest promotions and discounts for first-time clients.</p>
         <p>First-time clients receive a 10% discount on their initial service.</p>
     </section>
+
+    <hr>
 
     <section>
         <h2>Success Stories</h2>
@@ -55,6 +61,44 @@
 </div>
 
 <style>
+    .pricing {
+        padding: 3rem 2rem 10rem;
+        max-width: 1500px;
+        margin: auto;
+    }
 
+    h1 {
+        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        margin: auto;
+        margin-bottom: 1rem;
+        width: fit-content;
+        text-align: center;
+        line-height: 2.5ex;
+    }
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        line-height: 2.5ex;
+        margin-bottom: 1rem;
+    }
+    
+    p {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        line-height: 3ex;
+        text-wrap: pretty;
+    }
+
+    section {
+        max-width: 75ch;
+        margin: auto;
+
+        display: grid;
+        place-items: center;
+    }
+
+    hr {
+        width: min(100%, 70ch);
+        margin: 10rem auto;
+    }
 </style>
 

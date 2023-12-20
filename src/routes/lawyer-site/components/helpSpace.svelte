@@ -109,6 +109,11 @@
         overflow: clip;
     }
 
+    :global([data-theme="light"]) .menu {
+        color: var(--content);
+        background-color: var(--main);
+    }
+
     .menuContent {
         display: grid;
         gap: 2rem;
@@ -141,6 +146,7 @@
         
         color: var(--interactive);
         background-color: var(--main-1);
+        transition: background-color .5s;
     }
 
     .menu header nav button {
@@ -164,11 +170,6 @@
     :global([data-theme="light"]) .menu header nav button.active {
         background-color: var(--interactive);
     }
-
-    :global([data-theme="light"]) .menu .body a {
-        color: var(--main);
-    }
-
 
     .menu .close {
         border-radius: 50%;

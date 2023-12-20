@@ -5,6 +5,7 @@ export const translator = {
         comingSoon: 'Próximamente',
         idioma: 'Idioma',
         imagen: 'Imagen',
+        goBack: 'Volver',
 
         masInformacion: 'Más información',
         inicio: 'Inicio',
@@ -43,13 +44,13 @@ export const translator = {
         elEquipoDeCCS: "El equipo de CCS",
 
         guitarNoctiliaAndArgia: 'Guitarra Noctilia y Argia en proceso de secado',
-        guitarNoctiliaBeforeColor: 'Guitarra Noctilia previo al color',
+        guitarNoctiliaBeforeColor: 'Guitarra Noctilia previa al color',
         guitarNoctiliaColorProcess: 'Guitarra Noctilia en proceso de color',
         guitarNoctiliaBeforeAssembly: 'Guitarra Noctilia previa al ensamblaje',
-        guitarAsioClamatorBeforeColor: 'Guitarra Asio Clamator previo al color',
+        guitarAsioClamatorBeforeColor: 'Guitarra Asio Clamator previa al color',
         designingHeadsAsioClamatorBoaConstrictor: 'Diseñando las cabezas de Asio Clamator y Boa Constrictor',
         guitarAsioClamatorColorProcess: 'Guitarra Asio Clamator en proceso de color',
-        guitarBoaConstrictorBeforeColor: 'Guitarra Boa Constrictor previo al color',
+        guitarBoaConstrictorBeforeColor: 'Guitarra Boa Constrictor previa al color',
         guitarBoaConstrictorColorProcess: 'Guitarra Boa Constrictor en proceso de color',
     },
     en: {
@@ -58,6 +59,7 @@ export const translator = {
         comingSoon: 'Coming Soon',
         idioma: 'Language',
         imagen: 'Image',
+        goBack: 'Back',
 
         masInformacion: 'More Info',
         inicio: 'Home',
@@ -111,6 +113,7 @@ export const translator = {
         comingSoon: 'Prochainement',
         idioma: 'Langue',
         imagen: 'Image',
+        goBack: 'Retour',
 
         masInformacion: 'Plus d\'informations',
         inicio: 'Accueil',
@@ -164,6 +167,7 @@ export const translator = {
         comingSoon: 'Demnächst',
         idioma: 'Sprache',
         imagen: 'Bild',
+        goBack: 'Zurück',
 
         masInformacion: 'Mehr Info',
         inicio: 'Startseite',
@@ -217,6 +221,7 @@ export const translator = {
         comingSoon: 'Prossimamente',
         idioma: 'Lingua',
         imagen: 'Immagine',
+        goBack: 'Indietro',
 
         masInformacion: 'Ulteriori informazioni',
         inicio: 'Home',
@@ -270,6 +275,7 @@ export const translator = {
         comingSoon: 'Скоро',
         idioma: 'Язык',
         imagen: 'Изображение',
+        goBack: 'Назад',
 
         masInformacion: 'Дополнительная информация',
         inicio: 'Главная',

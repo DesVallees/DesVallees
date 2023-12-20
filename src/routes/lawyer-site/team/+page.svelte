@@ -109,7 +109,7 @@
         text-wrap: pretty;
     }
 
-    .lawyer, .joinOurTeam {
+    section {
         max-width: 68ch;
         margin: auto;
 
@@ -117,9 +117,9 @@
         place-items: center;
     }
 
-    .carousel {
-        width: min(100%, 70ch);
-        margin: 3rem auto;
+    a {
+        font-size: 1.25rem;
+        margin: 3rem 0;
     }
 
     hr {
@@ -127,9 +127,9 @@
         margin: 10rem auto;
     }
 
-    .joinOurTeam a {
-        font-size: 1.25rem;
-        margin: 3rem 0;
+    .carousel {
+        width: min(100%, 70ch);
+        margin: 3rem auto;
     }
 
 </style>

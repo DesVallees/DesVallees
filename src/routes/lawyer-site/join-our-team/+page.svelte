@@ -27,6 +27,8 @@
         </ul>
     </section>
 
+    <hr>
+
     <section>
         <h2>Current Opportunities</h2>
         <p>We are currently seeking attorneys with expertise in:</p>
@@ -37,6 +39,8 @@
         </ul>
         <p>If you are passionate about making a difference in the legal field, we'd love to hear from you. Contact us to discuss potential collaboration opportunities.</p>
     </section>
+
+    <hr>
 
     <section>
         <h2>Qualifications</h2>
@@ -49,6 +53,8 @@
         <p>If you meet these qualifications and are interested in joining our collaborative network, please reach out to us using the form below.</p>
     </section>
 
+    <hr>
+
     <section>
         <h2>What Our Attorneys Say</h2>
         <p>Here's what some of our collaborating attorneys have to say about working with LegalCollab:</p>
@@ -58,6 +64,8 @@
             <p class="attorney">John Doe, Family Law Attorney</p>
         </div>
     </section>
+
+    <hr>
 
     <section>
         <h2>Apply Now</h2>
@@ -81,4 +89,43 @@
 </div>
 
 <style>
+    .join {
+        padding: 3rem 2rem 10rem;
+        max-width: 1500px;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        margin: auto;
+        margin-bottom: 1rem;
+        width: fit-content;
+        text-align: center;
+        line-height: 2.5ex;
+    }
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        line-height: 2.5ex;
+        margin-bottom: 1rem;
+    }
+    
+    p {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        line-height: 3ex;
+        text-wrap: pretty;
+    }
+
+    section {
+        max-width: 75ch;
+        margin: auto;
+
+        display: grid;
+        place-items: center;
+    }
+
+    hr {
+        width: min(100%, 70ch);
+        margin: 10rem auto;
+    }
 </style>

@@ -39,6 +39,11 @@
 </svelte:head>
 
 <div class="main" in:fade|global>
+	<a class="back baseButton" href="/ccs" aria-label="{$dictionary.goBack}">
+		<ion-icon name="caret-back"></ion-icon>
+		<span>{$dictionary.goBack}</span>
+	</a>
+
 	{#if chosenGuitar}
 
 		<div class="imageContainer" style="height: {imageHeight}px;" in:fade|global={{delay: 100}}>
@@ -103,6 +108,19 @@
         flex-direction: column;
         justify-content: center;
 		align-items: center;
+
+		position: relative;
+	}
+
+	.back {
+		position: fixed;
+		top: 7rem;
+		left: clamp(0em, 4vw, 3em);
+
+		z-index: 2;
+		
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
 	}
 
 	.imageContainer {
@@ -217,9 +235,6 @@
 		width: 100%;
 	}
 
-	@media(max-height: 800px){
-		.main{padding-top: 20px;}
-	}
 	@media(orientation: portrait){
 		.main{padding-top: 0px;}
 		.imageContainer{min-height: 530px;}
@@ -228,6 +243,18 @@
 		p{
 			text-align: initial;
 			line-height: 2.1rem;
+		}
+
+		.back {
+			left: .5rem;
+			font-size: 1.05rem;
+		}
+	}
+
+	@media screen and (max-width: 76.125rem) {
+		.back {
+			position: absolute;
+			top: .5rem;
 		}
 	}
 
