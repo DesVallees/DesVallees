@@ -24,7 +24,7 @@
     
     <a data-sveltekit-reload href="/lawyer-site">{$dictionary.attorneyCollaborativeOnlineService} (2023)</a>
     <a data-sveltekit-reload href="/intranet">{$dictionary.intranet} (2023)</a>
-    <a data-sveltekit-reload href="/ccs">CCS (2023)</a>
+    <a target="_blank" href="https://www.ccsguitars.com/">CCS Guitars (2023)</a>
     <a data-sveltekit-reload href="/destype">DesType (2023)</a>
     <a data-sveltekit-reload href="/threlte">Threlte (2023)</a>
     

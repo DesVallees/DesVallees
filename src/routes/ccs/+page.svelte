@@ -56,6 +56,16 @@
 
     $: {if (isMobileDevice) xDis = 200}
 
+    function handleKeydown(event:any) {
+        const keyPressed = event.key;
+        
+        if (keyPressed === "ArrowLeft") {
+            previousGuitar();
+        } else if (keyPressed === "ArrowRight") {
+            nextGuitar();
+        }
+    }
+
 </script>
 
 <svelte:head>
@@ -67,7 +77,7 @@
     <meta name="description" content="{$dictionary.acercaDeNosotros}">
 </svelte:head>
 
-<svelte:window on:resize={() => isMobileDevice = window.innerWidth <= window.innerHeight}/>
+<svelte:window on:resize={() => isMobileDevice = window.innerWidth <= window.innerHeight} on:keydown={handleKeydown}/>
 
 <!-- out:fly={{x: (lastMove ? (lastMove === 'next' ? '-2000' : '2000') : '0'), duration: 700}} -->
 <div class="guitars" in:fade|global>

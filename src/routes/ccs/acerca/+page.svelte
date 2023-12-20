@@ -16,7 +16,6 @@
 		'carousel09.webp',
 		'carousel10.webp',
 	]
-	const imageDescriptions = ['']
 
 </script>
 
@@ -46,7 +45,20 @@
 	</article>
 
 	<section>
-		<Carousel {baseRoute} {images} {imageDescriptions} />
+		<Carousel {baseRoute} {images} width="500" height="500"
+			imageDescriptions={[
+				$dictionary.guitarNoctiliaAndArgia,
+				$dictionary.guitarNoctiliaBeforeColor,
+				$dictionary.guitarNoctiliaColorProcess,
+				$dictionary.guitarNoctiliaBeforeAssembly,
+				$dictionary.guitarNoctiliaAndArgia,
+				$dictionary.guitarAsioClamatorBeforeColor,
+				$dictionary.designingHeadsAsioClamatorBoaConstrictor,
+				$dictionary.guitarAsioClamatorColorProcess,
+				$dictionary.guitarBoaConstrictorBeforeColor,
+				$dictionary.guitarBoaConstrictorColorProcess,
+			]}
+		/>
 	</section>
 </div>
 
