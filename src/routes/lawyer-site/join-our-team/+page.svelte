@@ -1,8 +1,23 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
+    import { fade, slide } from "svelte/transition";
     import { dictionary } from "../stores";
 	import Testimonial from "../components/testimonial.svelte";
 	import FloatingLabel from "../components/floatingLabel.svelte";
+
+    let resumeInput: HTMLInputElement;
+    let resumeName = '';
+
+    function getResumeName () {
+        if (resumeInput.files && resumeInput.files.length > 0) {
+            resumeName = resumeInput.files[0].name;
+        }
+    }
+
+    function deleteResume () {
+        resumeInput.value = '';
+        resumeName = '';
+    }
+    
 </script>
 
 <svelte:head>
@@ -16,9 +31,9 @@
     <section>
         <p>LegalCollab is a collaborative network of experienced attorneys dedicated to providing affordable legal services. By joining our team, you'll have the opportunity to:</p>
         <ul style="margin-bottom: 0;">
-            <li>Collaborate with like-minded legal professionals</li>
-            <li>Expand your practice and reach new clients</li>
-            <li>Contribute to making legal assistance accessible to all</li>
+            <li>Collaborate with like-minded legal professionals.</li>
+            <li>Expand your practice and reach new clients.</li>
+            <li>Contribute to making legal assistance accessible to all.</li>
         </ul>
     </section>
 
@@ -33,6 +48,17 @@
             <li>Custody Proceedings</li>
         </ul>
         <p>If you are passionate about making a difference in the legal field, we'd love to hear from you. Contact us to discuss potential collaboration opportunities.</p>
+    </section>
+    
+    <hr>
+
+    <section>
+        <h2>What Our Attorneys Say</h2>
+        <p>Here's what some of our collaborating attorneys have to say about working with LegalCollab:</p>
+
+        <div class="testimonialCards">
+            <Testimonial photoSrc="/images/lawyers/Emily_Davis.jpg" name="Emily Davis, Family Law Attorney" location="Baltimore, MD" text="Joining LegalCollab was a game-changer for my practice. The collaborative model allows me to focus on serving my clients while being part of a supportive legal community."/>
+        </div>
     </section>
 
     <hr>
@@ -51,27 +77,27 @@
     <hr>
 
     <section>
-        <h2>What Our Attorneys Say</h2>
-        <p>Here's what some of our collaborating attorneys have to say about working with LegalCollab:</p>
-
-        <div class="testimonialCards">
-            <Testimonial photoSrc="/images/lawyers/Emily_Davis.jpg" name="Emily Davis, Family Law Attorney" location="Baltimore, MD" text="Joining LegalCollab was a game-changer for my practice. The collaborative model allows me to focus on serving my clients while being part of a supportive legal community."/>
-        </div>
-    </section>
-
-    <hr>
-
-    <section>
         <h2>Apply Now</h2>
-        <p>If you are interested in joining our team, please complete the application form below. Our team will review your application and reach out to discuss potential collaboration opportunities.</p>
+        <p>Our team will review your application and reach out to discuss potential collaboration opportunities.</p>
         <form>
             <FloatingLabel labelText={$dictionary.firstName} required/>
             <FloatingLabel labelText={$dictionary.lastName} required/>
             <FloatingLabel labelText={$dictionary.email} required/>
             <FloatingLabel labelText={$dictionary.phoneNumber}/>
 
-            <label for="resume">Upload Resume (PDF or Word):</label>
-            <input type="file" id="resume" accept=".pdf, .doc, .docx" />
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <label for="resume" tabindex="0" aria-label="Upload Resume (PDF or Word)">
+                <ion-icon name="document-attach-outline"></ion-icon>
+                <span>Upload Resume (PDF or Word)</span>
+            </label>
+            <input on:change={getResumeName} bind:this={resumeInput} style="display: none;" type="file" id="resume" accept=".pdf, .doc, .docx" />
+
+            {#if resumeName}
+                <div class="resume" transition:slide={{duration: 100}}>
+                    <span class="resumeName">{resumeName}</span>
+                    <button class="deleteResume baseButton" on:click={deleteResume} aria-label="Delete Resume" type="button"><ion-icon name="close-circle-outline"></ion-icon></button>
+                </div>
+            {/if}
 
             <button class="button" type="submit">Submit Application</button>
         </form>
@@ -138,7 +164,14 @@
         gap: 2ex;
     }
 
-    button {
+    label {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 1ch;
+    }
+
+    .button {
         margin: 2rem auto 0;
         font-size: 1.1rem;
     }
@@ -146,6 +179,19 @@
     .testimonialCards {
         margin: auto;
         margin-top: 2rem;
+    }
+
+    .resume {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        gap: 1ch;
+    }
+    
+    .resumeName {
+        user-select: none;
     }
 
     @media screen and (min-width: 500px){

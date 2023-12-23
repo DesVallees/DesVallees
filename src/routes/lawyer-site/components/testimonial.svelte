@@ -48,6 +48,7 @@
     img {
         border-radius: 50%;
         box-shadow: 0 0 1.5rem var(--content-1);
+        height: auto;
     }
 
     .mainInfo {

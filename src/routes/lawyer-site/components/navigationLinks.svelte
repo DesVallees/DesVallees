@@ -48,7 +48,7 @@
         <a href="/lawyer-site" class="baseButton" class:active={$page.url.pathname === '/lawyer-site'}>
             {$dictionary.home} 
         </a>
-        <button class="baseButton" on:mouseleave={closeMenu} on:click={() => toggleMenu("about")} on:focus={() => openMenu("about")} on:mouseenter={() => openMenu("about")} class:active={activeMenu === "about"} aria-label="{$dictionary.aboutUs}">
+        <button class="baseButton" on:mouseleave={closeMenu} on:click={() => toggleMenu("about")} on:mouseenter={() => openMenu("about")} class:active={activeMenu === "about"} aria-label="{$dictionary.aboutUs}">
             {$dictionary.aboutUs} 
             <ion-icon name="caret-down-outline" style="transform: rotate({activeMenu === "about" ? "180deg" : "0deg"}); transition: transform .2s"></ion-icon>
 
@@ -69,7 +69,7 @@
                 </menu>
             {/if}
         </button>
-        <button class="baseButton" on:mouseleave={closeMenu} on:click={() => toggleMenu("legal")} on:focus={() => openMenu("legal")} on:mouseenter={() => openMenu("legal")} class:active={activeMenu === "legal"} aria-label="{$dictionary.legalResources}">
+        <button class="baseButton" on:mouseleave={closeMenu} on:click={() => toggleMenu("legal")} on:mouseenter={() => openMenu("legal")} class:active={activeMenu === "legal"} aria-label="{$dictionary.legalResources}">
             {$dictionary.legalResources} 
             <ion-icon name="caret-down-outline" style="transform: rotate({activeMenu === "legal" ? "180deg" : "0deg"}); transition: transform .2s"></ion-icon>
 
@@ -87,7 +87,7 @@
                 </menu>
             {/if}
         </button>
-        <button class="baseButton" on:mouseleave={closeMenu} on:click={() => toggleMenu("contact")} on:focus={() => openMenu("contact")} on:mouseenter={() => openMenu("contact")} class:active={activeMenu === "contact"} aria-label="{$dictionary.getInTouch}">
+        <button class="baseButton" on:mouseleave={closeMenu} on:click={() => toggleMenu("contact")} on:mouseenter={() => openMenu("contact")} class:active={activeMenu === "contact"} aria-label="{$dictionary.getInTouch}">
             {$dictionary.getInTouch} 
             <ion-icon name="caret-down-outline" style="transform: rotate({activeMenu === "contact" ? "180deg" : "0deg"}); transition: transform .2s"></ion-icon>
 
@@ -104,7 +104,7 @@
         </button>
     </div>
     <div>
-        <button class="baseButton" on:mouseleave={closeMenu} on:click={() => toggleMenu("social")} on:focus={() => openMenu("social")} on:mouseenter={() => openMenu("social")} class:active={activeMenu === "social"} aria-label="{$dictionary.socialMedia}">
+        <button class="baseButton" on:mouseleave={closeMenu} on:click={() => toggleMenu("social")} on:mouseenter={() => openMenu("social")} class:active={activeMenu === "social"} aria-label="{$dictionary.socialMedia}">
             {$dictionary.socialMedia} 
             <ion-icon name="caret-down-outline" style="transform: rotate({activeMenu === "social" ? "180deg" : "0deg"}); transition: transform .2s"></ion-icon>
 

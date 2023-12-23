@@ -30,6 +30,8 @@
 <style>
 
     nav {
+        position: relative;
+        
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -94,10 +96,6 @@
 
         div {
             display: none;
-        }
-
-        section {
-            margin-right: .5rem;
         }
     }
 

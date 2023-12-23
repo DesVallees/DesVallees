@@ -1,29 +1,49 @@
 <script lang="ts">
+	import { slide } from "svelte/transition";
+	import { clickOutside } from "../functions";
 	import { dictionary, language, type Language } from "../stores";
 
     export let style: string = '';
-    export let buttonStyle: string = 'link';
+    export let buttonStyle: string = 'baseButton';
 
     function changeLanguage (language: Language) {
         $language = language;
+        closeMenu()
+    }
+
+    let open: boolean = false;
+
+    function toggleMenu() {
+        open = !open;
+    }
+
+    async function closeMenu() {
+        open = false;
     }
 </script>
 
-{#if $language === 'es'}
+<div class="changeLanguage" on:outside={closeMenu} use:clickOutside>
+    <button class={buttonStyle} style="{style}" on:click={toggleMenu} aria-label={$dictionary.language}>
+        {$dictionary.language}
+        <ion-icon name="language-outline"></ion-icon>
+    </button>
     
-    <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('en')} lang="en" aria-label="English">
-        English
-        <img lang="{$language}" src="/images/usFlag.webp" alt="{$dictionary.unitedStatesFlag}">
-    </button>
-
-    {:else}
-
-    <button class={buttonStyle} style="{style}" on:click={() => changeLanguage('es')} lang="es" aria-label="Español">
-        Español
-        <img lang="{$language}" src="/images/spainFlag.webp" alt="{$dictionary.spanishFlag}">
-    </button>
-
-{/if}
+    {#if open}
+        
+        <div class="menu" transition:slide>
+            <button class="baseButton" style="{style}" on:click={() => changeLanguage('en')} lang="en" aria-label="English">
+                English
+                <img lang="{$language}" src="/images/usFlag.webp" alt="{$dictionary.unitedStatesFlag}">
+            </button>
+        
+            <button class="baseButton" style="{style}" on:click={() => changeLanguage('es')} lang="es" aria-label="Español">
+                Español
+                <img lang="{$language}" src="/images/spainFlag.webp" alt="{$dictionary.spanishFlag}">
+            </button>
+        </div>
+    
+    {/if}
+</div>
 
 
 <style>
@@ -37,10 +57,32 @@
         width: auto;
         translate: 0 1px;
     }
-    
+
+    .menu {
+        position: absolute;
+        top: 100%;
+
+        display: grid;
+        gap: .5rem;
+
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border: solid 1px var(--content);
+        border-top: 0;
+        padding: 0 .5em 1em;
+        
+        background-color: var(--main);
+        z-index: 1;
+    }
+
+    .menu button {
+        width: 100%;
+        justify-content: start;
+    }
+
     @media screen and (min-width: 31rem) {
         button {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
         }
     }
 </style>
