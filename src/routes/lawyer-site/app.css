@@ -245,6 +245,7 @@ article h2 {
 }
 
 article p {
+    max-width: 70ch;
     color: var(--content-9);
 }
 
@@ -260,8 +261,22 @@ article a {
 }
 
 article li {
+    max-width: 70ch;
     margin-top: 2ex;
     margin-left: 1ch;
     list-style-position: inside;
     list-style-type: square;
+}
+
+article footer {
+    display: grid;
+    place-items: center;
+    margin-top: 4rem;
+}
+
+article footer p {
+    color: var(--content);
+    max-width: 60ch;
+    font-size: 1.15rem;
+    text-align: center;
 }

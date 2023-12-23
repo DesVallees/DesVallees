@@ -37,15 +37,14 @@
             <h2>{$dictionary.legalResources}</h2>
             <ul class="firstLevel">
                 <li><a class="link" href="./faq">{$dictionary.faq}</a></li>
-                <li><a class="link" href="./blog">{$dictionary.blog}</a></li>
-                <li><a class="link" href="./external-legal-resources">{$dictionary.externalLegalResources}</a></li>
                 <li><a class="link" href="./legal-disclaimers-and-policies">{$dictionary.legalDisclaimersAndPolicies}</a></li>
-                    <ul class="secondLevel">
-                        <li><a class="link" href="./legal-disclaimers-and-policies/terms-of-service">{$dictionary.termsOfService}</a></li>
-                        <li><a class="link" href="./legal-disclaimers-and-policies/privacy-policy">{$dictionary.privacyPolicy}</a></li>
-                        <li><a class="link" href="./legal-disclaimers-and-policies/data-protection">{$dictionary.dataProtection}</a></li>
-                        <li><a class="link" href="./legal-disclaimers-and-policies/refund-policy">{$dictionary.refundPolicy}</a></li>
-                    </ul>
+                <ul class="secondLevel">
+                    <li><a class="link" href="./legal-disclaimers-and-policies/terms-of-service">{$dictionary.termsOfService}</a></li>
+                    <li><a class="link" href="./legal-disclaimers-and-policies/privacy-policy">{$dictionary.privacyPolicy}</a></li>
+                    <li><a class="link" href="./legal-disclaimers-and-policies/data-protection">{$dictionary.dataProtection}</a></li>
+                    <li><a class="link" href="./legal-disclaimers-and-policies/refund-policy">{$dictionary.refundPolicy}</a></li>
+                </ul>
+                <li><a class="link" href="./external-legal-resources">{$dictionary.externalLegalResources}</a></li>
             </ul>
         </section>
 

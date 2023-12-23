@@ -74,6 +74,7 @@
     a {
         text-align: center;
         text-wrap: balance;
+        font-size: 1.05rem;
     }
 
     span {

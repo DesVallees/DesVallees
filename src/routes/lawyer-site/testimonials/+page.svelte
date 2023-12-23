@@ -2,12 +2,7 @@
     import { fade } from "svelte/transition";
     import { dictionary } from "../stores";
 	import Testimonial from "../components/testimonial.svelte";
-    import { onMount } from "svelte";
-	import toast from "svelte-french-toast";
-
-    onMount(() => {
-        toast(`${$dictionary.earlyDevelopmentStage}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
-    })
+	import FloatingLabel from "../components/floatingLabel.svelte";
 </script>
 
 <svelte:head>
@@ -19,10 +14,9 @@
     <h1>{$dictionary.testimonials}</h1>
 
     <section>
-        <h2>Client Testimonials</h2>
         <p>See what our clients have to say about their experiences with our legal services.</p>
         
-        <div class="testimonial">
+        <div class="video">
             <iframe
                 width="560"
                 height="315"
@@ -35,8 +29,10 @@
             <p>"Their team provided excellent support throughout my legal process." - Mary K.</p>
         </div>
 
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" name="John D." location="Wonderland" text="I'm grateful for the professional and affordable legal help I received."/>
-        <Testimonial photoSrc="/images/lawyers/logoWhite.webp" name="Sarah M." location="Wonderland" text="The attorneys were knowledgeable, and their guidance was invaluable."/>
+        <div class="testimonialCards">
+            <Testimonial photoSrc="/images/lawyers/Sofia_Lindström.jpg" name="Sofia Lindström" location="Wonderland" text="I'm grateful for the professional and affordable legal help I received."/>
+            <Testimonial photoSrc="/images/lawyers/Brian_Mitchell.jpg" name="Brian Mitchell" location="Wonderland" text="The attorneys were knowledgeable, and their guidance was invaluable."/>
+        </div>
     </section>
 
     <hr>
@@ -45,13 +41,11 @@
         <h2>Leave Your Review</h2>
         <p>We value your feedback! Share your experience with our legal services.</p>
         <form>
-            <label for="name">Your Name (Optional):</label>
-            <input type="text" placeholder="Your name" id="name" />
+            <FloatingLabel labelText={$dictionary.firstName} required />
+            <FloatingLabel labelText={$dictionary.lastName} required />
+            <FloatingLabel labelText="Write your review" element="textarea" required />
 
-            <label for="review">Your Review:</label>
-            <textarea id="review" placeholder="Write your review" required></textarea>
-
-            <button type="submit">Submit Review</button>
+            <button type="submit" class="button">Submit Review</button>
         </form>
     </section>
 </div>
@@ -64,7 +58,7 @@
     }
 
     h1 {
-        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        font-size: clamp(2.25rem, 6vw, 3rem);
         margin: auto;
         margin-bottom: 1rem;
         width: fit-content;
@@ -73,19 +67,20 @@
     }
 
     h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-        line-height: 2.5ex;
+        font-size: clamp(1.75rem, 4vw, 2rem);
+        line-height: 1.4;
+        text-align: center;
         margin-bottom: 1rem;
     }
     
     p {
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
-        line-height: 3ex;
+        font-size: clamp(1.2rem, 3vw, 1.4rem);
+        line-height: 1.8;
         text-wrap: pretty;
+        max-width: 50ch;
     }
 
     section {
-        max-width: 75ch;
         margin: auto;
 
         display: grid;
@@ -94,6 +89,52 @@
 
     hr {
         width: min(100%, 70ch);
-        margin: 10rem auto;
+        margin: 8rem auto;
+    }
+
+    .video {
+        display: grid;
+        justify-items: center;
+    }
+
+    .video p {
+        text-align: center;
+        width: 90%;
+        font-size: clamp(1.2rem, 3vw, 1.3rem);
+    }
+    
+    iframe {
+        max-width: 100%;
+        margin: 2rem 0 1rem;
+        border-radius: 10px;
+    }
+
+    .testimonialCards {
+        margin-top: 5rem;
+        display: grid;
+        row-gap: 2rem;
+        justify-content: center;
+    }
+
+    form {
+        margin-top: 2rem;
+        
+        width: 100%;
+        max-width: 65ch;
+        
+        display: grid;
+        gap: 2ex;
+    }
+
+    button {
+        margin: 2rem auto 0;
+        font-size: 1.1rem;
+    }
+
+    @media screen and (min-width: 500px){
+        p {
+            line-height: 1.7;
+            text-align: justify;
+        }
     }
 </style>

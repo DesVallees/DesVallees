@@ -78,14 +78,11 @@
                     <li><a href="/lawyer-site/faq" on:click|preventDefault={() => linkBehaviour("/lawyer-site/faq")} class="baseButton">
                         {$dictionary.faq}
                     </a></li>
-                    <li><a href="/lawyer-site/blog" on:click|preventDefault={() => linkBehaviour("/lawyer-site/blog")} class="baseButton">
-                        {$dictionary.blog}
+                    <li><a href="/lawyer-site/legal-disclaimers-and-policies" on:click|preventDefault={() => linkBehaviour("/lawyer-site/legal-disclaimers-and-policies")} class="baseButton">
+                        {$dictionary.legalDisclaimersAndPolicies}
                     </a></li>
                     <li><a href="/lawyer-site/external-legal-resources" on:click|preventDefault={() => linkBehaviour("/lawyer-site/external-legal-resources")} class="baseButton">
                         {$dictionary.externalLegalResources}
-                    </a></li>
-                    <li><a href="/lawyer-site/legal-disclaimers-and-policies" on:click|preventDefault={() => linkBehaviour("/lawyer-site/legal-disclaimers-and-policies")} class="baseButton">
-                        {$dictionary.legalDisclaimersAndPolicies}
                     </a></li>
                 </menu>
             {/if}

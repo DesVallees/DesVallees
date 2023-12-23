@@ -1,12 +1,6 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import { dictionary } from "../stores";
-	import { onMount } from "svelte";
-	import toast from "svelte-french-toast";
-
-    onMount(() => {
-        toast(`${$dictionary.earlyDevelopmentStage}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
-    })
 </script>
 
 <svelte:head>
@@ -18,15 +12,8 @@
     <h1>{$dictionary.externalLegalResources}</h1>
 
     <section>
-        <h2>Legal Forms and Templates</h2>
-        <p>Access a variety of legal forms and templates that can be useful in different legal situations. Explore our collection of <a target="_blank" href="/legal-forms">Legal Forms</a>.</p>
-    </section>
-
-    <hr>
-
-    <section>
         <h2>Government Sites</h2>
-        <p>Find important information and resources on government websites related to legal matters. Visit <a target="_blank" href="https://www.usa.gov/">USA.gov</a> for comprehensive government services.</p>
+        <p>Find important information and resources on government websites related to legal matters. Visit <a target="_blank" href="https://www.usa.gov/">usa.gov</a> for comprehensive government services.</p>
     </section>
 
     <hr>
@@ -35,8 +22,9 @@
         <h2>Additional Resources</h2>
         <p>Explore more external legal resources that can provide valuable insights and information.</p>
         <ul>
-            <h6>An additional resource</h6>
-            <li><a target="_blank" href="/">Name of the resource</a></li>
+            <li><a href="https://www.childwelfare.gov/" target="_blank">Child Welfare Information Gateway</a> - Information on child welfare and custody issues.</li>
+            <li><a href="https://search.usa.gov/search?affiliate=usagov_all_gov&query=divorce" target="_blank">USA.gov - Divorce and Separation</a> - U.S. government information on divorce and separation.</li>
+            <li><a href="https://search.usa.gov/search?affiliate=usagov_all_gov&query=custody" target="_blank">USA.gov - Custody</a> - U.S. government information on Custody.</li>
         </ul>
     </section>
 </div>
@@ -49,28 +37,36 @@
     }
 
     h1 {
-        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        font-size: clamp(2.25rem, 6vw, 3rem);
         margin: auto;
-        margin-bottom: 1rem;
+        margin-bottom: 5rem;
         width: fit-content;
         text-align: center;
         line-height: 2.5ex;
     }
 
     h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-        line-height: 2.5ex;
+        font-size: clamp(1.75rem, 4vw, 2rem);
+        line-height: 1.4;
+        text-align: center;
         margin-bottom: 1rem;
     }
     
-    p {
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
-        line-height: 3ex;
+    p, li {
+        font-size: clamp(1.2rem, 3vw, 1.4rem);
+        line-height: 1.8;
         text-wrap: pretty;
+        max-width: 50ch;
+    }
+
+    ul {
+        margin-top: 2rem;
+        width: 100%;
+        max-width: 65ch;
+        list-style-position: inside;
     }
 
     section {
-        max-width: 75ch;
         margin: auto;
 
         display: grid;
@@ -78,12 +74,22 @@
     }
 
     a {
-        font-size: 1.25rem;
-        margin: 3rem 0;
+        margin-top: 2.75rem;
+        font-size: clamp(1.15rem, 3vw, 1.3rem);
+        text-align: center;
+        color: var(--interactive);
+        text-decoration: underline;
     }
 
     hr {
         width: min(100%, 70ch);
-        margin: 10rem auto;
+        margin: 8rem auto;
+    }
+
+    @media screen and (min-width: 500px){
+        p {
+            line-height: 1.7;
+            text-align: justify;
+        }
     }
 </style>

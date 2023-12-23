@@ -1,12 +1,8 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import { dictionary } from "../stores";
-    import { onMount } from "svelte";
-	import toast from "svelte-french-toast";
-
-    onMount(() => {
-        toast(`${$dictionary.earlyDevelopmentStage}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
-    })
+	import Testimonial from "../components/testimonial.svelte";
+	import FloatingLabel from "../components/floatingLabel.svelte";
 </script>
 
 <svelte:head>
@@ -18,9 +14,8 @@
     <h1>{$dictionary.joinOurTeam}</h1>
 
     <section>
-        <h2>Why Join Our Team?</h2>
         <p>LegalCollab is a collaborative network of experienced attorneys dedicated to providing affordable legal services. By joining our team, you'll have the opportunity to:</p>
-        <ul>
+        <ul style="margin-bottom: 0;">
             <li>Collaborate with like-minded legal professionals</li>
             <li>Expand your practice and reach new clients</li>
             <li>Contribute to making legal assistance accessible to all</li>
@@ -46,9 +41,9 @@
         <h2>Qualifications</h2>
         <p>To be considered for collaboration, attorneys should meet the following qualifications:</p>
         <ul>
-            <li>Active law license in the jurisdiction of practice</li>
-            <li>Minimum of 5 years of legal practice experience</li>
-            <li>Demonstrated expertise in family law matters</li>
+            <li>Active law license in the jurisdiction of practice.</li>
+            <li>Minimum of 5 years of legal practice experience.</li>
+            <li>Demonstrated expertise in family law matters.</li>
         </ul>
         <p>If you meet these qualifications and are interested in joining our collaborative network, please reach out to us using the form below.</p>
     </section>
@@ -59,9 +54,8 @@
         <h2>What Our Attorneys Say</h2>
         <p>Here's what some of our collaborating attorneys have to say about working with LegalCollab:</p>
 
-        <div class="testimonial">
-            <p>"Joining LegalCollab was a game-changer for my practice. The collaborative model allows me to focus on serving my clients while being part of a supportive legal community."</p>
-            <p class="attorney">John Doe, Family Law Attorney</p>
+        <div class="testimonialCards">
+            <Testimonial photoSrc="/images/lawyers/Emily_Davis.jpg" name="Emily Davis, Family Law Attorney" location="Baltimore, MD" text="Joining LegalCollab was a game-changer for my practice. The collaborative model allows me to focus on serving my clients while being part of a supportive legal community."/>
         </div>
     </section>
 
@@ -71,19 +65,15 @@
         <h2>Apply Now</h2>
         <p>If you are interested in joining our team, please complete the application form below. Our team will review your application and reach out to discuss potential collaboration opportunities.</p>
         <form>
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" placeholder="Your full name" />
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Your email" />
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" placeholder="Your phone number" />
+            <FloatingLabel labelText={$dictionary.firstName} required/>
+            <FloatingLabel labelText={$dictionary.lastName} required/>
+            <FloatingLabel labelText={$dictionary.email} required/>
+            <FloatingLabel labelText={$dictionary.phoneNumber}/>
 
             <label for="resume">Upload Resume (PDF or Word):</label>
             <input type="file" id="resume" accept=".pdf, .doc, .docx" />
 
-            <button type="submit">Submit Application</button>
+            <button class="button" type="submit">Submit Application</button>
         </form>
     </section>
 </div>
@@ -96,36 +86,72 @@
     }
 
     h1 {
-        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        font-size: clamp(2.25rem, 6vw, 3rem);
         margin: auto;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         width: fit-content;
         text-align: center;
         line-height: 2.5ex;
     }
 
     h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-        line-height: 2.5ex;
+        font-size: clamp(1.75rem, 4vw, 2rem);
+        line-height: 1.4;
+        text-align: center;
         margin-bottom: 1rem;
     }
     
-    p {
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
-        line-height: 3ex;
+    p, li {
+        font-size: clamp(1.2rem, 3vw, 1.4rem);
+        line-height: 1.8;
         text-wrap: pretty;
+        max-width: 50ch;
+    }
+
+    ul {
+        margin: 2rem 0;
+        width: 100%;
+        max-width: 65ch;
+        list-style-position: inside;
     }
 
     section {
-        max-width: 75ch;
         margin: auto;
 
         display: grid;
-        place-items: center;
+        width: fit-content;
     }
 
     hr {
         width: min(100%, 70ch);
-        margin: 10rem auto;
+        margin: 8rem auto;
+    }
+
+    form {
+        margin: auto;
+        margin-top: 2rem;
+        
+        width: 100%;
+        max-width: 65ch;
+        
+        display: grid;
+        gap: 2ex;
+    }
+
+    button {
+        margin: 2rem auto 0;
+        font-size: 1.1rem;
+    }
+
+    .testimonialCards {
+        margin: auto;
+        margin-top: 2rem;
+    }
+
+    @media screen and (min-width: 500px){
+        p {
+            line-height: 1.7;
+            text-align: justify;
+        }
     }
 </style>

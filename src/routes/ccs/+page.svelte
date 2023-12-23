@@ -69,12 +69,12 @@
 </script>
 
 <svelte:head>
-    <title>CCS - {$dictionary.inicio}</title>
+    <title>CCS Guitars - {$dictionary.inicio}</title>
     <noscript>
         <title>CCS</title>
     </noscript>
     
-    <meta name="description" content="{$dictionary.acercaDeNosotros}">
+    <meta name="description" content="{$dictionary.resumenCCS}">
 </svelte:head>
 
 <svelte:window on:resize={() => isMobileDevice = window.innerWidth <= window.innerHeight} on:keydown={handleKeydown}/>

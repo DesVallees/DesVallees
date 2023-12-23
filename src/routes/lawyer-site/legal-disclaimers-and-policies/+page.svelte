@@ -1,53 +1,52 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import { dictionary } from "../stores";
-    import { onMount } from "svelte";
 	
 </script>
 
 <svelte:head>
     <title>{$dictionary.legalDisclaimersAndPolicies}</title>
-    <meta name="description" content="Important legal information, terms of service, and privacy policy.">
+    <meta name="description" content={$dictionary.disclaimersDescription}>
 </svelte:head>
 
 <div class="legal-disclaimers" in:fade>
     <h1>{$dictionary.legalDisclaimersAndPolicies}</h1>
 
     <section>
-        <h2>Terms of Service</h2>
-        <p>By using LegalCollab, you agree to abide by our Terms of Service. This includes the terms and conditions governing the use of our platform, services, and interactions with our network of attorneys.</p>
-        <a class="button" href="/lawyer-site/legal-disclaimers-and-policies/terms-of-service">Read our Terms of Service</a>
+        <h2>{$dictionary.termsOfService}</h2>
+        <p>{$dictionary.descriptionTermsOfService}</p>
+        <a class="button" href="/lawyer-site/legal-disclaimers-and-policies/terms-of-service">{$dictionary.readOurMasc} {$dictionary.termsOfService}</a>
     </section>
 
     <hr>
 
     <section>
-        <h2>Privacy Policy</h2>
-        <p>Your privacy is important to us. Our Privacy Policy outlines how we collect, use, and protect your personal information.</p>
-        <a class="button" href="/lawyer-site/legal-disclaimers-and-policies/privacy-policy">Read our Privacy Policy</a>
+        <h2>{$dictionary.privacyPolicy}</h2>
+        <p>{$dictionary.descriptionPrivacyPolicy}</p>
+        <a class="button" href="/lawyer-site/legal-disclaimers-and-policies/privacy-policy">{$dictionary.readOur} {$dictionary.privacyPolicy}</a>
     </section>
 
     <hr>
 
     <section>
-        <h2>Data Protection</h2>
-        <p>Client data protection is a priority at LegalCollab. We implement industry-standard measures to secure your data and ensure confidentiality.</p>
-        <a class="button" href="/lawyer-site/legal-disclaimers-and-policies/data-protection">Read our Data Protection Policy</a>
+        <h2>{$dictionary.dataProtection}</h2>
+        <p>{$dictionary.descriptionDataProtection}</p>
+        <a class="button" href="/lawyer-site/legal-disclaimers-and-policies/data-protection">{$dictionary.readOur} {$dictionary.dataProtectionPolicy}</a>
     </section>
 
     <hr>
 
     <section>
-        <h2>Refunds and Cancellations</h2>
-        <p>Please review this information before engaging our services.</p>
-        <a class="button" href="/lawyer-site/legal-disclaimers-and-policies/refund-policy">Read our Refund Policy</a>
+        <h2>{$dictionary.refundsAndCancellations}</h2>
+        <p>{$dictionary.descriptionRefundPolicy}</p>
+        <a class="button" href="/lawyer-site/legal-disclaimers-and-policies/refund-policy">{$dictionary.readOur} {$dictionary.refundPolicy}</a>
     </section>
 
     <hr>
 
     <section>
         <h2>{$dictionary.contactInformation}</h2>
-        <p>If you have legal inquiries or need further clarification about our legal disclaimers and policies, you can contact us for assistance.</p>
+        <p>{$dictionary.descriptionContact}</p>
         <a class="button" href="/lawyer-site/contact">{$dictionary.contactUs}</a>
     </section>
 </div>
@@ -60,28 +59,29 @@
     }
 
     h1 {
-        font-size: clamp(3rem, 12vw, 3.5rem);
+        font-size: clamp(2.25rem, 6vw, 3rem);
         margin: auto;
-        margin-bottom: 4rem;
+        margin-bottom: 5rem;
         width: fit-content;
         text-align: center;
         line-height: 2.5ex;
     }
 
     h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-        line-height: 2.5ex;
+        font-size: clamp(1.75rem, 4vw, 2rem);
+        line-height: 1.4;
+        text-align: center;
         margin-bottom: 1rem;
     }
     
     p {
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
-        line-height: 3ex;
+        font-size: clamp(1.2rem, 3vw, 1.4rem);
+        line-height: 1.8;
         text-wrap: pretty;
+        max-width: 50ch;
     }
 
     section {
-        max-width: 75ch;
         margin: auto;
 
         display: grid;
@@ -90,11 +90,19 @@
 
     a {
         margin-top: 2.75rem;
-        font-size: clamp(1.25rem, 3vw, 1.25rem);
+        font-size: clamp(1.15rem, 3vw, 1.3rem);
+        text-align: center;
     }
 
     hr {
         width: min(100%, 70ch);
-        margin: 10rem auto;
+        margin: 8rem auto;
+    }
+
+    @media screen and (min-width: 500px){
+        p {
+            line-height: 1.7;
+            text-align: justify;
+        }
     }
 </style>

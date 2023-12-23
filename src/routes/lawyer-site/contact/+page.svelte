@@ -52,21 +52,11 @@
             />
         </div>
 
-        <div class="row">
-            <FloatingLabel 
-                labelText={$dictionary.inquirySubject} 
-                required={true} 
-                autocomplete="off"
-                autocorrect={true}
-            />
-
-            <FloatingLabel 
-                labelText={$dictionary.preferredLanguage} 
-                required={true} 
-                autocomplete="off"
-                autocorrect={true}
-            />
-        </div>
+        <FloatingLabel 
+            labelText={$dictionary.inquirySubject} 
+            required={true} 
+            autocomplete="off"
+        />
     
         <div class="yourMessage">
             <FloatingLabel 
@@ -77,30 +67,17 @@
             />
         </div>
 
-        <div class="row">
-            <label class="attachment" for="attachment" aria-label="{$dictionary.attachment}">
-                <ion-icon name="attach"></ion-icon>
-                <span>{$dictionary.attachment}</span>
-                <input type="file" style="display: none;" id="attachment" accept=".pdf, .doc, .jpg, .png" />
-            </label>
-        
-            <label for="subscribe" class="checkbox">
-                <input type="checkbox" id="subscribe" />
-                {$dictionary.subscribeToNewsletter}
-            </label>
-        
-            <label for="preferredContact" class="radio">
-                <span class="radioLabel">
-                    {$dictionary.preferredContactMethod}:
-                </span>
-                <div>
-                    <input type="radio" id="contactEmail" name="preferredContact" value="email" />
-                    <label for="contactEmail">{$dictionary.email}</label>
-                    <input type="radio" id="contactPhone" name="preferredContact" value="phone" />
-                    <label for="contactPhone">{$dictionary.phoneNumber}</label>
-                </div>
-            </label>
-        </div>
+        <label for="preferredContact" class="radio">
+            <span class="radioLabel">
+                {$dictionary.preferredContactMethod}:
+            </span>
+            <div>
+                <input type="radio" id="contactEmail" name="preferredContact" value="email" />
+                <label for="contactEmail">{$dictionary.email}</label>
+                <input type="radio" id="contactPhone" name="preferredContact" value="phone" />
+                <label for="contactPhone">{$dictionary.phoneNumber}</label>
+            </div>
+        </label>
     
         <button class="button submit" type="submit">{$dictionary.submitInquiry}</button>
     </form>
@@ -192,19 +169,21 @@
     }
 
     form {
-        display: grid;
+        display: flex;
+        flex-direction: column;
         row-gap: 1rem;
         justify-content: center;
         
         margin: 2rem auto;
-        max-width: 700px;
+        width: 100%;
+        max-width: 45rem;
     }
 
     .yourMessage {
         margin: 1rem 0 .5rem;
     }
 
-    .attachment, .radio, .checkbox {
+    .radio {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -214,10 +193,6 @@
         padding: .625rem 0;
 
         font-weight: 500;
-    }
-
-    .attachment {
-        cursor: pointer;
     }
 
     .radio div {

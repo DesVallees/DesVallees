@@ -2,12 +2,6 @@
     import { fade } from "svelte/transition";
     import { dictionary } from "../stores";
 	import Testimonial from "../components/testimonial.svelte";
-    import { onMount } from "svelte";
-	import toast from "svelte-french-toast";
-
-    onMount(() => {
-        toast(`${$dictionary.earlyDevelopmentStage}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
-    })
 </script>
 
 <svelte:head>
@@ -19,12 +13,11 @@
     <h1>{$dictionary.pricing}</h1>
     
     <section>
-        <h2>Service Pricing</h2>
         <p>Our services are priced competitively to provide affordable legal assistance.</p>
         <ul>
-            <li>Divorce Proceedings Assistance: $200</li>
-            <li>Custody Proceedings Assistance: $150</li>
-            <li>Legal Consultation: $50/hour</li>
+            <li>Divorce Proceedings Assistance: <strong>$200</strong></li>
+            <li>Custody Proceedings Assistance: <strong>$150</strong></li>
+            <li>Legal Consultation: <strong>$50/hour</strong></li>
         </ul>
     </section>
 
@@ -44,8 +37,21 @@
 
     <section>
         <h2>Promotions</h2>
-        <p>Check out our latest promotions and discounts for first-time clients.</p>
-        <p>First-time clients receive a 10% discount on their initial service.</p>
+        <p>Explore our latest promotions and enjoy exclusive discounts on our legal services. Take advantage of these limited-time offers:</p>
+        <ul style="margin-bottom: 3rem; display: grid; gap: 2rem;">
+            <li>
+                <strong>First-Time Client Discount:</strong> New clients receive a 10% discount on their initial service. It's our way of welcoming you to the LegalCollab family!
+            </li>
+
+            <li>
+                <strong>Referral Rewards:</strong> Refer a friend or family member, and when they become a client, both you and the new client enjoy a discount on your next service with us.
+            </li>
+
+            <li>
+                <strong>Free Consultation:</strong> For a limited time, take advantage of a free initial consultation. Discuss your case with our experts without any upfront cost.
+            </li>
+        </ul>
+        <p>Each promotion is subject to specific terms and conditions. Please review the details and feel free to contact us if you have any questions or need further clarification.</p>
     </section>
 
     <hr>
@@ -53,22 +59,21 @@
     <section>
         <h2>Success Stories</h2>
         <p>Read about how our affordable legal services have made a difference for our clients.</p>
-        <ul>
-            <Testimonial photoSrc="/images/lawyers/logoWhite.webp" name="John D." location="Wonderland" text="I got through my divorce smoothly with their affordable assistance!"/>
-            <Testimonial photoSrc="/images/lawyers/logoWhite.webp" name="Sarah M." location="Wonderland" text="Their team made legal help accessible when I needed it most."/>
-        </ul>
+        <div class="testimonialCards">
+            <Testimonial photoSrc="/images/lawyers/Ji-Yeon_Kim.jpg" name="Ji-Yeon Kim" location="Wonderland" text="I got through my divorce smoothly with their affordable assistance!"/>
+            <Testimonial photoSrc="/images/lawyers/Rahul_Patel.jpg" name="Rahul Patel" location="Wonderland" text="Their team made legal help accessible when I needed it most."/>
+        </div>
     </section>
 </div>
 
 <style>
     .pricing {
         padding: 3rem 2rem 10rem;
-        max-width: 1500px;
         margin: auto;
     }
 
     h1 {
-        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        font-size: clamp(2.25rem, 6vw, 3rem);
         margin: auto;
         margin-bottom: 1rem;
         width: fit-content;
@@ -77,19 +82,27 @@
     }
 
     h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-        line-height: 2.5ex;
+        font-size: clamp(1.75rem, 4vw, 2rem);
+        line-height: 1.4;
+        text-align: center;
         margin-bottom: 1rem;
     }
     
-    p {
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
-        line-height: 3ex;
+    p, li {
+        font-size: clamp(1.2rem, 3vw, 1.4rem);
+        line-height: 1.8;
         text-wrap: pretty;
+        max-width: 50ch;
+    }
+
+    ul {
+        margin-top: 2rem;
+        width: 100%;
+        max-width: 65ch;
+        list-style-position: inside;
     }
 
     section {
-        max-width: 75ch;
         margin: auto;
 
         display: grid;
@@ -98,7 +111,21 @@
 
     hr {
         width: min(100%, 70ch);
-        margin: 10rem auto;
+        margin: 8rem auto;
+    }
+
+    .testimonialCards {
+        margin-top: 5rem;
+        display: grid;
+        row-gap: 2rem;
+        justify-content: center;
+    }
+
+    @media screen and (min-width: 500px){
+        p {
+            line-height: 1.7;
+            text-align: justify;
+        }
     }
 </style>
 

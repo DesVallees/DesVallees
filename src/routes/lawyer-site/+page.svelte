@@ -17,7 +17,7 @@
 </script>
 
 <svelte:head>
-    <title>LegalCollab - {$dictionary.homepage}</title>
+    <title>LegalCollab - {$dictionary.divorceAndCustodySpecialists}</title>
     <meta name="description" content="{$dictionary.homeDescription}">
 </svelte:head>
 

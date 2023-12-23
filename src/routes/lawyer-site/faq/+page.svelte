@@ -1,12 +1,11 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import { dictionary } from "../stores";
-    import { onMount } from "svelte";
 	import toast from "svelte-french-toast";
 
-    onMount(() => {
-        toast(`${$dictionary.earlyDevelopmentStage}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
-    })
+    function comingSoon() {
+        toast(`${$dictionary.comingSoon}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
+    }
 </script>
 
 <svelte:head>
@@ -18,9 +17,8 @@
     <h1>{$dictionary.frequentlyAskedQuestions}</h1>
 
     <section>
-        <h2>Search FAQs</h2>
         <p>Looking for something specific? Use the search bar below to find answers to your questions:</p>
-        <input type="text" name="search" placeholder="Search...">
+        <input on:focus={comingSoon} type="text" name="search" placeholder="Search...">
     </section>
 
     <hr>
@@ -29,7 +27,7 @@
         <h2>General Questions</h2>
         <dl>
             <dt>How does LegalCollab work?</dt>
-            <dd>
+            <dd style="margin-bottom: 3rem;">
                 <p>LegalCollab is a collaborative network of attorneys providing affordable legal services online. Clients can access services, resources, and legal guidance through our platform.</p>
             </dd>
 
@@ -47,7 +45,7 @@
         <h2>Using LegalCollab</h2>
         <dl>
             <dt>How do I sign up for LegalCollab?</dt>
-            <dd>
+            <dd style="margin-bottom: 3rem;">
                 <p>Signing up is easy! Visit our <a href="/signup">signup page</a> and follow the instructions to create your account. Once registered, you can explore available services and connect with attorneys.</p>
             </dd>
 
@@ -74,28 +72,52 @@
     }
 
     h1 {
-        font-size: clamp(3.3rem, 12vw, 4.5rem);
+        font-size: clamp(2.25rem, 6vw, 3rem);
         margin: auto;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         width: fit-content;
         text-align: center;
         line-height: 2.5ex;
     }
 
     h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-        line-height: 2.5ex;
+        font-size: clamp(1.75rem, 4vw, 2rem);
+        line-height: 1.4;
+        text-align: center;
         margin-bottom: 1rem;
     }
     
     p {
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
-        line-height: 3ex;
+        font-size: clamp(1.2rem, 3vw, 1.4rem);
+        line-height: 1.8;
         text-wrap: pretty;
+        max-width: 50ch;
+    }
+
+    input {
+        background-color: var(--main-2);
+        margin-top: 2rem;
+        border-radius: 15px;
+        padding: .7em 1em;
+        border: 2px var(--content-8) solid;
+        width: 100%;
+        max-width: 70ch;
+    }
+    
+    input:focus {
+        outline: none;
+        border: 2px var(--content) solid;
+    }
+
+    dt {
+        font-size: clamp(1.3rem, 3.5vw, 1.5rem);
+        font-weight: bold;
+        margin: 1rem 0;
+        display: list-item;
+        list-style-position: inside;
     }
 
     section {
-        max-width: 75ch;
         margin: auto;
 
         display: grid;
@@ -103,12 +125,20 @@
     }
 
     a {
-        font-size: 1.25rem;
-        margin: 3rem 0;
+        margin-top: 2.75rem;
+        font-size: clamp(1.15rem, 3vw, 1.3rem);
+        text-align: center;
     }
 
     hr {
         width: min(100%, 70ch);
-        margin: 10rem auto;
+        margin: 8rem auto;
+    }
+
+    @media screen and (min-width: 500px){
+        p {
+            line-height: 1.7;
+            text-align: justify;
+        }
     }
 </style>
