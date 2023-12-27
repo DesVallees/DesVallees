@@ -10,58 +10,57 @@
 
 <svelte:head>
     <title>{$dictionary.frequentlyAskedQuestions}</title>
-    <meta name="description" content="Frequently Asked Questions about our legal services.">
+    <meta name="description" content={$dictionary.exploreFAQPage}>
 </svelte:head>
 
 <div class="faq" in:fade>
     <h1>{$dictionary.frequentlyAskedQuestions}</h1>
 
     <section>
-        <p>Looking for something specific? Use the search bar below to find answers to your questions:</p>
-        <input on:focus={comingSoon} type="text" name="search" placeholder="Search...">
+        <p>{$dictionary.lookingForSomethingSpecific}</p>
+        <input on:focus={comingSoon} type="text" name="search" placeholder="{$dictionary.searchPlaceholder}">
     </section>
-
+    
     <hr>
     
     <section>
-        <h2>General Questions</h2>
+        <h2>{$dictionary.generalQuestions}</h2>
         <dl>
-            <dt>How does LegalCollab work?</dt>
-            <dd style="margin-bottom: 3rem;">
-                <p>LegalCollab is a collaborative network of attorneys providing affordable legal services online. Clients can access services, resources, and legal guidance through our platform.</p>
-            </dd>
-
-            <dt>What types of legal services do you offer?</dt>
+            <dt>{$dictionary.howDoesLegalCollabWork}</dt>
             <dd>
-                <p>We specialize in family law matters, including divorce proceedings and custody proceedings assistance. Our goal is to make legal representation more accessible and affordable.</p>
+                <p>{$dictionary.legalCollabFAQ}</p>
             </dd>
-
+    
+            <dt>{$dictionary.typesOfLegalServices}</dt>
+            <dd>
+                <p>{$dictionary.legalServicesDescription}</p>
+            </dd>
         </dl>
     </section>
-
+    
     <hr>
-
+    
     <section>
-        <h2>Using LegalCollab</h2>
+        <h2>{$dictionary.usingLegalCollab}</h2>
         <dl>
-            <dt>How do I sign up for LegalCollab?</dt>
-            <dd style="margin-bottom: 3rem;">
-                <p>Signing up is easy! Visit our <a href="/signup">signup page</a> and follow the instructions to create your account. Once registered, you can explore available services and connect with attorneys.</p>
-            </dd>
-
-            <dt>Is my information secure?</dt>
+            <dt>{$dictionary.signUpForLegalCollab}</dt>
             <dd>
-                <p>Yes, we take data security seriously. LegalCollab employs industry-standard encryption and security measures to protect your personal and legal information.</p>
+                <p>{$dictionary.signUpDescription}</p>
             </dd>
-
+    
+            <dt>{$dictionary.isMyInformationSecure}</dt>
+            <dd>
+                <p>{$dictionary.informationSecurityDescription}</p>
+            </dd>
         </dl>
     </section>
-
+    
     <hr>
-
+    
     <section>
-        <p>If you can't find the information you're looking for, feel free to <a href="/contact">contact us</a>. Our team is here to help!</p>
+        <p>{$dictionary.ifYouCantFindInformation} <a href="/lawyer-site/contact">{$dictionary.contactUs}</a>. {$dictionary.teamHereToHelp}</p>
     </section>
+    
 </div>
 
 <style>
@@ -117,6 +116,10 @@
         list-style-position: inside;
     }
 
+    dd:not(:last-child) {
+        margin-bottom: 3rem;
+    }
+
     section {
         margin: auto;
 
@@ -125,9 +128,9 @@
     }
 
     a {
-        margin-top: 2.75rem;
         font-size: clamp(1.15rem, 3vw, 1.3rem);
-        text-align: center;
+        color: var(--interactive);
+        text-decoration: underline;
     }
 
     hr {
@@ -135,10 +138,4 @@
         margin: 8rem auto;
     }
 
-    @media screen and (min-width: 500px){
-        p {
-            line-height: 1.7;
-            text-align: justify;
-        }
-    }
 </style>

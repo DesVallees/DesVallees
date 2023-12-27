@@ -5,59 +5,60 @@
 
 <svelte:head>
     <title>{$dictionary.termsOfService}</title>
-    <meta name="description" content="Terms and conditions governing the use of our platform, services, and interactions with our network of attorneys.">
+    <meta name="description" content={$dictionary.termsOfServiceDescription}>
 </svelte:head>
 
 <div in:fade>
     <article>
         <header>
-            <h1>LegalCollab - Terms of Service</h1>
+            <h1>{$dictionary.articles.termsOfService.legalCollabTermsOfService}</h1>
         </header>
-
+    
         <section>
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing or using the LegalCollab platform, you agree to abide by these Terms of Service. If you do not agree with any part of these terms, please refrain from using our services.</p>
+            <h2>{$dictionary.articles.termsOfService.acceptanceOfTerms}</h2>
+            <p>{$dictionary.articles.termsOfService.acceptanceOfTermsDescription}</p>
         </section>
-
+    
         <section>
-            <h2>2. Use of the Platform</h2>
-            <p>LegalCollab provides a platform for connecting users with attorneys specializing in divorce and custody proceedings. Users are solely responsible for their interactions and transactions on the platform.</p>
+            <h2>{$dictionary.articles.termsOfService.useOfThePlatform}</h2>
+            <p>{$dictionary.articles.termsOfService.useOfThePlatformDescription}</p>
         </section>
-
+    
         <section>
-            <h2>3. User Conduct</h2>
-            <p>Users must conduct themselves in a respectful and lawful manner while using LegalCollab. Any misuse, including but not limited to harassment or fraudulent activities, may result in the termination of services.</p>
+            <h2>{$dictionary.articles.termsOfService.userConduct}</h2>
+            <p>{$dictionary.articles.termsOfService.userConductDescription}</p>
         </section>
-
+    
         <section>
-            <h2>4. Privacy and Data Protection</h2>
-            <p>Protecting user privacy is a priority at LegalCollab. Our Privacy Policy outlines how we collect, use, and safeguard personal information. By using our services, you consent to the practices described in the Privacy Policy.</p>
+            <h2>{$dictionary.articles.termsOfService.privacyAndDataProtection}</h2>
+            <p>{$dictionary.articles.termsOfService.privacyAndDataProtectionDescription}</p>
         </section>
-
+    
         <section>
-            <h2>5. Intellectual Property</h2>
-            <p>All content and materials on the LegalCollab platform, unless otherwise indicated, are the property of LegalCollab. Users may not reproduce, distribute, or modify any content without prior written consent.</p>
+            <h2>{$dictionary.articles.termsOfService.intellectualProperty}</h2>
+            <p>{$dictionary.articles.termsOfService.intellectualPropertyDescription}</p>
         </section>
-
+    
         <section>
-            <h2>6. Disclaimer of Warranties</h2>
-            <p>LegalCollab makes no warranties or representations about the accuracy or completeness of the content on the platform. The use of our services is at the user's own risk.</p>
+            <h2>{$dictionary.articles.termsOfService.disclaimerOfWarranties}</h2>
+            <p>{$dictionary.articles.termsOfService.disclaimerOfWarrantiesDescription}</p>
         </section>
-
+    
         <section>
-            <h2>7. Termination of Services</h2>
-            <p>LegalCollab reserves the right to terminate services or restrict access to the platform for any reason without prior notice. Users may terminate their accounts at any time.</p>
+            <h2>{$dictionary.articles.termsOfService.terminationOfServices}</h2>
+            <p>{$dictionary.articles.termsOfService.terminationOfServicesDescription}</p>
         </section>
-
+    
         <section>
-            <h2>8. Contact Information</h2>
-            <p>If you have questions or concerns about these Terms of Service, please contact us at <a href="mailto:info@legalcollab.com">info@legalcollab.com</a>.</p>
+            <h2>{$dictionary.articles.termsOfService.contactInformation}</h2>
+            <p>{$dictionary.articles.termsOfService.contactInformationDescription} <a href="mailto:support@legalcollab.com">support@legalcollab.com</a>.</p>
         </section>
-
+    
         <footer>
-            <p>These Terms of Service were last updated on December 1st, 2023.</p>
+            <p>{$dictionary.articles.termsOfService.lastUpdatedOn}</p>
         </footer>
     </article>
+    
 </div>
 
 <style>

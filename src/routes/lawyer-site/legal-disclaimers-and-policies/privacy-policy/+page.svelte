@@ -5,52 +5,52 @@
 
 <svelte:head>
     <title>{$dictionary.privacyPolicy}</title>
-    <meta name="description" content="Our Privacy Policy outlines how we collect, use, and protect your personal information.">
+    <meta name="description" content="{$dictionary.articles.privacyPolicy.informationWeCollectDescription}">
 </svelte:head>
 
 <div in:fade>
     <article>
         <header>
-            <h1>LegalCollab - Privacy Policy</h1>
+            <h1>{$dictionary.articles.privacyPolicy.legalCollabPrivacyPolicy}</h1>
         </header>
-
+    
         <section>
-            <h2>1. Information We Collect</h2>
-            <p>LegalCollab collects personal information such as names, contact details, and case-related details. This information is provided by users voluntarily when using our platform.</p>
+            <h2>{$dictionary.articles.privacyPolicy.informationWeCollect}</h2>
+            <p>{$dictionary.articles.privacyPolicy.informationWeCollectDescription}</p>
         </section>
-
+    
         <section>
-            <h2>2. Use of Information</h2>
-            <p>We use the collected information to connect users with attorneys, improve our services, and communicate important updates. Personal information is treated with the utmost confidentiality and is not shared without explicit consent.</p>
+            <h2>{$dictionary.articles.privacyPolicy.useOfInformation}</h2>
+            <p>{$dictionary.articles.privacyPolicy.useOfInformationDescription}</p>
         </section>
-
+    
         <section>
-            <h2>3. Data Security</h2>
-            <p>LegalCollab employs industry-standard measures to secure user data. While we strive to protect personal information, users should be aware that no data transmission over the internet is entirely secure.</p>
+            <h2>{$dictionary.articles.privacyPolicy.dataSecurity}</h2>
+            <p>{$dictionary.articles.privacyPolicy.dataSecurityDescription}</p>
         </section>
-
+    
         <section>
-            <h2>4. Cookies and Tracking</h2>
-            <p>LegalCollab uses cookies and similar tracking technologies to enhance user experience. Users can manage cookie preferences through their browser settings.</p>
+            <h2>{$dictionary.articles.privacyPolicy.cookiesAndTracking}</h2>
+            <p>{$dictionary.articles.privacyPolicy.cookiesAndTrackingDescription}</p>
         </section>
-
+    
         <section>
-            <h2>5. Third-Party Links</h2>
-            <p>Our platform may contain links to third-party websites. LegalCollab is not responsible for the privacy practices or content of these external sites. Users should review the privacy policies of third parties.</p>
+            <h2>{$dictionary.articles.privacyPolicy.thirdPartyLinks}</h2>
+            <p>{$dictionary.articles.privacyPolicy.thirdPartyLinksDescription}</p>
         </section>
-
+    
         <section>
-            <h2>6. Changes to Privacy Policy</h2>
-            <p>LegalCollab reserves the right to update this Privacy Policy. Users will be notified of any changes, and continued use of our services after the changes constitute acceptance of the revised policy.</p>
+            <h2>{$dictionary.articles.privacyPolicy.changesToPrivacyPolicy}</h2>
+            <p>{$dictionary.articles.privacyPolicy.changesToPrivacyPolicyDescription}</p>
         </section>
-
+    
         <section>
-            <h2>7. Contact Information</h2>
-            <p>If you have questions or concerns about our Privacy Policy, please contact us at <a href="mailto:privacy@legalcollab.com">privacy@legalcollab.com</a>.</p>
+            <h2>{$dictionary.articles.privacyPolicy.contactInformation}</h2>
+            <p>{$dictionary.articles.privacyPolicy.contactInformationDescription} <a href="mailto:support@legalcollab.com">support@legalcollab.com</a>.</p>
         </section>
-
+    
         <footer>
-            <p>This Privacy Policy was last updated on December 1st, 2023.</p>
+            <p>{$dictionary.articles.privacyPolicy.lastUpdatedOn}</p>
         </footer>
     </article>
 </div>

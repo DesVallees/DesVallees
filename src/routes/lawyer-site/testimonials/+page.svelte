@@ -7,47 +7,48 @@
 
 <svelte:head>
     <title>{$dictionary.testimonials}</title>
-    <meta name="description" content="What our clients have to say about us.">
+    <meta name="description" content={$dictionary.seeClientExperiences}>
 </svelte:head>
 
 <div class="testimonials" in:fade>
     <h1>{$dictionary.testimonials}</h1>
 
     <section>
-        <p>See what our clients have to say about their experiences with our legal services.</p>
+        <p>{$dictionary.seeClientExperiences}</p>
         
         <div class="video">
             <iframe
                 width="560"
                 height="315"
-                src="https://www.youtube.com/embed/VIDEO_ID"
+                src="https://www.youtube.com/embed/UFatVn1hP3o"
                 title="Client Testimonial"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
             </iframe>
-            <p>"Their team provided excellent support throughout my legal process." - Mary K.</p>
+            <p>{$dictionary.clientTestimonial}</p>
         </div>
-
+    
         <div class="testimonialCards">
-            <Testimonial photoSrc="/images/lawyers/Sofia_Lindström.jpg" name="Sofia Lindström" location="Wonderland" text="I'm grateful for the professional and affordable legal help I received."/>
-            <Testimonial photoSrc="/images/lawyers/Brian_Mitchell.jpg" name="Brian Mitchell" location="Wonderland" text="The attorneys were knowledgeable, and their guidance was invaluable."/>
+            <Testimonial photoSrc="/images/lawyers/Sofia_Lindström.jpg" name="Sofia Lindström" location="{$dictionary.carrollCounty}" text="{$dictionary.sofiaTestimonial}"/>
+            <Testimonial photoSrc="/images/lawyers/Brian_Mitchell.jpg" name="Brian Mitchell" location="{$dictionary.baltimoreCounty}" text="{$dictionary.brianTestimonial}"/>
         </div>
     </section>
-
+    
     <hr>
-
+    
     <section>
-        <h2>Leave Your Review</h2>
-        <p>We value your feedback! Share your experience with our legal services.</p>
+        <h2>{$dictionary.leaveYourReview}</h2>
+        <p>{$dictionary.valueYourFeedback}</p>
         <form>
-            <FloatingLabel labelText={$dictionary.firstName} required />
-            <FloatingLabel labelText={$dictionary.lastName} required />
-            <FloatingLabel labelText="Write your review" element="textarea" required />
-
-            <button type="submit" class="button">Submit Review</button>
+            <FloatingLabel labelText="{$dictionary.firstName}" required />
+            <FloatingLabel labelText="{$dictionary.lastName}" required />
+            <FloatingLabel labelText="{$dictionary.writeYourReview}" element="textarea" required />
+    
+            <button type="submit" class="button">{$dictionary.submitReview}</button>
         </form>
     </section>
+    
 </div>
 
 <style>
@@ -75,9 +76,10 @@
     
     p {
         font-size: clamp(1.2rem, 3vw, 1.4rem);
-        line-height: 1.8;
         text-wrap: pretty;
         max-width: 50ch;
+        line-height: 1.7;
+        text-align: center;
     }
 
     section {
@@ -98,13 +100,14 @@
     }
 
     .video p {
-        text-align: center;
         width: 90%;
         font-size: clamp(1.2rem, 3vw, 1.3rem);
     }
     
     iframe {
         max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
         margin: 2rem 0 1rem;
         border-radius: 10px;
     }
@@ -131,10 +134,4 @@
         font-size: 1.1rem;
     }
 
-    @media screen and (min-width: 500px){
-        p {
-            line-height: 1.7;
-            text-align: justify;
-        }
-    }
 </style>

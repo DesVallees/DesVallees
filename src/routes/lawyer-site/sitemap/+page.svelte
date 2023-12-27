@@ -5,7 +5,7 @@
 
 <svelte:head>
     <title>{$dictionary.siteMap}</title>
-    <meta name="description" content="Explore the sitemap of our website.">
+    <meta name="description" content={$dictionary.legalCollabFAQ}>
 </svelte:head>
 
 <div class="sitemap" in:fade>

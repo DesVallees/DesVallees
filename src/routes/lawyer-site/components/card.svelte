@@ -52,15 +52,21 @@
     }
 
     a {
+        align-self: self-end;
+        
         font-size: clamp(1rem,  3.5vw, 1.1rem);
-        margin-top: 1rem;
+        text-align: center;
+        margin-top: 1.5rem;
+
+        padding: .5em .75em;
         width: 100%;
-        background-color: var(--content-2);
+        border: 2px solid var(--content-5);
+        background-color: var(--content-1);
     }
 
     a:hover,
     a:focus-visible {
-        background-color: var(--content-4);
+        background-color: var(--content-3);
     }
 
 
