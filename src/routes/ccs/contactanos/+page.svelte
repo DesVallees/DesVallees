@@ -34,7 +34,7 @@
 				<span>{$dictionary.copyEmail}</span>
 			</button>
 		</p>
-		<p>{$dictionary.visitOurInstagram} <a href="https://www.instagram.com/ccsguitars" target="_blank">@cssguitars</a></p>
+		<p>{$dictionary.visitOurInstagram} <a href="https://www.instagram.com/ccsguitars" target="_blank">@ccsguitars</a></p>
 	</section>
 	
 	<hr>

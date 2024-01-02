@@ -67,7 +67,7 @@
 
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        border: solid 1px var(--content-5);
+        border: solid 1px var(--content);
         box-shadow: 0 0 1.5rem var(--main);
         border-top: 0;
         padding: 0 .5em 1em;
