@@ -172,4 +172,5 @@
 
 <svelte:head>
     <title>Plan de trabajo - RADA Cycling Wear</title>
+    <meta name="description" content="Con esta reorganización, se prioriza el desarrollo del front-end y la implementación de la capacidad de compra en las primeras fases del proyecto para que los clientes puedan comenzar a utilizar el sitio rápidamente.">
 </svelte:head>

@@ -19,7 +19,7 @@
     <h1>{$dictionary.santiagoOvallesProjects}</h1>
     
     <a data-sveltekit-reload href="/journee">Journée ({$dictionary.comingSoon})</a>
-    <a data-sveltekit-reload href="/radacycling">RadaCycling ({$dictionary.comingSoon})</a>
+    <a data-sveltekit-reload href="/radacycling">RADA Cycling ({$dictionary.comingSoon})</a>
     
     <Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="1.5rem 0" />
     
