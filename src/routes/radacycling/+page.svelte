@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-    <title>RadaCycling</title>
+    <title>RADA Cycling</title>
     <meta name="description" content="{$dictionary.homeDescription}">
 </svelte:head>
 

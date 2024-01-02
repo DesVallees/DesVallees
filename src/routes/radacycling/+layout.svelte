@@ -2,7 +2,7 @@
     import './app.css'
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { language } from './stores';
+	import { baseImageRoute, language } from './stores';
 	import { sleep } from './functions';
     
 	import Nav from './components/nav.svelte';
@@ -43,7 +43,7 @@
 
 <svelte:head>
     <meta name="author" content="Santiago Ovalles">
-    <link rel="icon" href="/images/lawyers/logoFull.webp" />
+    <link rel="icon" href="{baseImageRoute}/favicon.webp" />
 </svelte:head>
 
 <Toaster />
