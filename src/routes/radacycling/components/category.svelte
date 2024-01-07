@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { baseImageRoute } from "../stores";
+	import { baseImageRoute, baseRoute } from "../stores";
 
+    export let style: string = "";
+    
     export let imageSrc: string;
     export let imageAlt: string;
 
@@ -9,11 +11,11 @@
 
 </script>
 
-<div class="category scrollAppear">
-    <img src="{baseImageRoute}/{imageSrc}" alt={imageAlt}>
+<div class="category" {style}>
+    <img src="{baseImageRoute}/{imageSrc}" alt={imageAlt} class="scrollAppear">
     <div class="text">
         <h2>{name}</h2>
-        <button class="button">{buttonText}</button>
+        <a href="{baseRoute}/catalog?category={name.toLowerCase()}" class="button">{buttonText}</a>
     </div>
 </div>
 
@@ -21,6 +23,7 @@
     .category {
         display: grid;
         grid-template-rows: repeat(2, 1fr);
+        max-width: fit-content;
     }
 
     .category > * {
@@ -32,9 +35,29 @@
     }
 
     .text {
-        justify-self: center;
         align-self: end;
-        margin-bottom: 2rem;
+
+        text-transform: uppercase;
+
+        width: 100%;
+        padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 6vw, 3rem) clamp(2rem, 8vw, 4rem);
+        
+        background-color: var(--main-5);
+        backdrop-filter: blur(3px);
+    }
+
+    h2 {
+        font-size: clamp(3rem, 8vw, 4rem);
+    }
+
+    a {
+        font-size: clamp(1.4rem, 4vw, 1.8rem);
+        background-color: var(--interactive-8);
+    }
+
+    a:hover,
+    a:focus-visible {
+        background-color: var(--interactive);
     }
 
 </style>

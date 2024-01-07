@@ -18,6 +18,7 @@
             style="
                 width: inherit; 
                 height: inherit; 
+                min-height: 100%;
                 
                 border-radius: 0; 
                 aspect-ratio: unset; 

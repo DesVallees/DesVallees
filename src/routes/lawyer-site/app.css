@@ -13,16 +13,6 @@
     border-radius: 5px;
 }
 
-html, :has(:target) {
-    scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion){
-    html, :has(:target) {
-        scroll-behavior: auto;
-    }
-}
-
 :root {    
     --main: rgb(var(--mainRGB));
     --main-9: rgba(var(--mainRGB), .9);

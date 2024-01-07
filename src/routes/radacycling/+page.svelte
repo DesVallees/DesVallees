@@ -4,6 +4,7 @@
 	import Landing from "./components/landing.svelte";
 	import Reveal from "./components/reveal.svelte";
 	import Category from "./components/category.svelte";
+	import Products from "./components/products.svelte";
 
     type Cat = {
         imageSrc: string,
@@ -20,11 +21,6 @@
             imageSrc: "cyclistBrillante.jpg",
             imageAlt: "Products For Women",
             name: "Women"
-        },
-        {
-            imageSrc: "cyclistC.jpg",
-            imageAlt: "Products For All",
-            name: "Unisex"
         },
     ]
 
@@ -47,99 +43,29 @@
 
     <section class="categories">
         {#each categories as cat}
-            <Category {...cat}/>
+            <Category {...cat} style="flex-grow: 1; flex-basis: 40rem"/>
         {/each}
     </section>
 
-    <section class="products scrollAppear">
-        <h2>Most Popular</h2>
-        <div>
-            <img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="Red Jersey 2024">
-            <h2>Jersey 2024</h2>
-            <div class="prices">
-                <p class="price">$89.97</p>
-                <p class="oldPrice">$125.00</p>
-            </div>
-            <div class="versions">
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="View Red Jersey 2024"></button>
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Blue.webp" alt="View Blue Jersey 2024"></button>
-            </div>
-        </div>
 
-        <div>
-            <img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="Red Jersey 2024">
-            <h2>Jersey 2024</h2>
-            <div class="prices">
-                <p class="price">$89.97</p>
-                <p class="oldPrice">$125.00</p>
-            </div>
-            <div class="versions">
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="View Red Jersey 2024"></button>
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Blue.webp" alt="View Blue Jersey 2024"></button>
-            </div>
-        </div>
-        
-        <div>
-            <img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="Red Jersey 2024">
-            <h2>Jersey 2024</h2>
-            <div class="prices">
-                <p class="price">$89.97</p>
-                <p class="oldPrice">$125.00</p>
-            </div>
-            <div class="versions">
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="View Red Jersey 2024"></button>
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Blue.webp" alt="View Blue Jersey 2024"></button>
-            </div>
-        </div>
-    </section>
+    <Products title="Most Popular."/>
 
-    <section class="promotions scrollAppear">
-        <a href="{baseRoute}/catalog">
-            <img src="{baseImageRoute}/Resources/radyImageHome.jpg" alt="New Jersey: Mint Chocolate Chip">
+    <section class="promotions">
+        <a href="{baseRoute}/catalog" class="scrollScale">
+            <img src="{baseImageRoute}/Resources/offer1bib2jerseys.png" alt="Offer: 1 Bib Plus 2 Jerseys">
+        </a>
+
+        <a href="{baseRoute}/contact" class="scrollScale">
+            <img src="{baseImageRoute}/Resources/radaCustom.png" alt="RADA Custom">
         </a>
     </section>
 
-    <section class="products scrollAppear">
-        <h2>Latest releases</h2>
-        <div>
-            <img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="Red Jersey 2024">
-            <h2>Jersey 2024</h2>
-            <div class="prices">
-                <p class="price">$89.97</p>
-                <p class="oldPrice">$125.00</p>
-            </div>
-            <div class="versions">
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="View Red Jersey 2024"></button>
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Blue.webp" alt="View Blue Jersey 2024"></button>
-            </div>
-        </div>
-        
-        <div>
-            <img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="Red Jersey 2024">
-            <h2>Jersey 2024</h2>
-            <div class="prices">
-                <p class="price">$89.97</p>
-                <p class="oldPrice">$125.00</p>
-            </div>
-            <div class="versions">
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="View Red Jersey 2024"></button>
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Blue.webp" alt="View Blue Jersey 2024"></button>
-            </div>
-        </div>
-        
-        <div>
-            <img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="Red Jersey 2024">
-            <h2>Jersey 2024</h2>
-            <div class="prices">
-                <p class="price">$89.97</p>
-                <p class="oldPrice">$125.00</p>
-            </div>
-            <div class="versions">
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Red.webp" alt="View Red Jersey 2024"></button>
-                <button class="button"><img src="{baseImageRoute}/Resources/Jersey2024Blue.webp" alt="View Blue Jersey 2024"></button>
-            </div>
-        </div>
-    </section>
+    <Products title="Latest Releases."/>
+    
+    <a href="{baseRoute}/catalog" class="scrollAppear">
+        <img src="{baseImageRoute}/Resources/radyImageHome.jpg" alt="New Jersey: Mint Chocolate Chip">
+    </a>
+
 
     <section class="ourWork">
         <h2>Some Of Our Work</h2>
@@ -152,19 +78,21 @@
         <p>We guarantee it!</p>
 
         <div>
-            <ion-icon name="cube-outline"></ion-icon>
-            <h3>Free Domestic Shiping</h3>
-            <p>On all orders over $100USD. Excluding Sale Periods.</p>
-        </div>
-        <div>
-            <ion-icon name="shirt-outline"></ion-icon>
-            <h3>30-Day Returns</h3>
-            <p>Risk-free returns to get you back out on the road in Rada Cycling Wear!</p>
-        </div>
-        <div>
-            <ion-icon name="layers-outline"></ion-icon>
-            <h3>Instant Exchanges</h3>
-            <p>Helping you find your best fit with us. All gain, and no pain.</p>
+            <aside>
+                <ion-icon name="cube-outline"></ion-icon>
+                <h3>Free Domestic Shiping</h3>
+                <p>On all orders over $100USD. Excluding Sale Periods.</p>
+            </aside>
+            <aside>
+                <ion-icon name="shirt-outline"></ion-icon>
+                <h3>30-Day Returns</h3>
+                <p>Risk-free returns to get you back out on the road in Rada Cycling Wear!</p>
+            </aside>
+            <aside>
+                <ion-icon name="layers-outline"></ion-icon>
+                <h3>Instant Exchanges</h3>
+                <p>Helping you find your best fit with us. All gain, and no pain.</p>
+            </aside>
         </div>
     </section>
 </div>
@@ -173,12 +101,48 @@
     .home {
         display: grid;
         place-items: center;
+        margin-bottom: 5rem;
     }
 
     .about {
         padding: 8rem 2rem;
-        background-color: black;
         width: 100%;
+        
+        background-color: black;
+    }
+    
+    .categories {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        background-color: black;
+    }
+
+    .promotions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .promotions img {
+        border-radius: 5px;
+        filter: contrast(300%) drop-shadow(.5rem .5rem 1rem var(--interactive-5));
+    }
+
+    .features, .ourWork {
+        display: grid;
+        place-items: center;
+        gap: 1rem;
+    }
+
+    .features div {
+        display: flex;
+    }
+
+    .promotions, .features, .ourWork {
+        padding: 4rem 1rem;
     }
     
 </style>

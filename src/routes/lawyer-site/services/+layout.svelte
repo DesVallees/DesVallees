@@ -7,7 +7,7 @@
     async function scrollToElementID(id: string) {
         if (!id) return;
         
-        await sleep(500)
+        await sleep(1)
         const targetElement:HTMLElement | null = document.querySelector(id);
         
         if (targetElement) {

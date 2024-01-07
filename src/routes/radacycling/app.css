@@ -51,18 +51,6 @@
 }
 
 html,
-:has(:target) {
-    scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion) {
-    html,
-    :has(:target) {
-        scroll-behavior: auto;
-    }
-}
-
-html,
 body,
 #app {
     height: 100%;
@@ -336,18 +324,32 @@ article footer p {
 
 @media (prefers-reduced-motion: no-preference) {
     .scrollAppear {
-        scale: .8;
         opacity: 0;
         
         animation: scrollAppear linear forwards;
         animation-timeline: view(y);
-        animation-range: cover 20vh 50vh;
+        animation-range: cover 25vh 50vh;
     }
 
     @keyframes scrollAppear {
         to {
-            scale: 1;
             opacity: 1;
+        }
+    }
+
+    .scrollScale {
+        opacity: 0;
+        scale: .8;
+        
+        animation: scrollScale linear forwards;
+        animation-timeline: view(y);
+        animation-range: cover 25vh 50vh;
+    }
+
+    @keyframes scrollScale {
+        to {
+            opacity: 1;
+            scale: 1;
         }
     }
 }

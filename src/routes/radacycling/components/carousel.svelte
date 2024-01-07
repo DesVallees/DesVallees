@@ -109,6 +109,7 @@
         display: flex;
 
         height: inherit;
+        min-height: inherit;
     }
 
     img {
