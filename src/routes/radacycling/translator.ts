@@ -40,7 +40,6 @@ export const translator = {
         ourWork: 'Our Work',
         
         homeDescription: "",
-        juanNardolilloWorldChampion: 'Juan Nardolillo - XCO 2023 World Champion wears Rada',
     },
     es: {
         comingSoon: 'Próximamente',
@@ -83,6 +82,5 @@ export const translator = {
         ourWork: 'Nuestro trabajo',
 
         homeDescription: "",
-        juanNardolilloWorldChampion: 'Juan Nardolillo - Campeón del Mundo XCO 2023 usa Rada',
     },
 };

@@ -3,7 +3,6 @@
 	import ChangeLanguage from "./changeLanguage.svelte";
 	import Logo from "./logo.svelte";
 	import SNav from "./sNav.svelte";
-	import ThemeSwitcher from "./themeSwitcher.svelte";
 
     let active: boolean = false;
 

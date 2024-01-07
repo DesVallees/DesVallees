@@ -11,11 +11,10 @@
         const targetElement:HTMLElement | null = document.querySelector(id);
         
         if (targetElement) {
-            const offset = 110;
+            const offset = 130;
 
             window.scrollTo({
                 top: targetElement.offsetTop - offset,
-                behavior: 'smooth',
             });
         }
     }

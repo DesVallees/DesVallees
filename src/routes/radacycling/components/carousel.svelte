@@ -1,15 +1,19 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import CarrouselController from "./carrouselController.svelte";
-	import { dictionary } from "../stores";
+	import { baseImageRoute, dictionary } from "../stores";
 	import { sleep } from "../functions";
 
 
     export let style: string = '';
+    export let imgStyle: string = '';
 
     export let images: string[];
     export let imageDescriptions: string[] | undefined = undefined;
+    export let imagesCommonDescription: string = '';
     export let automaticImageChangeTime: number = 5000;
+    export let hideArrows:boolean = false;
+    export let hideController:boolean = false;
 
     export let currentFileIndex: number = 0;
     let intervalId: number | undefined;
@@ -70,15 +74,19 @@
 
 <div class="carousel" {style}>
     <button aria-label={$dictionary.nextImage} style="cursor: default;" on:click={() => {nextImage(); stopAutomaticImageChanges();}} >
-        <img class:disappearAndAppear src={images[currentFileIndex]} alt={imageDescriptions ? imageDescriptions[currentFileIndex] : ''}>
+        <img style={imgStyle} class:disappearAndAppear src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription}>
     </button>
     
-    <div class="controller">
-        <CarrouselController on:interaction={stopAutomaticImageChanges} array={images} bind:currentFileIndex />
-    </div>
+    {#if !hideController}
+        <div class="controller">
+            <CarrouselController on:interaction={stopAutomaticImageChanges} array={images} bind:currentFileIndex />
+        </div>
+    {/if}
 
-    <button on:click={() => {previousImage(); stopAutomaticImageChanges();}} class="previous arrow" aria-label="{$dictionary.previousImage}"><ion-icon name="chevron-back"></ion-icon></button>
-    <button on:click={() => {nextImage(); stopAutomaticImageChanges();}} class="next arrow" aria-label="{$dictionary.nextImage}"><ion-icon name="chevron-forward"></ion-icon></button>
+    {#if !hideArrows}
+        <button on:click={() => {previousImage(); stopAutomaticImageChanges();}} class="previous arrow" aria-label="{$dictionary.previousImage}"><ion-icon name="chevron-back"></ion-icon></button>
+        <button on:click={() => {nextImage(); stopAutomaticImageChanges();}} class="next arrow" aria-label="{$dictionary.nextImage}"><ion-icon name="chevron-forward"></ion-icon></button>
+    {/if}
 </div>
 
 <style>
@@ -99,6 +107,8 @@
 
     button {
         display: flex;
+
+        height: inherit;
     }
 
     img {
@@ -107,7 +117,7 @@
     
     .controller {
         position: absolute;
-        top: 1rem;
+        bottom: 5%;
         left: 50%;
         translate: -50% 0;
 
@@ -153,7 +163,7 @@
     @media screen and (max-width: 600px) {
         .controller {
             top: unset;
-            bottom: .5rem;
+            bottom: 3%;
             padding: .6rem;
         }
 

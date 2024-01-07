@@ -1,19 +1,8 @@
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-*:focus-visible:not(input):not(textarea):not(select) {
-    outline: solid .25rem var(--content);
-    outline-offset: .35rem;
-    border-radius: 5px;
-}
-
-:root {    
+:root {
+    --mainRGB: 15, 15, 15;
+    --contentRGB: 245, 245, 250;
+    --interactiveRGB: 200, 15, 20;
+    
     --main: rgb(var(--mainRGB));
     --main-9: rgba(var(--mainRGB), .9);
     --main-8: rgba(var(--mainRGB), .8);
@@ -46,19 +35,90 @@
     --interactive-1: rgba(var(--interactiveRGB), .1);
 }
 
-[data-theme="dark"] {
-    --mainRGB: 15, 15, 15;
-    --contentRGB: 245, 245, 250;
-    --interactiveRGB: 200, 15, 20;
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-[data-theme="light"] {
-    --mainRGB: 245, 245, 250;
-    --contentRGB: 15, 15, 15;
-    --interactiveRGB: 237, 29, 36;
+*:focus-visible:not(input):not(textarea):not(select) {
+    outline: solid .25rem var(--content);
+    outline-offset: .35rem;
+    border-radius: 5px;
 }
 
-::selection{
+html,
+:has(:target) {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion) {
+    html,
+    :has(:target) {
+        scroll-behavior: auto;
+    }
+}
+
+html,
+body,
+#app {
+    height: 100%;
+}
+
+html {
+    hanging-punctuation: first last;
+}
+
+body {
+    min-height: 100svh;
+    color: var(--content);
+    background-color: var(--main);
+    position: relative;
+
+    transition: background-color .5s, color .2s;
+}
+
+
+/* Common Elements */
+
+img,
+picture,
+svg,
+video {
+    max-width: 100%;
+    height: auto;
+    user-select: none;
+}
+
+ion-icon {
+    pointer-events: none;
+    font-size: 1.5em;
+    color: inherit;
+    visibility: visible;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+p,
+li {
+    max-width: 70ch;
+    text-wrap: pretty;
+}
+
+
+/* Pseudo-elements */
+
+::selection {
     background-color: var(--interactive);
     color: var(--content);
 }
@@ -77,35 +137,25 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: var(--content);
-  border-radius: 5px;
+    background-color: var(--content);
+    border-radius: 5px;
 }
 
-html,
-body,
-#app {
-    height: 100%;
+textarea::-webkit-scrollbar {
+    width: .5rem;
 }
 
-body {
-    color: var(--content) !important;
-    background-color: var(--main) !important;
-    position: relative;
-
-    transition: background-color .5s, color .2s;
+textarea::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
-ion-icon {
-    pointer-events: none;
-    font-size: 1.5em;
-    color: inherit;
-    visibility: visible;
+textarea::-webkit-scrollbar-thumb {
+    background-color: var(--content);
+    border-radius: 2px;
 }
 
-img {
-    user-select: none;
-    max-width: 100%;
-}
+
+/* Buttons and Links */
 
 button,
 input,
@@ -121,7 +171,7 @@ a {
 }
 
 a,
-button{
+button {
     user-select: none;
     cursor: pointer;
 }
@@ -130,20 +180,10 @@ a {
     text-decoration: none;
 }
 
-textarea::-webkit-scrollbar {
-    width: .5rem;
-}
-
-textarea::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
-textarea::-webkit-scrollbar-thumb {
-  background-color: var(--content);
-  border-radius: 2px;
-}
-
-.button, .ghostButton, .baseButton, .link {
+.button,
+.ghostButton,
+.baseButton,
+.link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -210,7 +250,7 @@ textarea::-webkit-scrollbar-thumb {
     position: absolute;
     bottom: 0;
     left: 0;
-    
+
     width: 100%;
     height: .25em;
     border-radius: 4px;
@@ -229,6 +269,9 @@ textarea::-webkit-scrollbar-thumb {
     transform: scaleX(1);
 }
 
+
+/* Articles */
+
 article {
     margin-top: 3rem;
     line-height: 1.8;
@@ -237,20 +280,28 @@ article {
 
 article h1 {
     font-size: 2rem;
+    line-height: normal;
+    margin-bottom: 2rem;
 }
 
 article h2 {
     font-size: 1.5rem;
-    margin: 2rem 0 1rem;
+    line-height: normal;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 article p {
-    max-width: 70ch;
     color: var(--content-9);
+    line-height: 1.8;
+}
+
+article ul {
+    margin: 2rem 0;
 }
 
 article section {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 article a {
@@ -261,7 +312,6 @@ article a {
 }
 
 article li {
-    max-width: 70ch;
     margin-top: 2ex;
     margin-left: 1ch;
     list-style-position: inside;
@@ -279,4 +329,25 @@ article footer p {
     max-width: 60ch;
     font-size: 1.15rem;
     text-align: center;
+}
+
+
+/* Animations */
+
+@media (prefers-reduced-motion: no-preference) {
+    .scrollAppear {
+        scale: .8;
+        opacity: 0;
+        
+        animation: scrollAppear linear forwards;
+        animation-timeline: view(y);
+        animation-range: cover 20vh 50vh;
+    }
+
+    @keyframes scrollAppear {
+        to {
+            scale: 1;
+            opacity: 1;
+        }
+    }
 }

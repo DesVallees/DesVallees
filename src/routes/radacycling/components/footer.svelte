@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { baseRoute, dictionary } from "../stores";
+	import { dictionary } from "../stores";
 
     const currentYear: number = new Date().getFullYear();
 </script>
@@ -10,13 +10,9 @@
             <ion-icon name="logo-instagram"></ion-icon>
             <span>Instagram</span> 
         </a>
-        <a href="{baseRoute}" class="baseButton" aria-label="Facebook">
+        <a href="https://www.facebook.com/rada.cyclingwear/" target="_blank" class="baseButton" aria-label="Facebook">
             <ion-icon name="logo-facebook"></ion-icon>
             <span>Facebook</span> 
-        </a>
-        <a href="{baseRoute}" class="baseButton" aria-label="LinkedIn">
-            <ion-icon name="logo-linkedin"></ion-icon>
-            <span>LinkedIn</span> 
         </a>
     </div>
 </section>

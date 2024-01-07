@@ -19,8 +19,8 @@
     <p><strong>Descripción:</strong> Desarrollar las páginas necesarias para permitir ventas en el sitio utilizando tecnologías web (HTML, CSS, JavaScript, Svelte, SvelteKit),
         asegurándose de que puedan ser utilizadas en cualquier dispositivo y sean visualmente atractivas.</p>
     <ul>
-        <li>Página de Inicio (3-6 de enero de 2024)</li>
-        <li>Página de Catálogo (7-11 de enero de 2024)</li>
+        <li>Página de Inicio (3-7 de enero de 2024)</li>
+        <li>Página de Catálogo (8-11 de enero de 2024)</li>
         <li>Página de Producto (12-16 de enero de 2024)</li>
         <li>Página de Carrito (17-20 de enero de 2024)</li>
         <li>Página de Pago, incluyendo idea de recomendar más productos antes de pagar (21-24 de enero de 2024)</li>
@@ -119,7 +119,6 @@
     article {
         margin: 6rem auto;
         max-width: min(calc(100% - 3rem), 70ch);
-        font-size: 1.2rem;
     }
 
     @media screen and (min-width: 750px) {
@@ -128,43 +127,6 @@
         }
     }
     
-    article h1 {
-        font-size: 2rem;
-        line-height: normal;
-        margin-bottom: 2rem;
-    }
-    
-    article h2 {
-        font-size: 1.5rem;
-        line-height: normal;
-        margin: 2rem 0 1rem;
-    }
-    
-    article p {
-        max-width: 70ch;
-        line-height: 1.8;
-        color: var(--content-9);
-    }
-
-    article ul {
-        margin: 2rem 0;
-    }
-
-    article li {
-        max-width: 70ch;
-        margin-top: 2ex;
-        margin-left: 1ch;
-        list-style-position: inside;
-        list-style-type: square;
-    }
-
-    article footer p {
-        color: var(--content);
-        max-width: 60ch;
-        font-size: 1.15rem;
-        text-align: center;
-    }
-
     hr {
         margin: 5rem 0;
     }

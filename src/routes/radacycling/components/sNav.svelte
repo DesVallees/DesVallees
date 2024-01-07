@@ -6,8 +6,6 @@
 	import { sleep } from "../functions";
 	import { goto } from "$app/navigation";
 	import Logo from "./logo.svelte";
-	import ThemeSwitcher from "./themeSwitcher.svelte";
-	import toast from "svelte-french-toast";
 
     export let active : boolean = false;
 
@@ -61,17 +59,9 @@
                 <a href="https://www.instagram.com/rada_cyclingwear/" target="_blank" on:click={() => active = false} class="baseButton" aria-label="Instagram">
                     <ion-icon name="logo-instagram"></ion-icon>
                 </a>
-                <a href="{baseRoute}" on:click|preventDefault={() => linkBehaviour(`${baseRoute}`)} class="baseButton" aria-label="Facebook">
+                <a href="https://www.facebook.com/rada.cyclingwear/" target="_blank" on:click|preventDefault={() => active = false} class="baseButton" aria-label="Facebook">
                     <ion-icon name="logo-facebook"></ion-icon>
                 </a>
-                <a href="{baseRoute}" on:click|preventDefault={() => linkBehaviour(`${baseRoute}`)} class="baseButton" aria-label="LinkedIn">
-                    <ion-icon name="logo-linkedin"></ion-icon>
-                </a>
-            </section>
-            
-            <section class="darkMode">
-                <span>{$dictionary.darkMode}</span>
-                <ThemeSwitcher bind:switcher={lastFocusableElement} />
             </section>
         </div>
     </nav>
@@ -133,21 +123,10 @@
         font-size: 1.2rem;
     }
     
-    .darkMode {
-        display: none;
-        font-size: 1.05rem;
-        font-weight: bold;
-        margin-top: .5rem;
-    }
-
     @media screen and (max-width: 500px){
         nav {
             width: 35ch;
             padding: 3rem 1.5rem;
-        }
-
-        .darkMode {
-            display: flex;
         }
 
         .baseButton {
