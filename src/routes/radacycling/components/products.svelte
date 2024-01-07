@@ -96,7 +96,7 @@
     div {
         display: flex;
         gap: 2rem;
-        max-width: 90vw;
+        max-width: 80vw;
         overflow-x: auto;
     }
 </style>

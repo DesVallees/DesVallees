@@ -31,7 +31,7 @@
     {#if versions}
         <div class="versions">
             {#each versions as item}
-                <button class:current={item.current}>
+                <button class:current={item.current} on:click={() => imageSrc = item.imageSrc}>
                     <img width="50px" src="{baseImageRoute}/Resources/{item.imageSrc}" alt="{item.imageAlt}">
                 </button>
             {/each}
@@ -49,8 +49,10 @@
 
     h2 {
         margin-top: 1rem;
+        margin-bottom: .5rem;
 
         font-size: clamp(1.5rem, 4vw, 2rem);
+        line-height: 1.2;
     }
 
     .prices {

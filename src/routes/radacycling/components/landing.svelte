@@ -18,7 +18,7 @@
             style="
                 width: inherit; 
                 height: inherit; 
-                min-height: 100%;
+                min-height: inherit;
                 
                 border-radius: 0; 
                 aspect-ratio: unset; 
@@ -54,7 +54,7 @@
         width: 100%;
         height: 100vh;
         height: 100svh;   
-        min-height: 40rem;
+        min-height: 35rem;
         overflow: hidden;
         overflow: clip;
 
@@ -69,6 +69,7 @@
     .carousel {
         height: inherit;
         max-width: unset;
+        min-height: inherit;
 
         grid-row: 1 / -1;
     }

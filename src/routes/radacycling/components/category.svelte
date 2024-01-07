@@ -24,6 +24,8 @@
         display: grid;
         grid-template-rows: repeat(2, 1fr);
         max-width: fit-content;
+        max-height: 100vh;
+        max-height: 100svh;
     }
 
     .category > * {
@@ -32,6 +34,10 @@
 
     img, .text {
         grid-row: 1 / -1;
+    }
+
+    img {
+        max-height: inherit;
     }
 
     .text {

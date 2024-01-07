@@ -43,7 +43,7 @@
 
     <section class="categories">
         {#each categories as cat}
-            <Category {...cat} style="flex-grow: 1; flex-basis: 40rem"/>
+            <Category {...cat} style="flex-grow: 1; flex-basis: 35rem"/>
         {/each}
     </section>
 
@@ -121,13 +121,21 @@
 
     .promotions {
         display: flex;
-        justify-content: center;
         flex-wrap: wrap;
+        justify-content: center;
+
         gap: 1rem;
     }
 
+    .promotions a {
+        flex-grow: 1;
+        flex-basis: 35rem;
+
+        max-width: fit-content;
+    }
+
     .promotions img {
-        border-radius: 5px;
+        border-radius: 10px;
         filter: contrast(300%) drop-shadow(.5rem .5rem 1rem var(--interactive-5));
     }
 
@@ -142,7 +150,7 @@
     }
 
     .promotions, .features, .ourWork {
-        padding: 4rem 1rem;
+        padding: 4rem clamp(1rem, 4vw, 3rem);
     }
     
 </style>
