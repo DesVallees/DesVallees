@@ -24,6 +24,127 @@
         },
     ]
 
+    type Product = {
+        name: string,
+        imageSrc: string,
+        imageAlt: string,
+        price: string,
+        oldPrice: string | undefined,
+        versions: Version[] | undefined,
+        href: string,
+    }
+
+    type Version = {
+        imageSrc: string,
+        imageAlt: string,
+        hrefParam: string,
+        current: boolean,
+    }
+
+    let popular: Product[] = [
+        {
+            name: "Jersey 2024",
+            imageSrc: "Jersey2024Red.webp",
+            imageAlt: "Red Jersey 2024",
+            price: "$89.97",
+            oldPrice: "$125.00",
+            versions: [
+                {
+                    imageSrc: "Jersey2024Red.webp",
+                    imageAlt: "View Red Jersey 2024",
+                    hrefParam: "red",
+                    current: true
+                },
+                {
+                    imageSrc: "Jersey2024Blue.webp",
+                    imageAlt: "View Blue Jersey 2024",
+                    hrefParam: "blue",
+                    current: false
+                },
+            ],
+            href: "/catalog",
+        },
+        {
+            name: "Cycling Bib 2024",
+            imageSrc: "CyclingBib2024.webp",
+            imageAlt: "Cycling Bib 2024",
+            price: "$99.97",
+            oldPrice: undefined,
+            versions: undefined,
+            href: "/catalog",
+        },
+        {
+            name: "Bib + Jersey + Free Socks",
+            imageSrc: "1BibPlus2Jerseys.webp",
+            imageAlt: "Offer: 1 Bib Plus 1 Jersey Plus Free Socks",
+            price: "$219.97",
+            oldPrice: "$220.00",
+            versions: undefined,
+            href: "/catalog",
+        },
+        {
+            name: "RADA Socks",
+            imageSrc: "RadaSocks.webp",
+            imageAlt: "RADA Socks",
+            price: "$16.00",
+            oldPrice: "$25.00",
+            versions: undefined,
+            href: "/catalog",
+        },
+    ]
+
+    let latest: Product[] = [
+        {
+            name: "Bib + Jersey + Free Socks",
+            imageSrc: "1BibPlus2Jerseys.webp",
+            imageAlt: "Offer: 1 Bib Plus 1 Jersey Plus Free Socks",
+            price: "$219.97",
+            oldPrice: "$220.00",
+            versions: undefined,
+            href: "/catalog",
+        },
+        {
+            name: "RADA Socks",
+            imageSrc: "RadaSocks.webp",
+            imageAlt: "RADA Socks",
+            price: "$16.00",
+            oldPrice: "$25.00",
+            versions: undefined,
+            href: "/catalog",
+        },
+        {
+            name: "Jersey 2024",
+            imageSrc: "Jersey2024Red.webp",
+            imageAlt: "Red Jersey 2024",
+            price: "$89.97",
+            oldPrice: "$125.00",
+            versions: [
+                {
+                    imageSrc: "Jersey2024Red.webp",
+                    imageAlt: "View Red Jersey 2024",
+                    hrefParam: "red",
+                    current: true
+                },
+                {
+                    imageSrc: "Jersey2024Blue.webp",
+                    imageAlt: "View Blue Jersey 2024",
+                    hrefParam: "blue",
+                    current: false
+                },
+            ],
+            href: "/catalog",
+        },
+        {
+            name: "Cycling Bib 2024",
+            imageSrc: "CyclingBib2024.webp",
+            imageAlt: "Cycling Bib 2024",
+            price: "$99.97",
+            oldPrice: undefined,
+            versions: undefined,
+            href: "/catalog",
+        },
+    ]
+
 </script>
 
 <svelte:head>
@@ -48,7 +169,7 @@
     </section>
 
 
-    <Products title="Most Popular."/>
+    <Products title="Most Popular." products={popular}/>
 
     <section class="promotions">
         <a href="{baseRoute}/catalog" class="scrollScale">
@@ -60,48 +181,43 @@
         </a>
     </section>
 
-    <Products title="Latest Releases."/>
+    <Products title="Latest Releases." products={latest}/>
     
-    <a href="{baseRoute}/catalog" class="scrollAppear">
-        <img src="{baseImageRoute}/Resources/radyImageHome.jpg" alt="New Jersey: Mint Chocolate Chip">
-    </a>
-
-
     <section class="ourWork">
-        <h2>Some Of Our Work</h2>
+        <h2>Some Of Our Custom Work</h2>
         
-        <button class="button">View More</button>
+        <a href="{baseRoute}/our-work" class="button">View More</a>
     </section>
 
     <section class="features">
-        <h2>You'll Love RADA</h2>
-        <p>We guarantee it!</p>
-
-        <div>
-            <aside>
+        <h2>Your satisfaction is our promise!</h2>
+    
+        <div class="featureContainer">
+            <div>
                 <ion-icon name="cube-outline"></ion-icon>
-                <h3>Free Domestic Shiping</h3>
-                <p>On all orders over $100USD. Excluding Sale Periods.</p>
-            </aside>
-            <aside>
+                <h3>Swift, Free Domestic Shipping</h3>
+                <p>Enjoy seamless and complimentary shipping on all domestic orders.</p>
+            </div>
+            <div>
                 <ion-icon name="shirt-outline"></ion-icon>
-                <h3>30-Day Returns</h3>
-                <p>Risk-free returns to get you back out on the road in Rada Cycling Wear!</p>
-            </aside>
-            <aside>
+                <h3>Worry-Free 30-Day Returns</h3>
+                <p>Your peace of mind matters - our hassle-free returns ensure your complete satisfaction.</p>
+            </div>
+            <div>
                 <ion-icon name="layers-outline"></ion-icon>
-                <h3>Instant Exchanges</h3>
-                <p>Helping you find your best fit with us. All gain, and no pain.</p>
-            </aside>
+                <h3>Effortless Instant Exchanges</h3>
+                <p>Need a different size? Experience quick and easy exchanges for the perfect fit.</p>
+            </div>
         </div>
     </section>
+    
 </div>
 
 <style>
     .home {
         display: grid;
         place-items: center;
-        margin-bottom: 5rem;
+        margin-bottom: 8rem;
     }
 
     .about {
@@ -123,8 +239,9 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-
-        gap: 1rem;
+        
+        padding: 0 clamp(1rem, 4vw, 3rem);
+        gap: 2rem;
     }
 
     .promotions a {
@@ -140,17 +257,48 @@
     }
 
     .features, .ourWork {
+        padding: 4rem clamp(1rem, 4vw, 3rem);
         display: grid;
         place-items: center;
         gap: 1rem;
+        text-align: center;
     }
 
-    .features div {
+    .ourWork {
+        display: none;
+    }
+
+    .featureContainer {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5rem 3rem;
     }
 
-    .promotions, .features, .ourWork {
-        padding: 4rem clamp(1rem, 4vw, 3rem);
+    .featureContainer div {
+        display: grid;
+        place-items: center;
+        max-width: 20rem;
+    }
+
+    .features h2, .ourWork h2 {
+        font-size: clamp(2.5rem, 6vw, 3rem);
+        margin-bottom: 3rem;
+    }
+
+    .features h3, .ourWork a {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+        margin-bottom: 1rem;
+    }
+
+    .features p {
+        font-size: clamp(1.1rem, 2vw, 1.25rem);
+        color: var(--content-9);
     }
     
+    .features ion-icon {
+        font-size: 7rem;
+        margin-bottom: 1rem;
+    }
+
 </style>

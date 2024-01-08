@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import CarrouselController from "./carrouselController.svelte";
 	import { baseImageRoute, dictionary } from "../stores";
-	import { sleep } from "../functions";
+	import { handleSwipe, sleep } from "../functions";
 
 
     export let style: string = '';
@@ -41,8 +41,11 @@
         }
     }
 
+    let carousel: HTMLElement;
+
     onMount(() => {
         startAutomaticImageChanges();
+        handleSwipe(carousel, previousImage, nextImage)
     });
 
 
@@ -72,7 +75,7 @@
 
 <svelte:window on:keydown={handleKeydown}/>
 
-<div class="carousel" {style}>
+<div class="carousel" {style} bind:this={carousel}>
     <button aria-label={$dictionary.nextImage} style="cursor: default;" on:click={() => {nextImage(); stopAutomaticImageChanges();}} >
         <img style={imgStyle} class:disappearAndAppear src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription}>
     </button>

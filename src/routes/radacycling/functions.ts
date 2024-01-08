@@ -185,3 +185,22 @@ export const clickOutsideOrChild: ClickOutside = (element) => {
         }
     }
 }
+
+export function handleSwipe(element:HTMLElement, onSwipeRight: () => void, onSwipeLeft: () => void) {
+    let touchStartX = 0;
+
+    element.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    element.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const deltaX = touchEndX - touchStartX;
+
+        if (deltaX > 0) {
+            onSwipeRight();
+        } else if (deltaX < 0) {
+            onSwipeLeft();
+        }
+    });
+}

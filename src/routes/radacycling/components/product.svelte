@@ -17,7 +17,7 @@
     export let href: string
 </script>
 
-<div>
+<div class="product">
     <a href="{baseRoute}{href}" aria-label="{name}">
         <img class="mainImage" src="{baseImageRoute}/Resources/{imageSrc}" alt="{imageAlt}">
     </a>
@@ -44,7 +44,6 @@
     .mainImage {
         border-radius: 5px;
         aspect-ratio: 1 / 1;
-        min-width: 20rem;
     }
 
     h2 {
@@ -79,7 +78,7 @@
     
     .versions img {
         border-radius: 50%;
-        width: 50px;
+        width: 3rem;
         aspect-ratio: 1 / 1;
     }
 </style>
