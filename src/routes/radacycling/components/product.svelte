@@ -43,10 +43,7 @@
     
     onMount(() => {
         img.onmouseover = handleImageHover;
-        img.onfocus = handleImageHover;
-        
         img.onmouseleave = handleImageUnhover
-        img.onblur = handleImageUnhover
     })
 
     function changeVersion(newImageSrc: string, newImageHoverSrc: string | undefined) {
@@ -58,14 +55,16 @@
 <div>
     <a href="{baseRoute}{href}" aria-label="{name}">
         <img bind:this={img} class="mainImage" src="{baseImageRoute}/Resources/{imageSrc}" alt="{imageAlt}">
-        <h2>{name}</h2>
-        <div class="prices">
-            <p class="price">{price}</p>
-            {#if oldPrice}
-            <p class="oldPrice">{oldPrice}</p>
-            {/if}
-        </div>
     </a>
+
+    <h2>{name}</h2>
+    <div class="prices">
+        <p class="price">{price}</p>
+        {#if oldPrice}
+            <p class="oldPrice">{oldPrice}</p>
+        {/if}
+    </div>
+
     {#if versions}
         <div class="versions">
             {#each versions as item}

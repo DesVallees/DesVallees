@@ -68,7 +68,7 @@
         width: 100%;
         padding-bottom: 2rem;
 
-        max-width: 95vw;
+        max-width: calc(95vw - (clamp(0.5rem, 4vw, 5rem) * 2));
         overflow-x: auto;
         
         display: grid;
