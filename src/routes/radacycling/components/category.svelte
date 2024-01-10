@@ -23,7 +23,7 @@
     .category {
         display: grid;
         grid-template-rows: repeat(2, 1fr);
-        max-width: fit-content;
+        max-width: 50rem;
         max-height: 100vh;
         max-height: 100svh;
     }

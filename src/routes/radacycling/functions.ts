@@ -187,6 +187,7 @@ export const clickOutsideOrChild: ClickOutside = (element) => {
 }
 
 export function handleSwipe(element:HTMLElement, onSwipeRight: () => void, onSwipeLeft: () => void) {
+    let slidePixelRequirement = 50;
     let touchStartX = 0;
 
     element.addEventListener('touchstart', (e) => {
@@ -197,9 +198,9 @@ export function handleSwipe(element:HTMLElement, onSwipeRight: () => void, onSwi
         const touchEndX = e.changedTouches[0].clientX;
         const deltaX = touchEndX - touchStartX;
 
-        if (deltaX > 0) {
+        if (deltaX > slidePixelRequirement) {
             onSwipeRight();
-        } else if (deltaX < 0) {
+        } else if (deltaX < -slidePixelRequirement) {
             onSwipeLeft();
         }
     });

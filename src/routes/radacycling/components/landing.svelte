@@ -13,6 +13,12 @@
 </script>
 
 <section class="landing">
+    <div>
+        <h1>Champions wear RADA</h1>
+        <p>Elevate your training and racing with cutting-edge design and performance.</p>
+        <a href="{baseRoute}/catalog" class="button">Explore Now</a>
+    </div>
+    
     <section class="carousel">
         <Carousel 
             style="
@@ -41,12 +47,6 @@
             hideArrows={true}
         />
     </section>
-
-    <div>
-        <h1>Champions wear RADA</h1>
-        <p>Elevate your training and racing with cutting-edge design and performance.</p>
-        <a href="{baseRoute}/catalog" class="button">Explore Now</a>
-    </div>
 </section>
 
 <style>
@@ -87,6 +87,7 @@
 
     div * {
         filter: contrast(300%) drop-shadow(0 0 .5rem var(--interactive-8));
+        z-index: 1;
     }
 
     h1 {

@@ -76,7 +76,7 @@
 <svelte:window on:keydown={handleKeydown}/>
 
 <div class="carousel" {style} bind:this={carousel}>
-    <button aria-label={$dictionary.nextImage} style="cursor: default;" on:click={() => {nextImage(); stopAutomaticImageChanges();}} >
+    <button aria-label={$dictionary.nextImage} style="cursor: default;" on:click={() => {nextImage();}} >
         <img style={imgStyle} class:disappearAndAppear src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription}>
     </button>
     
@@ -113,6 +113,10 @@
 
         height: inherit;
         min-height: inherit;
+    }
+
+    button:focus-visible {
+        filter: opacity(.4);
     }
 
     img {

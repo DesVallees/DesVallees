@@ -19,7 +19,7 @@
 
 <footer>
     <span>
-        {$dictionary.copyright} {currentYear} RadaCycling. 
+        {$dictionary.copyright} {currentYear} RADA Cycling. 
     </span>
     <span>
         {$dictionary.allRightsReserved}
@@ -31,15 +31,13 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        column-gap: 1ch;
+        column-gap: 3ch;
         row-gap: .5rem;
     }
 
     section {
         max-width: 1500px;
         margin: auto;
-        display: grid;
-        row-gap: .5rem;
         
         padding: 2rem 4rem;
     }
@@ -55,14 +53,12 @@
         padding: 1rem 4rem 3rem;
     }
     
-    a {
-        text-align: center;
-        text-wrap: balance;
-        font-size: 1.05rem;
+    ion-icon {
+        font-size: 1.8rem
     }
-
+    
     span {
-        font-size: 1rem;
+        font-size: clamp(1.1rem, 2vw, 1.25rem);
         text-align: center;
         text-wrap: balance;
     }
