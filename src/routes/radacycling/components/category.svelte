@@ -36,7 +36,7 @@
     }
 
     img {
-        height: 100%;
+        height: auto;
         max-height: 100vh;
         max-height: 100svh;
     }
