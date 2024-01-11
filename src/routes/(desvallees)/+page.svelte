@@ -10,7 +10,7 @@
     <title>DesVallees - Santiago Ovalles' Portfolio</title>
     <link rel="icon" href="/images/journee/logoWhite.webp" />
     <meta name="author" content="Santiago Ovalles">
-    <meta name="description" content="Santiago Ovalles' Portfolio. Includes a comprehensive list of the projects and sketches he has made.">
+    <meta name="description" content="A compilation showcasing the various web projects Santiago has crafted over the course of his professional career.">
     <meta name="keywords" content="Ovalles, Santiago, Desvallees, Portfolio">
 </svelte:head>
 
@@ -36,8 +36,7 @@
     
     <Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
     
-    <a aria-disabled="true" href="/">Marshall's Care (2021)</a>
-    <!--  target="_blank" href="http://marshallscare.com/" -->
+    <a target="_blank" href="http://marshallscare.com/">Marshall's Care (2021)</a>
     <a target="_blank" href="https://ovaliza.com/">Ovaliza (2021)</a>
     <a target="_blank" href="https://canto-legal.web.app/">DesCalendar (2021)</a>
 
@@ -93,11 +92,11 @@
         background-color: var(--content-1);
     }
 
-    a[aria-disabled="true"] {
+    /* a[aria-disabled="true"] {
         color: var(--content-6);
         text-decoration: line-through;
         background-color: transparent !important;
         cursor: default;
-    }
+    } */
 
 </style>

@@ -242,6 +242,8 @@
     .promotions img {
         border-radius: 10px;
         filter: contrast(300%) drop-shadow(.5rem .5rem 1rem var(--interactive-5));
+        max-height: 100vh;
+        max-height: 100svh;
     }
 
     .features, .ourWork {

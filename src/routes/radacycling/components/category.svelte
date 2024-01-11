@@ -23,21 +23,22 @@
     .category {
         display: grid;
         grid-template-rows: repeat(2, 1fr);
-        max-width: 50rem;
-        max-height: 100vh;
-        max-height: 100svh;
-    }
+        
+        max-width: fit-content;
+        max-height: 50rem;
 
-    .category > * {
-        grid-column: 1 / -1;
+        aspect-ratio: 1 / 1;
     }
 
     img, .text {
+        grid-column: 1 / -1;
         grid-row: 1 / -1;
     }
 
     img {
-        max-height: inherit;
+        height: 100%;
+        max-height: 100vh;
+        max-height: 100svh;
     }
 
     .text {

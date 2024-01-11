@@ -20,9 +20,9 @@
         asegurándose de que puedan ser utilizadas en cualquier dispositivo y sean visualmente atractivas.</p>
     <ul>
         <li>Página de Inicio (3-7 de enero de 2024)</li>
-        <li>Página de Catálogo (8-11 de enero de 2024)</li>
-        <li>Página de Producto (12-16 de enero de 2024)</li>
-        <li>Página de Carrito (17-20 de enero de 2024)</li>
+        <li>Página de Catálogo (8-13 de enero de 2024)</li>
+        <li>Página de Producto (14-17 de enero de 2024)</li>
+        <li>Página de Carrito (18-20 de enero de 2024)</li>
         <li>Página de Pago, incluyendo idea de recomendar más productos antes de pagar (21-24 de enero de 2024)</li>
     </ul>
     <p><strong>Fecha de Finalización:</strong> 24 de enero de 2024</p>
