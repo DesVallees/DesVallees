@@ -115,7 +115,7 @@
 
         <nav class="product-navigation">
             <button type="button" class="product-nav-button" class:active={currentTab === "description"} on:click={() => changeTab("description")}>Description</button>
-            <button type="button" class="product-nav-button" class:active={currentTab === "details"} on:click={() => changeTab("details")}>Product Details</button>
+            <button type="button" class="product-nav-button" class:active={currentTab === "details"} on:click={() => changeTab("details")}>Details</button>
             <button type="button" class="product-nav-button" class:active={currentTab === "reviews"} on:click={() => changeTab("reviews")}>Reviews</button>
         </nav>
 

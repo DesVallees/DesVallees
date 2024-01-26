@@ -154,6 +154,7 @@
 
     .promo-code input {
         flex-grow: 1;
+        width: 10px;
         padding: 10px;
         margin-right: 10px;
         border: 1px solid var(--content-8);
