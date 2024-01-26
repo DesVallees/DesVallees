@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from "$app/stores";
 	import { baseRoute, dictionary } from "../stores";
 	import ChangeLanguage from "./changeLanguage.svelte";
 	import Logo from "./logo.svelte";
@@ -21,10 +22,10 @@
 
     <div>
         <section class="links x">
-            <a class="link" href="{baseRoute}">{$dictionary.home}</a>
-            <a class="link" href="{baseRoute}/catalog">{$dictionary.catalog}</a>
-            <a class="link" href="{baseRoute}/contact">{$dictionary.contactUs}</a>
-            <a class="link" href="{baseRoute}/our-work">{$dictionary.ourWork}</a>
+            <a class="link" class:active={$page.url.pathname === `${baseRoute}`} href="{baseRoute}">{$dictionary.home}</a>
+            <a class="link" class:active={$page.url.pathname === `${baseRoute}/catalog`} href="{baseRoute}/catalog">{$dictionary.catalog}</a>
+            <a class="link" class:active={$page.url.pathname === `${baseRoute}/contact`} href="{baseRoute}/contact">{$dictionary.contactUs}</a>
+            <a class="link" class:active={$page.url.pathname === `${baseRoute}/our-work`} href="{baseRoute}/our-work">{$dictionary.ourWork}</a>
         </section>
 
         <a class="s" href="{baseRoute}" aria-label={$dictionary.homepage}>
@@ -36,12 +37,12 @@
         <button class="baseButton x">
             <ion-icon name="search-outline"></ion-icon>
         </button>
-        <button class="baseButton x">
+        <a href="{baseRoute}/my-account" class="baseButton x" class:active={$page.url.pathname === `${baseRoute}/my-account`} aria-label={$dictionary.myAccount}>
             <ion-icon name="person-outline"></ion-icon>
-        </button>
-        <button class="baseButton">
+        </a>
+        <a href="{baseRoute}/cart" class="baseButton" class:active={$page.url.pathname === `${baseRoute}/cart`} aria-label={$dictionary.myAccount}>
             <ion-icon name="cart-outline"></ion-icon>
-        </button>
+        </a>
         <button class="baseButton x">
             <ion-icon name="settings-outline"></ion-icon>
         </button>
@@ -93,7 +94,7 @@
 
     .buttons {
         gap: .5rem;
-        font-size: 1.3rem;
+        font-size: 1.25rem;
     }
 
     @media screen and (min-width: 750px) {

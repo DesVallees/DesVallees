@@ -53,7 +53,7 @@
     .landing {
         width: 100%;
         height: 100vh;
-        height: 100svh;   
+        height: 100svh; 
         min-height: 35rem;
         overflow: hidden;
         overflow: clip;

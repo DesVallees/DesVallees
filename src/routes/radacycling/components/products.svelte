@@ -19,15 +19,14 @@
         imgHoverSrc: string | undefined,
         imageAlt: string,
         hrefParam: string,
-        current: boolean,
     }
     
     export let products: Product[]
 </script>
 
-<section class="scrollAppear">
+<section>
     <h2>{title}</h2>
-    <div>        
+    <div class="modernScrollbar">        
         {#each products as item}
             <Product {...item}/>
         {/each}
@@ -36,61 +35,47 @@
 
 <style>
     section {
-        padding: 6rem clamp(.5rem, 4vw, 5rem);
+        padding: 0 clamp(.5rem, 4vw, 5rem);
+
+        max-width: fit-content;
     }
 
-    div::-webkit-scrollbar {
-        height: .5rem;
-    }
-
-    div::-webkit-scrollbar-track {
-        background-color: var(--content-2);
-        border-radius: 5px;
-    }
-
-    div::-webkit-scrollbar-thumb {
-        background-color: var(--content-8);
-        border-radius: 5px;
-    }
-
-    div::-webkit-scrollbar-thumb:hover {
-        background-color: var(--content);
-        border-radius: 5px;
-    }
-    
     h2 {
-        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-size: clamp(1.7rem, 4vw, 2.25rem);
         text-transform: capitalize;
         margin-bottom: 1rem;
     }
     
     div {
-        width: 100%;
-        padding-bottom: 2rem;
+        padding: 5px .5rem 2rem;
 
-        max-width: calc(95vw - (clamp(0.5rem, 4vw, 5rem) * 2));
         overflow-x: auto;
         
         display: grid;
-
+        --gap: var(--gap, 2.5rem);
         grid-auto-flow: column;
-        grid-auto-columns: calc(25% - 2rem);
-        gap: 2rem;
+        grid-auto-columns: calc(25% - var(--gap, 2.5rem));
+        gap: var(--gap, 2.5rem);
     }
 
-    @media screen and (max-width: 90rem) {
+    @media screen and (max-width: 100rem) {
         div {
-            grid-auto-columns: 30%;
+            grid-auto-columns: calc(30% - var(--gap, 2.5rem));
         }
     }
-    @media screen and (max-width: 60rem) {
+    @media screen and (max-width: 70rem) {
         div {
-            grid-auto-columns: 40%;
+            grid-auto-columns: calc(45% - var(--gap, 2.5rem));
         }
     }
-    @media screen and (max-width: 40rem) {
+    @media screen and (max-width: 50rem) {
         div {
-            grid-auto-columns: 80%;
+            grid-auto-columns: calc(65% - var(--gap, 2.5rem));
+        }
+    }
+    @media screen and (max-width: 35rem) {
+        div {
+            grid-auto-columns: calc(90% - var(--gap, 2.5rem));
         }
     }
 </style>

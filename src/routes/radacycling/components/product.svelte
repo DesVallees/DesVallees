@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { baseImageRoute, baseRoute } from "../stores";
+	import { baseImageRoute, baseRoute, dictionary } from "../stores";
 
     type Version = {
         imageSrc: string,
         imgHoverSrc: string | undefined,
         imageAlt: string,
         hrefParam: string,
-        current: boolean,
     };
     
     export let name: string;
@@ -46,29 +45,66 @@
         img.onmouseleave = handleImageUnhover
     })
 
+    function calculateDiscount(oldPrice: string, currentPrice: string): string {
+        // Function to extract numeric part from the price string
+        const extractNumber = (price: string) => {
+            const numericPart = price.replace(/[^0-9.]/g, '');
+            return parseFloat(numericPart);
+        };
+
+        // Extracting numbers from the provided string prices
+        const oldPriceNum = extractNumber(oldPrice);
+        const currentPriceNum = extractNumber(currentPrice);
+
+        // Validating extracted numbers to prevent division by zero or negative values
+        if (isNaN(oldPriceNum) || isNaN(currentPriceNum) || oldPriceNum <= 0 || currentPriceNum > oldPriceNum) {
+            throw new Error('Invalid price input');
+        }
+
+        // Calculating discount percentage
+        const discount = ((oldPriceNum - currentPriceNum) / oldPriceNum) * 100;
+
+        // Returning the discount as a formatted string
+        return `${discount.toFixed(0)}%`;
+    }
+
+    let currentVersionSrc = imageSrc;
     function changeVersion(newImageSrc: string, newImageHoverSrc: string | undefined) {
         imageSrc = newImageSrc;
         imgHoverSrc = newImageHoverSrc;
+
+        currentVersionSrc = imageSrc;
     }
+
 </script>
 
-<div>
-    <a href="{baseRoute}{href}" aria-label="{name}">
+<div class="product">
+    <a href="{baseRoute}/catalog/{href}" aria-label="{name}">
         <img bind:this={img} class="mainImage" src="{baseImageRoute}/Resources/{imageSrc}" alt="{imageAlt}">
     </a>
 
-    <h2>{name}</h2>
-    <div class="prices">
-        <p class="price">{price}</p>
-        {#if oldPrice}
-            <p class="oldPrice">{oldPrice}</p>
-        {/if}
+    <div class="productInfo">
+        <div class="left">
+            <h2>{name}</h2>
+            <div class="prices">
+                <p class="price">{price}</p>
+                {#if oldPrice}
+                    <p class="oldPrice">{oldPrice}</p>
+                {/if}
+            </div>
+        </div>
+
+        <div class="right">
+            <button class="add" aria-label="{$dictionary.addToCart}">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </div>
     </div>
 
     {#if versions}
         <div class="versions">
             {#each versions as item}
-                <button aria-label="{item.imageAlt}" class:current={item.current} on:click={() => changeVersion(item.imageSrc, item.imgHoverSrc)}>
+                <button aria-label="{item.imageAlt}" class:current={currentVersionSrc === item.imageSrc} on:click={() => changeVersion(item.imageSrc, item.imgHoverSrc)}>
                     <img width="50px" src="{baseImageRoute}/Resources/{item.imageSrc}" alt="{item.imageAlt}">
                 </button>
             {/each}
@@ -76,66 +112,115 @@
     {/if}
 </div>
 
-
 <style>
-    .mainImage {
-        border-radius: 5px;
-        aspect-ratio: 1 / 1;
-        width: 100%;
-        max-width: 30rem;
-        object-fit: cover;
-    }
+.product {
+    --borderRadius: 10px;
+    max-width: 25rem;
+    background: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 .2rem .5rem var(--content-2);
+    transition: transform 0.3s ease;
+}
 
-    h2 {
-        margin-top: 1rem;
-        margin-bottom: .5rem;
+.product:hover {
+    transform: translateY(-5px);
+}
 
-        font-size: clamp(1.5rem, 4vw, 2rem);
-        line-height: 1.2;
-    }
+.mainImage {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+}
 
-    .prices {
-        display: flex;
-        gap: 2ch;
-    }
-    
-    p {
-        font-size: clamp(1rem, 2vw, 1.25rem);
-        color: var(--content-9);
-    }
+.productInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    gap: 1rem;
+}
 
-    .oldPrice {
-        color: var(--content-8);
-        text-decoration: line-through;
-    }
+.left h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    line-height: 1.25;
+}
 
-    .versions {
-        margin-top: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
+.prices {
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+    display: flex;
+    align-items: baseline;
+    margin-top: .25rem;
+}
 
-    .versions button {
-        --size: 3rem;
-        --hoverSize: 3.5rem;
-        border-radius: 50%;
-        width: var(--size);
-        height: var(--size);
-        overflow: hidden;
+.price {
+    margin-right: 10px;
+}
 
-        transition: .2s;
-    }
-    
-    .versions button:hover,
-    .versions button:focus-visible {
-        width: var(--hoverSize);
-        height: var(--hoverSize);
-    }
+.oldPrice {
+    font-size: .8em;
+    color: var(--interactive);
+    text-decoration: line-through;
+}
 
-    .versions img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.add {
+    background-color: var(--interactive-8);
+    border: none;
+    padding: 10px 12.5px;
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    border-radius: var(--borderRadius, 10px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.add:hover {
+    background-color: var(--interactive);
+}
+
+.add ion-icon {
+    --ionicon-stroke-width: 69px;
+}
+
+/* Versions Styles */
+.versions {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.versions button {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.versions button:hover {
+    transform: scale(1.1);
+}
+
+.versions button.current img {
+    border: 3px solid var(--interactive);
+    box-shadow: 0 0 1rem var(--interactive-3);
+    border-radius: var(--borderRadius, 10px);
+}
+
+.versions img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: var(--borderRadius, 10px);
+}
+
 </style>

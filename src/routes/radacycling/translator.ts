@@ -13,6 +13,7 @@ export const translator = {
         getInTouch: 'Get In Touch',
         socialMedia: 'Social Media',
         contactUs: 'Contact Us',
+        myAccount: 'My Account',
         image: 'Image',
         termsOfService: 'Terms of Service',
         privacyPolicy: 'Privacy Policy',
@@ -40,6 +41,10 @@ export const translator = {
         ourWork: 'Our Work',
         
         homeDescription: "",
+
+        catalogSlogan: "Gear Up, Stand Out, Ride On.",
+        discount: "discount",
+        addToCart: "Add to Cart",
     },
     es: {
         comingSoon: 'Próximamente',
@@ -54,6 +59,7 @@ export const translator = {
         home: 'Inicio',
         getInTouch: 'Ponte en Contacto',
         socialMedia: 'Redes Sociales',
+        myAccount: 'Mi Cuenta',
         contactUs: 'Contáctanos',
         image: 'Imagen',
         termsOfService: 'Términos de Servicio',
@@ -82,5 +88,9 @@ export const translator = {
         ourWork: 'Nuestro trabajo',
 
         homeDescription: "",
+
+        catalogSlogan: "Viste para Impresionar, Pedalea para Triunfar.",
+        discount: "descuento",
+        addToCart: "Añadir al carrito",
     },
 };

@@ -38,20 +38,30 @@
             </a>
 
             <a href="{baseRoute}" on:click|preventDefault={() => linkBehaviour(`${baseRoute}`)} class="baseButton" class:active={$page.url.pathname === `${baseRoute}`}>
-                {$dictionary.home} 
+                <ion-icon name="home"></ion-icon>
+                {$dictionary.home}
             </a>
 
             <a href="{baseRoute}/catalog" on:click|preventDefault={() => linkBehaviour(`${baseRoute}/catalog`)} class="baseButton" class:active={$page.url.pathname === `${baseRoute}/catalog`}>
-                {$dictionary.catalog} 
+                <ion-icon name="grid"></ion-icon>
+                {$dictionary.catalog}
             </a>
 
             <a href="{baseRoute}/contact" on:click|preventDefault={() => linkBehaviour(`${baseRoute}/contact`)} class="baseButton" class:active={$page.url.pathname === `${baseRoute}/contact`}>
-                {$dictionary.contactUs} 
+                <ion-icon name="mail"></ion-icon>
+                {$dictionary.contactUs}
             </a>
 
             <a href="{baseRoute}/our-work" on:click|preventDefault={() => linkBehaviour(`${baseRoute}/our-work`)} class="baseButton" class:active={$page.url.pathname === `${baseRoute}/our-work`}>
-                {$dictionary.ourWork} 
+                <ion-icon name="people"></ion-icon>
+                {$dictionary.ourWork}
             </a>
+
+            <a href="{baseRoute}/my-account" on:click|preventDefault={() => linkBehaviour(`${baseRoute}/my-account`)} class="baseButton" class:active={$page.url.pathname === `${baseRoute}/my-account`}>
+                <ion-icon name="person-circle"></ion-icon>
+                {$dictionary.myAccount}
+            </a>
+            
         </div>
         
         <div>
@@ -94,7 +104,7 @@
     div {
         width: 100%;
         display: grid;
-        row-gap: 1rem;
+        row-gap: 1.5rem;
     }
 
     .baseButton {

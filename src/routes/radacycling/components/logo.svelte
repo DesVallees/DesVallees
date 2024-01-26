@@ -22,7 +22,7 @@
 <style>
     img {
         height: auto;
-        width: 10rem;
+        width: 9rem;
         user-select: none;
         -webkit-user-drag: none;
     }
