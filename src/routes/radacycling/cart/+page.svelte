@@ -25,7 +25,7 @@
             details: 'Offer: 1 Bib Plus 1 Jersey Plus Free Socks',
             quantity: 1,
             price: 219.97,
-            imageUrl: `${baseImageRoute}/Resources/radimir.jpg`,
+            imageUrl: `${baseImageRoute}/Resources/1BibPlus2Jerseys.webp`,
         },
         {
             id: 4,
@@ -54,13 +54,17 @@
             <div class="item-details">
                 <h2>{item.name}</h2>
                 <p>{item.details}</p>
+                <div class="quantity-selector">
+                    <button on:click={() => item.quantity = Math.max(1, item.quantity - 1)}>
+                        <ion-icon name="remove"></ion-icon>
+                    </button>
+                    <span class="quantity">{item.quantity}</span>
+                    <button on:click={() => item.quantity += 1}>
+                        <ion-icon name="add"></ion-icon>
+                    </button>
+                </div>
             </div>
             <div class="cartRight">
-                <div class="quantity-selector">
-                    <button on:click={() => item.quantity = Math.max(1, item.quantity - 1)}>-</button>
-                    <span>{item.quantity}</span>
-                    <button on:click={() => item.quantity += 1}>+</button>
-                </div>
                 <div class="item-price">
                     ${item.price.toFixed(2)}
                 </div>
@@ -123,23 +127,45 @@
         display: grid;
         gap: .5rem;
         margin-left: 1rem;
+        align-self: end;
     }
 
     .quantity-selector {
         display: flex;
-        align-items: center;
-        margin-right: 15px;
+        
+        margin: 1rem 0;
+        border: solid 2px var(--content-8);
+        border-radius: 3px;
+        width: fit-content;
+
     }
 
+    .quantity-selector > * {
+        display: grid;
+        place-items: center;
+    }
+
+    .quantity-selector ion-icon {
+        font-size: 1.5rem;
+    }
+    
     .quantity-selector button {
-        border: none;
+        --border: solid 2px var(--content-8);
         background-color: var(--interactive);
-        padding: 5px 10px;
-        cursor: pointer;
+        padding: .2rem;
     }
 
-    .quantity-selector span {
+    .quantity-selector button:first-of-type {
+        border-right: var(--border);
+    }
+
+    .quantity-selector button:last-of-type {
+        border-left: var(--border);
+    }
+
+    .quantity {
         margin: 0 10px;
+        font-size: 1rem;
     }
 
     .item-price {
@@ -171,7 +197,9 @@
 
     .pricing {
         text-align: right;
-        margin: 2rem 0;
+        margin: 3rem 0 2rem;
+        display: grid;
+        gap: 1em;
     }
 
     .checkout-button {
@@ -180,7 +208,8 @@
         width: 100%;
         background-color: var(--interactive);
         border: none;
-        padding: 15px;
+        padding: 12px;
+        margin-bottom: 2rem;
         font-size: 18px;
         cursor: pointer;
         border-radius: 4px;

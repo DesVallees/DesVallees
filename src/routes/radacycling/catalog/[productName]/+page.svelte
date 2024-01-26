@@ -376,6 +376,9 @@
 
     .similar {
         margin: 2rem 1rem 4rem;
+
+        display: grid;
+        justify-content: center;
     }
 </style>
 

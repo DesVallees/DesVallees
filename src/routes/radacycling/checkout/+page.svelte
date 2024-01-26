@@ -5,8 +5,8 @@
         type PaymentMethod = 'card' | 'netbanking' | 'emi' | 'googlepay' | 'cod';
         type CartItem = { name: string; price: number; quantity: number; img:string};
     
-        let shippingAddress: string = 'B-101, Kingston Road, NewTownKingham, MarsPlanet 456123';
-        let phoneNumber: string = '+91-9876543210';
+        let shippingAddress: string = 'B-101, Kingston Road, New Town Kingham, MarsPlanet 456123';
+        let phoneNumber: string = '+1 (029) 979-2458';
         let selectedPaymentMethod: PaymentMethod | null = null;
         let cartItems: CartItem[] = [
     { name: 'Aero Dynamic Cycling Jersey', price: 59.99, quantity: 1, img: `${baseImageRoute}/Resources/Jersey2024RedBig.webp` },
@@ -102,11 +102,6 @@
             <button on:click={() => mcDo = false}>Skip</button>
           </div>
         {:else}
-          <div class="shipping-address">
-              <input type="text" bind:value={shippingAddress}>
-              <input type="text" bind:value={phoneNumber}>
-          </div>
-      
           <form on:submit|preventDefault={submitForm}>
             <div class="user-info">
               <input type="text" bind:value={fullName} placeholder="Full Name">
@@ -236,13 +231,6 @@
         grid-template-columns: 1fr;
     }
 }
-  
-    /* Style for address and phone number */
-    .shipping-address {
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 30px;
-    }
   
     /* Style for the payment methods section */
     .payment-methods {

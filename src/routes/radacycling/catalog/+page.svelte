@@ -4,6 +4,7 @@
 	import { categories, storage, type Product } from "../mockDb";
 	import Products from "../components/products.svelte";
 	import CatItem from "../components/catItem.svelte";
+	import Item from "../components/item.svelte";
 
     let newArrivals:Product[] = [
         storage.cyclingBib,
@@ -44,8 +45,17 @@
         </a>
     </section>
 
-    <section>
-        <Products title="Best Sellers" products={newArrivals}/>
+    <section class="catalogPadding items">
+        {#each newArrivals as item}
+            <Item 
+                href={item.href}
+                imageAlt={item.imageAlt}
+                imageSrc={item.imageSrc}
+                name={item.name}
+                price={item.price}
+                oldPrice={item.oldPrice}
+            />
+        {/each}
     </section>
 
     <section class="promotions catalogPadding">
@@ -168,6 +178,11 @@
         filter: contrast(300%) drop-shadow(.5rem .5rem 1rem var(--interactive-5));
         max-height: 100vh;
         max-height: 100svh;
+    }
+
+    .items {
+        display: grid;
+        gap: 2rem;
     }
     
 </style>
