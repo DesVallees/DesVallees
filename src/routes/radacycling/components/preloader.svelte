@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { scale } from "svelte/transition";
+	import { fade } from "svelte/transition";
 
     type Animation = 'default' | 'circle' | 'spinner' | 'dots';
 
@@ -7,7 +7,7 @@
     export let animation:Animation = "default";
 </script>
 
-<div class="overlay" out:scale {style}>
+<div class="overlay" out:fade {style}>
     
     <slot/>
     

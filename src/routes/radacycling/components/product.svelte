@@ -34,8 +34,6 @@
     }
     function handleImageUnhover() {
         if (imgHoverSrc) {
-            img.style.width = `100%`;
-            img.style.height = `auto`;
             imageSrc = originalImageSrc;
         }
     }
@@ -79,25 +77,24 @@
 </script>
 
 <div class="product">
-    <a href="{baseRoute}/catalog/{href}" aria-label="{name}">
+    <a href="{baseRoute}/catalog/{href}" aria-label="{name}" class="imgLink">
         <img bind:this={img} class="mainImage" src="{baseImageRoute}/Resources/{imageSrc}" alt="{imageAlt}">
+        {#if oldPrice}
+            <p class="discount">{calculateDiscount(oldPrice, price)} {$dictionary.discount}</p>
+        {/if}
     </a>
 
     <div class="productInfo">
         <div class="left">
-            <h2>{name}</h2>
+            <a href="{baseRoute}/catalog/{href}">
+                <h2>{name}</h2>
+            </a>
             <div class="prices">
                 <p class="price">{price}</p>
                 {#if oldPrice}
                     <p class="oldPrice">{oldPrice}</p>
                 {/if}
             </div>
-        </div>
-
-        <div class="right">
-            <button class="add" aria-label="{$dictionary.addToCart}">
-                <ion-icon name="add"></ion-icon>
-            </button>
         </div>
     </div>
 
@@ -113,114 +110,83 @@
 </div>
 
 <style>
-.product {
-    --borderRadius: 10px;
-    max-width: 25rem;
-    background: #1e1e1e;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 .2rem .5rem var(--content-2);
-    transition: transform 0.3s ease;
-}
+    .product {
+        max-width: 25rem;
+        overflow: hidden;
+    }
+    
+    .mainImage {
+        width: 100%;
+        max-width: 24rem;
+        object-fit: cover;
+        display: block;
+        border-radius: 5px;
+        aspect-ratio: 1 / 1;
+    }
 
-.product:hover {
-    transform: translateY(-5px);
-}
+    .imgLink {
+        position: relative;
+    }
 
-.mainImage {
-    width: 100%;
-    object-fit: cover;
-    display: block;
-    transition: opacity 0.3s ease;
-}
+    .discount {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
 
-.productInfo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    gap: 1rem;
-}
+        background-color: green;
+        color: white;
+        border-radius: 5px;
+        padding: .3em .6em;
+    }
 
-.left h2 {
-    margin: 0;
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    line-height: 1.25;
-}
+    h2 {
+        margin-top: 1rem;
+        margin-bottom: .5rem;
 
-.prices {
-    font-size: clamp(1.25rem, 4vw, 1.5rem);
-    display: flex;
-    align-items: baseline;
-    margin-top: .25rem;
-}
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        line-height: 1.2;
+    }
 
-.price {
-    margin-right: 10px;
-}
+    .prices {
+        display: flex;
+        gap: 2ch;
+    }
+    
+    p {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: var(--content-9);
+    }
 
-.oldPrice {
-    font-size: .8em;
-    color: var(--interactive);
-    text-decoration: line-through;
-}
+    .oldPrice {
+        color: var(--content-8);
+        text-decoration: line-through;
+    }
 
-.right {
-    display: flex;
-    align-items: center;
-}
-
-.add {
-    background-color: var(--interactive-8);
-    border: none;
-    padding: 10px 12.5px;
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    border-radius: var(--borderRadius, 10px);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.add:hover {
-    background-color: var(--interactive);
-}
-
-.add ion-icon {
-    --ionicon-stroke-width: 69px;
-}
-
-/* Versions Styles */
-.versions {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-}
-
-.versions button {
-    background: none;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.versions button:hover {
-    transform: scale(1.1);
-}
-
-.versions button.current img {
-    border: 3px solid var(--interactive);
-    box-shadow: 0 0 1rem var(--interactive-3);
-    border-radius: var(--borderRadius, 10px);
-}
-
-.versions img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: var(--borderRadius, 10px);
-}
+    /* Versions Styles */
+    .versions {
+        display: flex;
+        margin-top: 1rem;
+    }
+    .versions button {
+        background: none;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .versions button:hover {
+        transform: scale(1.1);
+    }
+    .versions button.current img {
+        border: 3px solid var(--interactive);
+        box-shadow: 0 0 1rem var(--interactive-3);
+        border-radius: var(--borderRadius, 10px);
+    }
+    .versions img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: var(--borderRadius, 10px);
+    }
 
 </style>

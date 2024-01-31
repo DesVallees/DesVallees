@@ -2,14 +2,27 @@
 	import { theme, dictionary, baseImageRoute } from '../stores';
     
     export let style: string = '';
+    export let version: string = ''
 
     let src: string;
     
     function getSource() {
-        if ($theme === "light"){
-            src = baseImageRoute + "/logoBlack.webp";
-        } else {
-            src = baseImageRoute + "/logoWhite.webp";
+        const darkVersion: string = baseImageRoute + "/logoBlack.webp";
+        const lightVersion: string = baseImageRoute + "/logoWhite.webp";
+
+        if (version) {
+            if (version === "light") {
+                src = lightVersion;
+            } else if (version === "dark") {
+                src = darkVersion;
+            }
+        }
+        else {
+            if ($theme === "light"){
+                src = darkVersion;
+            } else {
+                src = lightVersion;
+            }
         }
     }
 

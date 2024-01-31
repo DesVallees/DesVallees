@@ -3,12 +3,15 @@
 	import Carousel from "./carousel.svelte";
 
     let imageSources = [
-        'cyclistRPartoutB.jpg',
-        'cyclistA.jpg',
-        'cyclistB.jpg',
-        'cyclistC.jpg',
-        'cyclistD.jpg',
-        'cyclistE.jpg',
+        'demo/amsterdam.webp',
+        'demo/man.webp',
+        'demo/woman.webp',
+    ]
+    
+    let smallImagesSources = [
+        'demo/amsterdam-small.webp',
+        'demo/man-small.webp',
+        'demo/woman-small.webp',
     ]
 </script>
 
@@ -42,6 +45,7 @@
                 z-index: -1;
             "
             images={imageSources} 
+            smallImages={smallImagesSources}
             imagesCommonDescription="RADA Cycling Wear" 
             automaticImageChangeTime={10000}
             hideArrows={true}
@@ -60,6 +64,8 @@
 
         display: grid;
         grid-template-rows: repeat(2, 1fr);
+
+        color: var(--main);
     }
 
     .landing > * {
@@ -76,32 +82,33 @@
 
     div {
         display: grid;
-        place-content: center;
-        place-items: center;
+        align-content: end;
+        margin: clamp(5rem, 9vw, 10rem) clamp(0rem, 3vw, 3rem);
+        max-width: min(800px, 50vw);
 
         grid-row: 1 / -1;
 
-        background-color: var(--main-3);
         padding: 2rem;
     }
 
     div * {
-        filter: contrast(300%) drop-shadow(0 0 .5rem var(--interactive-8));
         z-index: 1;
     }
 
     h1 {
         font-size: clamp(3rem, 8vw, 5rem);
-        text-align: center;
+        line-height: 1.1;
+        margin-bottom: 1rem;
     }
 
     p {
         font-size: clamp(1.25rem, 4vw, 1.75rem);
-        text-align: center;
+        font-weight: bold;
     }
 
     a {
         font-size: clamp(1.1rem, 3vw, 1.5rem);
+        text-transform: uppercase;
 
         margin-top: 2rem;
     }

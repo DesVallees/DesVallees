@@ -26,8 +26,6 @@
         
         max-width: fit-content;
         max-height: 50rem;
-
-        aspect-ratio: 1 / 1;
     }
 
     img, .text {
@@ -37,8 +35,10 @@
 
     img {
         height: auto;
-        max-height: 100vh;
-        max-height: 100svh;
+        max-height: min(100vh, 50rem);
+        max-height: min(100svh, 50rem);
+
+        object-fit: cover;
     }
 
     .text {
@@ -49,8 +49,9 @@
         width: 100%;
         padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 6vw, 3rem) clamp(2rem, 8vw, 4rem);
         
-        background-color: var(--main-5);
-        backdrop-filter: blur(3px);
+        z-index: 1;
+
+        color: var(--main);
     }
 
     h2 {

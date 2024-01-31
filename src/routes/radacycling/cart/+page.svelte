@@ -86,11 +86,13 @@
 
 <style>
     .cart {
-        max-width: 600px;
-        margin: auto;
+        max-width: 800px;
+        margin: 6rem auto;
         border-radius: 8px;
-        padding: 20px;
-        padding-top: 5rem;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 3.5vw, 1.75rem);
     }
 
     .cart-item {
@@ -134,7 +136,7 @@
         display: flex;
         
         margin: 1rem 0;
-        border: solid 2px var(--content-8);
+        border: solid 2px var(--interactive);
         border-radius: 3px;
         width: fit-content;
 
@@ -150,8 +152,9 @@
     }
     
     .quantity-selector button {
-        --border: solid 2px var(--content-8);
+        --border: solid 2px var(--interactive);
         background-color: var(--interactive);
+        color: var(--main);
         padding: .2rem;
     }
 
@@ -189,6 +192,8 @@
 
     .promo-code button {
         background-color: var(--interactive);
+        color: var(--main);
+        font-weight: bold;
         border: none;
         padding: 10px 20px;
         cursor: pointer;
@@ -207,10 +212,12 @@
         text-align: center;
         width: 100%;
         background-color: var(--interactive);
+        color: var(--main);
         border: none;
         padding: 12px;
         margin-bottom: 2rem;
-        font-size: 18px;
+        font-size: 1.1rem;
+        font-weight: bold;
         cursor: pointer;
         border-radius: 4px;
     }    

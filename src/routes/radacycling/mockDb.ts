@@ -14,13 +14,13 @@ export let categories: Cat[] = [
     {
         name: "Men",
         icon: "man",
-        imageSrc: "/cyclistBrun.jpg",
+        imageSrc: "",
         imageAlt: "Products For Men",
     },
     {
         name: "Women",
         icon: "woman",
-        imageSrc: "/cyclistBrillante.jpg",
+        imageSrc: "",
         imageAlt: "Products For Women",
     },
     {

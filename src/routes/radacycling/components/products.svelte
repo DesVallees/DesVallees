@@ -2,6 +2,8 @@
 	import Product from "./product.svelte";
 
     export let title: string = "";
+    export let style: string = "";
+    export let carouselAutoColumns: string = "calc(25% - var(--gap, 2.5rem))";
 
     type Product = {
         name: string,
@@ -24,9 +26,9 @@
     export let products: Product[]
 </script>
 
-<section>
+<section {style}>
     <h2>{title}</h2>
-    <div class="modernScrollbar">        
+    <div style="--columns: {carouselAutoColumns}" class="modernScrollbar">        
         {#each products as item}
             <Product {...item}/>
         {/each}
@@ -54,7 +56,7 @@
         display: grid;
         --gap: var(--gap, 2.5rem);
         grid-auto-flow: column;
-        grid-auto-columns: calc(25% - var(--gap, 2.5rem));
+        grid-auto-columns: var(--columns, "calc(25% - var(--gap, 2.5rem))");
         gap: var(--gap, 2.5rem);
     }
 
@@ -74,6 +76,27 @@
         }
     }
     @media screen and (max-width: 35rem) {
+        div {
+            grid-auto-columns: calc(90% - var(--gap, 2.5rem));
+        }
+    }
+
+    @container (max-width: 100rem) {
+        div {
+            grid-auto-columns: calc(30% - var(--gap, 2.5rem));
+        }
+    }
+    @container (max-width: 70rem) {
+        div {
+            grid-auto-columns: calc(45% - var(--gap, 2.5rem));
+        }
+    }
+    @container (max-width: 50rem) {
+        div {
+            grid-auto-columns: calc(65% - var(--gap, 2.5rem));
+        }
+    }
+    @container (max-width: 35rem) {
         div {
             grid-auto-columns: calc(90% - var(--gap, 2.5rem));
         }

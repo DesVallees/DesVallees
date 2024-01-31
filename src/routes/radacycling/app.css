@@ -1,6 +1,6 @@
 :root {
-    --mainRGB: 10, 10, 10;
-    --contentRGB: 245, 245, 250;
+    --mainRGB: 245, 245, 250;
+    --contentRGB: 10, 10, 10;
     --interactiveRGB: 200, 15, 20;
     
     --main: rgb(var(--mainRGB));
@@ -114,19 +114,6 @@ li {
 ::placeholder {
     color: var(--content-7);
     opacity: 1;
-}
-
-body::-webkit-scrollbar {
-    width: 1rem;
-}
-
-body::-webkit-scrollbar-track {
-    background-color: var(--content-2);
-}
-
-body::-webkit-scrollbar-thumb {
-    background-color: var(--content);
-    border-radius: 5px;
 }
 
 textarea::-webkit-scrollbar {

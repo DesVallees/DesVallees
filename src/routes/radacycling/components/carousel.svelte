@@ -9,6 +9,8 @@
     export let imgStyle: string = '';
 
     export let images: string[];
+    export let smallImages: string[] | undefined = undefined;
+    export let smallImagesBreakpoint: string = "600px"
     export let imageDescriptions: string[] | undefined = undefined;
     export let imagesCommonDescription: string = '';
     export let automaticImageChangeTime: number = 5000;
@@ -77,7 +79,13 @@
 
 <div class="carousel" {style} bind:this={carousel}>
     <button aria-label={$dictionary.nextImage} style="cursor: default;" on:click={() => {nextImage();}} >
-        <img style={imgStyle} class:disappearAndAppear src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription}>
+        <!-- <img style={imgStyle} class:disappearAndAppear src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription}> -->
+        <picture>
+            {#if smallImages}
+                <source media="(max-width: {smallImagesBreakpoint})" srcset="{baseImageRoute}/{smallImages[currentFileIndex]}">
+            {/if}
+            <img class:disappearAndAppear src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription} style={imgStyle}>
+        </picture>
     </button>
     
     {#if !hideController}
@@ -119,6 +127,11 @@
         filter: opacity(.4);
     }
 
+    picture {
+        width: 100%;
+        height: 100%;
+    }
+    
     img {
         -webkit-user-drag: none;
     }

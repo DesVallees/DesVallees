@@ -34,7 +34,7 @@
     <nav on:click|stopPropagation transition:slide|global={{duration:200, axis: 'x'}}>
         <div>
             <a bind:this={firstFocusableElement} style="margin: 0 auto 2rem;" href="{baseRoute}" on:click|preventDefault={() => linkBehaviour(`${baseRoute}`)} aria-label={$dictionary.homepage}>
-                <Logo />
+                <Logo version="dark" />
             </a>
 
             <a href="{baseRoute}" on:click|preventDefault={() => linkBehaviour(`${baseRoute}`)} class="baseButton" class:active={$page.url.pathname === `${baseRoute}`}>
@@ -88,6 +88,7 @@
         max-width: 70%;
         z-index: 3;
         background-color: var(--main);
+        color: var(--content);
         border-right: solid 2px var(--content);
         padding: 3rem 2rem;
 

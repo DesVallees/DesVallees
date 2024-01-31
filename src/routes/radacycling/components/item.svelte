@@ -79,6 +79,7 @@
 
     .add {
         background-color: var(--interactive-8);
+        color: var(--main);
         border: none;
         padding: 10px 12.5px;
         font-size: clamp(1rem, 3vw, 1.25rem);

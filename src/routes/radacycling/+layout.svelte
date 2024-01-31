@@ -84,7 +84,8 @@
         left: 0;
         right: 0;
 
-        background-color: var(--main-5);
+        background-color: var(--content-7);
+        color: var(--main);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         transition: background-color .5s;
@@ -104,7 +105,7 @@
     }
 
     @keyframes disappearAndAppear {
-        0% {opacity: 0;}
+        0% {opacity: .7;}
         100% {opacity: 1;}
     }
 

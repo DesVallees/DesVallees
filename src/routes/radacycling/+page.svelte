@@ -14,12 +14,12 @@
     }
     let categories: Cat[] = [
         {
-            imageSrc: "cyclistBrun.jpg",
+            imageSrc: "demo/category_man.webp",
             imageAlt: "Products For Men",
             name: "Men"
         },
         {
-            imageSrc: "cyclistBrillante.jpg",
+            imageSrc: "demo/category_woman.webp",
             imageAlt: "Products For Women",
             name: "Women"
         },
@@ -107,7 +107,6 @@
     .home {
         display: grid;
         place-items: center;
-        margin-bottom: 8rem;
     }
 
     .about {
@@ -118,16 +117,17 @@
     }
     
     .categories {
+        --gap: clamp(.5rem, 4vw, 3rem);
+        
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        width: 100%;
-
-        background: linear-gradient(black, var(--main));
+        margin: 3rem var(--gap);
+        gap: calc(var(--gap) / 2);
     }
 
     .products {
-        margin: 6rem 0
+        margin: 2rem 0;
     }
 
     .promotions {
@@ -159,6 +159,9 @@
         place-items: center;
         gap: 1rem;
         text-align: center;
+        width: 100%;
+        margin-top: 3rem;
+        padding-bottom: 8rem;
     }
 
     .featureContainer {

@@ -44,13 +44,11 @@
   
   <style>
     .review-card {
-      background-color: #1e1e1e;
+      background-color: #00000010;
       border-radius: 8px;
       padding: 16px;
-      max-width: 300px;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 8px var(--content-2);
+      font-size: clamp(1rem, 3vw, 1.1rem);
     }
   
     .review-header {
@@ -73,14 +71,14 @@
     }
   
     .reviewer-name {
-      font-size: 14px;
+      font-size: 1em;
       font-weight: bold;
       margin: 0;
     }
   
     .review-date {
-      font-size: 12px;
-      color: #a9a9a9;
+      font-size: .9em;
+      color: var(--content-8);
       margin: 0;
     }
   
@@ -90,13 +88,13 @@
     }
   
     .star {
-      color: #ffd700;
+      color: #ebc805;
       margin-right: 4px;
-      font-size: 16px;
+      font-size: 1em;
     }
   
     .review-text {
-      font-size: 14px;
+      font-size: 1em;
       line-height: 1.5;
     }
   

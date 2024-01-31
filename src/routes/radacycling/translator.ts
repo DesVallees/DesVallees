@@ -43,7 +43,7 @@ export const translator = {
         homeDescription: "",
 
         catalogSlogan: "Gear Up, Stand Out, Ride On.",
-        discount: "discount",
+        discount: "off",
         addToCart: "Add to Cart",
     },
     es: {
@@ -90,7 +90,7 @@ export const translator = {
         homeDescription: "",
 
         catalogSlogan: "Viste para Impresionar, Pedalea para Triunfar.",
-        discount: "descuento",
+        discount: "de descuento",
         addToCart: "Añadir al carrito",
     },
 };

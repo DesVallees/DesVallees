@@ -2,12 +2,10 @@
         import { fade } from "svelte/transition";
         import { baseImageRoute, dictionary } from "../stores";
     
-        type PaymentMethod = 'card' | 'netbanking' | 'emi' | 'googlepay' | 'cod';
         type CartItem = { name: string; price: number; quantity: number; img:string};
     
-        let shippingAddress: string = 'B-101, Kingston Road, New Town Kingham, MarsPlanet 456123';
-        let phoneNumber: string = '+1 (029) 979-2458';
-        let selectedPaymentMethod: PaymentMethod | null = null;
+        let shippingAddress: string;
+        let phoneNumber: string;
         let cartItems: CartItem[] = [
     { name: 'Aero Dynamic Cycling Jersey', price: 59.99, quantity: 1, img: `${baseImageRoute}/Resources/Jersey2024RedBig.webp` },
     { name: 'Pro-Fit Padded Cycling Shorts', price: 45.50, quantity: 2, img: `${baseImageRoute}/Resources/RadaSocks.webp` },
@@ -26,7 +24,7 @@
         // Function to handle form submission
         function submitForm() {
           // Add validation logic for the new fields
-        if (!selectedPaymentMethod || !fullName || !email || !shippingAddress || !city || !postalCode || !country || !phoneNumber) {
+        if (!fullName || !email || !shippingAddress || !city || !postalCode || !country || !phoneNumber) {
             console.error('Please fill in all the fields');
             return;
         }
@@ -40,21 +38,14 @@
             postalCode,
             country,
             phoneNumber,
-            selectedPaymentMethod
         });
           
-            if (!selectedPaymentMethod) {
-                console.error('Please select a payment method');
-                return;
-            }
-    
             if (!validatePhoneNumber(phoneNumber)) {
                 console.error('Invalid phone number');
                 return;
             }
     
             console.log('Form submitted with shipping address:', shippingAddress);
-            console.log('Selected payment method:', selectedPaymentMethod);
         }
     
         // Calculate the total price of the cart
@@ -75,7 +66,7 @@
     
     <div class="checkout" in:fade>
         <div class="checkout-header">
-            <h1>Checkout</h1>
+            <h1>Shipping Information</h1>
         </div>
     
         {#if mcDo}
@@ -104,53 +95,25 @@
         {:else}
           <form on:submit|preventDefault={submitForm}>
             <div class="user-info">
-              <input type="text" bind:value={fullName} placeholder="Full Name">
-              <input type="email" bind:value={email} placeholder="Email Address">
-              <input type="text" bind:value={shippingAddress} placeholder="Shipping Address">
-              <input type="text" bind:value={city} placeholder="City">
-              <input type="text" bind:value={postalCode} placeholder="Postal Code">
-              <input type="text" bind:value={country} placeholder="Country">
-              <input type="tel" bind:value={phoneNumber} placeholder="Phone Number">
+              <input type="text" required bind:value={fullName} placeholder="Full Name">
+              <input type="email" required bind:value={email} placeholder="Email Address">
+              <input type="text" required bind:value={shippingAddress} placeholder="Shipping Address">
+              <input type="text" required bind:value={city} placeholder="City">
+              <input type="text" required bind:value={postalCode} placeholder="Postal Code">
+              <input type="text" required bind:value={country} placeholder="Country">
+              <input type="tel" required bind:value={phoneNumber} placeholder="Phone Number">
             </div>
             
-            <div class="payment-methods">
-              <label>
-                <input type="radio" bind:group={selectedPaymentMethod} value="card">
-                <span class="checkmark"></span>
-                Debit/Credit/ATM Card
-              </label>
-              <label>
-                <input type="radio" bind:group={selectedPaymentMethod} value="netbanking">
-                <span class="checkmark"></span>
-                Net Banking
-              </label>
-              <label>
-                <input type="radio" bind:group={selectedPaymentMethod} value="emi">
-                <span class="checkmark"></span>
-                EMI
-              </label>
-              <label>
-                <input type="radio" bind:group={selectedPaymentMethod} value="googlepay">
-                <span class="checkmark"></span>
-                UPI/Google Pay
-              </label>
-              <label class="disabled">
-                <input type="radio" bind:group={selectedPaymentMethod} value="cod" disabled>
-                <span class="checkmark"></span>
-                Cash on Delivery (Unavailable)
-              </label>
-            </div>
-      
             <div class="cart-items">
               {#each cartItems as item}
-              <div class="cart-item">
-                  <img src={item.img} alt={item.name} />
-                  <div class="item-details">
-                      <p>{item.name}</p>
-                      <p>Quantity: {item.quantity}</p>
-                      <p>Price: ${item.price.toFixed(2)}</p>
-                  </div>
-              </div>
+                <div class="cart-item">
+                    <img src={item.img} alt={item.name} />
+                    <div class="item-details">
+                        <p>{item.name}</p>
+                        <p>Quantity: {item.quantity}</p>
+                        <p>Price: ${item.price.toFixed(2)}</p>
+                    </div>
+                </div>
               {/each}
           </div>
           
@@ -179,12 +142,10 @@
 <style>
     /* Base styles for the checkout form */
     .checkout {
-      max-width: 400px;
-      margin: 20px auto;
-      margin-top: 5rem;
+      max-width: 1000px;
+      margin: 6rem auto;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
   
     /* Header style */
@@ -193,6 +154,10 @@
       text-align: left;
       border-bottom: 1px solid var(--content-8);
       padding-bottom: 10px;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 3.5vw, 1.75rem);
     }
 
     /* User Information Form Styles */
@@ -232,71 +197,6 @@
     }
 }
   
-    /* Style for the payment methods section */
-    .payment-methods {
-      margin: 30px 0;
-    }
-  
-    /* Custom radio button styling */
-    .payment-methods label {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 12px;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-  
-    /* Hide the browser's default radio button */
-    .payment-methods label input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
-  
-    /* Create a custom radio button */
-    .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 20px;
-      width: 20px;
-      background-color: var(--content);
-      border-radius: 50%;
-      border: 1px solid var(--content-8);
-    }
-  
-    /* When the radio button is checked, add a blue background */
-    .payment-methods label input:checked ~ .checkmark {
-      background-color: var(--interactive);
-    }
-  
-    /* Create the indicator (the dot/circle) - when checked */
-    .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
-  
-    /* Show the indicator (dot/circle) when checked */
-    .payment-methods label input:checked ~ .checkmark:after {
-      display: block;
-    }
-  
-    /* Style the indicator (dot/circle) */
-    .payment-methods label .checkmark:after {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--content);
-    }
-  
     /* Style for the totals section */
     .totals {
       line-height: 1.5;
@@ -329,12 +229,15 @@
     /* Style for the continue button */
     .continue-btn {
       width: 100%;
+      margin-top: 1rem;
       padding: 10px;
       background-color: var(--interactive);
+      color: var(--main);
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 1rem;
+      font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: filter .3s ease;
@@ -344,16 +247,6 @@
       filter: brightness(200%);
     }
   
-    /* Disabled style for unavailable options */
-    .disabled {
-      color: var(--content-5);
-    }
-  
-    .disabled .checkmark {
-      background-color: var(--content-6);
-      border-color: var(--content-5);
-    }
-
     /* Styles for Cart Items */
 .cart-items {
     display: flex;
@@ -376,7 +269,7 @@
 
 .item-details p {
     margin: 5px 0;
-    font-size: 14px;
+    font-size: clamp(.95rem, 3.5vw, 1rem);
 }
 
 

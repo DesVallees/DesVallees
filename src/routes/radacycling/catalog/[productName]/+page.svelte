@@ -97,9 +97,7 @@
 
 <div class="product-container" in:fade>
     <div class="image-container">
-        <!-- Assuming the first image is the main image to display -->
         <img src="{baseImageRoute}/Resources/{product.images[0]}" alt={product.name} class="product-image" />
-        <!-- Color options could be implemented here -->
     </div>
     
     <div class="product-content">
@@ -187,30 +185,28 @@
         </div>
 
     </div>
-</div>
-<div class="similar">
-    <Products title="Similar Products" products={similarProducts} />
+    <div class="similar">
+        <Products style="padding: 0;" carouselAutoColumns="calc(35% - var(--gap, 2.5rem))" title="Similar Products" products={similarProducts} />
+    </div>
 </div>
 
 <style>
     .product-container {
-        max-width: 420px;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         margin: auto;
+        max-width: 800px;
     }
 
     .image-container {
         position: relative;
-        text-align: center;
+        display: flex;
+        justify-content: center;
         z-index: 0;
-        background-color: #fff;
         padding: 5rem 0 1rem;
     }
 
     .product-image {
-        width: 100%;
-        display: block; /* Removes bottom space under image */
+        display: block;
     }
 
     .product-head {
@@ -238,7 +234,7 @@
 
     .product-price {
         font-size: 22px;
-        color: #0A84FF; /* Bright color for price for contrast */
+        color: #0A84FF;
         font-weight: bold;
     }
 
@@ -250,11 +246,11 @@
     }
 
     .rating {
-        color: #FFD60A; /* Gold color for the star rating */
+        color: #e6c10c;
     }
 
     .review-count {
-        color: #6E6E73; /* Grey color for text */
+        color: #6E6E73;
         font-size: 14px;
     }
 
@@ -320,7 +316,8 @@
         display: flex;
         
         margin: 1rem auto;
-        border: solid 2px var(--content-8);
+        border: solid 3px var(--interactive);
+        border-radius: 3px;
         width: fit-content;
 
     }
@@ -335,8 +332,9 @@
     }
     
     .quantity-selector button {
-        --border: solid 2px var(--content-8);
-        background-color: #2C2C2E;
+        --border: solid 2px var(--interactive);
+        background-color: var(--interactive);
+        color: var(--main);
         font-size: 1.5rem;
         padding: .2rem;
     }
@@ -351,7 +349,8 @@
 
     .quantity {
         margin: 0 15px;
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+        font-weight: bold;
     }
 
     .actions {
@@ -364,7 +363,9 @@
         border: none;
         padding: 15px 30px;
         margin-bottom: 2rem;
-        font-size: 16px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: var(--main);
         border-radius: 10px;
         cursor: pointer;
         transition: background-color 0.3s ease;
@@ -375,7 +376,7 @@
     }
 
     .similar {
-        margin: 2rem 1rem 4rem;
+        margin: 2rem 2rem 4rem;
 
         display: grid;
         justify-content: center;
