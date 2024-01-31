@@ -1,48 +1,17 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import { baseImageRoute, baseRoute, dictionary } from "../stores";
+    import { cartItems, deliveryFee } from "../mockDb";
 
-    let cartItems = [
-        {
-            id: 1,
-            name: 'Jersey 2024',
-            details: 'Red Jersey 2024',
-            quantity: 1,
-            price: 89.97,
-            imageUrl: `${baseImageRoute}/Resources/Jersey2024RedBig.webp`,
-        },
-        {
-            id: 2,
-            name: 'Cycling Bib 2024',
-            details: 'Cycling Bib 2024',
-            quantity: 1,
-            price: 99.97,
-            imageUrl: `${baseImageRoute}/Resources/bibFocus.webp`,
-        },
-        {
-            id: 3,
-            name: 'Bib + Jersey + Free Socks',
-            details: 'Offer: 1 Bib Plus 1 Jersey Plus Free Socks',
-            quantity: 1,
-            price: 219.97,
-            imageUrl: `${baseImageRoute}/Resources/1BibPlus2Jerseys.webp`,
-        },
-        {
-            id: 4,
-            name: 'RADA Socks',
-            details: 'RADA Socks',
-            quantity: 1,
-            price: 16.00,
-            imageUrl: `${baseImageRoute}/Resources/RadaSocks.webp`,
-        }
-    ]
-    
     let promoCode = '';
-    let deliveryFee = 8.18;
   
+    function calculateSubtotal() {
+        let subtotal = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+        return subtotal;
+    }
+    
     const calculateTotal = () => {
-    let subtotal = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
-        return subtotal + deliveryFee;
+        return calculateSubtotal() + deliveryFee;
     }
 </script>
   
@@ -77,7 +46,7 @@
         <button>Validate</button>
     </div>
     <div class="pricing">
-        <div>Sub Total: ${calculateTotal().toFixed(2)}</div>
+        <div>Sub Total: ${calculateSubtotal().toFixed(2)}</div>
         <div>Delivery Fee: ${deliveryFee.toFixed(2)}</div>
         <div>Total Amount: ${calculateTotal().toFixed(2)}</div>
     </div>
@@ -88,6 +57,7 @@
     .cart {
         max-width: 800px;
         margin: 6rem auto;
+        padding: 0 1.25rem;
         border-radius: 8px;
     }
 
@@ -222,3 +192,8 @@
         border-radius: 4px;
     }    
 </style>
+
+<svelte:head>
+    <title>My Cart | RADA Cycling Wear</title>
+    <meta name="description" content="Premium cycling wear designed for champions in training and racing. Shop our latest releases and enjoy free domestic shipping on orders over $100.">
+</svelte:head>

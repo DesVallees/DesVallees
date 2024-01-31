@@ -108,7 +108,7 @@ li {
 
 ::selection {
     background-color: var(--interactive);
-    color: var(--content);
+    color: var(--main);
 }
 
 ::placeholder {
@@ -195,13 +195,12 @@ a {
 }
 
 .button {
-    border: 1px solid var(--interactive);
-    background-color: var(--interactive-7);
+    background-color: var(--interactive);
 }
 
 .button:hover,
 .button:focus-visible {
-    background-color: var(--interactive);
+    filter: brightness(120%);
 }
 
 [data-theme="light"] .button {

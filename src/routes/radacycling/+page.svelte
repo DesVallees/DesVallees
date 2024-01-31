@@ -154,7 +154,7 @@
     }
 
     .features {
-        padding: 4rem clamp(1rem, 4vw, 3rem);
+        padding: 1rem clamp(1rem, 4vw, 3rem) 6rem;
         display: grid;
         place-items: center;
         gap: 1rem;

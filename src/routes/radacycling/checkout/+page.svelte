@@ -1,58 +1,71 @@
 <script lang="ts">
         import { fade } from "svelte/transition";
-        import { baseImageRoute, dictionary } from "../stores";
+        import { baseImageRoute, baseRoute, dictionary } from "../stores";
+	      import { cartItems, deliveryFee } from "../mockDb";
     
-        type CartItem = { name: string; price: number; quantity: number; img:string};
     
+        const demoProductAPI = "price_1OeSVfH1JOQComXCKyj7cG5z";
+        let demoCartItems = [
+          {
+            id: demoProductAPI,
+            quantity: 2,
+            name: "RADA Purchase",
+          }
+        ]
+        
         let shippingAddress: string;
         let phoneNumber: string;
-        let cartItems: CartItem[] = [
-    { name: 'Aero Dynamic Cycling Jersey', price: 59.99, quantity: 1, img: `${baseImageRoute}/Resources/Jersey2024RedBig.webp` },
-    { name: 'Pro-Fit Padded Cycling Shorts', price: 45.50, quantity: 2, img: `${baseImageRoute}/Resources/RadaSocks.webp` },
-    { name: 'High-Visibility Waterproof Jacket', price: 89.95, quantity: 1, img: `${baseImageRoute}/Resources/Jersey2024BlueFace.webp` },
-    { name: 'Performance Cycling Gloves', price: 25.99, quantity: 1, img: `${baseImageRoute}/Resources/CyclingBib2024.webp` },
-    { name: 'Ergonomic Bike Saddle', price: 75.00, quantity: 1, img: `${baseImageRoute}/Resources/1BibPlus2Jerseys.webp` }
-];
-        let taxRate: number = 0.1; // 10% tax rate
     
         let fullName: string = '';
-    let email: string = '';
-    let city: string = '';
-    let postalCode: string = '';
-    let country: string = '';
+        let email: string = '';
+        let city: string = '';
+        let postalCode: string = '';
+        let country: string = '';
         
         // Function to handle form submission
-        function submitForm() {
-          // Add validation logic for the new fields
-        if (!fullName || !email || !shippingAddress || !city || !postalCode || !country || !phoneNumber) {
-            console.error('Please fill in all the fields');
-            return;
-        }
+        async function submitForm() {
+            if (!fullName || !email || !shippingAddress || !city || !postalCode || !country || !phoneNumber) {
+                console.error('Please fill in all the fields');
+                return;
+            }
 
-        // Logging for demonstration purposes
-        console.log('Form submitted with following details:', {
-            fullName,
-            email,
-            shippingAddress,
-            city,
-            postalCode,
-            country,
-            phoneNumber,
-        });
-          
+            // Logging for demonstration purposes
+            console.log('Form submitted with following details:', {
+                fullName,
+                email,
+                shippingAddress,
+                city,
+                postalCode,
+                country,
+                phoneNumber,
+            });
+
             if (!validatePhoneNumber(phoneNumber)) {
                 console.error('Invalid phone number');
                 return;
             }
-    
-            console.log('Form submitted with shipping address:', shippingAddress);
+
+            // await fetch(`${baseRoute}/api/stripe-checkout`, {
+            //     method: "POST",
+            //     headers: {
+            //       "Content-Type": "application.json"
+            //     },
+            //     body: JSON.stringify(
+            //       { 
+            //         items: demoCartItems 
+            //       }
+            //     )
+            // }).then((data) => {
+            //   return data.json()
+            // }).then((data) => {
+            //   window.location.replace(data.url)
+            // });
         }
     
         // Calculate the total price of the cart
-        const getTotalPrice = () => cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        const getSubtotal = () => cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     
-        // Calculate the total tax
-        const getTotalTax = () => getTotalPrice() * taxRate;
+        const getTotal = () => getSubtotal() + deliveryFee;
     
         // Function to validate phone number
         function validatePhoneNumber(phone: string): boolean {
@@ -107,7 +120,7 @@
             <div class="cart-items">
               {#each cartItems as item}
                 <div class="cart-item">
-                    <img src={item.img} alt={item.name} />
+                    <img src={item.imageUrl} alt={item.name} />
                     <div class="item-details">
                         <p>{item.name}</p>
                         <p>Quantity: {item.quantity}</p>
@@ -121,15 +134,15 @@
               <div class="totals">
                   <div>
                       <h2>Sub Total</h2>
-                      <span class="value">${getTotalPrice().toFixed(2)}</span>
+                      <span class="value">${getSubtotal().toFixed(2)}</span>
                   </div>
                   <div>
-                      <h2>Tax</h2>
-                      <span class="value">${getTotalTax().toFixed(2)}</span>
+                      <h2>Delivery Fee</h2>
+                      <span class="value">${deliveryFee.toFixed(2)}</span>
                   </div>
                   <div>
                       <h2>Total Amount</h2>
-                      <span class="value">${(getTotalPrice() + getTotalTax()).toFixed(2)}</span>
+                      <span class="value">${getTotal().toFixed(2)}</span>
                   </div>
               </div>
       
@@ -144,7 +157,7 @@
     .checkout {
       max-width: 1000px;
       margin: 6rem auto;
-      padding: 20px;
+      padding: 0 1.25rem;
       border-radius: 8px;
     }
   
@@ -173,9 +186,9 @@
 .user-info input[type="tel"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+    border: 1px solid var(--content-2);
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
 .user-info input[type="text"]:focus,
@@ -183,7 +196,7 @@
 .user-info input[type="tel"]:focus {
     outline: none;
     border-color: var(--content);
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 2px var(--content-2);
 }
 
 .user-info input::placeholder {
@@ -313,4 +326,9 @@
   }
 
   </style>
+
+<svelte:head>
+  <title>Checkout</title>
+  <meta name="description" content="Premium cycling wear designed for champions in training and racing. Shop our latest releases and enjoy free domestic shipping on orders over $100.">
+</svelte:head>
   

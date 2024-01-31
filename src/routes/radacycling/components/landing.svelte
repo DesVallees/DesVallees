@@ -85,13 +85,15 @@
         align-content: end;
         margin: clamp(5rem, 9vw, 10rem) clamp(0rem, 3vw, 3rem);
         max-width: min(800px, 50vw);
-
+        
         grid-row: 1 / -1;
-
+        
         padding: 2rem;
-    }
 
+    }
+    
     div * {
+        filter: drop-shadow(3px 3px .5rem var(--content-5));
         z-index: 1;
     }
 

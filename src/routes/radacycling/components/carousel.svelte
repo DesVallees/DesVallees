@@ -18,7 +18,7 @@
     export let hideController:boolean = false;
 
     export let currentFileIndex: number = 0;
-    let intervalId: number | undefined;
+    let intervalId: ReturnType<typeof setInterval> | undefined;
 
     function nextImage() {
         currentFileIndex = (currentFileIndex + 1) % images.length;
@@ -51,18 +51,7 @@
     });
 
 
-    let disappearAndAppear:boolean = false;
     
-    $: currentFileIndex, checkDisappearAndAppear();
-    
-    async function checkDisappearAndAppear() {
-        disappearAndAppear = false
-        await sleep(1)
-        disappearAndAppear = true
-        await sleep(1100)
-        disappearAndAppear = false
-    }
-
     function handleKeydown(event:any) {
         const keyPressed = event.key;
         
@@ -79,12 +68,11 @@
 
 <div class="carousel" {style} bind:this={carousel}>
     <button aria-label={$dictionary.nextImage} style="cursor: default;" on:click={() => {nextImage();}} >
-        <!-- <img style={imgStyle} class:disappearAndAppear src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription}> -->
         <picture>
             {#if smallImages}
                 <source media="(max-width: {smallImagesBreakpoint})" srcset="{baseImageRoute}/{smallImages[currentFileIndex]}">
             {/if}
-            <img class:disappearAndAppear src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription} style={imgStyle}>
+            <img src="{baseImageRoute}/{images[currentFileIndex]}" alt={imageDescriptions ? imageDescriptions[currentFileIndex] : imagesCommonDescription} style={imgStyle}>
         </picture>
     </button>
     

@@ -134,8 +134,7 @@
         font-size: clamp(3rem, 8vw, 5rem);
         line-height: 1.25;
         text-align: center;
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: rgba(0, 0, 0, 0.5);
+        filter: drop-shadow(3px 3px .5rem var(--content-8));
     }
 
     h2 {
@@ -188,7 +187,8 @@
     .custom p {
         max-width: 700px;
         text-wrap: balance;
-        filter: contrast(300%) drop-shadow(0 0 .5rem var(--content-5));
+        filter: drop-shadow(0 0 .5rem var(--content-4));
+        font-weight: bold;
     }
     
     .edgyImg {

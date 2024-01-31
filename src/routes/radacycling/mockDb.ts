@@ -1,3 +1,5 @@
+import { baseImageRoute } from "./stores"
+
 type Cat = {
     name: string,
     icon: string,
@@ -146,3 +148,39 @@ export let storage: Record<string, Product> = {
         href: "rada-socks",
     }
 }
+
+export let deliveryFee = 8.18;
+export let cartItems = [
+    {
+        id: 1,
+        name: 'Jersey 2024',
+        details: 'Red Jersey 2024',
+        quantity: 1,
+        price: 89.97,
+        imageUrl: `${baseImageRoute}/Resources/Jersey2024RedBig.webp`,
+    },
+    {
+        id: 2,
+        name: 'Cycling Bib 2024',
+        details: 'Cycling Bib 2024',
+        quantity: 1,
+        price: 99.97,
+        imageUrl: `${baseImageRoute}/Resources/bibFocus.webp`,
+    },
+    {
+        id: 3,
+        name: 'Bib + Jersey + Free Socks',
+        details: 'Offer: 1 Bib Plus 1 Jersey Plus Free Socks',
+        quantity: 1,
+        price: 219.97,
+        imageUrl: `${baseImageRoute}/Resources/1BibPlus2Jerseys.webp`,
+    },
+    {
+        id: 4,
+        name: 'RADA Socks',
+        details: 'RADA Socks',
+        quantity: 1,
+        price: 16.00,
+        imageUrl: `${baseImageRoute}/Resources/RadaSocks.webp`,
+    }
+]

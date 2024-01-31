@@ -59,7 +59,8 @@ if (browser) {
     }
 }
 
-export const language: Writable<Language> = writable(storedLanguage || navigatorLanguage || 'en');
+// export const language: Writable<Language> = writable(storedLanguage || navigatorLanguage || 'en');
+export const language: Writable<Language> = writable('en');
 
 if (browser) {
     language.subscribe((value) => {

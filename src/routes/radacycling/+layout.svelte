@@ -84,7 +84,7 @@
         left: 0;
         right: 0;
 
-        background-color: var(--content-7);
+        background-color: var(--content-5);
         color: var(--main);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);

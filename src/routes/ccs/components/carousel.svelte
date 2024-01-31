@@ -14,7 +14,7 @@
     export let automaticImageChangeTime: number = 5000;
 
     export let currentFileIndex: number = 0;
-    let intervalId: number | undefined;
+    let intervalId: ReturnType<typeof setInterval> | undefined;
 
     function nextImage() {
         currentFileIndex = (currentFileIndex + 1) % images.length;

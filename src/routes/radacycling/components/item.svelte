@@ -78,7 +78,7 @@
     }
 
     .add {
-        background-color: var(--interactive-8);
+        background-color: var(--interactive);
         color: var(--main);
         border: none;
         padding: 10px 12.5px;
@@ -88,11 +88,11 @@
         display: flex;
         align-items: center;
         gap: 5px;
-        transition: background-color 0.3s ease;
+        transition: 0.3s ease;
     }
 
     .add:hover {
-        background-color: var(--interactive);
+        filter: brightness(120%);
     }
 
     .add ion-icon {

@@ -77,7 +77,7 @@
 </script>
 
 <div class="product">
-    <a href="{baseRoute}/catalog/{href}" aria-label="{name}" class="imgLink">
+    <a href="{baseRoute}/catalog/{href}" aria-label="{name}">
         <img bind:this={img} class="mainImage" src="{baseImageRoute}/Resources/{imageSrc}" alt="{imageAlt}">
         {#if oldPrice}
             <p class="discount">{calculateDiscount(oldPrice, price)} {$dictionary.discount}</p>
@@ -111,6 +111,7 @@
 
 <style>
     .product {
+        position: relative;
         max-width: 25rem;
         overflow: hidden;
     }
@@ -122,10 +123,6 @@
         display: block;
         border-radius: 5px;
         aspect-ratio: 1 / 1;
-    }
-
-    .imgLink {
-        position: relative;
     }
 
     .discount {
