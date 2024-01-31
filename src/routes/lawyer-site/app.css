@@ -13,7 +13,7 @@
     border-radius: 5px;
 }
 
-:root {    
+:root {
     --main: rgb(var(--mainRGB));
     --main-9: rgba(var(--mainRGB), .9);
     --main-8: rgba(var(--mainRGB), .8);
@@ -58,7 +58,7 @@
     --interactiveRGB: 6, 66, 216;
 }
 
-::selection{
+::selection {
     background-color: var(--interactive);
     color: white;
 }
@@ -77,8 +77,8 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: var(--content);
-  border-radius: 5px;
+    background-color: var(--content);
+    border-radius: 5px;
 }
 
 html,
@@ -121,7 +121,7 @@ a {
 }
 
 a,
-button{
+button {
     user-select: none;
     cursor: pointer;
 }
@@ -139,11 +139,14 @@ textarea::-webkit-scrollbar-track {
 }
 
 textarea::-webkit-scrollbar-thumb {
-  background-color: var(--content);
-  border-radius: 2px;
+    background-color: var(--content);
+    border-radius: 2px;
 }
 
-.button, .ghostButton, .baseButton, .link {
+.button,
+.ghostButton,
+.baseButton,
+.link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -210,7 +213,7 @@ textarea::-webkit-scrollbar-thumb {
     position: absolute;
     bottom: 0;
     left: 0;
-    
+
     width: 100%;
     height: .25em;
     border-radius: 4px;

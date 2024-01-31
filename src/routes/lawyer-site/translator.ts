@@ -216,7 +216,7 @@ export const translator = {
         dataProtectionPriority: 'Client data protection is a priority at LegalCollab. We implement industry-standard measures to secure your data and ensure confidentiality.',
         termsOfServiceDescription: 'Terms and conditions governing the use of our platform, services, and interactions with our network of attorneys.',
         exploreFAQPage: "Explore LegalCollab's FAQ page for expert insights on the way it LegalCollab works and family law. Our collaborative network of lawyers provides valuable answers to your legal queries.",
-        
+
         articles: {
             servicesIntroduction: {
                 key1: "Welcome to LegalCollab",

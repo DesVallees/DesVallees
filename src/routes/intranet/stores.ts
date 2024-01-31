@@ -28,7 +28,7 @@ export const username: Writable<string> = writable('');
 
 export const profile: Writable<Profile> = writable();
 
-export const showNotifications:Writable<boolean> = writable(false);
+export const showNotifications: Writable<boolean> = writable(false);
 
 
 

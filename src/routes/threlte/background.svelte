@@ -1,9 +1,9 @@
 <script lang="ts">
-    import * as Threlte from '@threlte/core'
-    import * as Three from 'three'
+	import * as Threlte from '@threlte/core';
+	import * as Three from 'three';
 
-    export let color: Three.ColorRepresentation
+	export let color: Three.ColorRepresentation;
 
-    const { scene } = Threlte.useThrelte()
-    $: color, scene.background = new Three.Color(color)
+	const { scene } = Threlte.useThrelte();
+	$: color, (scene.background = new Three.Color(color));
 </script>

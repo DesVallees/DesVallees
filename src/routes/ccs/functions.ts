@@ -4,7 +4,7 @@ export function sleep(ms: number): Promise<void> {
 
 export function throttle(func: () => void, limit: number): () => void {
     let lastCallTime = 0;
-    return function() {
+    return function () {
         const now = Date.now();
         if (now - lastCallTime >= limit) {
             func();

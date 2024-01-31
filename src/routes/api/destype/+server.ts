@@ -18,7 +18,7 @@ const languages = {
 }
 
 export const GET: RequestHandler = async ({ url }) => {
-    const language:string = url.searchParams.get('language') as string
+    const language: string = url.searchParams.get('language') as string
     const limit = Number(url.searchParams.get('limit'))
 
     const words = selectRandomElements(languages[language as Language], limit)
@@ -32,15 +32,15 @@ function selectRandomElements(array: any[], count: number) {
     let remaining = shuffleArray(array.slice()); // Make a copy of the array to avoid modifying the original
 
     while (selected.length < count) {
-    if (remaining.length === 0) {
-        // If all elements have been selected, shuffle the original array and start over
-        remaining = shuffleArray(array.slice());
-    }
+        if (remaining.length === 0) {
+            // If all elements have been selected, shuffle the original array and start over
+            remaining = shuffleArray(array.slice());
+        }
 
-    const index = Math.floor(Math.random() * remaining.length);
-    const element = remaining.splice(index, 1)[0];
+        const index = Math.floor(Math.random() * remaining.length);
+        const element = remaining.splice(index, 1)[0];
 
-    selected.push(element);
+        selected.push(element);
     }
 
     return selected;
@@ -56,6 +56,6 @@ function shuffleArray(array: any[]) {
     return array;
 }
 
-function withoutDuplicates(arr: any[], limit:number) {
+function withoutDuplicates(arr: any[], limit: number) {
     return arr.filter((value, index) => arr.indexOf(value) === index);
 }

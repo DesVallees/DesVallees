@@ -70,7 +70,7 @@ export const dictionary = derived(language, (language) => translator[language]);
 
 export type Theme = 'dark' | 'light';
 
-function isTheme(value:any) {
+function isTheme(value: any) {
     return (
         value === 'dark' ||
         value === 'light'
@@ -95,13 +95,13 @@ export const theme: Writable<Theme> = writable(storedTheme || 'dark');
 
 if (browser) {
     window.matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change',({ matches }) => {
-        if (matches) {
-            theme.set('dark')
-        } else {
-            theme.set('light')
-        }
-    })
+        .addEventListener('change', ({ matches }) => {
+            if (matches) {
+                theme.set('dark')
+            } else {
+                theme.set('light')
+            }
+        })
 
     theme.subscribe((value) => {
         document.documentElement.setAttribute("data-theme", value);

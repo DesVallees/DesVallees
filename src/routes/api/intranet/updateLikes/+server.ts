@@ -5,9 +5,9 @@ import { json } from '@sveltejs/kit';
 type Nature = 'increment' | 'decrement'
 
 export const POST: RequestHandler = (async ({ url }) => {
-    const id:number = parseInt(url.searchParams.get('id') as string)
+    const id: number = parseInt(url.searchParams.get('id') as string)
     const nature: Nature = url.searchParams.get('nature') as Nature
-    
+
     try {
         if (nature === 'increment') {
             await prisma.post.update({
@@ -19,7 +19,7 @@ export const POST: RequestHandler = (async ({ url }) => {
                 }
             })
         }
-        else if (nature === 'decrement'){
+        else if (nature === 'decrement') {
             await prisma.post.update({
                 where: {
                     id: id
@@ -36,5 +36,5 @@ export const POST: RequestHandler = (async ({ url }) => {
     }
 
     return json({ message: 'success' }, { status: 200 });
-        
+
 });

@@ -1,5 +1,5 @@
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({params}) => {
-    return {guitarSpanishName: params.id}
+export const load: PageServerLoad = async ({ params }) => {
+    return { guitarSpanishName: params.id }
 };

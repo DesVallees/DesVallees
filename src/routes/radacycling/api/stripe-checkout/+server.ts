@@ -6,12 +6,12 @@ const stripe = new Stripe(SECRET_STRIPE_KEY, {
     apiVersion: "2023-10-16"
 })
 
-export const POST: RequestHandler = async ({request}) => {
+export const POST: RequestHandler = async ({ request }) => {
     const data = await request.json();
     const items = data.items;
 
-    let lineItems : any = [];
-    items.forEach((item:any) => {
+    let lineItems: any = [];
+    items.forEach((item: any) => {
         lineItems.push({
             price: item.id,
             quantity: item.quantity

@@ -1,21 +1,21 @@
 export const notifications: any[] = [
     {
         id: '0',
-        content: `Today is Sarah Singh's Birthday!`, 
+        content: `Today is Sarah Singh's Birthday!`,
         seen: true,
         dismissed: false,
         date: new Date(2022, 7, 10).toISOString(),
     },
     {
         id: '1',
-        content: 'Monthly assessment reunion starts in 1 hour.', 
+        content: 'Monthly assessment reunion starts in 1 hour.',
         seen: true,
         dismissed: false,
         date: new Date(2022, 9, 15).toISOString(),
     },
     {
         id: '2',
-        content: `Today is Taylor Nguyen's Birthday!`, 
+        content: `Today is Taylor Nguyen's Birthday!`,
         seen: true,
         dismissed: false,
         date: new Date(2022, 11, 20).toISOString(),

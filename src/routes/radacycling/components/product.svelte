@@ -166,6 +166,7 @@
     }
     .versions button {
         background: none;
+        border-radius: var(--borderRadius, 10px);
         border: none;
         padding: 5px;
         cursor: pointer;
@@ -176,8 +177,6 @@
     }
     .versions button.current img {
         border: 3px solid var(--interactive);
-        box-shadow: 0 0 1rem var(--interactive-3);
-        border-radius: var(--borderRadius, 10px);
     }
     .versions img {
         width: 50px;

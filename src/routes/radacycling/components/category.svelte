@@ -1,71 +1,71 @@
 <script lang="ts">
-	import { baseImageRoute, baseRoute } from "../stores";
+	import { baseImageRoute, baseRoute } from '../stores';
 
-    export let style: string = "";
-    
-    export let imageSrc: string;
-    export let imageAlt: string;
+	export let style: string = '';
 
-    export let name: string;
-    export let buttonText: string = "Shop Now";
+	export let imageSrc: string;
+	export let imageAlt: string;
 
+	export let name: string;
+	export let buttonText: string = 'Shop Now';
 </script>
 
 <div class="category" {style}>
-    <img src="{baseImageRoute}/{imageSrc}" alt={imageAlt} class="scrollAppear">
-    <div class="text">
-        <h2>{name}</h2>
-        <a href="{baseRoute}/catalog?category={name.toLowerCase()}" class="button">{buttonText}</a>
-    </div>
+	<img src="{baseImageRoute}/{imageSrc}" alt={imageAlt} class="scrollAppear" />
+	<div class="text">
+		<h2>{name}</h2>
+		<a href="{baseRoute}/catalog?category={name.toLowerCase()}" class="button">{buttonText}</a>
+	</div>
 </div>
 
 <style>
-    .category {
-        display: grid;
-        grid-template-rows: repeat(2, 1fr);
-        
-        max-width: fit-content;
-        max-height: 50rem;
-    }
+	.category {
+		display: grid;
+		grid-template-rows: repeat(2, 1fr);
 
-    img, .text {
-        grid-column: 1 / -1;
-        grid-row: 1 / -1;
-    }
+		max-width: fit-content;
+		max-height: 50rem;
+	}
 
-    img {
-        height: auto;
-        max-height: min(100vh, 50rem);
-        max-height: min(100svh, 50rem);
+	img,
+	.text {
+		grid-column: 1 / -1;
+		grid-row: 1 / -1;
+	}
 
-        object-fit: cover;
-    }
+	img {
+		height: auto;
+		max-height: min(100vh, 50rem);
+		max-height: min(100svh, 50rem);
+		border-radius: 5px;
 
-    .text {
-        align-self: end;
+		object-fit: cover;
+	}
 
-        text-transform: uppercase;
+	.text {
+		align-self: end;
 
-        width: 100%;
-        padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 6vw, 3rem) clamp(2rem, 8vw, 4rem);
-        
-        z-index: 1;
+		text-transform: uppercase;
 
-        color: var(--main);
-    }
+		width: 100%;
+		padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 6vw, 3rem) clamp(2rem, 8vw, 4rem);
 
-    h2 {
-        font-size: clamp(3rem, 8vw, 4rem);
-    }
+		z-index: 1;
 
-    a {
-        font-size: clamp(1.4rem, 4vw, 1.8rem);
-        background-color: var(--interactive-8);
-    }
+		color: var(--main);
+	}
 
-    a:hover,
-    a:focus-visible {
-        background-color: var(--interactive);
-    }
+	h2 {
+		font-size: clamp(3rem, 8vw, 4rem);
+	}
 
+	a {
+		font-size: clamp(1.4rem, 4vw, 1.8rem);
+		background-color: var(--interactive-8);
+	}
+
+	a:hover,
+	a:focus-visible {
+		background-color: var(--interactive);
+	}
 </style>

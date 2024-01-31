@@ -1,263 +1,283 @@
 <script lang="ts">
-	import { scale } from "svelte/transition";
-	import { dictionary } from "../stores";
-	import toast from "svelte-french-toast";
+	import { scale } from 'svelte/transition';
+	import { dictionary } from '../stores';
+	import toast from 'svelte-french-toast';
 
-    let isMenuOpen: boolean = false;
+	let isMenuOpen: boolean = false;
 
-    type Menu = 'chat' | 'meeting'
-    let currentMenu:Menu = 'chat'
+	type Menu = 'chat' | 'meeting';
+	let currentMenu: Menu = 'chat';
 
-    function switchMenu(name:Menu) {
-        currentMenu = name;
-    }
+	function switchMenu(name: Menu) {
+		currentMenu = name;
+	}
 
-    function closeDialog() {
-        isMenuOpen = false
-    }
-    
-    function toggleDialog() {
-        isMenuOpen = !isMenuOpen
-    }
+	function closeDialog() {
+		isMenuOpen = false;
+	}
 
-    function focusDialog() {
-        if (firstFocusableElement) {
-            firstFocusableElement.focus()
-        }
-    }
+	function toggleDialog() {
+		isMenuOpen = !isMenuOpen;
+	}
 
-    function comingSoon() {
-        toast(`${$dictionary.comingSoon}...`, {duration: 3000, style: "font-weight: bold; background-color: var(--content); color: var(--main);"})
-    }
+	function focusDialog() {
+		if (firstFocusableElement) {
+			firstFocusableElement.focus();
+		}
+	}
 
-    let menuContentHeight: number;
-    let firstFocusableElement:HTMLElement;
+	function comingSoon() {
+		toast(`${$dictionary.comingSoon}...`, {
+			duration: 3000,
+			style: 'font-weight: bold; background-color: var(--content); color: var(--main);',
+		});
+	}
 
-    $: firstFocusableElement, focusDialog()
+	let menuContentHeight: number;
+	let firstFocusableElement: HTMLElement;
+
+	$: firstFocusableElement, focusDialog();
 </script>
 
 <div class="helpSpace">
-    {#if isMenuOpen}
-        <div class="menu" transition:scale style="height: {menuContentHeight}px;">
-            <div class="menuContent" bind:clientHeight={menuContentHeight}>
-                <header>
-                    <img width="45px" src="/images/lawyers/logoFull.webp" alt="{$dictionary.attorneyCollaborativeOnlineService}">
-                    <nav>
-                        <button bind:this={firstFocusableElement} on:click={() => switchMenu('chat')} class:active={currentMenu === 'chat'}>{$dictionary.onlineChat}</button>
-                        <button on:click={() => switchMenu('meeting')} class:active={currentMenu === 'meeting'}>{$dictionary.onlineMeeting}</button>
-                    </nav>
-                    <button class="close" on:click={closeDialog} aria-label="{$dictionary.close}"><ion-icon name="close"></ion-icon></button>
-                </header>
-    
-                {#if currentMenu === 'chat'}
-                    <div class="body chat">
-                        <p>{$dictionary.haveADoubt}</p>
-                        <button on:click={comingSoon} class="button">{$dictionary.sendUsAMessage}</button>
-                        <a class="link" href="/lawyer-site/faq" on:click={closeDialog}>{$dictionary.frequentlyAskedQuestions}</a>
-                    </div>
-    
-                {:else if currentMenu === 'meeting'}
-                    <div class="body meeting">
-                        <p>{$dictionary.connectWithOurExperts}</p>
-                        <button on:click={comingSoon} class="button">{$dictionary.scheduleAMeeting}</button>
-                        <a class="link" href="/lawyer-site/faq" on:click={closeDialog}>{$dictionary.frequentlyAskedQuestions}</a>
-                    </div>
-    
-                {/if}
-            </div>
-        </div>
-    {/if}
+	{#if isMenuOpen}
+		<div class="menu" transition:scale style="height: {menuContentHeight}px;">
+			<div class="menuContent" bind:clientHeight={menuContentHeight}>
+				<header>
+					<img
+						width="45px"
+						src="/images/lawyers/logoFull.webp"
+						alt={$dictionary.attorneyCollaborativeOnlineService}
+					/>
+					<nav>
+						<button
+							bind:this={firstFocusableElement}
+							on:click={() => switchMenu('chat')}
+							class:active={currentMenu === 'chat'}>{$dictionary.onlineChat}</button
+						>
+						<button
+							on:click={() => switchMenu('meeting')}
+							class:active={currentMenu === 'meeting'}
+							>{$dictionary.onlineMeeting}</button
+						>
+					</nav>
+					<button class="close" on:click={closeDialog} aria-label={$dictionary.close}
+						><ion-icon name="close" /></button
+					>
+				</header>
 
-    <button class="trigger" on:click={toggleDialog} aria-label="{$dictionary.needHelp}">
-        <ion-icon name="chatbubble"></ion-icon>
-    </button>
+				{#if currentMenu === 'chat'}
+					<div class="body chat">
+						<p>{$dictionary.haveADoubt}</p>
+						<button on:click={comingSoon} class="button"
+							>{$dictionary.sendUsAMessage}</button
+						>
+						<a class="link" href="/lawyer-site/faq" on:click={closeDialog}
+							>{$dictionary.frequentlyAskedQuestions}</a
+						>
+					</div>
+				{:else if currentMenu === 'meeting'}
+					<div class="body meeting">
+						<p>{$dictionary.connectWithOurExperts}</p>
+						<button on:click={comingSoon} class="button"
+							>{$dictionary.scheduleAMeeting}</button
+						>
+						<a class="link" href="/lawyer-site/faq" on:click={closeDialog}
+							>{$dictionary.frequentlyAskedQuestions}</a
+						>
+					</div>
+				{/if}
+			</div>
+		</div>
+	{/if}
+
+	<button class="trigger" on:click={toggleDialog} aria-label={$dictionary.needHelp}>
+		<ion-icon name="chatbubble" />
+	</button>
 </div>
 
-
 <style>
-    .menu *:focus-visible:not(input):not(textarea) {
-        outline: solid .25rem var(--main);
-    }
-    
-    .helpSpace {
-        position: fixed;
-        bottom: 3rem;
-        right: 3rem;
+	.menu *:focus-visible:not(input):not(textarea) {
+		outline: solid 0.25rem var(--main);
+	}
 
-        max-height: 100%;
-        max-width: calc(100% - 2rem);
-        
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-items: end;
-        justify-content: end;
-        row-gap: 1rem;
-        z-index: 15;
-    }
+	.helpSpace {
+		position: fixed;
+		bottom: 3rem;
+		right: 3rem;
 
-    .menu {
-        max-width: 500px;
-        border-radius: 25px;
+		max-height: 100%;
+		max-width: calc(100% - 2rem);
 
-        color: var(--main);
-        background-color: var(--content);
-        box-shadow: 0 0 10px var(--content-5);
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-items: end;
+		justify-content: end;
+		row-gap: 1rem;
+		z-index: 15;
+	}
 
-        transition: height .5s;
-        overflow: hidden;
-        overflow: clip;
-    }
+	.menu {
+		max-width: 500px;
+		border-radius: 25px;
 
-    :global([data-theme="light"]) .menu {
-        color: var(--content);
-        background-color: var(--main);
-    }
+		color: var(--main);
+		background-color: var(--content);
+		box-shadow: 0 0 10px var(--content-5);
 
-    .menuContent {
-        display: grid;
-        gap: 2rem;
+		transition: height 0.5s;
+		overflow: hidden;
+		overflow: clip;
+	}
 
-        padding: 1.5rem;
-    }
+	:global([data-theme='light']) .menu {
+		color: var(--content);
+		background-color: var(--main);
+	}
 
-    .menu img {
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
-    }
+	.menuContent {
+		display: grid;
+		gap: 2rem;
 
-    .menu header {
-        display: grid;
-        gap: 2rem;
-        grid-auto-flow: column;
-        align-items: center;
-        justify-content: space-between;
-    }
+		padding: 1.5rem;
+	}
 
-    .menu header nav {
-        --space: .4rem;
-        
-        display: flex;
-        gap: var(--space);
-        
-        width: fit-content;
-        padding: var(--space);
-        border-radius: 10px;
-        
-        color: var(--interactive);
-        background-color: var(--main-1);
-        transition: background-color .5s;
-    }
+	.menu img {
+		aspect-ratio: 1 / 1;
+		border-radius: 50%;
+	}
 
-    .menu header nav button {
-        padding: var(--space) calc(var(--space) * 2);
-        border-radius: 5px;
-        font-weight: 500;
+	.menu header {
+		display: grid;
+		gap: 2rem;
+		grid-auto-flow: column;
+		align-items: center;
+		justify-content: space-between;
+	}
 
-        background-color: transparent;
-        transition: background-color .5s;
-    }
+	.menu header nav {
+		--space: 0.4rem;
 
-    .menu header nav button.active {
-        background-color: var(--main-2);
-    }
+		display: flex;
+		gap: var(--space);
 
-    :global([data-theme="light"]) .menu header nav {
-        color: var(--main);
-        background-color: var(--interactive-7);
-    }
+		width: fit-content;
+		padding: var(--space);
+		border-radius: 10px;
 
-    :global([data-theme="light"]) .menu header nav button.active {
-        background-color: var(--interactive);
-    }
+		color: var(--interactive);
+		background-color: var(--main-1);
+		transition: background-color 0.5s;
+	}
 
-    .menu .close {
-        border-radius: 50%;
-        padding: .3em;
-        font-size: 1.3rem;
-        display: flex;
-    }
+	.menu header nav button {
+		padding: var(--space) calc(var(--space) * 2);
+		border-radius: 5px;
+		font-weight: 500;
 
-    .menu .close:hover,
-    .menu .close:focus-visible {
-        background-color: var(--main-1);
-    }
+		background-color: transparent;
+		transition: background-color 0.5s;
+	}
 
-    .menu .body {
-        display: grid;
-        gap: .5rem;
-        place-items: center;
-        padding: 0 2rem;
-    }
+	.menu header nav button.active {
+		background-color: var(--main-2);
+	}
 
-    .menu .body p {
-        font-size: 1.1rem;
-        margin-bottom: 3rem;
-    }
+	:global([data-theme='light']) .menu header nav {
+		color: var(--main);
+		background-color: var(--interactive-7);
+	}
 
-    .menu .body button {
-        padding-inline: 1rem;
-    }
+	:global([data-theme='light']) .menu header nav button.active {
+		background-color: var(--interactive);
+	}
 
-    .menu .body a {
-        color: var(--interactive);
-    }
+	.menu .close {
+		border-radius: 50%;
+		padding: 0.3em;
+		font-size: 1.3rem;
+		display: flex;
+	}
 
-    :global([data-theme="dark"]) .helpSpace .menu .body .button {
-        background-color: var(--interactive-9);
-        color: var(--content);
-    }
+	.menu .close:hover,
+	.menu .close:focus-visible {
+		background-color: var(--main-1);
+	}
 
-    
-    .trigger {
-        aspect-ratio:  1 / 1;
-        width: fit-content;
+	.menu .body {
+		display: grid;
+		gap: 0.5rem;
+		place-items: center;
+		padding: 0 2rem;
+	}
 
-        border-radius: 50%;
-        padding: .7em;
-        background-color: var(--interactive);
-        box-shadow: 3px 3px 10px var(--content-2);
-        
-        display: flex;
-        transition: all .5s;
-    }
-    
-    :global([data-theme="light"]) .trigger {
-        background-color: var(--content);
-        color: var(--main);
-        box-shadow: 3px 3px 10px var(--content-7);
-    }
-    
-    .trigger ion-icon {
-        font-size: 2.5rem;
-        transition: font-size .2s;
-    }
+	.menu .body p {
+		font-size: 1.1rem;
+		margin-bottom: 3rem;
+	}
 
-    .trigger:hover ion-icon {
-        font-size: 3rem;
-    }
+	.menu .body button {
+		padding-inline: 1rem;
+	}
 
-    @media screen and (max-width: 900px) {
-        .helpSpace {
-            bottom: 1rem;
-            right: 1rem;
-        }
-    }
+	.menu .body a {
+		color: var(--interactive);
+	}
 
-    @media screen and (max-width: 600px) {
+	:global([data-theme='dark']) .helpSpace .menu .body .button {
+		background-color: var(--interactive-9);
+		color: var(--content);
+	}
 
-        .menu header {
-            gap: 1rem;
-        }
+	.trigger {
+		aspect-ratio: 1 / 1;
+		width: fit-content;
 
-        .menu img {
-            display: none;
-        }
-    }
+		border-radius: 50%;
+		padding: 0.7em;
+		background-color: var(--interactive);
+		box-shadow: 3px 3px 10px var(--content-2);
 
-    @media screen and (max-width: 350px) {
-        .menu .close {
-            display: none;
-        }
-    }
+		display: flex;
+		transition: all 0.5s;
+	}
+
+	:global([data-theme='light']) .trigger {
+		background-color: var(--content);
+		color: var(--main);
+		box-shadow: 3px 3px 10px var(--content-7);
+	}
+
+	.trigger ion-icon {
+		font-size: 2.5rem;
+		transition: font-size 0.2s;
+	}
+
+	.trigger:hover ion-icon {
+		font-size: 3rem;
+	}
+
+	@media screen and (max-width: 900px) {
+		.helpSpace {
+			bottom: 1rem;
+			right: 1rem;
+		}
+	}
+
+	@media screen and (max-width: 600px) {
+		.menu header {
+			gap: 1rem;
+		}
+
+		.menu img {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 350px) {
+		.menu .close {
+			display: none;
+		}
+	}
 </style>

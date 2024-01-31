@@ -2,7 +2,7 @@ import { derived, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 
-export const chosenGuitarIndex:Writable<number> = writable(0);
+export const chosenGuitarIndex: Writable<number> = writable(0);
 
 
 

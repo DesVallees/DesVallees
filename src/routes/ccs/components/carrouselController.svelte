@@ -1,47 +1,50 @@
 <script lang="ts">
-	import { dictionary } from "../stores";
+	import { dictionary } from '../stores';
 
-
-    export let array:string[];
-    export let currentFileIndex: number;
-
+	export let array: string[];
+	export let currentFileIndex: number;
 </script>
 
 <div>
-    {#each array as i, index}
-        <button aria-label="{$dictionary.imagen} {index + 1}" on:click={() => currentFileIndex = index} class:active={index === currentFileIndex} tabindex={index === currentFileIndex ? -1 : 0}></button>
-    {/each}
+	{#each array as i, index}
+		<button
+			aria-label="{$dictionary.imagen} {index + 1}"
+			on:click={() => (currentFileIndex = index)}
+			class:active={index === currentFileIndex}
+			tabindex={index === currentFileIndex ? -1 : 0}
+		/>
+	{/each}
 </div>
 
 <style>
-    div{
-        display: flex;
-        gap: 1.5em;
-    }
-    
-    div button{
-        border-radius: 50px;
-        background-color: var(--contentDimer);
-        height: 12px;
-        width: 20px;
-        transition: all .2s;
-    }
+	div {
+		display: flex;
+		gap: 1.5em;
+	}
 
-    div button:not(.active):hover,
-    div button:not(.active):focus-visible{
-        width: 30px;
-        background-color: var(--contentDim);
-    }
+	div button {
+		border-radius: 50px;
+		background-color: var(--contentDimer);
+		height: 12px;
+		width: 20px;
+		transition: all 0.2s;
+	}
 
-    div .active{
-        width: 50px;
-        cursor: default;
-        background-color: var(--content);
-    }
+	div button:not(.active):hover,
+	div button:not(.active):focus-visible {
+		width: 30px;
+		background-color: var(--contentDim);
+	}
 
-    @media (orientation: portrait) {
-        div{
-            gap: 1em;
-        }
-    }
+	div .active {
+		width: 50px;
+		cursor: default;
+		background-color: var(--content);
+	}
+
+	@media (orientation: portrait) {
+		div {
+			gap: 1em;
+		}
+	}
 </style>

@@ -43,7 +43,7 @@ button {
     user-select: none;
 }
 
-button:hover, 
+button:hover,
 button:focus {
     box-shadow: 0 0 3px hsla(210, 20%, 98%, 1);
     color: hsla(210, 20%, 98%, 1);

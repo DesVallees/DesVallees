@@ -39,7 +39,7 @@ export const translator = {
 
         catalog: 'Catalog',
         ourWork: 'Our Work',
-        
+
         homeDescription: "",
 
         catalogSlogan: "Gear Up, Stand Out, Ride On.",
@@ -55,7 +55,7 @@ export const translator = {
         unitedStatesFlag: 'Bandera de los Estados Unidos',
         spanishFlag: 'Bandera Española',
         siteNavigation: 'Navegación del Sitio',
-        darkMode: 'Modo Oscuro',        
+        darkMode: 'Modo Oscuro',
         home: 'Inicio',
         getInTouch: 'Ponte en Contacto',
         socialMedia: 'Redes Sociales',

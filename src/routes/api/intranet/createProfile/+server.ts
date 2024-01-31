@@ -6,7 +6,7 @@ export const POST: RequestHandler = (async ({ request }) => {
     const profile = await request.json();
 
     try {
-        
+
         let dbProfile = await prisma.profile.findFirstOrThrow({
             where: {
                 microsoftId: profile.microsoftId
@@ -14,7 +14,7 @@ export const POST: RequestHandler = (async ({ request }) => {
         })
 
         return json(dbProfile);
-        
+
     } catch (error) {
 
         try {
@@ -35,10 +35,10 @@ export const POST: RequestHandler = (async ({ request }) => {
             })
 
         } catch (error) {
-    
+
             console.error('Error creating profile:', error);
             return json({ message: 'failure' }, { status: 500 });
-        
+
         }
     }
 
@@ -49,15 +49,15 @@ export const POST: RequestHandler = (async ({ request }) => {
                 microsoftId: profile.microsoftId
             }
         })
-    
+
         return json(dbProfile);
-        
+
     } catch (error) {
-        
+
         console.error('Unexpected error:', error);
         return json({ message: 'failure' }, { status: 500 });
 
     }
 
-        
+
 });

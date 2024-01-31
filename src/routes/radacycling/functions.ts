@@ -4,8 +4,8 @@ export function sleep(ms: number): Promise<void> {
 
 export function camelCaseToSpaced(camel: string): string {
     return camel.replace(/([a-z])([A-Z])/g, '$1 $2')
-                .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
-                .replace(/^./, str => str.toUpperCase());
+        .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+        .replace(/^./, str => str.toUpperCase());
 }
 
 export function spacedToHyphened(input: string): string {
@@ -81,7 +81,7 @@ export function autoResizeTextarea(element: HTMLTextAreaElement): void {
 
 export function throttle(func: () => void, limit: number): () => void {
     let lastCallTime = 0;
-    return function() {
+    return function () {
         const now = Date.now();
         if (now - lastCallTime >= limit) {
             func();
@@ -127,23 +127,23 @@ export function isGeneratedBlobUrl(url: string): boolean {
 
 export function escapeHTML(input: string): string {
     const entityMap: { [key: string]: string } = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;',
-      '/': '&#x2F;',
-      '`': '&#x60;',
-      '=': '&#x3D;'
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '/': '&#x2F;',
+        '`': '&#x60;',
+        '=': '&#x3D;'
     };
-  
+
     return input.replace(/[&<>"'`=\/]/g, (s) => entityMap[s]);
 }
 
 import type { Action } from "svelte/action";
 
 interface Attributes {
-    "on:outside"? : (event: CustomEvent) => void
+    "on:outside"?: (event: CustomEvent) => void
 }
 
 type ClickOutside = Action<HTMLElement, any, Attributes>
@@ -186,7 +186,7 @@ export const clickOutsideOrChild: ClickOutside = (element) => {
     }
 }
 
-export function handleSwipe(element:HTMLElement, onSwipeRight: () => void, onSwipeLeft: () => void) {
+export function handleSwipe(element: HTMLElement, onSwipeRight: () => void, onSwipeLeft: () => void) {
     let slidePixelRequirement = 50;
     let touchStartX = 0;
 

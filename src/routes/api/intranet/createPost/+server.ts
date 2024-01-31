@@ -3,11 +3,11 @@ import { prisma } from "$lib/server/prisma";
 import { json } from '@sveltejs/kit';
 
 export const POST: RequestHandler = (async ({ request }) => {
-    const { profileID, content, img, visibility, parentPostID } = Object.fromEntries(await request.formData()) as { 
-        profileID: string, 
-        content: string, 
-        img: string, 
-        visibility: string, 
+    const { profileID, content, img, visibility, parentPostID } = Object.fromEntries(await request.formData()) as {
+        profileID: string,
+        content: string,
+        img: string,
+        visibility: string,
         parentPostID: string | undefined
     }
 
@@ -18,7 +18,7 @@ export const POST: RequestHandler = (async ({ request }) => {
                 content: content,
                 visibility: visibility,
                 img: img,
-                parentPostID: ( parentPostID ? parseInt(parentPostID) : undefined)
+                parentPostID: (parentPostID ? parseInt(parentPostID) : undefined)
             }
         })
     }
@@ -44,5 +44,5 @@ export const POST: RequestHandler = (async ({ request }) => {
     }
 
     return json({ message: 'success' }, { status: 200 });
-        
+
 });

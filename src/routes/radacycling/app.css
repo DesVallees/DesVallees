@@ -2,7 +2,7 @@
     --mainRGB: 245, 245, 250;
     --contentRGB: 10, 10, 10;
     --interactiveRGB: 200, 15, 20;
-    
+
     --main: rgb(var(--mainRGB));
     --main-9: rgba(var(--mainRGB), .9);
     --main-8: rgba(var(--mainRGB), .8);
@@ -330,7 +330,7 @@ article footer p {
 @media (prefers-reduced-motion: no-preference) {
     .scrollAppear {
         opacity: 0;
-        
+
         animation: scrollAppear linear forwards;
         animation-timeline: view(y);
         animation-range: cover 25vh 50vh;
@@ -345,7 +345,7 @@ article footer p {
     .scrollScale {
         opacity: 0;
         scale: .8;
-        
+
         animation: scrollScale linear forwards;
         animation-timeline: view(y);
         animation-range: cover 25vh 50vh;

@@ -161,7 +161,7 @@ export const translator = {
         guitarBoaConstrictorBeforeColor: 'Guitare Boa Constrictor avant la couleur',
         guitarBoaConstrictorColorProcess: 'Guitare Boa Constrictor en cours de coloration',
     },
-    de:{
+    de: {
         error: "Ein Fehler ist aufgetreten.",
         paginaNoDisponible: 'Seite nicht verfügbar',
         comingSoon: 'Demnächst',
@@ -215,7 +215,7 @@ export const translator = {
         guitarBoaConstrictorBeforeColor: 'Gitarre Boa Constrictor vor der Farbgebung',
         guitarBoaConstrictorColorProcess: 'Gitarre Boa Constrictor im Färbeprozess',
     },
-    it:{
+    it: {
         error: "Si è verificato un errore.",
         paginaNoDisponible: 'Pagina non disponibile',
         comingSoon: 'Prossimamente',

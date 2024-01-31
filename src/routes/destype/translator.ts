@@ -40,11 +40,11 @@ export const translator = {
         ],
         goodScore: [
             "Impressionnant!",
-            "Excellent travail!", 
-            "Bravo!", 
-            "Félicitations!", 
-            "Vous êtes incroyable!", 
-            "Super travail!" 
+            "Excellent travail!",
+            "Bravo!",
+            "Félicitations!",
+            "Vous êtes incroyable!",
+            "Super travail!"
         ],
         bestScore: [
             "Tu as battu ton meilleur score!",
@@ -103,7 +103,7 @@ export const translator = {
             "¡Bravo!",
             "¡Felicidades!",
             "¡Eres increíble!",
-            "¡Gran trabajo!" 
+            "¡Gran trabajo!"
         ],
         bestScore: [
             "¡Has superado tu mejor puntuación!",
@@ -162,7 +162,7 @@ export const translator = {
             "Bravo!",
             "Complimenti!",
             "Sei incredibile!",
-            "Gran bel lavoro!" 
+            "Gran bel lavoro!"
         ],
         bestScore: [
             "Hai battuto il tuo punteggio più alto!",
@@ -217,11 +217,11 @@ export const translator = {
         ],
         goodScore: [
             "Impressive!",
-            "Excellent work!", 
-            "Well done!", 
-            "Congratulations!", 
-            "You are amazing!", 
-            "Great job!" 
+            "Excellent work!",
+            "Well done!",
+            "Congratulations!",
+            "You are amazing!",
+            "Great job!"
         ],
         bestScore: [
             "You just beat your highest score!",
@@ -275,12 +275,12 @@ export const translator = {
             "Каждая неудача - шанс для роста и улучшения.",
         ],
         goodScore: [
-            "Впечатляюще!", 
-            "Отличная работа!", 
-            "Молодец!", 
-            "Поздравляем!", 
-            "Ты потрясающий!", 
-            "Отличный результат!" 
+            "Впечатляюще!",
+            "Отличная работа!",
+            "Молодец!",
+            "Поздравляем!",
+            "Ты потрясающий!",
+            "Отличный результат!"
         ],
         bestScore: [
             "Вы только что побили свой рекорд!",
