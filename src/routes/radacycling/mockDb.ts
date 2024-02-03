@@ -204,7 +204,7 @@ export let reviews: Review[] = [
             'The Jersey 2024 is amazing. It fits true to size and is very stylish for any event.',
         name: 'markuslee',
         imageSrc: '/images/lawyers/Brian_Mitchell.jpg',
-        rating: 4,
+        rating: 5,
     },
     {
         productId: 0,
@@ -260,7 +260,7 @@ export let reviews: Review[] = [
             'Incredible comfort and sleek design! The Cycling Bib 2024 has made my rides more enjoyable. Highly recommend it to any cyclist!',
         name: 'lindseyb',
         imageSrc: '/images/lawyers/Ji-Yeon_Kim.jpg',
-        rating: 5,
+        rating: 4,
     },
 
     // Bib + Jersey + Socks Offer
@@ -317,7 +317,7 @@ export let reviews: Review[] = [
         text: 'I was skeptical about the price, but these socks are worth every penny. They feel like walking on clouds!',
         name: 'emilyrose',
         imageSrc: '/images/lawyers/Ji-Yeon_Kim.jpg',
-        rating: 5,
+        rating: 4,
     },
     {
         productId: 3,
@@ -333,7 +333,7 @@ export let reviews: Review[] = [
         text: 'The comfort level of RADA Socks is unbeatable. Plus, they look great with all my shoes!',
         name: 'anna_k',
         imageSrc: '/images/lawyers/Emily_Davis.jpg',
-        rating: 5,
+        rating: 4,
     },
 ];
 

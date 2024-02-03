@@ -15,7 +15,7 @@
 		return reviews.filter((review) => review.productId === productId);
 	}
 
-	function calculateAverageRating(reviews: ReviewType[]): number | undefined {
+	function calculateAverageRating(reviews: ReviewType[]): string | undefined {
 		if (reviews.length === 0) {
 			return undefined;
 		}
@@ -23,7 +23,7 @@
 		const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
 		const averageRating = totalRating / reviews.length;
 
-		return Number(averageRating.toFixed(1));
+		return averageRating.toFixed(1);
 	}
 
 	function findSimilarProducts(product: Product, count: number): Product[] {
@@ -38,7 +38,7 @@
 	}
 
 	let product: Product | undefined;
-	let averageRating: number | '-';
+	let averageRating: string;
 	let reviewCount: number;
 	let similarProducts: Product[];
 
@@ -55,6 +55,8 @@
 
 			similarProducts = findSimilarProducts(product, 8);
 		}
+
+		currentTab = 'description';
 	}
 
 	let quantity: number = 1;
@@ -212,6 +214,11 @@
 		justify-content: center;
 		z-index: 0;
 		padding: 5rem 0 1rem;
+	}
+
+	.image-container img {
+		max-height: max(50vh, 20rem);
+		width: auto;
 	}
 
 	.product-image {
