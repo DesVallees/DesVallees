@@ -75,6 +75,8 @@
 		min-height: 100%;
 		padding: 6rem 1.5rem;
 		margin: auto;
+
+		font-size: clamp(0.9rem, 3vw, 1rem);
 	}
 
 	h1 {
@@ -107,6 +109,10 @@
 		translate: 0 -50%;
 
 		color: var(--interactive);
+	}
+
+	.link {
+		font-size: 0.95em;
 	}
 
 	.forgotPassword {

@@ -152,7 +152,7 @@
 
 	.features {
 		padding: 1rem clamp(1rem, 4vw, 3rem) 6rem;
-		font-size: clamp(1rem, 4vw, 1.2rem);
+		font-size: clamp(0.9rem, 4vw, 1.2rem);
 
 		display: grid;
 		place-items: center;
@@ -177,7 +177,7 @@
 	}
 
 	.features h2 {
-		font-size: 2.25em;
+		font-size: 2.2em;
 		margin-bottom: 3rem;
 	}
 

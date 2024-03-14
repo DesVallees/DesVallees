@@ -73,13 +73,14 @@
 
 	.close {
 		position: absolute;
-		top: 1em;
-		right: 1em;
+		top: 1.5em;
+		right: 1.5em;
 
 		display: flex;
 		font-size: 1.2rem;
 		padding: 0.25em;
-		background-color: var(--main-5);
+		background-color: var(--content-5);
+		color: var(--main);
 		border-radius: 50%;
 
 		z-index: 2;

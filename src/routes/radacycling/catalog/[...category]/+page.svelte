@@ -370,7 +370,7 @@
 
 	.clearFilters {
 		text-transform: uppercase;
-		font-size: clamp(1rem, 2.5vw, 1.1rem);
+		font-size: clamp(0.9rem, 2.5vw, 1.1rem);
 		font-weight: bold;
 		color: var(--content);
 		white-space: nowrap;

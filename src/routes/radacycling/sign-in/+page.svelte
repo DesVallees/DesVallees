@@ -16,7 +16,7 @@
 	/>
 </svelte:head>
 
-<div class="logIn" in:fade>
+<div class="signIn" in:fade>
 	<h1>Create an account</h1>
 	<form on:submit|preventDefault={handleFormSubmission}>
 		<div class="inputGroup">
@@ -52,7 +52,7 @@
 </div>
 
 <style>
-	.logIn {
+	.signIn {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -61,6 +61,8 @@
 		min-height: 100%;
 		padding: 6rem 1.5rem;
 		margin: auto;
+
+		font-size: clamp(0.9rem, 3vw, 1rem);
 	}
 
 	h1 {
@@ -80,6 +82,10 @@
 		padding: 1em;
 		padding-left: 3em;
 		background-color: transparent;
+	}
+
+	.link {
+		font-size: 0.95em;
 	}
 
 	.inputGroup {
