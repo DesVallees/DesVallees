@@ -1,12 +1,25 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { baseImageRoute, baseRoute, dictionary } from '../stores';
-	import { cartItems, deliveryFee } from '../mockDb';
+	import { baseImageRoute, baseRoute, cartItems, dictionary } from '../stores';
+	import {
+		deliveryFee,
+		denormalizeCartItems,
+		storage,
+		type DenormalizedCartItem,
+	} from '../mockDb';
 
 	let promoCode = '';
 
+	let denormalizedData: DenormalizedCartItem[];
+
+	try {
+		denormalizedData = denormalizeCartItems($cartItems, storage);
+	} catch (error) {
+		console.error(error);
+	}
+
 	function calculateSubtotal() {
-		let subtotal = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+		let subtotal = denormalizedData.reduce((total, item) => total + item.totalItemPrice, 0);
 		return subtotal;
 	}
 
@@ -16,41 +29,55 @@
 </script>
 
 <div class="cart" in:fade>
-	<h1>My Cart</h1>
-	{#each cartItems as item (item.id)}
-		<div class="cart-item">
-			<img src={item.imageUrl} alt={item.name} />
-			<div class="item-details">
-				<h2>{item.name}</h2>
-				<p>{item.details}</p>
-				<div class="quantity-selector">
-					<button on:click={() => (item.quantity = Math.max(1, item.quantity - 1))}>
-						<ion-icon name="remove" />
-					</button>
-					<span class="quantity">{item.quantity}</span>
-					<button on:click={() => (item.quantity += 1)}>
-						<ion-icon name="add" />
-					</button>
+	{#if denormalizedData.length > 0}
+		<h1>My Cart</h1>
+		{#each denormalizedData as item (item.productId)}
+			<div class="cart-item">
+				<a href="{baseRoute}/catalog/products/{item.href}" class="imageLink">
+					<img src="{baseImageRoute}/{item.imageSrc}" alt={item.name} />
+				</a>
+				<div class="item-details">
+					<a href="{baseRoute}/catalog/products/{item.href}">
+						<h2>{item.name}</h2>
+					</a>
+					<p>Price: {item.price}</p>
+					<div class="quantity-selector">
+						<button on:click={() => (item.quantity = Math.max(1, item.quantity - 1))}>
+							<ion-icon name="remove" />
+						</button>
+						<span class="quantity">{item.quantity}</span>
+						<button on:click={() => (item.quantity += 1)}>
+							<ion-icon name="add" />
+						</button>
+					</div>
+				</div>
+				<div class="cartRight">
+					<div class="item-price">
+						<span><strong>Total:</strong></span>
+						<span>${item.totalItemPrice.toFixed(2)}</span>
+					</div>
 				</div>
 			</div>
-			<div class="cartRight">
-				<div class="item-price">
-					${item.price.toFixed(2)}
-				</div>
-			</div>
-		</div>
-	{/each}
+		{/each}
 
-	<div class="promo-code">
-		<input type="text" bind:value={promoCode} placeholder="Enter your promo code" />
-		<button>Validate</button>
-	</div>
-	<div class="pricing">
-		<div>Sub Total: ${calculateSubtotal().toFixed(2)}</div>
-		<div>Delivery Fee: ${deliveryFee.toFixed(2)}</div>
-		<div>Total Amount: ${calculateTotal().toFixed(2)}</div>
-	</div>
-	<a href="{baseRoute}/checkout" class="checkout-button">CHECKOUT</a>
+		<div class="promo-code">
+			<input type="text" bind:value={promoCode} placeholder="Enter your promo code" />
+			<button>Validate</button>
+		</div>
+		<div class="pricing">
+			<div>Sub Total: ${calculateSubtotal().toFixed(2)}</div>
+			<div>Delivery Fee: ${deliveryFee.toFixed(2)}</div>
+			<div>Total Amount: ${calculateTotal().toFixed(2)}</div>
+		</div>
+		<a href="{baseRoute}/checkout" class="checkout-button">CHECKOUT</a>
+	{:else}
+		<div class="emptyCart">
+			<ion-icon name="bag-remove" />
+			<h1>Your cart is empty</h1>
+			<p>Looks like you haven't made your choice yet...</p>
+			<a class="button exploreButton" href="{baseRoute}/catalog">Explore our catalog</a>
+		</div>
+	{/if}
 </div>
 
 <svelte:head>
@@ -64,7 +91,8 @@
 <style>
 	.cart {
 		max-width: 800px;
-		margin: 6rem auto;
+		min-height: 100%;
+		margin: 6rem auto 3rem;
 		padding: 0 1.25rem;
 		border-radius: 8px;
 	}
@@ -80,10 +108,13 @@
 		padding: 2rem 0;
 	}
 
+	.imageLink {
+		margin-right: 15px;
+	}
+
 	.cart-item img {
 		width: 100px;
 		height: auto;
-		margin-right: 15px;
 		border-radius: 4px;
 	}
 
@@ -93,13 +124,13 @@
 
 	.item-details h2 {
 		margin: 0;
-		font-size: 16px;
+		font-size: 1.1em;
 		color: var(--content-9);
 	}
 
 	.item-details p {
 		margin: 5px 0;
-		font-size: 14px;
+		font-size: 1em;
 		color: var(--content);
 	}
 
@@ -107,7 +138,6 @@
 		display: grid;
 		gap: 0.5rem;
 		margin-left: 1rem;
-		align-self: end;
 	}
 
 	.quantity-selector {
@@ -145,11 +175,13 @@
 
 	.quantity {
 		margin: 0 10px;
-		font-size: 1rem;
+		font-size: 1em;
 	}
 
 	.item-price {
-		font-size: 18px;
+		display: grid;
+		font-size: 1.1em;
+		text-align: end;
 	}
 
 	.promo-code {
@@ -197,5 +229,53 @@
 		font-weight: bold;
 		cursor: pointer;
 		border-radius: 4px;
+	}
+
+	.emptyCart {
+		display: grid;
+		place-content: center;
+		place-items: center;
+		gap: 0.5rem;
+		min-height: 50vh;
+	}
+
+	.emptyCart h1 {
+		text-transform: capitalize;
+	}
+
+	.emptyCart p {
+		font-size: 1.1rem;
+		text-align: center;
+	}
+
+	.emptyCart a {
+		text-transform: capitalize;
+		font-size: 1.05rem;
+		color: var(--main);
+		margin-top: 1rem;
+		padding: 0.5em 1em;
+	}
+
+	.emptyCart ion-icon {
+		font-size: 3rem;
+		color: var(--interactive);
+		margin: 0 auto 20px;
+		animation: bounce 1.5s infinite;
+	}
+
+	@keyframes bounce {
+		0%,
+		20%,
+		50%,
+		80%,
+		100% {
+			transform: translateY(0);
+		}
+		40% {
+			transform: translateY(-25px);
+		}
+		60% {
+			transform: translateY(-15px);
+		}
 	}
 </style>

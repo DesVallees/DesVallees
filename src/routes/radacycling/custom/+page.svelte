@@ -1,5 +1,7 @@
 <script>
+	import { fade } from 'svelte/transition';
 	import { baseImageRoute } from '../stores';
+	import CustomOverview from '../components/customOverview.svelte';
 
 	// Svelte component script space
 	let email = '';
@@ -14,7 +16,15 @@
 	};
 </script>
 
-<main>
+<svelte:head>
+	<title>Custom | RADA Cycling Wear</title>
+	<meta
+		name="description"
+		content="Discover custom cycling wear crafted to perfection at Rada Cycling Wear. Connect with us to personalize your cycling uniforms with unparalleled quality and design. Experience the blend of innovation and comfort tailored just for you. Start your custom journey today!"
+	/>
+</svelte:head>
+
+<main in:fade>
 	<header>
 		<picture>
 			<source srcset="{baseImageRoute}/demo/man-small.webp" media="(max-width: 650px)" />
@@ -28,6 +38,7 @@
 		<p>
 			If you're looking to get custom-designed cycling uniforms, you're in the right place!
 			Please fill out the form below or email us directly at <a
+				class="mailLink"
 				href="mailto:contact@radacyclingwear.com">contact@radacyclingwear.com</a
 			>.
 		</p>
@@ -52,7 +63,7 @@
 		</form>
 	</section>
 
-	<section id="why-us">
+	<section id="why-us" class="scrollScale">
 		<h2>Why Choose RADA Cycling Wear?</h2>
 		<p>
 			We understand the importance of comfort, performance, and style in cycling uniforms.
@@ -65,15 +76,7 @@
 		</ul>
 	</section>
 
-	<section id="gallery">
-		<h2>Some Of Our Work</h2>
-		<div>
-			<!-- Placeholder images representing previous work -->
-			<img src="{baseImageRoute}/demo/woman-small.webp" alt="Custom Design 1" />
-			<img src="{baseImageRoute}/demo/man-small.webp" alt="Custom Design 2" />
-			<img src="{baseImageRoute}/demo/amsterdam-small.webp" alt="Custom Design 3" />
-		</div>
-	</section>
+	<CustomOverview />
 </main>
 
 <style>
@@ -90,12 +93,15 @@
 		text-align: center;
 	}
 
+	.mailLink {
+		color: darkred;
+	}
+
 	p {
 		margin-bottom: 2rem;
 		line-height: 1.6;
 	}
 
-	/* Header */
 	header {
 		position: relative;
 		text-align: center;
@@ -127,12 +133,10 @@
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Improves legibility */
 	}
 
-	/* Sections */
 	section {
 		padding: 3.5em 2rem;
 	}
 
-	/* Form Styles */
 	form {
 		display: flex;
 		flex-direction: column;
@@ -159,7 +163,6 @@
 		outline: none;
 	}
 
-	/* Button */
 	button {
 		background-color: darkred;
 		color: white;
@@ -175,34 +178,11 @@
 		background-color: #b30000;
 	}
 
-	/* Why us */
-
 	li {
-		list-style-position: inside;
+		margin-left: 2ch;
 		margin-bottom: 1rem;
 	}
 
-	/* Gallery */
-	#gallery div {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 20px;
-	}
-
-	#gallery img {
-		border: 3px solid darkred;
-		border-radius: 5px;
-		transition: transform 0.3s ease;
-		width: 100%;
-		max-width: 300px;
-	}
-
-	#gallery img:hover {
-		transform: scale(1.05);
-	}
-
-	/* Responsive Design */
 	@media (max-width: 650px) {
 		header h1 {
 			font-size: 2em;

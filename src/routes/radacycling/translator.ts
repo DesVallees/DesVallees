@@ -45,6 +45,10 @@ export const translator = {
         catalogSlogan: "Gear Up, Stand Out, Ride On.",
         discount: "off",
         addToCart: "Add to Cart",
+        custom: "Custom",
+        mens: "Men",
+        womens: "Women",
+        selectedOption: "Selected Option"
     },
     es: {
         comingSoon: 'Próximamente',
@@ -92,5 +96,9 @@ export const translator = {
         catalogSlogan: "Viste para Impresionar, Pedalea para Triunfar.",
         discount: "de descuento",
         addToCart: "Añadir al carrito",
+        custom: "Custom",
+        mens: "Hombres",
+        womens: "Mujeres",
+        selectedOption: "Opción seleccionada"
     },
 };

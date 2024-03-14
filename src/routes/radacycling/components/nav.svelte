@@ -1,11 +1,41 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { baseRoute, dictionary } from '../stores';
+	import toast from 'svelte-french-toast';
+	import {
+		findCatalogCategoryByName,
+		type CatalogCategory,
+		denormalizeCatalogCategory,
+		featuredCategories,
+	} from '../mockDb';
+	import { baseImageRoute, baseRoute, dictionary } from '../stores';
 	import ChangeLanguage from './changeLanguage.svelte';
 	import Logo from './logo.svelte';
 	import SNav from './sNav.svelte';
+	import { blur, fade } from 'svelte/transition';
+	import { clickOutsideOrChild } from '../functions';
 
 	let active: boolean = false;
+
+	export let isCatalogMenuVisible: boolean = false;
+	let catalogMenu: CatalogCategory | undefined;
+	let lastMenuOpened = '';
+	function openCatalogMenu(menu: string) {
+		// Get menu information.
+		catalogMenu = findCatalogCategoryByName(menu);
+		if (catalogMenu) {
+			catalogMenu = denormalizeCatalogCategory(catalogMenu);
+		} else {
+			toast.error(`There has been an error opening the "${menu}" menu.`);
+		}
+
+		if (lastMenuOpened === menu && isCatalogMenuVisible) {
+			isCatalogMenuVisible = false;
+			lastMenuOpened = '';
+		} else {
+			isCatalogMenuVisible = true;
+			lastMenuOpened = menu;
+		}
+	}
 </script>
 
 <nav>
@@ -20,7 +50,9 @@
 		</button>
 
 		<a class="x" href={baseRoute} aria-label={$dictionary.homepage}>
-			<Logo />
+			{#key isCatalogMenuVisible}
+				<Logo version={isCatalogMenuVisible ? 'dark' : 'light'} />
+			{/key}
 		</a>
 	</section>
 
@@ -29,15 +61,20 @@
 			<a class="link" class:active={$page.url.pathname === `${baseRoute}`} href={baseRoute}
 				>{$dictionary.home}</a
 			>
-			<a
+			<button
 				class="link"
-				class:active={$page.url.pathname === `${baseRoute}/catalog`}
-				href="{baseRoute}/catalog">{$dictionary.catalog}</a
+				class:active={lastMenuOpened === 'men'}
+				on:click={() => openCatalogMenu('men')}>{$dictionary.mens}</button
+			>
+			<button
+				class="link"
+				class:active={lastMenuOpened === 'women'}
+				on:click={() => openCatalogMenu('women')}>{$dictionary.womens}</button
 			>
 			<a
 				class="link"
-				class:active={$page.url.pathname === `${baseRoute}/contact`}
-				href="{baseRoute}/contact">{$dictionary.contactUs}</a
+				class:active={$page.url.pathname === `${baseRoute}/custom`}
+				href="{baseRoute}/custom">{$dictionary.custom}</a
 			>
 			<a
 				class="link"
@@ -52,9 +89,9 @@
 	</div>
 
 	<section class="buttons">
-		<button class="baseButton x">
+		<!-- <button class="baseButton x">
 			<ion-icon name="search-outline" />
-		</button>
+		</button> -->
 		<a
 			href="{baseRoute}/my-account"
 			class="baseButton x"
@@ -71,10 +108,58 @@
 		>
 			<ion-icon name="cart-outline" />
 		</a>
-		<button class="baseButton x">
+		<!-- <button class="baseButton x">
 			<ion-icon name="settings-outline" />
-		</button>
+		</button> -->
 	</section>
+
+	{#if isCatalogMenuVisible && catalogMenu}
+		{#key catalogMenu}
+			<div
+				class="x catalogMenu"
+				on:outside={() => {
+					isCatalogMenuVisible = false;
+					lastMenuOpened = '';
+				}}
+				use:clickOutsideOrChild
+				out:fade
+			>
+				{#each catalogMenu.sections as section}
+					<div class="catalogMenuSection">
+						<h2>{section.name}</h2>
+						<div class="catalogMenuLinks">
+							{#if section.categories}
+								{#each section.categories as category}
+									<a
+										class="link"
+										href="{baseRoute}/catalog/{category.href}/{category.genderSpecific
+											? lastMenuOpened
+											: ''}">{category.name}</a
+									>
+								{/each}
+							{/if}
+						</div>
+					</div>
+				{/each}
+				<div class="featuredSection">
+					<a
+						href="{baseRoute}/catalog/{catalogMenu.featuredCategory?.href}/{catalogMenu
+							.featuredCategory?.genderSpecific
+							? lastMenuOpened
+							: ''}"
+						aria-label={catalogMenu.featuredCategory?.name}
+						class="featuredSectionLink"
+					>
+						<img
+							src="{baseImageRoute}/{catalogMenu.featuredCategory?.imageSrc}"
+							alt={catalogMenu.featuredCategory?.imageAlt}
+						/>
+						<h2>{catalogMenu.featuredCategory?.name}</h2>
+					</a>
+				</div>
+			</div>
+		{/key}
+	{/if}
 </nav>
 
 <SNav bind:active />
@@ -90,6 +175,85 @@
 
 		padding: 0.5rem 1rem;
 		width: 100%;
+	}
+
+	.catalogMenu {
+		position: absolute;
+		top: 100%;
+		left: 0;
+
+		background-color: var(--main);
+		color: var(--content);
+		box-shadow: 0 10px 15px -2px var(--content-2), 0 5px 10px -4px var(--content-1);
+
+		display: flex;
+		width: 100%;
+
+		opacity: 0;
+		animation: fade 0.4s forwards;
+	}
+
+	@keyframes fade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.catalogMenu > * {
+		flex: 1;
+	}
+
+	.catalogMenuSection {
+		border: 0.5px solid var(--content-2);
+		padding: clamp(1rem, 4vw, 2.5rem);
+	}
+
+	.catalogMenuSection h2 {
+		text-transform: uppercase;
+		margin-bottom: 1rem;
+	}
+
+	.catalogMenuLinks {
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.catalogMenuLinks a {
+		text-transform: capitalize;
+		font-size: 1.1rem;
+		font-weight: normal;
+	}
+
+	.featuredSectionLink {
+		width: 100%;
+		height: 100%;
+
+		display: grid;
+		grid-template-rows: repeat(2, 1fr);
+	}
+
+	.featuredSectionLink > * {
+		grid-column: 1 / -1;
+		grid-row: 1 / -1;
+	}
+
+	.featuredSectionLink img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.featuredSectionLink h2 {
+		filter: drop-shadow(3px 3px 0.5rem var(--content-8));
+		text-transform: uppercase;
+
+		padding: clamp(1rem, 4vw, 2rem);
+		color: var(--main);
+
+		z-index: 1;
 	}
 
 	a {
@@ -115,8 +279,12 @@
 	}
 
 	.links {
-		font-size: 1.15rem;
 		gap: 3rem;
+	}
+
+	.link {
+		font-size: 1rem;
+		text-transform: uppercase;
 	}
 
 	.buttons {
@@ -130,7 +298,7 @@
 		}
 	}
 
-	@media screen and (min-width: 70rem) {
+	@media screen and (min-width: 75rem) {
 		.x {
 			display: flex;
 		}

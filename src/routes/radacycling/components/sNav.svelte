@@ -1,32 +1,36 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { slide } from 'svelte/transition';
-	import { baseRoute, dictionary } from '../stores';
+	import { fly, slide } from 'svelte/transition';
+	import { baseRoute, dictionary, activeSNavMenu } from '../stores';
 	import Base from './base.svelte';
 	import { sleep } from '../functions';
 	import { goto } from '$app/navigation';
 	import Logo from './logo.svelte';
+	import { mainMenu } from '../mockDb';
 
 	export let active: boolean = false;
 
 	let firstFocusableElement: HTMLAnchorElement;
 	let lastFocusableElement: HTMLButtonElement;
 
-	let activeMenu: string | undefined;
-
-	function toggleMenu(value: string) {
-		activeMenu === value ? (activeMenu = undefined) : (activeMenu = value);
-	}
+	$activeSNavMenu = mainMenu;
 
 	async function linkBehaviour(href: string) {
 		active = false;
 
 		await sleep(2);
 		goto(href);
+
+		$activeSNavMenu = mainMenu;
 	}
 </script>
 
-<Base bind:active {firstFocusableElement} {lastFocusableElement}>
+<Base
+	bind:active
+	{firstFocusableElement}
+	{lastFocusableElement}
+	style="background-color: var(--content-4)"
+>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 	<nav on:click|stopPropagation transition:slide|global={{ duration: 200, axis: 'x' }}>
@@ -41,55 +45,29 @@
 				<Logo version="dark" />
 			</a>
 
-			<a
-				href={baseRoute}
-				on:click|preventDefault={() => linkBehaviour(`${baseRoute}`)}
-				class="baseButton"
-				class:active={$page.url.pathname === `${baseRoute}`}
-			>
-				<ion-icon name="home" />
-				{$dictionary.home}
-			</a>
-
-			<a
-				href="{baseRoute}/catalog"
-				on:click|preventDefault={() => linkBehaviour(`${baseRoute}/catalog`)}
-				class="baseButton"
-				class:active={$page.url.pathname === `${baseRoute}/catalog`}
-			>
-				<ion-icon name="grid" />
-				{$dictionary.catalog}
-			</a>
-
-			<a
-				href="{baseRoute}/contact"
-				on:click|preventDefault={() => linkBehaviour(`${baseRoute}/contact`)}
-				class="baseButton"
-				class:active={$page.url.pathname === `${baseRoute}/contact`}
-			>
-				<ion-icon name="mail" />
-				{$dictionary.contactUs}
-			</a>
-
-			<a
-				href="{baseRoute}/our-work"
-				on:click|preventDefault={() => linkBehaviour(`${baseRoute}/our-work`)}
-				class="baseButton"
-				class:active={$page.url.pathname === `${baseRoute}/our-work`}
-			>
-				<ion-icon name="people" />
-				{$dictionary.ourWork}
-			</a>
-
-			<a
-				href="{baseRoute}/my-account"
-				on:click|preventDefault={() => linkBehaviour(`${baseRoute}/my-account`)}
-				class="baseButton"
-				class:active={$page.url.pathname === `${baseRoute}/my-account`}
-			>
-				<ion-icon name="person-circle" />
-				{$dictionary.myAccount}
-			</a>
+			{#key $activeSNavMenu}
+				{#if $activeSNavMenu}
+					{#each $activeSNavMenu as item, index}
+						<a
+							href={item.href}
+							on:click|preventDefault={item.href
+								? () => (item.href ? linkBehaviour(item.href) : '')
+								: item.callback}
+							class="dynamicLink {item.classname || 'baseButton'}"
+							class:active={$page.url.pathname === item.href}
+							style="animation-delay: {index * 75}ms;"
+						>
+							{#if item.icon}
+								<ion-icon name={item.icon} style={item.iconStyle} />
+							{/if}
+							{item.name}
+							{#if !item.href}
+								<ion-icon class="notLinkArrowIcon" name="chevron-forward" />
+							{/if}
+						</a>
+					{/each}
+				{/if}
+			{/key}
 		</div>
 
 		<div>
@@ -118,6 +96,57 @@
 </Base>
 
 <style>
+	.dynamicLink {
+		translate: -100px;
+		opacity: 0;
+		animation: fly 0.5s forwards;
+
+		text-transform: capitalize;
+	}
+
+	.extraSpaceLink {
+		margin-bottom: 0.5rem;
+	}
+
+	.backButton {
+		position: relative;
+		margin-bottom: 3rem;
+	}
+
+	.backButton::after {
+		content: '';
+		position: absolute;
+		bottom: -2rem;
+		left: 0;
+
+		width: 100%;
+		height: 1px;
+		border-radius: 5px;
+
+		background-color: var(--content);
+	}
+
+	.backButton ion-icon {
+		rotate: 180deg;
+	}
+
+	.notLinkArrowIcon {
+		margin-left: auto;
+		font-size: 1.4em;
+	}
+
+	@keyframes fly {
+		from {
+			translate: -100px 0;
+			opacity: 0;
+		}
+
+		to {
+			translate: 0;
+			opacity: 1;
+		}
+	}
+
 	nav {
 		position: fixed;
 		top: 0;
@@ -145,7 +174,7 @@
 	div {
 		width: 100%;
 		display: grid;
-		row-gap: 1.5rem;
+		row-gap: 1rem;
 	}
 
 	.baseButton {
@@ -181,7 +210,7 @@
 		}
 
 		.baseButton {
-			font-size: 1.05rem;
+			font-size: 1rem;
 			padding: 0.5em 0.75em;
 		}
 	}

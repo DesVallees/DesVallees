@@ -7,6 +7,7 @@
 	export let firstFocusableElement: HTMLElement;
 	export let lastFocusableElement: HTMLElement;
 	export let active: boolean = true;
+	export let style: string = '';
 
 	function focusFirstElement() {
 		if (firstFocusableElement) {
@@ -46,6 +47,7 @@
 		in:fade|global={{ duration: 100 }}
 		out:fade|global={{ duration: 100, delay: 100 }}
 		on:click={() => (active = false)}
+		{style}
 	>
 		<button style="position: absolute; opacity: 0;" on:focus={focusLastElement} />
 

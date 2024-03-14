@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { baseImageRoute, baseRoute, dictionary } from '../stores';
-	import { cartItems, deliveryFee } from '../mockDb';
+	import { baseImageRoute, baseRoute, cartItems, dictionary } from '../stores';
+	import {
+		deliveryFee,
+		denormalizeCartItems,
+		storage,
+		type DenormalizedCartItem,
+	} from '../mockDb';
 
 	const demoProductAPI = 'price_1OeSVfH1JOQComXCKyj7cG5z';
 	let demoCartItems = [
@@ -69,11 +74,22 @@
 			});
 	}
 
-	// Calculate the total price of the cart
-	const getSubtotal = () =>
-		cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+	let denormalizedData: DenormalizedCartItem[];
 
-	const getTotal = () => getSubtotal() + deliveryFee;
+	try {
+		denormalizedData = denormalizeCartItems($cartItems, storage);
+	} catch (error) {
+		console.error(error);
+	}
+
+	function calculateSubtotal() {
+		let subtotal = denormalizedData.reduce((total, item) => total + item.totalItemPrice, 0);
+		return subtotal;
+	}
+
+	const calculateTotal = () => {
+		return calculateSubtotal() + deliveryFee;
+	};
 
 	// Function to validate phone number
 	function validatePhoneNumber(phone: string): boolean {
@@ -92,15 +108,6 @@
 	{#if mcDo}
 		<div class="mcDo">
 			<h2>You might be interested in:</h2>
-			<div class="extra">
-				<img src={`${baseImageRoute}/Resources/Jersey2024RedBig.webp`} alt="Hola lola" />
-
-				<button>
-					I want it!
-					<ion-icon name="add" />
-				</button>
-			</div>
-
 			<div class="extra">
 				<img src={`${baseImageRoute}/Resources/Jersey2024RedBig.webp`} alt="Hola lola" />
 
@@ -130,13 +137,13 @@
 			</div>
 
 			<div class="cart-items">
-				{#each cartItems as item}
+				{#each denormalizedData as item}
 					<div class="cart-item">
-						<img src={item.imageUrl} alt={item.name} />
+						<img src="{baseImageRoute}/{item.imageSrc}" alt={item.name} />
 						<div class="item-details">
-							<p>{item.name}</p>
+							<p><strong>{item.name}</strong></p>
 							<p>Quantity: {item.quantity}</p>
-							<p>Price: ${item.price.toFixed(2)}</p>
+							<p>Total Price: ${item.totalItemPrice.toFixed(2)}</p>
 						</div>
 					</div>
 				{/each}
@@ -145,7 +152,7 @@
 			<div class="totals">
 				<div>
 					<h2>Sub Total</h2>
-					<span class="value">${getSubtotal().toFixed(2)}</span>
+					<span class="value">${calculateSubtotal().toFixed(2)}</span>
 				</div>
 				<div>
 					<h2>Delivery Fee</h2>
@@ -153,7 +160,7 @@
 				</div>
 				<div>
 					<h2>Total Amount</h2>
-					<span class="value">${getTotal().toFixed(2)}</span>
+					<span class="value">${calculateTotal().toFixed(2)}</span>
 				</div>
 			</div>
 

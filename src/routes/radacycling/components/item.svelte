@@ -9,8 +9,8 @@
 	export let href: string;
 </script>
 
-<a href="{baseRoute}/catalog/{href}" class="item">
-	<img src="{baseImageRoute}/Resources/{imageSrc}" alt={imageAlt} />
+<a href="{baseRoute}/catalog/products/{href}" class="item">
+	<img src="{baseImageRoute}/{imageSrc}" alt={imageAlt} />
 	<div class="details">
 		<h2>{name}</h2>
 		{#if oldPrice}

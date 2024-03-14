@@ -1,36 +1,19 @@
 <script lang="ts">
 	import Product from './product.svelte';
+	import type { Product as ProductType } from '../mockDb';
 
 	export let title: string = '';
 	export let style: string = '';
 	export let carouselAutoColumns: string = 'calc(25% - var(--gap, 2.5rem))';
 
-	type Product = {
-		name: string;
-		imageSrc: string;
-		imgHoverSrc: string | undefined;
-		imageAlt: string;
-		price: string;
-		oldPrice: string | undefined;
-		versions: Version[] | undefined;
-		href: string;
-	};
-
-	type Version = {
-		imageSrc: string;
-		imgHoverSrc: string | undefined;
-		imageAlt: string;
-		hrefParam: string;
-	};
-
-	export let products: Product[];
+	export let products: ProductType[];
 </script>
 
 <section {style}>
 	<h2>{title}</h2>
 	<div style="--columns: {carouselAutoColumns}" class="modernScrollbar">
 		{#each products as item}
-			<Product {...item} />
+			<Product product={item} />
 		{/each}
 	</div>
 </section>

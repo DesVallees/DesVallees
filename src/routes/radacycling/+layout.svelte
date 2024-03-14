@@ -9,6 +9,7 @@
 	import Footer from './components/footer.svelte';
 	import Preloader from './components/preloader.svelte';
 	import { Toaster } from 'svelte-french-toast';
+	import Countdown from './components/countdown.svelte';
 
 	let disappearAndAppear: boolean = false;
 
@@ -38,6 +39,8 @@
 			}
 		};
 	});
+
+	let isCatalogMenuVisible: boolean = false;
 </script>
 
 <svelte:head>
@@ -46,10 +49,15 @@
 </svelte:head>
 
 <Toaster />
+<!-- <Countdown /> -->
 
 <div class:disappearAndAppear>
-	<header>
-		<Nav />
+	<header
+		style={isCatalogMenuVisible
+			? 'color: var(--content); background-color: var(--main);'
+			: 'background-color: var(--content-5); color: var(--main);'}
+	>
+		<Nav bind:isCatalogMenuVisible />
 	</header>
 
 	<main bind:this={mainContent}>
@@ -86,7 +94,7 @@
 		color: var(--main);
 		backdrop-filter: blur(8px);
 		-webkit-backdrop-filter: blur(8px);
-		transition: background-color 0.5s;
+		transition: background-color 0.3s;
 	}
 
 	main {

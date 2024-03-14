@@ -1,27 +1,531 @@
-import { baseImageRoute } from "./stores"
+import toast from "svelte-french-toast";
+import { activeSNavMenu, baseRoute, type CartItem, cartItems, dictionary } from "./stores"
+import { get } from 'svelte/store';
+
+let storedDictionary = get(dictionary)
 
 // Categories
-type Cat = {
+export type Category = {
     id: number
+
     imageSrc: string;
+    smallImageSrc?: string;
     imageAlt: string;
+
     name: string;
+    description?: string;
+    href: string;
+
+    genderSpecific?: boolean;
 };
 
-export let categories: Cat[] = [
+type CatalogSection = {
+    name: string;
+    categoryIds: number[];
+    categories?: Category[]; // Optional, will be filled by denormalize function
+};
+
+
+export type CatalogCategory = {
+    name: string;
+    featuredCategoryId: number;
+    featuredCategory?: Category; // Optional, will be filled by the denormalize function
+    sections: CatalogSection[];
+}
+
+
+export let featuredCategories: number[] = [7, 15]
+
+export let categories: Category[] = [
     {
         id: 0,
-        imageSrc: 'demo/category_man.webp',
-        imageAlt: 'Products For Men',
-        name: 'Men',
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cyclist wearing a short sleeve jersey",
+        name: "Short Sleeve Jerseys",
+        description: "Experience unparalleled comfort and aerodynamic performance with our short sleeve jerseys. Designed for the heat of competition and the freedom of the open road.",
+        href: "short-sleeve-jerseys",
+        genderSpecific: true,
     },
     {
         id: 1,
-        imageSrc: 'demo/category_woman.webp',
-        imageAlt: 'Products For Women',
-        name: 'Women',
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cyclist wearing a long sleeve jersey",
+        name: "Long Sleeve Jerseys",
+        description: "Gear up for cooler rides with our long sleeve jerseys. Offering extra protection without sacrificing breathability or comfort.",
+        href: "long-sleeve-jerseys",
+        genderSpecific: true,
+    },
+    {
+        id: 2,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cyclist with cycling bib shorts",
+        name: "Bibs",
+        description: "Elevate your ride with our cycling bibs. Engineered for long-lasting comfort and support, ensuring you stay focused on the ride ahead.",
+        href: "bibs",
+        genderSpecific: true,
+    },
+    {
+        id: 3,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Casual shirt for cyclists",
+        name: "Shirts",
+        description: "Discover our range of casual cycling shirts, blending style and functionality. Perfect for the café stop or the commute.",
+        href: "shirts",
+        genderSpecific: true,
+    },
+    {
+        id: 4,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cyclist wearing cycling shorts",
+        name: "Shorts",
+        description: "Find your perfect fit with our cycling shorts, designed for ultimate comfort and durability, mile after mile.",
+        href: "shorts",
+        genderSpecific: true,
+    },
+    {
+        id: 5,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cyclist wearing a jacket",
+        name: "Jackets & Vests",
+        description: "Brave the elements with our jackets and vests. From windproof to waterproof, layer up in style without compromising on performance.",
+        href: "jackets-vests",
+        genderSpecific: true,
+    },
+    {
+        id: 6,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cycling accessories",
+        name: "Accessories",
+        description: "Complete your kit with our cycling accessories. Everything you need from gloves to caps, ensuring every ride is a great one.",
+        href: "accessories",
+        genderSpecific: true,
+    },
+    {
+        id: 7,
+        imageSrc: "demo/category_man.webp",
+        smallImageSrc: "demo/man-small.webp",
+        imageAlt: "Complete collection of men's cycling wear",
+        name: "Men",
+        description: "Discover our comprehensive collection of men's cycling wear. Tailored for performance, comfort, and style.",
+        href: "men",
+        genderSpecific: false,
+    },
+    {
+        id: 8,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cycling wear for hot conditions",
+        name: "Hot",
+        description: "Embrace summer with garments designed to keep you cool and comfortable when it’s scorching. Crafted with breathable fabrics for optimal ventilation, and that wick sweat away.",
+        href: "hot-conditions",
+        genderSpecific: true,
+    },
+    {
+        id: 9,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cycling wear for cold conditions",
+        name: "Cold",
+        description: "Conquer the cold with our cycling wear designed for chilly rides. Stay warm without the bulk, thanks to innovative thermal technologies and layering solutions.",
+        href: "cold-conditions",
+        genderSpecific: true,
+    },
+    {
+        id: 10,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Cycling wear for wet conditions",
+        name: "Wet",
+        description: "Don’t let rain stop your ride. Our wet conditions gear is waterproof and breathable, keeping you dry and comfortable in any downpour.",
+        href: "wet-conditions",
+        genderSpecific: true,
+    },
+    {
+        id: 11,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Featured basics of cycling wear",
+        name: "Basics",
+        description: "Get started with our essentials. Quality basics that every cyclist needs, from reliable jerseys to versatile shorts.",
+        href: "basics",
+        genderSpecific: true,
+    },
+    {
+        id: 12,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Featured 360-degree range of cycling wear",
+        name: "360",
+        description: "Experience our 360-degree range, where innovation meets the open road. Cutting-edge materials and designs that move with you.",
+        href: "360-range",
+        genderSpecific: true,
+    },
+    {
+        id: 13,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Featured pinnacle series of cycling wear",
+        name: "Pinnacle",
+        description: "Reach the summit with Pinnacle. Our premium line features the best in performance, comfort, and style, for serious cyclists who demand the best.",
+        href: "pinnacle-series",
+        genderSpecific: true,
+    },
+    {
+        id: 14,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "Gift cards for cycling wear",
+        name: "Gift Cards",
+        description: "The perfect gift for the cyclist in your life. Give them the choice with our gift cards, redeemable across our entire range.",
+        href: "gift-cards",
+        genderSpecific: false,
+    },
+    {
+        id: 15,
+        imageSrc: "demo/category_woman.webp",
+        smallImageSrc: "demo/woman-small.webp",
+        imageAlt: "Complete collection of women's cycling wear",
+        name: "Women",
+        description: "Explore our full range of women's cycling wear, designed by women for women. Where comfort meets style, empowering your ride.",
+        href: "women",
+        genderSpecific: false,
+    },
+    {
+        id: 16,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "XS Size Cycling Gear",
+        name: "XS",
+        description: "Discover our selection of XS size cycling gear, perfectly tailored for those who prefer a snug fit. Ideal for maximizing performance and comfort.",
+        href: "size-xs",
+        genderSpecific: false,
+    },
+    {
+        id: 17,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "S Size Cycling Gear",
+        name: "S",
+        description: "Explore our range of S size cycling wear, designed for optimal movement and aerodynamics. Perfect for cyclists who value precision and fit.",
+        href: "size-s",
+        genderSpecific: false,
+    },
+    {
+        id: 18,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "M Size Cycling Gear",
+        name: "M",
+        description: "Browse our collection of M size cycling apparel, offering a balance of comfort and performance for the enthusiastic cyclist.",
+        href: "size-m",
+        genderSpecific: false,
+    },
+    {
+        id: 19,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "L Size Cycling Gear",
+        name: "L",
+        description: "Check out our selection of L size cycling clothing, engineered for durability and freedom of movement. Gear up for any challenge.",
+        href: "size-l",
+        genderSpecific: false,
+    },
+    {
+        id: 20,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "XL Size Cycling Gear",
+        name: "XL",
+        description: "Find your perfect fit with our XL size cycling gear, designed for extra comfort without compromising on performance.",
+        href: "size-xl",
+        genderSpecific: false,
+    },
+    {
+        id: 21,
+        imageSrc: "demo/amsterdam.webp",
+        smallImageSrc: "demo/amsterdam-small.webp",
+        imageAlt: "XXL Size Cycling Gear",
+        name: "XXL",
+        description: "Explore our XXL size cycling wear for superior comfort and style. Ideal for those who seek extra room and ease.",
+        href: "size-xxl",
+        genderSpecific: false,
+    },
+]
+
+export let categoryMenus: CatalogCategory[] = [
+    {
+        name: "men",
+        featuredCategoryId: 7,
+        sections: [
+            {
+                name: "apparel",
+                categoryIds: [
+                    1, 2, 3, 4, 5, 6
+                ]
+            },
+            {
+                name: "conditions",
+                categoryIds: [
+                    8, 9, 10
+                ]
+            },
+            {
+                name: "featured",
+                categoryIds: [
+                    11, 12, 13, 14
+                ]
+            }
+        ]
+    },
+    {
+        name: "women",
+        featuredCategoryId: 15,
+        sections: [
+            {
+                name: "apparel",
+                categoryIds: [
+                    1, 2, 3, 4, 5, 6
+                ]
+            },
+            {
+                name: "conditions",
+                categoryIds: [
+                    8, 9, 10
+                ]
+            },
+            {
+                name: "featured",
+                categoryIds: [
+                    11, 12, 13, 14
+                ]
+            }
+        ]
+    }
+];
+
+export function denormalizeCatalogCategory(catalogCategory: CatalogCategory): CatalogCategory {
+    // Denormalize each section by mapping the category IDs to their full data
+    const denormalizedSections: CatalogSection[] = catalogCategory.sections.map(section => {
+        const denormalizedCategoryIds = section.categoryIds.map(categoryId => {
+            // Find the full category data by its ID
+            const categoryData = categories.find(category => category.id === categoryId);
+            // If the category isn't found (which shouldn't happen), throw an error
+            if (!categoryData) {
+                throw new Error(`Category with ID ${categoryId} not found`);
+            }
+            return categoryData;
+        });
+
+        // Return the section with the denormalized categories included
+        return {
+            ...section,
+            categories: denormalizedCategoryIds
+        };
+    });
+
+    // Find the full category data for the featuredCategoryId
+    const featuredCategory = categories.find(category => category.id === catalogCategory.featuredCategoryId);
+    if (!featuredCategory) {
+        throw new Error(`Featured category with ID ${catalogCategory.featuredCategoryId} not found`);
+    }
+
+    // Construct and return the full denormalized catalog category object
+    return {
+        ...catalogCategory,
+        featuredCategory, // Add the full featuredCategory object
+        sections: denormalizedSections
+    };
+}
+
+export function denormalizeCategories(ids: number[]): Category[] {
+    const denormalizedCategoryIds = ids.map(categoryId => {
+        // Find the full category data by its ID
+        const categoryData = categories.find(category => category.id === categoryId);
+        // If the category isn't found (which shouldn't happen), throw an error
+        if (!categoryData) {
+            throw new Error(`Category with ID ${categoryId} not found`);
+        }
+        return categoryData;
+    });
+
+    // Return an object with the denormalized categories.
+    return denormalizedCategoryIds;
+}
+
+
+export function findCatalogCategoryByName(name: string): CatalogCategory | undefined {
+    return categoryMenus.find(categoryMenu => categoryMenu.name === name);
+}
+
+export function findCatalogSectionByName(sectionName: string): CatalogSection | undefined {
+    // Flatten the array of sections from all categories
+    const allSections: CatalogSection[] = categoryMenus.flatMap(category => category.sections);
+
+    // Find the first section that matches the sectionName
+    const matchingSection = allSections.find(section => section.name === sectionName);
+
+    return matchingSection;
+}
+
+export function findCategoryByHref(href: string): Category | undefined {
+    return categories.find(category => category.href === href);
+}
+
+export function findCategoryById(id: number): Category | undefined {
+    return categories.find(category => category.id === id);
+}
+
+export function getCategoryIdsFromHrefs(hrefs: string[]): number[] {
+    return hrefs.map(href => {
+        const category = findCategoryByHref(href);
+        if (!category) {
+            throw new Error(`Category not found for href: ${href}`);
+        }
+        return category.id;
+    });
+}
+
+export function getCategoryHrefsFromIds(ids: number[]): string[] {
+    return ids.map(id => {
+        const category = findCategoryById(id);
+        if (!category) {
+            throw new Error(`Category not found for id: ${id}`);
+        }
+        return category.href;
+    });
+}
+
+export function getCategoryNamesFromIds(ids: number[]): string[] {
+    return ids.map(id => {
+        const category = findCategoryById(id);
+        if (!category) {
+            throw new Error(`Category not found for id: ${id}`);
+        }
+        return category.name;
+    });
+}
+
+export type MenuItem = {
+    name: string;
+    href?: string;
+    icon?: string;
+    classname?: string;
+    callback?: () => void;
+
+    iconStyle?: string;
+};
+
+export const mainMenu: MenuItem[] = [
+    {
+        name: storedDictionary.home,
+        classname: 'baseButton extraSpaceLink',
+        icon: 'home',
+        href: baseRoute,
+    },
+    {
+        name: storedDictionary.mens,
+        classname: 'baseButton extraSpaceLink',
+        icon: 'man',
+        iconStyle: 'font-size: 2em; margin-left: -8px;',
+        callback: () => generateSectionsMenu('men'),
+    },
+    {
+        name: storedDictionary.womens,
+        classname: 'baseButton extraSpaceLink',
+        icon: 'woman',
+        iconStyle: 'font-size: 2em; margin-left: -8px;',
+        callback: () => generateSectionsMenu(`women`),
+    },
+    {
+        name: storedDictionary.custom,
+        classname: 'baseButton extraSpaceLink',
+        icon: 'mail',
+        href: `${baseRoute}/custom`,
+    },
+    {
+        name: storedDictionary.ourWork,
+        classname: 'baseButton extraSpaceLink',
+        icon: 'people',
+        href: `${baseRoute}/our-work`,
+    },
+    {
+        name: storedDictionary.myAccount,
+        classname: 'baseButton extraSpaceLink',
+        icon: 'person-circle',
+        href: `${baseRoute}/my-account`,
     },
 ];
+
+export function generateSectionsMenu(catalogCategoryName: string): void {
+    const catalogCategory = findCatalogCategoryByName(catalogCategoryName);
+
+    if (!catalogCategory) {
+        console.error(`Catalog category ${catalogCategoryName} not found`);
+        return;
+    }
+
+    const sectionsMenu: MenuItem[] = [
+        {
+            name: catalogCategoryName,
+            classname: "baseButton backButton",
+            callback: () => renderMenu(mainMenu),
+        },
+        ...catalogCategory.sections.map(section => ({
+            name: section.name,
+            callback: () => generateCategoryMenu(section.name, catalogCategory.name),
+        })),
+    ];
+
+    renderMenu(sectionsMenu);
+}
+
+export function generateCategoryMenu(sectionName: string, catalogCategoryName: string): void {
+    // Find the catalog category by name
+    const catalogCategory = findCatalogCategoryByName(catalogCategoryName);
+    if (!catalogCategory) {
+        console.error(`Catalog category ${catalogCategoryName} not found`);
+        return;
+    }
+
+    // Denormalize the catalog category to include category objects
+    const denormalizedCatalogCategory = denormalizeCatalogCategory(catalogCategory);
+
+    // Find the section within the catalog category
+    const section = denormalizedCatalogCategory.sections.find(s => s.name === sectionName);
+    if (!section || !section.categories) {
+        console.error(`Section ${sectionName} not found in catalog category ${catalogCategoryName}`);
+        return;
+    }
+
+    // Map the categories to MenuItem[]
+    const categoryMenu: MenuItem[] = [
+        {
+            name: sectionName,
+            classname: "baseButton backButton",
+            callback: () => generateSectionsMenu(catalogCategoryName),
+        },
+        ...section.categories.map(category => ({
+            name: category.name,
+            href: `${baseRoute}/catalog/${category.href}/${category.genderSpecific
+                ? catalogCategoryName
+                : ''}`,
+        })),
+    ];
+
+    // Render the new menu
+    renderMenu(categoryMenu)
+}
+
+export function renderMenu(menu: MenuItem[]) {
+    activeSNavMenu.set(menu)
+}
 
 
 // Products
@@ -37,8 +541,9 @@ export type Product = {
     oldPrice: string | undefined,
     versions: Version[] | undefined,
     href: string,
+    categoryIds: number[]
 }
-type Version = {
+export type Version = {
     imageSrc: string,
     imgHoverSrc: string | undefined,
     imageAlt: string,
@@ -53,6 +558,7 @@ export let storage: Record<string, Product> = {
     "jersey2024": {
         id: 0,
         name: "Jersey 2024",
+        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 18, 19, 20],
         description: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
         details: [
             { label: 'Material', value: 'High-Quality, Breathable Polyester' },
@@ -63,21 +569,21 @@ export let storage: Record<string, Product> = {
             { label: 'Warranty', value: "1 Year Manufacturer's Warranty" },
             { label: 'Care Instructions', value: 'Machine Washable, Do Not Iron' },
         ],
-        imageSrc: "Jersey2024Red.webp",
-        imgHoverSrc: "Jersey2024RedBig.webp",
+        imageSrc: "Resources/Jersey2024Red.webp",
+        imgHoverSrc: "Resources/Jersey2024RedBig.webp",
         imageAlt: "Red Jersey 2024",
         price: "$89.97",
         oldPrice: "$125.00",
         versions: [
             {
-                imageSrc: "Jersey2024Red.webp",
-                imgHoverSrc: "Jersey2024RedBig.webp",
+                imageSrc: "Resources/Jersey2024Red.webp",
+                imgHoverSrc: "Resources/Jersey2024RedBig.webp",
                 imageAlt: "View Red Jersey 2024",
                 hrefParam: "red",
             },
             {
-                imageSrc: "Jersey2024Blue.webp",
-                imgHoverSrc: "cremalleraJersey.webp",
+                imageSrc: "Resources/Jersey2024Blue.webp",
+                imgHoverSrc: "Resources/cremalleraJersey.webp",
                 imageAlt: "View Blue Jersey 2024",
                 hrefParam: "blue",
             },
@@ -87,6 +593,7 @@ export let storage: Record<string, Product> = {
     "cyclingBib": {
         id: 1,
         name: "Cycling Bib 2024",
+        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 17, 19, 21],
         description: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
         details: [
             { label: 'Material', value: 'Premium Lycra for stretch and comfort' },
@@ -99,21 +606,21 @@ export let storage: Record<string, Product> = {
             { label: 'UV Protection', value: 'UPF 50+ sun protection' },
             { label: 'Care Instructions', value: 'Machine wash cold, hang to dry' },
         ],
-        imageSrc: "CyclingBib2024.webp",
-        imgHoverSrc: "bibFocus.webp",
+        imageSrc: "Resources/CyclingBib2024.webp",
+        imgHoverSrc: "Resources/bibFocus.webp",
         imageAlt: "Cycling Bib 2024",
         price: "$99.97",
         oldPrice: undefined,
         versions: [
             {
-                imageSrc: "CyclingBib2024.webp",
-                imgHoverSrc: "bibFocus.webp",
+                imageSrc: "Resources/CyclingBib2024.webp",
+                imgHoverSrc: "Resources/bibFocus.webp",
                 imageAlt: "View Red Cycling Bib 2024",
                 hrefParam: "red",
             },
             {
-                imageSrc: "CyclingBib2024Blue.webp",
-                imgHoverSrc: "bibFocus.webp",
+                imageSrc: "Resources/CyclingBib2024Blue.webp",
+                imgHoverSrc: "Resources/bibFocus.webp",
                 imageAlt: "View Blue Cycling Bib 2024",
                 hrefParam: "blue",
             },
@@ -123,6 +630,7 @@ export let storage: Record<string, Product> = {
     "bibPlusJerseys": {
         id: 2,
         name: "Bib + Jersey + Free Socks",
+        categoryIds: [0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 15, 19],
         description: "Score the ultimate cycling trio with 'Bib + Jersey + Free Socks'! At just $219.97, enjoy professional-grade comfort and unbeatable style. This exclusive offer bundles sleek aerodynamics, breathability, and a complimentary touch of coziness for your feet. Upgrade your ride in one go!",
         details: [
             { "label": "Material", "value": "Technical Fabric, Moisture-Wicking" },
@@ -136,8 +644,8 @@ export let storage: Record<string, Product> = {
             { "label": "Warranty", "value": "2 Years Manufacturer's Warranty" },
             { "label": "Care Instructions", "value": "Machine Washable, Air Dry Recommended" },
         ],
-        imageSrc: "1BibPlus2Jerseys.webp",
-        imgHoverSrc: "radimir.jpg",
+        imageSrc: "Resources/1BibPlus2Jerseys.webp",
+        imgHoverSrc: "Resources/radimir.jpg",
         imageAlt: "Offer: 1 Bib Plus 1 Jersey Plus Free Socks",
         price: "$219.97",
         oldPrice: "$280.00",
@@ -147,6 +655,7 @@ export let storage: Record<string, Product> = {
     "radaSocks": {
         id: 3,
         name: "RADA Socks",
+        categoryIds: [6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         details: [
             { label: 'Material', value: 'Premium Soft Cotton Blend' },
             { label: 'Size', value: 'One Size Fits Most' },
@@ -157,7 +666,7 @@ export let storage: Record<string, Product> = {
             { label: 'Care Instructions', value: 'Machine Wash Cold, Tumble Dry Low' },
         ],
         description: "Step into comfort with RADA Socks — where coziness meets style. These premium socks hug your feet with softness while offering a snug fit, perfect for any adventure. At just $16.00, they're a steal from their usual $25.00. Upgrade your sock drawer and walk in a cloud of comfort!",
-        imageSrc: "RadaSocks.webp",
+        imageSrc: "Resources/RadaSocks.webp",
         imgHoverSrc: undefined,
         imageAlt: "RADA Socks",
         price: "$16.00",
@@ -166,6 +675,19 @@ export let storage: Record<string, Product> = {
         href: "rada-socks",
     },
 }
+
+export function findProductsByCategoryIds(categoryIds: number[]): Product[] {
+    // Convert the storage object to an array of products
+    const products = Object.values(storage);
+
+    // Filter products that include all of the specified category IDs
+    const matchingProducts = products.filter(product =>
+        categoryIds.every(id => product.categoryIds.includes(id))
+    );
+
+    return matchingProducts;
+}
+
 
 
 //Reviews
@@ -340,37 +862,76 @@ export let reviews: Review[] = [
 
 // Cart
 export let deliveryFee = 8.18;
-export let cartItems = [
-    {
-        id: 1,
-        name: 'Jersey 2024',
-        details: 'Red Jersey 2024',
-        quantity: 1,
-        price: 89.97,
-        imageUrl: `${baseImageRoute}/Resources/Jersey2024RedBig.webp`,
-    },
-    {
-        id: 2,
-        name: 'Cycling Bib 2024',
-        details: 'Cycling Bib 2024',
-        quantity: 1,
-        price: 99.97,
-        imageUrl: `${baseImageRoute}/Resources/bibFocus.webp`,
-    },
-    {
-        id: 3,
-        name: 'Bib + Jersey + Free Socks',
-        details: 'Offer: 1 Bib Plus 1 Jersey Plus Free Socks',
-        quantity: 1,
-        price: 219.97,
-        imageUrl: `${baseImageRoute}/Resources/1BibPlus2Jerseys.webp`,
-    },
-    {
-        id: 4,
-        name: 'RADA Socks',
-        details: 'RADA Socks',
-        quantity: 1,
-        price: 16.00,
-        imageUrl: `${baseImageRoute}/Resources/RadaSocks.webp`,
-    }
-]
+
+
+// Database Interaction Functions
+
+export type DenormalizedCartItem = {
+    productId: number,
+    quantity: number,
+    name: string,
+    imageSrc: string,
+    description: string,
+    price: string,
+    totalItemPrice: number,
+    href: string,
+}
+
+export function denormalizeCartItems(cartItems: CartItem[], storage: Record<string, Product>): DenormalizedCartItem[] {
+    return cartItems.map((item) => {
+        const product = Object.values(storage).find(product => product.id === item.productId);
+        if (!product) {
+            throw new Error(`Product with ID ${item.productId} not found`);
+        }
+        const itemPrice = parseFloat(product.price.replace(/[^0-9.-]+/g, ""));
+        const totalItemPrice = itemPrice * item.quantity;
+
+        return {
+            productId: item.productId,
+            quantity: item.quantity,
+            name: product.name,
+            imageSrc: product.imageSrc,
+            description: product.description,
+            price: product.price,
+            totalItemPrice: totalItemPrice,
+            href: product.href
+        };
+    });
+}
+
+// Adds a product to the cart or updates the quantity if the product already exists.
+export function addToCart(productId: number, quantity: number, name: string): void {
+    cartItems.update(items => {
+        const existingItemIndex = items.findIndex(item => item.productId === productId);
+        if (existingItemIndex !== -1) {
+            // Update quantity of an existing item
+            const updatedItems = [...items];
+            updatedItems[existingItemIndex] = {
+                ...updatedItems[existingItemIndex],
+                quantity,
+            };
+            toast.success("Item quantity has been updated.",
+                {
+                    style:
+                        "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
+                    position: "bottom-center"
+                })
+            return updatedItems;
+        } else {
+            // Add new item to the cart
+            toast.success(`"${name}" has been added to the cart!`,
+                {
+                    style:
+                        "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
+                    position: "bottom-center"
+                })
+            return [...items, { productId, quantity }];
+        }
+    });
+}
+
+export function removeFromCart(productId: number, name: string): void {
+    cartItems.update(items => items.filter(item => item.productId !== productId));
+
+    toast.success(`"${name}" has been removed from the cart.`)
+}

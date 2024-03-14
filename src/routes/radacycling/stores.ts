@@ -1,9 +1,15 @@
 import { derived, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
+import type { MenuItem } from './mockDb';
 
+export const activeSNavMenu: Writable<MenuItem[]> = writable();
 
-
+export let cartItems = writable<CartItem[]>([]);
+export type CartItem = {
+    productId: number,
+    quantity: number,
+}
 
 
 // Base Routes

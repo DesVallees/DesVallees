@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { storage, type Product, categories } from './mockDb';
+	import { storage, type Product, featuredCategories, denormalizeCategories } from './mockDb';
 	import { baseImageRoute, baseRoute, dictionary } from './stores';
 	import Landing from './components/landing.svelte';
 	import Reveal from './components/reveal.svelte';
 	import Category from './components/category.svelte';
 	import Products from './components/products.svelte';
+
+	const categories = denormalizeCategories(featuredCategories);
 
 	let popular: Product[] = [
 		storage.jersey2024,
@@ -40,8 +42,8 @@
 	</section>
 
 	<section class="categories">
-		{#each categories as cat}
-			<Category {...cat} style="flex-grow: 1; flex-basis: 35rem" />
+		{#each categories as category}
+			<Category {category} style="flex-grow: 1; flex-basis: 35rem" />
 		{/each}
 	</section>
 
@@ -51,7 +53,7 @@
 
 	<section class="promotions">
 		<a
-			href="{baseRoute}/catalog/bib-plus-jerseys"
+			href="{baseRoute}/catalog/products/bib-plus-jerseys"
 			class="scrollScale"
 			aria-label="Offer: 1 Bib Plus 2 Jerseys"
 		>
@@ -61,7 +63,7 @@
 			/>
 		</a>
 
-		<a href="{baseRoute}/contact" class="scrollScale" aria-label="Custom RADA Deals">
+		<a href="{baseRoute}/custom" class="scrollScale" aria-label="Custom RADA Deals">
 			<img src="{baseImageRoute}/Resources/radaCustom.png" alt="RADA Custom" />
 		</a>
 	</section>

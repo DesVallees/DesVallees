@@ -1,20 +1,18 @@
 <script lang="ts">
+	import type { Category } from '../mockDb';
 	import { baseImageRoute, baseRoute } from '../stores';
 
 	export let style: string = '';
 
-	export let imageSrc: string;
-	export let imageAlt: string;
-
-	export let name: string;
+	export let category: Category;
 	export let buttonText: string = 'Shop Now';
 </script>
 
 <div class="category" {style}>
-	<img src="{baseImageRoute}/{imageSrc}" alt={imageAlt} class="scrollAppear" />
+	<img src="{baseImageRoute}/{category.imageSrc}" alt={category.imageAlt} class="scrollAppear" />
 	<div class="text">
-		<h2>{name}</h2>
-		<a href="{baseRoute}/catalog?category={name.toLowerCase()}" class="button">{buttonText}</a>
+		<h2>{category.name}</h2>
+		<a href="{baseRoute}/catalog/{category.href}" class="button">{buttonText}</a>
 	</div>
 </div>
 

@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { baseImageRoute, baseRoute, dictionary } from '../../stores';
-	import Products from '../../components/products.svelte';
-	import Review from '../../components/review.svelte';
-	import { storage, type Product, reviews, type Review as ReviewType } from '../../mockDb';
+	import { baseImageRoute, baseRoute, dictionary } from '../../../stores';
+	import Products from '../../../components/products.svelte';
+	import Review from '../../../components/review.svelte';
+	import {
+		storage,
+		type Product,
+		reviews,
+		type Review as ReviewType,
+		addToCart,
+	} from '../../../mockDb';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
@@ -70,9 +76,6 @@
 		if (quantity > 1) quantity -= 1;
 	}
 
-	// Function to handle adding item to cart
-	function addToCart() {}
-
 	type Tab = 'description' | 'details' | 'reviews';
 	let currentTab: Tab = 'description';
 
@@ -84,12 +87,12 @@
 	$: $page.params.productName, setup();
 </script>
 
-{#key $page.params.productName}
-	{#if product}
+{#if product}
+	{#key product}
 		<div class="product-container" in:fade>
 			<div class="image-container">
 				<img
-					src="{baseImageRoute}/Resources/{product.imageSrc}"
+					src="{baseImageRoute}/{product.imageSrc}"
 					alt={product.imageAlt}
 					class="product-image"
 				/>
@@ -155,7 +158,7 @@
 							<p
 								style="margin: 1rem 0 2rem; text-align: center; color: var(--content-8)"
 							>
-								This product has no reviews
+								This product has no reviews.
 							</p>
 						{/if}
 					</div>
@@ -172,7 +175,14 @@
 				</div>
 
 				<div class="actions">
-					<button on:click={addToCart} class="add-to-cart-btn">Add to Cart</button>
+					<button
+						on:click={() => {
+							if (product) addToCart(product.id, quantity, product.name);
+						}}
+						class="add-to-cart-btn"
+					>
+						Add to Cart
+					</button>
 				</div>
 			</div>
 			<div class="similar">
@@ -184,21 +194,18 @@
 				/>
 			</div>
 		</div>
-	{:else}
-		<h1>Product not found.</h1>
-	{/if}
-{/key}
+	{/key}
+{:else}
+	<h1>Product not found.</h1>
+{/if}
 
 <svelte:head>
 	{#if product}
 		<title>{product.name}</title>
+		<meta name="description" content={product.description} />
 	{:else}
 		<title>Product not found.</title>
 	{/if}
-	<meta
-		name="description"
-		content="Unleash your cycling potential with the \'Jersey 2024\'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant blue color ensures visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!"
-	/>
 </svelte:head>
 
 <style>

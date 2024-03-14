@@ -24,22 +24,12 @@
 <div class="catalog" in:fade>
 	<section class="banner">
 		<img
-			src="{baseImageRoute}/demo/catalog.webp"
+			src="{baseImageRoute}/demo/accessories.webp"
 			alt="Cyclist Wearing Rada Cycling Wear Products"
 		/>
 
 		<div class="bannerContent">
 			<h1>{$dictionary.catalogSlogan}</h1>
-		</div>
-	</section>
-
-	<section class="categories catalogPadding">
-		<h2>Popular Categories</h2>
-
-		<div class="hScroller modernScrollbar">
-			{#each categories as item}
-				<CatItem {...item} />
-			{/each}
 		</div>
 	</section>
 
@@ -49,7 +39,7 @@
 
 	<section class="custom catalogPadding">
 		<p>Explore endless possibilities and make a statement that's uniquely yours.</p>
-		<a href="{baseRoute}/contact" aria-label="Custom RADA Deals">
+		<a href="{baseRoute}/custom" aria-label="Custom RADA Deals">
 			<img
 				class="edgyImg"
 				src="{baseImageRoute}/Resources/radaCustom.png"
@@ -72,7 +62,10 @@
 	</section>
 
 	<section class="promotions catalogPadding">
-		<a href="{baseRoute}/catalog/bib-plus-jerseys" aria-label="Offer: 1 Bib Plus 2 Jerseys">
+		<a
+			href="{baseRoute}/catalog/products/bib-plus-jerseys"
+			aria-label="Offer: 1 Bib Plus 2 Jerseys"
+		>
 			<img
 				class="edgyImg"
 				src="{baseImageRoute}/Resources/offer1bib2jerseys.png"
@@ -144,10 +137,6 @@
 		z-index: 1;
 	}
 
-	.categories {
-		display: none;
-	}
-
 	h1 {
 		font-size: clamp(3rem, 8vw, 5rem);
 		line-height: 1.25;
@@ -155,11 +144,11 @@
 		filter: drop-shadow(3px 3px 0.5rem var(--content-8));
 	}
 
-	h2 {
+	/* h2 {
 		font-size: clamp(1.7rem, 4vw, 2.25rem);
 		text-transform: capitalize;
 		margin-bottom: 0.25em;
-	}
+	} */
 
 	p {
 		font-size: clamp(1.5rem, 4vw, 1.75rem);
@@ -177,20 +166,6 @@
 
 	.catalogPadding {
 		padding: 0 clamp(0.5rem, 4vw, 5rem);
-	}
-
-	.hScroller {
-		width: calc(90vw - clamp(0.5rem, 4vw, 5rem));
-		max-width: 100%;
-		margin: 0 auto;
-
-		padding: 0.5rem 0;
-		padding-right: 1.5rem;
-
-		overflow-x: auto;
-
-		display: flex;
-		gap: 1.5rem;
 	}
 
 	.custom,
