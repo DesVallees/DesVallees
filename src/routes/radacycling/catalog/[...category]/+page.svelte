@@ -154,8 +154,12 @@
 	}
 
 	function clearFilters() {
-		selectedSizeIndex = 0;
-		selectedGenderIndex = 0;
+		if (!mainCategory?.sizeAgnostic) {
+			selectedSizeIndex = 0;
+		}
+		if (mainCategory?.genderSpecific) {
+			selectedGenderIndex = 0;
+		}
 		selectedSortIndex = 0;
 
 		filterByGender();
@@ -186,16 +190,20 @@
 		{/if}
 
 		<section class="filters">
-			<Filter
-				on:change={filterByGender}
-				options={genderOptions}
-				bind:optionSelectedIndex={selectedGenderIndex}
-			/>
-			<Filter
-				on:change={filterBySize}
-				options={sizeOptions}
-				bind:optionSelectedIndex={selectedSizeIndex}
-			/>
+			{#if mainCategory?.genderSpecific}
+				<Filter
+					on:change={filterByGender}
+					options={genderOptions}
+					bind:optionSelectedIndex={selectedGenderIndex}
+				/>
+			{/if}
+			{#if !mainCategory?.sizeAgnostic}
+				<Filter
+					on:change={filterBySize}
+					options={sizeOptions}
+					bind:optionSelectedIndex={selectedSizeIndex}
+				/>
+			{/if}
 			<Filter
 				on:change={sortByPrice}
 				options={sortOptions}
@@ -307,8 +315,10 @@
 	}
 
 	.products {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		/* display: flex;
+		flex-wrap: wrap; */
 		justify-content: center;
 		gap: 3em 2em;
 

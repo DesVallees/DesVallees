@@ -1,52 +1,59 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import Logo from '../components/logo.svelte';
-	import { baseRoute } from '../stores';
+	import { baseRoute, dictionary } from '../stores';
+	import toast from 'svelte-french-toast';
 
-	let email = '';
-	let password = '';
-	let errorMessage = '';
-
-	function validateForm() {
-		if (email.trim() === '' || password.trim() === '') {
-			errorMessage = 'Please enter both email and password.';
-			return false;
-		}
-		// Add more specific validation as needed (e.g., format of the email)
-		errorMessage = '';
-		return true;
-	}
-
-	function login() {
-		if (!validateForm()) {
-			return;
-		}
-		// Perform login logic here, e.g., API call to server
-		console.log('Logging in with', email, password);
-		// Reset form fields
-		email = '';
-		password = '';
+	function handleFormSubmission() {
+		toast.error('An error has occurred...', { position: 'bottom-center' });
 	}
 </script>
 
-<div class="account" in:fade>
-	<div class="login-container">
-		<h1>Welcome to Rada Cycling Wear</h1>
-		{#if errorMessage}
-			<p class="error-message">{errorMessage}</p>
-		{/if}
-		<form on:submit|preventDefault={login}>
-			<div class="form-group">
-				<label for="email">Email:</label>
-				<input type="email" id="email" bind:value={email} />
-			</div>
-			<div class="form-group">
-				<label for="password">Password:</label>
-				<input type="password" id="password" bind:value={password} />
-			</div>
-			<button type="submit" class="login-button">Login</button>
-		</form>
-		<a href="{baseRoute}/sign-in" class="link sign-in">Don't have an account? Sign in!</a>
+<div class="logIn" in:fade>
+	<h1>Log in to RADA</h1>
+	<form on:submit|preventDefault={handleFormSubmission}>
+		<div class="inputGroup">
+			<ion-icon name="mail" />
+			<input
+				type="email"
+				placeholder={$dictionary.email}
+				class="ghostButton"
+				required
+				autocapitalize="none"
+				autocorrect="false"
+				spellcheck="false"
+			/>
+		</div>
+		<div class="inputGroup">
+			<ion-icon name="lock-closed" />
+			<input type="password" placeholder="Password" class="ghostButton" required />
+		</div>
+		<button type="button" class="link forgotPassword" on:click={handleFormSubmission}
+			>Forgot Password</button
+		>
+
+		<button type="submit" class="button">Log In</button>
+	</form>
+
+	<hr />
+
+	<button
+		type="button"
+		class="button googleLogIn"
+		aria-label="Log in with Google"
+		on:click={() =>
+			toast.error('Error occurred connecting with Google Authentication System.', {
+				position: 'bottom-center',
+			})}
+	>
+		<ion-icon name="logo-google" />
+		Log in with google
+	</button>
+
+	<hr />
+
+	<div class="align" style="justify-content: center; font-size: 1.05rem;">
+		<p>Don't have an account?</p>
+		<a href="{baseRoute}/sign-in" class="link">Sign In</a>
 	</div>
 </div>
 
@@ -59,77 +66,106 @@
 </svelte:head>
 
 <style>
-	.account {
-		margin: auto;
-		display: grid;
-		place-items: center;
-		place-content: center;
+	.logIn {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		max-width: 420px;
 		min-height: 100%;
-	}
-
-	.login-container {
-		margin: clamp(5rem, 15vw, 8rem) auto;
-		width: 100vw;
-		max-width: 400px;
-		padding: 20px;
-		border: 1px solid #ccc;
-		border-radius: 8px;
-		background-color: #f9f9f9;
-		text-align: center;
-	}
-
-	@media screen and (max-width: 750px) {
-		.login-container {
-			border: none;
-			background-color: transparent;
-		}
+		padding: 6rem 1.5rem;
+		margin: auto;
 	}
 
 	h1 {
-		font-size: 1.5rem;
-		margin-bottom: 1.5rem;
+		text-wrap: balance;
 	}
 
-	.form-group {
-		margin-bottom: 20px;
-		text-align: left;
-	}
+	form {
+		display: grid;
+		gap: 1rem;
 
-	label {
-		display: block;
-		margin-bottom: 5px;
-	}
-
-	input[type='email'],
-	input[type='password'] {
 		width: 100%;
-		padding: 10px;
-		border: 1px solid #ccc;
-		border-radius: 4px;
+		margin-top: 2rem;
 	}
 
-	.login-button {
+	input {
 		width: 100%;
-		padding: 10px;
-		background-color: var(--interactive);
-		color: white;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
+		padding: 1em;
+		padding-left: 3em;
+		background-color: transparent;
 	}
 
-	.login-button:hover {
-		filter: brightness(120%);
+	.inputGroup {
+		position: relative;
 	}
 
-	.sign-in {
-		font-weight: normal;
-		margin: auto;
+	.inputGroup ion-icon {
+		position: absolute;
+		top: 50%;
+		left: 0.7em;
+		translate: 0 -50%;
+
+		color: var(--interactive);
+	}
+
+	.forgotPassword {
+		justify-self: end;
+		font-weight: 600;
+		font-size: 0.9rem;
+		margin-top: calc(-1rem - 0.1em);
+		color: var(--content-9);
+	}
+
+	.button {
+		width: 100%;
+		padding: 0.625em;
 		margin-top: 0.5rem;
+
+		color: var(--main);
+		text-transform: capitalize;
 	}
 
-	.error-message {
-		color: red;
-		margin-bottom: 20px;
+	.googleLogIn {
+		padding: 0.5em;
+		margin-top: 0;
+		margin-bottom: 1.25rem;
+	}
+
+	.googleLogIn {
+		background-color: rgb(206, 51, 12);
+	}
+
+	.googleLogIn:hover,
+	.googleLogIn:focus-visible {
+		background-color: rgb(206, 12, 12);
+	}
+
+	.align {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 1ch;
+		align-items: center;
+	}
+
+	hr {
+		border: none;
+		border-top: 3px solid var(--content-5);
+		overflow: visible;
+		text-align: center;
+		height: 5px;
+		margin: 2.5rem 10% 1rem;
+	}
+
+	hr:after {
+		background: var(--main);
+		content: '';
+		padding: 0 10%;
+		position: relative;
+		top: -13px;
+	}
+
+	hr:first-of-type {
+		margin: 2rem 10%;
 	}
 </style>

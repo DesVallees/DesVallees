@@ -1,19 +1,36 @@
 <script lang="ts">
+	import { crafts, type craftItem } from '../mockDb';
 	import { baseImageRoute } from '../stores';
+	import WorkPost from './workPost.svelte';
 
 	export let style: string = '';
+
+	// Get only the first three elements from crafts
+	let images = crafts.slice(0, 3);
+
+	let selectedImage: craftItem | null = null;
+
+	function selectImage(image: craftItem | null): void {
+		selectedImage = image;
+	}
 </script>
 
 <section id="gallery" {style} class="scrollScale">
 	<h2>Some Of Our Custom Work</h2>
 	<div>
 		<!-- Placeholder images representing previous work -->
-		<img src="{baseImageRoute}/demo/woman-small.webp" alt="Custom Design 1" />
-		<img src="{baseImageRoute}/demo/man-small.webp" alt="Custom Design 2" />
-		<img src="{baseImageRoute}/demo/amsterdam-small.webp" alt="Custom Design 3" />
+		{#each images as image}
+			<button class="scrollAppear" on:click={() => selectImage(image)}>
+				<img src="{baseImageRoute}/{image.src}" alt={image.alt} />
+			</button>
+		{/each}
 	</div>
 	<a class="moreWork" href="our-work">View more</a>
 </section>
+
+{#if selectedImage}
+	<WorkPost close={() => selectImage(null)} {selectedImage} />
+{/if}
 
 <style>
 	h2 {
@@ -39,11 +56,16 @@
 		border-radius: 5px;
 		transition: transform 0.3s ease;
 		width: 100%;
+		aspect-ratio: 6 / 11;
 		max-width: 300px;
+		object-fit: cover;
+		object-position: center;
+		height: auto;
+		cursor: pointer;
 	}
 
 	#gallery img:hover {
-		transform: scale(1.05);
+		transform: scale(1.025);
 	}
 
 	.moreWork {

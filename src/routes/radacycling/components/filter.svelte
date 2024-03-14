@@ -88,7 +88,7 @@
 
 	button {
 		text-transform: uppercase;
-		font-size: clamp(1rem, 2.5vw, 1.1rem);
+		font-size: clamp(1rem, 2vw, 1.1rem);
 		font-weight: bold;
 		color: var(--content);
 
@@ -146,6 +146,6 @@
 		left: 5%;
 		top: calc(100% + 1rem);
 		box-shadow: 0 0 10px var(--content);
-		z-index: 3;
+		z-index: 2;
 	}
 </style>

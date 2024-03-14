@@ -27,7 +27,7 @@
 				required
 			/>
 		</div>
-		<button class="link forgotPassword">{$dictionary.forgotPassword}</button>
+		<button type="button" class="link forgotPassword">{$dictionary.forgotPassword}</button>
 
 		<button type="submit" class="button">{$dictionary.logIn}</button>
 	</form>

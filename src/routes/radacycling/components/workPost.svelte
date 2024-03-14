@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade, scale } from 'svelte/transition';
+	import { baseImageRoute } from '../stores';
 
 	interface ImageItem {
 		src: string;
@@ -32,7 +33,7 @@
 		<button class="close" on:click={close}><ion-icon name="close-outline" /></button>
 		<div class="content">
 			<div class="imageContainer">
-				<img src={selectedImage.src} alt={selectedImage.alt} />
+				<img src="{baseImageRoute}/{selectedImage.src}" alt={selectedImage.alt} />
 			</div>
 			<div class="description">
 				<h2>{selectedImage.title}</h2>
@@ -56,7 +57,7 @@
 		align-items: center;
 		justify-content: center;
 		z-index: 1000;
-		padding: clamp(2rem, 8vw, 5rem);
+		padding: clamp(0rem, 3vw, 5rem);
 	}
 
 	.main {
@@ -121,6 +122,8 @@
 
 	h2 {
 		text-align: center;
+		margin: auto;
+		max-width: 80%;
 	}
 
 	p {

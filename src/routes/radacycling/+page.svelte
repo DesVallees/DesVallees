@@ -152,12 +152,14 @@
 
 	.features {
 		padding: 1rem clamp(1rem, 4vw, 3rem) 6rem;
+		font-size: clamp(1rem, 4vw, 1.2rem);
+
 		display: grid;
 		place-items: center;
 		gap: 1rem;
 		text-align: center;
 		width: 100%;
-		margin-top: 3rem;
+		margin-top: 1rem;
 		padding-bottom: 8rem;
 	}
 
@@ -175,17 +177,17 @@
 	}
 
 	.features h2 {
-		font-size: clamp(2.5rem, 6vw, 3rem);
+		font-size: 2.25em;
 		margin-bottom: 3rem;
 	}
 
 	.features h3 {
-		font-size: clamp(1.25rem, 4vw, 1.75rem);
+		font-size: 1.3em;
 		margin-bottom: 1rem;
 	}
 
 	.features p {
-		font-size: clamp(1.1rem, 2vw, 1.25rem);
+		font-size: 1.05em;
 		color: var(--content-9);
 	}
 
