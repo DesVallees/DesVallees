@@ -325,6 +325,13 @@
 		width: fit-content;
 	}
 
+	@media (min-width: 1000px) {
+		.products {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 3em 2em;
+		}
+	}
+
 	.noProducts {
 		display: grid;
 		place-items: center;

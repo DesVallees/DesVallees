@@ -62,12 +62,16 @@
 
 	.main {
 		position: relative;
-		background-color: white;
-		border-radius: 0.5rem;
+
 		height: 100%;
 		width: 100%;
 		max-width: 1200px;
 		padding: 2rem;
+
+		background-color: white;
+		border-radius: 0.5rem;
+
+		cursor: default;
 		overflow: auto;
 	}
 
@@ -132,12 +136,17 @@
 		font-size: 1.1rem;
 		text-align: left;
 		text-wrap: pretty;
+		line-height: 1.5;
 	}
 
 	@media screen and (max-width: 750px) {
 		.main {
 			border-radius: 0.5rem;
 			padding: 0.5rem 0 3rem;
+		}
+
+		.close {
+			position: fixed;
 		}
 
 		p {

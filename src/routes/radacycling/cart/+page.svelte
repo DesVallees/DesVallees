@@ -236,7 +236,7 @@
 		place-content: center;
 		place-items: center;
 		gap: 0.5rem;
-		min-height: 50vh;
+		min-height: 60vh;
 	}
 
 	.emptyCart h1 {
