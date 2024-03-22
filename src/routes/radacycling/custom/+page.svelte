@@ -130,6 +130,7 @@
 		left: 0;
 		transform: translate(0, -50%);
 		width: 50%;
+		margin-left: 2rem;
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Improves legibility */
 	}
 
@@ -188,6 +189,7 @@
 			font-size: 2em;
 			width: 90%;
 			left: 50%;
+			margin-left: 0;
 			transform: translate(-50%);
 		}
 

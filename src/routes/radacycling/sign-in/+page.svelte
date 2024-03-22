@@ -1,10 +1,26 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { baseRoute, dictionary } from '../stores';
-	import toast from 'svelte-french-toast';
+	import { anErrorOccurred } from '../functions';
+	import { authHandlers } from '../auth';
+	import Preloader from '../components/preloader.svelte';
 
-	function handleFormSubmission() {
-		toast.error('An error has occurred...', { position: 'bottom-center' });
+	let email: string;
+	let password: string;
+	let confirmPassword: string;
+
+	let authenticating: boolean = false;
+
+	async function handleFormSubmission() {
+		if (password === confirmPassword) {
+			authenticating = true;
+			await authHandlers.signin(email, password);
+			authenticating = false;
+		} else {
+			anErrorOccurred('Passwords do not match.');
+			password = '';
+			confirmPassword = '';
+		}
 	}
 </script>
 
@@ -15,6 +31,12 @@
 		content="Sign in to your Rada Cycling Wear account for secure access to your custom cycling wear orders, preferences, and exclusive updates. Experience a seamless connection to your cycling world. Ready for a smoother ride? Sign in now."
 	/>
 </svelte:head>
+
+{#if authenticating}
+	<Preloader animation="dots">
+		<h1 class="loadingH1">Rada</h1>
+	</Preloader>
+{/if}
 
 <div class="signIn" in:fade>
 	<h1>Create an account</h1>
@@ -29,15 +51,28 @@
 				autocapitalize="none"
 				autocorrect="false"
 				spellcheck="false"
+				bind:value={email}
 			/>
 		</div>
 		<div class="inputGroup">
 			<ion-icon name="lock-closed" />
-			<input type="password" placeholder="Password" class="ghostButton" required />
+			<input
+				type="password"
+				placeholder="Password"
+				class="ghostButton"
+				required
+				bind:value={password}
+			/>
 		</div>
 		<div class="inputGroup">
 			<ion-icon name="shield-checkmark" />
-			<input type="password" placeholder="Confirm Password" class="ghostButton" required />
+			<input
+				type="password"
+				placeholder="Confirm Password"
+				class="ghostButton"
+				required
+				bind:value={confirmPassword}
+			/>
 		</div>
 
 		<button type="submit" class="button">Create an account</button>
@@ -52,6 +87,26 @@
 </div>
 
 <style>
+	.loadingH1 {
+		position: relative;
+
+		font-size: 3.5rem;
+		text-transform: uppercase;
+	}
+
+	.loadingH1::after {
+		content: '';
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		translate: 120% 100%;
+
+		width: 8%;
+		aspect-ratio: 1 / 1;
+		background-color: var(--interactive);
+	}
+
 	.signIn {
 		display: flex;
 		flex-direction: column;
@@ -68,6 +123,7 @@
 	h1 {
 		text-wrap: balance;
 		text-transform: capitalize;
+		text-align: center;
 	}
 
 	form {

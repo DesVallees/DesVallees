@@ -1,61 +1,78 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { baseRoute, dictionary } from '../stores';
-	import toast from 'svelte-french-toast';
+	import { baseRoute, dictionary, userEmail } from '../stores';
+	import { anErrorOccurred } from '../functions';
+	import Preloader from '../components/preloader.svelte';
+	import { authHandlers } from '../auth';
+	import AccountPage from '../components/accountPage.svelte';
 
-	function handleFormSubmission() {
-		toast.error('An error has occurred...', { position: 'bottom-center' });
+	let email: string;
+	let password: string;
+
+	let authenticating: boolean = false;
+
+	async function logIn() {
+		authenticating = true;
+		await authHandlers.login(email, password).then(() => {
+			email = '';
+		});
+		password = '';
+		authenticating = false;
 	}
 </script>
 
-<div class="logIn" in:fade>
-	<h1>Log in to RADA</h1>
-	<form on:submit|preventDefault={handleFormSubmission}>
-		<div class="inputGroup">
-			<ion-icon name="mail" />
-			<input
-				type="email"
-				placeholder={$dictionary.email}
-				class="ghostButton"
-				required
-				autocapitalize="none"
-				autocorrect="false"
-				spellcheck="false"
-			/>
+{#if authenticating}
+	<Preloader animation="dots">
+		<h1 class="loadingH1">Rada</h1>
+	</Preloader>
+{/if}
+
+{#key $userEmail}
+	{#if $userEmail}
+		<AccountPage bind:authenticating />
+	{:else}
+		<div class="logIn" in:fade>
+			<h1>Log in to RADA</h1>
+			<form on:submit|preventDefault={logIn}>
+				<div class="inputGroup">
+					<ion-icon name="mail" />
+					<input
+						type="email"
+						placeholder={$dictionary.email}
+						class="ghostButton"
+						required
+						autocapitalize="none"
+						autocorrect="false"
+						spellcheck="false"
+						bind:value={email}
+					/>
+				</div>
+				<div class="inputGroup">
+					<ion-icon name="lock-closed" />
+					<input
+						type="password"
+						placeholder="Password"
+						class="ghostButton"
+						required
+						bind:value={password}
+					/>
+				</div>
+				<button type="button" class="link forgotPassword" on:click={() => anErrorOccurred()}
+					>Forgot Password</button
+				>
+
+				<button type="submit" class="button">Log In</button>
+			</form>
+
+			<hr />
+
+			<div class="align" style="justify-content: center; font-size: 1.05rem;">
+				<p>Don't have an account?</p>
+				<a href="{baseRoute}/sign-in" class="link">Sign In</a>
+			</div>
 		</div>
-		<div class="inputGroup">
-			<ion-icon name="lock-closed" />
-			<input type="password" placeholder="Password" class="ghostButton" required />
-		</div>
-		<button type="button" class="link forgotPassword" on:click={handleFormSubmission}
-			>Forgot Password</button
-		>
-
-		<button type="submit" class="button">Log In</button>
-	</form>
-
-	<hr />
-
-	<button
-		type="button"
-		class="button googleLogIn"
-		aria-label="Log in with Google"
-		on:click={() =>
-			toast.error('Error occurred connecting with Google Authentication System.', {
-				position: 'bottom-center',
-			})}
-	>
-		<ion-icon name="logo-google" />
-		Log in with google
-	</button>
-
-	<hr />
-
-	<div class="align" style="justify-content: center; font-size: 1.05rem;">
-		<p>Don't have an account?</p>
-		<a href="{baseRoute}/sign-in" class="link">Sign In</a>
-	</div>
-</div>
+	{/if}
+{/key}
 
 <svelte:head>
 	<title>Account | RADA Cycling Wear</title>
@@ -66,6 +83,26 @@
 </svelte:head>
 
 <style>
+	.loadingH1 {
+		position: relative;
+
+		font-size: 3.5rem;
+		text-transform: uppercase;
+	}
+
+	.loadingH1::after {
+		content: '';
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		translate: 120% 100%;
+
+		width: 8%;
+		aspect-ratio: 1 / 1;
+		background-color: var(--interactive);
+	}
+
 	.logIn {
 		display: flex;
 		flex-direction: column;
@@ -82,6 +119,7 @@
 	h1 {
 		text-wrap: balance;
 		text-transform: capitalize;
+		text-align: center;
 	}
 
 	form {
@@ -131,21 +169,6 @@
 
 		color: var(--main);
 		text-transform: capitalize;
-	}
-
-	.googleLogIn {
-		padding: 0.5em;
-		margin-top: 0;
-		margin-bottom: 1.25rem;
-	}
-
-	.googleLogIn {
-		background-color: rgb(206, 51, 12);
-	}
-
-	.googleLogIn:hover,
-	.googleLogIn:focus-visible {
-		background-color: rgb(206, 12, 12);
 	}
 
 	.align {

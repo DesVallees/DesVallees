@@ -7,15 +7,18 @@
 		storage,
 		type DenormalizedCartItem,
 	} from '../mockDb';
+	import { onMount } from 'svelte';
 
 	let promoCode = '';
 
 	let denormalizedData: DenormalizedCartItem[];
 
-	try {
-		denormalizedData = denormalizeCartItems($cartItems, storage);
-	} catch (error) {
-		console.error(error);
+	function getCartItems() {
+		try {
+			denormalizedData = denormalizeCartItems($cartItems, storage);
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	function calculateSubtotal() {
@@ -26,59 +29,68 @@
 	const calculateTotal = () => {
 		return calculateSubtotal() + deliveryFee;
 	};
+
+	onMount(() => {
+		getCartItems();
+	});
+	$: $cartItems, getCartItems();
 </script>
 
-<div class="cart" in:fade>
-	{#if denormalizedData.length > 0}
-		<h1>My Cart</h1>
-		{#each denormalizedData as item (item.productId)}
-			<div class="cart-item">
-				<a href="{baseRoute}/catalog/products/{item.href}" class="imageLink">
-					<img src="{baseImageRoute}/{item.imageSrc}" alt={item.name} />
-				</a>
-				<div class="item-details">
-					<a href="{baseRoute}/catalog/products/{item.href}">
-						<h2>{item.name}</h2>
+{#key $cartItems}
+	<div class="cart" in:fade>
+		{#if denormalizedData.length > 0}
+			<h1>My Cart</h1>
+			{#each denormalizedData as item (item.productId)}
+				<div class="cart-item">
+					<a href="{baseRoute}/catalog/products/{item.href}" class="imageLink">
+						<img src="{baseImageRoute}/{item.imageSrc}" alt={item.name} />
 					</a>
-					<p>Price: {item.price}</p>
-					<div class="quantity-selector">
-						<button on:click={() => (item.quantity = Math.max(1, item.quantity - 1))}>
-							<ion-icon name="remove" />
-						</button>
-						<span class="quantity">{item.quantity}</span>
-						<button on:click={() => (item.quantity += 1)}>
-							<ion-icon name="add" />
-						</button>
+					<div class="item-details">
+						<a href="{baseRoute}/catalog/products/{item.href}">
+							<h2>{item.name}</h2>
+						</a>
+						<p>Price: {item.price}</p>
+						<div class="quantity-selector">
+							<button
+								on:click={() => (item.quantity = Math.max(1, item.quantity - 1))}
+							>
+								<ion-icon name="remove" />
+							</button>
+							<span class="quantity">{item.quantity}</span>
+							<button on:click={() => (item.quantity += 1)}>
+								<ion-icon name="add" />
+							</button>
+						</div>
+					</div>
+					<div class="cartRight">
+						<div class="item-price">
+							<span><strong>Total:</strong></span>
+							<span>${item.totalItemPrice.toFixed(2)}</span>
+						</div>
 					</div>
 				</div>
-				<div class="cartRight">
-					<div class="item-price">
-						<span><strong>Total:</strong></span>
-						<span>${item.totalItemPrice.toFixed(2)}</span>
-					</div>
-				</div>
-			</div>
-		{/each}
+			{/each}
 
-		<div class="promo-code">
-			<input type="text" bind:value={promoCode} placeholder="Enter your promo code" />
-			<button>Validate</button>
-		</div>
-		<div class="pricing">
-			<div>Sub Total: ${calculateSubtotal().toFixed(2)}</div>
-			<div>Delivery Fee: ${deliveryFee.toFixed(2)}</div>
-			<div>Total Amount: ${calculateTotal().toFixed(2)}</div>
-		</div>
-		<a href="{baseRoute}/checkout" class="checkout-button">CHECKOUT</a>
-	{:else}
-		<div class="emptyCart">
-			<ion-icon name="bag-remove" />
-			<h1>Your cart is empty</h1>
-			<p>Looks like you haven't made your choice yet...</p>
-			<a class="button exploreButton" href="{baseRoute}/catalog">Explore our catalog</a>
-		</div>
-	{/if}
-</div>
+			<div class="promo-code">
+				<input type="text" bind:value={promoCode} placeholder="Enter your promo code" />
+				<button>Validate</button>
+			</div>
+			<div class="pricing">
+				<div>Sub Total: ${calculateSubtotal().toFixed(2)}</div>
+				<div>Delivery Fee: ${deliveryFee.toFixed(2)}</div>
+				<div>Total Amount: ${calculateTotal().toFixed(2)}</div>
+			</div>
+			<a href="{baseRoute}/checkout" class="checkout-button">CHECKOUT</a>
+		{:else}
+			<div class="emptyCart">
+				<ion-icon name="bag-remove" />
+				<h1>Your cart is empty</h1>
+				<p>Looks like you haven't made your choice yet...</p>
+				<a class="button exploreButton" href="{baseRoute}/catalog">Explore our catalog</a>
+			</div>
+		{/if}
+	</div>
+{/key}
 
 <svelte:head>
 	<title>My Cart | RADA Cycling Wear</title>

@@ -167,7 +167,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 5rem 3rem;
+		gap: 4rem 3rem;
 	}
 
 	.featureContainer div {

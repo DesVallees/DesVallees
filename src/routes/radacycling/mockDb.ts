@@ -26,7 +26,6 @@ type CatalogSection = {
     categories?: Category[]; // Optional, will be filled by denormalize function
 };
 
-
 export type CatalogCategory = {
     name: string;
     featuredCategoryId: number;
@@ -312,6 +311,7 @@ export let categoryMenus: CatalogCategory[] = [
     }
 ];
 
+
 export function denormalizeCatalogCategory(catalogCategory: CatalogCategory): CatalogCategory {
     // Denormalize each section by mapping the category IDs to their full data
     const denormalizedSections: CatalogSection[] = catalogCategory.sections.map(section => {
@@ -360,7 +360,6 @@ export function denormalizeCategories(ids: number[]): Category[] {
     // Return an object with the denormalized categories.
     return denormalizedCategoryIds;
 }
-
 
 export function findCatalogCategoryByName(name: string): CatalogCategory | undefined {
     return categoryMenus.find(categoryMenu => categoryMenu.name === name);
@@ -413,6 +412,7 @@ export function getCategoryNamesFromIds(ids: number[]): string[] {
         return category.name;
     });
 }
+
 
 export type MenuItem = {
     name: string;
@@ -545,12 +545,14 @@ export type Product = {
     href: string,
     categoryIds: number[]
 }
+
 export type Version = {
     imageSrc: string,
     imgHoverSrc: string | undefined,
     imageAlt: string,
     hrefParam: string,
 }
+
 type TableEntry = {
     label: string;
     value: string;
@@ -691,8 +693,7 @@ export function findProductsByCategoryIds(categoryIds: number[]): Product[] {
 }
 
 
-
-//Reviews
+// Reviews
 export type Review = {
     productId: number,
     date: string,
@@ -701,6 +702,7 @@ export type Review = {
     imageSrc: string,
     rating: number,
 }
+
 export let reviews: Review[] = [
     // Jersey
     {
@@ -865,9 +867,6 @@ export let reviews: Review[] = [
 // Cart
 export let deliveryFee = 8.18;
 
-
-// Database Interaction Functions
-
 export type DenormalizedCartItem = {
     productId: number,
     quantity: number,
@@ -901,8 +900,8 @@ export function denormalizeCartItems(cartItems: CartItem[], storage: Record<stri
     });
 }
 
-// Adds a product to the cart or updates the quantity if the product already exists.
 export function addToCart(productId: number, quantity: number, name: string): void {
+    // Adds a product to the cart or updates the quantity if the product already exists.
     cartItems.update(items => {
         const existingItemIndex = items.findIndex(item => item.productId === productId);
         if (existingItemIndex !== -1) {
@@ -940,7 +939,6 @@ export function removeFromCart(productId: number, name: string): void {
 
 
 // Previous work
-
 export type craftItem = {
     src: string;
     alt: string;

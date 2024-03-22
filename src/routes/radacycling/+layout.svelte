@@ -2,14 +2,16 @@
 	import './app.css';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { baseImageRoute, language } from './stores';
+	import { goto } from '$app/navigation';
+	import { baseImageRoute, baseRoute, userID, userEmail, language, dataReady } from './stores';
 	import { sleep } from './functions';
 
 	import Nav from './components/nav.svelte';
 	import Footer from './components/footer.svelte';
 	import Preloader from './components/preloader.svelte';
 	import { Toaster } from 'svelte-french-toast';
-	import Countdown from './components/countdown.svelte';
+	import { auth } from '$lib/firebase/firebase';
+	import { authHandlers } from './auth';
 
 	let disappearAndAppear: boolean = false;
 
@@ -23,21 +25,47 @@
 		disappearAndAppear = false;
 	}
 
-	let ready: boolean = false;
-	$: $page.url.pathname, goTop();
+	let layoutReady: boolean = false;
+	$: $page.url.pathname, handleURLChange($page.url.pathname);
 	let mainContent: HTMLElement;
-	let goTop: () => void = () => {};
+	let handleURLChange: (newUrl: string) => void = () => {};
 
 	onMount(() => {
-		ready = true;
+		layoutReady = true;
 
-		goTop = () => {
+		handleURLChange = (newUrl: string) => {
 			if (document) {
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
 				mainContent.scrollTop = 0;
 			}
+
+			if ($userEmail && newUrl === `${baseRoute}/sign-in`) {
+				goto(`${baseRoute}/my-account`);
+			}
 		};
+
+		let currentlyCreatingAnonymousAccount = false;
+		const unsubscribe = auth.onAuthStateChanged(async (user) => {
+			layoutReady = false;
+			if (user) {
+				if (user.email && $page.url.pathname === `${baseRoute}/sign-in`) {
+					goto(`${baseRoute}/my-account`);
+				}
+
+				$userID = user.uid;
+				$userEmail = user.email;
+			} else {
+				$userEmail = null;
+				if (!currentlyCreatingAnonymousAccount) {
+					currentlyCreatingAnonymousAccount = true;
+					await authHandlers.signInAnonymously().then(() => {
+						currentlyCreatingAnonymousAccount = false;
+					});
+				}
+			}
+			layoutReady = true;
+		});
 	});
 
 	let isCatalogMenuVisible: boolean = false;
@@ -68,7 +96,7 @@
 		<Footer />
 	</footer>
 
-	{#if !ready}
+	{#if !layoutReady || !dataReady}
 		<Preloader animation="dots">
 			<h1>Rada</h1>
 		</Preloader>

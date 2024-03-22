@@ -140,6 +140,7 @@ export function escapeHTML(input: string): string {
     return input.replace(/[&<>"'`=\/]/g, (s) => entityMap[s]);
 }
 
+import toast from "svelte-french-toast";
 import type { Action } from "svelte/action";
 
 interface Attributes {
@@ -204,4 +205,8 @@ export function handleSwipe(element: HTMLElement, onSwipeRight: () => void, onSw
             onSwipeLeft();
         }
     });
+}
+
+export function anErrorOccurred(error: string = 'An error has occurred...') {
+    toast.error(error, { position: 'bottom-center' });
 }

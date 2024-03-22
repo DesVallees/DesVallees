@@ -1,30 +1,106 @@
-import { derived, writable, type Writable } from 'svelte/store';
+import { derived, get, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 import type { MenuItem } from './mockDb';
+import { db } from '$lib/firebase/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export const activeSNavMenu: Writable<MenuItem[]> = writable();
 
-export let cartItems = writable<CartItem[]>([]);
+// Database
+export let dataReady: boolean = false;
+export const userID: Writable<string> = writable("")
+export const userEmail: Writable<string | null> = writable(null)
+userID.subscribe(async (value) => {
+    if (value) {
+        let userData: any;
+        const userDocumentReference = doc(db, 'user', value);
+        const docSnap = await getDoc(userDocumentReference);
+
+        if (!docSnap.exists()) {
+            const newUserData = {
+                cartItems: [],
+                purchases: [],
+            };
+
+            await setDoc(userDocumentReference, newUserData, { merge: true });
+            userData = newUserData;
+        } else {
+            userData = docSnap.data();
+        }
+
+        cartItems.set(userData["cartItems"])
+        purchases.set(userData["purchases"])
+        dataReady = true;
+    }
+})
+
 export type CartItem = {
     productId: number,
     quantity: number,
 }
+export const cartItems: Writable<CartItem[]> = writable([])
+cartItems.subscribe(async (value) => {
+    let uid = get(userID)
+    if (uid) {
+        const userDocumentReference = doc(db, 'user', uid);
+        const docSnap = await getDoc(userDocumentReference);
+
+        if (docSnap.exists()) {
+            try {
+                await setDoc(
+                    userDocumentReference,
+                    {
+                        cartItems: value
+                    },
+                    { merge: true }
+                )
+            } catch (error) {
+                console.error("Error while saving cart items: ", error);
+            }
+        }
+    }
+})
+
+
+export type Purchase = {
+    productId: number,
+    arrivalDate: string,
+}
+export const purchases: Writable<Purchase[]> = writable([])
+purchases.subscribe(async (value) => {
+    let uid = get(userID)
+    if (uid) {
+        const userDocumentReference = doc(db, 'user', uid);
+        const docSnap = await getDoc(userDocumentReference);
+
+        if (docSnap.exists()) {
+            try {
+                await setDoc(
+                    userDocumentReference,
+                    {
+                        purchases: value
+                    },
+                    { merge: true }
+                )
+            } catch (error) {
+                console.error("Error while saving purchases data: ", error);
+            }
+        }
+    }
+})
 
 
 // Base Routes
-
 export const baseImageRoute = '/images/radacycling';
 export const baseRoute = '/radacycling';
 
 
 // Language Management
-
-export type Language = 'es' | 'en';
+export type Language = 'en';
 
 export function isLanguage(value: any): value is Language {
     return (
-        value === 'es' ||
         value === 'en'
     );
 }
@@ -65,8 +141,7 @@ if (browser) {
     }
 }
 
-// export const language: Writable<Language> = writable(storedLanguage || navigatorLanguage || 'en');
-export const language: Writable<Language> = writable('en');
+export const language: Writable<Language> = writable(storedLanguage || navigatorLanguage || 'en');
 
 if (browser) {
     language.subscribe((value) => {
@@ -80,7 +155,6 @@ export const dictionary = derived(language, (language) => translator[language]);
 
 
 // Theme Management
-
 export type Theme = 'dark' | 'light';
 
 function isTheme(value: any) {
