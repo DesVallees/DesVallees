@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 	import { baseImageRoute, baseRoute, cartItems, dictionary } from '../stores';
 	import {
 		deliveryFee,
 		denormalizeCartItems,
 		storage,
 		type DenormalizedCartItem,
+		removeFromCart,
+		addToCart,
 	} from '../mockDb';
 	import { onMount } from 'svelte';
 
@@ -36,12 +38,12 @@
 	$: $cartItems, getCartItems();
 </script>
 
-{#key $cartItems}
-	<div class="cart" in:fade>
+<div class="cart" in:fade>
+	{#key $cartItems}
 		{#if denormalizedData.length > 0}
 			<h1>My Cart</h1>
 			{#each denormalizedData as item (item.productId)}
-				<div class="cart-item">
+				<div class="cart-item" transition:slide>
 					<a href="{baseRoute}/catalog/products/{item.href}" class="imageLink">
 						<img src="{baseImageRoute}/{item.imageSrc}" alt={item.name} />
 					</a>
@@ -52,17 +54,24 @@
 						<p>Price: {item.price}</p>
 						<div class="quantity-selector">
 							<button
-								on:click={() => (item.quantity = Math.max(1, item.quantity - 1))}
+								on:click={() =>
+									addToCart(item.productId, Math.max(1, item.quantity - 1))}
 							>
 								<ion-icon name="remove" />
 							</button>
 							<span class="quantity">{item.quantity}</span>
-							<button on:click={() => (item.quantity += 1)}>
+							<button on:click={() => addToCart(item.productId, item.quantity + 1)}>
 								<ion-icon name="add" />
 							</button>
 						</div>
 					</div>
 					<div class="cartRight">
+						<button
+							class="close"
+							on:click={() => removeFromCart(item.productId, item.name)}
+						>
+							<ion-icon name="close" />
+						</button>
 						<div class="item-price">
 							<span><strong>Total:</strong></span>
 							<span>${item.totalItemPrice.toFixed(2)}</span>
@@ -89,8 +98,8 @@
 				<a class="button exploreButton" href="{baseRoute}/catalog">Explore our catalog</a>
 			</div>
 		{/if}
-	</div>
-{/key}
+	{/key}
+</div>
 
 <svelte:head>
 	<title>My Cart | RADA Cycling Wear</title>
@@ -147,9 +156,26 @@
 	}
 
 	.cartRight {
+		align-self: baseline;
+
 		display: grid;
-		gap: 0.5rem;
+		gap: 1rem;
 		margin-left: 1rem;
+		justify-items: end;
+	}
+
+	.close {
+		display: flex;
+		border-radius: 50%;
+		padding: 0.25em;
+		width: fit-content;
+
+		background-color: transparent;
+		transition: background-color 0.2s;
+	}
+
+	.close:hover {
+		background-color: var(--content-2);
 	}
 
 	.quantity-selector {

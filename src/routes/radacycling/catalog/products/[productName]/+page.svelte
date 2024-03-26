@@ -1,6 +1,12 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { baseImageRoute, baseRoute, dictionary } from '../../../stores';
+	import { fade, scale } from 'svelte/transition';
+	import {
+		baseImageRoute,
+		baseRoute,
+		dictionary,
+		type CartItem,
+		cartItems,
+	} from '../../../stores';
 	import Products from '../../../components/products.svelte';
 	import Review from '../../../components/review.svelte';
 	import {
@@ -9,6 +15,8 @@
 		reviews,
 		type Review as ReviewType,
 		addToCart,
+		getCartItemFromID,
+		removeFromCart,
 	} from '../../../mockDb';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
@@ -44,13 +52,46 @@
 	}
 
 	let product: Product | undefined;
+	let productInCart: CartItem | undefined;
 	let averageRating: string;
 	let reviewCount: number;
 	let similarProducts: Product[];
 
 	let productReviews: ReviewType[];
 
+	let quantity: number = productInCart?.quantity || 1;
+	$: quantity, updateCartQuantity();
+
+	function incrementQuantity() {
+		quantity += 1;
+	}
+
+	function decrementQuantity() {
+		if (quantity > 1) quantity -= 1;
+	}
+
+	function updateCartQuantity() {
+		if (product && (productInCart || productAdded)) {
+			addToCart(product.id, quantity);
+		}
+	}
+
+	let productAdded: boolean = false;
+	function toggleProduct() {
+		if (product) {
+			if (productInCart || productAdded) {
+				removeFromCart(product.id, product.name);
+				productAdded = false;
+				productInCart = undefined;
+			} else {
+				addToCart(product.id, quantity, product.name);
+				productAdded = true;
+			}
+		}
+	}
+
 	function setup() {
+		quantity = 1;
 		product = findProductByHref($page.params.productName);
 
 		if (product) {
@@ -60,20 +101,14 @@
 			reviewCount = productReviews.length;
 
 			similarProducts = findSimilarProducts(product, 8);
+
+			productInCart = getCartItemFromID($cartItems, product.id);
+			if (productInCart) {
+				quantity = productInCart.quantity;
+			}
 		}
 
 		currentTab = 'description';
-	}
-
-	let quantity: number = 1;
-
-	// Functions for incrementing and decrementing quantity
-	function incrementQuantity() {
-		quantity += 1;
-	}
-
-	function decrementQuantity() {
-		if (quantity > 1) quantity -= 1;
 	}
 
 	type Tab = 'description' | 'details' | 'reviews';
@@ -175,13 +210,20 @@
 				</div>
 
 				<div class="actions">
-					<button
-						on:click={() => {
-							if (product) addToCart(product.id, quantity, product.name);
-						}}
-						class="add-to-cart-btn"
-					>
-						Add to Cart
+					<button on:click={toggleProduct} class="add-to-cart-btn">
+						{#if productInCart || productAdded}
+							<div
+								in:scale
+								style="display: flex; align-items: center; gap: 1ch; margin: -.2em 0"
+							>
+								<span>Item Added!</span>
+								<ion-icon name="bag-check-outline" />
+							</div>
+						{:else}
+							<div in:scale>
+								<span>Add to Cart</span>
+							</div>
+						{/if}
 					</button>
 				</div>
 			</div>

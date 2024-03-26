@@ -28,10 +28,10 @@ userID.subscribe(async (value) => {
         } else {
             userData = docSnap.data();
         }
+        dataReady = true;
 
         cartItems.set(userData["cartItems"])
         purchases.set(userData["purchases"])
-        dataReady = true;
     }
 })
 

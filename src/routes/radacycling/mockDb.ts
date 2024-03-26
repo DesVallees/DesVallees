@@ -900,7 +900,7 @@ export function denormalizeCartItems(cartItems: CartItem[], storage: Record<stri
     });
 }
 
-export function addToCart(productId: number, quantity: number, name: string): void {
+export function addToCart(productId: number, quantity: number, name?: string): void {
     // Adds a product to the cart or updates the quantity if the product already exists.
     cartItems.update(items => {
         const existingItemIndex = items.findIndex(item => item.productId === productId);
@@ -911,21 +911,25 @@ export function addToCart(productId: number, quantity: number, name: string): vo
                 ...updatedItems[existingItemIndex],
                 quantity,
             };
-            toast.success("Item quantity has been updated.",
-                {
-                    style:
-                        "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
-                    position: "bottom-center"
-                })
+            if (name) {
+                toast.success("Item quantity has been updated.",
+                    {
+                        style:
+                            "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
+                        position: "bottom-center"
+                    })
+            }
             return updatedItems;
         } else {
             // Add new item to the cart
-            toast.success(`"${name}" has been added to the cart!`,
-                {
-                    style:
-                        "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
-                    position: "bottom-center"
-                })
+            if (name) {
+                toast.success(`"${name}" has been added to the cart!`,
+                    {
+                        style:
+                            "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
+                        position: "bottom-center"
+                    })
+            }
             return [...items, { productId, quantity }];
         }
     });
@@ -934,7 +938,16 @@ export function addToCart(productId: number, quantity: number, name: string): vo
 export function removeFromCart(productId: number, name: string): void {
     cartItems.update(items => items.filter(item => item.productId !== productId));
 
-    toast.success(`"${name}" has been removed from the cart.`)
+    toast.success(`"${name}" has been removed from the cart.`,
+        {
+            style:
+                "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
+            position: "bottom-center"
+        })
+}
+
+export function getCartItemFromID(cartItemsStore: CartItem[], productId: number) {
+    return Object.values(cartItemsStore).find(item => item.productId === productId)
 }
 
 

@@ -46,7 +46,7 @@
 		};
 
 		let currentlyCreatingAnonymousAccount = false;
-		const unsubscribe = auth.onAuthStateChanged(async (user) => {
+		auth.onAuthStateChanged(async (user) => {
 			layoutReady = false;
 			if (user) {
 				if (user.email && $page.url.pathname === `${baseRoute}/sign-in`) {
