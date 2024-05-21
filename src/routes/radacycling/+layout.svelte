@@ -48,6 +48,7 @@
 		let currentlyCreatingAnonymousAccount = false;
 		auth.onAuthStateChanged(async (user) => {
 			layoutReady = false;
+
 			if (user) {
 				if (user.email && $page.url.pathname === `${baseRoute}/sign-in`) {
 					goto(`${baseRoute}/my-account`);
@@ -64,6 +65,7 @@
 					});
 				}
 			}
+
 			layoutReady = true;
 		});
 	});
@@ -96,7 +98,7 @@
 		<Footer />
 	</footer>
 
-	{#if !layoutReady || !dataReady}
+	{#if !layoutReady || !$dataReady}
 		<Preloader animation="dots">
 			<h1>Rada</h1>
 		</Preloader>

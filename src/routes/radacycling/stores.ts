@@ -8,9 +8,10 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 export const activeSNavMenu: Writable<MenuItem[]> = writable();
 
 // Database
-export let dataReady: boolean = false;
+export const dataReady: Writable<boolean> = writable(false)
 export const userID: Writable<string> = writable("")
 export const userEmail: Writable<string | null> = writable(null)
+
 userID.subscribe(async (value) => {
     if (value) {
         let userData: any;
@@ -28,7 +29,8 @@ userID.subscribe(async (value) => {
         } else {
             userData = docSnap.data();
         }
-        dataReady = true;
+
+        dataReady.set(true)
 
         cartItems.set(userData["cartItems"])
         purchases.set(userData["purchases"])
