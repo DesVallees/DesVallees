@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { theme, dictionary, baseImageRoute } from '../stores';
+	import { theme, baseImageRoute } from '../stores';
 
 	export let style: string = '';
 	export let version: string = '';
@@ -28,7 +28,7 @@
 	$: $theme, getSource();
 </script>
 
-<img {style} {src} alt="Rada Cycling" loading="lazy" />
+<img {style} {src} alt="Rada Cycling Wear" loading="lazy" />
 
 <style>
 	img {

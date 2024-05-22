@@ -4,7 +4,6 @@
 	import {
 		deliveryFee,
 		denormalizeCartItems,
-		storage,
 		type DenormalizedCartItem,
 		removeFromCart,
 		addToCart,
@@ -17,7 +16,7 @@
 
 	function getCartItems() {
 		try {
-			denormalizedData = denormalizeCartItems($cartItems, storage);
+			denormalizedData = denormalizeCartItems($cartItems);
 		} catch (error) {
 			console.error(error);
 		}
@@ -41,7 +40,7 @@
 <div class="cart" in:fade>
 	{#key $cartItems}
 		{#if denormalizedData.length > 0}
-			<h1>My Cart</h1>
+			<h1>{$dictionary.myCart}</h1>
 			{#each denormalizedData as item (item.productId)}
 				<div class="cart-item" transition:slide>
 					<a href="{baseRoute}/catalog/products/{item.href}" class="imageLink">
@@ -51,7 +50,7 @@
 						<a href="{baseRoute}/catalog/products/{item.href}">
 							<h2>{item.name}</h2>
 						</a>
-						<p>Price: {item.price}</p>
+						<p>{$dictionary.price}: {item.price}</p>
 						<div class="quantity-selector">
 							<button
 								on:click={() =>
@@ -73,7 +72,7 @@
 							<ion-icon name="close" />
 						</button>
 						<div class="item-price">
-							<span><strong>Total:</strong></span>
+							<span><strong>{$dictionary.total}:</strong></span>
 							<span>${item.totalItemPrice.toFixed(2)}</span>
 						</div>
 					</div>
@@ -81,32 +80,35 @@
 			{/each}
 
 			<div class="promo-code">
-				<input type="text" bind:value={promoCode} placeholder="Enter your promo code" />
-				<button>Validate</button>
+				<input
+					type="text"
+					bind:value={promoCode}
+					placeholder={$dictionary.enterYourPromoCode}
+				/>
+				<button>{$dictionary.validate}</button>
 			</div>
 			<div class="pricing">
-				<div>Sub Total: ${calculateSubtotal().toFixed(2)}</div>
-				<div>Delivery Fee: ${deliveryFee.toFixed(2)}</div>
-				<div>Total Amount: ${calculateTotal().toFixed(2)}</div>
+				<div>{$dictionary.subtotal}: ${calculateSubtotal().toFixed(2)}</div>
+				<div>{$dictionary.deliveryFee}: ${deliveryFee.toFixed(2)}</div>
+				<div>{$dictionary.totalAmount}: ${calculateTotal().toFixed(2)}</div>
 			</div>
-			<a href="{baseRoute}/checkout" class="checkout-button">CHECKOUT</a>
+			<a href="{baseRoute}/checkout" class="checkout-button">{$dictionary.checkout}</a>
 		{:else}
 			<div class="emptyCart">
 				<ion-icon name="bag-remove" />
-				<h1>Your cart is empty</h1>
-				<p>Looks like you haven't made your choice yet...</p>
-				<a class="button exploreButton" href="{baseRoute}/catalog">Explore our catalog</a>
+				<h1>{$dictionary.yourCartIsEmpty}</h1>
+				<p>{$dictionary.looksLikeYouHaventMadeYourChoice}</p>
+				<a class="button exploreButton" href="{baseRoute}/catalog"
+					>{$dictionary.exploreOurCatalog}</a
+				>
 			</div>
 		{/if}
 	{/key}
 </div>
 
 <svelte:head>
-	<title>My Cart | RADA Cycling Wear</title>
-	<meta
-		name="description"
-		content="Premium cycling wear designed for champions in training and racing. Shop our latest releases and enjoy free domestic shipping on orders over $100."
-	/>
+	<title>{$dictionary.myCart} | RADA Cycling Wear</title>
+	<meta name="description" content={$dictionary.siteDescription} />
 </svelte:head>
 
 <style>
@@ -257,6 +259,7 @@
 	.checkout-button {
 		display: block;
 		text-align: center;
+		text-transform: uppercase;
 		width: 100%;
 		background-color: var(--interactive);
 		color: var(--main);

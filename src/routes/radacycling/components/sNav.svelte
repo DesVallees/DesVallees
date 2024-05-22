@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { fly, slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { baseRoute, dictionary, activeSNavMenu } from '../stores';
 	import Base from './base.svelte';
 	import { sleep } from '../functions';

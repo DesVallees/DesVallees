@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { baseImageRoute, baseRoute, dictionary } from '../stores';
-	import { categories, storage, type Product } from '../mockDb';
+	import { baseImageRoute, baseRoute, dictionary, language } from '../stores';
+	import { storage, type Product } from '../mockDb';
 	import Products from '../components/products.svelte';
-	import CatItem from '../components/catItem.svelte';
 	import Item from '../components/item.svelte';
 
 	let newArrivals: Product[] = [
@@ -23,10 +22,7 @@
 
 <div class="catalog" in:fade>
 	<section class="banner">
-		<img
-			src="{baseImageRoute}/demo/accessories.webp"
-			alt="Cyclist Wearing Rada Cycling Wear Products"
-		/>
+		<img src="{baseImageRoute}/demo/accessories.webp" alt={$dictionary.cyclistWearingRADA} />
 
 		<div class="bannerContent">
 			<h1>{$dictionary.catalogSlogan}</h1>
@@ -34,16 +30,16 @@
 	</section>
 
 	<section>
-		<Products title="New Arrivals" products={newArrivals} />
+		<Products title={$dictionary.newArrivals} products={newArrivals} />
 	</section>
 
 	<section class="custom catalogPadding">
-		<p>Explore endless possibilities and make a statement that's uniquely yours.</p>
-		<a href="{baseRoute}/custom" aria-label="Custom RADA Deals">
+		<p>{$dictionary.exploreEndlessPossibilities}</p>
+		<a href="{baseRoute}/custom" aria-label={$dictionary.customDeals}>
 			<img
 				class="edgyImg"
 				src="{baseImageRoute}/Resources/radaCustom.png"
-				alt="RADA Custom"
+				alt={$dictionary.customDeals}
 			/>
 		</a>
 	</section>
@@ -52,9 +48,9 @@
 		{#each newArrivals as item}
 			<Item
 				href={item.href}
-				imageAlt={item.imageAlt}
+				imageAlt={item.imageAlt[$language]}
 				imageSrc={item.imageSrc}
-				name={item.name}
+				name={item.name[$language]}
 				price={item.price}
 				oldPrice={item.oldPrice}
 			/>
@@ -64,27 +60,24 @@
 	<section class="promotions catalogPadding">
 		<a
 			href="{baseRoute}/catalog/products/bib-plus-jerseys"
-			aria-label="Offer: 1 Bib Plus 2 Jerseys"
+			aria-label={$dictionary.offerOneBibTwoJerseys}
 		>
 			<img
 				class="edgyImg"
 				src="{baseImageRoute}/Resources/offer1bib2jerseys.png"
-				alt="Offer: 1 Bib Plus 2 Jerseys"
+				alt={$dictionary.offerOneBibTwoJerseys}
 			/>
 		</a>
 	</section>
 
 	<section>
-		<Products title="Most Viewed" products={mostViewed} />
+		<Products title={$dictionary.mostViewed} products={mostViewed} />
 	</section>
 </div>
 
 <svelte:head>
-	<title>Catalog | RADA Cycling Wear</title>
-	<meta
-		name="description"
-		content="Premium cycling wear designed for champions in training and racing. Shop our latest releases and enjoy free domestic shipping on orders over $100."
-	/>
+	<title>{$dictionary.catalog} | RADA Cycling Wear</title>
+	<meta name="description" content={$dictionary.siteDescription} />
 </svelte:head>
 
 <style>

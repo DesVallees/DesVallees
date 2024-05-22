@@ -2,10 +2,10 @@
 	import { fade, scale } from 'svelte/transition';
 	import {
 		baseImageRoute,
-		baseRoute,
 		dictionary,
 		type CartItem,
 		cartItems,
+		language,
 	} from '../../../stores';
 	import Products from '../../../components/products.svelte';
 	import Review from '../../../components/review.svelte';
@@ -80,11 +80,11 @@
 	function toggleProduct() {
 		if (product) {
 			if (productInCart || productAdded) {
-				removeFromCart(product.id, product.name);
+				removeFromCart(product.id, product.name[$language]);
 				productAdded = false;
 				productInCart = undefined;
 			} else {
-				addToCart(product.id, quantity, product.name);
+				addToCart(product.id, quantity, product.name[$language]);
 				productAdded = true;
 			}
 		}
@@ -102,13 +102,19 @@
 
 			similarProducts = findSimilarProducts(product, 8);
 
+			checkIfProductIsInCart();
+		}
+
+		currentTab = 'description';
+	}
+
+	function checkIfProductIsInCart() {
+		if (product) {
 			productInCart = getCartItemFromID($cartItems, product.id);
 			if (productInCart) {
 				quantity = productInCart.quantity;
 			}
 		}
-
-		currentTab = 'description';
 	}
 
 	type Tab = 'description' | 'details' | 'reviews';
@@ -120,6 +126,7 @@
 
 	onMount(() => setup());
 	$: $page.params.productName, setup();
+	$: $cartItems, checkIfProductIsInCart();
 </script>
 
 {#if product}
@@ -128,19 +135,19 @@
 			<div class="image-container">
 				<img
 					src="{baseImageRoute}/{product.imageSrc}"
-					alt={product.imageAlt}
+					alt={product.imageAlt[$language]}
 					class="product-image"
 				/>
 			</div>
 
 			<div class="product-content">
 				<div class="product-head">
-					<h1 class="product-title">{product.name}</h1>
+					<h1 class="product-title">{product.name[$language]}</h1>
 					<div class="product-price">{product.price}</div>
 				</div>
 				<div class="product-rating">
 					<span class="rating">{averageRating} ★</span>
-					<span class="review-count">({reviewCount} reviews)</span>
+					<span class="review-count">({reviewCount} {$dictionary.reviews})</span>
 				</div>
 
 				<nav class="product-navigation">
@@ -148,25 +155,25 @@
 						type="button"
 						class="product-nav-button"
 						class:active={currentTab === 'description'}
-						on:click={() => changeTab('description')}>Description</button
+						on:click={() => changeTab('description')}>{$dictionary.description}</button
 					>
 					<button
 						type="button"
 						class="product-nav-button"
 						class:active={currentTab === 'details'}
-						on:click={() => changeTab('details')}>Details</button
+						on:click={() => changeTab('details')}>{$dictionary.details}</button
 					>
 					<button
 						type="button"
 						class="product-nav-button"
 						class:active={currentTab === 'reviews'}
-						on:click={() => changeTab('reviews')}>Reviews</button
+						on:click={() => changeTab('reviews')}>{$dictionary.reviews}</button
 					>
 				</nav>
 
 				{#if currentTab === 'description'}
 					<div class="product-description" in:fade>
-						<p>{product.description}</p>
+						<p>{product.description[$language]}</p>
 					</div>
 				{:else if currentTab === 'details'}
 					<div class="product-details" in:fade>
@@ -174,8 +181,8 @@
 							<tbody>
 								{#each product.details as row}
 									<tr>
-										<td>{row.label}</td>
-										<td>{row.value}</td>
+										<td>{row.label[$language]}</td>
+										<td>{row.value[$language]}</td>
 									</tr>
 								{/each}
 							</tbody>
@@ -193,18 +200,26 @@
 							<p
 								style="margin: 1rem 0 2rem; text-align: center; color: var(--content-8)"
 							>
-								This product has no reviews.
+								{$dictionary.thisProductHasNoReviews}
 							</p>
 						{/if}
 					</div>
 				{/if}
 
 				<div class="quantity-selector">
-					<button on:click={decrementQuantity} class="decrement">
+					<button
+						on:click={decrementQuantity}
+						class="decrement"
+						aria-label="{$dictionary.decreaseQuantityTo} {quantity - 1}"
+					>
 						<ion-icon name="remove" />
 					</button>
 					<div class="quantity">{quantity}</div>
-					<button on:click={incrementQuantity} class="increment">
+					<button
+						on:click={incrementQuantity}
+						class="increment"
+						aria-label="{$dictionary.increaseQuantityTo} {quantity + 1}"
+					>
 						<ion-icon name="add" />
 					</button>
 				</div>
@@ -216,12 +231,12 @@
 								in:scale
 								style="display: flex; align-items: center; gap: 1ch; margin: -.2em 0"
 							>
-								<span>Item Added!</span>
+								<span>{$dictionary.itemAdded}</span>
 								<ion-icon name="bag-check-outline" />
 							</div>
 						{:else}
 							<div in:scale>
-								<span>Add to Cart</span>
+								<span>{$dictionary.addToCart}</span>
 							</div>
 						{/if}
 					</button>
@@ -231,22 +246,22 @@
 				<Products
 					style="padding: 0;"
 					carouselAutoColumns="calc(35% - var(--gap, 2.5rem))"
-					title="Similar Products"
+					title={$dictionary.similarProducts}
 					products={similarProducts}
 				/>
 			</div>
 		</div>
 	{/key}
 {:else}
-	<h1>Product not found.</h1>
+	<h1>{$dictionary.productNotFound}</h1>
 {/if}
 
 <svelte:head>
 	{#if product}
-		<title>{product.name}</title>
-		<meta name="description" content={product.description} />
+		<title>{product.name[$language]}</title>
+		<meta name="description" content={product.description[$language]} />
 	{:else}
-		<title>Product not found.</title>
+		<title>{$dictionary.productNotFound}</title>
 	{/if}
 </svelte:head>
 
@@ -328,6 +343,7 @@
 	}
 
 	.product-nav-button {
+		text-transform: capitalize;
 		padding: 10px 0;
 		color: var(--content-8);
 		width: fit-content;

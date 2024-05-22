@@ -30,6 +30,8 @@
 	let mainContent: HTMLElement;
 	let handleURLChange: (newUrl: string) => void = () => {};
 
+	let currentlyCreatingAnonymousAccount = false;
+
 	onMount(() => {
 		layoutReady = true;
 
@@ -45,7 +47,6 @@
 			}
 		};
 
-		let currentlyCreatingAnonymousAccount = false;
 		auth.onAuthStateChanged(async (user) => {
 			layoutReady = false;
 

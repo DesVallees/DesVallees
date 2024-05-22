@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { baseImageRoute, baseRoute, dictionary } from '../stores';
+	import { baseImageRoute, baseRoute, dictionary, language } from '../stores';
 	import type { Product, Version } from '../mockDb';
 
 	export let product: Product;
 
-	let name: string = product.name;
+	let name: string = product.name[$language];
 	let imageSrc: string = product.imageSrc;
 	let imgHoverSrc: string | undefined = product.imgHoverSrc;
-	let imageAlt: string = product.imageAlt;
+	let imageAlt: string = product.imageAlt[$language];
 	let price: string = product.price;
 	let oldPrice: string | undefined = product.oldPrice;
 	let versions: Version[] | undefined = product.versions;
@@ -102,11 +102,15 @@
 		<div class="versions">
 			{#each versions as item}
 				<button
-					aria-label={item.imageAlt}
+					aria-label={item.imageAlt[$language]}
 					class:current={currentVersionSrc === item.imageSrc}
 					on:click={() => changeVersion(item.imageSrc, item.imgHoverSrc)}
 				>
-					<img width="50px" src="{baseImageRoute}/{item.imageSrc}" alt={item.imageAlt} />
+					<img
+						width="50px"
+						src="{baseImageRoute}/{item.imageSrc}"
+						alt={item.imageAlt[$language]}
+					/>
 				</button>
 			{/each}
 		</div>
@@ -135,13 +139,18 @@
 
 	.discount {
 		position: absolute;
-		top: 1rem;
-		right: 1rem;
+		top: 0.5em;
+		right: 0.5em;
 
 		background-color: green;
-		color: white;
 		border-radius: 5px;
 		padding: 0.3em 0.6em;
+		max-width: clamp(55%, 10vw, 70%);
+
+		color: white;
+		text-align: center;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	h2 {

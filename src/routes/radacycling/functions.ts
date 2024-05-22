@@ -207,6 +207,9 @@ export function handleSwipe(element: HTMLElement, onSwipeRight: () => void, onSw
     });
 }
 
-export function anErrorOccurred(error: string = 'An error has occurred...') {
+import { dictionary } from "./stores"
+import { get } from 'svelte/store';
+let storedDictionary = get(dictionary)
+export function anErrorOccurred(error: string = storedDictionary.anErrorHasOccurred) {
     toast.error(error, { position: 'bottom-center' });
 }

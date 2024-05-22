@@ -1,8 +1,11 @@
 import toast from "svelte-french-toast";
-import { activeSNavMenu, baseRoute, type CartItem, cartItems, dictionary } from "./stores"
+import { activeSNavMenu, baseRoute, type CartItem, cartItems, dictionary, language } from "./stores"
 import { get } from 'svelte/store';
 
 let storedDictionary = get(dictionary)
+let storedLanguage = get(language)
+
+type translatableContent = { en: string; es: string; }
 
 // Categories
 export type Category = {
@@ -10,10 +13,10 @@ export type Category = {
 
     imageSrc: string;
     smallImageSrc?: string;
-    imageAlt: string;
+    imageAlt: translatableContent;
 
-    name: string;
-    description?: string;
+    name: translatableContent;
+    description?: translatableContent;
     href: string;
 
     genderSpecific?: boolean;
@@ -21,13 +24,15 @@ export type Category = {
 };
 
 type CatalogSection = {
-    name: string;
+    name: translatableContent;
     categoryIds: number[];
     categories?: Category[]; // Optional, will be filled by denormalize function
 };
 
 export type CatalogCategory = {
-    name: string;
+    id: number;
+    href: string;
+    name: translatableContent;
     featuredCategoryId: number;
     featuredCategory?: Category; // Optional, will be filled by the denormalize function
     sections: CatalogSection[];
@@ -41,9 +46,9 @@ export let categories: Category[] = [
         id: 0,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cyclist wearing a short sleeve jersey",
-        name: "Short Sleeve Jerseys",
-        description: "Experience unparalleled comfort and aerodynamic performance with our short sleeve jerseys. Designed for the heat of competition and the freedom of the open road.",
+        imageAlt: { en: "Cyclist wearing a short sleeve jersey", es: "Ciclista con camiseta de manga corta" },
+        name: { en: "Short Sleeve Jerseys", es: "Camisetas de Manga Corta" },
+        description: { en: "Experience unparalleled comfort and aerodynamic performance with our short sleeve jerseys. Designed for the heat of competition and the freedom of the open road.", es: "Experimenta un confort y rendimiento aerodinámico incomparables con nuestras camisetas de manga corta. Diseñadas para el calor de la competencia y la libertad de la carretera abierta." },
         href: "short-sleeve-jerseys",
         genderSpecific: true,
     },
@@ -51,9 +56,9 @@ export let categories: Category[] = [
         id: 1,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cyclist wearing a long sleeve jersey",
-        name: "Long Sleeve Jerseys",
-        description: "Gear up for cooler rides with our long sleeve jerseys. Offering extra protection without sacrificing breathability or comfort.",
+        imageAlt: { en: "Cyclist wearing a long sleeve jersey", es: "Ciclista con camiseta de manga larga" },
+        name: { en: "Long Sleeve Jerseys", es: "Camisetas de Manga Larga" },
+        description: { en: "Gear up for cooler rides with our long sleeve jerseys. Offering extra protection without sacrificing breathability or comfort.", es: "Prepárate para rutas más frescas con nuestras camisetas de manga larga. Ofrecen protección adicional sin sacrificar la transpirabilidad o el confort." },
         href: "long-sleeve-jerseys",
         genderSpecific: true,
     },
@@ -61,9 +66,9 @@ export let categories: Category[] = [
         id: 2,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cyclist with cycling bib shorts",
-        name: "Bibs",
-        description: "Elevate your ride with our cycling bibs. Engineered for long-lasting comfort and support, ensuring you stay focused on the ride ahead.",
+        imageAlt: { en: "Cyclist with cycling bib shorts", es: "Ciclista con pantalones de ciclismo" },
+        name: { en: "Bibs", es: "Pantalones" },
+        description: { en: "Elevate your ride with our cycling bibs. Engineered for long-lasting comfort and support, ensuring you stay focused on the ride ahead.", es: "Eleva tu recorrido con nuestras mallas de ciclismo. Diseñadas para proporcionar confort y soporte duraderos, asegurando que te mantengas concentrado en el camino por delante." },
         href: "bibs",
         genderSpecific: true,
     },
@@ -71,9 +76,9 @@ export let categories: Category[] = [
         id: 3,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Casual shirt for cyclists",
-        name: "Shirts",
-        description: "Discover our range of casual cycling shirts, blending style and functionality. Perfect for the café stop or the commute.",
+        imageAlt: { en: "Casual shirt for cyclists", es: "Camisa casual para ciclistas" },
+        name: { en: "Shirts", es: "Camisas" },
+        description: { en: "Discover our range of casual cycling shirts, blending style and functionality. Perfect for the café stop or the commute.", es: "Descubre nuestra gama de camisas de ciclismo casual, que combinan estilo y funcionalidad. Perfectas para la parada en el café o el trayecto." },
         href: "shirts",
         genderSpecific: true,
     },
@@ -81,9 +86,9 @@ export let categories: Category[] = [
         id: 4,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cyclist wearing cycling shorts",
-        name: "Shorts",
-        description: "Find your perfect fit with our cycling shorts, designed for ultimate comfort and durability, mile after mile.",
+        imageAlt: { en: "Cyclist wearing cycling shorts", es: "Ciclista con shorts de ciclismo" },
+        name: { en: "Shorts", es: "Shorts" },
+        description: { en: "Find your perfect fit with our cycling shorts, designed for ultimate comfort and durability, mile after mile.", es: "Encuentra tu ajuste perfecto con nuestros shorts de ciclismo, diseñados para ofrecer la máxima comodidad y durabilidad, kilómetro tras kilómetro." },
         href: "shorts",
         genderSpecific: true,
     },
@@ -91,9 +96,9 @@ export let categories: Category[] = [
         id: 5,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cyclist wearing a jacket",
-        name: "Jackets & Vests",
-        description: "Brave the elements with our jackets and vests. From windproof to waterproof, layer up in style without compromising on performance.",
+        imageAlt: { en: "Cyclist wearing a jacket", es: "Ciclista con chaqueta" },
+        name: { en: "Jackets & Vests", es: "Chaquetas y Chalecos" },
+        description: { en: "Brave the elements with our jackets and vests. From windproof to waterproof, layer up in style without compromising on performance.", es: "Enfréntate a los elementos con nuestras chaquetas y chalecos. Desde a prueba de viento hasta impermeables, vístete por capas con estilo sin comprometer el rendimiento." },
         href: "jackets-vests",
         genderSpecific: true,
     },
@@ -101,9 +106,9 @@ export let categories: Category[] = [
         id: 6,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cycling accessories",
-        name: "Accessories",
-        description: "Complete your kit with our cycling accessories. Everything you need from gloves to caps, ensuring every ride is a great one.",
+        imageAlt: { en: "Cycling accessories", es: "Accesorios para ciclismo" },
+        name: { en: "Accessories", es: "Accesorios" },
+        description: { en: "Complete your kit with our cycling accessories. Everything you need from gloves to caps, ensuring every ride is a great one.", es: "Completa tu equipo con nuestros accesorios para ciclismo. Todo lo que necesitas desde guantes hasta gorras, asegurando que cada salida sea excepcional." },
         href: "accessories",
         genderSpecific: true,
     },
@@ -111,9 +116,9 @@ export let categories: Category[] = [
         id: 7,
         imageSrc: "demo/category_man.webp",
         smallImageSrc: "demo/man-small.webp",
-        imageAlt: "Complete collection of men's cycling wear",
-        name: "Men",
-        description: "Discover our comprehensive collection of men's cycling wear. Tailored for performance, comfort, and style.",
+        imageAlt: { en: "Complete collection of men's cycling wear", es: "Colección completa de ropa de ciclismo para hombres" },
+        name: { en: "Men", es: "Hombres" },
+        description: { en: "Discover our comprehensive collection of men's cycling wear. Tailored for performance, comfort, and style.", es: "Descubre nuestra colección completa de ropa de ciclismo para hombres. Diseñada para rendimiento, confort y estilo." },
         href: "men",
         genderSpecific: false,
     },
@@ -121,9 +126,9 @@ export let categories: Category[] = [
         id: 8,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cycling wear for hot conditions",
-        name: "Hot",
-        description: "Embrace summer with garments designed to keep you cool and comfortable when it’s scorching. Crafted with breathable fabrics for optimal ventilation, and that wick sweat away.",
+        imageAlt: { en: "Cycling wear for hot conditions", es: "Ropa de ciclismo para condiciones cálidas" },
+        name: { en: "Hot", es: "Calor" },
+        description: { en: "Embrace summer with garments designed to keep you cool and comfortable when it’s scorching. Crafted with breathable fabrics for optimal ventilation, and that wick sweat away.", es: "Afronta el verano con prendas diseñadas para mantenerte fresco y cómodo cuando hace mucho calor. Confeccionadas con tejidos transpirables para una ventilación óptima que aleja el sudor." },
         href: "hot-conditions",
         genderSpecific: true,
     },
@@ -131,9 +136,9 @@ export let categories: Category[] = [
         id: 9,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cycling wear for cold conditions",
-        name: "Cold",
-        description: "Conquer the cold with our cycling wear designed for chilly rides. Stay warm without the bulk, thanks to innovative thermal technologies and layering solutions.",
+        imageAlt: { en: "Cycling wear for cold conditions", es: "Ropa de ciclismo para condiciones frías" },
+        name: { en: "Cold", es: "Frío" },
+        description: { en: "Conquer the cold with our cycling wear designed for chilly rides. Stay warm without the bulk, thanks to innovative thermal technologies and layering solutions.", es: "Conquista el frío con nuestra ropa de ciclismo diseñada para paseos fríos. Mantente caliente sin volumen gracias a tecnologías térmicas innovadoras y soluciones de capas." },
         href: "cold-conditions",
         genderSpecific: true,
     },
@@ -141,9 +146,9 @@ export let categories: Category[] = [
         id: 10,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Cycling wear for wet conditions",
-        name: "Wet",
-        description: "Don’t let rain stop your ride. Our wet conditions gear is waterproof and breathable, keeping you dry and comfortable in any downpour.",
+        imageAlt: { en: "Cycling wear for wet conditions", es: "Ropa de ciclismo para condiciones húmedas" },
+        name: { en: "Wet", es: "Húmedo" },
+        description: { en: "Don’t let rain stop your ride. Our wet conditions gear is waterproof and breathable, keeping you dry and comfortable in any downpour.", es: "No dejes que la lluvia detenga tu paseo. Nuestro equipo para condiciones húmedas es impermeable y transpirable, manteniéndote seco y cómodo en cualquier aguacero." },
         href: "wet-conditions",
         genderSpecific: true,
     },
@@ -151,9 +156,9 @@ export let categories: Category[] = [
         id: 11,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Featured basics of cycling wear",
-        name: "Basics",
-        description: "Get started with our essentials. Quality basics that every cyclist needs, from reliable jerseys to versatile shorts.",
+        imageAlt: { en: "Featured basics of cycling wear", es: "Básicos destacados de ropa de ciclismo" },
+        name: { en: "Basics", es: "Básicos" },
+        description: { en: "Get started with our essentials. Quality basics that every cyclist needs, from reliable jerseys to versatile shorts.", es: "Comienza con nuestros esenciales. Básicos de calidad que todo ciclista necesita, desde camisetas confiables hasta shorts versátiles." },
         href: "basics",
         genderSpecific: true,
     },
@@ -161,9 +166,9 @@ export let categories: Category[] = [
         id: 12,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Featured 360-degree range of cycling wear",
-        name: "360",
-        description: "Experience our 360-degree range, where innovation meets the open road. Cutting-edge materials and designs that move with you.",
+        imageAlt: { en: "Featured 360-degree range of cycling wear", es: "Gama destacada de 360 grados de ropa de ciclismo" },
+        name: { en: "360", es: "360" },
+        description: { en: "Experience our 360-degree range, where innovation meets the open road. Cutting-edge materials and designs that move with you.", es: "Experimenta nuestra gama de 360 grados, donde la innovación se encuentra con la carretera abierta. Materiales y diseños de vanguardia que se mueven contigo." },
         href: "360-range",
         genderSpecific: true,
     },
@@ -171,9 +176,9 @@ export let categories: Category[] = [
         id: 13,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Featured pinnacle series of cycling wear",
-        name: "Pinnacle",
-        description: "Reach the summit with Pinnacle. Our premium line features the best in performance, comfort, and style, for serious cyclists who demand the best.",
+        imageAlt: { en: "Featured pinnacle series of cycling wear", es: "Serie cumbre destacada de ropa de ciclismo" },
+        name: { en: "Pinnacle", es: "Cumbre" },
+        description: { en: "Reach the summit with Pinnacle. Our premium line features the best in performance, comfort, and style, for serious cyclists who demand the best.", es: "Alcanza la cima con Cumbre. Nuestra línea premium ofrece lo mejor en rendimiento, confort y estilo, para ciclistas serios que exigen lo mejor." },
         href: "pinnacle-series",
         genderSpecific: true,
     },
@@ -181,9 +186,9 @@ export let categories: Category[] = [
         id: 14,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "Gift cards for cycling wear",
-        name: "Gift Cards",
-        description: "The perfect gift for the cyclist in your life. Give them the choice with our gift cards, redeemable across our entire range.",
+        imageAlt: { en: "Gift cards for cycling wear", es: "Tarjetas de regalo para ropa de ciclismo" },
+        name: { en: "Gift Cards", es: "Tarjetas de Regalo" },
+        description: { en: "The perfect gift for the cyclist in your life. Give them the choice with our gift cards, redeemable across our entire range.", es: "El regalo perfecto para el ciclista en tu vida. Dales la elección con nuestras tarjetas de regalo, canjeables en toda nuestra gama." },
         href: "gift-cards",
         genderSpecific: false,
         sizeAgnostic: true,
@@ -192,9 +197,9 @@ export let categories: Category[] = [
         id: 15,
         imageSrc: "demo/category_woman.webp",
         smallImageSrc: "demo/woman-small.webp",
-        imageAlt: "Complete collection of women's cycling wear",
-        name: "Women",
-        description: "Explore our full range of women's cycling wear, designed by women for women. Where comfort meets style, empowering your ride.",
+        imageAlt: { en: "Complete collection of women's cycling wear", es: "Colección completa de ropa de ciclismo para mujeres" },
+        name: { en: "Women", es: "Mujeres" },
+        description: { en: "Explore our full range of women's cycling wear, designed by women for women. Where comfort meets style, empowering your ride.", es: "Explora nuestra gama completa de ropa de ciclismo para mujeres, diseñada por mujeres para mujeres. Donde el confort se encuentra con el estilo, empoderando tu paseo." },
         href: "women",
         genderSpecific: false,
     },
@@ -202,9 +207,9 @@ export let categories: Category[] = [
         id: 16,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "XS Size Cycling Gear",
-        name: "XS",
-        description: "Discover our selection of XS size cycling gear, perfectly tailored for those who prefer a snug fit. Ideal for maximizing performance and comfort.",
+        imageAlt: { en: "XS Size Cycling Gear", es: "Equipo de ciclismo talla XS" },
+        name: { en: "XS", es: "XS" },
+        description: { en: "Discover our selection of XS size cycling gear, perfectly tailored for those who prefer a snug fit. Ideal for maximizing performance and comfort.", es: "Descubre nuestra selección de equipo de ciclismo talla XS, perfectamente adaptado para aquellos que prefieren un ajuste ceñido. Ideal para maximizar rendimiento y comodidad." },
         href: "size-xs",
         genderSpecific: false,
     },
@@ -212,9 +217,9 @@ export let categories: Category[] = [
         id: 17,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "S Size Cycling Gear",
-        name: "S",
-        description: "Explore our range of S size cycling wear, designed for optimal movement and aerodynamics. Perfect for cyclists who value precision and fit.",
+        imageAlt: { en: "S Size Cycling Gear", es: "Equipo de ciclismo talla S" },
+        name: { en: "S", es: "S" },
+        description: { en: "Explore our range of S size cycling wear, designed for optimal movement and aerodynamics. Perfect for cyclists who value precision and fit.", es: "Explora nuestra gama de ropa de ciclismo talla S, diseñada para un movimiento óptimo y aerodinámica. Perfecto para ciclistas que valoran la precisión y el ajuste." },
         href: "size-s",
         genderSpecific: false,
     },
@@ -222,9 +227,9 @@ export let categories: Category[] = [
         id: 18,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "M Size Cycling Gear",
-        name: "M",
-        description: "Browse our collection of M size cycling apparel, offering a balance of comfort and performance for the enthusiastic cyclist.",
+        imageAlt: { en: "M Size Cycling Gear", es: "Equipo de ciclismo talla M" },
+        name: { en: "M", es: "M" },
+        description: { en: "Browse our collection of M size cycling apparel, offering a balance of comfort and performance for the enthusiastic cyclist.", es: "Consulta nuestra colección de ropa de ciclismo talla M, que ofrece un equilibrio entre comodidad y rendimiento para el ciclista entusiasta." },
         href: "size-m",
         genderSpecific: false,
     },
@@ -232,9 +237,9 @@ export let categories: Category[] = [
         id: 19,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "L Size Cycling Gear",
-        name: "L",
-        description: "Check out our selection of L size cycling clothing, engineered for durability and freedom of movement. Gear up for any challenge.",
+        imageAlt: { en: "L Size Cycling Gear", es: "Equipo de ciclismo talla L" },
+        name: { en: "L", es: "L" },
+        description: { en: "Check out our selection of L size cycling clothing, engineered for durability and freedom of movement. Gear up for any challenge.", es: "Revisa nuestra selección de ropa de ciclismo talla L, diseñada para durabilidad y libertad de movimiento. Prepárate para cualquier desafío." },
         href: "size-l",
         genderSpecific: false,
     },
@@ -242,9 +247,9 @@ export let categories: Category[] = [
         id: 20,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "XL Size Cycling Gear",
-        name: "XL",
-        description: "Find your perfect fit with our XL size cycling gear, designed for extra comfort without compromising on performance.",
+        imageAlt: { en: "XL Size Cycling Gear", es: "Equipo de ciclismo talla XL" },
+        name: { en: "XL", es: "XL" },
+        description: { en: "Find your perfect fit with our XL size cycling gear, designed for extra comfort without compromising on performance.", es: "Encuentra tu ajuste perfecto con nuestro equipo de ciclismo talla XL, diseñado para un confort extra sin comprometer el rendimiento." },
         href: "size-xl",
         genderSpecific: false,
     },
@@ -252,33 +257,36 @@ export let categories: Category[] = [
         id: 21,
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
-        imageAlt: "XXL Size Cycling Gear",
-        name: "XXL",
-        description: "Explore our XXL size cycling wear for superior comfort and style. Ideal for those who seek extra room and ease.",
+        imageAlt: { en: "XXL Size Cycling Gear", es: "Equipo de ciclismo talla XXL" },
+        name: { en: "XXL", es: "XXL" },
+        description: { en: "Explore our XXL size cycling wear for superior comfort and style. Ideal for those who seek extra room and ease.", es: "Explora nuestra ropa de ciclismo talla XXL para un confort y estilo superiores. Ideal para aquellos que buscan espacio extra y facilidad." },
         href: "size-xxl",
         genderSpecific: false,
-    },
-]
+    }
+];
+
 
 export let categoryMenus: CatalogCategory[] = [
     {
-        name: "men",
+        id: 0,
+        name: { en: "men", es: "hombres" },
+        href: "men",
         featuredCategoryId: 7,
         sections: [
             {
-                name: "apparel",
+                name: { en: "apparel", es: "ropa" },
                 categoryIds: [
                     1, 2, 3, 4, 5, 6
                 ]
             },
             {
-                name: "conditions",
+                name: { en: "conditions", es: "condiciones" },
                 categoryIds: [
                     8, 9, 10
                 ]
             },
             {
-                name: "featured",
+                name: { en: "featured", es: "destacados" },
                 categoryIds: [
                     11, 12, 13, 14
                 ]
@@ -286,23 +294,25 @@ export let categoryMenus: CatalogCategory[] = [
         ]
     },
     {
-        name: "women",
+        id: 1,
+        name: { en: "women", es: "mujeres" },
+        href: "women",
         featuredCategoryId: 15,
         sections: [
             {
-                name: "apparel",
+                name: { en: "apparel", es: "ropa" },
                 categoryIds: [
                     1, 2, 3, 4, 5, 6
                 ]
             },
             {
-                name: "conditions",
+                name: { en: "conditions", es: "condiciones" },
                 categoryIds: [
                     8, 9, 10
                 ]
             },
             {
-                name: "featured",
+                name: { en: "featured", es: "destacados" },
                 categoryIds: [
                     11, 12, 13, 14
                 ]
@@ -361,8 +371,8 @@ export function denormalizeCategories(ids: number[]): Category[] {
     return denormalizedCategoryIds;
 }
 
-export function findCatalogCategoryByName(name: string): CatalogCategory | undefined {
-    return categoryMenus.find(categoryMenu => categoryMenu.name === name);
+export function findCatalogCategoryByID(id: number): CatalogCategory | undefined {
+    return categoryMenus.find(categoryMenu => categoryMenu.id === id);
 }
 
 export function findCatalogSectionByName(sectionName: string): CatalogSection | undefined {
@@ -370,7 +380,7 @@ export function findCatalogSectionByName(sectionName: string): CatalogSection | 
     const allSections: CatalogSection[] = categoryMenus.flatMap(category => category.sections);
 
     // Find the first section that matches the sectionName
-    const matchingSection = allSections.find(section => section.name === sectionName);
+    const matchingSection = allSections.find(section => section.name[storedLanguage] === sectionName);
 
     return matchingSection;
 }
@@ -409,7 +419,7 @@ export function getCategoryNamesFromIds(ids: number[]): string[] {
         if (!category) {
             throw new Error(`Category not found for id: ${id}`);
         }
-        return category.name;
+        return category.name[storedLanguage];
     });
 }
 
@@ -432,18 +442,18 @@ export const mainMenu: MenuItem[] = [
         href: baseRoute,
     },
     {
-        name: storedDictionary.mens,
+        name: storedDictionary.men,
         classname: 'baseButton extraSpaceLink',
         icon: 'man',
         iconStyle: 'font-size: 2em; margin-left: -8px;',
-        callback: () => generateSectionsMenu('men'),
+        callback: () => generateSectionsMenu(0),
     },
     {
-        name: storedDictionary.womens,
+        name: storedDictionary.women,
         classname: 'baseButton extraSpaceLink',
         icon: 'woman',
         iconStyle: 'font-size: 2em; margin-left: -8px;',
-        callback: () => generateSectionsMenu(`women`),
+        callback: () => generateSectionsMenu(1),
     },
     {
         name: storedDictionary.custom,
@@ -465,34 +475,34 @@ export const mainMenu: MenuItem[] = [
     },
 ];
 
-export function generateSectionsMenu(catalogCategoryName: string): void {
-    const catalogCategory = findCatalogCategoryByName(catalogCategoryName);
+export function generateSectionsMenu(catalogCategoryID: number): void {
+    const catalogCategory = findCatalogCategoryByID(catalogCategoryID);
 
     if (!catalogCategory) {
-        console.error(`Catalog category ${catalogCategoryName} not found`);
+        console.error(`Catalog category ${catalogCategoryID} not found`);
         return;
     }
 
     const sectionsMenu: MenuItem[] = [
         {
-            name: catalogCategoryName,
+            name: catalogCategory.name[storedLanguage],
             classname: "baseButton backButton",
             callback: () => renderMenu(mainMenu),
         },
         ...catalogCategory.sections.map(section => ({
-            name: section.name,
-            callback: () => generateCategoryMenu(section.name, catalogCategory.name),
+            name: section.name[storedLanguage],
+            callback: () => generateCategoryMenu(section.name[storedLanguage], catalogCategoryID),
         })),
     ];
 
     renderMenu(sectionsMenu);
 }
 
-export function generateCategoryMenu(sectionName: string, catalogCategoryName: string): void {
+export function generateCategoryMenu(sectionName: string, catalogCategoryID: number): void {
     // Find the catalog category by name
-    const catalogCategory = findCatalogCategoryByName(catalogCategoryName);
+    const catalogCategory = findCatalogCategoryByID(catalogCategoryID);
     if (!catalogCategory) {
-        console.error(`Catalog category ${catalogCategoryName} not found`);
+        console.error(`Catalog category ${catalogCategoryID} not found`);
         return;
     }
 
@@ -500,9 +510,9 @@ export function generateCategoryMenu(sectionName: string, catalogCategoryName: s
     const denormalizedCatalogCategory = denormalizeCatalogCategory(catalogCategory);
 
     // Find the section within the catalog category
-    const section = denormalizedCatalogCategory.sections.find(s => s.name === sectionName);
+    const section = denormalizedCatalogCategory.sections.find(s => s.name[storedLanguage] === sectionName);
     if (!section || !section.categories) {
-        console.error(`Section ${sectionName} not found in catalog category ${catalogCategoryName}`);
+        console.error(`Section ${sectionName} not found in catalog category ${catalogCategoryID}`);
         return;
     }
 
@@ -511,12 +521,12 @@ export function generateCategoryMenu(sectionName: string, catalogCategoryName: s
         {
             name: sectionName,
             classname: "baseButton backButton",
-            callback: () => generateSectionsMenu(catalogCategoryName),
+            callback: () => generateSectionsMenu(catalogCategoryID),
         },
         ...section.categories.map(category => ({
-            name: category.name,
+            name: category.name[storedLanguage],
             href: `${baseRoute}/catalog/${category.href}/${category.genderSpecific
-                ? catalogCategoryName
+                ? catalogCategory.href
                 : ''}`,
         })),
     ];
@@ -533,12 +543,12 @@ export function renderMenu(menu: MenuItem[]) {
 // Products
 export type Product = {
     id: number,
-    name: string,
-    description: string,
+    name: translatableContent,
+    description: translatableContent,
     details: TableEntry[],
     imageSrc: string,
     imgHoverSrc: string | undefined,
-    imageAlt: string,
+    imageAlt: translatableContent,
     price: string,
     oldPrice: string | undefined,
     versions: Version[] | undefined,
@@ -549,46 +559,49 @@ export type Product = {
 export type Version = {
     imageSrc: string,
     imgHoverSrc: string | undefined,
-    imageAlt: string,
+    imageAlt: translatableContent,
     hrefParam: string,
 }
 
 type TableEntry = {
-    label: string;
-    value: string;
+    label: translatableContent;
+    value: translatableContent;
 };
 
 export let storage: Record<string, Product> = {
     "jersey2024": {
         id: 0,
-        name: "Jersey 2024",
+        name: { en: "Jersey 2024", es: "Camiseta 2024" },
         categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 18, 19, 20],
-        description: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
+        description: {
+            en: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
+            es: "Desata tu potencial ciclista con la 'Camiseta 2024'! Diseñada para un confort y rendimiento supremos, esta camiseta combina tela transpirable con un diseño elegante. Sus colores vibrantes garantizan visibilidad, mientras que el ajuste ergonómico proporciona una movilidad sin igual. Perfecta tanto para paseos casuales como para competencias. ¡Eleva tu paseo hoy!"
+        },
         details: [
-            { label: 'Material', value: 'High-Quality, Breathable Polyester' },
-            { label: 'Color', value: 'Vibrant Blue' },
-            { label: 'Size Availability', value: 'XS, S, M, L, XL, XXL' },
-            { label: 'Fit Type', value: 'Ergonomic, Race Fit' },
-            { label: 'Features', value: 'Quick-Dry, UV Protection, Anti-Sweat' },
-            { label: 'Warranty', value: "1 Year Manufacturer's Warranty" },
-            { label: 'Care Instructions', value: 'Machine Washable, Do Not Iron' },
+            { label: { en: 'Material', es: 'Material' }, value: { en: 'High-Quality, Breathable Polyester', es: 'Poliéster transpirable de alta calidad' } },
+            { label: { en: 'Color', es: 'Color' }, value: { en: 'Vibrant Blue', es: 'Azul vibrante' } },
+            { label: { en: 'Size Availability', es: 'Disponibilidad de tallas' }, value: { en: 'XS, S, M, L, XL, XXL', es: 'XS, S, M, L, XL, XXL' } },
+            { label: { en: 'Fit Type', es: 'Tipo de ajuste' }, value: { en: 'Ergonomic, Race Fit', es: 'Ajuste ergonómico, de competición' } },
+            { label: { en: 'Features', es: 'Características' }, value: { en: 'Quick-Dry, UV Protection, Anti-Sweat', es: 'Secado rápido, protección UV, anti-sudor' } },
+            { label: { en: 'Warranty', es: 'Garantía' }, value: { en: "1 Year Manufacturer's Warranty", es: "Garantía de 1 año del fabricante" } },
+            { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine Washable, Do Not Iron', es: 'Lavable a máquina, no planchar' } },
         ],
         imageSrc: "Resources/Jersey2024Red.webp",
         imgHoverSrc: "Resources/Jersey2024RedBig.webp",
-        imageAlt: "Red Jersey 2024",
+        imageAlt: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
         price: "$89.97",
         oldPrice: "$125.00",
         versions: [
             {
                 imageSrc: "Resources/Jersey2024Red.webp",
                 imgHoverSrc: "Resources/Jersey2024RedBig.webp",
-                imageAlt: "View Red Jersey 2024",
+                imageAlt: { en: "View Red Jersey 2024", es: "Ver Camiseta Roja 2024" },
                 hrefParam: "red",
             },
             {
                 imageSrc: "Resources/Jersey2024Blue.webp",
                 imgHoverSrc: "Resources/cremalleraJersey.webp",
-                imageAlt: "View Blue Jersey 2024",
+                imageAlt: { en: "View Blue Jersey 2024", es: "Ver Camiseta Azul 2024" },
                 hrefParam: "blue",
             },
         ],
@@ -596,36 +609,39 @@ export let storage: Record<string, Product> = {
     },
     "cyclingBib": {
         id: 1,
-        name: "Cycling Bib 2024",
+        name: { en: "Cycling Bib 2024", es: "Pantalón de Ciclismo 2024" },
         categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 17, 19, 21],
-        description: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
+        description: {
+            en: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
+            es: "Experimenta el pináculo del confort con el Pantalón de Ciclismo 2024. Diseñado para la resistencia, su diseño elegante ofrece un ajuste como una segunda piel, mientras que los tejidos avanzados proporcionan una transpirabilidad óptima. Disponible en rojo o azul, es la elección profesional para ciclistas serios. Eleva tu paseo por solo $99.97."
+        },
         details: [
-            { label: 'Material', value: 'Premium Lycra for stretch and comfort' },
-            { label: 'Chamois', value: 'Multi-density, contoured foam padding' },
-            { label: 'Leg Grippers', value: 'Silicone dots for secure fit' },
-            { label: 'Stitching', value: 'Flatlock seams to prevent chafing' },
-            { label: 'Straps', value: 'Mesh for breathability and support' },
-            { label: 'Aerodynamics', value: 'Wind tunnel tested design' },
-            { label: 'Durability', value: 'Reinforced stitching at stress points' },
-            { label: 'UV Protection', value: 'UPF 50+ sun protection' },
-            { label: 'Care Instructions', value: 'Machine wash cold, hang to dry' },
+            { label: { en: 'Material', es: 'Material' }, value: { en: 'Premium Lycra for stretch and comfort', es: 'Licra premium para elasticidad y comodidad' } },
+            { label: { en: 'Chamois', es: 'Badana' }, value: { en: 'Multi-density, contoured foam padding', es: 'Acolchado de espuma contorneado de múltiples densidades' } },
+            { label: { en: 'Leg Grippers', es: 'Agarres para piernas' }, value: { en: 'Silicone dots for secure fit', es: 'Puntos de silicona para un ajuste seguro' } },
+            { label: { en: 'Stitching', es: 'Costuras' }, value: { en: 'Flatlock seams to prevent chafing', es: 'Costuras flatlock para prevenir rozaduras' } },
+            { label: { en: 'Straps', es: 'Tirantes' }, value: { en: 'Mesh for breathability and support', es: 'Malla para transpirabilidad y soporte' } },
+            { label: { en: 'Aerodynamics', es: 'Aerodinámica' }, value: { en: 'Wind tunnel tested design', es: 'Diseño probado en túnel de viento' } },
+            { label: { en: 'Durability', es: 'Durabilidad' }, value: { en: 'Reinforced stitching at stress points', es: 'Costuras reforzadas en puntos de estrés' } },
+            { label: { en: 'UV Protection', es: 'Protección UV' }, value: { en: 'UPF 50+ sun protection', es: 'Protección solar UPF 50+' } },
+            { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine wash cold, hang to dry', es: 'Lavar a máquina en frío, colgar para secar' } },
         ],
         imageSrc: "Resources/CyclingBib2024.webp",
         imgHoverSrc: "Resources/bibFocus.webp",
-        imageAlt: "Cycling Bib 2024",
+        imageAlt: { en: "Cycling Bib 2024", es: "Pantalón de Ciclismo 2024" },
         price: "$99.97",
         oldPrice: undefined,
         versions: [
             {
                 imageSrc: "Resources/CyclingBib2024.webp",
                 imgHoverSrc: "Resources/bibFocus.webp",
-                imageAlt: "View Red Cycling Bib 2024",
+                imageAlt: { en: "View Red Cycling Bib 2024", es: "Ver Pantalón Rojo de Ciclismo 2024" },
                 hrefParam: "red",
             },
             {
                 imageSrc: "Resources/CyclingBib2024Blue.webp",
                 imgHoverSrc: "Resources/bibFocus.webp",
-                imageAlt: "View Blue Cycling Bib 2024",
+                imageAlt: { en: "View Blue Cycling Bib 2024", es: "Ver Pantalón Azul de Ciclismo 2024" },
                 hrefParam: "blue",
             },
         ],
@@ -633,24 +649,27 @@ export let storage: Record<string, Product> = {
     },
     "bibPlusJerseys": {
         id: 2,
-        name: "Bib + Jersey + Free Socks",
+        name: { en: "Bib + 2 Jerseys + Free Socks", es: "Pantalón + 2 Camisetas + Calcetines Gratis" },
         categoryIds: [0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 15, 19],
-        description: "Score the ultimate cycling trio with 'Bib + Jersey + Free Socks'! At just $219.97, enjoy professional-grade comfort and unbeatable style. This exclusive offer bundles sleek aerodynamics, breathability, and a complimentary touch of coziness for your feet. Upgrade your ride in one go!",
+        description: {
+            en: "Score the ultimate cycling trio with 'Bib + 2 Jerseys + Free Socks'! At just $219.97, enjoy professional-grade comfort and unbeatable style. This exclusive offer bundles sleek aerodynamics, breathability, and a complimentary touch of coziness for your feet. Upgrade your ride in one go!",
+            es: "Consigue el trío ciclista definitivo con 'Pantalón + 2 Camisetas + Calcetines Gratis'! Por solo $219.97, disfruta de un confort de nivel profesional y un estilo inigualable. Esta oferta exclusiva incluye aerodinámica elegante, transpirabilidad y un toque de comodidad adicional para tus pies. ¡Mejora tu paseo de una vez por todas!"
+        },
         details: [
-            { "label": "Material", "value": "Technical Fabric, Moisture-Wicking" },
-            { "label": "Bib Material", "value": "Compression Lycra for Support and Performance" },
-            { "label": "Jersey Fit", "value": "Form-Fitting, Aerodynamic Cut" },
-            { "label": "Sock Fabric", "value": "Breathable, Anti-Bacterial Yarn" },
-            { "label": "Package Includes", "value": "1 Bib, 1 Jersey, 1 Pair of Socks" },
-            { "label": "Comfort", "value": "Chamois Padding in Bib, Flat Seams to Prevent Chafing" },
-            { "label": "Durability", "value": "Reinforced Stitching for Longevity" },
-            { "label": "UV Protection", "value": "UPF 50+ Sun Protection" },
-            { "label": "Warranty", "value": "2 Years Manufacturer's Warranty" },
-            { "label": "Care Instructions", "value": "Machine Washable, Air Dry Recommended" },
+            { label: { en: "Material", es: "Material" }, value: { en: "Technical Fabric, Moisture-Wicking", es: "Tejido técnico, absorbe humedad" } },
+            { label: { en: "Bib Material", es: "Material del Pantalón" }, value: { en: "Compression Lycra for Support and Performance", es: "Licra de compresión para soporte y rendimiento" } },
+            { label: { en: "Jersey Fit", es: "Ajuste de las Camisetas" }, value: { en: "Form-Fitting, Aerodynamic Cut", es: "Ajuste ceñido, corte aerodinámico" } },
+            { label: { en: "Sock Fabric", es: "Tejido de los Calcetines" }, value: { en: "Breathable, Anti-Bacterial Yarn", es: "Hilo transpirable, antibacteriano" } },
+            { label: { en: "Package Includes", es: "El Paquete Incluye" }, value: { en: "1 Bib, 2 Jerseys, 1 Pair of Socks", es: "1 Pantalón, 2 Camisetas, 1 Par de Calcetines" } },
+            { label: { en: "Comfort", es: "Comodidad" }, value: { en: "Chamois Padding in Bib, Flat Seams to Prevent Chafing", es: "Acolchado de badana en el pantalón, costuras planas para prevenir rozaduras" } },
+            { label: { en: "Durability", es: "Durabilidad" }, value: { en: "Reinforced Stitching for Longevity", es: "Costuras reforzadas para una mayor duración" } },
+            { label: { en: "UV Protection", es: "Protección UV" }, value: { en: "UPF 50+ Sun Protection", es: "Protección solar UPF 50+" } },
+            { label: { en: "Warranty", es: "Garantía" }, value: { en: "2 Years Manufacturer's Warranty", es: "Garantía del fabricante de 2 años" } },
+            { label: { en: "Care Instructions", es: "Instrucciones de cuidado" }, value: { en: "Machine Washable, Air Dry Recommended", es: "Lavable a máquina, se recomienda secar al aire" } },
         ],
         imageSrc: "Resources/1BibPlus2Jerseys.webp",
         imgHoverSrc: "Resources/radimir.jpg",
-        imageAlt: "Offer: 1 Bib Plus 1 Jersey Plus Free Socks",
+        imageAlt: { en: "Offer: 1 Bib Plus 2 Jerseys Plus Free Socks", es: "Oferta: 1 Pantalón + 2 Camisetas + Calcetines Gratis" },
         price: "$219.97",
         oldPrice: "$280.00",
         versions: undefined,
@@ -658,27 +677,31 @@ export let storage: Record<string, Product> = {
     },
     "radaSocks": {
         id: 3,
-        name: "RADA Socks",
+        name: { en: "RADA Socks", es: "Calcetines RADA" },
         categoryIds: [6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
+        description: {
+            en: "Step into comfort with RADA Socks — where coziness meets style. These premium socks hug your feet with softness while offering a snug fit, perfect for any adventure. At just $16.00, they're a steal from their usual $25.00. Upgrade your sock drawer and walk in a cloud of comfort!",
+            es: "Adéntrate en el confort con los Calcetines RADA — donde la comodidad se encuentra con el estilo. Estos calcetines premium abrazan tus pies con suavidad mientras ofrecen un ajuste perfecto, ideal para cualquier aventura. Por solo $16.00, son una ganga de su precio habitual de $25.00. ¡Mejora tu cajón de calcetines y camina en una nube de confort!"
+        },
         details: [
-            { label: 'Material', value: 'Premium Soft Cotton Blend' },
-            { label: 'Size', value: 'One Size Fits Most' },
-            { label: 'Height', value: 'Crew Cut Length' },
-            { label: 'Thickness', value: 'Medium Cushioning for Comfort' },
-            { label: 'Features', value: 'Reinforced Heel & Toe, Arch Support' },
-            { label: 'Packaging', value: 'Eco-Friendly, Biodegradable Bag' },
-            { label: 'Care Instructions', value: 'Machine Wash Cold, Tumble Dry Low' },
+            { label: { en: 'Material', es: 'Material' }, value: { en: 'Premium Soft Cotton Blend', es: 'Mezcla de algodón suave premium' } },
+            { label: { en: 'Size', es: 'Tamaño' }, value: { en: 'One Size Fits Most', es: 'Talla única para la mayoría' } },
+            { label: { en: 'Height', es: 'Altura' }, value: { en: 'Crew Cut Length', es: 'Longitud a la altura de la tripulación' } },
+            { label: { en: 'Thickness', es: 'Grosor' }, value: { en: 'Medium Cushioning for Comfort', es: 'Amortiguación media para comodidad' } },
+            { label: { en: 'Features', es: 'Características' }, value: { en: 'Reinforced Heel & Toe, Arch Support', es: 'Talón y punta reforzados, soporte de arco' } },
+            { label: { en: 'Packaging', es: 'Empaque' }, value: { en: 'Eco-Friendly, Biodegradable Bag', es: 'Bolsa biodegradable ecológica' } },
+            { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine Wash Cold, Tumble Dry Low', es: 'Lavar a máquina en frío, secar en secadora a baja temperatura' } },
         ],
-        description: "Step into comfort with RADA Socks — where coziness meets style. These premium socks hug your feet with softness while offering a snug fit, perfect for any adventure. At just $16.00, they're a steal from their usual $25.00. Upgrade your sock drawer and walk in a cloud of comfort!",
         imageSrc: "Resources/RadaSocks.webp",
         imgHoverSrc: undefined,
-        imageAlt: "RADA Socks",
+        imageAlt: { en: "RADA Socks", es: "Calcetines RADA" },
         price: "$16.00",
         oldPrice: "$25.00",
         versions: undefined,
         href: "rada-socks",
     },
-}
+};
+
 
 export function findProductsByCategoryIds(categoryIds: number[]): Product[] {
     // Convert the storage object to an array of products
@@ -878,7 +901,7 @@ export type DenormalizedCartItem = {
     href: string,
 }
 
-export function denormalizeCartItems(cartItems: CartItem[], storage: Record<string, Product>): DenormalizedCartItem[] {
+export function denormalizeCartItems(cartItems: CartItem[]): DenormalizedCartItem[] {
     return cartItems.map((item) => {
         const product = Object.values(storage).find(product => product.id === item.productId);
         if (!product) {
@@ -890,9 +913,9 @@ export function denormalizeCartItems(cartItems: CartItem[], storage: Record<stri
         return {
             productId: item.productId,
             quantity: item.quantity,
-            name: product.name,
+            name: product.name[storedLanguage],
             imageSrc: product.imageSrc,
-            description: product.description,
+            description: product.description[storedLanguage],
             price: product.price,
             totalItemPrice: totalItemPrice,
             href: product.href
@@ -912,7 +935,7 @@ export function addToCart(productId: number, quantity: number, name?: string): v
                 quantity,
             };
             if (name) {
-                toast.success("Item quantity has been updated.",
+                toast.success(storedDictionary.quantityUpdated,
                     {
                         style:
                             "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
@@ -923,7 +946,7 @@ export function addToCart(productId: number, quantity: number, name?: string): v
         } else {
             // Add new item to the cart
             if (name) {
-                toast.success(`"${name}" has been added to the cart!`,
+                toast.success(`"${name}" ${storedDictionary.hasBeenAddedToTheCart}`,
                     {
                         style:
                             "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
@@ -938,7 +961,7 @@ export function addToCart(productId: number, quantity: number, name?: string): v
 export function removeFromCart(productId: number, name: string): void {
     cartItems.update(items => items.filter(item => item.productId !== productId));
 
-    toast.success(`"${name}" has been removed from the cart.`,
+    toast.success(`"${name}" ${storedDictionary.hasBeenRemovedFromTheCart}`,
         {
             style:
                 "max-width: 60%; text-align: center; box-shadow: 2px 2px 20px var(--content-5)",
@@ -954,38 +977,46 @@ export function getCartItemFromID(cartItemsStore: CartItem[], productId: number)
 // Previous work
 export type craftItem = {
     src: string;
-    alt: string;
-    title: string;
-    description: string;
+    alt: translatableContent;
+    title: translatableContent;
+    description: translatableContent;
 }
 
 export let crafts: craftItem[] = [
     {
         src: `demo/woman-small.webp`,
-        alt: 'Cyclist wearing our high-performance jersey',
-        title: 'High-Performance Women’s Jersey',
-        description:
-            'Showcasing our latest in women’s cycling jerseys, this piece combines aerodynamics with unparalleled comfort. Developed in collaboration with professional cyclists, it features breathable, moisture-wicking fabric and a form-fitting design for those who refuse to compromise on performance or style.',
+        alt: { en: 'Cyclist wearing our high-performance jersey', es: 'Ciclista usando nuestra camiseta de alto rendimiento' },
+        title: { en: 'High-Performance Women’s Jersey', es: 'Camiseta de Alto Rendimiento para Mujeres' },
+        description: {
+            en: 'Showcasing our latest in women’s cycling jerseys, this piece combines aerodynamics with unparalleled comfort. Developed in collaboration with professional cyclists, it features breathable, moisture-wicking fabric and a form-fitting design for those who refuse to compromise on performance or style.',
+            es: 'Presentando lo último en camisetas de ciclismo para mujeres, esta pieza combina la aerodinámica con un confort sin igual. Desarrollada en colaboración con ciclistas profesionales, cuenta con un tejido transpirable que absorbe la humedad y un diseño ajustado para quienes no renuncian al rendimiento ni al estilo.'
+        },
     },
     {
         src: `demo/man-small.webp`,
-        alt: 'Cyclist in action wearing our mountain biking gear',
-        title: 'All-Terrain Mountain Biking Gear',
-        description:
-            'Designed for the trails, our all-terrain gear set is built to withstand the most challenging conditions. With reinforced stitching, ample storage for long rides, and integrated protective padding, this gear represents our commitment to combining durability with the freedom of movement.',
+        alt: { en: 'Cyclist in action wearing our mountain biking gear', es: 'Ciclista en acción usando nuestro equipo de ciclismo de montaña' },
+        title: { en: 'All-Terrain Mountain Biking Gear', es: 'Equipo de Ciclismo de Montaña Todo Terreno' },
+        description: {
+            en: 'Designed for the trails, our all-terrain gear set is built to withstand the most challenging conditions. With reinforced stitching, ample storage for long rides, and integrated protective padding, this gear represents our commitment to combining durability with the freedom of movement.',
+            es: 'Diseñado para los senderos, nuestro equipo todo terreno está construido para resistir las condiciones más desafiantes. Con costuras reforzadas, amplio almacenamiento para recorridos largos y acolchado protector integrado, este equipo representa nuestro compromiso de combinar durabilidad con la libertad de movimiento.'
+        },
     },
     {
         src: `demo/amsterdam-small.webp`,
-        alt: 'Urban cyclist apparel by the canals of Amsterdam',
-        title: 'Urban Commuter Series',
-        description:
-            'Inspired by the cycling culture of Amsterdam, our Urban Commuter Series marries functionality with sleek, minimalist design. Waterproof, yet breathable materials and subtle reflective details ensure safety and comfort in urban environments, making every commute a statement.',
+        alt: { en: 'Urban cyclist apparel by the canals of Amsterdam', es: 'Ropa de ciclista urbano junto a los canales de Ámsterdam' },
+        title: { en: 'Urban Commuter Series', es: 'Serie para Ciclistas Urbanos' },
+        description: {
+            en: 'Inspired by the cycling culture of Amsterdam, our Urban Commuter Series marries functionality with sleek, minimalist design. Waterproof, yet breathable materials and subtle reflective details ensure safety and comfort in urban environments, making every commute a statement.',
+            es: 'Inspirada en la cultura ciclista de Ámsterdam, nuestra Serie para Ciclistas Urbanos combina funcionalidad con un diseño elegante y minimalista. Materiales impermeables pero transpirables y detalles reflectantes sutiles garantizan la seguridad y el confort en entornos urbanos, haciendo de cada trayecto una declaración de estilo.'
+        },
     },
     {
         src: `demo/women.webp`,
-        alt: 'Eco-friendly cycling wear collection',
-        title: 'Eco-Friendly Collection',
-        description:
-            'Our Eco-Friendly Collection is a testament to our commitment to sustainability. Made from recycled materials without compromising on performance, these pieces offer cyclists a way to support the environment while enjoying their ride. Join us on the journey towards a greener future.',
+        alt: { en: 'Eco-friendly cycling wear collection', es: 'Colección de ropa de ciclismo ecológica' },
+        title: { en: 'Eco-Friendly Collection', es: 'Colección Ecológica' },
+        description: {
+            en: 'Our Eco-Friendly Collection is a testament to our commitment to sustainability. Made from recycled materials without compromising on performance, these pieces offer cyclists a way to support the environment while enjoying their ride. Join us on the journey towards a greener future.',
+            es: 'Nuestra Colección Ecológica es un testimonio de nuestro compromiso con la sostenibilidad. Hecha de materiales reciclados sin comprometer el rendimiento, estas piezas ofrecen a los ciclistas una forma de apoyar al medio ambiente mientras disfrutan de su paseo. Únete a nosotros en el camino hacia un futuro más verde.'
+        },
     },
 ];

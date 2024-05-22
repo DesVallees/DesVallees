@@ -32,7 +32,7 @@
 		<AccountPage bind:authenticating />
 	{:else}
 		<div class="logIn" in:fade>
-			<h1>Log in to RADA</h1>
+			<h1>{$dictionary.logInToRADA}</h1>
 			<form on:submit|preventDefault={logIn}>
 				<div class="inputGroup">
 					<ion-icon name="mail" />
@@ -51,35 +51,32 @@
 					<ion-icon name="lock-closed" />
 					<input
 						type="password"
-						placeholder="Password"
+						placeholder={$dictionary.password}
 						class="ghostButton"
 						required
 						bind:value={password}
 					/>
 				</div>
 				<button type="button" class="link forgotPassword" on:click={() => anErrorOccurred()}
-					>Forgot Password</button
+					>{$dictionary.forgotPassword}</button
 				>
 
-				<button type="submit" class="button">Log In</button>
+				<button type="submit" class="button">{$dictionary.logIn}</button>
 			</form>
 
 			<hr />
 
 			<div class="align" style="justify-content: center; font-size: 1.05rem;">
-				<p>Don't have an account?</p>
-				<a href="{baseRoute}/sign-in" class="link">Sign In</a>
+				<p>{$dictionary.dontHaveAnAccount}</p>
+				<a href="{baseRoute}/sign-in" class="link">{$dictionary.signIn}</a>
 			</div>
 		</div>
 	{/if}
 {/key}
 
 <svelte:head>
-	<title>Account | RADA Cycling Wear</title>
-	<meta
-		name="description"
-		content="Manage your Rada Cycling Wear profile with ease. Access your orders, track custom cycling wear progress, and update your preferences all in one place. Simplify your cycling journey with personalized account settings. Log in to elevate your experience!"
-	/>
+	<title>{$dictionary.myAccount} | RADA Cycling Wear</title>
+	<meta name="description" content={$dictionary.accountPageDescription} />
 </svelte:head>
 
 <style>

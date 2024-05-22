@@ -2,38 +2,37 @@
 	import { page } from '$app/stores';
 	import toast from 'svelte-french-toast';
 	import {
-		findCatalogCategoryByName,
+		findCatalogCategoryByID,
 		type CatalogCategory,
 		denormalizeCatalogCategory,
-		featuredCategories,
 	} from '../mockDb';
-	import { baseImageRoute, baseRoute, dictionary } from '../stores';
+	import { baseImageRoute, baseRoute, dictionary, language } from '../stores';
 	import ChangeLanguage from './changeLanguage.svelte';
 	import Logo from './logo.svelte';
 	import SNav from './sNav.svelte';
-	import { blur, fade } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { clickOutsideOrChild } from '../functions';
 
 	let active: boolean = false;
 
 	export let isCatalogMenuVisible: boolean = false;
 	let catalogMenu: CatalogCategory | undefined;
-	let lastMenuOpened = '';
-	function openCatalogMenu(menu: string) {
+	let lastMenuOpened: number = -1;
+	function openCatalogMenu(menuID: number) {
 		// Get menu information.
-		catalogMenu = findCatalogCategoryByName(menu);
+		catalogMenu = findCatalogCategoryByID(menuID);
 		if (catalogMenu) {
 			catalogMenu = denormalizeCatalogCategory(catalogMenu);
 		} else {
-			toast.error(`There has been an error opening the "${menu}" menu.`);
+			toast.error(`There has been an error opening the "${menuID}" menu.`);
 		}
 
-		if (lastMenuOpened === menu && isCatalogMenuVisible) {
+		if (lastMenuOpened === menuID && isCatalogMenuVisible) {
 			isCatalogMenuVisible = false;
-			lastMenuOpened = '';
+			lastMenuOpened = -1;
 		} else {
 			isCatalogMenuVisible = true;
-			lastMenuOpened = menu;
+			lastMenuOpened = menuID;
 		}
 	}
 </script>
@@ -63,13 +62,13 @@
 			>
 			<button
 				class="link"
-				class:active={lastMenuOpened === 'men'}
-				on:click={() => openCatalogMenu('men')}>{$dictionary.mens}</button
+				class:active={lastMenuOpened === 0}
+				on:click={() => openCatalogMenu(0)}>{$dictionary.men}</button
 			>
 			<button
 				class="link"
-				class:active={lastMenuOpened === 'women'}
-				on:click={() => openCatalogMenu('women')}>{$dictionary.womens}</button
+				class:active={lastMenuOpened === 1}
+				on:click={() => openCatalogMenu(1)}>{$dictionary.women}</button
 			>
 			<a
 				class="link"
@@ -119,22 +118,22 @@
 				class="x catalogMenu"
 				on:outside={() => {
 					isCatalogMenuVisible = false;
-					lastMenuOpened = '';
+					lastMenuOpened = -1;
 				}}
 				use:clickOutsideOrChild
 				out:fade
 			>
 				{#each catalogMenu.sections as section}
 					<div class="catalogMenuSection">
-						<h2>{section.name}</h2>
+						<h2>{section.name[$language]}</h2>
 						<div class="catalogMenuLinks">
 							{#if section.categories}
 								{#each section.categories as category}
 									<a
 										class="link"
 										href="{baseRoute}/catalog/{category.href}/{category.genderSpecific
-											? lastMenuOpened
-											: ''}">{category.name}</a
+											? catalogMenu.href
+											: ''}">{category.name[$language]}</a
 									>
 								{/each}
 							{/if}
@@ -147,14 +146,14 @@
 							.featuredCategory?.genderSpecific
 							? lastMenuOpened
 							: ''}"
-						aria-label={catalogMenu.featuredCategory?.name}
+						aria-label={catalogMenu.featuredCategory?.name[$language]}
 						class="featuredSectionLink"
 					>
 						<img
 							src="{baseImageRoute}/{catalogMenu.featuredCategory?.imageSrc}"
-							alt={catalogMenu.featuredCategory?.imageAlt}
+							alt={catalogMenu.featuredCategory?.imageAlt[$language]}
 						/>
-						<h2>{catalogMenu.featuredCategory?.name}</h2>
+						<h2>{catalogMenu.featuredCategory?.name[$language]}</h2>
 					</a>
 				</div>
 			</div>

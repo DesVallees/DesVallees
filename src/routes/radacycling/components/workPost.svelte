@@ -1,17 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fade, scale } from 'svelte/transition';
-	import { baseImageRoute } from '../stores';
-
-	interface ImageItem {
-		src: string;
-		alt: string;
-		title: string;
-		description: string;
-	}
+	import { scale } from 'svelte/transition';
+	import { baseImageRoute, language } from '../stores';
+	import type { craftItem } from '../mockDb';
 
 	export let close: () => void;
-	export let selectedImage: ImageItem;
+	export let selectedImage: craftItem;
 
 	// Close modal on Escape key press
 	const handleKeydown = (event: KeyboardEvent) => {
@@ -33,12 +27,15 @@
 		<button class="close" on:click={close}><ion-icon name="close-outline" /></button>
 		<div class="content">
 			<div class="imageContainer">
-				<img src="{baseImageRoute}/{selectedImage.src}" alt={selectedImage.alt} />
+				<img
+					src="{baseImageRoute}/{selectedImage.src}"
+					alt={selectedImage.alt[$language]}
+				/>
 			</div>
 			<div class="description">
-				<h2>{selectedImage.title}</h2>
+				<h2>{selectedImage.title[$language]}</h2>
 				<p>
-					{selectedImage.description}
+					{selectedImage.description[$language]}
 				</p>
 			</div>
 		</div>

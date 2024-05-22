@@ -99,11 +99,12 @@ export const baseRoute = '/radacycling';
 
 
 // Language Management
-export type Language = 'en';
+export type Language = 'en' | 'es';
 
 export function isLanguage(value: any): value is Language {
     return (
-        value === 'en'
+        value === 'en' ||
+        value === 'es'
     );
 }
 

@@ -25,20 +25,14 @@
 
 <svelte:head>
 	<title>RADA Cycling Wear</title>
-	<meta
-		name="description"
-		content="Premium cycling wear designed for champions in training and racing. Shop our latest releases and enjoy free domestic shipping on orders over $100."
-	/>
+	<meta name="description" content={$dictionary.siteDescription} />
 </svelte:head>
 
 <div class="home" in:fade>
 	<Landing />
 
 	<section class="about">
-		<Reveal
-			title="Meet Rada Cycling Wear"
-			paragraph="Experience the thrill of cycling with RADA, where performance meets style. Our premium cycling wear is crafted for champions, providing the perfect blend of comfort and performance on every ride."
-		/>
+		<Reveal title={$dictionary.meetRADA} paragraph={$dictionary.experienceTheThrill} />
 	</section>
 
 	<section class="categories">
@@ -48,52 +42,51 @@
 	</section>
 
 	<section class="products scrollAppear">
-		<Products title="Most Popular." products={popular} />
+		<Products title={$dictionary.mostPopular} products={popular} />
 	</section>
 
 	<section class="promotions">
 		<a
 			href="{baseRoute}/catalog/products/bib-plus-jerseys"
 			class="scrollScale"
-			aria-label="Offer: 1 Bib Plus 2 Jerseys"
+			aria-label={$dictionary.offerOneBibTwoJerseys}
 		>
 			<img
 				src="{baseImageRoute}/Resources/offer1bib2jerseys.png"
-				alt="Offer: 1 Bib Plus 2 Jerseys"
+				alt={$dictionary.offerOneBibTwoJerseys}
 			/>
 		</a>
 
-		<a href="{baseRoute}/custom" class="scrollScale" aria-label="Custom RADA Deals">
-			<img src="{baseImageRoute}/Resources/radaCustom.png" alt="RADA Custom" />
+		<a href="{baseRoute}/custom" class="scrollScale" aria-label={$dictionary.customDeals}>
+			<img src="{baseImageRoute}/Resources/radaCustom.png" alt={$dictionary.customDeals} />
 		</a>
 	</section>
 
 	<section class="products scrollAppear">
-		<Products title="Latest Releases." products={latest} />
+		<Products title={$dictionary.latestReleases} products={latest} />
 	</section>
 
 	<section class="features">
-		<h2 class="scrollAppear">Your satisfaction is our promise!</h2>
+		<h2 class="scrollAppear">{$dictionary.yourSatisfaction}</h2>
 
 		<div class="featureContainer">
 			<div class="scrollScale">
 				<ion-icon name="cube-outline" />
-				<h3>Swift, Free Domestic Shipping</h3>
-				<p>Enjoy seamless and complimentary shipping on all domestic orders.</p>
+				<h3>{$dictionary.swiftFreeShipping}</h3>
+				<p>{$dictionary.enjoySeemless}</p>
 			</div>
 			<div class="scrollScale">
 				<ion-icon name="shirt-outline" />
-				<h3>Worry-Free 30-Day Returns</h3>
+				<h3>{$dictionary.worryFreeReturns}</h3>
 				<p>
-					Your peace of mind matters - our hassle-free returns ensure your complete
-					satisfaction.
+					{$dictionary.mindPeaceMatters}
 				</p>
 			</div>
 			<div class="scrollScale">
 				<ion-icon name="layers-outline" />
-				<h3>Effortless Instant Exchanges</h3>
+				<h3>{$dictionary.effortlessExchanges}</h3>
 				<p>
-					Need a different size? Experience quick and easy exchanges for the perfect fit.
+					{$dictionary.needADifferentSize}
 				</p>
 			</div>
 		</div>

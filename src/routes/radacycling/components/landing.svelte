@@ -13,9 +13,9 @@
 
 <section class="landing">
 	<div>
-		<h1>Champions wear RADA</h1>
-		<p>Elevate your training and racing with cutting-edge design and performance.</p>
-		<a href="{baseRoute}/catalog" class="button">Explore Now</a>
+		<h1>{$dictionary.championsWearRADA}</h1>
+		<p>{$dictionary.elevateYourTraining}</p>
+		<a href="{baseRoute}/catalog" class="button">{$dictionary.exploreNow}</a>
 	</div>
 
 	<section class="carousel">

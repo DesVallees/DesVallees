@@ -1,78 +1,72 @@
 <script>
 	import { fade } from 'svelte/transition';
-	import { baseImageRoute } from '../stores';
+	import { baseImageRoute, dictionary } from '../stores';
 	import CustomOverview from '../components/customOverview.svelte';
+	import toast from 'svelte-french-toast';
 
-	// Svelte component script space
 	let email = '';
 	let message = '';
 	let subject = '';
 
-	// Placeholder function for form submission
 	const submitForm = () => {
-		console.log({ email, subject, message });
-		// Here, you'd typically handle the form submission, like sending the data to a server
-		alert('Thank you for your message. We will get back to you shortly!');
+		toast($dictionary.thankYouForYourMessage);
 	};
 </script>
 
 <svelte:head>
-	<title>Custom | RADA Cycling Wear</title>
-	<meta
-		name="description"
-		content="Discover custom cycling wear crafted to perfection at Rada Cycling Wear. Connect with us to personalize your cycling uniforms with unparalleled quality and design. Experience the blend of innovation and comfort tailored just for you. Start your custom journey today!"
-	/>
+	<title>{$dictionary.custom} | RADA Cycling Wear</title>
+	<meta name="description" content={$dictionary.customPageDescription} />
 </svelte:head>
 
 <main in:fade>
 	<header>
 		<picture>
 			<source srcset="{baseImageRoute}/demo/man-small.webp" media="(max-width: 650px)" />
-			<img src="{baseImageRoute}/demo/man.webp" alt="RADA Cycling Wear Hero" />
+			<img src="{baseImageRoute}/demo/man.webp" alt={$dictionary.customPageDescription} />
 		</picture>
-		<h1>Elevate Your Team's Spirit with Custom Designs</h1>
+		<h1>{$dictionary.elevateYourTeamWithCustomDesigns}</h1>
 	</header>
 
 	<section id="contact-info">
-		<h2>Contact Us</h2>
+		<h2>{$dictionary.contactUs}</h2>
 		<p>
-			If you're looking to get custom-designed cycling uniforms, you're in the right place!
-			Please fill out the form below or email us directly at <a
-				class="mailLink"
-				href="mailto:contact@radacyclingwear.com">contact@radacyclingwear.com</a
+			{$dictionary.ifYourLookingForCustom}
+			<a class="mailLink" href="mailto:contact@radacyclingwear.com"
+				>contact@radacyclingwear.com</a
 			>.
 		</p>
 
 		<form on:submit|preventDefault={submitForm}>
 			<div>
-				<label for="email">Your Email:</label>
+				<label for="email">{$dictionary.yourEmail}:</label>
 				<input id="email" type="email" bind:value={email} required />
 			</div>
 
 			<div>
-				<label for="subject">Subject:</label>
+				<label for="subject">{$dictionary.subject}:</label>
 				<input id="subject" type="text" bind:value={subject} required />
 			</div>
 
 			<div>
-				<label for="message">Your Message:</label>
+				<label for="message">{$dictionary.yourMessage}:</label>
 				<textarea id="message" bind:value={message} rows="6" required />
 			</div>
 
-			<button type="submit">Send Message</button>
+			<button type="submit">{$dictionary.submit}</button>
 		</form>
 	</section>
 
 	<section id="why-us" class="scrollScale">
-		<h2>Why Choose RADA Cycling Wear?</h2>
+		<h2>
+			{$dictionary.whyChoose}
+		</h2>
 		<p>
-			We understand the importance of comfort, performance, and style in cycling uniforms.
-			Here's why teams love working with us:
+			{$dictionary.weUnderstand}
 		</p>
 		<ul>
-			<li>Custom designs that reflect your team's spirit and ambition.</li>
-			<li>High-quality materials for enhanced performance and durability.</li>
-			<li>Expert advice to help you choose the best options for your needs.</li>
+			<li>{$dictionary.reflectTeam}</li>
+			<li>{$dictionary.highQualityMaterials}</li>
+			<li>{$dictionary.expertAdvice}</li>
 		</ul>
 	</section>
 

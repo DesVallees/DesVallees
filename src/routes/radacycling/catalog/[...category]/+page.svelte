@@ -10,7 +10,7 @@
 		getCategoryNamesFromIds,
 		getCategoryHrefsFromIds,
 	} from '../../mockDb';
-	import { baseImageRoute, baseRoute, dictionary } from '../../stores';
+	import { baseImageRoute, baseRoute, dictionary, language } from '../../stores';
 	import Product from '../../components/product.svelte';
 	import Filter from '../../components/filter.svelte';
 	import { goto } from '$app/navigation';
@@ -67,7 +67,7 @@
 
 	let selectedSizeIndex = 0;
 	const sizeOptions = [
-		{ id: -1, name: 'Size' },
+		{ id: -1, name: $dictionary.size },
 		{ id: 16, name: 'XS' },
 		{ id: 17, name: 'S' },
 		{ id: 18, name: 'M' },
@@ -81,9 +81,9 @@
 
 	let selectedGenderIndex = 0;
 	const genderOptions = [
-		{ id: -1, name: 'Gender' },
-		{ id: 7, name: 'Men' },
-		{ id: 15, name: 'Women' },
+		{ id: -1, name: $dictionary.gender },
+		{ id: 7, name: $dictionary.men },
+		{ id: 15, name: $dictionary.women },
 	];
 	const genderCategoryIds = genderOptions.map((option) => {
 		return option.id;
@@ -92,9 +92,9 @@
 	let selectedSortIndex = 0;
 	$: selectedSortIndex, sortByPrice();
 	const sortOptions = [
-		{ id: -1, name: 'Sort by' },
-		{ id: 1, name: 'Price ($-$$)' },
-		{ id: 2, name: 'Price ($$-$)' },
+		{ id: -1, name: $dictionary.sortBy },
+		{ id: 1, name: `${$dictionary.price} ($-$$)` },
+		{ id: 2, name: `${$dictionary.price} ($$-$)` },
 	];
 
 	function filterBySize() {
@@ -178,14 +178,17 @@
 						media="(max-width: 650px)"
 					/>
 				{/if}
-				<img src="{baseImageRoute}/{mainCategory?.imageSrc}" alt={mainCategory?.imageAlt} />
+				<img
+					src="{baseImageRoute}/{mainCategory?.imageSrc}"
+					alt={mainCategory?.imageAlt[$language]}
+				/>
 			</picture>
-			<h1>{mainCategory?.name}</h1>
+			<h1>{mainCategory?.name[$language]}</h1>
 		</header>
 
 		{#if mainCategory?.description}
 			<section class="description">
-				<p>{mainCategory?.description}</p>
+				<p>{mainCategory.description[$language]}</p>
 			</section>
 		{/if}
 
@@ -211,7 +214,7 @@
 			/>
 
 			<button class="clearFilters" on:click={clearFilters}>
-				Clear All Filters
+				{$dictionary.clearAllFilters}
 				<ion-icon name="close" />
 			</button>
 		</section>
@@ -228,8 +231,7 @@
 			<section class="noProducts">
 				<ion-icon name="search" />
 				<p>
-					There are no products that match your criteria... but hang tight! We're always
-					adding new products that might be just what you're looking for.
+					{$dictionary.thereAreNoProducts}
 				</p>
 			</section>
 		{/if}
@@ -238,7 +240,9 @@
 
 <svelte:head>
 	<title>{$dictionary.catalog} | {categoryNames.join(' - ')}</title>
-	<meta name="description" content={mainCategory?.description} />
+	{#if mainCategory?.description}
+		<meta name="description" content={mainCategory.description[$language]} />
+	{/if}
 </svelte:head>
 
 <style>

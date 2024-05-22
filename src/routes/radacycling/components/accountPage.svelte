@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { userEmail } from '../stores';
+	import { dictionary, userEmail } from '../stores';
 	import { authHandlers } from '../auth';
 
 	export let authenticating: boolean;
@@ -13,19 +13,19 @@
 </script>
 
 <div class="account" in:fade>
-	<h1>My Account</h1>
+	<h1>{$dictionary.myAccount}</h1>
 	<div class="email-section">
-		<h2>Email</h2>
+		<h2>{$dictionary.email}</h2>
 		<p>{$userEmail}</p>
 	</div>
 	<div class="email-section">
-		<h2>My Orders</h2>
+		<h2>{$dictionary.myOrders}</h2>
 		<div class="orders">
-			<i class="noOrdersParagraph">Your order history is empty.</i>
+			<i class="noOrdersParagraph">{$dictionary.emptyOrderList}</i>
 		</div>
 	</div>
 	<button class="logOutButton button" on:click={logOut} disabled={authenticating}>
-		<span>Log Out</span>
+		<span>{$dictionary.logOut}</span>
 		<ion-icon name="log-out-outline" />
 	</button>
 </div>

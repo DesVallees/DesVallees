@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import WorkPost from '../components/workPost.svelte';
-	import { baseImageRoute } from '../stores';
+	import { baseImageRoute, dictionary, language } from '../stores';
 	import { crafts, type craftItem } from '../mockDb';
 
 	let images = crafts;
@@ -20,18 +20,16 @@
 
 <div class="ourWork" in:fade>
 	<div class="header-section">
-		<h1>Our Craftsmanship</h1>
+		<h1>{$dictionary.ourCraftmanship}</h1>
 		<p>
-			Discover the passion and precision behind each piece of our cycling wear. Explore our
-			gallery of previous works to see the quality and innovation we bring to cyclists
-			worldwide.
+			{$dictionary.discoverThePassion}
 		</p>
 	</div>
 
 	<div class="image-grid">
 		{#each images as image}
 			<button on:click={() => selectImage(image)}>
-				<img src="{baseImageRoute}/{image.src}" alt={image.alt} />
+				<img src="{baseImageRoute}/{image.src}" alt={image.alt[$language]} />
 			</button>
 		{/each}
 	</div>
@@ -43,12 +41,7 @@
 
 <svelte:head>
 	<title>Our Work | RADA Cycling Wear</title>
-	<meta
-		name="description"
-		content="Discover the passion and precision behind each piece of our cycling wear. Explore our
-		gallery of previous works to see the quality and innovation we bring to cyclists
-		worldwide."
-	/>
+	<meta name="description" content={$dictionary.discoverThePassion} />
 </svelte:head>
 
 <style>

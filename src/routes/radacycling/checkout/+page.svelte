@@ -1,12 +1,8 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { baseImageRoute, baseRoute, cartItems, dictionary } from '../stores';
-	import {
-		deliveryFee,
-		denormalizeCartItems,
-		storage,
-		type DenormalizedCartItem,
-	} from '../mockDb';
+	import { deliveryFee, denormalizeCartItems, type DenormalizedCartItem } from '../mockDb';
+	import { onMount } from 'svelte';
 
 	const demoProductAPI = 'price_1OeSVfH1JOQComXCKyj7cG5z';
 	let demoCartItems = [
@@ -25,7 +21,6 @@
 	let postalCode: string = '';
 	let country: string = '';
 
-	// Function to handle form submission
 	async function submitForm() {
 		return;
 		if (
@@ -76,10 +71,12 @@
 
 	let denormalizedData: DenormalizedCartItem[];
 
-	try {
-		denormalizedData = denormalizeCartItems($cartItems, storage);
-	} catch (error) {
-		console.error(error);
+	function getCartItems() {
+		try {
+			denormalizedData = denormalizeCartItems($cartItems);
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	function calculateSubtotal() {
@@ -91,59 +88,56 @@
 		return calculateSubtotal() + deliveryFee;
 	};
 
-	// Function to validate phone number
 	function validatePhoneNumber(phone: string): boolean {
-		// Add your phone number validation logic here
 		return true;
 	}
 
-	let mcDo: boolean = false;
+	onMount(() => {
+		getCartItems();
+	});
+	$: $cartItems, getCartItems();
 </script>
 
 <div class="checkout" in:fade>
 	<div class="checkout-header">
-		<h1>Shipping Information</h1>
+		<h1>{$dictionary.shippingInformation}</h1>
 	</div>
 
-	{#if mcDo}
-		<div class="mcDo">
-			<h2>You might be interested in:</h2>
-			<div class="extra">
-				<img src={`${baseImageRoute}/Resources/Jersey2024RedBig.webp`} alt="Hola lola" />
-
-				<button>
-					I want it!
-					<ion-icon name="add" />
-				</button>
-			</div>
-
-			<button on:click={() => (mcDo = false)}>Skip</button>
+	<form on:submit|preventDefault={submitForm}>
+		<div class="user-info">
+			<input type="text" required bind:value={fullName} placeholder={$dictionary.fullName} />
+			<input type="email" required bind:value={email} placeholder={$dictionary.email} />
+			<input
+				type="text"
+				required
+				bind:value={shippingAddress}
+				placeholder={$dictionary.shippingAddress}
+			/>
+			<input type="text" required bind:value={city} placeholder={$dictionary.city} />
+			<input
+				type="text"
+				required
+				bind:value={postalCode}
+				placeholder={$dictionary.postalCode}
+			/>
+			<input type="text" required bind:value={country} placeholder={$dictionary.country} />
+			<input
+				type="tel"
+				required
+				bind:value={phoneNumber}
+				placeholder={$dictionary.phoneNumber}
+			/>
 		</div>
-	{:else}
-		<form on:submit|preventDefault={submitForm}>
-			<div class="user-info">
-				<input type="text" required bind:value={fullName} placeholder="Full Name" />
-				<input type="email" required bind:value={email} placeholder="Email Address" />
-				<input
-					type="text"
-					required
-					bind:value={shippingAddress}
-					placeholder="Shipping Address"
-				/>
-				<input type="text" required bind:value={city} placeholder="City" />
-				<input type="text" required bind:value={postalCode} placeholder="Postal Code" />
-				<input type="text" required bind:value={country} placeholder="Country" />
-				<input type="tel" required bind:value={phoneNumber} placeholder="Phone Number" />
-			</div>
 
+		{#key $cartItems}
 			<div class="cart-items">
 				{#each denormalizedData as item}
 					<div class="cart-item">
 						<img src="{baseImageRoute}/{item.imageSrc}" alt={item.name} />
 						<div class="item-details">
 							<p><strong>{item.name}</strong></p>
-							<p>Quantity: {item.quantity}</p>
-							<p>Total Price: ${item.totalItemPrice.toFixed(2)}</p>
+							<p>{$dictionary.quantity}: {item.quantity}</p>
+							<p>{$dictionary.totalPrice}: ${item.totalItemPrice.toFixed(2)}</p>
 						</div>
 					</div>
 				{/each}
@@ -151,30 +145,27 @@
 
 			<div class="totals">
 				<div>
-					<h2>Sub Total</h2>
+					<h2>{$dictionary.subtotal}</h2>
 					<span class="value">${calculateSubtotal().toFixed(2)}</span>
 				</div>
 				<div>
-					<h2>Delivery Fee</h2>
+					<h2>{$dictionary.deliveryFee}</h2>
 					<span class="value">${deliveryFee.toFixed(2)}</span>
 				</div>
 				<div>
-					<h2>Total Amount</h2>
+					<h2>{$dictionary.totalAmount}</h2>
 					<span class="value">${calculateTotal().toFixed(2)}</span>
 				</div>
 			</div>
+		{/key}
 
-			<button type="submit" class="continue-btn">Continue</button>
-		</form>
-	{/if}
+		<button type="submit" class="continue-btn">{$dictionary.continue}</button>
+	</form>
 </div>
 
 <svelte:head>
-	<title>Checkout</title>
-	<meta
-		name="description"
-		content="Premium cycling wear designed for champions in training and racing. Shop our latest releases and enjoy free domestic shipping on orders over $100."
-	/>
+	<title>{$dictionary.shippingInformation}</title>
+	<meta name="description" content={$dictionary.siteDescription} />
 </svelte:head>
 
 <style>
@@ -308,43 +299,5 @@
 	.item-details p {
 		margin: 5px 0;
 		font-size: clamp(0.95rem, 3.5vw, 1rem);
-	}
-
-	.mcDo div.extra {
-		padding: 20px; /* Spacing inside the container */
-		margin: 2rem auto;
-		border-radius: 8px; /* Rounded corners */
-		display: grid; /* Aligns the image and button side by side */
-		justify-items: center;
-		background-color: white;
-		box-shadow: 0 0 1rem var(--content-2);
-		width: fit-content;
-		align-items: center; /* Centers items vertically */
-		gap: 20px; /* Spacing between items */
-	}
-
-	.mcDo div.extra img {
-		max-width: 100px; /* Limit image size */
-		border-radius: 4px; /* Optional: rounded corners for the image */
-	}
-
-	.mcDo button {
-		background-color: var(--interactive); /* Button background color */
-		border: none; /* Remove default border */
-		padding: 10px 20px; /* Padding inside the button */
-		border-radius: 4px; /* Rounded corners for the button */
-		cursor: pointer; /* Hand cursor on hover */
-		margin: auto;
-		display: flex; /* To align the text and icon */
-		align-items: center; /* Center the text and icon vertically */
-		gap: 5px; /* Spacing between text and icon */
-	}
-
-	.mcDo button:hover {
-		filter: brightness(200%);
-	}
-
-	.mcDo button ion-icon {
-		--ionicon-stroke-width: 48px; /* Adjusts the stroke width of the icon */
 	}
 </style>

@@ -2,7 +2,7 @@
 	export let date: string;
 	export let text: string;
 	export let name: string;
-	export let imageSrc: string = '/images/lawyers/Sofia_Lindström.jpg';
+	export let imageSrc: string;
 	export let rating: number;
 
 	// Function to create an array for the star rating, filled with boolean values

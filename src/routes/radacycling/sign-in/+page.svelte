@@ -17,7 +17,7 @@
 			await authHandlers.signin(email, password);
 			authenticating = false;
 		} else {
-			anErrorOccurred('Passwords do not match.');
+			anErrorOccurred($dictionary.passwordsDoNotMatch);
 			password = '';
 			confirmPassword = '';
 		}
@@ -25,11 +25,8 @@
 </script>
 
 <svelte:head>
-	<title>Sign In | RADA Cycling Wear</title>
-	<meta
-		name="description"
-		content="Sign in to your Rada Cycling Wear account for secure access to your custom cycling wear orders, preferences, and exclusive updates. Experience a seamless connection to your cycling world. Ready for a smoother ride? Sign in now."
-	/>
+	<title>{$dictionary.signIn} | RADA Cycling Wear</title>
+	<meta name="description" content={$dictionary.signInPageDescription} />
 </svelte:head>
 
 {#if authenticating}
@@ -39,7 +36,7 @@
 {/if}
 
 <div class="signIn" in:fade>
-	<h1>Create an account</h1>
+	<h1>{$dictionary.createAnAccount}</h1>
 	<form on:submit|preventDefault={handleFormSubmission}>
 		<div class="inputGroup">
 			<ion-icon name="mail" />
@@ -58,7 +55,7 @@
 			<ion-icon name="lock-closed" />
 			<input
 				type="password"
-				placeholder="Password"
+				placeholder={$dictionary.password}
 				class="ghostButton"
 				required
 				bind:value={password}
@@ -68,21 +65,21 @@
 			<ion-icon name="shield-checkmark" />
 			<input
 				type="password"
-				placeholder="Confirm Password"
+				placeholder={$dictionary.confirmPassword}
 				class="ghostButton"
 				required
 				bind:value={confirmPassword}
 			/>
 		</div>
 
-		<button type="submit" class="button">Create an account</button>
+		<button type="submit" class="button">{$dictionary.createAnAccount}</button>
 	</form>
 
 	<hr />
 
 	<div class="align" style="justify-content: center; font-size: 1.05rem;">
-		<p>Already have an account?</p>
-		<a href="{baseRoute}/my-account" class="link">Log In</a>
+		<p>{$dictionary.alreadyHaveAnAccount}</p>
+		<a href="{baseRoute}/my-account" class="link">{$dictionary.logIn}</a>
 	</div>
 </div>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { crafts, type craftItem } from '../mockDb';
-	import { baseImageRoute } from '../stores';
+	import { baseImageRoute, dictionary, language } from '../stores';
 	import WorkPost from './workPost.svelte';
 
 	export let style: string = '';
@@ -16,16 +16,15 @@
 </script>
 
 <section id="gallery" {style} class="scrollScale">
-	<h2>Some Of Our Custom Work</h2>
+	<h2>{$dictionary.someOfOurCustomWork}</h2>
 	<div>
-		<!-- Placeholder images representing previous work -->
 		{#each images as image}
 			<button class="scrollAppear" on:click={() => selectImage(image)}>
-				<img src="{baseImageRoute}/{image.src}" alt={image.alt} />
+				<img src="{baseImageRoute}/{image.src}" alt={image.alt[$language]} />
 			</button>
 		{/each}
 	</div>
-	<a class="moreWork" href="our-work">View more</a>
+	<a class="moreWork" href="our-work">{$dictionary.viewMore}</a>
 </section>
 
 {#if selectedImage}
@@ -80,6 +79,7 @@
 
 		background-color: darkred;
 
+		text-transform: capitalize;
 		font-size: 1em;
 		text-align: center;
 		color: white;
