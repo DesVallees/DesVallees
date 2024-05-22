@@ -40,7 +40,7 @@
 {/if}
 
 <svelte:head>
-	<title>{$dictionary.ourWork} | RADA Cycling Wear</title>
+	<title>{$dictionary.ourCraftmanship} | PGM Cycling Wear</title>
 	<meta name="description" content={$dictionary.discoverThePassion} />
 </svelte:head>
 
