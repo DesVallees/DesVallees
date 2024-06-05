@@ -59,6 +59,8 @@
 				selectedGenderIndex = activeGenderIndex;
 			}
 		}
+
+		sortByPrice();
 	}
 
 	$: $page.params.category, setup();
@@ -145,7 +147,7 @@
 			else if (selectedSortIndex === 2) {
 				return priceB - priceA;
 			}
-			// No sorting or unrecognized index (should not happen if control flow is correct)
+			// No sorting or unrecognized index
 			return 0;
 		});
 

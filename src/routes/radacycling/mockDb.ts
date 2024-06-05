@@ -5,7 +5,7 @@ import { get } from 'svelte/store';
 let storedDictionary = get(dictionary)
 let storedLanguage = get(language)
 
-type translatableContent = { en: string; es: string; }
+export type translatableContent = { en: string; es: string; }
 
 // Categories
 export type Category = {
@@ -551,16 +551,10 @@ export type Product = {
     imageAlt: translatableContent,
     price: string,
     oldPrice: string | undefined,
-    versions: Version[] | undefined,
+    mainVersion: boolean,
+    versionsIds: number[] | undefined,
     href: string,
     categoryIds: number[]
-}
-
-export type Version = {
-    imageSrc: string,
-    imgHoverSrc: string | undefined,
-    imageAlt: translatableContent,
-    hrefParam: string,
 }
 
 type TableEntry = {
@@ -569,9 +563,35 @@ type TableEntry = {
 };
 
 export let storage: Record<string, Product> = {
-    "jersey2024": {
+    "redJersey2024": {
         id: 0,
-        name: { en: "Jersey 2024", es: "Camiseta 2024" },
+        name: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
+        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 18, 19, 20],
+        description: {
+            en: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
+            es: "Desata tu potencial ciclista con la 'Camiseta 2024'! Diseñada para un confort y rendimiento supremos, esta camiseta combina tela transpirable con un diseño elegante. Sus colores vibrantes garantizan visibilidad, mientras que el ajuste ergonómico proporciona una movilidad sin igual. Perfecta tanto para paseos casuales como para competencias. ¡Eleva tu paseo hoy!"
+        },
+        details: [
+            { label: { en: 'Material', es: 'Material' }, value: { en: 'High-Quality, Breathable Polyester', es: 'Poliéster transpirable de alta calidad' } },
+            { label: { en: 'Color', es: 'Color' }, value: { en: 'Vibrant Red', es: 'Rojo vibrante' } },
+            { label: { en: 'Size Availability', es: 'Disponibilidad de tallas' }, value: { en: 'XS, S, M, L, XL, XXL', es: 'XS, S, M, L, XL, XXL' } },
+            { label: { en: 'Fit Type', es: 'Tipo de ajuste' }, value: { en: 'Ergonomic, Race Fit', es: 'Ajuste ergonómico, de competición' } },
+            { label: { en: 'Features', es: 'Características' }, value: { en: 'Quick-Dry, UV Protection, Anti-Sweat', es: 'Secado rápido, protección UV, anti-sudor' } },
+            { label: { en: 'Warranty', es: 'Garantía' }, value: { en: "1 Year Manufacturer's Warranty", es: "Garantía de 1 año del fabricante" } },
+            { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine Washable, Do Not Iron', es: 'Lavable a máquina, no planchar' } },
+        ],
+        imageSrc: "Resources/Jersey2024Red.webp",
+        imgHoverSrc: "Resources/Jersey2024RedBig.webp",
+        imageAlt: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
+        price: "$89.97",
+        oldPrice: "$125.00",
+        mainVersion: true,
+        versionsIds: [0, 1],
+        href: "jersey-2024-red",
+    },
+    "blueJersey2024": {
+        id: 1,
+        name: { en: "Blue Jersey 2024", es: "Camiseta Azul 2024" },
         categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 18, 19, 20],
         description: {
             en: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
@@ -586,30 +606,18 @@ export let storage: Record<string, Product> = {
             { label: { en: 'Warranty', es: 'Garantía' }, value: { en: "1 Year Manufacturer's Warranty", es: "Garantía de 1 año del fabricante" } },
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine Washable, Do Not Iron', es: 'Lavable a máquina, no planchar' } },
         ],
-        imageSrc: "Resources/Jersey2024Red.webp",
-        imgHoverSrc: "Resources/Jersey2024RedBig.webp",
-        imageAlt: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
+        imageSrc: "Resources/Jersey2024Blue.webp",
+        imgHoverSrc: "Resources/cremalleraJersey.webp",
+        imageAlt: { en: "View Blue Jersey 2024", es: "Ver Camiseta Azul 2024" },
         price: "$89.97",
         oldPrice: "$125.00",
-        versions: [
-            {
-                imageSrc: "Resources/Jersey2024Red.webp",
-                imgHoverSrc: "Resources/Jersey2024RedBig.webp",
-                imageAlt: { en: "View Red Jersey 2024", es: "Ver Camiseta Roja 2024" },
-                hrefParam: "red",
-            },
-            {
-                imageSrc: "Resources/Jersey2024Blue.webp",
-                imgHoverSrc: "Resources/cremalleraJersey.webp",
-                imageAlt: { en: "View Blue Jersey 2024", es: "Ver Camiseta Azul 2024" },
-                hrefParam: "blue",
-            },
-        ],
-        href: "jersey-2024",
+        mainVersion: false,
+        versionsIds: [0, 1],
+        href: "jersey-2024-blue",
     },
-    "cyclingBib": {
-        id: 1,
-        name: { en: "Cycling Bib 2024", es: "Pantalón de Ciclismo 2024" },
+    "redCyclingBib": {
+        id: 2,
+        name: { en: "Red Cycling Bib 2024", es: "Pantalón de Ciclismo Rojo 2024" },
         categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 17, 19, 21],
         description: {
             en: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
@@ -628,27 +636,43 @@ export let storage: Record<string, Product> = {
         ],
         imageSrc: "Resources/CyclingBib2024.webp",
         imgHoverSrc: "Resources/bibFocus.webp",
-        imageAlt: { en: "Cycling Bib 2024", es: "Pantalón de Ciclismo 2024" },
+        imageAlt: { en: "Red Cycling Bib 2024", es: "Pantalón de Ciclismo Rojo 2024" },
         price: "$99.97",
         oldPrice: undefined,
-        versions: [
-            {
-                imageSrc: "Resources/CyclingBib2024.webp",
-                imgHoverSrc: "Resources/bibFocus.webp",
-                imageAlt: { en: "View Red Cycling Bib 2024", es: "Ver Pantalón Rojo de Ciclismo 2024" },
-                hrefParam: "red",
-            },
-            {
-                imageSrc: "Resources/CyclingBib2024Blue.webp",
-                imgHoverSrc: "Resources/bibFocus.webp",
-                imageAlt: { en: "View Blue Cycling Bib 2024", es: "Ver Pantalón Azul de Ciclismo 2024" },
-                hrefParam: "blue",
-            },
+        mainVersion: true,
+        versionsIds: [2, 3],
+        href: "cycling-bib-2024-red",
+    },
+    "blueCyclingBib": {
+        id: 3,
+        name: { en: "Blue Cycling Bib 2024", es: "Pantalón de Ciclismo Azul 2024" },
+        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 17, 19, 21],
+        description: {
+            en: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
+            es: "Experimenta el pináculo del confort con el Pantalón de Ciclismo 2024. Diseñado para la resistencia, su diseño elegante ofrece un ajuste como una segunda piel, mientras que los tejidos avanzados proporcionan una transpirabilidad óptima. Disponible en rojo o azul, es la elección profesional para ciclistas serios. Eleva tu paseo por solo $99.97."
+        },
+        details: [
+            { label: { en: 'Material', es: 'Material' }, value: { en: 'Premium Lycra for stretch and comfort', es: 'Licra premium para elasticidad y comodidad' } },
+            { label: { en: 'Chamois', es: 'Badana' }, value: { en: 'Multi-density, contoured foam padding', es: 'Acolchado de espuma contorneado de múltiples densidades' } },
+            { label: { en: 'Leg Grippers', es: 'Agarres para piernas' }, value: { en: 'Silicone dots for secure fit', es: 'Puntos de silicona para un ajuste seguro' } },
+            { label: { en: 'Stitching', es: 'Costuras' }, value: { en: 'Flatlock seams to prevent chafing', es: 'Costuras flatlock para prevenir rozaduras' } },
+            { label: { en: 'Straps', es: 'Tirantes' }, value: { en: 'Mesh for breathability and support', es: 'Malla para transpirabilidad y soporte' } },
+            { label: { en: 'Aerodynamics', es: 'Aerodinámica' }, value: { en: 'Wind tunnel tested design', es: 'Diseño probado en túnel de viento' } },
+            { label: { en: 'Durability', es: 'Durabilidad' }, value: { en: 'Reinforced stitching at stress points', es: 'Costuras reforzadas en puntos de estrés' } },
+            { label: { en: 'UV Protection', es: 'Protección UV' }, value: { en: 'UPF 50+ sun protection', es: 'Protección solar UPF 50+' } },
+            { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine wash cold, hang to dry', es: 'Lavar a máquina en frío, colgar para secar' } },
         ],
-        href: "cycling-bib-2024",
+        imageSrc: "Resources/CyclingBib2024Blue.webp",
+        imgHoverSrc: "Resources/bibFocus.webp",
+        imageAlt: { en: "View Blue Cycling Bib 2024", es: "Ver Pantalón Azul de Ciclismo 2024" },
+        price: "$99.97",
+        oldPrice: undefined,
+        mainVersion: false,
+        versionsIds: [2, 3],
+        href: "cycling-bib-2024-blue",
     },
     "bibPlusJerseys": {
-        id: 2,
+        id: 4,
         name: { en: "Bib + 2 Jerseys + Free Socks", es: "Pantalón + 2 Camisetas + Calcetines Gratis" },
         categoryIds: [0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 15, 19],
         description: {
@@ -672,11 +696,12 @@ export let storage: Record<string, Product> = {
         imageAlt: { en: "Offer: 1 Bib Plus 2 Jerseys Plus Free Socks", es: "Oferta: 1 Pantalón + 2 Camisetas + Calcetines Gratis" },
         price: "$219.97",
         oldPrice: "$280.00",
-        versions: undefined,
+        mainVersion: true,
+        versionsIds: undefined,
         href: "bib-plus-jerseys",
     },
     "radaSocks": {
-        id: 3,
+        id: 5,
         name: { en: "RADA Socks", es: "Calcetines RADA" },
         categoryIds: [6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
@@ -697,11 +722,23 @@ export let storage: Record<string, Product> = {
         imageAlt: { en: "RADA Socks", es: "Calcetines RADA" },
         price: "$16.00",
         oldPrice: "$25.00",
-        versions: undefined,
+        mainVersion: true,
+        versionsIds: undefined,
         href: "rada-socks",
     },
 };
 
+export function findProductsByIds(ids: number[]): Product[] {
+    // Convert the storage object to an array of products
+    const products = Object.values(storage);
+
+    // Get products with the specified IDs
+    const matchingProducts = products.filter(product =>
+        ids.includes(product.id)
+    );
+
+    return matchingProducts;
+}
 
 export function findProductsByCategoryIds(categoryIds: number[]): Product[] {
     // Convert the storage object to an array of products
@@ -709,10 +746,30 @@ export function findProductsByCategoryIds(categoryIds: number[]): Product[] {
 
     // Filter products that include all of the specified category IDs
     const matchingProducts = products.filter(product =>
-        categoryIds.every(id => product.categoryIds.includes(id))
+        categoryIds.every(id => product.categoryIds.includes(id) && product.mainVersion)
     );
 
     return matchingProducts;
+}
+
+export function findProductByHref(hrefParam: string): Product | undefined {
+    return Object.values(storage).find((product) => product.href === hrefParam);
+}
+
+export function findSimilarProducts(product: Product, count: number): Product[] {
+    // Convert storage object to an array and filter out the original product
+    const otherProducts = Object.values(storage).filter(
+        (p) =>
+            p.id !== product.id &&
+            p.mainVersion === true &&
+            !product.versionsIds?.includes(p.id),
+    );
+
+    // Shuffle the array to get random products
+    const shuffledProducts = otherProducts.sort(() => 0.5 - Math.random());
+
+    // Slice the array to get the specified count or the maximum amount possible
+    return shuffledProducts.slice(0, count);
 }
 
 
@@ -729,7 +786,7 @@ export type Review = {
 export let reviews: Review[] = [
     // Jersey
     {
-        productId: 0,
+        productId: 1,
         date: '01-20-2024',
         text:
             'Nice color and good fabric quality. This is the perfect size and the blue version matches my style perfectly.',
@@ -756,7 +813,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 0,
+        productId: 1,
         date: '02-05-2024',
         text:
             'Great jersey, the material is high-quality and the blue is just the right shade. Highly recommend!',
@@ -776,7 +833,7 @@ export let reviews: Review[] = [
 
     // Cycling Bib
     {
-        productId: 1,
+        productId: 2,
         date: '03-01-2024',
         text:
             'The Cycling Bib 2024 is a game-changer. The fit is exceptional, and it provides the comfort needed on long rides. Top-notch quality!',
@@ -785,7 +842,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 1,
+        productId: 3,
         date: '03-04-2024',
         text:
             'Just finished a century ride with the Cycling Bib 2024, and I couldn’t be happier. Supportive, stylish, and the blue color is stunning!',
@@ -794,7 +851,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 1,
+        productId: 2,
         date: '03-07-2024',
         text:
             'The red Cycling Bib 2024 fits like a glove and breathes so well. It\'s my new go-to for all my cycling tours.',
@@ -803,7 +860,7 @@ export let reviews: Review[] = [
         rating: 4,
     },
     {
-        productId: 1,
+        productId: 3,
         date: '03-10-2024',
         text:
             'Incredible comfort and sleek design! The Cycling Bib 2024 has made my rides more enjoyable. Highly recommend it to any cyclist!',
@@ -814,7 +871,7 @@ export let reviews: Review[] = [
 
     // Bib + Jersey + Socks Offer
     {
-        productId: 2,
+        productId: 4,
         date: '01-30-2024',
         text:
             'The comfort level of the Bib + Jersey combo is unparalleled, and the free socks are a delightful bonus! Worth every penny.',
@@ -823,7 +880,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 2,
+        productId: 4,
         date: '02-15-2024',
         text:
             'Unbeatable deal! The jersey fits like a second skin, and the bibs are just the right amount of snug. Plus, free socks - amazing!',
@@ -832,7 +889,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 2,
+        productId: 4,
         date: '02-20-2024',
         text:
             'Fantastic set for any cyclist! The materials are top-notch and they look professional. The socks are the cherry on top.',
@@ -841,7 +898,7 @@ export let reviews: Review[] = [
         rating: 4,
     },
     {
-        productId: 2,
+        productId: 4,
         date: '02-28-2024',
         text:
             'Just did a century ride in my new Bib + Jersey, and they performed excellently. The socks kept my feet comfy throughout.',
@@ -853,7 +910,7 @@ export let reviews: Review[] = [
 
     // Rada Socks
     {
-        productId: 3,
+        productId: 5,
         date: '03-01-2024',
         text: 'These RADA Socks are a game-changer! Super comfortable for my daily runs and stylish enough for casual wear.',
         name: 'julianv',
@@ -861,7 +918,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 3,
+        productId: 5,
         date: '03-03-2024',
         text: 'I was skeptical about the price, but these socks are worth every penny. They feel like walking on clouds!',
         name: 'emilyrose',
@@ -869,7 +926,7 @@ export let reviews: Review[] = [
         rating: 4,
     },
     {
-        productId: 3,
+        productId: 5,
         date: '03-05-2024',
         text: 'Bought these for my hiking trips, and they’ve been fantastic. No blisters, and my feet stay dry!',
         name: 'mikejones',
@@ -877,7 +934,7 @@ export let reviews: Review[] = [
         rating: 4,
     },
     {
-        productId: 3,
+        productId: 5,
         date: '03-07-2024',
         text: 'The comfort level of RADA Socks is unbeatable. Plus, they look great with all my shoes!',
         name: 'anna_k',
@@ -885,6 +942,21 @@ export let reviews: Review[] = [
         rating: 4,
     },
 ];
+
+export function findReviewsByProductId(productId: number): Review[] {
+    return reviews.filter((review) => review.productId === productId);
+}
+
+export function calculateAverageRating(reviews: Review[]): string | undefined {
+    if (reviews.length === 0) {
+        return undefined;
+    }
+
+    const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+    const averageRating = totalRating / reviews.length;
+
+    return averageRating.toFixed(1);
+}
 
 
 // Cart

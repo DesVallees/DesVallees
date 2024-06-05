@@ -1,9 +1,13 @@
 <script lang="ts">
-	export let date: string;
-	export let text: string;
-	export let name: string;
-	export let imageSrc: string;
-	export let rating: number;
+	import type { Review } from '../mockDb';
+
+	export let review: Review;
+
+	let date: string = review.date;
+	let text: string = review.text;
+	let name: string = review.name;
+	let imageSrc: string = review.imageSrc;
+	let rating: number = review.rating;
 
 	// Function to create an array for the star rating, filled with boolean values
 	// true for a full star, false for an empty star

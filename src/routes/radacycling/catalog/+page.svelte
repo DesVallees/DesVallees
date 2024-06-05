@@ -7,14 +7,14 @@
 
 	let newArrivals: Product[] = [
 		storage.bibPlusJerseys,
-		storage.jersey2024,
-		storage.cyclingBib,
+		storage.redJersey2024,
+		storage.redCyclingBib,
 		storage.radaSocks,
 	];
 
 	let mostViewed: Product[] = [
-		storage.jersey2024,
-		storage.cyclingBib,
+		storage.redJersey2024,
+		storage.redCyclingBib,
 		storage.bibPlusJerseys,
 		storage.radaSocks,
 	];

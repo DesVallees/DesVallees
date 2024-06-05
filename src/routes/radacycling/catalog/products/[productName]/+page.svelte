@@ -10,48 +10,22 @@
 	import Products from '../../../components/products.svelte';
 	import Review from '../../../components/review.svelte';
 	import {
-		storage,
 		type Product,
-		reviews,
 		type Review as ReviewType,
 		addToCart,
 		getCartItemFromID,
 		removeFromCart,
+		calculateAverageRating,
+		findProductByHref,
+		findReviewsByProductId,
+		findSimilarProducts,
+		findProductsByIds,
 	} from '../../../mockDb';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
-	function findProductByHref(hrefParam: string): Product | undefined {
-		return Object.values(storage).find((product) => product.href === hrefParam);
-	}
-
-	function findReviewsByProductId(productId: number): ReviewType[] {
-		return reviews.filter((review) => review.productId === productId);
-	}
-
-	function calculateAverageRating(reviews: ReviewType[]): string | undefined {
-		if (reviews.length === 0) {
-			return undefined;
-		}
-
-		const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
-		const averageRating = totalRating / reviews.length;
-
-		return averageRating.toFixed(1);
-	}
-
-	function findSimilarProducts(product: Product, count: number): Product[] {
-		// Convert storage object to an array and filter out the original product
-		const otherProducts = Object.values(storage).filter((p) => p.id !== product.id);
-
-		// Shuffle the array to get random products
-		const shuffledProducts = otherProducts.sort(() => 0.5 - Math.random());
-
-		// Slice the array to get the specified count or the maximum amount possible
-		return shuffledProducts.slice(0, count);
-	}
-
 	let product: Product | undefined;
+	let versions: Product[] | undefined;
 	let productInCart: CartItem | undefined;
 	let averageRating: string;
 	let reviewCount: number;
@@ -95,6 +69,8 @@
 		product = findProductByHref($page.params.productName);
 
 		if (product) {
+			versions = product.versionsIds ? findProductsByIds(product.versionsIds) : undefined;
+
 			productReviews = findReviewsByProductId(product.id);
 
 			averageRating = calculateAverageRating(productReviews) || '-';
@@ -138,6 +114,24 @@
 					alt={product.imageAlt[$language]}
 					class="product-image"
 				/>
+
+				{#if versions}
+					<div class="versions">
+						{#each versions as item}
+							<a
+								aria-label={item.imageAlt[$language]}
+								class:current={product.imageSrc === item.imageSrc}
+								href={item.href}
+							>
+								<img
+									width="50px"
+									src="{baseImageRoute}/{item.imageSrc}"
+									alt={item.imageAlt[$language]}
+								/>
+							</a>
+						{/each}
+					</div>
+				{/if}
 			</div>
 
 			<div class="product-content">
@@ -193,7 +187,7 @@
 						{#if productReviews.length > 0}
 							<div class="reviews-container">
 								{#each productReviews as review}
-									<Review {...review} />
+									<Review {review} />
 								{/each}
 							</div>
 						{:else}
@@ -283,6 +277,40 @@
 	.image-container img {
 		max-height: max(50vh, 20rem);
 		width: auto;
+	}
+
+	.image-container .versions {
+		position: absolute;
+		right: 0.5rem;
+		top: 50%;
+		transform: translateY(-50%);
+
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.versions a {
+		background: none;
+		border-radius: var(--borderRadius, 10px);
+		border: none;
+		padding: 5px;
+		cursor: pointer;
+		transition: transform 0.3s ease;
+	}
+
+	.versions a:hover {
+		transform: scale(1.1);
+	}
+
+	.versions a.current img {
+		border: 3px solid var(--interactive);
+	}
+
+	.versions img {
+		width: 50px;
+		height: 50px;
+		object-fit: cover;
+		border-radius: var(--borderRadius, 10px);
 	}
 
 	.product-image {

@@ -1,17 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { baseImageRoute, baseRoute, dictionary, language } from '../stores';
-	import type { Product, Version } from '../mockDb';
+	import { findProductsByIds, type Product, type translatableContent } from '../mockDb';
 
 	export let product: Product;
 
-	let name: string = product.name[$language];
+	let name: translatableContent = product.name;
 	let imageSrc: string = product.imageSrc;
 	let imgHoverSrc: string | undefined = product.imgHoverSrc;
-	let imageAlt: string = product.imageAlt[$language];
+	let imageAlt: translatableContent = product.imageAlt;
 	let price: string = product.price;
 	let oldPrice: string | undefined = product.oldPrice;
-	let versions: Version[] | undefined = product.versions;
+	let versions: Product[] | undefined = product.versionsIds
+		? findProductsByIds(product.versionsIds)
+		: undefined;
 	let href: string = product.href;
 
 	let img: HTMLImageElement;
@@ -68,17 +70,27 @@
 	}
 
 	let currentVersionSrc = imageSrc;
-	function changeVersion(newImageSrc: string, newImageHoverSrc: string | undefined) {
-		imageSrc = newImageSrc;
-		imgHoverSrc = newImageHoverSrc;
+	function changeVersion(version: Product) {
+		name = version.name;
+		imageSrc = version.imageSrc;
+		imgHoverSrc = version.imgHoverSrc;
+		imageAlt = version.imageAlt;
+		price = version.price;
+		oldPrice = version.oldPrice;
+		href = version.href;
 
 		currentVersionSrc = imageSrc;
 	}
 </script>
 
 <div class="product">
-	<a href="{baseRoute}/catalog/products/{href}" aria-label={name}>
-		<img bind:this={img} class="mainImage" src="{baseImageRoute}/{imageSrc}" alt={imageAlt} />
+	<a href="{baseRoute}/catalog/products/{href}" aria-label={name[$language]}>
+		<img
+			bind:this={img}
+			class="mainImage"
+			src="{baseImageRoute}/{imageSrc}"
+			alt={imageAlt[$language]}
+		/>
 		{#if oldPrice}
 			<p class="discount">{calculateDiscount(oldPrice, price)} {$dictionary.discount}</p>
 		{/if}
@@ -87,7 +99,7 @@
 	<div class="productInfo">
 		<div class="left">
 			<a href="{baseRoute}/catalog/products/{href}">
-				<h2>{name}</h2>
+				<h2>{name[$language]}</h2>
 			</a>
 			<div class="prices">
 				<p class="price">{price}</p>
@@ -104,7 +116,7 @@
 				<button
 					aria-label={item.imageAlt[$language]}
 					class:current={currentVersionSrc === item.imageSrc}
-					on:click={() => changeVersion(item.imageSrc, item.imgHoverSrc)}
+					on:click={() => changeVersion(item)}
 				>
 					<img
 						width="50px"

@@ -10,15 +10,15 @@
 	const categories = denormalizeCategories(featuredCategories);
 
 	let popular: Product[] = [
-		storage.jersey2024,
-		storage.cyclingBib,
+		storage.redJersey2024,
+		storage.redCyclingBib,
 		storage.bibPlusJerseys,
 		storage.radaSocks,
 	];
 	let latest: Product[] = [
-		storage.cyclingBib,
+		storage.redCyclingBib,
 		storage.radaSocks,
-		storage.jersey2024,
+		storage.redJersey2024,
 		storage.bibPlusJerseys,
 	];
 </script>
