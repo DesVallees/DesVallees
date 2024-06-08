@@ -41,25 +41,41 @@
 	{#key $cartItems}
 		{#if denormalizedData.length > 0}
 			<h1>{$dictionary.myCart}</h1>
-			{#each denormalizedData as item (item.productId)}
+			{#each denormalizedData as item (`${item.productId}-${item.sizeId}`)}
 				<div class="cart-item" transition:slide>
-					<a href="{baseRoute}/catalog/products/{item.href}" class="imageLink">
+					<a
+						href="{baseRoute}/catalog/products/{item.href}{item.sizeId
+							? '?sizeID=' + item.sizeId
+							: ''}"
+						class="imageLink"
+					>
 						<img src="{baseImageRoute}/{item.imageSrc}" alt={item.name} />
 					</a>
 					<div class="item-details">
-						<a href="{baseRoute}/catalog/products/{item.href}">
+						<a
+							href="{baseRoute}/catalog/products/{item.href}{item.sizeId
+								? '?sizeID=' + item.sizeId
+								: ''}"
+						>
 							<h2>{item.name}</h2>
 						</a>
 						<p>{$dictionary.price}: {item.price}</p>
 						<div class="quantity-selector">
 							<button
 								on:click={() =>
-									addToCart(item.productId, Math.max(1, item.quantity - 1))}
+									addToCart(
+										item.productId,
+										Math.max(1, item.quantity - 1),
+										item.sizeId,
+									)}
 							>
 								<ion-icon name="remove" />
 							</button>
 							<span class="quantity">{item.quantity}</span>
-							<button on:click={() => addToCart(item.productId, item.quantity + 1)}>
+							<button
+								on:click={() =>
+									addToCart(item.productId, item.quantity + 1, item.sizeId)}
+							>
 								<ion-icon name="add" />
 							</button>
 						</div>
@@ -67,7 +83,7 @@
 					<div class="cartRight">
 						<button
 							class="close"
-							on:click={() => removeFromCart(item.productId, item.name)}
+							on:click={() => removeFromCart(item.productId, item.name, item.sizeId)}
 						>
 							<ion-icon name="close" />
 						</button>

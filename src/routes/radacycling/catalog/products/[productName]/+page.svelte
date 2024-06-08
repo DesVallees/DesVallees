@@ -13,7 +13,7 @@
 		type Product,
 		type Review as ReviewType,
 		addToCart,
-		getCartItemFromID,
+		getCartItemFromIDs,
 		removeFromCart,
 		calculateAverageRating,
 		findProductByHref,
@@ -33,6 +33,24 @@
 
 	let productReviews: ReviewType[];
 
+	let allSizeOptions = [
+		{ id: 16, name: 'XS' },
+		{ id: 17, name: 'S' },
+		{ id: 18, name: 'M' },
+		{ id: 19, name: 'L' },
+		{ id: 20, name: 'XL' },
+		{ id: 21, name: 'XXL' },
+	];
+	let sizeOptions: { id: number; name: string }[];
+
+	function getSizeNameById(id: number): string | undefined {
+		const sizeOption = allSizeOptions.find((option) => option.id === id);
+		return sizeOption?.name;
+	}
+
+	let sizeId: number | undefined;
+	let sizeName: string | undefined;
+
 	let quantity: number = productInCart?.quantity || 1;
 	$: quantity, updateCartQuantity();
 
@@ -46,7 +64,7 @@
 
 	function updateCartQuantity() {
 		if (product && (productInCart || productAdded)) {
-			addToCart(product.id, quantity);
+			addToCart(product.id, quantity, sizeId);
 		}
 	}
 
@@ -54,11 +72,26 @@
 	function toggleProduct() {
 		if (product) {
 			if (productInCart || productAdded) {
-				removeFromCart(product.id, product.name[$language]);
+				removeFromCart(
+					product.id,
+					`${
+						product.name[$language] +
+						(sizeId ? ' - ' + $dictionary.size + ' ' + sizeName : '')
+					}`,
+					sizeId,
+				);
 				productAdded = false;
 				productInCart = undefined;
 			} else {
-				addToCart(product.id, quantity, product.name[$language]);
+				addToCart(
+					product.id,
+					quantity,
+					sizeId,
+					`${
+						product.name[$language] +
+						(sizeId ? ' - ' + $dictionary.size + ' ' + sizeName : '')
+					}`,
+				);
 				productAdded = true;
 			}
 		}
@@ -66,10 +99,18 @@
 
 	function setup() {
 		quantity = 1;
+		sizeId = undefined;
+		sizeName = undefined;
+
 		product = findProductByHref($page.params.productName);
 
 		if (product) {
 			versions = product.versionsIds ? findProductsByIds(product.versionsIds) : undefined;
+			sizeOptions = allSizeOptions.filter((option) =>
+				product?.categoryIds.includes(option.id),
+			);
+
+			handleSizeChange(Number($page.url.searchParams.get('sizeID')));
 
 			productReviews = findReviewsByProductId(product.id);
 
@@ -81,23 +122,44 @@
 			checkIfProductIsInCart();
 		}
 
-		currentTab = 'description';
+		if (resetTabWhenNewProduct) {
+			currentTab = 'description';
+		} else {
+			resetTabWhenNewProduct = true;
+		}
 	}
 
 	function checkIfProductIsInCart() {
+		productAdded = false;
+
 		if (product) {
-			productInCart = getCartItemFromID($cartItems, product.id);
+			productInCart = getCartItemFromIDs($cartItems, product.id, sizeId);
 			if (productInCart) {
 				quantity = productInCart.quantity;
+			} else {
+				quantity = 1;
 			}
 		}
 	}
 
 	type Tab = 'description' | 'details' | 'reviews';
 	let currentTab: Tab = 'description';
+	let resetTabWhenNewProduct: boolean = true;
 
 	function changeTab(newTab: Tab) {
 		currentTab = newTab;
+	}
+
+	function handleSizeChange(id: number) {
+		if (sizeId !== id) {
+			sizeId = id;
+			sizeName = getSizeNameById(id);
+		} else {
+			sizeId = undefined;
+			sizeName = undefined;
+		}
+
+		checkIfProductIsInCart();
 	}
 
 	onMount(() => setup());
@@ -122,6 +184,7 @@
 								aria-label={item.imageAlt[$language]}
 								class:current={product.imageSrc === item.imageSrc}
 								href={item.href}
+								on:click={() => (resetTabWhenNewProduct = false)}
 							>
 								<img
 									width="50px"
@@ -136,8 +199,14 @@
 
 			<div class="product-content">
 				<div class="product-head">
-					<h1 class="product-title">{product.name[$language]}</h1>
-					<div class="product-price">{product.price}</div>
+					{#key sizeId}
+						<h1 class="product-title" in:fade>
+							{product.name[$language] +
+								(sizeId ? ' - ' + $dictionary.size + ' ' + sizeName : '')}
+						</h1>
+
+						<div in:fade class="product-price">{product.price}</div>
+					{/key}
 				</div>
 				<div class="product-rating">
 					<span class="rating">{averageRating} ★</span>
@@ -200,41 +269,64 @@
 					</div>
 				{/if}
 
-				<div class="quantity-selector">
-					<button
-						on:click={decrementQuantity}
-						class="decrement"
-						aria-label="{$dictionary.decreaseQuantityTo} {quantity - 1}"
-					>
-						<ion-icon name="remove" />
-					</button>
-					<div class="quantity">{quantity}</div>
-					<button
-						on:click={incrementQuantity}
-						class="increment"
-						aria-label="{$dictionary.increaseQuantityTo} {quantity + 1}"
-					>
-						<ion-icon name="add" />
-					</button>
-				</div>
+				{#if sizeOptions.length > 0}
+					<div class="size-container">
+						<h3>{$dictionary.size}</h3>
+						<div class="size-selector">
+							{#each sizeOptions as option}
+								<button
+									class:current={sizeId === option.id}
+									on:click={() => handleSizeChange(option.id)}
+								>
+									{option.name}
+								</button>
+							{/each}
+						</div>
+					</div>
+				{/if}
 
-				<div class="actions">
-					<button on:click={toggleProduct} class="add-to-cart-btn">
-						{#if productInCart || productAdded}
-							<div
-								in:scale
-								style="display: flex; align-items: center; gap: 1ch; margin: -.2em 0"
-							>
-								<span>{$dictionary.itemAdded}</span>
-								<ion-icon name="bag-check-outline" />
-							</div>
-						{:else}
-							<div in:scale>
-								<span>{$dictionary.addToCart}</span>
-							</div>
-						{/if}
-					</button>
-				</div>
+				{#if sizeOptions.length === 0 || sizeId}
+					<div class="quantity-selector">
+						<button
+							on:click={decrementQuantity}
+							class="decrement"
+							aria-label="{$dictionary.decreaseQuantityTo} {quantity - 1}"
+						>
+							<ion-icon name="remove" />
+						</button>
+						<div class="quantity">{quantity}</div>
+						<button
+							on:click={incrementQuantity}
+							class="increment"
+							aria-label="{$dictionary.increaseQuantityTo} {quantity + 1}"
+						>
+							<ion-icon name="add" />
+						</button>
+					</div>
+
+					<div class="actions">
+						<button in:scale on:click={toggleProduct} class="add-to-cart-btn">
+							{#if productInCart || productAdded}
+								<div
+									in:scale
+									style="display: flex; align-items: center; gap: 1ch; margin: -.2em 0"
+								>
+									<span>{$dictionary.itemAdded}</span>
+									<ion-icon name="bag-check-outline" />
+								</div>
+							{:else}
+								<div in:scale>
+									<span>{$dictionary.addToCart}</span>
+								</div>
+							{/if}
+						</button>
+					</div>
+				{:else}
+					<p in:scale class="noSize">
+						<ion-icon name="alert-circle-outline" />
+						<span>{$dictionary.pleaseSelectASize}</span>
+					</p>
+				{/if}
 			</div>
 			<div class="similar">
 				<Products
@@ -421,6 +513,46 @@
 		margin: 2rem 0;
 	}
 
+	.size-container {
+		margin: 2rem auto;
+
+		display: grid;
+		gap: 1rem;
+	}
+
+	.size-container h3 {
+		font-size: 1.2em;
+		text-align: center;
+	}
+
+	.size-selector {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.size-selector button {
+		border-radius: 5px;
+		padding: 0.3em 0.8em;
+
+		box-shadow: 2px 2px 10px var(--content-2);
+
+		font-weight: bold;
+		text-align: center;
+
+		transition: background-color 0.2s;
+	}
+
+	.size-selector button:hover {
+		background-color: var(--interactive-1);
+	}
+
+	.size-selector button.current {
+		border: 3px solid var(--interactive);
+		background-color: var(--interactive-1);
+	}
+
 	.quantity-selector {
 		display: flex;
 
@@ -480,6 +612,17 @@
 
 	.add-to-cart-btn:hover {
 		filter: brightness(200%);
+	}
+
+	.noSize {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1ch;
+
+		margin: 2rem 0 7rem;
+
+		color: var(--interactive);
 	}
 
 	.similar {

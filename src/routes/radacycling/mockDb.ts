@@ -674,7 +674,7 @@ export let storage: Record<string, Product> = {
     "bibPlusJerseys": {
         id: 4,
         name: { en: "Bib + 2 Jerseys + Free Socks", es: "Pantalón + 2 Camisetas + Calcetines Gratis" },
-        categoryIds: [0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 15, 19],
+        categoryIds: [0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 15],
         description: {
             en: "Score the ultimate cycling trio with 'Bib + 2 Jerseys + Free Socks'! At just $219.97, enjoy professional-grade comfort and unbeatable style. This exclusive offer bundles sleek aerodynamics, breathability, and a complimentary touch of coziness for your feet. Upgrade your ride in one go!",
             es: "Consigue el trío ciclista definitivo con 'Pantalón + 2 Camisetas + Calcetines Gratis'! Por solo $219.97, disfruta de un confort de nivel profesional y un estilo inigualable. Esta oferta exclusiva incluye aerodinámica elegante, transpirabilidad y un toque de comodidad adicional para tus pies. ¡Mejora tu paseo de una vez por todas!"
@@ -964,6 +964,7 @@ export let deliveryFee = 8.18;
 
 export type DenormalizedCartItem = {
     productId: number,
+    sizeId?: number,
     quantity: number,
     name: string,
     imageSrc: string,
@@ -982,10 +983,16 @@ export function denormalizeCartItems(cartItems: CartItem[]): DenormalizedCartIte
         const itemPrice = parseFloat(product.price.replace(/[^0-9.-]+/g, ""));
         const totalItemPrice = itemPrice * item.quantity;
 
+        let productSize;
+        if (item.sizeId) {
+            productSize = findCategoryById(item.sizeId)?.name[storedLanguage];
+        }
+
         return {
             productId: item.productId,
+            sizeId: item.sizeId,
             quantity: item.quantity,
-            name: product.name[storedLanguage],
+            name: `${product.name[storedLanguage]}${productSize ? " - " + storedDictionary.size + ' ' + productSize : ""}`,
             imageSrc: product.imageSrc,
             description: product.description[storedLanguage],
             price: product.price,
@@ -995,10 +1002,12 @@ export function denormalizeCartItems(cartItems: CartItem[]): DenormalizedCartIte
     });
 }
 
-export function addToCart(productId: number, quantity: number, name?: string): void {
+export function addToCart(productId: number, quantity: number, sizeId?: number, name?: string): void {
     // Adds a product to the cart or updates the quantity if the product already exists.
     cartItems.update(items => {
-        const existingItemIndex = items.findIndex(item => item.productId === productId);
+        sizeId ||= 0
+
+        const existingItemIndex = items.findIndex(item => item.productId === productId && item.sizeId === sizeId);
         if (existingItemIndex !== -1) {
             // Update quantity of an existing item
             const updatedItems = [...items];
@@ -1025,13 +1034,15 @@ export function addToCart(productId: number, quantity: number, name?: string): v
                         position: "bottom-center"
                     })
             }
-            return [...items, { productId, quantity }];
+            return [...items, { productId, quantity, sizeId }];
         }
     });
 }
 
-export function removeFromCart(productId: number, name: string): void {
-    cartItems.update(items => items.filter(item => item.productId !== productId));
+export function removeFromCart(productId: number, name: string, sizeId?: number): void {
+    sizeId ||= 0
+
+    cartItems.update(items => items.filter(item => item.productId !== productId || item.sizeId !== sizeId));
 
     toast.success(`"${name}" ${storedDictionary.hasBeenRemovedFromTheCart}`,
         {
@@ -1041,8 +1052,10 @@ export function removeFromCart(productId: number, name: string): void {
         })
 }
 
-export function getCartItemFromID(cartItemsStore: CartItem[], productId: number) {
-    return Object.values(cartItemsStore).find(item => item.productId === productId)
+export function getCartItemFromIDs(cartItemsStore: CartItem[], productId: number, sizeId?: number) {
+    sizeId ||= 0
+
+    return Object.values(cartItemsStore).find(item => item.productId === productId && item.sizeId === sizeId)
 }
 
 

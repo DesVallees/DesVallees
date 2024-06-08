@@ -137,6 +137,7 @@ export const translator = {
         someOfOurCustomWork: "Some Of Our Custom Work",
         viewMore: "View more",
         anErrorHasOccurred: "An error has occurred...",
+        pleaseSelectASize: "Please select a size",
     },
     es: {
         comingSoon: 'Próximamente',
@@ -276,5 +277,6 @@ export const translator = {
         someOfOurCustomWork: "Algunos de Nuestros Trabajos Personalizados",
         viewMore: "Ver más",
         anErrorHasOccurred: "Ha ocurrido un error...",
+        pleaseSelectASize: "Por favor selecciona una talla",
     },
 };

@@ -40,6 +40,7 @@ userID.subscribe(async (value) => {
 export type CartItem = {
     productId: number,
     quantity: number,
+    sizeId: number,
 }
 export const cartItems: Writable<CartItem[]> = writable([])
 cartItems.subscribe(async (value) => {
