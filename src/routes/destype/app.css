@@ -33,10 +33,10 @@ body {
 button {
     font: inherit;
     cursor: pointer;
-    color: hsla(210, 20%, 98%, 0.4);
+    color: hsla(210, 20%, 98%, 0.6);
     background: none;
     border: none;
-    box-shadow: 0 0 3px hsla(210, 20%, 98%, 0.4);
+    box-shadow: 0 0 3px hsla(210, 20%, 98%, 0.6);
     transition: all 0.3s ease;
     padding: .3rem;
     border-radius: 5px;

@@ -58,7 +58,7 @@
 			in:receive|global={{ key: newLanguage }}
 			out:send|global={{ key: newLanguage }}
 			animate:flip={{ duration: 400 }}
-			class={newLanguage === $language ? 'current' : ''}
+			class:current={newLanguage === $language}
 			disabled={newLanguage === $language}
 			on:click={() => changeLanguage(newLanguage)}
 			lang={newLanguage}

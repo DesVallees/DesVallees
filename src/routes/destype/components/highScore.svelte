@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { scale } from 'svelte/transition';
+	import { scale, fade } from 'svelte/transition';
 	import { bestWPM, dictionary } from '../stores';
 </script>
 
@@ -8,7 +8,7 @@
 		<span>{$dictionary.highScore}: </span>
 
 		{#key $bestWPM}
-			<span in:scale|global>{$bestWPM}</span>
+			<span in:fade|global>{$bestWPM}</span>
 		{/key}
 
 		<span>{$dictionary.wpm}</span>

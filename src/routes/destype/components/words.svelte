@@ -523,16 +523,18 @@
 	}
 
 	.letter {
-		opacity: 0.4;
+		opacity: 0.5;
 		transition: all 0.3s ease;
 	}
 
 	:global(.letter[data-letter='correct']) {
 		opacity: 1;
+		text-shadow: 0 0 2px var(--fg-100);
 	}
 
 	:global(.letter[data-letter='incorrect']) {
 		opacity: 1;
+		text-shadow: 0 0 2px var(--primary);
 		color: var(--primary);
 	}
 
