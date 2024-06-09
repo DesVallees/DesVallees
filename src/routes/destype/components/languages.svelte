@@ -9,7 +9,7 @@
 
 	const dispatch = createEventDispatcher();
 
-	$: languages = ['fr', 'es', 'it', 'en', 'ru'];
+	$: languages = ['fr', 'es', 'it', 'en', 'ru', 'de'];
 
 	function getLanguageName(languageCode: string): string | undefined {
 		const languageMappings: Record<string, string> = {
@@ -18,6 +18,7 @@
 			fr: 'français',
 			it: 'italiano',
 			ru: 'Русский',
+			de: 'deutsch',
 		};
 
 		return languageMappings[languageCode];

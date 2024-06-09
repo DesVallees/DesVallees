@@ -6,8 +6,9 @@ import english from "./english.json";
 import español from "./espanol.json";
 import italiano from "./italiano.json";
 import Русский from "./Русский.json";
+import deutsch from "./deutsch.json";
 
-type Language = 'fr' | 'en' | 'es' | 'it' | 'ru'
+type Language = 'fr' | 'en' | 'es' | 'it' | 'ru' | 'de'
 
 const languages = {
     'fr': français as any[],
@@ -15,6 +16,7 @@ const languages = {
     'en': english as any[],
     'it': italiano as any[],
     'ru': Русский as any[],
+    'de': deutsch as any[],
 }
 
 export const GET: RequestHandler = async ({ url }) => {
@@ -22,7 +24,6 @@ export const GET: RequestHandler = async ({ url }) => {
     const limit = Number(url.searchParams.get('limit'))
 
     const words = selectRandomElements(languages[language as Language], limit)
-    // const words = withoutDuplicates(languages[language as Language], limit)
 
     return json(words)
 }

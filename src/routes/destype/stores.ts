@@ -14,7 +14,7 @@ export const game: Writable<Game> = writable('waiting for input')
 
 // Language Management
 
-export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru';
+export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de';
 
 export function isLanguage(value: any): value is Language {
     return (
@@ -22,7 +22,8 @@ export function isLanguage(value: any): value is Language {
         value === 'es' ||
         value === 'it' ||
         value === 'en' ||
-        value === 'ru'
+        value === 'ru' ||
+        value === 'de'
     );
 }
 
