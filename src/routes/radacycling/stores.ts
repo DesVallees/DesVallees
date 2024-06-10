@@ -2,7 +2,7 @@ import { derived, get, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 import type { MenuItem } from './mockDb';
-import { db } from '$lib/firebase/firebase';
+import { db } from '$lib/firebase/rada';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export const activeSNavMenu: Writable<MenuItem[]> = writable();

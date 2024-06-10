@@ -2,9 +2,11 @@
 	import './app.css';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { language } from './stores';
+	import { baseImageRoute, baseRoute, language, user } from './stores';
 	import { sleep } from './functions';
 	import { Toaster } from 'svelte-french-toast';
+	import { goto } from '$app/navigation';
+	import { auth } from '$lib/firebase/journee';
 
 	import Nav from './components/nav.svelte';
 	import Footer from './components/footer.svelte';
@@ -23,27 +25,47 @@
 		disappearAndAppear = false;
 	}
 
-	let ready: boolean = false;
-	$: $page.url.pathname, goTop();
+	let layoutReady: boolean = false;
+	$: $page.url.pathname, handleURLChange($page.url.pathname);
 	let mainContent: HTMLElement;
-	let goTop: () => void = () => {};
+	let handleURLChange: (newUrl: string) => void = () => {};
 
 	onMount(() => {
-		ready = true;
+		layoutReady = true;
 
-		goTop = () => {
+		handleURLChange = (newUrl: string) => {
 			if (document) {
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
 				mainContent.scrollTop = 0;
 			}
+
+			if ($user && newUrl === `${baseRoute}/sign-in`) {
+				goto(`${baseRoute}`);
+			}
 		};
+
+		auth.onAuthStateChanged(async (user) => {
+			layoutReady = false;
+
+			if (user) {
+				if (user.email && $page.url.pathname === `${baseRoute}/sign-in`) {
+					goto(`${baseRoute}`);
+				}
+
+				$user = user;
+			} else {
+				$user = undefined;
+			}
+
+			layoutReady = true;
+		});
 	});
 </script>
 
 <svelte:head>
 	<meta name="author" content="Santiago Ovalles" />
-	<link rel="icon" href="/images/journee/logoWhite.webp" />
+	<link rel="icon" href="{baseImageRoute}/logoWhite.webp" />
 </svelte:head>
 
 <Toaster />
@@ -64,7 +86,7 @@
 		<Footer />
 	</footer>
 
-	{#if !ready}
+	{#if !layoutReady}
 		<Preloader animation="dots">
 			<h1 style="font-size: 3rem;">Journée</h1>
 		</Preloader>

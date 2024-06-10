@@ -135,3 +135,11 @@ export function escapeHTML(input: string): string {
 
     return input.replace(/[&<>"'`=\/]/g, (s) => entityMap[s]);
 }
+
+import toast from "svelte-french-toast";
+import { dictionary } from "./stores"
+import { get } from 'svelte/store';
+let storedDictionary = get(dictionary)
+export function anErrorOccurred(error: string = storedDictionary.errorOccurred) {
+    toast.error(error, { position: 'bottom-center' });
+}

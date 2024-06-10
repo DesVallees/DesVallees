@@ -1,9 +1,37 @@
 import { derived, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
+import { db } from '$lib/firebase/journee';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import type { User } from 'firebase/auth';
+
+// Database
+export const dataReady: Writable<boolean> = writable(false);
+export const user: Writable<User | undefined> = writable(undefined);
+
+user.subscribe(async (user) => {
+    if (user) {
+        let userData: any;
+        const userDocumentReference = doc(db, 'users', user.uid);
+        const docSnap = await getDoc(userDocumentReference);
+
+        if (!docSnap.exists()) {
+            const newUserData = {};
+
+            await setDoc(userDocumentReference, newUserData, { merge: true });
+            userData = newUserData;
+        } else {
+            userData = docSnap.data();
+        }
+
+        dataReady.set(true)
+    }
+})
 
 
-
+// Base Routes
+export const baseImageRoute = '/images/journee';
+export const baseRoute = '/journee';
 
 
 // Language Management

@@ -1,5 +1,5 @@
 // Import the functions from the SDKs
-import { deleteApp, getApp, getApps, initializeApp, type FirebaseApp } from "firebase/app";
+import { getApps, initializeApp, type FirebaseApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 
@@ -13,18 +13,8 @@ const firebaseConfig = {
     appId: import.meta.env.VITE_RADA_appId,
 };
 
-
 // Initialize Firebase
-let firebaseApp: FirebaseApp;
-
-if (!getApps().length) {
-    firebaseApp = initializeApp(firebaseConfig)
-} else {
-    firebaseApp = getApp()
-    deleteApp(firebaseApp)
-
-    firebaseApp = initializeApp(firebaseConfig)
-}
+let firebaseApp: FirebaseApp = getApps().find(app => app.name === 'rada') || initializeApp(firebaseConfig, 'rada');
 
 // Export Database
 export const db = getFirestore(firebaseApp)

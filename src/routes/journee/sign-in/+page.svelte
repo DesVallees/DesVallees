@@ -1,14 +1,42 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { dictionary } from '../stores';
+	import { authHandlers } from '../auth';
+	import { anErrorOccurred } from '../functions';
+	import Preloader from '../components/preloader.svelte';
+
+	let email: string;
+	let password: string;
+	let confirmPassword: string;
+
+	let authenticating: boolean = false;
+
+	async function handleFormSubmission() {
+		if (password === confirmPassword) {
+			authenticating = true;
+			await authHandlers.signin(email, password);
+			authenticating = false;
+		} else {
+			anErrorOccurred($dictionary.passwordsDoNotMatch);
+			password = '';
+			confirmPassword = '';
+		}
+	}
 </script>
+
+{#if authenticating}
+	<Preloader animation="dots">
+		<h1 style="font-size: 3rem;">Journée</h1>
+	</Preloader>
+{/if}
 
 <div class="logIn" in:fade>
 	<h1>{$dictionary.beginYourJournee}</h1>
-	<form action="">
+	<form on:submit|preventDefault={handleFormSubmission}>
 		<div class="inputGroup">
 			<ion-icon name="mail" />
 			<input
+				bind:value={email}
 				type="email"
 				placeholder={$dictionary.email}
 				class="ghostButton"
@@ -21,6 +49,7 @@
 		<div class="inputGroup">
 			<ion-icon name="lock-closed" />
 			<input
+				bind:value={password}
 				type="password"
 				placeholder={$dictionary.password}
 				class="ghostButton"
@@ -30,6 +59,7 @@
 		<div class="inputGroup">
 			<ion-icon name="shield-checkmark" />
 			<input
+				bind:value={confirmPassword}
 				type="password"
 				placeholder={$dictionary.confirmPassword}
 				class="ghostButton"

@@ -10,7 +10,7 @@
 	import Footer from './components/footer.svelte';
 	import Preloader from './components/preloader.svelte';
 	import { Toaster } from 'svelte-french-toast';
-	import { auth } from '$lib/firebase/firebase';
+	import { auth } from '$lib/firebase/rada';
 	import { authHandlers } from './auth';
 
 	let disappearAndAppear: boolean = false;

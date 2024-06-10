@@ -1,4 +1,4 @@
-import { auth } from "$lib/firebase/firebase";
+import { auth } from "$lib/firebase/rada";
 import { linkWithCredential, signInAnonymously, EmailAuthProvider, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { anErrorOccurred } from "./functions";
 import { goto } from "$app/navigation";

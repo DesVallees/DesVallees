@@ -1,14 +1,37 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { dictionary } from '../stores';
+	import { authHandlers } from '../auth';
+	import Preloader from '../components/preloader.svelte';
+
+	let email: string;
+	let password: string;
+
+	let authenticating: boolean = false;
+
+	async function logIn() {
+		authenticating = true;
+		await authHandlers.login(email, password).then(() => {
+			email = '';
+		});
+		password = '';
+		authenticating = false;
+	}
 </script>
+
+{#if authenticating}
+	<Preloader animation="dots">
+		<h1 style="font-size: 3rem;">Journée</h1>
+	</Preloader>
+{/if}
 
 <div class="logIn" in:fade>
 	<h1>{$dictionary.logInToJournee}</h1>
-	<form action="">
+	<form on:submit|preventDefault={logIn}>
 		<div class="inputGroup">
 			<ion-icon name="mail" />
 			<input
+				bind:value={email}
 				type="email"
 				placeholder={$dictionary.email}
 				class="ghostButton"
@@ -21,6 +44,7 @@
 		<div class="inputGroup">
 			<ion-icon name="lock-closed" />
 			<input
+				bind:value={password}
 				type="password"
 				placeholder={$dictionary.password}
 				class="ghostButton"

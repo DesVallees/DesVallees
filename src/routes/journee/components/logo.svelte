@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { baseImageRoute } from '../stores';
 
 	export let style: string = '';
 
-	let src = '/images/journee/logoWhite.webp';
+	let src = `${baseImageRoute}/logoWhite.webp`;
 
 	let loaded = false;
 
