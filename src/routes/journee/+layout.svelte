@@ -56,6 +56,7 @@
 				$user = user;
 			} else {
 				$user = undefined;
+				$dataReady = true
 			}
 
 			layoutReady = true;
