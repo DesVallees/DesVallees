@@ -1,9 +1,10 @@
-import { derived, writable, type Writable } from 'svelte/store';
+import { derived, get, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 import { db } from '$lib/firebase/journee';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import type { User } from 'firebase/auth';
+import { myPosts, type Post } from './database';
 
 // Database
 export const dataReady: Writable<boolean> = writable(false);
@@ -24,10 +25,36 @@ user.subscribe(async (user) => {
             userData = docSnap.data();
         }
 
+        // Fetch all posts for the user
+        const postsCollectionReference = collection(db, 'users', user.uid, 'posts');
+        const postsSnapshot = await getDocs(postsCollectionReference);
+        const postsData = postsSnapshot.docs.map(doc => ({ ...doc.data() as Post }));
+
+        // Update the myPosts store with the fetched posts
+        myPosts.set(postsData);
+
         dataReady.set(true)
     }
 })
 
+myPosts.subscribe((value) => {
+    let userInfo: User | undefined = get(user)
+    if (userInfo) {
+        value.forEach(async post => {
+            const userPostReference = doc(db, 'users', userInfo.uid, 'posts', post.id.toString());
+    
+            try {
+                await setDoc(
+                    userPostReference,
+                    { ...post },
+                    { merge: true }
+                )
+            } catch (error) {
+                console.error("Error while saving post: ", error);
+            }
+        });
+    }
+})
 
 // Base Routes
 export const baseImageRoute = '/images/journee';

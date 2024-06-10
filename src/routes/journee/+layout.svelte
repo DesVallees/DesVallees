@@ -2,7 +2,7 @@
 	import './app.css';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { baseImageRoute, baseRoute, language, user } from './stores';
+	import { baseImageRoute, baseRoute, language, user, dataReady} from './stores';
 	import { sleep } from './functions';
 	import { Toaster } from 'svelte-french-toast';
 	import { goto } from '$app/navigation';
@@ -86,7 +86,7 @@
 		<Footer />
 	</footer>
 
-	{#if !layoutReady}
+	{#if !layoutReady || !$dataReady}
 		<Preloader animation="dots">
 			<h1 style="font-size: 3rem;">Journée</h1>
 		</Preloader>
@@ -113,6 +113,7 @@
 
 	main {
 		max-width: 100vw;
+		display: grid;
 		align-self: stretch;
 	}
 

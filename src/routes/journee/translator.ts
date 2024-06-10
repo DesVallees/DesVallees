@@ -27,6 +27,9 @@ export const translator = {
         passwordsDoNotMatch: 'Las contraseñas no coinciden',
         logOut: 'Cerrar sesión',
         welcome: 'Bienvenido',
+        newPost: 'Nueva publicación',
+        noPostsYet: '¡No has creado ninguna publicación todavía!',
+        done: 'Hecho',
     },
     en: {
         comingSoon: 'Coming Soon',
@@ -56,6 +59,9 @@ export const translator = {
         passwordsDoNotMatch: 'Passwords do not match',
         logOut: 'Log Out',
         welcome: 'Welcome',
+        newPost: 'New Post',
+        noPostsYet: 'You haven\'t created any posts yet!',
+        done: 'Done',
     },
     fr: {
         comingSoon: 'Prochainement',
@@ -85,6 +91,9 @@ export const translator = {
         passwordsDoNotMatch: 'Les mots de passe ne correspondent pas',
         logOut: 'Se déconnecter',
         welcome: 'Bienvenue',
+        newPost: 'Nouvelle publication',
+        noPostsYet: 'Vous n\'avez pas encore créé de publications !',
+        done: 'Fait',
     },
     de: {
         comingSoon: 'Demnächst',
@@ -114,6 +123,9 @@ export const translator = {
         passwordsDoNotMatch: 'Die Passwörter stimmen nicht überein',
         logOut: 'Abmelden',
         welcome: 'Willkommen',
+        newPost: 'Neuer Beitrag',
+        noPostsYet: 'Du hast noch keine Beiträge erstellt!',
+        done: 'Fertig',
     },
     it: {
         comingSoon: 'Prossimamente',
@@ -143,6 +155,9 @@ export const translator = {
         passwordsDoNotMatch: 'Le password non corrispondono',
         logOut: 'Esci',
         welcome: 'Benvenuto',
+        newPost: 'Nuovo post',
+        noPostsYet: 'Non hai ancora creato alcun post!',
+        done: 'Fatto',
     },
     ru: {
         comingSoon: 'Скоро',
@@ -172,5 +187,8 @@ export const translator = {
         passwordsDoNotMatch: 'Пароли не совпадают',
         logOut: 'Выйти',
         welcome: 'Добро пожаловать',
+        newPost: 'Новый пост',
+        noPostsYet: 'Вы еще не создали ни одного поста!',
+        done: 'Готово',
     },
 };
