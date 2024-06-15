@@ -47,32 +47,23 @@ export function convertDataUrlToUrl(dataUrl: string): string {
 export function autoResizeTextarea(element: HTMLTextAreaElement): void {
     const minHeight = element.offsetHeight;
 
-    const paddingTop = parseInt(window.getComputedStyle(element, null).getPropertyValue("padding-top"));
-    const paddingRight = parseInt(window.getComputedStyle(element, null).getPropertyValue("padding-right"));
-    const paddingBottom = parseInt(window.getComputedStyle(element, null).getPropertyValue("padding-bottom"));
-    const paddingLeft = parseInt(window.getComputedStyle(element, null).getPropertyValue("padding-left"));
-    const border = parseInt(window.getComputedStyle(element, null).getPropertyValue("border"));
-
     const resize = () => {
-        const oldHeight = element.style.height;
         element.style.height = "auto";
-        const newHeight = element.scrollHeight - border;
+        const newHeight = element.scrollHeight;
         element.style.height = Math.max(minHeight, newHeight) + "px";
-        if (oldHeight !== element.style.height) {
-            resize();
-        }
     };
 
+    // Event listeners for input, focus, and window resize
     element.addEventListener("input", resize);
     element.addEventListener("focus", resize);
-    element.addEventListener("blur", resize);
     window.addEventListener("resize", resize);
 
+    // Initial setup
     element.style.overflow = "hidden";
     element.style.boxSizing = "border-box";
-    element.style.padding = `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`;
 
-    resize();
+    // Call resize initially and after the textarea is rendered
+    setTimeout(resize, 0);
 }
 
 export function throttle(func: () => void, limit: number): () => void {

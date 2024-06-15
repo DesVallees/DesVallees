@@ -30,6 +30,8 @@ export const translator = {
         newPost: 'Nueva publicación',
         noPostsYet: '¡No has creado ninguna publicación todavía!',
         done: 'Hecho',
+        thinking: '¿En qué estás pensando?',
+        postTitle: 'Título de tu publicación...',
     },
     en: {
         comingSoon: 'Coming Soon',
@@ -62,6 +64,8 @@ export const translator = {
         newPost: 'New Post',
         noPostsYet: 'You haven\'t created any posts yet!',
         done: 'Done',
+        thinking: 'What are you thinking?',
+        postTitle: 'Title of your post...',
     },
     fr: {
         comingSoon: 'Prochainement',
@@ -94,6 +98,8 @@ export const translator = {
         newPost: 'Nouvelle publication',
         noPostsYet: 'Vous n\'avez pas encore créé de publications !',
         done: 'Fait',
+        thinking: 'À quoi penses-tu ?',
+        postTitle: 'Titre de votre publication...',
     },
     de: {
         comingSoon: 'Demnächst',
@@ -126,6 +132,8 @@ export const translator = {
         newPost: 'Neuer Beitrag',
         noPostsYet: 'Du hast noch keine Beiträge erstellt!',
         done: 'Fertig',
+        thinking: 'Woran denkst du?',
+        postTitle: 'Titel deines Beitrags...',
     },
     it: {
         comingSoon: 'Prossimamente',
@@ -158,6 +166,8 @@ export const translator = {
         newPost: 'Nuovo post',
         noPostsYet: 'Non hai ancora creato alcun post!',
         done: 'Fatto',
+        thinking: 'A cosa stai pensando?',
+        postTitle: 'Titolo del tuo post...',
     },
     ru: {
         comingSoon: 'Скоро',
@@ -190,5 +200,7 @@ export const translator = {
         newPost: 'Новый пост',
         noPostsYet: 'Вы еще не создали ни одного поста!',
         done: 'Готово',
+        thinking: 'О чем ты думаешь?',
+        postTitle: 'Заголовок вашего поста...',
     },
 };

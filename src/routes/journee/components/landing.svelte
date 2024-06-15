@@ -1,30 +1,28 @@
 <script lang="ts">
-	import { fade } from "svelte/transition";
-	import { baseImageRoute, dictionary } from "../stores";
-
-
+	import { fade } from 'svelte/transition';
+	import { baseImageRoute, dictionary } from '../stores';
 </script>
 
 <div class="landing" in:fade>
-    <section>
-        <h1>Journée</h1>
-        <h2>{$dictionary.slogan}</h2>
+	<section>
+		<h1>Journée</h1>
+		<h2>{$dictionary.slogan}</h2>
 
-        <a href="/journee/log-in" class="button">{$dictionary.logIn}</a>
-    </section>
+		<a href="/journee/log-in" class="button">{$dictionary.logIn}</a>
+	</section>
 
-    <div class="imgWrapper">
-        <img
-            src="{baseImageRoute}/gufoLanding.webp"
-            alt={$dictionary.landingOwlAlt}
-            width="368"
-            height="368"
-        />
-    </div>
+	<div class="imgWrapper">
+		<img
+			src="{baseImageRoute}/gufoLanding.webp"
+			alt={$dictionary.landingOwlAlt}
+			width="368"
+			height="368"
+		/>
+	</div>
 </div>
-    
+
 <style>
-    .landing {
+	.landing {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;

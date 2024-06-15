@@ -17,6 +17,7 @@
     --mainRGB: 24, 26, 32;
     --contentRGB: 245, 245, 255;
     --interactiveRGB: 65, 10, 216;
+    --complementaryRGB: 180, 217, 9;
 
     --main: rgb(var(--mainRGB));
     --main-9: rgba(var(--mainRGB), .9);
@@ -48,6 +49,16 @@
     --interactive-3: rgba(var(--interactiveRGB), .3);
     --interactive-2: rgba(var(--interactiveRGB), .2);
     --interactive-1: rgba(var(--interactiveRGB), .1);
+    --complementary: rgb(var(--complementaryRGB));
+    --complementary-9: rgba(var(--complementaryRGB), .9);
+    --complementary-8: rgba(var(--complementaryRGB), .8);
+    --complementary-7: rgba(var(--complementaryRGB), .7);
+    --complementary-6: rgba(var(--complementaryRGB), .6);
+    --complementary-5: rgba(var(--complementaryRGB), .5);
+    --complementary-4: rgba(var(--complementaryRGB), .4);
+    --complementary-3: rgba(var(--complementaryRGB), .3);
+    --complementary-2: rgba(var(--complementaryRGB), .2);
+    --complementary-1: rgba(var(--complementaryRGB), .1);
 }
 
 ::selection {
@@ -85,7 +96,6 @@ img {
 }
 
 button,
-input,
 input,
 textarea,
 a {

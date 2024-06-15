@@ -3,7 +3,7 @@ import { writable, type Writable } from "svelte/store"
 export const myPosts: Writable<Post[]> = writable([])
 
 /**
- * Function to update or create a post in the array.
+ * Function to update or create a post in a Post array.
  * @param posts - Array of Post objects.
  * @param newPost - The new Post object to be added or used to update an existing post.
 */
@@ -21,15 +21,66 @@ export function updateOrCreatePost(posts: Post[], newPost: Post): void {
     myPosts.set(posts);
 }
 
+/**
+ * Function to get a post in a Post array.
+ * @param posts - Array of Post objects.
+ * @param id - The ID of the Post to be retrieved.
+*/
+export function getPostById(posts: Post[], id: string): Post | undefined {
+    return posts.find(post => post.id === id);
+}
+
+/**
+ * Function to delete a post in a Post array.
+ * @param posts - Array of Post objects.
+ * @param id - The ID of the Post to be deleted.
+*/
+export function deletePostById(posts: Post[], postId: string): void {
+    const index = posts.findIndex(post => post.id === postId);
+
+    if (index !== -1) {
+        posts.splice(index, 1);
+        myPosts.set(posts);
+    }
+}
+
+
+/**
+ * Function to generate a unique ID, making sure it's not already in a Post array.
+ * @param posts - Array of Post objects.
+*/
+export function generateUniqueId(posts: Post[]): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const idLength = 10;
+
+    function generateId(): string {
+        let id = '';
+        for (let i = 0; i < idLength; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            id += characters[randomIndex];
+        }
+        return id;
+    }
+
+    let newId = generateId();
+
+    while (posts.some(post => post.id === newId)) {
+        newId = generateId();
+    }
+
+    return newId;
+}
+
 export interface Post {
-    id: number
+    id: string
     authorId: string
     isAnonymous: boolean
     publishedDate: number
     date: number
     location?: string
     title: string
-    content: PostContent[]
+    content: string
+    media: Media[]
     visibility: Visibility
     isLocked: boolean
     categoryID: number
@@ -56,15 +107,7 @@ interface Video {
     width?: number
 }
 
-type ListItem = 'ordered' | 'unordered'
-
-interface PostText {
-    type: 'text'
-    content: string
-    listItemType?: ListItem
-}
-
-export type PostContent =  PostText | Image | Video
+export type Media = Image | Video
 
 type VisibilityType = 'private' | 'public'
 type SpecialUsers = 'Are the only ones that can view the post' | 'Cannot view the post'

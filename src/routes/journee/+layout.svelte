@@ -2,7 +2,7 @@
 	import './app.css';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { baseImageRoute, baseRoute, language, user, dataReady} from './stores';
+	import { baseImageRoute, baseRoute, language, user, dataReady } from './stores';
 	import { sleep } from './functions';
 	import { Toaster } from 'svelte-french-toast';
 	import { goto } from '$app/navigation';
@@ -56,7 +56,7 @@
 				$user = user;
 			} else {
 				$user = undefined;
-				$dataReady = true
+				$dataReady = true;
 			}
 
 			layoutReady = true;

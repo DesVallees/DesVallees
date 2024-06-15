@@ -2,7 +2,7 @@ import { derived, get, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 import { db } from '$lib/firebase/journee';
-import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import type { User } from 'firebase/auth';
 import { myPosts, type Post } from './database';
 
@@ -12,6 +12,8 @@ export const user: Writable<User | undefined> = writable(undefined);
 
 user.subscribe(async (user) => {
     if (user) {
+        dataReady.set(false)
+
         let userData: any;
         const userDocumentReference = doc(db, 'users', user.uid);
         const docSnap = await getDoc(userDocumentReference);
@@ -37,24 +39,44 @@ user.subscribe(async (user) => {
     }
 })
 
-myPosts.subscribe((value) => {
-    let userInfo: User | undefined = get(user)
+let previousPosts: Post[] = [];
+
+myPosts.subscribe(async (currentPosts) => {
+    const userInfo: User | undefined = get(user);
+
     if (userInfo) {
-        value.forEach(async post => {
+        // Handle deletions
+        const deletedPosts = previousPosts.filter(
+            previousPost => !currentPosts.some(currentPost => currentPost.id === previousPost.id)
+        );
+
+        for (const post of deletedPosts) {
             const userPostReference = doc(db, 'users', userInfo.uid, 'posts', post.id.toString());
-    
+            try {
+                await deleteDoc(userPostReference);
+            } catch (error) {
+                console.error("Error while deleting post: ", error);
+            }
+        }
+
+        // Handle additions/updates
+        for (const post of currentPosts) {
+            const userPostReference = doc(db, 'users', userInfo.uid, 'posts', post.id.toString());
             try {
                 await setDoc(
                     userPostReference,
                     { ...post },
                     { merge: true }
-                )
+                );
             } catch (error) {
                 console.error("Error while saving post: ", error);
             }
-        });
+        }
+
+        // Update previousPosts to the current state
+        previousPosts = [...currentPosts];
     }
-})
+});
 
 // Base Routes
 export const baseImageRoute = '/images/journee';
