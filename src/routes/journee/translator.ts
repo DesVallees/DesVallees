@@ -32,6 +32,9 @@ export const translator = {
         done: 'Hecho',
         thinking: '¿En qué estás pensando?',
         postTitle: 'Título de tu publicación...',
+        discard: 'Descartar',
+        editPost: 'Editar publicación',
+        deletePost: 'Eliminar publicación',
     },
     en: {
         comingSoon: 'Coming Soon',
@@ -66,6 +69,9 @@ export const translator = {
         done: 'Done',
         thinking: 'What are you thinking?',
         postTitle: 'Title of your post...',
+        discard: 'Discard',
+        editPost: 'Edit post',
+        deletePost: 'Delete post',
     },
     fr: {
         comingSoon: 'Prochainement',
@@ -100,6 +106,9 @@ export const translator = {
         done: 'Fait',
         thinking: 'À quoi penses-tu ?',
         postTitle: 'Titre de votre publication...',
+        discard: 'Jeter',
+        editPost: 'Modifier la publication',
+        deletePost: 'Supprimer la publication',
     },
     de: {
         comingSoon: 'Demnächst',
@@ -134,6 +143,9 @@ export const translator = {
         done: 'Fertig',
         thinking: 'Woran denkst du?',
         postTitle: 'Titel deines Beitrags...',
+        discard: 'Verwerfen',
+        editPost: 'Beitrag bearbeiten',
+        deletePost: 'Beitrag löschen',
     },
     it: {
         comingSoon: 'Prossimamente',
@@ -168,6 +180,9 @@ export const translator = {
         done: 'Fatto',
         thinking: 'A cosa stai pensando?',
         postTitle: 'Titolo del tuo post...',
+        discard: 'Scartare',
+        editPost: 'Modifica post',
+        deletePost: 'Elimina post',
     },
     ru: {
         comingSoon: 'Скоро',
@@ -202,5 +217,8 @@ export const translator = {
         done: 'Готово',
         thinking: 'О чем ты думаешь?',
         postTitle: 'Заголовок вашего поста...',
+        discard: 'Отменить',
+        editPost: 'Редактировать пост',
+        deletePost: 'Удалить пост',
     },
 };

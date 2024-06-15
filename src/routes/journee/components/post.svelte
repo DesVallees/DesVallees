@@ -2,7 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { slide } from 'svelte/transition';
 	import { deletePostById, myPosts, type Post } from '../database';
-	import { baseRoute } from '../stores';
+	import { baseRoute, dictionary } from '../stores';
+	import { escapeAndFormat } from '../functions';
 
 	export let post: Post;
 
@@ -21,7 +22,10 @@
 		<div class="left">
 			<h2 class="title">{post.title}</h2>
 			<p class="date">
-				{postDate.toLocaleDateString()} - {postDate.getHours()}:{postDate.getMinutes()}
+				{postDate.toLocaleDateString()} - {String(postDate.getHours()).padStart(
+					2,
+					'0',
+				)}:{String(postDate.getMinutes()).padStart(2, '0')}
 			</p>
 		</div>
 		<div class="center">
@@ -30,17 +34,21 @@
 			{/if}
 		</div>
 		<div class="right">
-			<button class="ionButton edit" on:click={editPost}>
+			<button class="ionButton edit" on:click={editPost} aria-label={$dictionary.editPost}>
 				<ion-icon name="create-outline" />
 			</button>
-			<button class="ionButton delete" on:click={deletePost}>
+			<button
+				class="ionButton delete"
+				on:click={deletePost}
+				aria-label={$dictionary.deletePost}
+			>
 				<ion-icon name="trash-outline" />
 			</button>
 		</div>
 	</header>
 
 	<main>
-		<p class="content">{post.content}</p>
+		<p class="content">{@html escapeAndFormat(post.content)}</p>
 	</main>
 </div>
 
@@ -49,7 +57,7 @@
 		display: grid;
 		gap: 1em;
 
-		width: min(500px, 100%);
+		width: min(60ch, 100%);
 		padding: 2rem 0;
 		border-bottom: solid 1px var(--content-5);
 	}

@@ -59,11 +59,7 @@
 
 <div class="create" in:slide={{ axis: 'y', duration: 500 }}>
 	<header>
-		<h1>{$dictionary.newPost}</h1>
-
-		<button class="close" on:click={closeModal}>
-			<ion-icon name="close-outline" />
-		</button>
+		<h1>{entryID ? $dictionary.editPost : $dictionary.newPost}</h1>
 	</header>
 	<main>
 		<!-- svelte-ignore a11y-autofocus -->
@@ -83,6 +79,10 @@
 		/>
 	</main>
 	<footer>
+		<button class="button close" on:click={closeModal}>
+			{$dictionary.discard}
+		</button>
+
 		<button class="button done" on:click={() => saveChanges(true)}>{$dictionary.done}</button>
 	</footer>
 </div>
@@ -91,32 +91,21 @@
 	.create {
 		width: 100%;
 
-		padding: 1rem clamp(1.5rem, 7vw, 10%);
+		padding: 2rem clamp(1.5rem, 7vw, 10%);
 	}
 
-	header {
+	header,
+	footer {
 		display: flex;
 		align-items: center;
+		gap: 2ch;
 
-		margin-bottom: 2rem;
+		margin-bottom: 1.5rem;
 	}
 
-	.close {
-		display: flex;
-
-		margin-left: auto;
-		padding: 0.25em;
-		border-radius: 50%;
-
-		font-size: 1.25em;
-		background-color: transparent;
-
-		transition: all 0.2s;
-	}
-
-	.close:hover,
-	.close:focus-visible {
-		background-color: var(--content-1);
+	h1 {
+		font-size: 1.5em;
+		text-transform: capitalize;
 	}
 
 	main {
@@ -142,10 +131,13 @@
 		border-top: solid 3px var(--interactive);
 	}
 
-	.done {
-		margin-top: 1rem;
-		margin-left: auto;
+	footer {
+		justify-content: end;
 
+		margin-top: 1rem;
+	}
+
+	.button {
 		min-width: 4rem;
 
 		font-size: 1.05em;

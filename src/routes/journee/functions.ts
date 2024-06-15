@@ -116,15 +116,85 @@ export function escapeHTML(input: string): string {
     const entityMap: { [key: string]: string } = {
         '&': '&amp;',
         '<': '&lt;',
-        '>': '&gt;',
         '"': '&quot;',
         "'": '&#39;',
-        '/': '&#x2F;',
+        '/': '&#47;',
         '`': '&#x60;',
         '=': '&#x3D;'
     };
 
-    return input.replace(/[&<>"'`=\/]/g, (s) => entityMap[s]);
+    return input.replace(/[&<"'`=\/]/g, (s) => entityMap[s]);
+}
+
+export function unescapeHTML(input: string): string {
+    const entityMap: { [key: string]: string } = {
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>',
+        '&quot;': '"',
+        '&#39;': "'",
+        '&#47;': '/',
+        '&#x60;': '`',
+        '&#x3D;': '='
+    };
+
+    // Create a regular expression to find all the HTML entities in the input string.
+    const entityRegex = /&amp;|&lt;|&gt;|&quot;|&#39;|&#47;|&#x60;|&#x3D;/g;
+
+    return input.replace(entityRegex, (s) => entityMap[s]);
+}
+
+// Linkify URLs
+export function linkify(text: string): string {
+    const urlPattern = /((?:https?:&#47;&#47;|ftp:&#47;&#47;|@)?(?:www\.)?(?:[A-Z0-9.-]{2,})(\.|\:)(?:[A-Z]|[0-9]{2,})(?:[/?=&#]*[^\s()\]\}>]*)?)/ig;
+    const emailPattern = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
+
+    // Replace URLs
+    text = text.replace(urlPattern, (match) => {
+        // Do not change email addresses or strings that contain colons but don't contain letters
+        if (match.includes("@") || (match.includes(":") && !(/([A-Z])/gi).test(match))) return match;
+
+        // Check if the match starts with "http", "https", or "ftp", if not, prepend "https://"
+        let href = match;
+        if (!href.startsWith('http') && !href.startsWith('ftp')) {
+            href = 'https://' + href;
+        }
+
+        return `<a style="text-decoration: underline; color: var(--complementary);" href="${href}" target="_blank">${match}</a>`;
+    });
+
+    // Replace email addresses
+    text = text.replace(emailPattern, '<a style="text-decoration: underline; color: var(--complementary);" href="mailto:$1">$1</a>');
+
+    return text;
+}
+
+
+// Basic Markdown conversion (bold and italics)
+export function convertMarkdown(text: string): string {
+    const boldPattern = /\*\*(.*?)\*\*/g; // **text**
+    const italicPattern = /\*(.*?)\*/g; // *text*
+    return text.replace(boldPattern, '<strong>$1</strong>').replace(italicPattern, '<em>$1</em>');
+}
+
+// Convert newlines to <br>
+export function convertNewlines(text: string): string {
+    return text.replace(/\n/g, '<br>');
+}
+
+// Preserve spaces at the begging of lines
+function preserveLeadingSpaces(text: string): string {
+    return text.replace(/^[\s\t]+/gm, (match) => {
+        return match.replace(/ /g, '&nbsp;').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
+    });
+}
+
+export function escapeAndFormat(text: string): string {
+    const escapedText = escapeHTML(text);
+    const spaceMindfulText = preserveLeadingSpaces(escapedText);
+    const linkifiedText = linkify(spaceMindfulText);
+    const markdownText = convertMarkdown(linkifiedText);
+    return convertNewlines(markdownText);
 }
 
 import toast from "svelte-french-toast";
