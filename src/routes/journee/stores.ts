@@ -39,44 +39,45 @@ user.subscribe(async (user) => {
     }
 })
 
-let previousPosts: Post[] = [];
+export function deletePostFromDatabase(id: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const userInfo: User | undefined = get(user);
 
-myPosts.subscribe(async (currentPosts) => {
-    const userInfo: User | undefined = get(user);
-
-    if (userInfo) {
-        // Handle deletions
-        const deletedPosts = previousPosts.filter(
-            previousPost => !currentPosts.some(currentPost => currentPost.id === previousPost.id)
-        );
-
-        for (const post of deletedPosts) {
-            const userPostReference = doc(db, 'users', userInfo.uid, 'posts', post.id.toString());
-            try {
-                await deleteDoc(userPostReference);
-            } catch (error) {
-                console.error("Error while deleting post: ", error);
-            }
+        if (!userInfo) {
+            reject(new Error("User information not available."));
+            return;
         }
 
-        // Handle additions/updates
-        for (const post of currentPosts) {
-            const userPostReference = doc(db, 'users', userInfo.uid, 'posts', post.id.toString());
-            try {
-                await setDoc(
-                    userPostReference,
-                    { ...post },
-                    { merge: true }
-                );
-            } catch (error) {
-                console.error("Error while saving post: ", error);
-            }
+        const userPostReference = doc(db, 'users', userInfo.uid, 'posts', id);
+        deleteDoc(userPostReference)
+            .then(() => {
+                resolve();
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+}
+
+export function updateOrCreatePostFromDatabase(post: Post): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const userInfo: User | undefined = get(user);
+
+        if (!userInfo) {
+            reject(new Error("User information not available."));
+            return;
         }
 
-        // Update previousPosts to the current state
-        previousPosts = [...currentPosts];
-    }
-});
+        const userPostReference = doc(db, 'users', userInfo.uid, 'posts', post.id);
+        setDoc(userPostReference, { ...post }, { merge: true })
+            .then(() => {
+                resolve();
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+}
 
 // Base Routes
 export const baseImageRoute = '/images/journee';

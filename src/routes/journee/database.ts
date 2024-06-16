@@ -1,4 +1,5 @@
 import { writable, type Writable } from "svelte/store"
+import { dataReady, deletePostFromDatabase, updateOrCreatePostFromDatabase } from "./stores";
 
 export const myPosts: Writable<Post[]> = writable([])
 
@@ -8,26 +9,26 @@ export const myPosts: Writable<Post[]> = writable([])
  * @param newPost - The new Post object to be added or used to update an existing post.
 */
 export function updateOrCreatePost(posts: Post[], newPost: Post): void {
-    const index = posts.findIndex(post => post.id === newPost.id);
+    dataReady.set(false)
+    updateOrCreatePostFromDatabase(newPost)
+        .then(() => {
+            const index = posts.findIndex(post => post.id === newPost.id);
 
-    if (index !== -1) {
-        // Post exists, update the content
-        posts[index] = newPost;
-    } else {
-        // Post does not exist, create a new one
-        posts.push(newPost);
-    }
+            if (index !== -1) {
+                // Post exists, update the content
+                posts[index] = newPost;
+            } else {
+                // Post does not exist, create a new one
+                posts.push(newPost);
+            }
 
-    myPosts.set(posts);
-}
-
-/**
- * Function to get a post in a Post array.
- * @param posts - Array of Post objects.
- * @param id - The ID of the Post to be retrieved.
-*/
-export function getPostById(posts: Post[], id: string): Post | undefined {
-    return posts.find(post => post.id === id);
+            myPosts.set(posts);
+            dataReady.set(true)
+        })
+        .catch((error) => {
+            dataReady.set(true)
+            console.error(error)
+        })
 }
 
 /**
@@ -39,9 +40,25 @@ export function deletePostById(posts: Post[], postId: string): void {
     const index = posts.findIndex(post => post.id === postId);
 
     if (index !== -1) {
-        posts.splice(index, 1);
-        myPosts.set(posts);
+        deletePostFromDatabase(postId)
+            .then(() => {
+                posts.splice(index, 1);
+                myPosts.set(posts);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+
     }
+}
+
+/**
+ * Function to get a post in a Post array.
+ * @param posts - Array of Post objects.
+ * @param id - The ID of the Post to be retrieved.
+*/
+export function getPostById(posts: Post[], id: string): Post | undefined {
+    return posts.find(post => post.id === id);
 }
 
 
