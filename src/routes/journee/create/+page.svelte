@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import { baseRoute, dictionary, user } from '../stores';
+	import { baseRoute, dictionary, user, dataReady } from '../stores';
 	import {
 		generateUniqueId,
 		getPostById,
@@ -34,10 +34,10 @@
 
 	const entryID: string | null = $page.url.searchParams.get('entryID');
 
-	const entry = entryID ? getPostById($myPosts, entryID) || newEntry : newEntry;
+	let entry: Post;
 
 	// Create a shallow copy of the entry object to avoid changing the $myPosts array when making changes.
-	const entryCopy = { ...entry };
+	let entryCopy: Post;
 
 	function closeModal() {
 		goto(baseRoute);
@@ -50,6 +50,16 @@
 			closeModal();
 		}
 	}
+
+	const setUp = () => {
+		if ($dataReady && $user) {
+			newEntry.authorId = $user.uid;
+			entry = entryID ? getPostById($myPosts, entryID) || newEntry : newEntry;
+			entryCopy = { ...entry };
+		}
+	};
+
+	$: $dataReady, setUp();
 </script>
 
 <svelte:head>
@@ -61,23 +71,26 @@
 	<header>
 		<h1>{entryID ? $dictionary.editPost : $dictionary.newPost}</h1>
 	</header>
-	<main>
-		<!-- svelte-ignore a11y-autofocus -->
-		<input
-			type="text"
-			class="title"
-			bind:value={entryCopy.title}
-			placeholder={$dictionary.postTitle}
-			autofocus
-		/>
-		<textarea
-			class="content"
-			bind:value={entryCopy.content}
-			use:autoResizeTextarea
-			placeholder={$dictionary.thinking}
-			style="resize: none;"
-		/>
-	</main>
+	{#if entryCopy}
+		<main>
+			<!-- svelte-ignore a11y-autofocus -->
+			<input
+				type="text"
+				class="title"
+				bind:value={entryCopy.title}
+				placeholder={$dictionary.postTitle}
+			/>
+			<textarea
+				class="content"
+				bind:value={entryCopy.content}
+				use:autoResizeTextarea
+				placeholder={$dictionary.thinking}
+				style="resize: none;"
+			/>
+		</main>
+	{:else}
+		<p>{$dictionary.errorOccurred}</p>
+	{/if}
 	<footer>
 		<button class="button close" on:click={closeModal}>
 			{$dictionary.discard}

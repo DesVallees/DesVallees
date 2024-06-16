@@ -116,14 +116,18 @@ export function escapeHTML(input: string): string {
     const entityMap: { [key: string]: string } = {
         '&': '&amp;',
         '<': '&lt;',
+        '>': '&gt;',
         '"': '&quot;',
         "'": '&#39;',
         '/': '&#47;',
         '`': '&#x60;',
-        '=': '&#x3D;'
+        '=': '&#x3D;',
+        ":": '&#x3A;',
+        '?': '&#x3F;',
+        '#': '&#x23;',
     };
 
-    return input.replace(/[&<"'`=\/]/g, (s) => entityMap[s]);
+    return input.replace(/[&<>"'\/`=:?#]/g, (s) => entityMap[s]);
 }
 
 export function unescapeHTML(input: string): string {
@@ -135,30 +139,39 @@ export function unescapeHTML(input: string): string {
         '&#39;': "'",
         '&#47;': '/',
         '&#x60;': '`',
-        '&#x3D;': '='
+        '&#x3D;': '=',
+        '&#x3A;': ":",
+        '&#x3F;': '?',
+        '&#x23;': '#',
     };
 
     // Create a regular expression to find all the HTML entities in the input string.
-    const entityRegex = /&amp;|&lt;|&gt;|&quot;|&#39;|&#47;|&#x60;|&#x3D;/g;
+    const entityRegex = /&amp;|&lt;|&gt;|&quot;|&#39;|&#47;|&#x60;|&#x3D|&#x3A;|&#x3F;|&#x23;/g;
 
     return input.replace(entityRegex, (s) => entityMap[s]);
 }
 
 // Linkify URLs
 export function linkify(text: string): string {
-    const urlPattern = /((?:https?:&#47;&#47;|ftp:&#47;&#47;|@)?(?:www\.)?(?:[A-Z0-9.-]{2,})(\.|\:)(?:[A-Z]|[0-9]{2,})(?:[/?=&#]*[^\s()\]\}>]*)?)/ig;
+    const protocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.[A-Z]{2,}|&#x3A;[0-9]{2,5}|\.[0-9]{1,3})(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9.-@]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
+    const noProtocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)?(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.(?:com|org|net|edu|gov|mil|io|co|us|uk|ca|de|jp|me|store|biz|info|name|tv|app))(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9.-@]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
     const emailPattern = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
 
-    // Replace URLs
-    text = text.replace(urlPattern, (match) => {
-        // Do not change email addresses or strings that contain colons but don't contain letters
-        if (match.includes("@") || (match.includes(":") && !(/([A-Z])/gi).test(match))) return match;
+    // Replace URLs that have protocol so extension can be flexible
+    text = text.replace(protocolUrlPattern, (match) => {
+        // Do not change email addresses
+        if (match.includes("@")) return match;
 
-        // Check if the match starts with "http", "https", or "ftp", if not, prepend "https://"
-        let href = match;
-        if (!href.startsWith('http') && !href.startsWith('ftp')) {
-            href = 'https://' + href;
-        }
+        return `<a style="text-decoration: underline; color: var(--complementary);" href="${match}" target="_blank">${match}</a>`;
+    });
+
+    // Replace URLs that do not have protocol so extension is strict
+    text = text.replace(noProtocolUrlPattern, (match) => {
+        // Do not change email addresses or URLs that contain "://" (protocols), because they've already been changed
+        if (match.includes("@") || match.includes("&#x3A;&#47;&#47;")) return match;
+
+        // Prepend match with "https://"
+        const href = 'https://' + match;
 
         return `<a style="text-decoration: underline; color: var(--complementary);" href="${href}" target="_blank">${match}</a>`;
     });
