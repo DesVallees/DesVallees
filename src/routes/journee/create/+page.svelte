@@ -79,6 +79,7 @@
 				class="title"
 				bind:value={entryCopy.title}
 				placeholder={$dictionary.postTitle}
+				autofocus={!entryID}
 			/>
 			<textarea
 				class="content"

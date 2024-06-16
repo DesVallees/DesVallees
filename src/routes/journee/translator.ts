@@ -35,6 +35,8 @@ export const translator = {
         discard: 'Descartar',
         editPost: 'Editar publicación',
         deletePost: 'Eliminar publicación',
+        postNotSaved: 'No se pudo guardar la publicación. Por favor, inténtalo de nuevo...',
+        errorDeletingPost: 'Hubo un error al eliminar la publicación...',
     },
     en: {
         comingSoon: 'Coming Soon',
@@ -72,6 +74,8 @@ export const translator = {
         discard: 'Discard',
         editPost: 'Edit post',
         deletePost: 'Delete post',
+        postNotSaved: 'Post could not be saved. Please try again...',
+        errorDeletingPost: 'There was an error deleting the post...',
     },
     fr: {
         comingSoon: 'Prochainement',
@@ -109,6 +113,8 @@ export const translator = {
         discard: 'Jeter',
         editPost: 'Modifier la publication',
         deletePost: 'Supprimer la publication',
+        postNotSaved: 'La publication n\'a pas pu être enregistrée. Veuillez réessayer...',
+        errorDeletingPost: 'Une erreur s\'est produite lors de la suppression de la publication...',
     },
     de: {
         comingSoon: 'Demnächst',
@@ -146,6 +152,8 @@ export const translator = {
         discard: 'Verwerfen',
         editPost: 'Beitrag bearbeiten',
         deletePost: 'Beitrag löschen',
+        postNotSaved: 'Der Beitrag konnte nicht gespeichert werden. Bitte versuche es erneut...',
+        errorDeletingPost: 'Beim Löschen des Beitrags ist ein Fehler aufgetreten...',
     },
     it: {
         comingSoon: 'Prossimamente',
@@ -183,6 +191,8 @@ export const translator = {
         discard: 'Scartare',
         editPost: 'Modifica post',
         deletePost: 'Elimina post',
+        postNotSaved: 'Il post non può essere salvato. Per favore, riprova...',
+        errorDeletingPost: 'Si è verificato un errore durante l\'eliminazione del post...',
     },
     ru: {
         comingSoon: 'Скоро',
@@ -220,5 +230,7 @@ export const translator = {
         discard: 'Отменить',
         editPost: 'Редактировать пост',
         deletePost: 'Удалить пост',
+        postNotSaved: 'Пост не удалось сохранить. Пожалуйста, попробуйте еще раз...',
+        errorDeletingPost: 'Произошла ошибка при удалении поста...',
     },
 };

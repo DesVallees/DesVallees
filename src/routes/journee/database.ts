@@ -1,5 +1,7 @@
-import { writable, type Writable } from "svelte/store"
-import { dataReady, deletePostFromDatabase, updateOrCreatePostFromDatabase } from "./stores";
+import { get, writable, type Writable } from "svelte/store"
+import { baseRoute, deletePostFromDatabase, updateOrCreatePostFromDatabase, dictionary } from "./stores";
+import { goto } from "$app/navigation";
+import toast from "svelte-french-toast";
 
 export const myPosts: Writable<Post[]> = writable([])
 
@@ -9,25 +11,24 @@ export const myPosts: Writable<Post[]> = writable([])
  * @param newPost - The new Post object to be added or used to update an existing post.
 */
 export function updateOrCreatePost(posts: Post[], newPost: Post): void {
-    dataReady.set(false)
+    const index = posts.findIndex(post => post.id === newPost.id);
+
+    if (index !== -1) {
+        // Post exists, update the content
+        posts[index] = newPost;
+    } else {
+        // Post does not exist, create a new one
+        posts.push(newPost);
+    }
+
+    myPosts.set(posts);
+
     updateOrCreatePostFromDatabase(newPost)
-        .then(() => {
-            const index = posts.findIndex(post => post.id === newPost.id);
-
-            if (index !== -1) {
-                // Post exists, update the content
-                posts[index] = newPost;
-            } else {
-                // Post does not exist, create a new one
-                posts.push(newPost);
-            }
-
-            myPosts.set(posts);
-            dataReady.set(true)
-        })
         .catch((error) => {
-            dataReady.set(true)
-            console.error(error)
+            toast.error(get(dictionary).postNotSaved, { position: 'bottom-center' });
+            console.error(error);
+
+            goto(`${baseRoute}/create?entryID=${newPost.id}`);
         })
 }
 
@@ -40,15 +41,18 @@ export function deletePostById(posts: Post[], postId: string): void {
     const index = posts.findIndex(post => post.id === postId);
 
     if (index !== -1) {
-        deletePostFromDatabase(postId)
-            .then(() => {
-                posts.splice(index, 1);
-                myPosts.set(posts);
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+        const [deletedPost] = posts.splice(index, 1);
+        myPosts.set(posts);
 
+        deletePostFromDatabase(postId)
+            .catch((error) => {
+                // Error occurred, re-add the post to the array
+                posts.splice(index, 0, deletedPost);
+                myPosts.set(posts);
+
+                toast.error(get(dictionary).errorDeletingPost, { position: 'bottom-center' });
+                console.error(error);
+            });
     }
 }
 

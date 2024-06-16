@@ -13,6 +13,26 @@
 	import BackgroundCircle from './components/backgroundCircle.svelte';
 	import Preloader from './components/preloader.svelte';
 
+	const loggedForbiddenRoutes = ['sign-in', 'log-in'];
+	const outsiderForbiddenRoutes = ['create'];
+
+	function checkRoute(url: string) {
+		let forbiddenRoutes;
+		if ($user) {
+			forbiddenRoutes = loggedForbiddenRoutes;
+		} else {
+			forbiddenRoutes = outsiderForbiddenRoutes;
+		}
+
+		for (let i = 0; i < forbiddenRoutes.length; i++) {
+			const path = forbiddenRoutes[i];
+			if (url === `${baseRoute}/${path}`) {
+				goto(baseRoute);
+				return;
+			}
+		}
+	}
+
 	let disappearAndAppear: boolean = false;
 
 	$: $language, checkDisappearAndAppear();
@@ -40,25 +60,20 @@
 				mainContent.scrollTop = 0;
 			}
 
-			if ($user && newUrl === `${baseRoute}/sign-in`) {
-				goto(`${baseRoute}`);
-			}
+			checkRoute(newUrl);
 		};
 
 		auth.onAuthStateChanged(async (user) => {
 			layoutReady = false;
 
 			if (user) {
-				if (user.email && $page.url.pathname === `${baseRoute}/sign-in`) {
-					goto(`${baseRoute}`);
-				}
-
 				$user = user;
 			} else {
 				$user = undefined;
 				$dataReady = true;
 			}
 
+			checkRoute($page.url.pathname);
 			layoutReady = true;
 		});
 	});
