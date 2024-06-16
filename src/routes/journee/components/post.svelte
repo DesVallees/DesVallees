@@ -48,7 +48,11 @@
 	</header>
 
 	<main>
-		<p class="content">{@html escapeAndFormat(post.content)}</p>
+		<p class="content">
+			<span>
+				{@html escapeAndFormat(post.content)}
+			</span>
+		</p>
 	</main>
 </div>
 
@@ -60,6 +64,9 @@
 		width: min(60ch, 100%);
 		padding: 2rem 0;
 		border-bottom: solid 1px var(--content-5);
+
+		overflow: auto;
+		text-wrap: pretty;
 	}
 
 	header {
@@ -113,6 +120,10 @@
 
 	.delete {
 		color: var(--complementary);
+	}
+
+	main {
+		display: grid;
 	}
 
 	.content {

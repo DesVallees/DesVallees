@@ -153,8 +153,8 @@ export function unescapeHTML(input: string): string {
 
 // Linkify URLs
 export function linkify(text: string): string {
-    const protocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.[A-Z]{2,}|&#x3A;[0-9]{2,5}|\.[0-9]{1,3})(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9.-@]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
-    const noProtocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)?(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.(?:com|org|net|edu|gov|mil|io|co|us|uk|ca|de|jp|me|store|biz|info|name|tv|app|ai|gg|xyz|site|ly))\b(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9.-@]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
+    const protocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.[A-Z]{2,}|&#x3A;[0-9]{2,5}|\.[0-9]{1,3})(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9.-@%]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
+    const noProtocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)?(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.(?:com|org|net|edu|gov|mil|io|co|us|uk|ca|de|jp|me|store|biz|info|name|tv|app|ai|gg|xyz|site|ly))\b(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9.-@%]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
     const emailPattern = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
 
     // Replace URLs that have protocol so extension can be flexible
@@ -162,7 +162,7 @@ export function linkify(text: string): string {
         // Do not change email addresses
         if (match.includes("@")) return match;
 
-        return `<a style="text-decoration: underline; color: var(--complementary);" href="${match}" target="_blank">${match}</a>`;
+        return `<a style="text-decoration: underline; color: var(--complementary); ${match.length > 40 ? "word-break: break-all;" : ""};" href="${match}" target="_blank">${match}</a>`;
     });
 
     // Replace URLs that do not have protocol so extension is strict
@@ -173,11 +173,13 @@ export function linkify(text: string): string {
         // Prepend match with "https://"
         const href = 'https://' + match;
 
-        return `<a style="text-decoration: underline; color: var(--complementary);" href="${href}" target="_blank">${match}</a>`;
+        return `<a style="text-decoration: underline; color: var(--complementary); ${match.length > 40 ? "word-break: break-all;" : ""};" href="${href}" target="_blank">${match}</a>`;
     });
 
     // Replace email addresses
-    text = text.replace(emailPattern, '<a style="text-decoration: underline; color: var(--complementary);" href="mailto:$1">$1</a>');
+    text = text.replace(emailPattern, (match) => {
+        return `<a style="text-decoration: underline; color: var(--complementary); ${match.length > 40 ? "word-break: break-all;" : ""};" href="mailto:${match}">${match}</a>`
+    });
 
     return text;
 }
