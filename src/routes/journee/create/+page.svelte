@@ -68,9 +68,7 @@
 </svelte:head>
 
 <div class="create" in:slide={{ axis: 'y', duration: 500 }}>
-	<header>
-		<h1>{entryID ? $dictionary.editPost : $dictionary.newPost}</h1>
-	</header>
+	<h1>{entryCopy.title}</h1>
 	{#if entryCopy}
 		<main>
 			<!-- svelte-ignore a11y-autofocus -->
@@ -84,9 +82,7 @@
 			<textarea
 				class="content"
 				bind:value={entryCopy.content}
-				use:autoResizeTextarea
 				placeholder={$dictionary.thinking}
-				style="resize: none;"
 			/>
 		</main>
 	{:else}
@@ -103,12 +99,13 @@
 
 <style>
 	.create {
+		max-width: 75ch;
 		width: 100%;
 
-		padding: 2rem clamp(1.5rem, 7vw, 10%);
+		margin: 0 auto;
+		padding: 2rem clamp(0.5rem, 4vw, 5%);
 	}
 
-	header,
 	footer {
 		display: flex;
 		align-items: center;
@@ -118,31 +115,36 @@
 	}
 
 	h1 {
-		font-size: 1.5em;
-		text-transform: capitalize;
+		display: none;
 	}
 
 	main {
+		height: 100%;
+
 		display: grid;
+		grid-template-rows: auto 1fr;
 
 		border-radius: 15px;
-		border: solid 3px var(--interactive);
 	}
 
 	textarea,
 	input {
 		width: 100%;
-		padding: 1rem;
+		padding: 1rem 0.5rem;
 	}
 
 	.title {
-		font-size: 1.1em;
+		font-size: 1.4em;
 		font-weight: bold;
 	}
 
 	.content {
 		line-height: 1.5;
 		border-top: solid 3px var(--interactive);
+		border-bottom: solid 3px var(--interactive);
+		box-shadow: 0 12px 10px -10px var(--interactive);
+
+		resize: none;
 	}
 
 	footer {
