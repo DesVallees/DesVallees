@@ -8,8 +8,6 @@
 	import { goto } from '$app/navigation';
 	import { auth } from '$lib/firebase/journee';
 
-	import Nav from './components/nav.svelte';
-	import Footer from './components/footer.svelte';
 	import BackgroundCircle from './components/backgroundCircle.svelte';
 	import Preloader from './components/preloader.svelte';
 
@@ -17,6 +15,8 @@
 	const outsiderForbiddenRoutes = ['create'];
 
 	function checkRoute(url: string) {
+		if (!$dataReady) return;
+
 		let forbiddenRoutes;
 		if ($user) {
 			forbiddenRoutes = loggedForbiddenRoutes;
@@ -47,6 +47,7 @@
 
 	let layoutReady: boolean = false;
 	$: $page.url.pathname, handleURLChange($page.url.pathname);
+	$: $dataReady, handleURLChange($page.url.pathname);
 	let mainContent: HTMLElement;
 	let handleURLChange: (newUrl: string) => void = () => {};
 
@@ -90,17 +91,9 @@
 <BackgroundCircle coordinates={{ left: '30%', top: '70%' }} style="opacity: .8;" />
 
 <div class:disappearAndAppear>
-	<nav>
-		<Nav />
-	</nav>
-
 	<main bind:this={mainContent}>
 		<slot />
 	</main>
-
-	<footer>
-		<Footer />
-	</footer>
 
 	{#if !layoutReady || !$dataReady}
 		<Preloader animation="dots">
@@ -113,24 +106,16 @@
 	div {
 		min-height: 100%;
 		display: grid;
-		grid-template-rows: auto 1fr auto;
+		grid-template-rows: 1fr;
 		align-items: center;
-	}
-
-	nav {
-		z-index: 3;
-		position: sticky;
-		top: 0;
-		left: 0;
-
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
 	}
 
 	main {
 		max-width: 100vw;
 		display: grid;
 		align-self: stretch;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
 	}
 
 	.disappearAndAppear {

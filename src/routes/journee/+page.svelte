@@ -6,6 +6,7 @@
 	import { myPosts, type Post as PostType } from './database';
 	import Post from './components/post.svelte';
 	import { goto } from '$app/navigation';
+	import Footer from './components/footer.svelte';
 
 	// Sorting function to sort posts by 'date' property in descending order
 	const sortByDateDesc = (a: PostType, b: PostType) => b.date - a.date;
@@ -17,11 +18,9 @@
 	}
 </script>
 
-<div in:fade>
+<div in:fade class="baseRoute">
 	{#if $user}
 		<div class="home" in:fade>
-			<h1>{$dictionary.welcome} {$user.email}</h1>
-
 			{#if $myPosts.length > 0}
 				<div class="postList">
 					{#each sortedPosts as post, index (post.id)}
@@ -37,6 +36,8 @@
 			<button class="newEntry" on:click={openNewEntry}>
 				<ion-icon name="add-outline" style="--ionicon-stroke-width: 60px" />
 			</button>
+
+			<Footer />
 		</div>
 	{:else}
 		<Landing />
@@ -49,6 +50,12 @@
 </svelte:head>
 
 <style>
+	.baseRoute {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+	}
+
 	.home {
 		position: relative;
 
@@ -58,11 +65,6 @@
 		gap: 1rem;
 
 		padding: 2rem clamp(1.5rem, 7vw, 10%);
-	}
-
-	h1 {
-		font-size: 1.3rem;
-		margin-bottom: 1rem;
 	}
 
 	.button {

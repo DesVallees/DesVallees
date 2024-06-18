@@ -4,6 +4,8 @@
 	import { authHandlers } from '../auth';
 	import { anErrorOccurred } from '../functions';
 	import Preloader from '../components/preloader.svelte';
+	import LandingNav from '../components/landingNav.svelte';
+	import Footer from '../components/footer.svelte';
 
 	let email: string;
 	let password: string;
@@ -30,52 +32,58 @@
 	</Preloader>
 {/if}
 
-<div class="logIn" in:fade>
-	<h1>{$dictionary.beginYourJournee}</h1>
-	<form on:submit|preventDefault={handleFormSubmission}>
-		<div class="inputGroup">
-			<ion-icon name="mail" />
-			<input
-				bind:value={email}
-				type="email"
-				placeholder={$dictionary.email}
-				class="ghostButton"
-				required
-				autocapitalize="none"
-				autocorrect="false"
-				spellcheck="false"
-			/>
-		</div>
-		<div class="inputGroup">
-			<ion-icon name="lock-closed" />
-			<input
-				bind:value={password}
-				type="password"
-				placeholder={$dictionary.password}
-				class="ghostButton"
-				required
-			/>
-		</div>
-		<div class="inputGroup">
-			<ion-icon name="shield-checkmark" />
-			<input
-				bind:value={confirmPassword}
-				type="password"
-				placeholder={$dictionary.confirmPassword}
-				class="ghostButton"
-				required
-			/>
-		</div>
+<div class="signIn" in:fade>
+	<LandingNav />
 
-		<button type="submit" class="button">{$dictionary.createAnAccount}</button>
-	</form>
+	<main>
+		<h1>{$dictionary.beginYourJournee}</h1>
+		<form on:submit|preventDefault={handleFormSubmission}>
+			<div class="inputGroup">
+				<ion-icon name="mail" />
+				<input
+					bind:value={email}
+					type="email"
+					placeholder={$dictionary.email}
+					class="ghostButton"
+					required
+					autocapitalize="none"
+					autocorrect="false"
+					spellcheck="false"
+				/>
+			</div>
+			<div class="inputGroup">
+				<ion-icon name="lock-closed" />
+				<input
+					bind:value={password}
+					type="password"
+					placeholder={$dictionary.password}
+					class="ghostButton"
+					required
+				/>
+			</div>
+			<div class="inputGroup">
+				<ion-icon name="shield-checkmark" />
+				<input
+					bind:value={confirmPassword}
+					type="password"
+					placeholder={$dictionary.confirmPassword}
+					class="ghostButton"
+					required
+				/>
+			</div>
 
-	<hr />
+			<button type="submit" class="button">{$dictionary.createAnAccount}</button>
+		</form>
 
-	<div class="align" style="justify-content: center; font-size: 1.05rem;">
-		<p>{$dictionary.alreadyHaveAnAccount}</p>
-		<a href="/journee/log-in" class="link">{$dictionary.logYouIn}</a>
-	</div>
+		<hr />
+
+		<div class="align" style="justify-content: center; font-size: 1.05rem;">
+			<p>{$dictionary.alreadyHaveAnAccount}</p>
+			<a href="/journee/log-in" class="link">{$dictionary.logYouIn}</a>
+		</div>
+	</main>
+
+	<Footer />
 </div>
 
 <svelte:head>
@@ -88,15 +96,19 @@
 </svelte:head>
 
 <style>
-	.logIn {
+	.signIn {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+	}
+
+	main {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 
 		max-width: 450px;
-		min-height: 100%;
 		padding: 1.5rem;
-		margin: auto;
+		margin: 0 auto;
 	}
 
 	h1 {

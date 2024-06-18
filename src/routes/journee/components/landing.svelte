@@ -1,28 +1,41 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { baseImageRoute, dictionary } from '../stores';
+	import Footer from './footer.svelte';
+	import LandingNav from './landingNav.svelte';
 </script>
 
 <div class="landing" in:fade>
-	<section>
-		<h1>Journée</h1>
-		<h2>{$dictionary.slogan}</h2>
+	<LandingNav />
 
-		<a href="/journee/log-in" class="button">{$dictionary.logIn}</a>
-	</section>
+	<main>
+		<section>
+			<h1>Journée</h1>
+			<h2>{$dictionary.slogan}</h2>
 
-	<div class="imgWrapper">
-		<img
-			src="{baseImageRoute}/gufoLanding.webp"
-			alt={$dictionary.landingOwlAlt}
-			width="368"
-			height="368"
-		/>
-	</div>
+			<a href="/journee/log-in" class="button">{$dictionary.logIn}</a>
+		</section>
+
+		<div class="imgWrapper">
+			<img
+				src="{baseImageRoute}/gufoLanding.webp"
+				alt={$dictionary.landingOwlAlt}
+				width="368"
+				height="368"
+			/>
+		</div>
+	</main>
+
+	<Footer />
 </div>
 
 <style>
 	.landing {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+	}
+
+	main {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -30,7 +43,6 @@
 		column-gap: 20%;
 		row-gap: 2rem;
 
-		min-height: 100%;
 		padding: 1.5rem;
 	}
 
@@ -53,7 +65,7 @@
 	.imgWrapper {
 		position: relative;
 		width: 23rem;
-		max-width: 75%;
+		max-width: 70vw;
 
 		display: flex;
 	}
@@ -79,7 +91,7 @@
 	}
 
 	@media screen and (min-width: 800px) {
-		.landing {
+		main {
 			padding: 1.5rem 5rem;
 		}
 	}

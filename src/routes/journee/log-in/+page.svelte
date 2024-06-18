@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { dictionary } from '../stores';
+	import { dataReady, dictionary } from '../stores';
 	import { authHandlers } from '../auth';
 	import Preloader from '../components/preloader.svelte';
+	import LandingNav from '../components/landingNav.svelte';
+	import Footer from '../components/footer.svelte';
 
 	let email: string;
 	let password: string;
@@ -26,53 +28,59 @@
 {/if}
 
 <div class="logIn" in:fade>
-	<h1>{$dictionary.logInToJournee}</h1>
-	<form on:submit|preventDefault={logIn}>
-		<div class="inputGroup">
-			<ion-icon name="mail" />
-			<input
-				bind:value={email}
-				type="email"
-				placeholder={$dictionary.email}
-				class="ghostButton"
-				required
-				autocapitalize="none"
-				autocorrect="false"
-				spellcheck="false"
-			/>
+	<LandingNav />
+
+	<main>
+		<h1>{$dictionary.logInToJournee}</h1>
+		<form on:submit|preventDefault={logIn}>
+			<div class="inputGroup">
+				<ion-icon name="mail" />
+				<input
+					bind:value={email}
+					type="email"
+					placeholder={$dictionary.email}
+					class="ghostButton"
+					required
+					autocapitalize="none"
+					autocorrect="false"
+					spellcheck="false"
+				/>
+			</div>
+			<div class="inputGroup">
+				<ion-icon name="lock-closed" />
+				<input
+					bind:value={password}
+					type="password"
+					placeholder={$dictionary.password}
+					class="ghostButton"
+					required
+				/>
+			</div>
+			<button type="button" class="link forgotPassword">{$dictionary.forgotPassword}</button>
+
+			<button type="submit" class="button">{$dictionary.logIn}</button>
+		</form>
+
+		<hr />
+
+		<button type="button" class="button googleLogIn" aria-label={$dictionary.logInWithGoogle}>
+			<ion-icon name="logo-google" />
+			{$dictionary.logInWithGoogle}
+		</button>
+		<button type="button" class="button appleLogIn" aria-label={$dictionary.logInWithApple}>
+			<ion-icon name="logo-apple" />
+			{$dictionary.logInWithApple}
+		</button>
+
+		<hr />
+
+		<div class="align" style="justify-content: center; font-size: 1.05rem;">
+			<p>{$dictionary.newToJournee}</p>
+			<a href="/journee/sign-in" class="link">{$dictionary.createAnAccount}</a>
 		</div>
-		<div class="inputGroup">
-			<ion-icon name="lock-closed" />
-			<input
-				bind:value={password}
-				type="password"
-				placeholder={$dictionary.password}
-				class="ghostButton"
-				required
-			/>
-		</div>
-		<button type="button" class="link forgotPassword">{$dictionary.forgotPassword}</button>
+	</main>
 
-		<button type="submit" class="button">{$dictionary.logIn}</button>
-	</form>
-
-	<hr />
-
-	<button type="button" class="button googleLogIn" aria-label={$dictionary.logInWithGoogle}>
-		<ion-icon name="logo-google" />
-		{$dictionary.logInWithGoogle}
-	</button>
-	<button type="button" class="button appleLogIn" aria-label={$dictionary.logInWithApple}>
-		<ion-icon name="logo-apple" />
-		{$dictionary.logInWithApple}
-	</button>
-
-	<hr />
-
-	<div class="align" style="justify-content: center; font-size: 1.05rem;">
-		<p>{$dictionary.newToJournee}</p>
-		<a href="/journee/sign-in" class="link">{$dictionary.createAnAccount}</a>
-	</div>
+	<Footer />
 </div>
 
 <svelte:head>
@@ -86,6 +94,11 @@
 
 <style>
 	.logIn {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+	}
+
+	main {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

@@ -7,7 +7,7 @@
 	export let animation: Animation = 'default';
 </script>
 
-<div class="overlay" out:fade {style}>
+<div class="overlay" out:fade={{ delay: 10 }} {style}>
 	<slot />
 
 	{#if animation === 'default'}

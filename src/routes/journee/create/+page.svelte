@@ -71,8 +71,9 @@
 </svelte:head>
 
 <div class="create" in:slide={{ axis: 'y', duration: 500 }}>
-	<h1>{entryCopy.title || $dictionary.postTitle}</h1>
 	{#if entryCopy}
+		<h1>{entryCopy.title || $dictionary.postTitle}</h1>
+
 		<main>
 			<!-- svelte-ignore a11y-autofocus -->
 			<input
@@ -102,6 +103,9 @@
 
 <style>
 	.create {
+		display: grid;
+		grid-template-rows: 1fr auto;
+
 		max-width: 75ch;
 		width: 100%;
 
