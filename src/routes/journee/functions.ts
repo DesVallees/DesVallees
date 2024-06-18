@@ -184,15 +184,14 @@ export function linkify(text: string): string {
     return text;
 }
 
-
 // Markdown conversion
 export function convertMarkdown(text: string): string {
-    const boldPattern = /\*(.*?)\*/g; // *text*
-    const italicPattern = /\_(.*?)\_/g; // _text_
-    const crossedPattern = /\~(.*?)\~/g; // ~text~
+    const boldPattern = /\*((?:(?!<br>)[^*])*)\*/g; // *text*
+    const italicPattern = /_((?:(?!<br>)[^_])*)_/g; // _text_
+    const crossedPattern = /~((?:(?!<br>)[^~])*)~/g; // ~text~
     const monospacePattern = /&#x60;&#x60;&#x60;(?:<br>)?([\s\S]*?)&#x60;&#x60;&#x60;/g; // ```text```
-    const unorderedListPattern = /(&nbsp;)*(?:-\s)(.*?)(?:<br>|$)/gm; // - text
-    const orderedListPattern = /(&nbsp;)*(\d(?:\.|\))\s)(.*?)(?:<br>|$)/gm; // 1. text
+    const unorderedListPattern = /(?<=^|\>)(?:&nbsp;)*(?:-\s)(.*?)(?:<br>|$)/gm; // - text
+    const orderedListPattern = /(?<=^|\>)(?:&nbsp;)*(\d(?:\.|\))\s)(.*?)(?:<br>|$)/gm; // 1. text
     const subtitlePattern = /(^|<br>)(?:&#x23;\s)(.*?)(?:<br>|$)/gm; // # text
 
     // Placeholders for pre and a tags content
@@ -210,20 +209,22 @@ export function convertMarkdown(text: string): string {
     });
 
     // Replace content inside a tags with placeholders
-    text = text.replace(/<a [^>]*>(.*?)<\/a>/g, (match, linkContent) => {
-        aContents.push(linkContent);
-        return match.replace(linkContent, aPlaceholder);
+    text = text.replace(/<a[^>]*>(.*?)<\/a>/g, (match, linkContent) => {
+        return match.replace(new RegExp(linkContent, 'g'), () => {
+            aContents.push(linkContent)
+            return aPlaceholder;
+        });
     });
 
     // Perform markdown conversion
     text = text.replace(boldPattern, '<strong>$1</strong>')
         .replace(italicPattern, '<em>$1</em>')
         .replace(crossedPattern, '<s>$1</s>')
-        .replace(unorderedListPattern, (match, nbspSequence, content) => {
+        .replace(unorderedListPattern, (match, content) => {
             const nbspCount = ((match || "").match(/&nbsp;/g) || []).length;
             return `<ul><li style="margin-left: ${nbspCount}ch;">${content}</li></ul>`;
         })
-        .replace(orderedListPattern, (match, nbspSequence, listNumber, content) => {
+        .replace(orderedListPattern, (match, listNumber, content) => {
             const nbspCount = ((match || "").match(/&nbsp;/g) || []).length;
             return `<ol><li style="position: relative; margin-left: ${nbspCount}ch;"><span style="position: absolute; left: -2ch; top: 0;">${listNumber}</span>${content}</li></ol>`
         })
@@ -240,7 +241,6 @@ export function convertMarkdown(text: string): string {
 
     return text;
 }
-
 
 // Convert newlines to <br>
 export function convertNewlines(text: string): string {

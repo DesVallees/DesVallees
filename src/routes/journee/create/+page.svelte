@@ -10,7 +10,6 @@
 	} from '../database';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { autoResizeTextarea } from '../functions';
 
 	const newEntry: Post = {
 		id: generateUniqueId($myPosts),
