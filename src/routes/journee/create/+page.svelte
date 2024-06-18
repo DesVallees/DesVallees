@@ -63,12 +63,16 @@
 </script>
 
 <svelte:head>
-	<title>{$dictionary.newPost}</title>
+	{#if entryID}
+		<title>{$dictionary.editPost}</title>
+	{:else}
+		<title>{$dictionary.newPost}</title>
+	{/if}
 	<meta name="description" content={$dictionary.discoverTranquility} />
 </svelte:head>
 
 <div class="create" in:slide={{ axis: 'y', duration: 500 }}>
-	<h1>{entryCopy.title}</h1>
+	<h1>{entryCopy.title || $dictionary.postTitle}</h1>
 	{#if entryCopy}
 		<main>
 			<!-- svelte-ignore a11y-autofocus -->

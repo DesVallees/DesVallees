@@ -20,7 +20,7 @@
 <div class="post" transition:slide={{ duration: 200 }}>
 	<header>
 		<div class="left">
-			<h2 class="title">{post.title}</h2>
+			<h1 class="title">{post.title}</h1>
 			<p class="date">
 				{postDate.toLocaleDateString()} - {String(postDate.getHours()).padStart(
 					2,
@@ -47,12 +47,8 @@
 		</div>
 	</header>
 
-	<main>
-		<p class="content">
-			<span>
-				{@html escapeAndFormat(post.content)}
-			</span>
-		</p>
+	<main class="content">
+		{@html escapeAndFormat(post.content)}
 	</main>
 </div>
 
@@ -122,11 +118,59 @@
 		color: var(--complementary);
 	}
 
-	main {
-		display: grid;
-	}
-
 	.content {
 		line-height: 1.5;
+	}
+
+	/* Bold text */
+	:global(.content strong) {
+		font-weight: bold;
+	}
+
+	/* Italic text */
+	:global(.content em) {
+		font-style: italic;
+	}
+
+	/* Crossed-out text */
+	:global(.content s) {
+		text-decoration: line-through;
+	}
+
+	/* Monospace text */
+	:global(.content pre) {
+		background-color: var(--content-1);
+		border: 1px solid var(--content-3);
+		border-radius: 5px;
+		padding: 0.5em;
+		margin-top: 0.5em;
+		font-family: monospace;
+		white-space: pre-wrap;
+		word-break: break-all;
+		overflow-x: auto;
+	}
+
+	/* Lists */
+	:global(.content ul, .content ol) {
+		margin: 0.5em 0 0.3em 2ch;
+		padding-left: 0;
+	}
+
+	:global(.content ul) {
+		list-style-type: disc;
+	}
+
+	:global(.content ol) {
+		list-style-type: none;
+	}
+
+	:global(.content li) {
+		margin-bottom: 0.2em;
+	}
+
+	/* Subtitles */
+	:global(.content h2) {
+		font-size: 1.1em;
+		margin: 0.5em 0;
 	}
 </style>

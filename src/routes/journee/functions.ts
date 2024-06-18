@@ -153,8 +153,8 @@ export function unescapeHTML(input: string): string {
 
 // Linkify URLs
 export function linkify(text: string): string {
-    const protocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.[A-Z]{2,}|&#x3A;[0-9]{2,5}|\.[0-9]{1,3})(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9\.\-\;@%]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
-    const noProtocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)?(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.(?:com|org|net|edu|gov|mil|io|co|us|uk|ca|de|jp|me|store|biz|info|name|tv|app|ai|gg|xyz|site|ly))\b(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9\.\-\;@%]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
+    const protocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.[A-Z]{2,}|&#x3A;[0-9]{2,5}|\.[0-9]{1,3})(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9\.\-\;\,\$\+~_@%]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
+    const noProtocolUrlPattern = /((?:https?&#x3A;&#47;&#47;|ftp&#x3A;&#47;&#47;|@)?(?:www\.)?(?:(?:[^\u0000-\u007F]|[A-Z0-9.-]){2,})(?:\.(?:com|org|net|edu|gov|mil|io|co|us|uk|ca|de|es|it|fr|ru|jp|me|store|biz|info|name|tv|app|ai|gg|xyz|site|ly))\b(?:&#47;(?:[^\u0000-\u007F]|[A-Z0-9\.\-\;\,\$\+~_@%]|&amp;|&#47;|&#x3D|&#x3A;|&#x3F;|&#x23;)*)?)/ig;
     const emailPattern = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
 
     // Replace URLs that have protocol so extension can be flexible
@@ -185,12 +185,62 @@ export function linkify(text: string): string {
 }
 
 
-// Basic Markdown conversion (bold and italics)
+// Markdown conversion
 export function convertMarkdown(text: string): string {
-    const boldPattern = /\*\*(.*?)\*\*/g; // **text**
-    const italicPattern = /\*(.*?)\*/g; // *text*
-    return text.replace(boldPattern, '<strong>$1</strong>').replace(italicPattern, '<em>$1</em>');
+    const boldPattern = /\*(.*?)\*/g; // *text*
+    const italicPattern = /\_(.*?)\_/g; // _text_
+    const crossedPattern = /\~(.*?)\~/g; // ~text~
+    const monospacePattern = /&#x60;&#x60;&#x60;(?:<br>)?([\s\S]*?)&#x60;&#x60;&#x60;/g; // ```text```
+    const unorderedListPattern = /(&nbsp;)*(?:-\s)(.*?)(?:<br>|$)/gm; // - text
+    const orderedListPattern = /(&nbsp;)*(\d(?:\.|\))\s)(.*?)(?:<br>|$)/gm; // 1. text
+    const subtitlePattern = /(^|<br>)(?:&#x23;\s)(.*?)(?:<br>|$)/gm; // # text
+
+    // Placeholders for pre and a tags content
+    const prePlaceholder = 'pasc00991j9a9d8cu8hlcaicbb';
+    const aPlaceholder = 'ja7dc9120ksa0123oajx8123';
+    let preContents: string[] = [];
+    let aContents: string[] = [];
+
+    text = text.replace(monospacePattern, '<pre>$1</pre>');
+
+    // Replace content inside pre tags with placeholders
+    text = text.replace(/<pre>([\s\S]*?)<\/pre><br>/g, (match, preContent) => {
+        preContents.push(preContent);
+        return match.replace(preContent, prePlaceholder).replace("<br>", "");
+    });
+
+    // Replace content inside a tags with placeholders
+    text = text.replace(/<a [^>]*>(.*?)<\/a>/g, (match, linkContent) => {
+        aContents.push(linkContent);
+        return match.replace(linkContent, aPlaceholder);
+    });
+
+    // Perform markdown conversion
+    text = text.replace(boldPattern, '<strong>$1</strong>')
+        .replace(italicPattern, '<em>$1</em>')
+        .replace(crossedPattern, '<s>$1</s>')
+        .replace(unorderedListPattern, (match, nbspSequence, content) => {
+            const nbspCount = ((match || "").match(/&nbsp;/g) || []).length;
+            return `<ul><li style="margin-left: ${nbspCount}ch;">${content}</li></ul>`;
+        })
+        .replace(orderedListPattern, (match, nbspSequence, listNumber, content) => {
+            const nbspCount = ((match || "").match(/&nbsp;/g) || []).length;
+            return `<ol><li style="position: relative; margin-left: ${nbspCount}ch;"><span style="position: absolute; left: -2ch; top: 0;">${listNumber}</span>${content}</li></ol>`
+        })
+        .replace(subtitlePattern, '$1<h2>$2</h2>')
+
+    // Merge consecutive <ul> or <ol> tags
+    text = text.replace(/<\/ul>\s*<ul>/g, '').replace(/<\/ol>\s*<ol>/g, '');
+
+    // Restore content inside pre tags
+    text = text.replace(new RegExp(prePlaceholder, 'g'), () => preContents.shift() || '');
+
+    // Restore content inside a tags
+    text = text.replace(new RegExp(aPlaceholder, 'g'), () => aContents.shift() || '');
+
+    return text;
 }
+
 
 // Convert newlines to <br>
 export function convertNewlines(text: string): string {
@@ -206,10 +256,10 @@ function preserveLeadingSpaces(text: string): string {
 
 export function escapeAndFormat(text: string): string {
     const escapedText = escapeHTML(text);
-    const spaceMindfulText = preserveLeadingSpaces(escapedText);
-    const linkifiedText = linkify(spaceMindfulText);
-    const markdownText = convertMarkdown(linkifiedText);
-    return convertNewlines(markdownText);
+    const linkifiedText = linkify(escapedText);
+    const spacedText = preserveLeadingSpaces(linkifiedText);
+    const newLinesText = convertNewlines(spacedText);
+    return convertMarkdown(newLinesText);
 }
 
 import toast from "svelte-french-toast";
