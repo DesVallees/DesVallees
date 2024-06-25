@@ -59,7 +59,22 @@
 	};
 
 	$: $dataReady, setUp();
+
+	let discardButton: HTMLButtonElement;
+	let doneButton: HTMLButtonElement;
 </script>
+
+<svelte:window
+	on:keypress={(event) => {
+		if (event.key == 'Escape') {
+			event.preventDefault();
+			discardButton.click();
+		} else if (event.key == 'Enter' && event.shiftKey) {
+			event.preventDefault();
+			doneButton.click();
+		}
+	}}
+/>
 
 <svelte:head>
 	{#if entryID}
@@ -93,11 +108,13 @@
 		<p>{$dictionary.errorOccurred}</p>
 	{/if}
 	<footer>
-		<button class="button close" on:click={closeModal}>
+		<button class="button close" bind:this={discardButton} on:click={closeModal}>
 			{$dictionary.discard}
 		</button>
 
-		<button class="button done" on:click={() => saveChanges(true)}>{$dictionary.done}</button>
+		<button class="button done" bind:this={doneButton} on:click={() => saveChanges(true)}
+			>{$dictionary.done}</button
+		>
 	</footer>
 </div>
 
@@ -148,8 +165,6 @@
 	.content {
 		line-height: 1.5;
 		border-top: solid 3px var(--interactive);
-		border-bottom: solid 3px var(--interactive);
-		box-shadow: 0 12px 10px -10px var(--interactive);
 
 		resize: none;
 	}

@@ -16,6 +16,8 @@
 	function openNewEntry() {
 		goto(`${baseRoute}/create`);
 	}
+
+	let newEntry: HTMLButtonElement;
 </script>
 
 <div in:fade class="baseRoute">
@@ -33,7 +35,7 @@
 
 			<button class="button" on:click={authHandlers.logout}>{$dictionary.logOut}</button>
 
-			<button class="newEntry" on:click={openNewEntry}>
+			<button class="newEntry" bind:this={newEntry} on:click={openNewEntry}>
 				<ion-icon name="add-outline" style="--ionicon-stroke-width: 60px" />
 			</button>
 
@@ -43,6 +45,15 @@
 		<Landing />
 	{/if}
 </div>
+
+<svelte:window
+	on:keypress={(event) => {
+		if (event.key == 'n' || event.key == 'N') {
+			event.preventDefault();
+			newEntry.click();
+		}
+	}}
+/>
 
 <svelte:head>
 	<title>Journée - {$dictionary.slogan}</title>

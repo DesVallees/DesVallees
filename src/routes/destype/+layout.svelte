@@ -11,7 +11,7 @@
 	<meta name="author" content="Santiago Ovalles" />
 	<meta
 		name="description"
-		content="DesType is a free game / typing test to improve your typing skills in five different languages."
+		content="DesType is a free game / typing test to improve your typing skills in six different languages."
 	/>
 	<meta name="keywords" content="Typing, Speed, Destype, Typing Test" />
 	<link rel="icon" href="https://fav.farm/🤓" />
