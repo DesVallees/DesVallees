@@ -150,6 +150,9 @@ export const translator = {
         success: "Success!",
         informationSubmitted: "Your information has been successfully submitted. You will receive 50% off your next purchase.",
         clubName: "Club Name",
+        male: "Male",
+        female: "Female",
+        other: "Other",
     },
     es: {
         comingSoon: 'Próximamente',
@@ -302,5 +305,8 @@ export const translator = {
         success: "¡Hecho!",
         informationSubmitted: "Tu información ha sido enviada con éxito. Recibirás 50% en tu próxima compra.",
         clubName: "Nombre del club",
+        male: "Masculino",
+        female: "Femenino",
+        other: "Otro",
     },
 };

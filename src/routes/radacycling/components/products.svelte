@@ -65,7 +65,7 @@
 	}
 	@media screen and (max-width: 35rem) {
 		div {
-			grid-auto-columns: calc(calc(100% / calc(var(--maxColumns) / 3)) - var(--gap));
+			grid-auto-columns: calc(calc(100% / calc(var(--maxColumns) / 3.5)) - var(--gap));
 		}
 	}
 </style>

@@ -137,9 +137,9 @@
 						<label for="gender">{$dictionary.gender}</label>
 						<select bind:value={gender} required name="gender" id="gender">
 							<option value="" selected disabled />
-							<option value="Female">Femenino</option>
-							<option value="Male">Masculino</option>
-							<option value="Other">Otro</option>
+							<option value="Female">{$dictionary.female}</option>
+							<option value="Male">{$dictionary.male}</option>
+							<option value="Other">{$dictionary.other}</option>
 						</select>
 					</div>
 					<div class="inClub">

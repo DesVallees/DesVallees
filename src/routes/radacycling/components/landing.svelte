@@ -100,13 +100,18 @@
 	}
 
 	p {
-		font-size: clamp(1.25rem, 4vw, 1.65em);
+		font-size: clamp(1.25rem, 2.5vw, 1.5em);
 		font-weight: 500;
 	}
 
 	a {
-		font-size: clamp(1.1rem, 3vw, 1.5rem);
-		text-transform: uppercase;
+		font-size: clamp(1.25rem, 3vw, 1.5rem);
+		font-weight: 500;
+
+		text-transform: capitalize;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
 		margin-top: 2rem;
 	}

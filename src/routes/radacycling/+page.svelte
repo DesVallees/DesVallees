@@ -173,17 +173,19 @@
 	}
 
 	.features h2 {
-		font-size: 2.2em;
+		font-size: 2em;
 		margin-bottom: 3rem;
 	}
 
 	.features h3 {
-		font-size: 1.3em;
-		margin-bottom: 1rem;
+		font-size: 1.25em;
+		font-weight: 600;
+		margin-bottom: 0.5em;
 	}
 
 	.features p {
-		font-size: 1.05em;
+		font-size: 0.95em;
+		font-weight: normal;
 		color: var(--content-9);
 	}
 

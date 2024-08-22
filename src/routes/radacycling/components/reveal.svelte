@@ -11,11 +11,13 @@
 <style>
 	h2 {
 		font-size: clamp(2.5rem, 6vw, 3rem);
+		font-weight: 600;
 		text-align: center;
 	}
 
 	p {
 		font-size: clamp(1.25rem, 3vw, 1.5rem);
+		font-weight: normal;
 		line-height: 1.5;
 		margin: auto;
 		margin-top: 1.5rem;

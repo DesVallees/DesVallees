@@ -21,12 +21,8 @@
 	let originalImageSrc: string;
 	function handleImageHover() {
 		originalImageSrc = imageSrc;
-		let originalImageWidth = img.offsetWidth;
-		let originalImageHeight = img.offsetHeight;
 
 		if (imgHoverSrc) {
-			img.style.width = `${originalImageWidth}px`;
-			img.style.height = `${originalImageHeight}px`;
 			imageSrc = imgHoverSrc;
 		}
 	}
@@ -197,7 +193,7 @@
 	}
 
 	h2 {
-		margin-bottom: 0.25em;
+		margin-bottom: 0.15em;
 
 		font-size: 1em;
 		font-weight: normal;
