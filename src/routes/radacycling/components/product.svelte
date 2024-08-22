@@ -90,8 +90,9 @@
 		<!-- {#if oldPrice}
 			<p class="discount">{calculateDiscount(oldPrice, price)} {$dictionary.discount}</p>
 		{/if} -->
-		<button class="add baseButton">+</button>
 	</a>
+
+	<button class="add baseButton">+</button>
 
 	<div class="productInfo">
 		<div class="left">

@@ -130,22 +130,20 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .modernScrollbar::-webkit-scrollbar {
-    height: .25rem;
+    height: .3rem;
 }
 
 .modernScrollbar::-webkit-scrollbar-track {
-    background-color: var(--content-2);
-    border-radius: 5px;
+    background-color: transparent;
 }
 
 .modernScrollbar::-webkit-scrollbar-thumb {
-    background-color: var(--content-8);
-    border-radius: 5px;
+    background-color: var(--content-3);
+    border-radius: 10px;
 }
 
 .modernScrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: var(--content);
-    border-radius: 5px;
+    background-color: var(--content-8);
 }
 
 .noScrollbar::-webkit-scrollbar {

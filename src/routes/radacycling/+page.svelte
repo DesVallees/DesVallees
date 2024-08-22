@@ -129,6 +129,7 @@
 		justify-content: center;
 
 		padding: 0 clamp(1rem, 4vw, 3rem);
+		margin-bottom: 2rem;
 		gap: 2rem;
 	}
 

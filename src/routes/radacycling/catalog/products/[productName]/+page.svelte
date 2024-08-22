@@ -331,8 +331,7 @@
 			<div class="similar">
 				<Products
 					style="padding: 0;"
-					maxColumns={3}
-					gap="2.5rem"
+					maxColumns={2.5}
 					title={$dictionary.similarProducts}
 					products={similarProducts}
 				/>

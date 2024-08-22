@@ -180,6 +180,8 @@
 		bottom: 20px;
 		right: 20px;
 		width: 350px;
+		max-height: 90vh;
+		overflow-y: auto;
 		background-color: #fff;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 		border-radius: 8px;
@@ -246,6 +248,17 @@
 		color: #333;
 	}
 
+	@media screen and (max-width: 750px) {
+		h2 {
+			font-size: 20px;
+		}
+
+		.inputGroup input,
+		.inputGroup select {
+			font-size: 1em;
+		}
+	}
+
 	.b {
 		display: flex;
 		flex-wrap: wrap;
@@ -272,6 +285,13 @@
 		margin-left: 5px;
 		padding-right: 1ch;
 		font-size: 12px;
+	}
+
+	@media screen and (max-width: 750px) {
+		.inClub label,
+		.terms label {
+			font-size: 13px;
+		}
 	}
 
 	.terms a {
