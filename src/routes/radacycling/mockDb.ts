@@ -692,7 +692,7 @@ export let storage: Record<string, Product> = {
             { label: { en: "Care Instructions", es: "Instrucciones de cuidado" }, value: { en: "Machine Washable, Air Dry Recommended", es: "Lavable a máquina, se recomienda secar al aire" } },
         ],
         imageSrc: "Resources/1BibPlus2Jerseys.webp",
-        imgHoverSrc: "Resources/radimir.jpg",
+        imgHoverSrc: undefined,
         imageAlt: { en: "Offer: 1 Bib Plus 2 Jerseys Plus Free Socks", es: "Oferta: 1 Pantalón + 2 Camisetas + Calcetines Gratis" },
         price: "$219.97",
         oldPrice: "$280.00",

@@ -6,6 +6,7 @@
 	import Reveal from './components/reveal.svelte';
 	import Category from './components/category.svelte';
 	import Products from './components/products.svelte';
+	import LandingForm from './components/landingForm.svelte';
 
 	const categories = denormalizeCategories(featuredCategories);
 
@@ -27,6 +28,8 @@
 	<title>RADA Cycling Wear</title>
 	<meta name="description" content={$dictionary.siteDescription} />
 </svelte:head>
+
+<LandingForm />
 
 <div class="home" in:fade>
 	<Landing />
@@ -63,7 +66,7 @@
 	</section>
 
 	<section class="products scrollAppear">
-		<Products title={$dictionary.latestReleases} products={latest} />
+		<Products title={$dictionary.newCollection} products={latest} />
 	</section>
 
 	<section class="features">

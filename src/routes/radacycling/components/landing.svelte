@@ -15,7 +15,7 @@
 	<div>
 		<h1>{$dictionary.championsWearRADA}</h1>
 		<p>{$dictionary.elevateYourTraining}</p>
-		<a href="{baseRoute}/catalog" class="button">{$dictionary.exploreNow}</a>
+		<a href="{baseRoute}/catalog" class="button">{$dictionary.viewNewCollection}</a>
 	</div>
 
 	<section class="carousel">
@@ -94,13 +94,14 @@
 
 	h1 {
 		font-size: clamp(3rem, 8vw, 5rem);
+		font-weight: 600;
 		line-height: 1.1;
 		margin-bottom: 1rem;
 	}
 
 	p {
-		font-size: clamp(1.25rem, 4vw, 1.75rem);
-		font-weight: bold;
+		font-size: clamp(1.25rem, 4vw, 1.65em);
+		font-weight: 500;
 	}
 
 	a {

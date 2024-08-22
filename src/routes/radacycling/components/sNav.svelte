@@ -102,6 +102,7 @@
 		animation: fly 0.5s forwards;
 
 		text-transform: capitalize;
+		font-weight: 600;
 	}
 
 	.extraSpaceLink {

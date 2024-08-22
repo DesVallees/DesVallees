@@ -278,7 +278,11 @@
 	}
 
 	.links {
-		gap: 3rem;
+		gap: 3em;
+	}
+
+	.links .link {
+		font-weight: normal;
 	}
 
 	.link {

@@ -331,7 +331,8 @@
 			<div class="similar">
 				<Products
 					style="padding: 0;"
-					carouselAutoColumns="calc(35% - var(--gap, 2.5rem))"
+					maxColumns={3}
+					gap="2.5rem"
 					title={$dictionary.similarProducts}
 					products={similarProducts}
 				/>

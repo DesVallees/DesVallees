@@ -5,7 +5,7 @@
 	export let style: string = '';
 
 	export let category: Category;
-	export let buttonText: string = $dictionary.shopNow;
+	export let buttonText: string = $dictionary.collection;
 </script>
 
 <div class="category" {style}>

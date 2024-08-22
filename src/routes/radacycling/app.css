@@ -148,6 +148,22 @@ textarea::-webkit-scrollbar-thumb {
     border-radius: 5px;
 }
 
+.noScrollbar::-webkit-scrollbar {
+    height: 0;
+}
+
+.noScrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.noScrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.noScrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: transparent;
+}
+
 
 /* Buttons and Links */
 

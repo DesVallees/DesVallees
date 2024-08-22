@@ -4,14 +4,15 @@
 
 	export let title: string = '';
 	export let style: string = '';
-	export let carouselAutoColumns: string = 'calc(25% - var(--gap, 2.5rem))';
+	export let maxColumns: number = 4;
+	export let gap: string = '2.5rem';
 
 	export let products: ProductType[];
 </script>
 
 <section {style}>
 	<h2>{title}</h2>
-	<div style="--columns: {carouselAutoColumns}" class="modernScrollbar">
+	<div style="--maxColumns: {maxColumns}; --gap: {gap};" class="noScrollbar">
 		{#each products as item}
 			<Product product={item} />
 		{/each}
@@ -32,56 +33,39 @@
 	}
 
 	div {
+		--gap: var(--gap, 2.5rem);
+		--maxColumns: var(--maxColumns, 4);
+
 		padding: 5px 0.5rem 2rem;
 
 		overflow-x: auto;
 
 		display: grid;
-		--gap: var(--gap, 2.5rem);
 		grid-auto-flow: column;
-		grid-auto-columns: var(--columns, 'calc(25% - var(--gap, 2.5rem))');
+		grid-auto-columns: calc(calc(100% / calc(var(--maxColumns) / 1)) - var(--gap));
 		gap: var(--gap, 2.5rem);
+
+		box-shadow: 10px 0 10px -10px #00000015, -10px 0 10px -10px #00000015;
 	}
 
 	@media screen and (max-width: 100rem) {
 		div {
-			grid-auto-columns: calc(30% - var(--gap, 2.5rem));
+			grid-auto-columns: calc(calc(100% / calc(var(--maxColumns) / 1.25)) - var(--gap));
 		}
 	}
 	@media screen and (max-width: 70rem) {
 		div {
-			grid-auto-columns: calc(45% - var(--gap, 2.5rem));
+			grid-auto-columns: calc(calc(100% / calc(var(--maxColumns) / 1.75)) - var(--gap));
 		}
 	}
 	@media screen and (max-width: 50rem) {
 		div {
-			grid-auto-columns: calc(65% - var(--gap, 2.5rem));
+			grid-auto-columns: calc(calc(100% / calc(var(--maxColumns) / 2.5)) - var(--gap));
 		}
 	}
 	@media screen and (max-width: 35rem) {
 		div {
-			grid-auto-columns: calc(90% - var(--gap, 2.5rem));
-		}
-	}
-
-	@container (max-width: 100rem) {
-		div {
-			grid-auto-columns: calc(30% - var(--gap, 2.5rem));
-		}
-	}
-	@container (max-width: 70rem) {
-		div {
-			grid-auto-columns: calc(45% - var(--gap, 2.5rem));
-		}
-	}
-	@container (max-width: 50rem) {
-		div {
-			grid-auto-columns: calc(65% - var(--gap, 2.5rem));
-		}
-	}
-	@container (max-width: 35rem) {
-		div {
-			grid-auto-columns: calc(90% - var(--gap, 2.5rem));
+			grid-auto-columns: calc(calc(100% / calc(var(--maxColumns) / 3)) - var(--gap));
 		}
 	}
 </style>

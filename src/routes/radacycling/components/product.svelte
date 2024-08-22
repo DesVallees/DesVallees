@@ -91,9 +91,10 @@
 			src="{baseImageRoute}/{imageSrc}"
 			alt={imageAlt[$language]}
 		/>
-		{#if oldPrice}
+		<!-- {#if oldPrice}
 			<p class="discount">{calculateDiscount(oldPrice, price)} {$dictionary.discount}</p>
-		{/if}
+		{/if} -->
+		<button class="add baseButton">+</button>
 	</a>
 
 	<div class="productInfo">
@@ -149,7 +150,33 @@
 		background-color: white;
 	}
 
-	.discount {
+	.add {
+		position: absolute;
+		top: 0.35em;
+		right: 0.35em;
+
+		padding: 0 0 3px;
+
+		width: 40px;
+		height: 40px;
+
+		font-size: 25px;
+		font-weight: normal;
+
+		background-color: var(--main-7);
+		backdrop-filter: blur(5px);
+		-webkit-backdrop-filter: blur(5px);
+		box-shadow: 1px 1px 10px #00000050;
+		color: var(--interactive);
+	}
+
+	.add:focus-visible,
+	.add:hover {
+		background-color: var(--interactive-8);
+		color: var(--main);
+	}
+
+	/* .discount {
 		position: absolute;
 		top: 0.5em;
 		right: 0.5em;
@@ -163,19 +190,29 @@
 		text-align: center;
 		overflow: hidden;
 		text-overflow: ellipsis;
+	} */
+
+	.productInfo {
+		margin: 1rem 0 0.5rem;
 	}
 
 	h2 {
-		margin-top: 1rem;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.25em;
 
-		font-size: 1.4em;
+		font-size: 1em;
+		font-weight: normal;
 		line-height: 1.2;
+
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.prices {
 		display: flex;
-		gap: 2ch;
+		align-items: end;
+		gap: 0.5ch;
+		font-weight: bold;
 	}
 
 	p {
@@ -184,15 +221,16 @@
 	}
 
 	.oldPrice {
-		color: var(--content-8);
+		color: var(--content-7);
 		text-decoration: line-through;
+		font-size: 0.8em;
 	}
 
 	/* Versions Styles */
 	.versions {
 		display: flex;
-		margin-top: 0.9em;
 	}
+
 	.versions button {
 		background: none;
 		border-radius: var(--borderRadius, 10px);
@@ -201,15 +239,18 @@
 		cursor: pointer;
 		transition: transform 0.3s ease;
 	}
+
 	.versions button:hover {
 		transform: scale(1.1);
 	}
+
 	.versions button.current img {
 		border: 3px solid var(--interactive);
 	}
+
 	.versions img {
-		width: 50px;
-		height: 50px;
+		width: 45px;
+		height: 45px;
 		object-fit: cover;
 		border-radius: var(--borderRadius, 10px);
 	}

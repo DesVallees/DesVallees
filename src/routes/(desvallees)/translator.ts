@@ -9,6 +9,7 @@ export const translator = {
         profileCards: "Tarjetas de Perfil",
         sketch: "Bosquejo",
         comingSoon: 'Próximamente',
+        charades: 'Charadas',
     },
     en: {
         santiagoOvallesProjects: "Santiago Ovalles' Projects",
@@ -20,6 +21,7 @@ export const translator = {
         profileCards: "Profile Cards",
         sketch: "Sketch",
         comingSoon: 'Coming Soon',
+        charades: 'Charades',
     },
     fr: {
         santiagoOvallesProjects: "Projets de Santiago Ovalles",
@@ -31,6 +33,7 @@ export const translator = {
         profileCards: "Cartes de Profil",
         sketch: "Croquis",
         comingSoon: 'Prochainement',
+        charades: 'Charades',
     },
     de: {
         santiagoOvallesProjects: "Santiago Ovalles Projekte",
@@ -42,6 +45,7 @@ export const translator = {
         profileCards: "Profilkarten",
         sketch: "Skizze",
         comingSoon: 'Demnächst',
+        charades: 'Scharade',
     },
     it: {
         santiagoOvallesProjects: "Progetti di Santiago Ovalles",
@@ -53,6 +57,7 @@ export const translator = {
         profileCards: "Carte del Profilo",
         sketch: "Schizzo",
         comingSoon: 'Prossimamente',
+        charades: 'Mimo',
     },
     ru: {
         santiagoOvallesProjects: "Проекты Сантьяго Овальеса",
@@ -64,5 +69,6 @@ export const translator = {
         profileCards: "Профильные карты",
         sketch: "Эскиз",
         comingSoon: 'Скоро',
+        charades: 'Шарады',
     },
 };

@@ -10,6 +10,7 @@
 	} from '../database';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { isMobileOrTablet } from '../functions';
 
 	const newEntry: Post = {
 		id: generateUniqueId($myPosts),
@@ -69,7 +70,7 @@
 		if (event.key == 'Escape') {
 			event.preventDefault();
 			discardButton.click();
-		} else if (event.key == 'Enter' && event.shiftKey) {
+		} else if (event.key == 'Enter' && event.shiftKey && !isMobileOrTablet()) {
 			event.preventDefault();
 			doneButton.click();
 		}
