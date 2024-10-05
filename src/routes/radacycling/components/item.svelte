@@ -56,6 +56,7 @@
 	.details h2 {
 		margin: 0;
 		font-size: clamp(1.1rem, 3vw, 1.3rem);
+		font-weight: 600;
 		color: var(--content-9);
 		margin-bottom: 1rem;
 	}
@@ -78,16 +79,20 @@
 	}
 
 	.add {
-		background-color: var(--interactive);
-		color: var(--main);
-		border: none;
-		padding: 10px 12.5px;
-		font-size: clamp(1rem, 3vw, 1.25rem);
-		border-radius: var(--borderRadius, 10px);
-		cursor: pointer;
-		display: flex;
+		display: none;
 		align-items: center;
 		gap: 5px;
+
+		padding: 10px 12.5px;
+		border: none;
+		border-radius: var(--borderRadius, 10px);
+
+		background-color: var(--interactive);
+		color: var(--main);
+
+		font-size: clamp(1rem, 3vw, 1.25rem);
+
+		cursor: pointer;
 		transition: 0.3s ease;
 	}
 

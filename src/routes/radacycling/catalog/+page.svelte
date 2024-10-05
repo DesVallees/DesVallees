@@ -174,8 +174,7 @@
 	.custom p {
 		max-width: 700px;
 		text-wrap: balance;
-		filter: drop-shadow(0 0 0.5rem var(--content-4));
-		font-weight: bold;
+		font-weight: 600;
 	}
 
 	.edgyImg {

@@ -2,12 +2,12 @@
 	import Product from './product.svelte';
 	import type { Product as ProductType } from '../mockDb';
 
+	export let products: ProductType[];
+
 	export let title: string = '';
 	export let style: string = '';
-	export let maxColumns: number = 4;
+	export let maxColumns: number = products.length;
 	export let gap: string = '2.5rem';
-
-	export let products: ProductType[];
 </script>
 
 <section {style}>

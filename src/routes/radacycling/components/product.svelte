@@ -92,7 +92,7 @@
 		{/if} -->
 	</a>
 
-	<button class="add baseButton">+</button>
+	<button class="add baseButton" aria-label={$dictionary.addToCart}>+</button>
 
 	<div class="productInfo">
 		<div class="left">
@@ -169,7 +169,7 @@
 
 	.add:focus-visible,
 	.add:hover {
-		background-color: var(--interactive-8);
+		background-color: var(--interactive-9);
 		color: var(--main);
 	}
 
