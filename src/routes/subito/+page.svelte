@@ -248,9 +248,12 @@
 	}
 
 	.task {
-		max-width: 65ch;
 		font-size: 1.5em;
 		font-weight: 500;
+		text-align: center;
+		text-wrap: balance;
+
+		max-width: 65ch;
 		padding: 10%;
 
 		transition: all 0.2s;

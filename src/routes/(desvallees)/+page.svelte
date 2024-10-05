@@ -19,7 +19,6 @@
 	<h1>{$dictionary.santiagoOvallesProjects}</h1>
 
 	<a data-sveltekit-reload href="/journee">Journée ({$dictionary.comingSoon})</a>
-	<a data-sveltekit-reload href="/radacycling">RADA Cycling ({$dictionary.comingSoon})</a>
 
 	<Separator
 		width="90%"
@@ -28,6 +27,11 @@
 		color="var(--content-8)"
 		margin="1.5rem 0"
 	/>
+
+	<a data-sveltekit-reload href="/radacycling">RADA Cycling (2024)</a>
+	<a data-sveltekit-reload href="/subito">Súbito (2024)</a>
+
+	<Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
 
 	<a target="_blank" href="https://www.ccsguitars.com/">CCS Guitars (2023)</a>
 	<a data-sveltekit-reload href="/lawyer-site">LegalCollab (2023)</a>
