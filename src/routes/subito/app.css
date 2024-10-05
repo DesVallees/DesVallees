@@ -129,6 +129,15 @@ textarea::-webkit-scrollbar-thumb {
     border-radius: 2px;
 }
 
+select {
+    color: var(--content);
+    background-color: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    font-size: 1rem;
+}
+
 .button,
 .ghostButton,
 .baseButton,

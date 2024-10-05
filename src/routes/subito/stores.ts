@@ -128,7 +128,6 @@ export function pickTask() {
 
 
 // Settings
-export const displayInstructionsOnBothSides: Writable<boolean | undefined> = writable(undefined);
 export const initialTime: Writable<number> = writable(20);
 
 // Game State
@@ -171,6 +170,9 @@ export function updateTimeBasedOnNumber(number: number) {
     if (get(time) <= 0 || get(time2) <= 0) {
         get(time) <= 0 ? state.set('redWins') : state.set('blueWins')
         stopTimers();
+
+        // The winning team starts the next round
+        turn.update(n => n + 1);
     }
 }
 
@@ -201,4 +203,46 @@ export function resetTimers() {
 export function changeTurn() {
     pickTask();
     turn.update(n => n + 1);
+}
+
+
+// Participants
+function createPersistentStore(key: string, defaultValue: never[]) {
+    let storedValue: string[] | null = null;
+    if (browser) {
+        let json = localStorage.getItem(key)
+        if (json) {
+            storedValue = JSON.parse(json);
+        }
+    }
+
+    const store = writable(storedValue || defaultValue);
+
+    // Subscribe to store changes and update local storage
+    store.subscribe(value => {
+        if (browser) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+    });
+
+    return store;
+}
+
+// Stores for blue and red participants
+export const blueParticipants = createPersistentStore('blueParticipants', []);
+export const redParticipants = createPersistentStore('redParticipants', []);
+
+// Function to add participants from an input string
+export function addParticipants(inputString: string, team: 'blue' | 'red') {
+    // Clean up and validate the input string
+    const names = inputString
+        .split(',')
+        .map(name => name.trim()) // Remove extra spaces
+        .filter(name => name.length > 0); // Filter out empty strings
+
+    if (team === 'blue') {
+        blueParticipants.set(names);
+    } else if (team === 'red') {
+        redParticipants.set(names);
+    }
 }
