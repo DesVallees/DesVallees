@@ -45,6 +45,27 @@ function getCookie(name: string): string | null {
     return null;
 }
 
+function createPersistentStore(key: string, defaultValue: any) {
+    let storedValue: string[] | null = null;
+    if (browser) {
+        let json = localStorage.getItem(key)
+        if (json) {
+            storedValue = JSON.parse(json);
+        }
+    }
+
+    const store = writable(storedValue || defaultValue);
+
+    // Subscribe to store changes and update local storage
+    store.subscribe(value => {
+        if (browser) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+    });
+
+    return store;
+}
+
 let navigatorLanguage;
 let storedLanguage;
 if (browser) {
@@ -122,13 +143,24 @@ export function pickTask() {
 
     // Return the task from `tasksList` at the picked index
     task.set(get(tasksList)[pickedIndex]);
+    language.subscribe(() => {
+        task.set(get(tasksList)[pickedIndex]);
+    })
 }
 
 
 
 
 // Settings
-export const initialTime: Writable<number> = writable(20);
+export const settingsOpened: Writable<boolean> = writable(false)
+export const initialTime: Writable<number> = createPersistentStore('initialTime', 20);
+
+export function openSettings() {
+    settingsOpened.set(true)
+}
+export function closeSettings() {
+    settingsOpened.set(false)
+}
 
 // Game State
 export const state: Writable<'start' | 'playing' | 'paused' | 'blueWins' | 'redWins'> = writable('start');
@@ -139,6 +171,7 @@ state.subscribe((value) => {
 
 // Internal writable store to manage the main time value
 const mainTime = writable(get(initialTime));
+initialTime.subscribe((value) => mainTime.set(value));
 
 // Derived store for time
 export const time = derived(mainTime, ($mainTime) => $mainTime);
@@ -207,28 +240,6 @@ export function changeTurn() {
 
 
 // Participants
-function createPersistentStore(key: string, defaultValue: never[]) {
-    let storedValue: string[] | null = null;
-    if (browser) {
-        let json = localStorage.getItem(key)
-        if (json) {
-            storedValue = JSON.parse(json);
-        }
-    }
-
-    const store = writable(storedValue || defaultValue);
-
-    // Subscribe to store changes and update local storage
-    store.subscribe(value => {
-        if (browser) {
-            localStorage.setItem(key, JSON.stringify(value));
-        }
-    });
-
-    return store;
-}
-
-// Stores for blue and red participants
 export const blueParticipants = createPersistentStore('blueParticipants', []);
 export const redParticipants = createPersistentStore('redParticipants', []);
 
