@@ -142,9 +142,9 @@ export function pickTask() {
     localStorage.setItem('indexes', JSON.stringify(currentIndexes));
 
     // Return the task from `tasksList` at the picked index
-    task.set(get(tasksList)[pickedIndex]);
+    task.set(get(tasksList)[pickedIndex] || get(tasksList)[0]);
     language.subscribe(() => {
-        task.set(get(tasksList)[pickedIndex]);
+        task.set(get(tasksList)[pickedIndex] || get(tasksList)[0]);
     })
 }
 
