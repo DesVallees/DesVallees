@@ -2,13 +2,9 @@
 	import { baseRoute, dictionary } from '../stores';
 	import Carousel from './carousel.svelte';
 
-	let imageSources = ['demo/amsterdam.webp', 'demo/man.webp', 'demo/woman.webp'];
+	let imageSources = ['landing.webp'];
 
-	let smallImagesSources = [
-		'demo/amsterdam-small.webp',
-		'demo/man-small.webp',
-		'demo/woman-small.webp',
-	];
+	let smallImagesSources = ['landing-small.webp'];
 </script>
 
 <section class="landing">

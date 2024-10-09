@@ -75,11 +75,11 @@
 				class:active={$page.url.pathname === `${baseRoute}/custom`}
 				href="{baseRoute}/custom">{$dictionary.custom}</a
 			>
-			<a
+			<!-- <a
 				class="link"
 				class:active={$page.url.pathname === `${baseRoute}/our-work`}
 				href="{baseRoute}/our-work">{$dictionary.ourWork}</a
-			>
+			> -->
 		</section>
 
 		<a class="s" href={baseRoute} aria-label={$dictionary.homepage}>
@@ -187,6 +187,7 @@
 
 		display: flex;
 		width: 100%;
+		max-height: 50vh;
 
 		opacity: 0;
 		animation: fade 0.4s forwards;
@@ -242,6 +243,7 @@
 	.featuredSectionLink img {
 		width: 100%;
 		height: 100%;
+		object-position: top;
 		object-fit: cover;
 	}
 

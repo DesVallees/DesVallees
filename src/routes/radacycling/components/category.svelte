@@ -42,6 +42,7 @@
 		border-radius: 5px;
 
 		object-fit: cover;
+		box-shadow: 3px 3px 10px #00000050;
 	}
 
 	.text {

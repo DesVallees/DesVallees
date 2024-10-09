@@ -20,24 +20,37 @@
 			window.removeEventListener('keydown', handleKeydown);
 		};
 	});
+
+	const justImage = !selectedImage.title && !selectedImage.description;
 </script>
 
 <button class="backdrop" on:click={close}>
-	<button class="main" on:click|stopPropagation in:scale out:scale={{ duration: 200 }}>
-		<button class="close" on:click={close}><ion-icon name="close-outline" /></button>
+	<button
+		class:justImage
+		class="main"
+		on:click|stopPropagation
+		in:scale
+		out:scale={{ duration: 200 }}
+	>
+		{#if !justImage}
+			<button class="close" on:click={close}><ion-icon name="close-outline" /></button>
+		{/if}
 		<div class="content">
 			<div class="imageContainer">
 				<img
+					class:justImageImage={justImage}
 					src="{baseImageRoute}/{selectedImage.src}"
-					alt={selectedImage.alt[$language]}
+					alt={selectedImage.alt ? selectedImage.alt[$language] : ''}
 				/>
 			</div>
-			<div class="description">
-				<h2>{selectedImage.title[$language]}</h2>
-				<p>
-					{selectedImage.description[$language]}
-				</p>
-			</div>
+			{#if !justImage}
+				<div class="description">
+					<h2>{selectedImage.title ? selectedImage.title[$language] : ''}</h2>
+					<p>
+						{selectedImage.description ? selectedImage.description[$language] : ''}
+					</p>
+				</div>
+			{/if}
 		</div>
 	</button>
 </button>
@@ -99,6 +112,18 @@
 		gap: 1rem;
 	}
 
+	.justImage {
+		background-color: rgba(255, 255, 255, 0);
+
+		width: fit-content;
+		height: fit-content;
+		padding: 0 !important;
+	}
+
+	.justImageImage {
+		aspect-ratio: initial;
+	}
+
 	.imageContainer {
 		flex-grow: 1;
 		flex-shrink: 0;
@@ -111,6 +136,8 @@
 		aspect-ratio: 6 / 11;
 		object-position: center;
 		object-fit: cover;
+
+		box-shadow: 2px 2px 10px #00000080;
 	}
 
 	.description {

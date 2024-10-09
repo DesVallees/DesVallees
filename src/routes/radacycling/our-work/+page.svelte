@@ -6,11 +6,6 @@
 
 	let images = crafts;
 
-	// Replicate images in the image array.
-	for (let i = 0; i < 2; i++) {
-		images = images.concat(images);
-	}
-
 	let selectedImage: craftItem | null = null;
 
 	function selectImage(image: craftItem | null): void {
@@ -29,7 +24,10 @@
 	<div class="image-grid">
 		{#each images as image}
 			<button on:click={() => selectImage(image)}>
-				<img src="{baseImageRoute}/{image.src}" alt={image.alt[$language]} />
+				<img
+					src="{baseImageRoute}/{image.src}"
+					alt={image.alt ? image.alt[$language] : ''}
+				/>
 			</button>
 		{/each}
 	</div>

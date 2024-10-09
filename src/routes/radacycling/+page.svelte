@@ -44,14 +44,14 @@
 		{/each}
 	</section>
 
-	<section class="products scrollAppear">
+	<section class="products scrollAppear hide">
 		<Products title={$dictionary.mostPopular} products={popular} />
 	</section>
 
 	<section class="promotions">
 		<a
 			href="{baseRoute}/catalog/products/bib-plus-jerseys"
-			class="scrollScale"
+			class="scrollScale hide"
 			aria-label={$dictionary.offerOneBibTwoJerseys}
 		>
 			<img
@@ -65,11 +65,11 @@
 		</a>
 	</section>
 
-	<section class="products scrollAppear">
+	<section class="products scrollAppear hide">
 		<Products title={$dictionary.newCollection} products={latest} />
 	</section>
 
-	<section class="features">
+	<section class="features hide">
 		<h2 class="scrollAppear">{$dictionary.yourSatisfaction}</h2>
 
 		<div class="featureContainer">
@@ -145,6 +145,7 @@
 		filter: contrast(300%) drop-shadow(0.5rem 0.5rem 1rem var(--interactive-5));
 		max-height: 100vh;
 		max-height: 100svh;
+		box-shadow: 3px 3px 10px #00000050;
 	}
 
 	.features {

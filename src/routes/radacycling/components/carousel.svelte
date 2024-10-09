@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import CarrouselController from './carrouselController.svelte';
 	import { baseImageRoute, dictionary } from '../stores';
-	import { handleSwipe, sleep } from '../functions';
+	import { handleSwipe } from '../functions';
 
 	export let style: string = '';
 	export let imgStyle: string = '';
@@ -87,7 +87,7 @@
 		</picture>
 	</button>
 
-	{#if !hideController}
+	{#if !hideController && images.length > 1}
 		<div class="controller">
 			<CarrouselController
 				on:interaction={stopAutomaticImageChanges}
@@ -97,7 +97,7 @@
 		</div>
 	{/if}
 
-	{#if !hideArrows}
+	{#if !hideArrows && images.length > 1}
 		<button
 			on:click={() => {
 				previousImage();

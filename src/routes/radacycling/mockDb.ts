@@ -7,7 +7,7 @@ let storedLanguage = get(language)
 
 export type translatableContent = { en: string; es: string; }
 
-// Categories
+// #region Categories
 export type Category = {
     id: number
 
@@ -266,62 +266,6 @@ export let categories: Category[] = [
 ];
 
 
-export let categoryMenus: CatalogCategory[] = [
-    {
-        id: 0,
-        name: { en: "men", es: "hombres" },
-        href: "men",
-        featuredCategoryId: 7,
-        sections: [
-            {
-                name: { en: "apparel", es: "ropa" },
-                categoryIds: [
-                    1, 2, 3, 4, 5, 6
-                ]
-            },
-            {
-                name: { en: "conditions", es: "condiciones" },
-                categoryIds: [
-                    8, 9, 10
-                ]
-            },
-            {
-                name: { en: "featured", es: "destacados" },
-                categoryIds: [
-                    11, 12, 13, 14
-                ]
-            }
-        ]
-    },
-    {
-        id: 1,
-        name: { en: "women", es: "mujeres" },
-        href: "women",
-        featuredCategoryId: 15,
-        sections: [
-            {
-                name: { en: "apparel", es: "ropa" },
-                categoryIds: [
-                    1, 2, 3, 4, 5, 6
-                ]
-            },
-            {
-                name: { en: "conditions", es: "condiciones" },
-                categoryIds: [
-                    8, 9, 10
-                ]
-            },
-            {
-                name: { en: "featured", es: "destacados" },
-                categoryIds: [
-                    11, 12, 13, 14
-                ]
-            }
-        ]
-    }
-];
-
-
 export function denormalizeCatalogCategory(catalogCategory: CatalogCategory): CatalogCategory {
     // Denormalize each section by mapping the category IDs to their full data
     const denormalizedSections: CatalogSection[] = catalogCategory.sections.map(section => {
@@ -422,8 +366,9 @@ export function getCategoryNamesFromIds(ids: number[]): string[] {
         return category.name[storedLanguage];
     });
 }
+// #endregion
 
-
+// #region Menus
 export type MenuItem = {
     name: string;
     href?: string;
@@ -461,18 +406,73 @@ export const mainMenu: MenuItem[] = [
         icon: 'mail',
         href: `${baseRoute}/custom`,
     },
-    {
-        name: storedDictionary.ourWork,
-        classname: 'baseButton extraSpaceLink',
-        icon: 'people',
-        href: `${baseRoute}/our-work`,
-    },
+    // {
+    //     name: storedDictionary.ourWork,
+    //     classname: 'baseButton extraSpaceLink',
+    //     icon: 'people',
+    //     href: `${baseRoute}/our-work`,
+    // },
     {
         name: storedDictionary.myAccount,
         classname: 'baseButton extraSpaceLink',
         icon: 'person-circle',
         href: `${baseRoute}/my-account`,
     },
+];
+
+export let categoryMenus: CatalogCategory[] = [
+    {
+        id: 0,
+        name: { en: "men", es: "hombres" },
+        href: "men",
+        featuredCategoryId: 7,
+        sections: [
+            {
+                name: { en: "apparel", es: "ropa" },
+                categoryIds: [
+                    1, 2, 3, 4, 5, 6
+                ]
+            },
+            // {
+            //     name: { en: "conditions", es: "condiciones" },
+            //     categoryIds: [
+            //         8, 9, 10
+            //     ]
+            // },
+            // {
+            //     name: { en: "featured", es: "destacados" },
+            //     categoryIds: [
+            //         11, 12, 13, 14
+            //     ]
+            // }
+        ]
+    },
+    {
+        id: 1,
+        name: { en: "women", es: "mujeres" },
+        href: "women",
+        featuredCategoryId: 15,
+        sections: [
+            {
+                name: { en: "apparel", es: "ropa" },
+                categoryIds: [
+                    1, 2, 3, 4, 5, 6
+                ]
+            },
+            // {
+            //     name: { en: "conditions", es: "condiciones" },
+            //     categoryIds: [
+            //         8, 9, 10
+            //     ]
+            // },
+            // {
+            //     name: { en: "featured", es: "destacados" },
+            //     categoryIds: [
+            //         11, 12, 13, 14
+            //     ]
+            // }
+        ]
+    }
 ];
 
 export function generateSectionsMenu(catalogCategoryID: number): void {
@@ -538,9 +538,9 @@ export function generateCategoryMenu(sectionName: string, catalogCategoryID: num
 export function renderMenu(menu: MenuItem[]) {
     activeSNavMenu.set(menu)
 }
+// #endregion
 
-
-// Products
+// #region Products
 export type Product = {
     id: number,
     name: translatableContent,
@@ -771,9 +771,9 @@ export function findSimilarProducts(product: Product, count: number): Product[] 
     // Slice the array to get the specified count or the maximum amount possible
     return shuffledProducts.slice(0, count);
 }
+// #endregion
 
-
-// Reviews
+// #region Reviews
 export type Review = {
     productId: number,
     date: string,
@@ -957,9 +957,9 @@ export function calculateAverageRating(reviews: Review[]): string | undefined {
 
     return averageRating.toFixed(1);
 }
+// #endregion
 
-
-// Cart
+// #region Cart
 export let deliveryFee = 8.18;
 
 export type DenormalizedCartItem = {
@@ -1057,51 +1057,220 @@ export function getCartItemFromIDs(cartItemsStore: CartItem[], productId: number
 
     return Object.values(cartItemsStore).find(item => item.productId === productId && item.sizeId === sizeId)
 }
+// #endregion
 
-
-// Previous work
+// #region Our Work
 export type craftItem = {
     src: string;
-    alt: translatableContent;
-    title: translatableContent;
-    description: translatableContent;
+    alt?: translatableContent;
+    title?: translatableContent;
+    description?: translatableContent;
 }
 
 export let crafts: craftItem[] = [
+    // {
+    //     src: `demo/woman-small.webp`,
+    //     alt: { en: 'Cyclist wearing our high-performance jersey', es: 'Ciclista usando nuestra camiseta de alto rendimiento' },
+    //     title: { en: 'High-Performance Women’s Jersey', es: 'Camiseta de Alto Rendimiento para Mujeres' },
+    //     description: {
+    //         en: 'Showcasing our latest in women’s cycling jerseys, this piece combines aerodynamics with unparalleled comfort. Developed in collaboration with professional cyclists, it features breathable, moisture-wicking fabric and a form-fitting design for those who refuse to compromise on performance or style.',
+    //         es: 'Presentando lo último en camisetas de ciclismo para mujeres, esta pieza combina la aerodinámica con un confort sin igual. Desarrollada en colaboración con ciclistas profesionales, cuenta con un tejido transpirable que absorbe la humedad y un diseño ajustado para quienes no renuncian al rendimiento ni al estilo.'
+    //     },
+    // },
+    // {
+    //     src: `demo/man-small.webp`,
+    //     alt: { en: 'Cyclist in action wearing our mountain biking gear', es: 'Ciclista en acción usando nuestro equipo de ciclismo de montaña' },
+    //     title: { en: 'All-Terrain Mountain Biking Gear', es: 'Equipo de Ciclismo de Montaña Todo Terreno' },
+    //     description: {
+    //         en: 'Designed for the trails, our all-terrain gear set is built to withstand the most challenging conditions. With reinforced stitching, ample storage for long rides, and integrated protective padding, this gear represents our commitment to combining durability with the freedom of movement.',
+    //         es: 'Diseñado para los senderos, nuestro equipo todo terreno está construido para resistir las condiciones más desafiantes. Con costuras reforzadas, amplio almacenamiento para recorridos largos y acolchado protector integrado, este equipo representa nuestro compromiso de combinar durabilidad con la libertad de movimiento.'
+    //     },
+    // },
+    // {
+    //     src: `demo/amsterdam-small.webp`,
+    //     alt: { en: 'Urban cyclist apparel by the canals of Amsterdam', es: 'Ropa de ciclista urbano junto a los canales de Ámsterdam' },
+    //     title: { en: 'Urban Commuter Series', es: 'Serie para Ciclistas Urbanos' },
+    //     description: {
+    //         en: 'Inspired by the cycling culture of Amsterdam, our Urban Commuter Series marries functionality with sleek, minimalist design. Waterproof, yet breathable materials and subtle reflective details ensure safety and comfort in urban environments, making every commute a statement.',
+    //         es: 'Inspirada en la cultura ciclista de Ámsterdam, nuestra Serie para Ciclistas Urbanos combina funcionalidad con un diseño elegante y minimalista. Materiales impermeables pero transpirables y detalles reflectantes sutiles garantizan la seguridad y el confort en entornos urbanos, haciendo de cada trayecto una declaración de estilo.'
+    //     },
+    // },
+    // {
+    //     src: `demo/women.webp`,
+    //     alt: { en: 'Eco-friendly cycling wear collection', es: 'Colección de ropa de ciclismo ecológica' },
+    //     title: { en: 'Eco-Friendly Collection', es: 'Colección Ecológica' },
+    //     description: {
+    //         en: 'Our Eco-Friendly Collection is a testament to our commitment to sustainability. Made from recycled materials without compromising on performance, these pieces offer cyclists a way to support the environment while enjoying their ride. Join us on the journey towards a greener future.',
+    //         es: 'Nuestra Colección Ecológica es un testimonio de nuestro compromiso con la sostenibilidad. Hecha de materiales reciclados sin comprometer el rendimiento, estas piezas ofrecen a los ciclistas una forma de apoyar al medio ambiente mientras disfrutan de su paseo. Únete a nosotros en el camino hacia un futuro más verde.'
+    //     },
+    // },
     {
-        src: `demo/woman-small.webp`,
-        alt: { en: 'Cyclist wearing our high-performance jersey', es: 'Ciclista usando nuestra camiseta de alto rendimiento' },
-        title: { en: 'High-Performance Women’s Jersey', es: 'Camiseta de Alto Rendimiento para Mujeres' },
-        description: {
-            en: 'Showcasing our latest in women’s cycling jerseys, this piece combines aerodynamics with unparalleled comfort. Developed in collaboration with professional cyclists, it features breathable, moisture-wicking fabric and a form-fitting design for those who refuse to compromise on performance or style.',
-            es: 'Presentando lo último en camisetas de ciclismo para mujeres, esta pieza combina la aerodinámica con un confort sin igual. Desarrollada en colaboración con ciclistas profesionales, cuenta con un tejido transpirable que absorbe la humedad y un diseño ajustado para quienes no renuncian al rendimiento ni al estilo.'
-        },
+        src: 'custom-one.webp'
     },
     {
-        src: `demo/man-small.webp`,
-        alt: { en: 'Cyclist in action wearing our mountain biking gear', es: 'Ciclista en acción usando nuestro equipo de ciclismo de montaña' },
-        title: { en: 'All-Terrain Mountain Biking Gear', es: 'Equipo de Ciclismo de Montaña Todo Terreno' },
-        description: {
-            en: 'Designed for the trails, our all-terrain gear set is built to withstand the most challenging conditions. With reinforced stitching, ample storage for long rides, and integrated protective padding, this gear represents our commitment to combining durability with the freedom of movement.',
-            es: 'Diseñado para los senderos, nuestro equipo todo terreno está construido para resistir las condiciones más desafiantes. Con costuras reforzadas, amplio almacenamiento para recorridos largos y acolchado protector integrado, este equipo representa nuestro compromiso de combinar durabilidad con la libertad de movimiento.'
-        },
+        src: 'custom-two.webp'
     },
     {
-        src: `demo/amsterdam-small.webp`,
-        alt: { en: 'Urban cyclist apparel by the canals of Amsterdam', es: 'Ropa de ciclista urbano junto a los canales de Ámsterdam' },
-        title: { en: 'Urban Commuter Series', es: 'Serie para Ciclistas Urbanos' },
-        description: {
-            en: 'Inspired by the cycling culture of Amsterdam, our Urban Commuter Series marries functionality with sleek, minimalist design. Waterproof, yet breathable materials and subtle reflective details ensure safety and comfort in urban environments, making every commute a statement.',
-            es: 'Inspirada en la cultura ciclista de Ámsterdam, nuestra Serie para Ciclistas Urbanos combina funcionalidad con un diseño elegante y minimalista. Materiales impermeables pero transpirables y detalles reflectantes sutiles garantizan la seguridad y el confort en entornos urbanos, haciendo de cada trayecto una declaración de estilo.'
-        },
+        src: 'custom-three.webp'
     },
     {
-        src: `demo/women.webp`,
-        alt: { en: 'Eco-friendly cycling wear collection', es: 'Colección de ropa de ciclismo ecológica' },
-        title: { en: 'Eco-Friendly Collection', es: 'Colección Ecológica' },
-        description: {
-            en: 'Our Eco-Friendly Collection is a testament to our commitment to sustainability. Made from recycled materials without compromising on performance, these pieces offer cyclists a way to support the environment while enjoying their ride. Join us on the journey towards a greener future.',
-            es: 'Nuestra Colección Ecológica es un testimonio de nuestro compromiso con la sostenibilidad. Hecha de materiales reciclados sin comprometer el rendimiento, estas piezas ofrecen a los ciclistas una forma de apoyar al medio ambiente mientras disfrutan de su paseo. Únete a nosotros en el camino hacia un futuro más verde.'
-        },
+        src: 'custom/1.webp'
+    },
+    {
+        src: 'custom/2.webp'
+    },
+    {
+        src: 'custom/3.webp'
+    },
+    {
+        src: 'custom/4.webp'
+    },
+    {
+        src: 'custom/5.webp'
+    },
+    {
+        src: 'custom/6.webp'
+    },
+    {
+        src: 'custom/7.webp'
+    },
+    {
+        src: 'custom/8.webp'
+    },
+    {
+        src: 'custom/9.webp'
+    },
+    {
+        src: 'custom/10.webp'
+    },
+    {
+        src: 'custom/11.webp'
+    },
+    {
+        src: 'custom/12.webp'
+    },
+    {
+        src: 'custom/13.webp'
+    },
+    {
+        src: 'custom/14.webp'
+    },
+    {
+        src: 'custom/15.webp'
+    },
+    {
+        src: 'custom/16.webp'
+    },
+    {
+        src: 'custom/17.webp'
+    },
+    {
+        src: 'custom/18.webp'
+    },
+    {
+        src: 'custom/19.webp'
+    },
+    {
+        src: 'custom/20.webp'
+    },
+    {
+        src: 'custom/21.webp'
+    },
+    {
+        src: 'custom/22.webp'
+    },
+    {
+        src: 'custom/23.webp'
+    },
+    {
+        src: 'custom/24.webp'
+    },
+    {
+        src: 'custom/25.webp'
+    },
+    {
+        src: 'custom/26.webp'
+    },
+    {
+        src: 'custom/27.webp'
+    },
+    {
+        src: 'custom/28.webp'
+    },
+    {
+        src: 'custom/29.webp'
+    },
+    {
+        src: 'custom/30.webp'
+    },
+    {
+        src: 'custom/31.webp'
+    },
+    {
+        src: 'custom/32.webp'
+    },
+    {
+        src: 'custom/33.webp'
+    },
+    {
+        src: 'custom/34.webp'
+    },
+    {
+        src: 'custom/35.webp'
+    },
+    {
+        src: 'custom/36.webp'
+    },
+    {
+        src: 'custom/37.webp'
+    },
+    {
+        src: 'custom/38.webp'
+    },
+    {
+        src: 'custom/39.webp'
+    },
+    {
+        src: 'custom/40.webp'
+    },
+    {
+        src: 'custom/41.webp'
+    },
+    {
+        src: 'custom/42.webp'
+    },
+    {
+        src: 'custom/43.webp'
+    },
+    {
+        src: 'custom/44.webp'
+    },
+    {
+        src: 'custom/45.webp'
+    },
+    {
+        src: 'custom/46.webp'
+    },
+    {
+        src: 'custom/47.webp'
+    },
+    {
+        src: 'custom/48.webp'
+    },
+    {
+        src: 'custom/49.webp'
+    },
+    {
+        src: 'custom/50.webp'
+    },
+    {
+        src: 'custom/51.webp'
+    },
+    {
+        src: 'custom/52.webp'
+    },
+    {
+        src: 'custom/53.webp'
     },
 ];
+// #endregion

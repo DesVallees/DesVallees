@@ -284,7 +284,7 @@
 
 		position: absolute;
 		top: 50%;
-		left: 0;
+		left: 2vw;
 		transform: translate(0, -50%);
 
 		width: 50%;

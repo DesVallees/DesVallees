@@ -20,7 +20,10 @@
 	<div>
 		{#each images as image}
 			<button class="scrollAppear" on:click={() => selectImage(image)}>
-				<img src="{baseImageRoute}/{image.src}" alt={image.alt[$language]} />
+				<img
+					src="{baseImageRoute}/{image.src}"
+					alt={image.alt ? image.alt[$language] : ''}
+				/>
 			</button>
 		{/each}
 	</div>

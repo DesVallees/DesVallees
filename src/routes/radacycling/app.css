@@ -372,3 +372,7 @@ article footer p {
         }
     }
 }
+
+.hide {
+    display: none !important;
+}

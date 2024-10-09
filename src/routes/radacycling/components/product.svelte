@@ -87,12 +87,12 @@
 			src="{baseImageRoute}/{imageSrc}"
 			alt={imageAlt[$language]}
 		/>
-		<!-- {#if oldPrice}
+		{#if oldPrice}
 			<p class="discount">{calculateDiscount(oldPrice, price)} {$dictionary.discount}</p>
-		{/if} -->
+		{/if}
 	</a>
 
-	<button class="add baseButton" aria-label={$dictionary.addToCart}>+</button>
+	<button class="add baseButton hide" aria-label={$dictionary.addToCart}>+</button>
 
 	<div class="productInfo">
 		<div class="left">
@@ -173,7 +173,7 @@
 		color: var(--main);
 	}
 
-	/* .discount {
+	.discount {
 		position: absolute;
 		top: 0.5em;
 		right: 0.5em;
@@ -187,7 +187,7 @@
 		text-align: center;
 		overflow: hidden;
 		text-overflow: ellipsis;
-	} */
+	}
 
 	.productInfo {
 		margin: 1rem 0 0.5rem;
