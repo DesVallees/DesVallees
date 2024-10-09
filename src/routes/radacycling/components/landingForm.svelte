@@ -6,13 +6,10 @@
 	import { anErrorOccurred } from '../functions';
 	import { onMount } from 'svelte';
 
-	let name: string;
-	let city: string;
+	let firstName: string;
+	let lastName: string;
 	let email: string;
 	let phone: string;
-	let gender: string;
-	let inClub: boolean = false;
-	let club: string;
 	let termsAccepted: boolean = false;
 
 	let formHasBeenSent: boolean = true;
@@ -55,17 +52,12 @@
 		// Create a reference to the Firestore document
 		const userInfoDocumentReference = doc(db, 'user', $userID, 'info', 'discountForm');
 
-		// If no club has been provided, asign an empty string
-		club ||= '';
-
 		// Create an object with the form data
 		const formData = {
-			name,
-			city,
+			firstName,
+			lastName,
 			email,
 			phone,
-			gender,
-			club,
 			timestamp: new Date(),
 		};
 
@@ -115,13 +107,25 @@
 			<!-- Body -->
 			<form on:submit={saveFormData}>
 				<div class="a">
-					<div class="name inputGroup">
-						<label for="name">{$dictionary.fullName}</label>
-						<input bind:value={name} required type="text" name="name" id="name" />
+					<div class="firstName inputGroup">
+						<label for="firstName">{$dictionary.firstName}</label>
+						<input
+							bind:value={firstName}
+							required
+							type="text"
+							name="firstName"
+							id="firstName"
+						/>
 					</div>
-					<div class="city inputGroup">
-						<label for="city">{$dictionary.city}</label>
-						<input bind:value={city} required type="text" name="city" id="city" />
+					<div class="lastName inputGroup">
+						<label for="lastName">{$dictionary.lastName}</label>
+						<input
+							bind:value={lastName}
+							required
+							type="text"
+							name="lastName"
+							id="lastName"
+						/>
 					</div>
 					<div class="email inputGroup">
 						<label for="email">{$dictionary.email}</label>
@@ -133,26 +137,6 @@
 					</div>
 				</div>
 				<div class="b">
-					<div class="gender inputGroup">
-						<label for="gender">{$dictionary.gender}</label>
-						<select bind:value={gender} required name="gender" id="gender">
-							<option value="" selected disabled />
-							<option value="Female">{$dictionary.female}</option>
-							<option value="Male">{$dictionary.male}</option>
-							<option value="Other">{$dictionary.other}</option>
-						</select>
-					</div>
-					<div class="inClub">
-						<label for="inClub">{$dictionary.belongToClubOrOrganization}</label>
-						<input bind:checked={inClub} type="checkbox" name="inClub" id="inClub" />
-					</div>
-
-					{#if inClub}
-						<div class="club inputGroup">
-							<label for="club">{$dictionary.clubName}</label>
-							<input bind:value={club} required type="text" name="club" id="club" />
-						</div>
-					{/if}
 					<div class="terms">
 						<label for="terms">
 							<span>{$dictionary.iAcceptThe}</span>
@@ -238,8 +222,7 @@
 		color: #555;
 	}
 
-	.inputGroup input,
-	.inputGroup select {
+	.inputGroup input {
 		width: 100%;
 		padding: 8px;
 		border: 1px solid #ddd;
@@ -253,8 +236,7 @@
 			font-size: 20px;
 		}
 
-		.inputGroup input,
-		.inputGroup select {
+		.inputGroup input {
 			font-size: 1em;
 		}
 	}
@@ -265,22 +247,12 @@
 		gap: 10px;
 	}
 
-	.b .inputGroup,
-	.b .inClub {
-		flex: 1 1 48%;
-	}
-
-	.inClub,
 	.terms {
 		display: flex;
 		align-items: center;
-	}
-
-	.terms {
 		margin-bottom: 1em;
 	}
 
-	.inClub label,
 	.terms label {
 		margin-left: 5px;
 		padding-right: 1ch;
@@ -288,7 +260,6 @@
 	}
 
 	@media screen and (max-width: 750px) {
-		.inClub label,
 		.terms label {
 			font-size: 13px;
 		}

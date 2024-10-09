@@ -153,6 +153,8 @@ export const translator = {
         male: "Male",
         female: "Female",
         other: "Other",
+        firstName: "First Name",
+        lastName: "Last Name",
     },
     es: {
         comingSoon: 'Próximamente',
@@ -308,5 +310,7 @@ export const translator = {
         male: "Masculino",
         female: "Femenino",
         other: "Otro",
+        firstName: "Nombre",
+        lastName: "Apellido",
     },
 };
