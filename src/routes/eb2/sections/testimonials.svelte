@@ -43,7 +43,7 @@
 <style>
 	.testimonialsSection {
 		background-color: #f27931; /* Orange background */
-		padding: 4rem 50px;
+		padding: 4rem 3rem;
 		text-align: center;
 		color: white;
 	}
@@ -62,11 +62,10 @@
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
-		margin: auto;
-		gap: 1.5rem;
-
 		align-items: center;
-		justify-content: center;
+		justify-content: start;
+		align-content: center;
+		gap: 1.5rem;
 	}
 
 	@media (min-width: 1200px) {
@@ -78,6 +77,16 @@
 	@media (min-width: 1350px) {
 		.testimonialsContainer {
 			max-height: 1000px;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		.testimonialsSection {
+			padding: 4rem 2rem;
+		}
+
+		.testimonialsContainer {
+			width: calc(100vw - 4rem);
 		}
 	}
 </style>

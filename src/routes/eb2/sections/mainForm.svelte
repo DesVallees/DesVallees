@@ -1,17 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { baseImageRoute, baseRoute } from '../stores';
-
-	// Importing required elements
-	let fullName = '';
-	let email = '';
-	let phone = '';
+	import { phoneFormat } from '../functions';
+	import { baseImageRoute, baseRoute, email, fullName, phone } from '../stores';
 
 	// Form submit handler
 	function handleSubmit() {
 		goto(`${baseRoute}/resume`);
-		console.log({ fullName, email, phone });
 	}
+
+	let phoneField: HTMLInputElement;
 </script>
 
 <div class="mainForm" style="background-image: url('{baseImageRoute}/landing.jpg');">
@@ -37,9 +34,15 @@
 
 	<!-- Form Section -->
 	<form id="evaluacion-gratuita" on:submit|preventDefault={handleSubmit} class="evaluationForm">
-		<input required type="text" bind:value={fullName} placeholder="Nombre Completo" />
-		<input required type="email" bind:value={email} placeholder="Correo Electrónico" />
-		<input type="tel" bind:value={phone} placeholder="Teléfono" />
+		<input required type="text" bind:value={$fullName} placeholder="Nombre Completo" />
+		<input required type="email" bind:value={$email} placeholder="Correo Electrónico" />
+		<input
+			type="tel"
+			bind:this={phoneField}
+			on:input={() => phoneFormat(phoneField)}
+			bind:value={$phone}
+			placeholder="Teléfono"
+		/>
 		<button type="submit">Quiero una evaluación gratuita</button>
 	</form>
 </div>

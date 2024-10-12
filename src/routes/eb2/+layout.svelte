@@ -40,7 +40,20 @@
 
 <svelte:head>
 	<meta name="author" content="Santiago Ovalles" />
-	<link rel="icon" href="{baseImageRoute}/logo-small.jpg" />
+	<link
+		rel="icon"
+		href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-32x32.png"
+		sizes="32x32"
+	/>
+	<link
+		rel="icon"
+		href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-192x192.png"
+		sizes="192x192"
+	/>
+	<link
+		rel="apple-touch-icon"
+		href="https://cantolegal.com/wp-content/uploads/2019/10/cropped-android-chrome-256x256-180x180.png"
+	/>
 </svelte:head>
 
 <Toaster />

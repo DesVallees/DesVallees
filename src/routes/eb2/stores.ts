@@ -2,18 +2,21 @@ import { derived, get, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 
+export const fullName: Writable<string> = createPersistentStore('fullName', '');
+export const email: Writable<string> = createPersistentStore('email', '');
+export const phone: Writable<string> = createPersistentStore('phone', '');
+
 // Base Routes
 export const baseRoute = '/eb2';
 export const baseImageRoute = `/images` + baseRoute;
 
 
 // Language Management
-export type Language = 'es' | 'en';
+export type Language = 'es';
 
 export function isLanguage(value: any): value is Language {
     return (
-        value === 'es' ||
-        value === 'en'
+        value === 'es'
     );
 }
 
@@ -78,7 +81,7 @@ export const language: Writable<Language> = writable(storedLanguage || navigator
 
 if (browser) {
     language.subscribe((value) => {
-        document.documentElement.lang = value || 'en';
+        document.documentElement.lang = value || 'es';
         setCookie('lang', value, 1000);
     })
 }

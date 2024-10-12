@@ -41,10 +41,12 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: 1rem;
+
+		font-size: 1rem;
 	}
 
 	.content {
-		font-size: 0.8rem;
+		font-size: 0.8em;
 		line-height: 1.6;
 		margin-bottom: 15px;
 		font-style: italic;
@@ -64,13 +66,27 @@
 
 	.name {
 		font-weight: bold;
-		font-size: 0.8rem;
+		font-size: 0.8em;
 		margin-bottom: 5px;
 	}
 
 	.stars {
-		font-size: 0.75rem;
+		font-size: 0.75em;
 		text-align: center;
 		color: #f4b400; /* Star color */
+	}
+
+	@media screen and (max-width: 1200px) {
+		.testimonialCard {
+			gap: 0.75rem;
+
+			font-size: 1.15rem;
+		}
+	}
+
+	@media screen and (max-width: 500px) {
+		.content {
+			text-align: left;
+		}
 	}
 </style>

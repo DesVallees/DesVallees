@@ -130,6 +130,8 @@
 			flex-direction: column;
 			text-align: center;
 			align-items: center;
+			padding: 4rem 1rem;
+			font-size: 0.8rem;
 		}
 
 		.socialMedia {

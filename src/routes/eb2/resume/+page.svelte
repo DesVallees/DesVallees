@@ -1,10 +1,18 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { baseImageRoute } from '../stores'; // Importing the baseImageRoute
+	import { baseImageRoute, email, fullName, phone } from '../stores';
+	import { enhance } from '$app/forms';
+	import toast from 'svelte-french-toast';
 
 	let fileInput: HTMLInputElement;
 	let fileName: string;
 	let cvLabel: HTMLLabelElement;
+	let linkedinURL = '';
+
+	export let form;
+	$: form, feedbackMessage();
+
+	let isSubmitting = false;
 
 	// Function to update the label when a file is selected
 	function updateLabel() {
@@ -32,6 +40,19 @@
 			}
 		}
 	}
+
+	function feedbackMessage() {
+		if (form?.success) {
+			deleteFile();
+			toast.success('Solicitud enviada correctamente.', { style: 'font-size: 0.9em;' });
+		} else if (form?.error && isSubmitting) {
+			toast.error('La solicitud no ha podido ser enviada. Intenta más tarde.', {
+				style: 'font-size: 0.9em;',
+			});
+		}
+
+		isSubmitting = false;
+	}
 </script>
 
 <div in:fade class="resumePage" style="background-image: url('{baseImageRoute}/backFlag.jpg');">
@@ -44,41 +65,92 @@
 			<p>
 				Para hacer una evaluación completa de tu perfil profesional y determinar tu
 				elegibilidad es necesario evaluar tu currículum. Puedes ingresar un archivo DOC,
-				PDF, JPG o PNG de tu CV o ingresar la URL de tu perfil de Linkedin (asegúrate que
+				PDF, JPG o PNG de tu CV o ingresar la URL de tu perfil de Linkedin (asegúrate de que
 				esté actualizado).
 			</p>
 
-			<div class="inputGroup">
-				<label for="cv">CV:</label>
-				<label
-					bind:this={cvLabel}
-					style="color: {fileName ? 'white' : ''}"
-					id="cv-label"
-					for="cv"
-				>
-					<span> Haz clic aquí para seleccionar un archivo</span>
-				</label>
-				{#if fileName}
-					<button on:click={deleteFile} class="deleteFile"
-						><ion-icon name="close-outline" /></button
+			<form
+				method="post"
+				enctype="multipart/form-data"
+				on:submit={(event) => {
+					if ((!fileInput || !fileInput.files?.length) && !linkedinURL.trim()) {
+						event.preventDefault();
+						toast.error('Por favor ingresa un archivo CV o una URL de Linkedin.', {
+							style: 'font-size: 0.9em;',
+						});
+					} else {
+						isSubmitting = true;
+					}
+				}}
+			>
+				<div class="inputGroup">
+					<div class="previousInfo hide">
+						<input
+							required
+							type="text"
+							bind:value={$fullName}
+							placeholder="Nombre Completo"
+							name="fullName"
+						/>
+						<input
+							required
+							type="email"
+							bind:value={$email}
+							placeholder="Correo Electrónico"
+							name="email"
+						/>
+						<input type="tel" bind:value={$phone} placeholder="Teléfono" name="phone" />
+					</div>
+
+					<label for="cv">CV:</label>
+					<label
+						bind:this={cvLabel}
+						style="color: {fileName ? 'white' : ''};"
+						id="cv-label"
+						for="cv"
 					>
-				{/if}
-				<input
-					bind:this={fileInput}
-					type="file"
-					id="cv"
-					accept=".doc,.docx,.pdf,.jpg,.png"
-					style="display:none;"
-				/>
+						<span> Haz clic aquí para seleccionar un archivo</span>
+					</label>
+					{#if fileName}
+						<button on:click={deleteFile} class="deleteFile"
+							><ion-icon name="close-outline" /></button
+						>
+					{/if}
+					<input
+						bind:this={fileInput}
+						type="file"
+						id="cv"
+						accept=".doc,.docx,.pdf,.jpg,.png"
+						style="display: none;"
+						name="cv"
+					/>
 
-				<label for="linkedin">URL de Linkedin:</label>
-				<input type="url" id="linkedin" placeholder="Enlace de perfil de Linkedin" />
-			</div>
+					<label for="linkedin">URL de Linkedin:</label>
+					<input
+						type="url"
+						id="linkedin"
+						name="linkedin"
+						placeholder="Enlace de perfil de Linkedin"
+						bind:value={linkedinURL}
+					/>
+				</div>
 
-			<button type="submit" class="submitButton">Enviar</button>
+				<button type="submit" class="submitButton" disabled={isSubmitting}>
+					{#if isSubmitting}
+						Enviando...
+					{:else}
+						Enviar
+					{/if}
+				</button>
+			</form>
 		</div>
 	</div>
 </div>
+
+<svelte:head>
+	<title>Ingresa tu CV o enlace de Linkedin</title>
+	<meta name="description" content="" />
+</svelte:head>
 
 <style>
 	/* Main container styling */
@@ -91,6 +163,7 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-color: #0c3a6b;
+		font-size: 1rem;
 	}
 
 	/* Content container styling */
@@ -149,7 +222,7 @@
 
 	label {
 		display: block;
-		font-size: 0.8em;
+		font-size: 0.75em;
 		color: #fff;
 		margin-bottom: 8px;
 	}
@@ -163,6 +236,7 @@
 		border: none;
 		border-radius: 6px;
 		margin-bottom: 0.75em;
+		font-size: 0.9em;
 	}
 
 	input[type='url']::placeholder {
@@ -189,13 +263,15 @@
 
 		float: right;
 
-		background-color: rgba(200, 12, 12, 0.8);
+		background-color: rgba(228, 9, 9, 0.8);
 		color: white;
 		border-radius: 50%;
 		aspect-ratio: 1 / 1;
 
 		margin-top: -1.25em;
 		transform: translate(-50%, -125%);
+
+		font-size: 1em;
 
 		cursor: pointer;
 		z-index: 1;
@@ -207,7 +283,7 @@
 		padding: 14px;
 		background-color: #ff6d00;
 		color: #fff;
-		font-size: 0.9em;
+		font-size: 0.85em;
 		font-weight: bold;
 		border: none;
 		border-radius: 8px;
