@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { scale } from 'svelte/transition';
 	import { receive, send } from '../transitions.js';
 	import { flip } from 'svelte/animate';
 
@@ -67,6 +66,8 @@
 					</p>
 				</div>
 			</div>
+		{:else}
+			<p>No hay solicitudes para mostrar.</p>
 		{/each}
 	</div>
 </div>

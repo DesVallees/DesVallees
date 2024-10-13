@@ -43,10 +43,10 @@
 	function feedbackMessage() {
 		if (form?.success) {
 			deleteFile();
-			toast.success('Solicitud enviada correctamente.', { style: 'font-size: 0.9em;' });
+			toast.success('Solicitud enviada correctamente.', { style: 'font-size: 1.2em;' });
 		} else if (form?.error && isSubmitting) {
 			toast.error('La solicitud no ha podido ser enviada. Intenta más tarde.', {
-				style: 'font-size: 0.9em;',
+				style: 'font-size: 1.2em;',
 			});
 		}
 
@@ -75,7 +75,7 @@
 					if ((!fileInput || !fileInput.files?.length) && !linkedinURL.trim()) {
 						event.preventDefault();
 						toast.error('Por favor ingresa un archivo CV o una URL de Linkedin.', {
-							style: 'font-size: 0.9em;',
+							style: 'font-size: 1.2em;',
 						});
 					} else {
 						isSubmitting = true;
