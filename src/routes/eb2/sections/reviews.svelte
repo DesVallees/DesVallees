@@ -22,6 +22,7 @@
 		align-items: center;
 		text-align: center;
 		color: white;
+		font-size: 1.5rem;
 	}
 
 	.review {
@@ -38,7 +39,7 @@
 	}
 
 	.review p {
-		font-size: 1.2rem;
+		font-size: 1.2em;
 		font-weight: bolder;
 		text-wrap: balance;
 		max-width: 20ch;
@@ -50,6 +51,7 @@
 		.reviewsSection {
 			flex-direction: column;
 			gap: 2rem;
+			font-size: 1rem;
 		}
 
 		.review {

@@ -16,21 +16,25 @@
 <style>
 	.statisticsSection {
 		background-color: #f27931; /* Orange background */
-		padding: 4rem;
+		padding: 4em;
 		text-align: center;
 		color: white;
+		font-size: 1.5rem;
 	}
 
 	h2 {
-		font-size: 2.5rem;
+		font-size: 2.4em;
 		font-weight: bolder;
 		margin-bottom: 20px;
 	}
 
 	p {
-		font-size: 1.2rem;
+		font-size: 1.15em;
+		color: aliceblue;
+		max-width: 75ch;
 		font-weight: bold;
-		margin-bottom: 2.5rem;
+		margin: auto;
+		margin-bottom: 2em;
 		text-wrap: balance;
 		text-align: center;
 	}
@@ -39,7 +43,7 @@
 		background-color: #b30000; /* Dark red background */
 		color: white;
 		padding: 20px 30px;
-		font-size: 1.1rem;
+		font-size: 1.1em;
 		font-weight: bold;
 		border: none;
 		border-radius: 35px;
@@ -56,20 +60,21 @@
 
 	@media (max-width: 768px) {
 		.statisticsSection {
-			padding: 4rem 3rem;
+			padding: 4em 3em;
+			font-size: 1rem;
 		}
 
 		h2 {
-			font-size: 2rem;
+			font-size: 2em;
 		}
 
 		p {
-			font-size: 1rem;
+			font-size: 1em;
 		}
 
 		.ctaButton {
 			padding: 12px 25px;
-			font-size: 1rem;
+			font-size: 1em;
 		}
 	}
 </style>

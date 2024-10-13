@@ -97,16 +97,4 @@
 			opacity: 1;
 		}
 	}
-
-	@media screen and (min-width: 500px) {
-		:root {
-			font-size: 120%;
-		}
-	}
-
-	@media screen and (min-width: 1200px) {
-		:root {
-			font-size: 150%;
-		}
-	}
 </style>

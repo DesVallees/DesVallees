@@ -5,7 +5,7 @@
 
 	// Form submit handler
 	function handleSubmit() {
-		goto(`${baseRoute}/resume`);
+		goto(`${baseRoute}/curriculum`);
 	}
 
 	let phoneField: HTMLInputElement;
@@ -52,26 +52,29 @@
 		position: relative;
 		background-size: cover;
 		background-position: center;
-		padding: 50px;
+		padding: 5rem 50px;
 		color: white;
 		display: flex;
 		flex-direction: column;
+		font-size: 1.5rem;
 	}
 
 	@media screen and (min-width: 1500px) {
 		.mainForm {
-			padding: 50px 10rem;
+			padding: 50px 10em;
 		}
 	}
 	@media screen and (max-width: 750px) {
 		.mainForm {
 			padding: 30px;
+			padding-bottom: 50px;
+			font-size: 1rem;
 		}
 	}
 
 	.logo {
-		width: 7rem;
-		margin-bottom: 2rem;
+		width: 7em;
+		margin-bottom: 2em;
 	}
 
 	.mainText {

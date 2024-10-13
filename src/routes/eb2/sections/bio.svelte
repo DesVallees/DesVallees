@@ -18,13 +18,14 @@
 <style>
 	.bioSection {
 		text-align: center;
-		padding: 4rem 3.25rem;
+		padding: 4em 3.25em;
 		background-color: white;
 		color: #212121; /* Dark color for the text */
+		font-size: 1.5rem;
 	}
 
 	h4 {
-		font-size: 1.2rem;
+		font-size: 1.2em;
 		font-weight: bolder;
 		text-transform: uppercase;
 		text-wrap: balance;
@@ -33,7 +34,7 @@
 	}
 
 	h2 {
-		font-size: 2rem;
+		font-size: 2em;
 		font-weight: bolder;
 		text-transform: uppercase;
 		text-wrap: balance;
@@ -44,7 +45,7 @@
 	p {
 		margin: 0 auto;
 		line-height: 1.65;
-		font-size: 0.9rem;
+		font-size: 0.9em;
 		font-weight: normal;
 		text-wrap: balance;
 	}
@@ -52,13 +53,14 @@
 	@media (max-width: 768px) {
 		.bioSection {
 			padding: 4rem 2rem;
+			font-size: 1rem;
 		}
 
 		h2 {
-			font-size: 1.8rem;
+			font-size: 1.8em;
 		}
 		p {
-			font-size: 1rem;
+			font-size: 1em;
 		}
 	}
 </style>

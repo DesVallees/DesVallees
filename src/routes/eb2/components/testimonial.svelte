@@ -29,7 +29,7 @@
 			rgba(255, 255, 255, 0.5),
 			rgba(255, 255, 255, 0.95) 80%
 		);
-		padding: 2.5rem;
+		padding: 2em;
 		border-radius: 0.75rem;
 		box-shadow: rgba(0, 0, 0, 0.1) 5px 10px 5px -3px, rgba(0, 0, 0, 0.05) 0px 4px 46px -2px;
 		max-width: 400px;
@@ -40,9 +40,9 @@
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
-		gap: 1rem;
+		gap: 1em;
 
-		font-size: 1rem;
+		font-size: 1.5rem;
 	}
 
 	.content {
@@ -78,9 +78,15 @@
 
 	@media screen and (max-width: 1200px) {
 		.testimonialCard {
-			gap: 0.75rem;
+			gap: 0.75em;
 
-			font-size: 1.15rem;
+			font-size: 1.15em;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		.testimonialCard {
+			font-size: 1.1rem;
 		}
 	}
 

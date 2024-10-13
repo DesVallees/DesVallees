@@ -78,6 +78,10 @@ body,
     overflow-x: hidden;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     color: var(--content);
     background: var(--main);
@@ -241,5 +245,5 @@ select {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }

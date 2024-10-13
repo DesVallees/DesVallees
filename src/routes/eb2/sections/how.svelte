@@ -29,8 +29,9 @@
 	.howSection {
 		display: flex;
 		gap: 40px;
-		padding: 5rem 3rem;
+		padding: 5em 3em;
 		align-items: center;
+		font-size: 1.5rem;
 	}
 
 	.textContainer {
@@ -45,7 +46,7 @@
 	}
 
 	p {
-		font-size: 0.9rem;
+		font-size: 0.9em;
 		margin-bottom: 2em;
 		line-height: 1.6;
 	}
@@ -77,8 +78,8 @@
 
 	@media (max-width: 768px) {
 		.howSection {
-			padding: 5rem 2rem;
-			font-size: 1.1rem;
+			padding: 5em 2em;
+			font-size: 1rem;
 			flex-direction: column;
 			text-align: left;
 		}

@@ -30,30 +30,31 @@
 <style>
 	.requisitesSection {
 		text-align: center;
-		padding: 5rem 4rem;
+		padding: 5em 4em;
 		background-color: white;
 		color: #212121;
 		font-weight: 300;
 		max-width: 1500px;
 		margin: auto;
+		font-size: 1.5rem;
 	}
 
 	h2 {
-		font-size: 2rem;
+		font-size: 2em;
 		margin-bottom: 20px;
 		font-weight: 700;
 	}
 
 	p {
-		font-size: 1rem;
+		font-size: 1em;
 		margin-bottom: 20px;
 	}
 
 	ul {
 		list-style-type: none;
 		padding: 0;
-		font-size: 1rem;
-		margin: 2rem 0;
+		font-size: 1em;
+		margin: 2em 0;
 		text-align: left;
 	}
 
@@ -68,17 +69,17 @@
 	}
 
 	.question {
-		font-size: 1.1rem;
+		font-size: 1.1em;
 		max-width: 50ch;
 		text-align: center;
-		margin: 2rem auto;
+		margin: 2em auto;
 	}
 
 	.ctaButton {
 		background-color: rgb(203, 9, 9); /* Dark blue button */
 		color: white;
 		padding: 15px 30px;
-		font-size: 1.2rem;
+		font-size: 1.2em;
 		font-weight: 700;
 		border: none;
 		border-radius: 30px;
@@ -94,19 +95,20 @@
 
 	@media (max-width: 768px) {
 		.requisitesSection {
-			padding: 5rem 2rem;
+			padding: 5em 2em;
+			font-size: 1rem;
 		}
 
 		h2 {
-			font-size: 2rem;
+			font-size: 2em;
 		}
 
 		p {
-			font-size: 1rem;
+			font-size: 1em;
 		}
 
 		.ctaButton {
-			font-size: 1rem;
+			font-size: 1em;
 			padding: 12px 25px;
 		}
 	}

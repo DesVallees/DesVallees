@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { baseImageRoute, email, fullName, phone } from '../stores';
-	import { enhance } from '$app/forms';
 	import toast from 'svelte-french-toast';
 
 	let fileInput: HTMLInputElement;
@@ -55,7 +54,7 @@
 	}
 </script>
 
-<div in:fade class="resumePage" style="background-image: url('{baseImageRoute}/backFlag.jpg');">
+<div in:fade class="curriculum" style="background-image: url('{baseImageRoute}/backFlag.jpg');">
 	<div class="contentContainer">
 		<div class="content">
 			<img src="{baseImageRoute}/logo-small.jpg" alt="Canto Legal Logo" class="logo" />
@@ -154,7 +153,7 @@
 
 <style>
 	/* Main container styling */
-	.resumePage {
+	.curriculum {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -163,7 +162,7 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-color: #0c3a6b;
-		font-size: 1rem;
+		font-size: 1.5rem;
 	}
 
 	/* Content container styling */
@@ -295,7 +294,7 @@
 	}
 
 	@media screen and (max-width: 768px) {
-		.resumePage {
+		.curriculum {
 			font-size: 1.2rem;
 		}
 	}

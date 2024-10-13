@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { baseImageRoute } from '../stores'; // Importing the baseImageRoute
+	import { baseImageRoute, baseRoute } from '../stores'; // Importing the baseImageRoute
 </script>
 
 <footer class="footerSection">
 	<div class="footerLeft">
-		<img src="{baseImageRoute}/logo.avif" alt="Canto Legal Logo" class="footerLogo" />
+		<a href={baseRoute}>
+			<img src="{baseImageRoute}/logo.avif" alt="Canto Legal Logo" class="footerLogo" />
+		</a>
 		<div class="socialMedia">
 			<a
 				href="https://www.facebook.com/KatherineCantoLegal/"
@@ -41,7 +43,13 @@
 	</div>
 
 	<div class="footerRight">
-		<img src="{baseImageRoute}/expertiseAward.webp" alt="Expertise Award" class="awardImage" />
+		<a href="{baseRoute}/solicitudes" target="_blank" rel="noopener noreferrer">
+			<img
+				src="{baseImageRoute}/expertiseAward.webp"
+				alt="Expertise Award"
+				class="awardImage"
+			/>
+		</a>
 		<p>Law office of Katherine Canto &copy; 2024, todos los derechos reservados.</p>
 		<p class="disclaimer">
 			La abogada Katherine Canto es miembro del Colegio de Abogados del Estado de Washington,
@@ -57,18 +65,18 @@
 	.footerSection {
 		background-color: #000c25; /* Dark blue background */
 		color: white;
-		padding: 4rem 6rem;
+		padding: 4em 6em;
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
-		gap: 2rem;
-		font-size: 0.7rem;
+		gap: 2em;
+		font-size: 1.1rem;
 		font-weight: 300;
 	}
 
 	@media screen and (min-width: 1500px) {
 		.footerSection {
-			padding: 4rem 12rem;
+			padding: 4em 12em;
 		}
 	}
 
@@ -79,7 +87,7 @@
 
 	.socialMedia {
 		display: flex;
-		gap: 2rem;
+		gap: 2em;
 		margin-bottom: 20px;
 	}
 
@@ -104,7 +112,7 @@
 		flex-direction: column;
 		align-items: end;
 		justify-content: end;
-		gap: 0.5rem;
+		gap: 0.5em;
 		text-align: right;
 	}
 
@@ -116,12 +124,11 @@
 	}
 
 	.awardImage {
-		margin-top: 20px;
 		width: 120px;
 	}
 
 	address {
-		margin-top: 1.5rem;
+		margin-top: 1.5em;
 		font-style: normal;
 	}
 
@@ -130,7 +137,7 @@
 			flex-direction: column;
 			text-align: center;
 			align-items: center;
-			padding: 4rem 1rem;
+			padding: 4em 1em;
 			font-size: 0.8rem;
 		}
 

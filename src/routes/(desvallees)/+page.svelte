@@ -28,6 +28,7 @@
 		margin="1.5rem 0"
 	/>
 
+	<a data-sveltekit-reload href="/eb2">EB2 (2024)</a>
 	<a data-sveltekit-reload href="/radacycling">RADA Cycling (2024)</a>
 	<a data-sveltekit-reload href="/subito">Súbito (2024)</a>
 

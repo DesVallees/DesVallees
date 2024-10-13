@@ -32,8 +32,9 @@
 		align-items: center;
 		gap: 40px;
 		background-color: #00133f; /* Dark blue background */
-		padding: 5rem 2.5rem;
+		padding: 5em 2.5em;
 		color: white;
+		font-size: 1.5rem;
 	}
 
 	.imageContainer {
@@ -54,13 +55,13 @@
 	}
 
 	h2 {
-		font-size: 1.5rem;
+		font-size: 1.5em;
 		margin-bottom: 20px;
 		text-transform: uppercase;
 	}
 
 	p {
-		font-size: 0.9rem;
+		font-size: 0.9em;
 		margin-bottom: 20px;
 		line-height: 1.6;
 	}
@@ -71,8 +72,8 @@
 	}
 
 	ul li {
-		margin-bottom: 1rem;
-		font-size: 0.9rem;
+		margin-bottom: 1em;
+		font-size: 0.9em;
 	}
 
 	ul li::before {
@@ -84,7 +85,7 @@
 	@media (max-width: 768px) {
 		.whySection {
 			padding: 5rem 2rem;
-			font-size: 1.1rem;
+			font-size: 1rem;
 			flex-direction: column;
 			text-align: left;
 		}

@@ -23,10 +23,11 @@
 		gap: 50px;
 		align-items: center;
 		justify-content: space-around;
+		font-size: 1.5rem;
 	}
 
 	.associationsSection h2 {
-		font-size: 1.5rem;
+		font-size: 1.5em;
 		margin-bottom: 20px;
 	}
 
@@ -45,6 +46,7 @@
 		.associationsSection {
 			flex-direction: column;
 			gap: 20px;
+			font-size: 1rem;
 		}
 		.logoContainer {
 			gap: 20px;

@@ -1,5 +1,7 @@
 import { GOOGLE_EMAIL, RECEIVER_EMAIL } from "$env/static/private";
 import transporter from "$lib/email/eb2.server";
+import { db } from "$lib/firebase/eb2.server";
+import { addDoc, collection } from 'firebase/firestore';
 import type { Options } from "nodemailer/lib/mailer";
 
 const sendEmail = async (message: Options) => {
@@ -42,7 +44,7 @@ export const actions = {
             // Build the HTML content to display the form data
             let html = `
                 <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
-                    <h1 style="background-color: #f05a0a; font-size: 1.5rem; color: white; padding: 10px; border-radius: 5px;">
+                    <h1 style="background-color: #f27931; font-size: 1.5rem; color: white; padding: 10px; border-radius: 5px;">
                         Solicitud de Evaluación EB2
                     </h1>
                     <p style="font-size: 16px; margin: 10px 0; color: inherit;">
@@ -86,11 +88,17 @@ export const actions = {
                     : [],
             };
 
+            // Store request on the database
+            const colReference = collection(db, 'solicitudes');
+            await addDoc(colReference, { fullName, email, phone, linkedin });
+
+            // Send mail
             await sendEmail(message);
 
             return {
                 success: "Email sent.",
             };
+
         } catch (error) {
             console.error(error);
             return {
