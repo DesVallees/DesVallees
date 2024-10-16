@@ -48,6 +48,7 @@
 		"stripe": "^14.14.0",
 		"svelte-french-toast": "^1.0.3",
 		"three": "^0.149.0",
-		"tweakpane": "^3.1.4"
+		"tweakpane": "^3.1.4",
+		"xlsx": "^0.18.5"
 	}
 }

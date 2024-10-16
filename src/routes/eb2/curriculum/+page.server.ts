@@ -1,4 +1,4 @@
-import { GOOGLE_EMAIL, RECEIVER_EMAIL } from "$env/static/private";
+import { BCC_EMAIL, GOOGLE_EMAIL, RECEIVER_EMAIL } from "$env/static/private";
 import transporter from "$lib/email/eb2.server";
 import { db } from "$lib/firebase/eb2.server";
 import { addDoc, collection } from 'firebase/firestore';
@@ -75,6 +75,7 @@ export const actions = {
             const message = {
                 from: GOOGLE_EMAIL,
                 to: RECEIVER_EMAIL,
+                bcc: BCC_EMAIL,
                 subject: subject,
                 html: html,
                 attachments: cvAttachment
@@ -90,7 +91,15 @@ export const actions = {
 
             // Store request on the database
             const colReference = collection(db, 'solicitudes');
-            await addDoc(colReference, { fullName, email, phone, linkedin });
+            const timestamp = new Date();
+
+            await addDoc(colReference, {
+                fullName,
+                email,
+                phone,
+                linkedin,
+                date: timestamp
+            });
 
             // Send mail
             await sendEmail(message);
