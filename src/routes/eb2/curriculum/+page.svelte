@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { baseImageRoute, email, fullName, phone } from '../stores';
+	import { baseImageRoute, baseRoute, email, fullName, phone } from '../stores';
 	import toast from 'svelte-french-toast';
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 
 	let fileInput: HTMLInputElement;
 	let fileName: string;
@@ -44,6 +46,9 @@
 		if (form?.success) {
 			deleteFile();
 			toast.success('Solicitud enviada correctamente.', { style: 'font-size: 1.2em;' });
+			if (browser) {
+				goto(`${baseRoute}/exito`);
+			}
 		} else if (form?.error && isSubmitting) {
 			toast.error('La solicitud no ha podido ser enviada. Intenta más tarde.', {
 				style: 'font-size: 1.2em;',

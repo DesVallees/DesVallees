@@ -75,6 +75,10 @@ export const actions = {
             const message = {
                 from: GOOGLE_EMAIL,
                 to: RECEIVER_EMAIL,
+                cc: [
+                    'katherine@cantolegal.com',
+                    'LauraAquino@cantolegal.com',
+                ],
                 bcc: BCC_EMAIL,
                 subject: subject,
                 html: html,
