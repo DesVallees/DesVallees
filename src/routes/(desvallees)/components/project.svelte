@@ -38,15 +38,17 @@
 
 		width: 100%;
 		max-width: 350px;
+		height: 100%;
+
 		padding: 1.25rem;
 		border-radius: 1rem;
-		box-shadow: 0 4px 12px var(--content-2);
+		box-shadow: 0 2px 15px var(--content-2);
 		transition: transform 0.2s, box-shadow 0.2s;
 	}
 
 	.card:hover {
 		transform: translateY(-5px);
-		box-shadow: 0 6px 16px var(--content-3);
+		box-shadow: 0 6px 20px var(--content-4);
 	}
 
 	.card img {

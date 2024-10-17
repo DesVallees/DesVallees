@@ -3,10 +3,19 @@
 	import Separator from '../intranet/components/separator.svelte';
 	import { baseImageRoute, dictionary } from './stores';
 	import Project from './components/project.svelte';
+	import { flip } from 'svelte/animate';
+	import { receive, send } from './transitions';
 
 	const projectsImageRoute = baseImageRoute + '/projects';
 
-	const projects = [
+	interface Project {
+		href: string;
+		name: string;
+		description: string;
+		src: string;
+		disabled?: boolean;
+	}
+	const projects: Project[] = [
 		{
 			href: `/journee`,
 			name: `Journée (${$dictionary.comingSoon})`,
@@ -112,6 +121,8 @@
 			src: `${projectsImageRoute}/profilecards.webp`,
 		},
 	];
+
+	let filterText: string;
 </script>
 
 <svelte:head>
@@ -142,12 +153,27 @@
 		maxWidth="900px"
 		height="2px"
 		color="var(--content-8)"
-		margin="3rem 0 4rem"
+		margin="3rem 0 2rem"
 	/>
 
+	<div class="search">
+		<ion-icon name="search" />
+		<input type="text" bind:value={filterText} placeholder={$dictionary.lookForProject} />
+	</div>
+
 	<main>
-		{#each projects as project}
-			<Project {...project} />
+		{#each projects.filter((p) => !p.disabled && (!filterText || `${p.name} ${p.description}`
+						.toLowerCase()
+						.includes(filterText.toLowerCase()))) as project (project.name)}
+			<div
+				in:receive|global={{ key: project.name }}
+				out:send|global={{ key: project.name }}
+				animate:flip={{ duration: 400 }}
+			>
+				<Project {...project} />
+			</div>
+		{:else}
+			<p style="font-size: 1.05em;">{$dictionary.noProjectsToShow}</p>
 		{/each}
 	</main>
 </div>
@@ -209,8 +235,53 @@
 		column-gap: 2rem;
 		row-gap: 2rem;
 
-		width: 100%;
 		max-width: 1200px;
+	}
+
+	.search {
+		position: relative;
+
+		width: 400px;
+		max-width: 100%;
+		margin-bottom: 2rem;
+	}
+
+	.search ion-icon {
+		position: absolute;
+		left: 12px;
+		top: 50%;
+		transform: translateY(-50%);
+
+		font-size: 1.3em;
+		color: var(--content);
+	}
+
+	.search input {
+		width: 100%;
+		padding: 0.5em 1em 0.5em 2.5em;
+		border: 2px solid var(--content-5);
+		border-radius: 10px;
+
+		background-color: var(--interactive-2);
+		box-shadow: 2px 2px 5px var(--content-2);
+
+		font-size: 1.1em;
+		color: var(--content);
+	}
+
+	.search input:focus {
+		outline: 2px solid var(--content);
+		box-shadow: 2px 2px 10px var(--content-5);
+	}
+
+	.search input::placeholder {
+		color: var(--content-7);
+	}
+
+	@media screen and (max-width: 1200px) {
+		main {
+			max-width: 100%;
+		}
 	}
 
 	@media screen and (max-width: 800px) {

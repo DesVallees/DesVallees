@@ -28,6 +28,8 @@ export const translator = {
         description_deschat: 'Un bosquejo de un servicio de mensajería donde los usuarios pueden chatear mediante texto, imágenes y archivos. La plataforma permite el envío de mensajes directos utilizando números de teléfono.',
         description_pdfeditor: 'Esta versión carga un Formulario G-28, permitiendo que los administradores asignen valores a los campos y los rellenen automáticamente con datos de los clientes.',
         description_profilecards: 'Un sitio que muestra tarjetas de empleados con detalles sobre días de trabajo, vacaciones y más. También ofrece evaluaciones usando un formulario de Clapp Forms.',
+        noProjectsToShow: 'No hay proyectos para mostrar.',
+        lookForProject: 'Busca un proyecto...',
     },
     en: {
         santiagoOvalles: "Santiago Ovalles",
@@ -58,6 +60,8 @@ export const translator = {
         description_deschat: 'A sketch for a messaging service where users can chat via text, images, and files. The platform allows direct messaging using phone numbers.',
         description_pdfeditor: 'A sketch for a larger project. This version loads a Form G-28, allowing administrators to assign values to fields and auto-fill them with client data.',
         description_profilecards: 'A site displaying employee cards with details on workdays, vacation days, and more. It also enables evaluation using a form powered by Clapp Forms.',
+        noProjectsToShow: 'No projects to show.',
+        lookForProject: 'Look for a project...',
     },
     fr: {
         santiagoOvalles: "Santiago Ovalles",
@@ -88,6 +92,8 @@ export const translator = {
         description_deschat: 'Un croquis pour un service de messagerie où les utilisateurs peuvent discuter par texte, images et fichiers. La plateforme permet la messagerie directe en utilisant des numéros de téléphone.',
         description_pdfeditor: 'Un croquis pour un projet plus vaste. Cette version charge un formulaire G-28, permettant aux administrateurs d\'attribuer des valeurs aux champs et de les remplir automatiquement avec les données des clients.',
         description_profilecards: 'Un site affichant des cartes d\'employés avec des détails sur les jours de travail, les jours de congé, et plus. Il permet également l\'évaluation via un formulaire alimenté par Clapp Forms.',
+        noProjectsToShow: 'Aucun projet à afficher.',
+        lookForProject: 'Cherchez un projet...',
     },
     de: {
         santiagoOvalles: "Santiago Ovalles",
@@ -118,6 +124,8 @@ export const translator = {
         description_deschat: 'Ein Entwurf für einen Messaging-Dienst, bei dem Benutzer über Text, Bilder und Dateien chatten können. Die Plattform ermöglicht direkte Nachrichten über Telefonnummern.',
         description_pdfeditor: 'Ein Entwurf für ein größeres Projekt. Diese Version lädt ein G-28-Formular und ermöglicht Administratoren, Felder mit Werten zu belegen und sie automatisch mit Kundendaten auszufüllen.',
         description_profilecards: 'Eine Website, die Mitarbeiterkarten mit Details zu Arbeitstagen, Urlaubstagen und mehr anzeigt. Sie ermöglicht auch Bewertungen mithilfe eines Formulars von Clapp Forms.',
+        noProjectsToShow: 'Keine Projekte zu zeigen.',
+        lookForProject: 'Suche nach einem Projekt...',
     },
     it: {
         santiagoOvalles: "Santiago Ovalles",
@@ -148,6 +156,8 @@ export const translator = {
         description_deschat: 'Uno schizzo per un servizio di messaggistica in cui gli utenti possono chattare tramite testo, immagini e file. La piattaforma consente la messaggistica diretta utilizzando numeri di telefono.',
         description_pdfeditor: 'Uno schizzo per un progetto più grande. Questa versione carica un modulo G-28, consentendo agli amministratori di assegnare valori ai campi e di compilarli automaticamente con i dati dei clienti.',
         description_profilecards: 'Un sito che mostra schede dei dipendenti con dettagli su giorni lavorativi, giorni di ferie e altro. Consente inoltre la valutazione tramite un modulo gestito da Clapp Forms.',
+        noProjectsToShow: 'Nessun progetto da mostrare.',
+        lookForProject: 'Cerca un progetto...',
     },
     pr: {
         santiagoOvalles: "Santiago Ovalles",
@@ -178,6 +188,8 @@ export const translator = {
         description_deschat: 'Um esboço de um serviço de mensagens onde os usuários podem conversar via texto, imagens e arquivos. A plataforma permite o envio de mensagens diretas usando números de telefone.',
         description_pdfeditor: 'Um esboço para um projeto maior. Esta versão carrega um Formulário G-28, permitindo que administradores atribuam valores aos campos e os preencham automaticamente com os dados do cliente.',
         description_profilecards: 'Um site que exibe cartões de funcionários com detalhes sobre dias de trabalho, dias de férias e muito mais. Ele também permite avaliações usando um formulário fornecido pelo Clapp Forms.',
+        noProjectsToShow: 'Nenhum projeto para mostrar.',
+        lookForProject: 'Procure por um projeto...',
     },
     ru: {
         santiagoOvalles: "Сантьяго Овальеса",
@@ -208,5 +220,7 @@ export const translator = {
         description_deschat: 'Эскиз мессенджера, где пользователи могут общаться через текст, изображения и файлы. Платформа позволяет отправлять сообщения напрямую, используя телефонные номера.',
         description_pdfeditor: 'Эскиз для более крупного проекта. Эта версия загружает форму G-28, позволяя администраторам назначать значения полям и автоматически заполнять их данными клиента.',
         description_profilecards: 'Сайт, на котором отображаются карточки сотрудников с данными о рабочих днях, днях отпуска и многом другом. Также позволяет проводить оценку с использованием формы, управляемой Clapp Forms.',
+        noProjectsToShow: 'Нет проектов для показа.',
+        lookForProject: 'Ищите проект...',
     },
 };
