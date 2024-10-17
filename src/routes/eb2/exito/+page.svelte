@@ -61,6 +61,7 @@
 		.card {
 			text-align: left;
 			padding: 4rem 1rem;
+			border-radius: 0px;
 		}
 	}
 

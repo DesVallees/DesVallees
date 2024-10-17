@@ -3,12 +3,11 @@ import { translator } from './translator';
 import { browser } from "$app/environment";
 
 
-
-
+// Base Routes
+export const baseImageRoute = `/images/desvallees`;
 
 // Language Management
-
-export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de';
+export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de' | 'pr';
 
 export function isLanguage(value: any): value is Language {
     return (
@@ -17,7 +16,8 @@ export function isLanguage(value: any): value is Language {
         value === 'it' ||
         value === 'en' ||
         value === 'ru' ||
-        value === 'de'
+        value === 'de' ||
+        value === 'pr'
     );
 }
 

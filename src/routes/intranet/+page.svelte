@@ -4,11 +4,12 @@
 	import NewPost from './components/newPost.svelte';
 	import { dictionary, type Profile } from './stores';
 	import type { PageData } from './$types';
+	import { posts, profiles } from './futureDB';
 
-	export let data: PageData;
+	// export let data: PageData;
 
-	$: ({ posts } = data);
-	$: ({ profiles } = data);
+	// $: ({ posts } = data);
+	// $: ({ profiles } = data);
 
 	function findProfile(id: number): Profile | undefined {
 		return profiles.find((profile: Profile) => profile.id === id);

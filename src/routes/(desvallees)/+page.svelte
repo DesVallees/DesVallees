@@ -1,7 +1,117 @@
 <script lang="ts">
 	import './app.css';
 	import Separator from '../intranet/components/separator.svelte';
-	import { dictionary } from './stores';
+	import { baseImageRoute, dictionary } from './stores';
+	import Project from './components/project.svelte';
+
+	const projectsImageRoute = baseImageRoute + '/projects';
+
+	const projects = [
+		{
+			href: `/journee`,
+			name: `Journée (${$dictionary.comingSoon})`,
+			description: $dictionary.description_journee,
+			src: `/images/journee/gufoLanding.webp`,
+		},
+		{
+			href: `/eb2`,
+			name: `EB2`,
+			description: $dictionary.description_eb2,
+			src: `${projectsImageRoute}/eb2.webp`,
+		},
+		{
+			href: `/radacycling`,
+			name: `RADA Cycling`,
+			description: $dictionary.description_rada,
+			src: `${projectsImageRoute}/rada.webp`,
+		},
+		{
+			href: `/subito`,
+			name: `Súbito`,
+			description: $dictionary.description_subito,
+			src: `${projectsImageRoute}/subito.webp`,
+		},
+		{
+			href: `https://www.ccsguitars.com/`,
+			name: `CCS Guitars`,
+			description: $dictionary.description_ccs,
+			src: `${projectsImageRoute}/ccsguitars.webp`,
+		},
+		{
+			href: `/lawyer-site`,
+			name: `LegalCollab`,
+			description: $dictionary.description_legalcollab,
+			src: `${projectsImageRoute}/legalcollab.webp`,
+		},
+		{
+			href: `/intranet`,
+			name: `${$dictionary.intranet}`,
+			description: $dictionary.description_intranet,
+			src: `${projectsImageRoute}/intranet.webp`,
+		},
+		{
+			href: `/destype`,
+			name: `DesType`,
+			description: $dictionary.description_destype,
+			src: `${projectsImageRoute}/destype.webp`,
+		},
+		{
+			href: `/threlte`,
+			name: `Threlte`,
+			description: $dictionary.description_threlte,
+			src: `${projectsImageRoute}/threlte.webp`,
+		},
+		{
+			href: `https://clappforms.web.app/`,
+			name: `${$dictionary.clappForms}`,
+			description: $dictionary.description_clappforms,
+			src: `${projectsImageRoute}/clappforms.webp`,
+		},
+		{
+			href: `http://app.clapplawyers.com/`,
+			name: `${$dictionary.backoffice}`,
+			description: '...',
+			src: `${projectsImageRoute}/clappbackoffice.webp`,
+			disabled: true,
+		},
+		{
+			href: `http://marshallscare.com/`,
+			name: `Marshall's Care`,
+			description: '...',
+			src: `${projectsImageRoute}/eb2.webp`,
+			disabled: true,
+		},
+		{
+			href: `https://ovaliza.com/`,
+			name: `Ovaliza`,
+			description: $dictionary.description_ovaliza,
+			src: `${projectsImageRoute}/ovaliza.webp`,
+		},
+		{
+			href: `https://canto-legal.web.app/`,
+			name: `DesCalendar`,
+			description: $dictionary.description_descalendar,
+			src: `${projectsImageRoute}/descalendar.webp`,
+		},
+		{
+			href: `https://deschat-35f5b.web.app/`,
+			name: `DesChat (${$dictionary.sketch})`,
+			description: $dictionary.description_deschat,
+			src: `${projectsImageRoute}/deschat.webp`,
+		},
+		{
+			href: `https://clapppdfs.web.app/`,
+			name: `${$dictionary.pdfEditor} (${$dictionary.sketch})`,
+			description: $dictionary.description_pdfeditor,
+			src: `${projectsImageRoute}/pdfeditor.webp`,
+		},
+		{
+			href: `https://deschat-35f5b.web.app/sketch`,
+			name: `${$dictionary.profileCards} (${$dictionary.sketch})`,
+			description: $dictionary.description_profilecards,
+			src: `${projectsImageRoute}/profilecards.webp`,
+		},
+	];
 </script>
 
 <svelte:head>
@@ -15,104 +125,109 @@
 	<meta name="keywords" content="Ovalles, Santiago, Desvallees, Portfolio" />
 </svelte:head>
 
-<div>
-	<h1>{$dictionary.santiagoOvallesProjects}</h1>
-
-	<a data-sveltekit-reload href="/journee">Journée ({$dictionary.comingSoon})</a>
+<div class="desvallees">
+	<header>
+		<img class="pp" src="{baseImageRoute}/santiago.webp" alt={$dictionary.photoOfSantiago} />
+		<div class="intro">
+			<h1>{$dictionary.santiagoOvalles}</h1>
+			<p class="introParagraph">
+				<span>{$dictionary.helloImSantiago}</span>
+				<a class="email" href="mailto:santiago@desvallees.me">santiago@desvallees.me</a>
+			</p>
+		</div>
+	</header>
 
 	<Separator
-		width="90%"
-		maxWidth="500px"
+		width="100%"
+		maxWidth="900px"
 		height="2px"
 		color="var(--content-8)"
-		margin="1.5rem 0"
+		margin="3rem 0 4rem"
 	/>
 
-	<a data-sveltekit-reload href="/eb2">EB2 (2024)</a>
-	<a data-sveltekit-reload href="/radacycling">RADA Cycling (2024)</a>
-	<a data-sveltekit-reload href="/subito">Súbito (2024)</a>
-
-	<Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
-
-	<a target="_blank" href="https://www.ccsguitars.com/">CCS Guitars (2023)</a>
-	<a data-sveltekit-reload href="/lawyer-site">LegalCollab (2023)</a>
-	<a data-sveltekit-reload href="/intranet">{$dictionary.intranet} (2023)</a>
-	<a data-sveltekit-reload href="/destype">DesType (2023)</a>
-	<a data-sveltekit-reload href="/threlte">Threlte (2023)</a>
-
-	<Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
-
-	<a target="_blank" href="https://clappforms.web.app/">{$dictionary.clappForms} (2022)</a>
-	<a target="_blank" href="http://app.clapplawyers.com/">{$dictionary.backoffice} (2022)</a>
-
-	<Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
-
-	<!-- svelte-ignore a11y-missing-attribute -->
-	<a aria-disabled="true">Marshall's Care (2021)</a>
-	<!-- target="_blank" href="http://marshallscare.com/" -->
-	<a target="_blank" href="https://ovaliza.com/">Ovaliza (2021)</a>
-	<a target="_blank" href="https://canto-legal.web.app/">DesCalendar (2021)</a>
-
-	<Separator width="90%" maxWidth="500px" height="2px" color="var(--content-8)" margin="3rem 0" />
-
-	<a target="_blank" href="https://deschat-35f5b.web.app/">DesChat ({$dictionary.sketch})</a>
-	<a target="_blank" href="https://clapppdfs.web.app/"
-		>{$dictionary.pdfEditor} ({$dictionary.sketch})</a
-	>
-	<a target="_blank" href="https://tictactoe-b2edd.web.app/"
-		>{$dictionary.ticTacToe} ({$dictionary.sketch})</a
-	>
-	<a target="_blank" href="https://deschat-35f5b.web.app/sketch"
-		>{$dictionary.profileCards} ({$dictionary.sketch})</a
-	>
+	<main>
+		{#each projects as project}
+			<Project {...project} />
+		{/each}
+	</main>
 </div>
 
 <style>
-	div {
-		display: grid;
-		justify-items: center;
-		gap: 1.25rem;
+	.desvallees {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-		min-height: 100%;
-		max-width: 70ch;
 		margin: auto;
 		padding: 5rem 2rem;
 	}
 
+	header {
+		display: flex;
+		column-gap: 2em;
+		row-gap: 2em;
+
+		justify-content: center;
+		align-items: start;
+
+		max-width: 1000px;
+		height: fit-content;
+	}
+
+	.pp {
+		height: 10em;
+		border-radius: 1em;
+		box-shadow: 5px 5px 10px #ffffff50;
+	}
+
+	.intro {
+		display: grid;
+		gap: 0.65em;
+
+		font-size: 1.2em;
+		max-width: 50ch;
+	}
+
 	h1 {
-		font-size: 1.75rem;
-		margin-bottom: 2.5rem;
-		text-decoration: underline;
-		text-underline-offset: 4px;
-		text-align: center;
+		font-size: 2.5em;
 	}
 
-	a {
-		color: inherit;
-		text-decoration: none;
-
-		width: fit-content;
-		padding: 0.325em 0.75em;
-
-		border-radius: 10px;
-
-		font-size: 1.25rem;
-		font-weight: 700;
-		text-align: center;
-
-		transition: 0.2s all;
-		background-color: transparent;
+	.introParagraph {
+		font-size: 1em;
+		text-wrap: balance;
+		line-height: 1.4;
 	}
 
-	a:hover,
-	a:focus-visible {
-		background-color: var(--content-1);
+	.email {
+		color: var(--content);
 	}
 
-	a[aria-disabled='true'] {
-		color: var(--content-6);
-		text-decoration: line-through;
-		background-color: transparent !important;
-		cursor: default;
+	main {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(275px, 100%), 1fr));
+		justify-items: center;
+		column-gap: 2rem;
+		row-gap: 2rem;
+
+		width: 100%;
+		max-width: 1200px;
+	}
+
+	@media screen and (max-width: 800px) {
+		header {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+	}
+
+	@media screen and (max-width: 500px) {
+		.desvallees {
+			padding: 3rem 2rem;
+		}
+
+		header {
+			font-size: 0.9rem;
+		}
 	}
 </style>
