@@ -138,7 +138,7 @@
 
 <div class="desvallees">
 	<header>
-		<img class="pp" src="{baseImageRoute}/santiago.webp" alt={$dictionary.photoOfSantiago} />
+		<img class="pp" src="{baseImageRoute}/santiago.png" alt={$dictionary.photoOfSantiago} />
 		<div class="intro">
 			<h1>{$dictionary.santiagoOvalles}</h1>
 			<p class="introParagraph">
@@ -158,7 +158,12 @@
 
 	<div class="search">
 		<ion-icon name="search" />
-		<input type="text" bind:value={filterText} placeholder={$dictionary.lookForProject} />
+		<input
+			type="text"
+			autocomplete="off"
+			bind:value={filterText}
+			placeholder={$dictionary.lookForProject}
+		/>
 	</div>
 
 	<main>
