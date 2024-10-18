@@ -1,21 +1,18 @@
 <script lang="ts">
 	import './app.css';
-	import Separator from '../intranet/components/separator.svelte';
+
 	import { baseImageRoute, dictionary } from './stores';
-	import Project from './components/project.svelte';
 	import { flip } from 'svelte/animate';
 	import { receive, send } from './transitions';
 
+	import Project from './components/project.svelte';
+	import LanguagePicker from './components/languagePicker.svelte';
+	import ThemeSwitcher from './components/themeSwitcher.svelte';
+	import Separator from './components/separator.svelte';
+
 	const projectsImageRoute = baseImageRoute + '/projects';
 
-	interface Project {
-		href: string;
-		name: string;
-		description: string;
-		src: string;
-		disabled?: boolean;
-	}
-	const projects: Project[] = [
+	$: projects = [
 		{
 			href: `/journee`,
 			name: `Journée (${$dictionary.comingSoon})`,
@@ -148,12 +145,17 @@
 		</div>
 	</header>
 
+	<div class="controls">
+		<LanguagePicker />
+		<ThemeSwitcher />
+	</div>
+
 	<Separator
 		width="100%"
 		maxWidth="900px"
 		height="2px"
 		color="var(--content-8)"
-		margin="3rem 0 2rem"
+		margin="1rem 0 2rem"
 	/>
 
 	<div class="search">
@@ -208,7 +210,7 @@
 	.pp {
 		height: 10em;
 		border-radius: 1em;
-		box-shadow: 5px 5px 10px #ffffff50;
+		box-shadow: 5px 5px 10px var(--content-2);
 	}
 
 	.intro {
@@ -225,12 +227,26 @@
 
 	.introParagraph {
 		font-size: 1em;
-		text-wrap: balance;
+		text-wrap: pretty;
 		line-height: 1.4;
 	}
 
 	.email {
 		color: var(--content);
+	}
+
+	.controls {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 5rem;
+		row-gap: 1rem;
+		align-items: center;
+		justify-content: center;
+
+		margin-top: 2rem;
+		margin-bottom: 0.5rem;
+
+		font-size: 1.1rem;
 	}
 
 	main {
@@ -253,7 +269,7 @@
 
 	.search ion-icon {
 		position: absolute;
-		left: 12px;
+		left: 0.75em;
 		top: 50%;
 		transform: translateY(-50%);
 
@@ -265,13 +281,17 @@
 		width: 100%;
 		padding: 0.5em 1em 0.5em 2.5em;
 		border: 2px solid var(--content-5);
-		border-radius: 10px;
+		border-radius: 20px;
 
 		background-color: var(--interactive-2);
-		box-shadow: 2px 2px 5px var(--content-2);
+		box-shadow: 2px 2px 10px var(--content-2);
 
 		font-size: 1.1em;
 		color: var(--content);
+	}
+
+	.search input:hover {
+		box-shadow: 2px 2px 10px var(--content-5);
 	}
 
 	.search input:focus {
@@ -295,6 +315,15 @@
 			align-items: center;
 			text-align: center;
 		}
+
+		.introParagraph {
+			text-wrap: balance;
+		}
+
+		.controls {
+			margin-top: 2.5rem;
+			margin-bottom: 1rem;
+		}
 	}
 
 	@media screen and (max-width: 500px) {
@@ -305,5 +334,17 @@
 		header {
 			font-size: 0.9rem;
 		}
+
+		.controls {
+			font-size: 1rem;
+		}
+
+		.search {
+			margin-top: 1rem;
+		}
+	}
+
+	:global([data-theme='light']) .search input {
+		background-color: var(--interactive-1);
 	}
 </style>

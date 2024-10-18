@@ -239,8 +239,8 @@
 
 	.download:focus-visible,
 	.download:hover {
-		background-color: #f2793175;
-		box-shadow: 2px 2px 5ox #00000033;
+		border-color: #f27931;
+		box-shadow: 0 0 5px var(--content-1);
 	}
 
 	/* Body */

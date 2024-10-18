@@ -14,11 +14,6 @@
 }
 
 :root {
-    --mainRGB: 24, 26, 32;
-    --contentRGB: 245, 245, 255;
-    --interactiveRGB: 65, 10, 216;
-    --complementaryRGB: 180, 217, 9;
-
     --main: rgb(var(--mainRGB));
     --main-9: rgba(var(--mainRGB), .9);
     --main-8: rgba(var(--mainRGB), .8);
@@ -61,6 +56,20 @@
     --complementary-1: rgba(var(--complementaryRGB), .1);
 }
 
+[data-theme="dark"] {
+    --mainRGB: 24, 26, 32;
+    --contentRGB: 245, 245, 255;
+    --interactiveRGB: 65, 10, 216;
+    --complementaryRGB: 180, 217, 9;
+}
+
+[data-theme="light"] {
+    --mainRGB: 240, 245, 250;
+    --contentRGB: 6, 53, 122;
+    --interactiveRGB: 6, 66, 216;
+    --complementaryRGB: 180, 217, 9;
+}
+
 html,
 body,
 #app {
@@ -72,4 +81,42 @@ body {
     color: var(--content);
     background: var(--main);
     position: relative;
+}
+
+@media (orientation: portrait) {
+    button {
+        cursor: default;
+    }
+}
+
+.hide {
+    display: none !important;
+}
+
+button {
+    user-select: none;
+    cursor: pointer;
+}
+
+ion-icon {
+    pointer-events: none;
+    font-size: 1.5em;
+    color: inherit;
+    visibility: visible;
+}
+
+img {
+    user-select: none;
+}
+
+button,
+input,
+textarea,
+a {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
 }

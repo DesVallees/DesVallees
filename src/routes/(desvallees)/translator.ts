@@ -2,6 +2,9 @@ export const translator = {
     es: {
         santiagoOvalles: "Santiago Ovalles",
         santiagoOvallesProjects: "Proyectos de Santiago Ovalles",
+        language: 'Idioma',
+        theme: 'Tema',
+        darkMode: 'Modo oscuro',
         intranet: "Intranet de Canto Legal",
         backoffice: "Clapp Back Office - Características Menores",
         clappForms: "Formularios Clapp",
@@ -34,6 +37,9 @@ export const translator = {
     en: {
         santiagoOvalles: "Santiago Ovalles",
         santiagoOvallesProjects: "Santiago Ovalles' Projects",
+        language: 'Language',
+        theme: 'Theme',
+        darkMode: 'Dark Mode',
         intranet: "Canto Legal Intranet",
         backoffice: "Clapp Back Office - Minor features",
         clappForms: "Clapp Forms",
@@ -66,6 +72,9 @@ export const translator = {
     fr: {
         santiagoOvalles: "Santiago Ovalles",
         santiagoOvallesProjects: "Projets de Santiago Ovalles",
+        language: 'Langue',
+        theme: 'Thème',
+        darkMode: 'Mode sombre',
         intranet: "Intranet de Canto Legal",
         backoffice: "Clapp Back Office - Fonctionnalités Mineures",
         clappForms: "Formulaires Clapp",
@@ -98,6 +107,9 @@ export const translator = {
     de: {
         santiagoOvalles: "Santiago Ovalles",
         santiagoOvallesProjects: "Santiago Ovalles Projekte",
+        language: 'Sprache',
+        theme: 'Thema',
+        darkMode: 'Dunkelmodus',
         intranet: "Canto Legal Intranet",
         backoffice: "Clapp Back Office - Kleinere Funktionen",
         clappForms: "Clapp Forms",
@@ -130,6 +142,9 @@ export const translator = {
     it: {
         santiagoOvalles: "Santiago Ovalles",
         santiagoOvallesProjects: "Progetti di Santiago Ovalles",
+        language: 'Lingua',
+        theme: 'Tema',
+        darkMode: 'Modalità scura',
         intranet: "Intranet di Canto Legal",
         backoffice: "Clapp Back Office - Funzionalità Minori",
         clappForms: "Moduli Clapp",
@@ -159,9 +174,12 @@ export const translator = {
         noProjectsToShow: 'Nessun progetto da mostrare.',
         lookForProject: 'Cerca un progetto...',
     },
-    pr: {
+    pt: {
         santiagoOvalles: "Santiago Ovalles",
         santiagoOvallesProjects: "Projetos de Santiago Ovalles",
+        language: 'Idioma',
+        theme: 'Tema',
+        darkMode: 'Modo escuro',
         intranet: "Intranet Canto Legal",
         backoffice: "Clapp Back Office - Funcionalidades Menores",
         clappForms: "Formulários Clapp",
@@ -194,6 +212,9 @@ export const translator = {
     ru: {
         santiagoOvalles: "Сантьяго Овальеса",
         santiagoOvallesProjects: "Проекты Сантьяго Овальеса",
+        language: 'Язык',
+        theme: 'Тема',
+        darkMode: 'Темный режим',
         intranet: "Внутренняя сеть Canto Legal",
         backoffice: "Clapp Back Office - Мелкие функции",
         clappForms: "Формы Clapp",

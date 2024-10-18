@@ -6,8 +6,9 @@ import { browser } from "$app/environment";
 // Base Routes
 export const baseImageRoute = `/images/desvallees`;
 
+
 // Language Management
-export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de' | 'pr';
+export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de' | 'pt';
 
 export function isLanguage(value: any): value is Language {
     return (
@@ -17,7 +18,7 @@ export function isLanguage(value: any): value is Language {
         value === 'en' ||
         value === 'ru' ||
         value === 'de' ||
-        value === 'pr'
+        value === 'pt'
     );
 }
 
@@ -67,3 +68,46 @@ if (browser) {
 }
 
 export const dictionary = derived(language, (language) => translator[language]);
+
+
+// Theme Management
+export type Theme = 'dark' | 'light';
+
+function isTheme(value: any) {
+    return (
+        value === 'dark' ||
+        value === 'light'
+    );
+}
+
+let storedTheme: Theme | undefined;
+if (browser) {
+    const themeCookie = getCookie('theme')
+    if (isTheme(themeCookie)) {
+        storedTheme = themeCookie as Theme;
+    }
+    else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        storedTheme = 'dark';
+    }
+    else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        storedTheme = 'light';
+    }
+}
+
+export const theme: Writable<Theme> = writable(storedTheme || 'dark');
+
+if (browser) {
+    window.matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', ({ matches }) => {
+            if (matches) {
+                theme.set('dark')
+            } else {
+                theme.set('light')
+            }
+        })
+
+    theme.subscribe((value) => {
+        document.documentElement.setAttribute("data-theme", value);
+        setCookie('theme', value, 1000);
+    })
+}

@@ -31,6 +31,7 @@
 		justify-content: space-between;
 
 		background-color: var(--interactive-1);
+		border: 1px solid var(--content-3);
 
 		color: var(--content);
 		text-align: center;
@@ -41,7 +42,7 @@
 		height: 100%;
 
 		padding: 1.25rem;
-		border-radius: 1rem;
+		border-radius: 20px;
 		box-shadow: 0 2px 15px var(--content-2);
 		transition: transform 0.2s, box-shadow 0.2s;
 	}
