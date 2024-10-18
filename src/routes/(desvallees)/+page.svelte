@@ -1,7 +1,7 @@
 <script lang="ts">
 	import './app.css';
 
-	import { baseImageRoute, dictionary } from './stores';
+	import { baseImageRoute, dictionary, filterText } from './stores';
 	import { flip } from 'svelte/animate';
 	import { receive, send } from './transitions';
 
@@ -119,7 +119,6 @@
 		},
 	];
 
-	let filterText: string;
 	let filterInput: HTMLInputElement;
 
 	function isPrintableKey(key: string) {
@@ -130,7 +129,7 @@
 		if (document.activeElement !== filterInput && isPrintableKey(event.key)) {
 			filterInput.focus();
 			if (event.key === 'Backspace') {
-				filterText = filterText.slice(0, -1);
+				$filterText = $filterText.slice(0, -1);
 			}
 		} else if (document.activeElement === filterInput && event.key === 'Enter') {
 			const firstProjectHREF = projects.filter(
@@ -139,7 +138,7 @@
 					(!filterText ||
 						`${p.name} ${p.description}`
 							.toLowerCase()
-							.includes(filterText.toLowerCase())),
+							.includes($filterText.toLowerCase())),
 			)[0].href;
 
 			window.location.href = firstProjectHREF;
@@ -190,7 +189,7 @@
 		<input
 			type="text"
 			autocomplete="off"
-			bind:value={filterText}
+			bind:value={$filterText}
 			bind:this={filterInput}
 			placeholder={$dictionary.lookForProject}
 		/>
@@ -199,7 +198,7 @@
 	<main>
 		{#each projects.filter((p) => !p.disabled && (!filterText || `${p.name} ${p.description}`
 						.toLowerCase()
-						.includes(filterText.toLowerCase()))) as project (project.name)}
+						.includes($filterText.toLowerCase()))) as project (project.name)}
 			<div
 				in:receive|global={{ key: project.name }}
 				out:send|global={{ key: project.name }}
