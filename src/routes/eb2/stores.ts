@@ -43,7 +43,7 @@ function getCookie(name: string): string | null {
 }
 
 function createPersistentStore(key: string, defaultValue: any) {
-    let storedValue: string[] | null = null;
+    let storedValue: string | null = null;
     if (browser) {
         let json = localStorage.getItem(key)
         if (json) {

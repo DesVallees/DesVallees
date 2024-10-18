@@ -147,7 +147,13 @@
 	}
 
 	onMount(() => {
-		filterInput.value = $filterText;
+		let storedValue: string | null = null;
+		let json = sessionStorage.getItem('projectFilterText');
+		if (json) {
+			storedValue = JSON.parse(json);
+		}
+
+		$filterText = storedValue || '';
 	});
 </script>
 

@@ -6,7 +6,7 @@ import { browser } from "$app/environment";
 export let filterText: Writable<string> = createSessionStore('projectFilterText', '')
 
 function createSessionStore(key: string, defaultValue: any) {
-    let storedValue: string[] | null = null;
+    let storedValue: string | null = null;
     if (browser) {
         let json = sessionStorage.getItem(key)
         if (json) {
