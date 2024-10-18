@@ -120,7 +120,34 @@
 	];
 
 	let filterText: string;
+	let filterInput: HTMLInputElement;
+
+	function isPrintableKey(key: string) {
+		return key === 'Backspace' || (key.length === 1 && key.match(/[\w\s]/)); // Backspace and alphanumeric characters
+	}
+
+	function handleKey(event: KeyboardEvent) {
+		if (document.activeElement !== filterInput && isPrintableKey(event.key)) {
+			filterInput.focus();
+			if (event.key === 'Backspace') {
+				filterText = filterText.slice(0, -1);
+			}
+		} else if (document.activeElement === filterInput && event.key === 'Enter') {
+			const firstProjectHREF = projects.filter(
+				(p) =>
+					!p.disabled &&
+					(!filterText ||
+						`${p.name} ${p.description}`
+							.toLowerCase()
+							.includes(filterText.toLowerCase())),
+			)[0].href;
+
+			window.location.href = firstProjectHREF;
+		}
+	}
 </script>
+
+<svelte:window on:keypress={handleKey} />
 
 <svelte:head>
 	<title>DesVallees - Santiago Ovalles' Portfolio</title>
@@ -164,6 +191,7 @@
 			type="text"
 			autocomplete="off"
 			bind:value={filterText}
+			bind:this={filterInput}
 			placeholder={$dictionary.lookForProject}
 		/>
 	</div>
