@@ -4,7 +4,6 @@
 	import { baseImageRoute, dictionary, filterText } from './stores';
 	import { flip } from 'svelte/animate';
 	import { receive, send } from './transitions';
-	import { onMount } from 'svelte';
 
 	import Project from './components/project.svelte';
 	import LanguagePicker from './components/languagePicker.svelte';
@@ -145,12 +144,6 @@
 			window.location.href = firstProjectHREF;
 		}
 	}
-
-	onMount(() => {
-		let storedValue: string | null = sessionStorage.getItem('projectFilterText');
-
-		$filterText = storedValue || '';
-	});
 </script>
 
 <svelte:window on:keypress={handleKey} />

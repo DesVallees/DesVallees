@@ -8,7 +8,10 @@ export let filterText: Writable<string> = createSessionStore('projectFilterText'
 function createSessionStore(key: string, defaultValue: any) {
     let storedValue: string | null = null;
     if (browser) {
-        storedValue = sessionStorage.getItem(key)
+        let json = sessionStorage.getItem(key)
+        if (json) {
+            storedValue = JSON.parse(json);
+        }
     }
 
     const store = writable(storedValue || defaultValue);
