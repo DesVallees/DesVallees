@@ -69,6 +69,9 @@
 			padding: 30px;
 			padding-bottom: 50px;
 			font-size: 1rem;
+
+			background-color: #1e202b;
+			background-image: none !important;
 		}
 	}
 

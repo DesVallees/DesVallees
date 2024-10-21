@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 	import { baseImageRoute, baseRoute, email, fullName, phone } from '../stores';
 	import toast from 'svelte-french-toast';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
+	import Separator from '../components/separator.svelte';
 
 	let fileInput: HTMLInputElement;
 	let fileName: string;
@@ -57,6 +58,8 @@
 
 		isSubmitting = false;
 	}
+
+	let noCurriculum: boolean = false;
 </script>
 
 <div in:fade class="curriculum" style="background-image: url('{baseImageRoute}/backFlag.jpg');">
@@ -77,7 +80,11 @@
 				method="post"
 				enctype="multipart/form-data"
 				on:submit={(event) => {
-					if ((!fileInput || !fileInput.files?.length) && !linkedinURL.trim()) {
+					if (
+						(!fileInput || !fileInput.files?.length) &&
+						!linkedinURL.trim() &&
+						!noCurriculum
+					) {
 						event.preventDefault();
 						toast.error('Por favor ingresa un archivo CV o una URL de Linkedin.', {
 							style: 'font-size: 1.2em;',
@@ -106,29 +113,7 @@
 						<input type="tel" bind:value={$phone} placeholder="Teléfono" name="phone" />
 					</div>
 
-					<label for="cv">CV:</label>
-					<label
-						bind:this={cvLabel}
-						style="color: {fileName ? 'white' : ''};"
-						id="cv-label"
-						for="cv"
-					>
-						<span> Haz clic aquí para seleccionar un archivo</span>
-					</label>
-					{#if fileName}
-						<button on:click={deleteFile} class="deleteFile"
-							><ion-icon name="close-outline" /></button
-						>
-					{/if}
-					<input
-						bind:this={fileInput}
-						type="file"
-						id="cv"
-						accept=".doc,.docx,.pdf,.jpg,.png"
-						style="display: none;"
-						name="cv"
-					/>
-
+					<!-- Linkedin -->
 					<label for="linkedin">URL de Linkedin:</label>
 					<input
 						type="url"
@@ -137,7 +122,143 @@
 						placeholder="Enlace de perfil de Linkedin"
 						bind:value={linkedinURL}
 					/>
+
+					<!-- CV -->
+					{#if !noCurriculum}
+						<div out:slide>
+							<label for="cv">CV:</label>
+							<label
+								bind:this={cvLabel}
+								style="color: {fileName ? 'white' : ''};"
+								id="cv-label"
+								for="cv"
+							>
+								<span> Haz clic aquí para seleccionar un archivo</span>
+							</label>
+							{#if fileName}
+								<button on:click={deleteFile} class="deleteFile"
+									><ion-icon name="close-outline" /></button
+								>
+							{/if}
+							<input
+								bind:this={fileInput}
+								type="file"
+								id="cv"
+								accept=".doc,.docx,.pdf,.jpg,.png"
+								style="display: none;"
+								name="cv"
+							/>
+						</div>
+					{/if}
+
+					<!-- Checkbox - No CV -->
+					<div class="checkbox-container">
+						<label for="noCV">¿No tienes un currículum?</label>
+						<input type="checkbox" name="noCV" id="noCV" bind:checked={noCurriculum} />
+					</div>
+
+					{#if noCurriculum}
+						<div
+							class="noCurriculum"
+							transition:slide
+							style="padding-top: 1rem; margin-bottom: -1rem;"
+						>
+							<Separator width="100%" margin="0 0 3rem" color="#fff" height="1px" />
+
+							<!-- Nivel Académico -->
+							<label for="academicLevel">Nivel Académico:</label>
+							<select id="academicLevel" name="academicLevel" required>
+								<option value="" disabled selected
+									>Selecciona tu nivel académico</option
+								>
+								<option>Doctorado (PhD)</option>
+								<option>Maestría</option>
+								<option>Postgrado / Especialización</option>
+								<option>Licenciatura (Grado Universitario de 4 años)</option>
+								<option>Técnico Superior Universitario (TSU)</option>
+								<option>Bachillerato / Preparatoria</option>
+								<option>Carrera Universitaria Incompleta</option>
+							</select>
+
+							<!-- Años de Experiencia Profesional -->
+							<label for="yearsOfExperience">Años de Experiencia Profesional:</label>
+							<select id="yearsOfExperience" name="yearsOfExperience" required>
+								<option value="" disabled selected
+									>Selecciona tus años de experiencia</option
+								>
+								<option>Menos de 5 años</option>
+								<option>5-10 años</option>
+								<option>11-15 años</option>
+								<option>16-20 años</option>
+								<option>Más de 20 años</option>
+							</select>
+
+							<!-- Área o Campo Profesional Actual -->
+							<label for="currentField">Área o Campo Profesional Actual:</label>
+							<select id="currentField" name="currentField" required>
+								<option value="" disabled selected
+									>Selecciona tu área profesional</option
+								>
+								<option
+									>Ciencias de la Salud (Médico, Enfermería, Biotecnología)</option
+								>
+								<option
+									>Ingeniería y Tecnología (Ingeniería Civil, Eléctrica,
+									Informática)</option
+								>
+								<option>Ciencias Exactas (Matemáticas, Física, Química)</option>
+								<option
+									>Negocios y Finanzas (Administración, Contaduría, Economía)</option
+								>
+								<option>Derecho y Ciencias Políticas</option>
+								<option>Educación y Formación</option>
+								<option>Agricultura y Recursos Naturales</option>
+								<option>Tecnología de la Información (TI) y Ciberseguridad</option>
+								<option>Logística y Cadena de Suministro</option>
+							</select>
+
+							<!-- Reconocimiento o Premio Profesional -->
+							<label for="awards"
+								>¿Has recibido algún reconocimiento o premio profesional en tu
+								campo?</label
+							>
+							<select id="awards" name="awards" required>
+								<option value="" disabled selected>Selecciona una opción</option>
+								<option>Sí, a nivel nacional o internacional</option>
+								<option>Sí, a nivel local o dentro de la empresa</option>
+								<option
+									>No, pero he tenido logros significativos en mi trabajo</option
+								>
+								<option>No</option>
+							</select>
+
+							<!-- Proyecto o Plan que beneficiaría a EE.UU. -->
+							<label for="project"
+								>¿Tienes un proyecto o plan de trabajo que beneficiaría a EE.UU.?</label
+							>
+							<select id="project" name="project" required>
+								<option value="" disabled selected>Selecciona una opción</option>
+								<option
+									>Sí, tengo un proyecto definido que beneficiará a EE.UU.</option
+								>
+								<option
+									>Estoy trabajando en un proyecto que podría ser beneficioso para
+									EE.UU.</option
+								>
+								<option
+									>No tengo un proyecto concreto, pero mis habilidades y
+									experiencia son valiosas para EE.UU.</option
+								>
+								<option
+									>No tengo un proyecto específico, quiero que me ayuden a
+									crearlo.</option
+								>
+							</select>
+						</div>
+					{/if}
 				</div>
+
+				<Separator width="100%" margin="3rem 0" color="#fff" height="1px" />
 
 				<button type="submit" class="submitButton" disabled={isSubmitting}>
 					{#if isSubmitting}
@@ -232,7 +353,8 @@
 	}
 
 	#cv-label,
-	input[type='url'] {
+	input[type='url'],
+	select {
 		width: 100%;
 		padding: 0.75em;
 		background-color: #122b4a;
@@ -241,6 +363,10 @@
 		border-radius: 6px;
 		margin-bottom: 0.75em;
 		font-size: 0.9em;
+	}
+
+	select {
+		margin-bottom: 1.2em;
 	}
 
 	input[type='url']::placeholder {
@@ -256,10 +382,45 @@
 
 	input[type='url']:hover,
 	#cv-label:hover,
-	#cv-label:focus-visible {
+	#cv-label:focus-visible,
+	select:hover,
+	select:focus-visible {
 		background-color: #103058;
 	}
 
+	/* Checkbox */
+	.checkbox-container {
+		display: flex;
+		align-items: center;
+		margin-bottom: 1.25em;
+	}
+
+	.checkbox-container label {
+		font-size: 0.85em;
+		color: #fff;
+		margin-right: 10px;
+	}
+
+	.checkbox-container input[type='checkbox'] {
+		width: 18px;
+		height: 18px;
+		border: 2px solid #fff;
+		border-radius: 4px;
+		background-color: #122b4a;
+		cursor: pointer;
+		transform: translateY(-10%);
+	}
+
+	.checkbox-container input[type='checkbox']:hover {
+		background-color: #103058;
+	}
+
+	.checkbox-container input[type='checkbox']:checked {
+		background-color: #ff6d00;
+		border-color: #ff6d00;
+	}
+
+	/* Delete file button */
 	.deleteFile {
 		display: flex;
 		justify-content: center;

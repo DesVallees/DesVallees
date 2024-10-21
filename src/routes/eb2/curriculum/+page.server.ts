@@ -27,7 +27,20 @@ export const actions = {
             const linkedin = formData.get("linkedin");
             const cvFile = formData.get("cv") as File | null;
 
-            if (!linkedin && (!cvFile || !cvFile?.name)) {
+            // Obtener el valor del checkbox
+            const noCV = formData.get("noCV") === "on";
+
+            // Solo obtener los valores de los campos select si el checkbox está marcado
+            let academicLevel = null, yearsOfExperience = null, currentField = null, awards = null, project = null;
+            if (noCV) {
+                academicLevel = formData.get("academicLevel");
+                yearsOfExperience = formData.get("yearsOfExperience");
+                currentField = formData.get("currentField");
+                awards = formData.get("awards");
+                project = formData.get("project");
+            }
+
+            if (!linkedin && (!cvFile || !cvFile?.name) && !noCV) {
                 return {
                     error: "There was an error sending the email.",
                 };
@@ -41,7 +54,7 @@ export const actions = {
                 cvAttachment = Buffer.from(arrayBuffer);
             }
 
-            // Build the HTML content to display the form data
+            // Construir el contenido del email
             let html = `
                 <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
                     <h1 style="background-color: #f27931; font-size: 1.5rem; color: white; padding: 10px; border-radius: 5px;">
@@ -58,19 +71,26 @@ export const actions = {
                     </p>
                     <p style="font-size: 16px; margin: 10px 0;">
                         <strong>LinkedIn:</strong> 
-                        ${linkedin
-                    ? `<a href="${linkedin}" target="_blank">
-                                    ${linkedin}
-                                </a>`
-                    : "No proporcionado"
-                }
+                        ${linkedin ? `<a href="${linkedin}" target="_blank">${linkedin}</a>` : "No proporcionado"}
                     </p>
                     ${cvFile?.name
                     ? `<p style="font-size: 16px; margin: 10px 0;"><strong>CV adjunto:</strong> ${cvFile?.name}</p>`
                     : "<p style='font-size: 16px; margin: 10px 0;'><strong>CV:</strong> No se adjuntó un archivo</p>"
                 }
-                </div>
             `;
+
+            // Si el checkbox está marcado, se añaden los campos adicionales al correo
+            if (noCV) {
+                html += `
+                    <p style="font-size: 16px; margin: 30px 0 10px;"><strong>Nivel Académico:</strong> ${academicLevel}</p>
+                    <p style="font-size: 16px; margin: 10px 0;"><strong>Años de Experiencia Profesional:</strong> ${yearsOfExperience}</p>
+                    <p style="font-size: 16px; margin: 10px 0;"><strong>Área o Campo Profesional Actual:</strong> ${currentField}</p>
+                    <p style="font-size: 16px; margin: 10px 0;"><strong>Reconocimientos o Premios:</strong> ${awards}</p>
+                    <p style="font-size: 16px; margin: 10px 0;"><strong>Proyecto o Plan que beneficiaría a EE.UU.:</strong> ${project}</p>
+                `;
+            }
+
+            html += `</div>`;
 
             const message = {
                 from: GOOGLE_EMAIL,
@@ -93,19 +113,26 @@ export const actions = {
                     : [],
             };
 
-            // Store request on the database
+            // Guardar la solicitud en la base de datos
             const colReference = collection(db, 'solicitudes');
             const timestamp = new Date();
 
-            await addDoc(colReference, {
+            const docData = {
                 fullName,
                 email,
                 phone,
                 linkedin,
+                academicLevel,
+                yearsOfExperience,
+                currentField,
+                awards,
+                project,
                 date: timestamp
-            });
+            };
 
-            // Send mail
+            await addDoc(colReference, docData);
+
+            // Enviar el correo
             await sendEmail(message);
 
             return {

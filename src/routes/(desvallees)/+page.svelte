@@ -32,6 +32,13 @@
 			src: `${projectsImageRoute}/rada.webp`,
 		},
 		{
+			href: `/chameleon`,
+			name: $dictionary.chameleon,
+			description: $dictionary.description_chameleon,
+			src: `https://miro.medium.com/v2/resize:fit:300/1*cWGXsZij2YY8koglYBcZNw.jpeg`,
+			disabled: true,
+		},
+		{
 			href: `/subito`,
 			name: `Súbito`,
 			description: $dictionary.description_subito,

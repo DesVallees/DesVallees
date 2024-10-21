@@ -2,29 +2,10 @@ import { derived, get, writable, type Writable } from 'svelte/store';
 import { translator } from './translator';
 import { browser } from "$app/environment";
 import { db } from '$lib/firebase/chameleon';
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
-import type { User } from 'firebase/auth';
-import { game, type Game } from './database';
 
 // Database
-export const dataReady: Writable<boolean> = writable(false);
+export const dataReady: Writable<boolean> = writable(true);
 export const code: Writable<string> = writable();
-
-code.subscribe(async (room) => {
-    if (code) {
-        dataReady.set(false)
-
-        let roomData: Game = {};
-        const roomDocumentReference = doc(db, 'rooms', room);
-        const docSnap = await getDoc(roomDocumentReference);
-
-        if (!docSnap.exists()) {
-            await setDoc(roomDocumentReference, roomData, { merge: true });
-        } else {
-            roomData = docSnap.data();
-        }
-    }
-})
 
 // Base Routes
 export const baseImageRoute = '/images/journee';
@@ -33,7 +14,7 @@ export const baseRoute = '/chameleon';
 
 // Language Management
 
-export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de';
+export type Language = 'fr' | 'es' | 'it' | 'en' | 'ru' | 'de' | 'pt';
 
 export function isLanguage(value: any): value is Language {
     return (
@@ -42,7 +23,8 @@ export function isLanguage(value: any): value is Language {
         value === 'it' ||
         value === 'en' ||
         value === 'ru' ||
-        value === 'de'
+        value === 'de' ||
+        value === 'pt'
     );
 }
 

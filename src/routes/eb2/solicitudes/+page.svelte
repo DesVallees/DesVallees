@@ -45,19 +45,40 @@
 		const filteredData = solicitudes.filter(
 			(solicitud) =>
 				!filterText ||
-				`${solicitud.fullName}${solicitud.email}${solicitud.phone}${
-					solicitud.linkedin
+				`${solicitud.fullName}${solicitud.email}${solicitud.phone}${solicitud.linkedin}${
+					solicitud.academicLevel
+				}${solicitud.yearsOfExperience}${solicitud.currentField}${solicitud.awards}${
+					solicitud.project
 				}${formatDateTime('human', solicitud.date)}`
 					.toLowerCase()
 					.includes(filterText.toLowerCase()),
 		);
-		const formattedData = filteredData.map(({ fullName, email, phone, linkedin, date }) => ({
-			Nombre: fullName,
-			Email: email,
-			Teléfono: phone,
-			Linkedin: linkedin,
-			Fecha: formatDateTime('human', date),
-		}));
+
+		const formattedData = filteredData.map(
+			({
+				fullName,
+				email,
+				phone,
+				linkedin,
+				date,
+				academicLevel,
+				yearsOfExperience,
+				currentField,
+				awards,
+				project,
+			}) => ({
+				Nombre: fullName,
+				Email: email,
+				Teléfono: phone,
+				Linkedin: linkedin,
+				Nivel_Académico: academicLevel,
+				Años_Experiencia: yearsOfExperience,
+				Campo_Profesional: currentField,
+				Reconocimientos: awards,
+				Proyecto_Beneficio_EEUU: project,
+				Fecha: formatDateTime('human', date),
+			}),
+		);
 
 		// Send the data to the API route
 		const response = await fetch('/api/excel', {
@@ -114,7 +135,7 @@
 	</div>
 
 	<div class="cards">
-		{#each solicitudes.filter((solicitud) => !filterText || `${solicitud.fullName}${solicitud.email}${solicitud.phone}${solicitud.linkedin}${formatDateTime('human', solicitud.date)}`
+		{#each solicitudes.filter((solicitud) => !filterText || `${solicitud.fullName}${solicitud.email}${solicitud.phone}${solicitud.linkedin}${solicitud.academicLevel}${solicitud.yearsOfExperience}${solicitud.currentField}${solicitud.awards}${solicitud.project}${formatDateTime('human', solicitud.date)}`
 					.toLowerCase()
 					.includes(filterText.toLowerCase())) as solicitud (solicitud.id)}
 			<div
@@ -151,6 +172,36 @@
 							<span>No proporcionado.</span>
 						{/if}
 					</p>
+					{#if solicitud.academicLevel}
+						<p>
+							🎓 <strong>Nivel Académico:</strong>
+							<span>{solicitud.academicLevel}</span>
+						</p>
+					{/if}
+					{#if solicitud.yearsOfExperience}
+						<p>
+							📅 <strong>Años de Experiencia:</strong>
+							<span>{solicitud.yearsOfExperience}</span>
+						</p>
+					{/if}
+					{#if solicitud.currentField}
+						<p>
+							💼 <strong>Campo Profesional:</strong>
+							<span>{solicitud.currentField}</span>
+						</p>
+					{/if}
+					{#if solicitud.awards}
+						<p>
+							🏆 <strong>Reconocimientos:</strong>
+							<span>{solicitud.awards}</span>
+						</p>
+					{/if}
+					{#if solicitud.project}
+						<p>
+							📑 <strong>Proyecto que beneficia a EE.UU.:</strong>
+							<span>{solicitud.project}</span>
+						</p>
+					{/if}
 					{#if solicitud.date}
 						<span class="date">{formatDateTime('human', solicitud.date)}</span>
 					{/if}

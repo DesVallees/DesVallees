@@ -23,4 +23,8 @@ export const translator = {
         chameleon: "Хамелеон",
         errorOccurred: 'Произошла ошибка...',
     },
+    pt: {
+        chameleon: 'Camaleão',
+        errorOccurred: 'Ocorreu um erro…',
+    },
 };
