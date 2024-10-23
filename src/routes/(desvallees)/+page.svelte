@@ -20,7 +20,7 @@
 			src: `/images/journee/gufoLanding.webp`,
 		},
 		{
-			href: `/eb2`,
+			href: `https://eb2.cantolegal.com`,
 			name: `EB2`,
 			description: $dictionary.description_eb2,
 			src: `${projectsImageRoute}/eb2.webp`,
