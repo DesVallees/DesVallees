@@ -35,7 +35,7 @@
 	<Landing />
 
 	<section class="about">
-		<Reveal title={$dictionary.meetRADA} paragraph={$dictionary.experienceTheThrill} />
+		<a class="aboutButton button" href="{baseRoute}/catalog">{$dictionary.newCollection}</a>
 	</section>
 
 	<section class="categories">
@@ -107,6 +107,18 @@
 		width: 100%;
 
 		background-color: black;
+	}
+
+	.aboutButton {
+		font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+		color: var(--main);
+		font-weight: 600;
+
+		text-transform: uppercase;
+		white-space: nowrap;
+
+		margin: auto;
+		margin-top: 2rem;
 	}
 
 	.categories {
