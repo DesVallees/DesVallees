@@ -5,19 +5,9 @@
 	import Products from '../components/products.svelte';
 	import Item from '../components/item.svelte';
 
-	let newArrivals: Product[] = [
-		storage.bibPlusJerseys,
-		storage.redJersey2024,
-		storage.redCyclingBib,
-		storage.radaSocks,
-	];
+	let newArrivals: Product[] = [storage.redJersey2024, storage.redCyclingBib, storage.radaSocks];
 
-	let mostViewed: Product[] = [
-		storage.redJersey2024,
-		storage.redCyclingBib,
-		storage.bibPlusJerseys,
-		storage.radaSocks,
-	];
+	let mostViewed: Product[] = [storage.redJersey2024, storage.redCyclingBib, storage.radaSocks];
 </script>
 
 <div class="catalog" in:fade>

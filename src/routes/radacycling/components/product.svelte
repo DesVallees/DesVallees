@@ -88,7 +88,7 @@
 			alt={imageAlt[$language]}
 		/>
 		{#if oldPrice}
-			<p class="discount">{calculateDiscount(oldPrice, price)} {$dictionary.discount}</p>
+			<p class="discount hide">{calculateDiscount(oldPrice, price)} {$dictionary.discount}</p>
 		{/if}
 	</a>
 

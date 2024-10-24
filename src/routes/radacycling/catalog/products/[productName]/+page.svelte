@@ -222,13 +222,13 @@
 					>
 					<button
 						type="button"
-						class="product-nav-button"
+						class="product-nav-button hide"
 						class:active={currentTab === 'details'}
 						on:click={() => changeTab('details')}>{$dictionary.details}</button
 					>
 					<button
 						type="button"
-						class="product-nav-button"
+						class="product-nav-button hide"
 						class:active={currentTab === 'reviews'}
 						on:click={() => changeTab('reviews')}>{$dictionary.reviews}</button
 					>

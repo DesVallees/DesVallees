@@ -10,18 +10,8 @@
 
 	const categories = denormalizeCategories(featuredCategories);
 
-	let popular: Product[] = [
-		storage.redJersey2024,
-		storage.redCyclingBib,
-		storage.bibPlusJerseys,
-		storage.radaSocks,
-	];
-	let latest: Product[] = [
-		storage.redCyclingBib,
-		storage.radaSocks,
-		storage.redJersey2024,
-		storage.bibPlusJerseys,
-	];
+	let popular: Product[] = [storage.redJersey2024, storage.redCyclingBib, storage.radaSocks];
+	let latest: Product[] = [storage.redCyclingBib, storage.radaSocks, storage.redJersey2024];
 </script>
 
 <svelte:head>

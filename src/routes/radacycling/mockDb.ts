@@ -566,7 +566,7 @@ export let storage: Record<string, Product> = {
     "redJersey2024": {
         id: 0,
         name: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
-        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 18, 19, 20],
+        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
             en: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
             es: "Desata tu potencial ciclista con la 'Camiseta 2024'! Diseñada para un confort y rendimiento supremos, esta camiseta combina tela transpirable con un diseño elegante. Sus colores vibrantes garantizan visibilidad, mientras que el ajuste ergonómico proporciona una movilidad sin igual. Perfecta tanto para paseos casuales como para competencias. ¡Eleva tu paseo hoy!"
@@ -583,8 +583,8 @@ export let storage: Record<string, Product> = {
         imageSrc: "Resources/Jersey2024Red.webp",
         imgHoverSrc: "Resources/Jersey2024RedBig.webp",
         imageAlt: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
-        price: "$89.97",
-        oldPrice: "$125.00",
+        price: "$89.99",
+        oldPrice: undefined,
         mainVersion: true,
         versionsIds: [0, 1],
         href: "jersey-2024-red",
@@ -592,7 +592,7 @@ export let storage: Record<string, Product> = {
     "blueJersey2024": {
         id: 1,
         name: { en: "Blue Jersey 2024", es: "Camiseta Azul 2024" },
-        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 18, 19, 20],
+        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
             en: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
             es: "Desata tu potencial ciclista con la 'Camiseta 2024'! Diseñada para un confort y rendimiento supremos, esta camiseta combina tela transpirable con un diseño elegante. Sus colores vibrantes garantizan visibilidad, mientras que el ajuste ergonómico proporciona una movilidad sin igual. Perfecta tanto para paseos casuales como para competencias. ¡Eleva tu paseo hoy!"
@@ -609,8 +609,8 @@ export let storage: Record<string, Product> = {
         imageSrc: "Resources/Jersey2024Blue.webp",
         imgHoverSrc: "Resources/cremalleraJersey.webp",
         imageAlt: { en: "View Blue Jersey 2024", es: "Ver Camiseta Azul 2024" },
-        price: "$89.97",
-        oldPrice: "$125.00",
+        price: "$89.99",
+        oldPrice: undefined,
         mainVersion: false,
         versionsIds: [0, 1],
         href: "jersey-2024-blue",
@@ -618,7 +618,7 @@ export let storage: Record<string, Product> = {
     "redCyclingBib": {
         id: 2,
         name: { en: "Red Cycling Bib 2024", es: "Pantalón de Ciclismo Rojo 2024" },
-        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 17, 19, 21],
+        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
             en: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
             es: "Experimenta el pináculo del confort con el Pantalón de Ciclismo 2024. Diseñado para la resistencia, su diseño elegante ofrece un ajuste como una segunda piel, mientras que los tejidos avanzados proporcionan una transpirabilidad óptima. Disponible en rojo o azul, es la elección profesional para ciclistas serios. Eleva tu paseo por solo $99.97."
@@ -637,7 +637,7 @@ export let storage: Record<string, Product> = {
         imageSrc: "Resources/CyclingBib2024.webp",
         imgHoverSrc: "Resources/bibFocus.webp",
         imageAlt: { en: "Red Cycling Bib 2024", es: "Pantalón de Ciclismo Rojo 2024" },
-        price: "$99.97",
+        price: "$109.99",
         oldPrice: undefined,
         mainVersion: true,
         versionsIds: [2, 3],
@@ -646,7 +646,7 @@ export let storage: Record<string, Product> = {
     "blueCyclingBib": {
         id: 3,
         name: { en: "Blue Cycling Bib 2024", es: "Pantalón de Ciclismo Azul 2024" },
-        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 17, 19, 21],
+        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
             en: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
             es: "Experimenta el pináculo del confort con el Pantalón de Ciclismo 2024. Diseñado para la resistencia, su diseño elegante ofrece un ajuste como una segunda piel, mientras que los tejidos avanzados proporcionan una transpirabilidad óptima. Disponible en rojo o azul, es la elección profesional para ciclistas serios. Eleva tu paseo por solo $99.97."
@@ -665,45 +665,16 @@ export let storage: Record<string, Product> = {
         imageSrc: "Resources/CyclingBib2024Blue.webp",
         imgHoverSrc: "Resources/bibFocus.webp",
         imageAlt: { en: "View Blue Cycling Bib 2024", es: "Ver Pantalón Azul de Ciclismo 2024" },
-        price: "$99.97",
+        price: "$109.99",
         oldPrice: undefined,
         mainVersion: false,
         versionsIds: [2, 3],
         href: "cycling-bib-2024-blue",
     },
-    "bibPlusJerseys": {
-        id: 4,
-        name: { en: "Bib + 2 Jerseys + Free Socks", es: "Pantalón + 2 Camisetas + Calcetines Gratis" },
-        categoryIds: [0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 15],
-        description: {
-            en: "Score the ultimate cycling trio with 'Bib + 2 Jerseys + Free Socks'! At just $219.97, enjoy professional-grade comfort and unbeatable style. This exclusive offer bundles sleek aerodynamics, breathability, and a complimentary touch of coziness for your feet. Upgrade your ride in one go!",
-            es: "Consigue el trío ciclista definitivo con 'Pantalón + 2 Camisetas + Calcetines Gratis'! Por solo $219.97, disfruta de un confort de nivel profesional y un estilo inigualable. Esta oferta exclusiva incluye aerodinámica elegante, transpirabilidad y un toque de comodidad adicional para tus pies. ¡Mejora tu paseo de una vez por todas!"
-        },
-        details: [
-            { label: { en: "Material", es: "Material" }, value: { en: "Technical Fabric, Moisture-Wicking", es: "Tejido técnico, absorbe humedad" } },
-            { label: { en: "Bib Material", es: "Material del Pantalón" }, value: { en: "Compression Lycra for Support and Performance", es: "Licra de compresión para soporte y rendimiento" } },
-            { label: { en: "Jersey Fit", es: "Ajuste de las Camisetas" }, value: { en: "Form-Fitting, Aerodynamic Cut", es: "Ajuste ceñido, corte aerodinámico" } },
-            { label: { en: "Sock Fabric", es: "Tejido de los Calcetines" }, value: { en: "Breathable, Anti-Bacterial Yarn", es: "Hilo transpirable, antibacteriano" } },
-            { label: { en: "Package Includes", es: "El Paquete Incluye" }, value: { en: "1 Bib, 2 Jerseys, 1 Pair of Socks", es: "1 Pantalón, 2 Camisetas, 1 Par de Calcetines" } },
-            { label: { en: "Comfort", es: "Comodidad" }, value: { en: "Chamois Padding in Bib, Flat Seams to Prevent Chafing", es: "Acolchado de badana en el pantalón, costuras planas para prevenir rozaduras" } },
-            { label: { en: "Durability", es: "Durabilidad" }, value: { en: "Reinforced Stitching for Longevity", es: "Costuras reforzadas para una mayor duración" } },
-            { label: { en: "UV Protection", es: "Protección UV" }, value: { en: "UPF 50+ Sun Protection", es: "Protección solar UPF 50+" } },
-            { label: { en: "Warranty", es: "Garantía" }, value: { en: "2 Years Manufacturer's Warranty", es: "Garantía del fabricante de 2 años" } },
-            { label: { en: "Care Instructions", es: "Instrucciones de cuidado" }, value: { en: "Machine Washable, Air Dry Recommended", es: "Lavable a máquina, se recomienda secar al aire" } },
-        ],
-        imageSrc: "Resources/1BibPlus2Jerseys.webp",
-        imgHoverSrc: undefined,
-        imageAlt: { en: "Offer: 1 Bib Plus 2 Jerseys Plus Free Socks", es: "Oferta: 1 Pantalón + 2 Camisetas + Calcetines Gratis" },
-        price: "$219.97",
-        oldPrice: "$280.00",
-        mainVersion: true,
-        versionsIds: undefined,
-        href: "bib-plus-jerseys",
-    },
     "radaSocks": {
         id: 5,
         name: { en: "RADA Socks", es: "Calcetines RADA" },
-        categoryIds: [6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
+        categoryIds: [6, 7, 8, 9, 10, 11, 12, 13, 15],
         description: {
             en: "Step into comfort with RADA Socks — where coziness meets style. These premium socks hug your feet with softness while offering a snug fit, perfect for any adventure. At just $16.00, they're a steal from their usual $25.00. Upgrade your sock drawer and walk in a cloud of comfort!",
             es: "Adéntrate en el confort con los Calcetines RADA — donde la comodidad se encuentra con el estilo. Estos calcetines premium abrazan tus pies con suavidad mientras ofrecen un ajuste perfecto, ideal para cualquier aventura. Por solo $16.00, son una ganga de su precio habitual de $25.00. ¡Mejora tu cajón de calcetines y camina en una nube de confort!"
@@ -720,8 +691,8 @@ export let storage: Record<string, Product> = {
         imageSrc: "Resources/RadaSocks.webp",
         imgHoverSrc: undefined,
         imageAlt: { en: "RADA Socks", es: "Calcetines RADA" },
-        price: "$16.00",
-        oldPrice: "$25.00",
+        price: "$18.00",
+        oldPrice: undefined,
         mainVersion: true,
         versionsIds: undefined,
         href: "rada-socks",
