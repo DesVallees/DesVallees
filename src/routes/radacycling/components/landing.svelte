@@ -9,9 +9,9 @@
 
 <section class="landing">
 	<div>
-		<h1>{$dictionary.championsWearRADA}</h1>
-		<p>{$dictionary.elevateYourTraining}</p>
-		<a href="{baseRoute}/catalog" class="button">{$dictionary.viewNewCollection}</a>
+		<!-- <h1>{$dictionary.championsWearRADA}</h1> -->
+		<p>{$dictionary.experienceTheThrill}</p>
+		<!-- <a href="{baseRoute}/catalog" class="button">{$dictionary.viewNewCollection}</a> -->
 	</div>
 
 	<section class="carousel">
@@ -76,7 +76,7 @@
 		display: grid;
 		align-content: end;
 		margin: clamp(5rem, 9vw, 10rem) clamp(0rem, 3vw, 3rem);
-		max-width: min(800px, 50vw);
+		max-width: min(1000px, 80vw);
 
 		grid-row: 1 / -1;
 
@@ -84,23 +84,23 @@
 	}
 
 	div * {
-		filter: drop-shadow(3px 3px 0.5rem var(--content-5));
+		filter: drop-shadow(3px 3px 1rem var(--content));
 		z-index: 1;
 	}
 
-	h1 {
+	/* h1 {
 		font-size: clamp(3rem, 8vw, 5rem);
 		font-weight: 600;
 		line-height: 1.1;
 		margin-bottom: 1rem;
-	}
+	} */
 
 	p {
-		font-size: clamp(1.25rem, 2.5vw, 1.5em);
+		font-size: clamp(1.1em, 3vw, 2em);
 		font-weight: 500;
 	}
 
-	a {
+	/* a {
 		font-size: clamp(1.15rem, 2.5vw, 1.5rem);
 		font-weight: 600;
 
@@ -108,5 +108,5 @@
 		white-space: nowrap;
 
 		margin-top: 2rem;
-	}
+	} */
 </style>
