@@ -14,7 +14,7 @@
 </script>
 
 <div class="ourWork" in:fade>
-	<div class="header-section">
+	<div class="header-section hide">
 		<h1>{$dictionary.ourCraftmanship}</h1>
 		<p>
 			{$dictionary.discoverThePassion}
