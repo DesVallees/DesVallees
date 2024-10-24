@@ -33,7 +33,7 @@ export type CatalogCategory = {
     id: number;
     href: string;
     name: translatableContent;
-    featuredCategoryId: number;
+    featuredCategoryId: number | undefined;
     featuredCategory?: Category; // Optional, will be filled by the denormalize function
     sections: CatalogSection[];
 }
@@ -57,7 +57,7 @@ export let categories: Category[] = [
         imageSrc: "demo/amsterdam.webp",
         smallImageSrc: "demo/amsterdam-small.webp",
         imageAlt: { en: "Cyclist wearing a long sleeve jersey", es: "Ciclista con camiseta de manga larga" },
-        name: { en: "Long Sleeve Jerseys", es: "Camisetas de Manga Larga" },
+        name: { en: "Jerseys", es: "Camisetas" },
         description: { en: "Gear up for cooler rides with our long sleeve jerseys. Offering extra protection without sacrificing breathability or comfort.", es: "Prepárate para rutas más frescas con nuestras camisetas de manga larga. Ofrecen protección adicional sin sacrificar la transpirabilidad o el confort." },
         href: "long-sleeve-jerseys",
         genderSpecific: true,
@@ -288,9 +288,6 @@ export function denormalizeCatalogCategory(catalogCategory: CatalogCategory): Ca
 
     // Find the full category data for the featuredCategoryId
     const featuredCategory = categories.find(category => category.id === catalogCategory.featuredCategoryId);
-    if (!featuredCategory) {
-        throw new Error(`Featured category with ID ${catalogCategory.featuredCategoryId} not found`);
-    }
 
     // Construct and return the full denormalized catalog category object
     return {
@@ -425,12 +422,12 @@ export let categoryMenus: CatalogCategory[] = [
         id: 0,
         name: { en: "men", es: "hombres" },
         href: "men",
-        featuredCategoryId: 7,
+        featuredCategoryId: undefined,
         sections: [
             {
                 name: { en: "apparel", es: "ropa" },
                 categoryIds: [
-                    1, 2, 3, 4, 5, 6
+                    1, 2, 6
                 ]
             },
             // {
@@ -451,12 +448,12 @@ export let categoryMenus: CatalogCategory[] = [
         id: 1,
         name: { en: "women", es: "mujeres" },
         href: "women",
-        featuredCategoryId: 15,
+        featuredCategoryId: undefined,
         sections: [
             {
                 name: { en: "apparel", es: "ropa" },
                 categoryIds: [
-                    1, 2, 3, 4, 5, 6
+                    1, 2, 6
                 ]
             },
             // {

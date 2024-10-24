@@ -124,7 +124,7 @@
 				out:fade
 			>
 				{#each catalogMenu.sections as section}
-					<div class="catalogMenuSection">
+					<div class="catalogMenuSection" class:celiMenu={!catalogMenu.featuredCategory}>
 						<h2>{section.name[$language]}</h2>
 						<div class="catalogMenuLinks">
 							{#if section.categories}
@@ -140,22 +140,24 @@
 						</div>
 					</div>
 				{/each}
-				<div class="featuredSection">
-					<a
-						href="{baseRoute}/catalog/{catalogMenu.featuredCategory?.href}/{catalogMenu
-							.featuredCategory?.genderSpecific
-							? lastMenuOpened
-							: ''}"
-						aria-label={catalogMenu.featuredCategory?.name[$language]}
-						class="featuredSectionLink"
-					>
-						<img
-							src="{baseImageRoute}/{catalogMenu.featuredCategory?.imageSrc}"
-							alt={catalogMenu.featuredCategory?.imageAlt[$language]}
-						/>
-						<h2>{catalogMenu.featuredCategory?.name[$language]}</h2>
-					</a>
-				</div>
+				{#if catalogMenu.featuredCategory}
+					<div class="featuredSection">
+						<a
+							href="{baseRoute}/catalog/{catalogMenu.featuredCategory
+								?.href}/{catalogMenu.featuredCategory?.genderSpecific
+								? lastMenuOpened
+								: ''}"
+							aria-label={catalogMenu.featuredCategory?.name[$language]}
+							class="featuredSectionLink"
+						>
+							<img
+								src="{baseImageRoute}/{catalogMenu.featuredCategory?.imageSrc}"
+								alt={catalogMenu.featuredCategory?.imageAlt[$language]}
+							/>
+							<h2>{catalogMenu.featuredCategory?.name[$language]}</h2>
+						</a>
+					</div>
+				{/if}
 			</div>
 		{/key}
 	{/if}
@@ -209,6 +211,11 @@
 	.catalogMenuSection {
 		border: 0.5px solid var(--content-2);
 		padding: clamp(1rem, 4vw, 2.5rem);
+	}
+
+	.celiMenu {
+		display: grid;
+		justify-content: center;
 	}
 
 	.catalogMenuSection h2 {
