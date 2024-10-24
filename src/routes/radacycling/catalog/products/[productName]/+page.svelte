@@ -236,7 +236,7 @@
 
 				{#if currentTab === 'description'}
 					<div class="product-description" in:fade>
-						<p>{product.description[$language]}</p>
+						<p>{@html product.description[$language]}</p>
 					</div>
 				{:else if currentTab === 'details'}
 					<div class="product-details" in:fade>

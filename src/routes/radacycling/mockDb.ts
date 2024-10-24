@@ -565,8 +565,26 @@ export let storage: Record<string, Product> = {
         name: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
         categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
-            en: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
-            es: "Desata tu potencial ciclista con la 'Camiseta 2024'! Diseñada para un confort y rendimiento supremos, esta camiseta combina tela transpirable con un diseño elegante. Sus colores vibrantes garantizan visibilidad, mientras que el ajuste ergonómico proporciona una movilidad sin igual. Perfecta tanto para paseos casuales como para competencias. ¡Eleva tu paseo hoy!"
+            en: `
+                Our Jersey is designed to sit close to the skin, made with a lightweight performance fabric that wicks away moisture, provides added sun protection, breathability, and improved comfort and support.
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li>High compression silicon waist band ensures it stays in place during performance</li>
+                    <li>High stretch and high compression silicon arm gripper</li>
+                    <li>Gusseted rear pockets that expand to carry snacks and tools</li>
+                    <li>Rear water-resistant storage pocket</li>
+                    <li>Concealed zipper</li>
+                </ul>
+            `,
+            es: `
+                Nuestra camiseta está diseñada para ajustarse cerca de la piel, fabricada con un tejido de rendimiento ligero que absorbe la humedad, proporciona protección solar adicional, transpirabilidad y mayor comodidad y soporte.
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li>La banda de cintura de silicona de alta compresión asegura que se mantenga en su lugar durante la actividad</li>
+                    <li>Agarre de brazo de alta elasticidad y alta compresión</li>
+                    <li>Bolsillos traseros con fuelle que se expanden para llevar bocadillos y herramientas</li>
+                    <li>Bolsillo trasero impermeable</li>
+                    <li>Cremallera oculta</li>
+                </ul>
+            `
         },
         details: [
             { label: { en: 'Material', es: 'Material' }, value: { en: 'High-Quality, Breathable Polyester', es: 'Poliéster transpirable de alta calidad' } },
@@ -591,8 +609,26 @@ export let storage: Record<string, Product> = {
         name: { en: "Blue Jersey 2024", es: "Camiseta Azul 2024" },
         categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
-            en: "Unleash your cycling potential with the 'Jersey 2024'! Crafted for supreme comfort and performance, this jersey combines breathable fabric with a sleek design. Its vibrant colors ensure visibility, while the ergonomic fit provides unmatched mobility. Perfect for both casual rides and competitive races. Elevate your ride today!",
-            es: "Desata tu potencial ciclista con la 'Camiseta 2024'! Diseñada para un confort y rendimiento supremos, esta camiseta combina tela transpirable con un diseño elegante. Sus colores vibrantes garantizan visibilidad, mientras que el ajuste ergonómico proporciona una movilidad sin igual. Perfecta tanto para paseos casuales como para competencias. ¡Eleva tu paseo hoy!"
+            en: `
+                Our Jersey is designed to sit close to the skin, made with a lightweight performance fabric that wicks away moisture, provides added sun protection, breathability, and improved comfort and support.
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li>High compression silicon waist band ensures it stays in place during performance</li>
+                    <li>High stretch and high compression silicon arm gripper</li>
+                    <li>Gusseted rear pockets that expand to carry snacks and tools</li>
+                    <li>Rear water-resistant storage pocket</li>
+                    <li>Concealed zipper</li>
+                </ul>
+            `,
+            es: `
+                Nuestra camiseta está diseñada para ajustarse cerca de la piel, fabricada con un tejido de rendimiento ligero que absorbe la humedad, proporciona protección solar adicional, transpirabilidad y mayor comodidad y soporte.
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li>La banda de cintura de silicona de alta compresión asegura que se mantenga en su lugar durante la actividad</li>
+                    <li>Agarre de brazo de alta elasticidad y alta compresión</li>
+                    <li>Bolsillos traseros con fuelle que se expanden para llevar bocadillos y herramientas</li>
+                    <li>Bolsillo trasero impermeable</li>
+                    <li>Cremallera oculta</li>
+                </ul>
+            `
         },
         details: [
             { label: { en: 'Material', es: 'Material' }, value: { en: 'High-Quality, Breathable Polyester', es: 'Poliéster transpirable de alta calidad' } },
@@ -617,8 +653,26 @@ export let storage: Record<string, Product> = {
         name: { en: "Red Cycling Bib 2024", es: "Pantalón de Ciclismo Rojo 2024" },
         categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
-            en: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
-            es: "Experimenta el pináculo del confort con el Pantalón de Ciclismo 2024. Diseñado para la resistencia, su diseño elegante ofrece un ajuste como una segunda piel, mientras que los tejidos avanzados proporcionan una transpirabilidad óptima. Disponible en rojo o azul, es la elección profesional para ciclistas serios. Eleva tu paseo por solo $99.97."
+            en: `
+                Our bib shorts are designed with Italian pads and fabrics, offering added levels of comfort and compression. The lightweight, breathable construction of the bib and brace straps minimizes unwanted movement, while maintaining airflow through your body and providing a more comfortable fit during longer rides.
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li style="margin-bottom: 5px;">We use Elastic Interface ultra-high density inserts made perfectly for road and off-road activities.</li>
+                    <li style="margin-bottom: 5px;">The perforations on the surface allow for higher air permeability, resulting in lower skin temperature and reduced moisture.</li>
+                    <li style="margin-bottom: 5px;">The ECO Carbonium Flash top fabric combines a special channel structure with the natural antistatic and bacteriostatic properties of the Carbonium thread.</li>
+                    <li style="margin-bottom: 5px;">The channel structure, made from extremely soft and recycled polyamide, helps collect, canalize, and expel moisture.</li>
+                    <li>Rapid-drying and eco-friendly.</li>
+                </ul>
+            `,
+            es: `
+                Nuestro pantalón de ciclismo está diseñado con almohadillas y telas italianas, ofreciendo mayores niveles de comodidad y compresión. La construcción ligera y transpirable de los tirantes minimiza el movimiento no deseado, mientras mantiene el flujo de aire a través de tu cuerpo, proporcionando un ajuste más cómodo durante los recorridos más largos.
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li style="margin-bottom: 5px;">Usamos insertos de Elastic Interface de ultra alta densidad, perfectamente diseñados para actividades en carretera y fuera de carretera.</li>
+                    <li style="margin-bottom: 5px;">Las perforaciones en la superficie permiten una mayor permeabilidad al aire, lo que resulta en una temperatura de la piel más baja y una menor humedad.</li>
+                    <li style="margin-bottom: 5px;">La tela superior ECO Carbonium Flash combina una estructura especial de canal con las propiedades antistáticas y bacteriostáticas naturales del hilo Carbonium.</li>
+                    <li style="margin-bottom: 5px;">La estructura de canales, hecha de poliamida reciclada y extremadamente suave, ayuda a recolectar, canalizar y expulsar la humedad.</li>
+                    <li>Secado rápido y ecológico.</li>
+                </ul>
+            `
         },
         details: [
             { label: { en: 'Material', es: 'Material' }, value: { en: 'Premium Lycra for stretch and comfort', es: 'Licra premium para elasticidad y comodidad' } },
@@ -645,8 +699,26 @@ export let storage: Record<string, Product> = {
         name: { en: "Blue Cycling Bib 2024", es: "Pantalón de Ciclismo Azul 2024" },
         categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
-            en: "Experience the pinnacle of comfort with the Cycling Bib 2024. Engineered for endurance, its sleek design offers a second-skin fit, while advanced fabrics provide optimal breathability. Available in red or blue, it's the pro choice for serious cyclists. Elevate your ride for just $99.97.",
-            es: "Experimenta el pináculo del confort con el Pantalón de Ciclismo 2024. Diseñado para la resistencia, su diseño elegante ofrece un ajuste como una segunda piel, mientras que los tejidos avanzados proporcionan una transpirabilidad óptima. Disponible en rojo o azul, es la elección profesional para ciclistas serios. Eleva tu paseo por solo $99.97."
+            en: `
+                Our bib shorts are designed with Italian pads and fabrics, offering added levels of comfort and compression. The lightweight, breathable construction of the bib and brace straps minimizes unwanted movement, while maintaining airflow through your body and providing a more comfortable fit during longer rides.
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li style="margin-bottom: 5px;">We use Elastic Interface ultra-high density inserts made perfectly for road and off-road activities.</li>
+                    <li style="margin-bottom: 5px;">The perforations on the surface allow for higher air permeability, resulting in lower skin temperature and reduced moisture.</li>
+                    <li style="margin-bottom: 5px;">The ECO Carbonium Flash top fabric combines a special channel structure with the natural antistatic and bacteriostatic properties of the Carbonium thread.</li>
+                    <li style="margin-bottom: 5px;">The channel structure, made from extremely soft and recycled polyamide, helps collect, canalize, and expel moisture.</li>
+                    <li>Rapid-drying and eco-friendly.</li>
+                </ul>
+            `,
+            es: `
+                Nuestro pantalón de ciclismo está diseñado con almohadillas y telas italianas, ofreciendo mayores niveles de comodidad y compresión. La construcción ligera y transpirable de los tirantes minimiza el movimiento no deseado, mientras mantiene el flujo de aire a través de tu cuerpo, proporcionando un ajuste más cómodo durante los recorridos más largos.
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li style="margin-bottom: 5px;">Usamos insertos de Elastic Interface de ultra alta densidad, perfectamente diseñados para actividades en carretera y fuera de carretera.</li>
+                    <li style="margin-bottom: 5px;">Las perforaciones en la superficie permiten una mayor permeabilidad al aire, lo que resulta en una temperatura de la piel más baja y una menor humedad.</li>
+                    <li style="margin-bottom: 5px;">La tela superior ECO Carbonium Flash combina una estructura especial de canal con las propiedades antistáticas y bacteriostáticas naturales del hilo Carbonium.</li>
+                    <li style="margin-bottom: 5px;">La estructura de canales, hecha de poliamida reciclada y extremadamente suave, ayuda a recolectar, canalizar y expulsar la humedad.</li>
+                    <li>Secado rápido y ecológico.</li>
+                </ul>
+            `
         },
         details: [
             { label: { en: 'Material', es: 'Material' }, value: { en: 'Premium Lycra for stretch and comfort', es: 'Licra premium para elasticidad y comodidad' } },
@@ -673,8 +745,12 @@ export let storage: Record<string, Product> = {
         name: { en: "RADA Socks", es: "Calcetines RADA" },
         categoryIds: [6, 7, 8, 9, 10, 11, 12, 13, 15],
         description: {
-            en: "Step into comfort with RADA Socks — where coziness meets style. These premium socks hug your feet with softness while offering a snug fit, perfect for any adventure. At just $16.00, they're a steal from their usual $25.00. Upgrade your sock drawer and walk in a cloud of comfort!",
-            es: "Adéntrate en el confort con los Calcetines RADA — donde la comodidad se encuentra con el estilo. Estos calcetines premium abrazan tus pies con suavidad mientras ofrecen un ajuste perfecto, ideal para cualquier aventura. Por solo $16.00, son una ganga de su precio habitual de $25.00. ¡Mejora tu cajón de calcetines y camina en una nube de confort!"
+            en: `
+                The lightweight, breathable material of our RADA sock is equipped with potent moisture-wicking properties to keep your feet comfortable and dry throughout your ride.
+            `,
+            es: `
+                El material ligero y transpirable de nuestro calcetín RADA está equipado con potentes propiedades para absorber la humedad, manteniendo tus pies cómodos y secos durante todo el recorrido.
+            `
         },
         details: [
             { label: { en: 'Material', es: 'Material' }, value: { en: 'Premium Soft Cotton Blend', es: 'Mezcla de algodón suave premium' } },
