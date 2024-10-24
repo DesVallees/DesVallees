@@ -21,10 +21,10 @@
 <main in:fade>
 	<header>
 		<picture>
-			<source srcset="{baseImageRoute}/demo/man-small.webp" media="(max-width: 650px)" />
-			<img src="{baseImageRoute}/demo/man.webp" alt={$dictionary.customPageDescription} />
+			<source srcset="{baseImageRoute}/custom/1.webp" media="(max-width: 650px)" />
+			<img src="{baseImageRoute}/custom/1.webp" alt={$dictionary.customPageDescription} />
 		</picture>
-		<h1>{$dictionary.elevateYourTeamWithCustomDesigns}</h1>
+		<h1 class="hide">{$dictionary.elevateYourTeamWithCustomDesigns}</h1>
 	</header>
 
 	<section id="contact-info">
