@@ -178,6 +178,15 @@ a {
     font-size: inherit;
 }
 
+select {
+    color: var(--content);
+    background-color: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    font-size: 1rem;
+}
+
 a,
 button {
     user-select: none;

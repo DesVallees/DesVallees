@@ -1,12 +1,19 @@
-<script>
+<script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { baseImageRoute, dictionary } from '../stores';
 	import CustomOverview from '../components/customOverview.svelte';
 	import toast from 'svelte-french-toast';
+	import { phoneFormat } from '../functions';
 
 	let email = '';
 	let message = '';
-	let subject = '';
+	let teamName = '';
+	let teamSize = '';
+	let phone = '';
+	let firstName = '';
+	let lastName = '';
+
+	let phoneField: HTMLInputElement;
 
 	const submitForm = () => {
 		toast($dictionary.thankYouForYourMessage);
@@ -36,38 +43,85 @@
 			>.
 		</p>
 
-		<form on:submit|preventDefault={submitForm}>
-			<div>
-				<label for="email">{$dictionary.yourEmail}:</label>
-				<input id="email" type="email" bind:value={email} required />
+		<form on:submit|preventDefault={submitForm} class="custom-form">
+			<div class="form-row">
+				<input
+					id="firstName"
+					type="text"
+					placeholder={$dictionary.firstName}
+					bind:value={firstName}
+					required
+				/>
+				<input
+					id="lastName"
+					type="text"
+					placeholder={$dictionary.lastName}
+					bind:value={lastName}
+					required
+				/>
 			</div>
 
-			<div>
-				<label for="subject">{$dictionary.subject}:</label>
-				<input id="subject" type="text" bind:value={subject} required />
+			<input
+				id="teamName"
+				type="text"
+				placeholder={$dictionary.teamName}
+				bind:value={teamName}
+				required
+			/>
+			<input
+				id="email"
+				type="email"
+				placeholder={$dictionary.yourEmail}
+				bind:value={email}
+				required
+			/>
+
+			<div class="form-row">
+				<input
+					id="phone"
+					type="tel"
+					bind:this={phoneField}
+					on:input={() => phoneFormat(phoneField)}
+					placeholder={$dictionary.phoneNumber}
+					bind:value={phone}
+					required
+				/>
 			</div>
 
-			<div>
-				<label for="message">{$dictionary.yourMessage}:</label>
-				<textarea id="message" bind:value={message} rows="6" required />
-			</div>
+			<select id="teamSize" bind:value={teamSize} required>
+				<option value="" disabled selected>{$dictionary.teamClubSize}</option>
+				<option value="1-5">1-5</option>
+				<option value="6-10">6-10</option>
+				<option value="11-30">11-30</option>
+				<option value="31-50">31-50</option>
+				<option value="51-100">51-100</option>
+				<option value="101-250">101-250</option>
+				<option value="251-500">251-500</option>
+				<option value="500+">500+</option>
+			</select>
+
+			<textarea
+				id="message"
+				placeholder={$dictionary.message}
+				bind:value={message}
+				rows="4"
+				required
+			/>
 
 			<button type="submit">{$dictionary.submit}</button>
 		</form>
 	</section>
 
 	<section id="why-us" class="scrollScale">
-		<h2>
-			{$dictionary.whyChoose}
-		</h2>
-		<p>
-			{$dictionary.weUnderstand}
-		</p>
+		<h2>{$dictionary.whyUsTitle}</h2>
+		<p>{$dictionary.whyUsDescription}</p>
 		<ul>
 			<li>{$dictionary.reflectTeam}</li>
-			<li>{$dictionary.highQualityMaterials}</li>
-			<li>{$dictionary.expertAdvice}</li>
+			<li>{$dictionary.highQualityProducts}</li>
+			<li>{$dictionary.lowMinimumKits}</li>
+			<li>{$dictionary.turnAroundTime}</li>
 		</ul>
+		<p>{$dictionary.bestChoice}</p>
 	</section>
 
 	<CustomOverview />
@@ -92,7 +146,6 @@
 	}
 
 	p {
-		margin-bottom: 2rem;
 		line-height: 1.6;
 	}
 
@@ -132,18 +185,6 @@
 		padding: 3.5em 2rem;
 	}
 
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	label {
-		display: block;
-		margin-bottom: 5px;
-		font-weight: bold;
-	}
-
 	input,
 	textarea {
 		width: 100%;
@@ -173,12 +214,69 @@
 		background-color: #b30000;
 	}
 
+	ul {
+		margin: 2rem 0;
+	}
+
 	li {
 		margin-left: 2ch;
 		margin-bottom: 1rem;
 	}
 
+	.custom-form {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		width: 100%;
+		max-width: 600px;
+		margin: auto;
+		margin-top: 2rem;
+		font-size: 1.1rem;
+	}
+
+	.form-row {
+		display: flex;
+		gap: 1rem;
+	}
+
+	input,
+	select,
+	textarea {
+		width: 100%;
+		padding: 0.75rem;
+		font-size: 1em;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+	}
+
+	input:focus,
+	select:focus,
+	textarea:focus {
+		outline: none;
+		border-color: darkred;
+	}
+
+	button {
+		width: 100%;
+		background-color: darkred;
+		color: white;
+		border: none;
+		padding: 0.75rem;
+		font-size: 1em;
+		cursor: pointer;
+		border-radius: 5px;
+		transition: background-color 0.3s ease;
+	}
+
+	button:hover {
+		background-color: #b30000;
+	}
+
 	@media (max-width: 650px) {
+		.form-row {
+			flex-direction: column;
+		}
+
 		header h1 {
 			font-size: 2em;
 			width: 90%;

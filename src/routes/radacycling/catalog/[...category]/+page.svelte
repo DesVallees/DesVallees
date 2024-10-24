@@ -322,9 +322,8 @@
 
 	.products {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		/* display: flex;
-		flex-wrap: wrap; */
+		grid-template-columns: repeat(1, 1fr);
+		/* grid-template-columns: repeat(2, 1fr);  */
 		justify-content: center;
 		gap: 3em 2em;
 
