@@ -1105,15 +1105,6 @@ export let crafts: craftItem[] = [
     //     },
     // },
     {
-        src: 'custom-one.webp'
-    },
-    {
-        src: 'custom-two.webp'
-    },
-    {
-        src: 'custom-three.webp'
-    },
-    {
         src: 'custom/1.webp'
     },
     {
@@ -1271,6 +1262,15 @@ export let crafts: craftItem[] = [
     },
     {
         src: 'custom/53.webp'
+    },
+    {
+        src: 'custom/54.webp'
+    },
+    {
+        src: 'custom/55.webp'
+    },
+    {
+        src: 'custom/56.webp'
     },
 ];
 // #endregion

@@ -29,7 +29,7 @@
 	<meta name="description" content={$dictionary.siteDescription} />
 </svelte:head>
 
-<LandingForm />
+<!-- <LandingForm /> -->
 
 <div class="home" in:fade>
 	<Landing />
