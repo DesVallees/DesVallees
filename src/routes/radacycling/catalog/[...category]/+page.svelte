@@ -188,11 +188,11 @@
 			<h1>{mainCategory?.name[$language]}</h1>
 		</header>
 
-		{#if mainCategory?.description}
+		<!-- {#if mainCategory?.description}
 			<section class="description">
 				<p>{mainCategory.description[$language]}</p>
 			</section>
-		{/if}
+		{/if} -->
 
 		<section class="filters">
 			{#if mainCategory?.genderSpecific}
@@ -290,7 +290,7 @@
 		width: 50%;
 	}
 
-	.description {
+	/* .description {
 		font-size: 1em;
 		font-weight: 600;
 		text-align: center;
@@ -298,7 +298,7 @@
 
 		padding-bottom: 4rem;
 		border-bottom: solid 1px var(--content-5);
-	}
+	} */
 
 	@media (max-width: 650px) {
 		header h1 {
@@ -379,6 +379,7 @@
 		flex-wrap: wrap;
 		row-gap: 1rem;
 		margin-bottom: 3rem;
+		margin-top: 3rem;
 	}
 
 	.clearFilters {
