@@ -34,14 +34,26 @@
 		<h1 class="hide">{$dictionary.elevateYourTeamWithCustomDesigns}</h1>
 	</header>
 
+	<section id="why-us" class="scrollScale">
+		<h2>{$dictionary.whyUsTitle}</h2>
+		<p>{$dictionary.whyUsDescription}</p>
+		<ul>
+			<li>{$dictionary.reflectTeam}</li>
+			<li>{$dictionary.highQualityProducts}</li>
+			<li>{$dictionary.lowMinimumKits}</li>
+			<li>{$dictionary.turnAroundTime}</li>
+		</ul>
+		<p>{$dictionary.bestChoice}</p>
+	</section>
+
 	<section id="contact-info">
-		<h2>{$dictionary.contactUs}</h2>
+		<!-- <h2>{$dictionary.contactUs}</h2>
 		<p>
 			{$dictionary.ifYourLookingForCustom}
 			<a class="mailLink" href="mailto:contact@radacyclingwear.com"
 				>contact@radacyclingwear.com</a
 			>.
-		</p>
+		</p> -->
 
 		<form on:submit|preventDefault={submitForm} class="custom-form">
 			<div class="form-row">
@@ -112,18 +124,6 @@
 		</form>
 	</section>
 
-	<section id="why-us" class="scrollScale">
-		<h2>{$dictionary.whyUsTitle}</h2>
-		<p>{$dictionary.whyUsDescription}</p>
-		<ul>
-			<li>{$dictionary.reflectTeam}</li>
-			<li>{$dictionary.highQualityProducts}</li>
-			<li>{$dictionary.lowMinimumKits}</li>
-			<li>{$dictionary.turnAroundTime}</li>
-		</ul>
-		<p>{$dictionary.bestChoice}</p>
-	</section>
-
 	<CustomOverview />
 </main>
 
@@ -141,9 +141,9 @@
 		text-align: center;
 	}
 
-	.mailLink {
+	/* .mailLink {
 		color: darkred;
-	}
+	} */
 
 	p {
 		line-height: 1.6;
@@ -157,13 +157,14 @@
 		height: calc(100svh - 20rem);
 		min-height: 22rem;
 		max-height: clamp(40rem, 5vw, 80rem);
+		margin-bottom: 2rem;
 		overflow: hidden;
 	}
 
 	header img {
 		max-width: revert;
 		width: 100%;
-		object-position: center top;
+		object-position: center 90%;
 		height: 100%;
 
 		object-fit: cover;
@@ -182,7 +183,7 @@
 	}
 
 	section {
-		padding: 3.5em 2rem;
+		padding: 1.5em 2rem;
 	}
 
 	input,
@@ -230,7 +231,6 @@
 		width: 100%;
 		max-width: 600px;
 		margin: auto;
-		margin-top: 2rem;
 		font-size: 1.1rem;
 	}
 
