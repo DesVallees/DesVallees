@@ -43,7 +43,6 @@
 		border: 1px solid var(--content);
 		border-radius: 20px;
 
-		translate: 0 0.1em;
 		transition: all 0.2s;
 		transform: scale(1.1);
 	}

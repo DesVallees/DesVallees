@@ -173,7 +173,9 @@
 			<h1>{$dictionary.santiagoOvalles}</h1>
 			<p class="introParagraph">
 				<span>{$dictionary.helloImSantiago}</span>
-				<a class="email" href="mailto:santiago@desvallees.me">santiago@desvallees.me</a>
+				<a class="email" href="mailto:contact@santiagoovalles.com"
+					>contact@santiagoovalles.com</a
+				>
 			</p>
 		</div>
 	</header>
