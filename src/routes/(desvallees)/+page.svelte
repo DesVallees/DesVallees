@@ -156,7 +156,7 @@
 <svelte:window on:keypress={handleKey} />
 
 <svelte:head>
-	<title>DesVallees - Santiago Ovalles' Portfolio</title>
+	<title>Santiago Ovalles</title>
 	<link rel="icon" href="/images/journee/logoWhite.webp" />
 	<meta name="author" content="Santiago Ovalles" />
 	<meta
@@ -194,7 +194,19 @@
 	/>
 
 	<div class="search">
-		<ion-icon name="search" />
+		<svg
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			class="icon"
+		>
+			<path
+				d="M11 2a9 9 0 0 1 7.4 14.6l4.3 4.3a1 1 0 0 1-1.4 1.4l-4.3-4.3A9 9 0 1 1 11 2zm0 2a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"
+				fill="currentColor"
+			/>
+		</svg>
 		<input
 			type="text"
 			autocomplete="off"
@@ -303,7 +315,7 @@
 		margin-bottom: 2rem;
 	}
 
-	.search ion-icon {
+	.search svg {
 		position: absolute;
 		left: 0.75em;
 		top: 50%;
