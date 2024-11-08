@@ -35,6 +35,7 @@ export const translator = {
         leaveYourReview: 'Leave Your Review',
         writeYourReview: 'Write your review',
         submit: 'Submit',
+        sending: 'Sending...',
         searchPlaceholder: 'Search...',
         catalog: 'Catalog',
         ourWork: 'Our Work',
@@ -165,6 +166,7 @@ export const translator = {
         teamClubSize: "Team / Club Size",
         message: "Message",
         howDidYouHearAboutUs: "How did you hear about RADA Cycling Wear Custom Apparel?",
+        optional: "Optional"
     },
     es: {
         comingSoon: 'Próximamente',
@@ -202,6 +204,7 @@ export const translator = {
         leaveYourReview: 'Deja tu Reseña',
         writeYourReview: 'Escribe tu reseña',
         submit: 'Enviar',
+        sending: 'Enviando...',
         searchPlaceholder: 'Buscar...',
         catalog: 'Catálogo',
         ourWork: 'Nuestro trabajo',
@@ -332,5 +335,6 @@ export const translator = {
         teamClubSize: "Tamaño del equipo / club",
         message: "Mensaje",
         howDidYouHearAboutUs: "¿Cómo te enteraste de la ropa personalizada de RADA Cycling Wear?",
+        optional: "Opcional"
     },
 };

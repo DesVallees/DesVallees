@@ -5,19 +5,23 @@
 	import toast from 'svelte-french-toast';
 	import { phoneFormat } from '../functions';
 
-	let email = '';
-	let message = '';
-	let teamName = '';
-	let teamSize = '';
-	let phone = '';
-	let firstName = '';
-	let lastName = '';
-
 	let phoneField: HTMLInputElement;
 
-	const submitForm = () => {
-		toast($dictionary.thankYouForYourMessage);
-	};
+	let isSubmitting: boolean = false;
+	export let form;
+	$: form, feedbackMessage();
+
+	function feedbackMessage() {
+		if (form?.success) {
+			toast.success($dictionary.thankYouForYourMessage, { style: 'font-size: 1.2em;' });
+		} else if (form?.error && isSubmitting) {
+			toast.error($dictionary.anErrorHasOccurred, {
+				style: 'font-size: 1.2em;',
+			});
+		}
+
+		isSubmitting = false;
+	}
 </script>
 
 <svelte:head>
@@ -55,52 +59,52 @@
 			>.
 		</p> -->
 
-		<form on:submit|preventDefault={submitForm} class="custom-form">
+		<form method="post" class="custom-form" on:submit={() => (isSubmitting = true)}>
 			<div class="form-row">
 				<input
 					id="firstName"
+					name="firstName"
 					type="text"
 					placeholder={$dictionary.firstName}
-					bind:value={firstName}
 					required
 				/>
 				<input
 					id="lastName"
+					name="lastName"
 					type="text"
 					placeholder={$dictionary.lastName}
-					bind:value={lastName}
 					required
 				/>
 			</div>
 
 			<input
 				id="teamName"
+				name="teamName"
 				type="text"
 				placeholder={$dictionary.teamName}
-				bind:value={teamName}
 				required
 			/>
 			<input
 				id="email"
+				name="email"
 				type="email"
 				placeholder={$dictionary.yourEmail}
-				bind:value={email}
 				required
 			/>
 
 			<div class="form-row">
 				<input
 					id="phone"
+					name="phone"
 					type="tel"
 					bind:this={phoneField}
 					on:input={() => phoneFormat(phoneField)}
 					placeholder={$dictionary.phoneNumber}
-					bind:value={phone}
 					required
 				/>
 			</div>
 
-			<select id="teamSize" bind:value={teamSize} required>
+			<select id="teamSize" name="teamSize" required>
 				<option value="" disabled selected>{$dictionary.teamClubSize}</option>
 				<option value="1-5">1-5</option>
 				<option value="6-10">6-10</option>
@@ -114,13 +118,18 @@
 
 			<textarea
 				id="message"
-				placeholder={$dictionary.message}
-				bind:value={message}
+				name="message"
+				placeholder="{$dictionary.message} ({$dictionary.optional})"
 				rows="4"
-				required
 			/>
 
-			<button type="submit">{$dictionary.submit}</button>
+			<button type="submit" disabled={isSubmitting}>
+				{#if isSubmitting}
+					{$dictionary.sending}
+				{:else}
+					{$dictionary.submit}
+				{/if}
+			</button>
 		</form>
 	</section>
 
