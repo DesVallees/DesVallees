@@ -106,7 +106,6 @@
 
 			<select id="teamSize" name="teamSize" required>
 				<option value="" disabled selected>{$dictionary.teamClubSize}</option>
-				<option value="1-5">1-5</option>
 				<option value="6-10">6-10</option>
 				<option value="11-30">11-30</option>
 				<option value="31-50">31-50</option>
