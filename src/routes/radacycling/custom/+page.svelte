@@ -31,10 +31,20 @@
 
 <main in:fade>
 	<header>
+		<img
+			class="bg"
+			src="{baseImageRoute}/custom/1.webp"
+			alt={$dictionary.customPageDescription}
+		/>
 		<picture>
 			<source srcset="{baseImageRoute}/custom/1.webp" media="(max-width: 650px)" />
-			<img src="{baseImageRoute}/custom/1.webp" alt={$dictionary.customPageDescription} />
+			<img
+				class="fg"
+				src="{baseImageRoute}/custom/1.webp"
+				alt={$dictionary.customPageDescription}
+			/>
 		</picture>
+
 		<h1 class="hide">{$dictionary.elevateYourTeamWithCustomDesigns}</h1>
 	</header>
 
@@ -169,13 +179,34 @@
 		overflow: hidden;
 	}
 
-	header img {
+	header .fg {
 		max-width: revert;
 		width: 100%;
-		object-position: center 90%;
 		height: 100%;
 
+		object-fit: contain;
+	}
+
+	@media screen and (max-width: 800px) {
+		header .fg {
+			object-fit: cover;
+		}
+	}
+
+	header .bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		max-width: revert;
+		width: 100%;
+		height: 100%;
+
+		filter: blur(12px);
+
 		object-fit: cover;
+		object-position: center 90%;
+		z-index: -1;
 	}
 
 	header h1 {
