@@ -25,7 +25,7 @@
 		display: grid;
 		grid-template-rows: repeat(2, 1fr);
 
-		max-width: fit-content;
+		max-width: 422px;
 		max-height: 50rem;
 	}
 
@@ -36,7 +36,7 @@
 	}
 
 	img {
-		height: auto;
+		height: 100%;
 		max-height: min(100vh, 50rem);
 		max-height: min(100svh, 50rem);
 		border-radius: 5px;

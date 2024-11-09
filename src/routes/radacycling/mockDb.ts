@@ -114,7 +114,7 @@ export let categories: Category[] = [
     },
     {
         id: 7,
-        imageSrc: "demo/category_man.webp",
+        imageSrc: "Resources/category_man.webp",
         smallImageSrc: "demo/man-small.webp",
         imageAlt: { en: "Complete collection of men's cycling wear", es: "Colección completa de ropa de ciclismo para hombres" },
         name: { en: "Men", es: "Hombres" },
@@ -195,7 +195,7 @@ export let categories: Category[] = [
     },
     {
         id: 15,
-        imageSrc: "demo/category_woman.webp",
+        imageSrc: "Resources/category_woman.webp",
         smallImageSrc: "demo/woman-small.webp",
         imageAlt: { en: "Complete collection of women's cycling wear", es: "Colección completa de ropa de ciclismo para mujeres" },
         name: { en: "Women", es: "Mujeres" },
