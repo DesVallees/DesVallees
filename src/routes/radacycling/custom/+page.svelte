@@ -60,7 +60,7 @@
 		<p>{$dictionary.bestChoice}</p>
 	</section>
 
-	<section id="contact-info">
+	<section class="formSection">
 		<!-- <h2>{$dictionary.contactUs}</h2>
 		<p>
 			{$dictionary.ifYourLookingForCustom}
@@ -261,6 +261,10 @@
 	li {
 		margin-left: 2ch;
 		margin-bottom: 1rem;
+	}
+
+	.formSection {
+		width: 100%;
 	}
 
 	.custom-form {

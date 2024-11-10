@@ -270,7 +270,7 @@
 	header img {
 		max-width: revert;
 		width: 100%;
-		object-position: center top;
+		object-position: center 20%;
 		height: 100%;
 
 		object-fit: cover;

@@ -115,7 +115,7 @@ export let categories: Category[] = [
     {
         id: 7,
         imageSrc: "Resources/category_man.webp",
-        smallImageSrc: "demo/man-small.webp",
+        smallImageSrc: "Resources/category_man.webp",
         imageAlt: { en: "Complete collection of men's cycling wear", es: "Colección completa de ropa de ciclismo para hombres" },
         name: { en: "Men", es: "Hombres" },
         description: { en: "Discover our comprehensive collection of men's cycling wear. Tailored for performance, comfort, and style.", es: "Descubre nuestra colección completa de ropa de ciclismo para hombres. Diseñada para rendimiento, confort y estilo." },
@@ -196,7 +196,7 @@ export let categories: Category[] = [
     {
         id: 15,
         imageSrc: "Resources/category_woman.webp",
-        smallImageSrc: "demo/woman-small.webp",
+        smallImageSrc: "Resources/category_woman.webp",
         imageAlt: { en: "Complete collection of women's cycling wear", es: "Colección completa de ropa de ciclismo para mujeres" },
         name: { en: "Women", es: "Mujeres" },
         description: { en: "Explore our full range of women's cycling wear, designed by women for women. Where comfort meets style, empowering your ride.", es: "Explora nuestra gama completa de ropa de ciclismo para mujeres, diseñada por mujeres para mujeres. Donde el confort se encuentra con el estilo, empoderando tu paseo." },
