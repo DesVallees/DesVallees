@@ -27,7 +27,7 @@
 	}
 
 	h2 {
-		font-size: clamp(1.7rem, 4vw, 2.25rem);
+		font-size: clamp(1.7rem, 4vw, 2.325rem);
 		font-weight: 600;
 		text-transform: capitalize;
 		margin-bottom: 1rem;

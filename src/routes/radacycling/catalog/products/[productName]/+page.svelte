@@ -23,6 +23,7 @@
 	} from '../../../mockDb';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import Carousel from '../../../components/carousel.svelte';
 
 	let product: Product | undefined;
 	let versions: Product[] | undefined;
@@ -171,10 +172,13 @@
 	{#key product}
 		<div class="product-container" in:fade>
 			<div class="image-container">
-				<img
-					src="{baseImageRoute}/{product.imageSrc}"
-					alt={product.imageAlt[$language]}
-					class="product-image"
+				<Carousel
+					images={product.imageSources}
+					imagesCommonDescription={product.imageAlt[$language]}
+					hideController={true}
+					style="border-radius: 0; aspect-ratio: initial; width: 100%;"
+					imgStyle="max-height: max(50vh, 20rem); box-shadow: 0 0 1.5rem var(--content-1);"
+					automaticImageChangeTime={60000}
 				/>
 
 				{#if versions}
@@ -182,13 +186,13 @@
 						{#each versions as item}
 							<a
 								aria-label={item.imageAlt[$language]}
-								class:current={product.imageSrc === item.imageSrc}
+								class:current={product.id === item.id}
 								href={item.href}
 								on:click={() => (resetTabWhenNewProduct = false)}
 							>
 								<img
 									width="50px"
-									src="{baseImageRoute}/{item.imageSrc}"
+									src="{baseImageRoute}/{item.imageSources[0]}"
 									alt={item.imageAlt[$language]}
 								/>
 							</a>
@@ -366,6 +370,12 @@
 		padding: 5rem 0 1rem;
 	}
 
+	@media screen and (max-width: 750px) {
+		.image-container {
+			padding-top: 4rem;
+		}
+	}
+
 	.image-container img {
 		max-height: max(50vh, 20rem);
 		width: auto;
@@ -403,10 +413,6 @@
 		height: 50px;
 		object-fit: cover;
 		border-radius: var(--borderRadius, 10px);
-	}
-
-	.product-image {
-		display: block;
 	}
 
 	.product-head {

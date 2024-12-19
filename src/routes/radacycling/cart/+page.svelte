@@ -40,7 +40,9 @@
 <div class="cart" in:fade>
 	{#key $cartItems}
 		{#if denormalizedData.length > 0}
-			<h1>{$dictionary.myCart}</h1>
+			<div class="header">
+				<h1>{$dictionary.myCart}</h1>
+			</div>
 			{#each denormalizedData as item (`${item.productId}-${item.sizeId}`)}
 				<div class="cart-item" transition:slide>
 					<a
@@ -95,20 +97,13 @@
 				</div>
 			{/each}
 
-			<div class="promo-code">
-				<input
-					type="text"
-					bind:value={promoCode}
-					placeholder={$dictionary.enterYourPromoCode}
-				/>
-				<button>{$dictionary.validate}</button>
-			</div>
 			<div class="pricing">
-				<div>{$dictionary.subtotal}: ${calculateSubtotal().toFixed(2)}</div>
-				<div>{$dictionary.deliveryFee}: ${deliveryFee.toFixed(2)}</div>
-				<div>{$dictionary.totalAmount}: ${calculateTotal().toFixed(2)}</div>
+				<div>{$dictionary.totalAmount}: ${calculateSubtotal().toFixed(2)}</div>
 			</div>
-			<a href="{baseRoute}/checkout" class="checkout-button">{$dictionary.checkout}</a>
+			<form method="post">
+				<input type="hidden" name="cartItems" value={JSON.stringify(denormalizedData)} />
+				<button type="submit" class="checkout-button">{$dictionary.checkout}</button>
+			</form>
 		{:else}
 			<div class="emptyCart">
 				<ion-icon name="bag-remove" />
@@ -133,7 +128,19 @@
 		min-height: 100%;
 		margin: 6rem auto 3rem;
 		padding: 0 1.25rem;
-		border-radius: 8px;
+	}
+
+	@media (max-width: 749px) {
+		.cart {
+			margin: 5rem auto 3rem;
+			padding: 0 1.25rem;
+		}
+	}
+
+	.header {
+		text-align: left;
+		border-bottom: 1px solid var(--content-8);
+		padding-bottom: 10px;
 	}
 
 	h1 {
@@ -240,36 +247,13 @@
 		text-align: end;
 	}
 
-	.promo-code {
-		display: flex;
-		justify-content: space-between;
-		margin: 3rem 0 1.5rem;
-	}
-
-	.promo-code input {
-		flex-grow: 1;
-		width: 10px;
-		padding: 10px;
-		margin-right: 10px;
-		border: 1px solid var(--content-8);
-		border-radius: 4px;
-	}
-
-	.promo-code button {
-		background-color: var(--interactive);
-		color: var(--main);
-		font-weight: bold;
-		border: none;
-		padding: 10px 20px;
-		cursor: pointer;
-		border-radius: 4px;
-	}
-
 	.pricing {
 		text-align: right;
-		margin: 3rem 0 2rem;
+		margin: 2rem 0 1rem;
 		display: grid;
 		gap: 1em;
+		font-size: 1.1em;
+		font-weight: 500;
 	}
 
 	.checkout-button {

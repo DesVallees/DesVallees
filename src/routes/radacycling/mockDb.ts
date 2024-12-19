@@ -543,8 +543,8 @@ export type Product = {
     name: translatableContent,
     description: translatableContent,
     details: TableEntry[],
-    imageSrc: string,
-    imgHoverSrc: string | undefined,
+    imageSources: string[],
+    imageHoverSource: string | undefined,
     imageAlt: translatableContent,
     price: string,
     oldPrice: string | undefined,
@@ -559,11 +559,11 @@ type TableEntry = {
     value: translatableContent;
 };
 
-export let storage: Record<string, Product> = {
-    "redJersey2024": {
+export let products: Record<string, Product> = {
+    "menjersey": {
         id: 0,
-        name: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
-        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
+        name: { en: "Men's Jersey", es: "Camiseta Para Hombres" },
+        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21],
         description: {
             en: `
                 Our Jersey is designed to sit close to the skin, made with a lightweight performance fabric that wicks away moisture, provides added sun protection, breathability, and improved comfort and support.
@@ -595,19 +595,19 @@ export let storage: Record<string, Product> = {
             { label: { en: 'Warranty', es: 'Garantía' }, value: { en: "1 Year Manufacturer's Warranty", es: "Garantía de 1 año del fabricante" } },
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine Washable, Do Not Iron', es: 'Lavable a máquina, no planchar' } },
         ],
-        imageSrc: "Resources/Jersey2024Red.webp",
-        imgHoverSrc: "Resources/Jersey2024RedBig.webp",
+        imageSources: ["Resources/jersey_men_1.jpeg", "Resources/jersey_men_2.jpeg", "Resources/jersey_men_3.jpeg", "Resources/jersey_men_4.jpeg", "Resources/jersey_men_5.jpeg"],
+        imageHoverSource: "Resources/jersey_men_2.jpeg",
         imageAlt: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
         price: "$89.99",
         oldPrice: undefined,
         mainVersion: true,
-        versionsIds: [0, 1],
-        href: "jersey-2024-red",
+        versionsIds: undefined,
+        href: "men-jersey",
     },
-    "blueJersey2024": {
+    "womenjersey": {
         id: 1,
-        name: { en: "Blue Jersey 2024", es: "Camiseta Azul 2024" },
-        categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
+        name: { en: "Women's Jersey", es: "Camiseta Para Mujeres" },
+        categoryIds: [0, 1, 3, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
             en: `
                 Our Jersey is designed to sit close to the skin, made with a lightweight performance fabric that wicks away moisture, provides added sun protection, breathability, and improved comfort and support.
@@ -639,19 +639,19 @@ export let storage: Record<string, Product> = {
             { label: { en: 'Warranty', es: 'Garantía' }, value: { en: "1 Year Manufacturer's Warranty", es: "Garantía de 1 año del fabricante" } },
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine Washable, Do Not Iron', es: 'Lavable a máquina, no planchar' } },
         ],
-        imageSrc: "Resources/Jersey2024Blue.webp",
-        imgHoverSrc: "Resources/cremalleraJersey.webp",
+        imageSources: ["Resources/jersey_women_1.jpeg", "Resources/jersey_women_2.jpeg", "Resources/jersey_women_3.jpeg", "Resources/jersey_women_4.jpeg"],
+        imageHoverSource: "Resources/jersey_women_2.jpeg",
         imageAlt: { en: "View Blue Jersey 2024", es: "Ver Camiseta Azul 2024" },
         price: "$89.99",
         oldPrice: undefined,
-        mainVersion: false,
-        versionsIds: [0, 1],
-        href: "jersey-2024-blue",
+        mainVersion: true,
+        versionsIds: undefined,
+        href: "women-jersey",
     },
-    "redCyclingBib": {
+    "menbib": {
         id: 2,
-        name: { en: "Red Cycling Bib 2024", es: "Pantalón de Ciclismo Rojo 2024" },
-        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
+        name: { en: "Men's Bib", es: "Pantalón de Ciclismo Para Hombres" },
+        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21],
         description: {
             en: `
                 Our bib shorts are designed with Italian pads and fabrics, offering added levels of comfort and compression. The lightweight, breathable construction of the bib and brace straps minimizes unwanted movement, while maintaining airflow through your body and providing a more comfortable fit during longer rides.
@@ -685,19 +685,19 @@ export let storage: Record<string, Product> = {
             { label: { en: 'UV Protection', es: 'Protección UV' }, value: { en: 'UPF 50+ sun protection', es: 'Protección solar UPF 50+' } },
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine wash cold, hang to dry', es: 'Lavar a máquina en frío, colgar para secar' } },
         ],
-        imageSrc: "Resources/CyclingBib2024.webp",
-        imgHoverSrc: "Resources/bibFocus.webp",
+        imageSources: ["Resources/bib_men_1.jpeg", "Resources/bib_men_2.jpeg", "Resources/bib_men_3.jpeg", "Resources/bib_men_4.jpeg", "Resources/bib_men_5.jpeg"],
+        imageHoverSource: "Resources/bib_men_2.jpeg",
         imageAlt: { en: "Red Cycling Bib 2024", es: "Pantalón de Ciclismo Rojo 2024" },
         price: "$109.99",
         oldPrice: undefined,
         mainVersion: true,
-        versionsIds: [2, 3],
-        href: "cycling-bib-2024-red",
+        versionsIds: undefined,
+        href: "men-bib",
     },
-    "blueCyclingBib": {
+    "womenbib": {
         id: 3,
-        name: { en: "Blue Cycling Bib 2024", es: "Pantalón de Ciclismo Azul 2024" },
-        categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
+        name: { en: "Women's Bib", es: "Pantalón de Ciclismo Para Mujeres" },
+        categoryIds: [2, 4, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
             en: `
                 Our bib shorts are designed with Italian pads and fabrics, offering added levels of comfort and compression. The lightweight, breathable construction of the bib and brace straps minimizes unwanted movement, while maintaining airflow through your body and providing a more comfortable fit during longer rides.
@@ -731,14 +731,14 @@ export let storage: Record<string, Product> = {
             { label: { en: 'UV Protection', es: 'Protección UV' }, value: { en: 'UPF 50+ sun protection', es: 'Protección solar UPF 50+' } },
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine wash cold, hang to dry', es: 'Lavar a máquina en frío, colgar para secar' } },
         ],
-        imageSrc: "Resources/CyclingBib2024Blue.webp",
-        imgHoverSrc: "Resources/bibFocus.webp",
+        imageSources: ["Resources/bib_women_1.jpeg", "Resources/bib_women_2.jpeg", "Resources/bib_women_3.jpeg", "Resources/bib_women_4.jpeg", "Resources/bib_women_5.jpeg"],
+        imageHoverSource: "Resources/bib_women_2.jpeg",
         imageAlt: { en: "View Blue Cycling Bib 2024", es: "Ver Pantalón Azul de Ciclismo 2024" },
         price: "$109.99",
         oldPrice: undefined,
-        mainVersion: false,
-        versionsIds: [2, 3],
-        href: "cycling-bib-2024-blue",
+        mainVersion: true,
+        versionsIds: undefined,
+        href: "women-bib",
     },
     "radaSocks": {
         id: 5,
@@ -761,8 +761,8 @@ export let storage: Record<string, Product> = {
             { label: { en: 'Packaging', es: 'Empaque' }, value: { en: 'Eco-Friendly, Biodegradable Bag', es: 'Bolsa biodegradable ecológica' } },
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine Wash Cold, Tumble Dry Low', es: 'Lavar a máquina en frío, secar en secadora a baja temperatura' } },
         ],
-        imageSrc: "Resources/RadaSocks.webp",
-        imgHoverSrc: undefined,
+        imageSources: ["Resources/RadaSocks.webp"],
+        imageHoverSource: undefined,
         imageAlt: { en: "RADA Socks", es: "Calcetines RADA" },
         price: "$18.00",
         oldPrice: undefined,
@@ -773,11 +773,11 @@ export let storage: Record<string, Product> = {
 };
 
 export function findProductsByIds(ids: number[]): Product[] {
-    // Convert the storage object to an array of products
-    const products = Object.values(storage);
+    // Convert the products object to an array of products
+    const productArray = Object.values(products);
 
     // Get products with the specified IDs
-    const matchingProducts = products.filter(product =>
+    const matchingProducts = productArray.filter(product =>
         ids.includes(product.id)
     );
 
@@ -785,11 +785,11 @@ export function findProductsByIds(ids: number[]): Product[] {
 }
 
 export function findProductsByCategoryIds(categoryIds: number[]): Product[] {
-    // Convert the storage object to an array of products
-    const products = Object.values(storage);
+    // Convert the products object to an array of products
+    const productArray = Object.values(products);
 
     // Filter products that include all of the specified category IDs
-    const matchingProducts = products.filter(product =>
+    const matchingProducts = productArray.filter(product =>
         categoryIds.every(id => product.categoryIds.includes(id) && product.mainVersion)
     );
 
@@ -797,12 +797,12 @@ export function findProductsByCategoryIds(categoryIds: number[]): Product[] {
 }
 
 export function findProductByHref(hrefParam: string): Product | undefined {
-    return Object.values(storage).find((product) => product.href === hrefParam);
+    return Object.values(products).find((product) => product.href === hrefParam);
 }
 
 export function findSimilarProducts(product: Product, count: number): Product[] {
-    // Convert storage object to an array and filter out the original product
-    const otherProducts = Object.values(storage).filter(
+    // Convert products object to an array and filter out the original product
+    const otherProducts = Object.values(products).filter(
         (p) =>
             p.id !== product.id &&
             p.mainVersion === true &&
@@ -814,6 +814,11 @@ export function findSimilarProducts(product: Product, count: number): Product[] 
 
     // Slice the array to get the specified count or the maximum amount possible
     return shuffledProducts.slice(0, count);
+}
+
+export function findProductsByHrefs(hrefs: string[]): Product[] {
+    let categoryIds = getCategoryIdsFromHrefs(hrefs);
+    return findProductsByCategoryIds(categoryIds);
 }
 // #endregion
 
@@ -901,7 +906,7 @@ export let reviews: Review[] = [
             'The red Cycling Bib 2024 fits like a glove and breathes so well. It\'s my new go-to for all my cycling tours.',
         name: 'daveanderson',
         imageSrc: '/images/lawyers/Rahul_Patel.jpg',
-        rating: 4,
+        rating: 5,
     },
     {
         productId: 3,
@@ -910,7 +915,7 @@ export let reviews: Review[] = [
             'Incredible comfort and sleek design! The Cycling Bib 2024 has made my rides more enjoyable. Highly recommend it to any cyclist!',
         name: 'lindseyb',
         imageSrc: '/images/lawyers/Ji-Yeon_Kim.jpg',
-        rating: 4,
+        rating: 5,
     },
 
     // Bib + Jersey + Socks Offer
@@ -939,7 +944,7 @@ export let reviews: Review[] = [
             'Fantastic set for any cyclist! The materials are top-notch and they look professional. The socks are the cherry on top.',
         name: 'sophiag',
         imageSrc: '/images/lawyers/Ji-Yeon_Kim.jpg',
-        rating: 4,
+        rating: 5,
     },
     {
         productId: 4,
@@ -967,7 +972,7 @@ export let reviews: Review[] = [
         text: 'I was skeptical about the price, but these socks are worth every penny. They feel like walking on clouds!',
         name: 'emilyrose',
         imageSrc: '/images/lawyers/Ji-Yeon_Kim.jpg',
-        rating: 4,
+        rating: 5,
     },
     {
         productId: 5,
@@ -975,7 +980,7 @@ export let reviews: Review[] = [
         text: 'Bought these for my hiking trips, and they’ve been fantastic. No blisters, and my feet stay dry!',
         name: 'mikejones',
         imageSrc: '/images/lawyers/Brian_Mitchell.jpg',
-        rating: 4,
+        rating: 5,
     },
     {
         productId: 5,
@@ -983,7 +988,7 @@ export let reviews: Review[] = [
         text: 'The comfort level of RADA Socks is unbeatable. Plus, they look great with all my shoes!',
         name: 'anna_k',
         imageSrc: '/images/lawyers/Emily_Davis.jpg',
-        rating: 4,
+        rating: 5,
     },
 ];
 
@@ -1020,7 +1025,7 @@ export type DenormalizedCartItem = {
 
 export function denormalizeCartItems(cartItems: CartItem[]): DenormalizedCartItem[] {
     return cartItems.map((item) => {
-        const product = Object.values(storage).find(product => product.id === item.productId);
+        const product = Object.values(products).find(product => product.id === item.productId);
         if (!product) {
             throw new Error(`Product with ID ${item.productId} not found`);
         }
@@ -1037,7 +1042,7 @@ export function denormalizeCartItems(cartItems: CartItem[]): DenormalizedCartIte
             sizeId: item.sizeId,
             quantity: item.quantity,
             name: `${product.name[storedLanguage]}${productSize ? " - " + storedDictionary.size + ' ' + productSize : ""}`,
-            imageSrc: product.imageSrc,
+            imageSrc: product.imageSources[0],
             description: product.description[storedLanguage],
             price: product.price,
             totalItemPrice: totalItemPrice,

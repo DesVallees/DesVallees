@@ -3,9 +3,10 @@
 	import { baseImageRoute, dictionary } from '../stores';
 	import CustomOverview from '../components/customOverview.svelte';
 	import toast from 'svelte-french-toast';
-	import { phoneFormat } from '../functions';
+	import PhoneInput from '../components/phoneInput.svelte';
 
-	let phoneField: HTMLInputElement;
+	let phone: string;
+	let valid: boolean;
 
 	let isSubmitting: boolean = false;
 	export let form;
@@ -103,15 +104,8 @@
 			/>
 
 			<div class="form-row">
-				<input
-					id="phone"
-					name="phone"
-					type="tel"
-					bind:this={phoneField}
-					on:input={() => phoneFormat(phoneField)}
-					placeholder={$dictionary.phoneNumber}
-					required
-				/>
+				<input class="hide" name="phone" bind:value={phone} />
+				<PhoneInput bind:value={phone} bind:valid />
 			</div>
 
 			<select id="teamSize" name="teamSize" required>
@@ -125,6 +119,12 @@
 				<option value="500+">500+</option>
 			</select>
 
+			<select id="contactMethod" name="contactMethod" required>
+				<option value="" disabled selected>{$dictionary.preferredContactMethod}</option>
+				<option value="email">{$dictionary.contactByEmail}</option>
+				<option value="whatsapp">{$dictionary.contactByWhatsApp}</option>
+			</select>
+
 			<textarea
 				id="message"
 				name="message"
@@ -132,9 +132,11 @@
 				rows="4"
 			/>
 
-			<button type="submit" disabled={isSubmitting}>
+			<button type="submit" disabled={isSubmitting || !valid}>
 				{#if isSubmitting}
 					{$dictionary.sending}
+				{:else if !valid}
+					{$dictionary.invalidPhoneNumber}
 				{:else}
 					{$dictionary.submit}
 				{/if}
@@ -252,6 +254,10 @@
 
 	button:hover {
 		background-color: #b30000;
+	}
+
+	button:disabled {
+		background-color: #b30000cc !important;
 	}
 
 	ul {

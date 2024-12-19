@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { storage, type Product, featuredCategories, denormalizeCategories } from './mockDb';
+	import {
+		type Product,
+		featuredCategories,
+		denormalizeCategories,
+		findProductsByHrefs,
+	} from './mockDb';
 	import { baseImageRoute, baseRoute, dictionary } from './stores';
 	import Landing from './components/landing.svelte';
 	import Reveal from './components/reveal.svelte';
@@ -10,8 +15,8 @@
 
 	const categories = denormalizeCategories(featuredCategories);
 
-	let popular: Product[] = [storage.redJersey2024, storage.redCyclingBib, storage.radaSocks];
-	let latest: Product[] = [storage.redCyclingBib, storage.radaSocks, storage.redJersey2024];
+	let popular: Product[] = findProductsByHrefs(['men']);
+	let latest: Product[] = findProductsByHrefs(['women']);
 </script>
 
 <svelte:head>
@@ -25,6 +30,8 @@
 	<Landing />
 
 	<section class="about">
+		<img src="{baseImageRoute}/newCollection.jpeg" alt={$dictionary.newCollection} />
+
 		<a class="aboutButton button" href="{baseRoute}/catalog">{$dictionary.newCollection}</a>
 	</section>
 
@@ -93,22 +100,42 @@
 	}
 
 	.about {
-		padding: 8rem 2rem;
+		position: relative;
+		width: 100%;
+		height: 7rem;
+		min-height: 22rem;
+		max-height: clamp(40rem, 5vw, 80rem);
+		overflow: hidden;
+
 		width: 100%;
 
 		background-color: black;
 	}
 
+	.about img {
+		width: 100%;
+		height: auto;
+
+		object-fit: contain;
+		object-position: center center;
+		transform: translateY(-28%);
+
+		filter: opacity(0.35);
+		box-shadow: 0 0 5px #00000040;
+	}
+
 	.aboutButton {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
 		font-size: clamp(1.25rem, 3.5vw, 1.5rem);
 		color: var(--main);
 		font-weight: 600;
 
 		text-transform: uppercase;
 		white-space: nowrap;
-
-		margin: auto;
-		margin-top: 2rem;
 	}
 
 	.categories {
@@ -130,7 +157,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 
-		padding: 0 clamp(1rem, 4vw, 3rem);
+		padding: 0 clamp(0.5rem, 4vw, 3rem);
 		margin-bottom: 2rem;
 		gap: 2rem;
 	}

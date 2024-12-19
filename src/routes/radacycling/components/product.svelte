@@ -6,8 +6,8 @@
 	export let product: Product;
 
 	let name: translatableContent = product.name;
-	let imageSrc: string = product.imageSrc;
-	let imgHoverSrc: string | undefined = product.imgHoverSrc;
+	let imageSrc: string = product.imageSources[0];
+	let imageHoverSource: string | undefined = product.imageHoverSource;
 	let imageAlt: translatableContent = product.imageAlt;
 	let price: string = product.price;
 	let oldPrice: string | undefined = product.oldPrice;
@@ -22,12 +22,12 @@
 	function handleImageHover() {
 		originalImageSrc = imageSrc;
 
-		if (imgHoverSrc) {
-			imageSrc = imgHoverSrc;
+		if (imageHoverSource) {
+			imageSrc = imageHoverSource;
 		}
 	}
 	function handleImageUnhover() {
-		if (imgHoverSrc) {
+		if (imageHoverSource) {
 			imageSrc = originalImageSrc;
 		}
 	}
@@ -68,8 +68,8 @@
 	let currentVersionSrc = imageSrc;
 	function changeVersion(version: Product) {
 		name = version.name;
-		imageSrc = version.imageSrc;
-		imgHoverSrc = version.imgHoverSrc;
+		imageSrc = version.imageSources[0];
+		imageHoverSource = version.imageHoverSource;
 		imageAlt = version.imageAlt;
 		price = version.price;
 		oldPrice = version.oldPrice;
@@ -113,12 +113,12 @@
 			{#each versions as item}
 				<button
 					aria-label={item.imageAlt[$language]}
-					class:current={currentVersionSrc === item.imageSrc}
+					class:current={currentVersionSrc === item.imageSources[0]}
 					on:click={() => changeVersion(item)}
 				>
 					<img
 						width="50px"
-						src="{baseImageRoute}/{item.imageSrc}"
+						src="{baseImageRoute}/{item.imageSources[0]}"
 						alt={item.imageAlt[$language]}
 					/>
 				</button>

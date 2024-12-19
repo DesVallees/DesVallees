@@ -1,14 +1,14 @@
 import nodemailer from 'nodemailer';
-import { GOOGLE_EMAIL, GOOGLE_EMAIL_PASSWORD } from "$env/static/private";
+import { EMAIL, EMAIL_PASSWORD } from "$env/static/private";
 
-let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
+const transporter = nodemailer.createTransport({
+    host: 'gtxm1140.siteground.biz', // SiteGround's mail server
+    port: 465, // SMTP Port for secure connections
+    secure: true, // Use SSL/TLS
     auth: {
-        user: GOOGLE_EMAIL,
-        pass: GOOGLE_EMAIL_PASSWORD,
-    },
+        user: EMAIL, // Your email address
+        pass: EMAIL_PASSWORD // Your email password
+    }
 });
 
 transporter.verify(function (error: any, success: any) {
