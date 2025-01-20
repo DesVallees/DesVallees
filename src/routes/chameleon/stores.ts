@@ -1,14 +1,28 @@
-import { derived, get, writable, type Writable } from 'svelte/store';
+import { derived, writable, type Writable } from 'svelte/store';
+import type { Player } from './peer';
 import { translator } from './translator';
 import { browser } from "$app/environment";
-import { db } from '$lib/firebase/chameleon';
 
-// Database
-export const dataReady: Writable<boolean> = writable(true);
-export const code: Writable<string> = writable();
+// Player state
+export const dataReady = writable(true);
+
+export const players = writable<Player[]>([]);
+export const isHost = writable(false);
+
+type GameState = {
+    phase: 'lobby' | 'in-progress' | 'voting' | 'results';
+    chameleon: string | null;
+    word: string | null;
+};
+
+export const gameState: Writable<GameState> = writable({
+    phase: 'lobby',
+    chameleon: null,
+    word: null
+});
 
 // Base Routes
-export const baseImageRoute = '/images/journee';
+export const baseImageRoute = '/images/chameleon';
 export const baseRoute = '/chameleon';
 
 

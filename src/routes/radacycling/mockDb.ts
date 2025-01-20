@@ -539,17 +539,18 @@ export function renderMenu(menu: MenuItem[]) {
 
 // #region Products
 export type Product = {
-    id: number,
+    id: string,
     name: translatableContent,
+    status: boolean,
     description: translatableContent,
     details: TableEntry[],
     imageSources: string[],
-    imageHoverSource: string | undefined,
+    imageHoverSource: string | null,
     imageAlt: translatableContent,
     price: string,
-    oldPrice: string | undefined,
+    oldPrice: string | null,
     mainVersion: boolean,
-    versionsIds: number[] | undefined,
+    versionsIds: string[] | null,
     href: string,
     categoryIds: number[]
 }
@@ -561,8 +562,9 @@ type TableEntry = {
 
 export let products: Record<string, Product> = {
     "menjersey": {
-        id: 0,
+        id: "menjersey",
         name: { en: "Men's Jersey", es: "Camiseta Para Hombres" },
+        status: true,
         categoryIds: [0, 1, 3, 7, 8, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21],
         description: {
             en: `
@@ -599,14 +601,15 @@ export let products: Record<string, Product> = {
         imageHoverSource: "Resources/jersey_men_2.jpeg",
         imageAlt: { en: "Red Jersey 2024", es: "Camiseta Roja 2024" },
         price: "$89.99",
-        oldPrice: undefined,
+        oldPrice: null,
         mainVersion: true,
-        versionsIds: undefined,
+        versionsIds: null,
         href: "men-jersey",
     },
     "womenjersey": {
-        id: 1,
+        id: "womenjersey",
         name: { en: "Women's Jersey", es: "Camiseta Para Mujeres" },
+        status: true,
         categoryIds: [0, 1, 3, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
             en: `
@@ -643,14 +646,15 @@ export let products: Record<string, Product> = {
         imageHoverSource: "Resources/jersey_women_2.jpeg",
         imageAlt: { en: "View Blue Jersey 2024", es: "Ver Camiseta Azul 2024" },
         price: "$89.99",
-        oldPrice: undefined,
+        oldPrice: null,
         mainVersion: true,
-        versionsIds: undefined,
+        versionsIds: null,
         href: "women-jersey",
     },
     "menbib": {
-        id: 2,
+        id: "menbib",
         name: { en: "Men's Bib", es: "Pantalón de Ciclismo Para Hombres" },
+        status: true,
         categoryIds: [2, 4, 7, 8, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21],
         description: {
             en: `
@@ -685,18 +689,19 @@ export let products: Record<string, Product> = {
             { label: { en: 'UV Protection', es: 'Protección UV' }, value: { en: 'UPF 50+ sun protection', es: 'Protección solar UPF 50+' } },
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine wash cold, hang to dry', es: 'Lavar a máquina en frío, colgar para secar' } },
         ],
-        imageSources: ["Resources/bib_men_1.jpeg", "Resources/bib_men_2.jpeg", "Resources/bib_men_3.jpeg", "Resources/bib_men_4.jpeg", "Resources/bib_men_5.jpeg"],
-        imageHoverSource: "Resources/bib_men_2.jpeg",
+        imageSources: ["Resources/bib_men_3.jpeg", "Resources/bib_men_4.jpeg", "Resources/bib_men_5.jpeg"],
+        imageHoverSource: "Resources/bib_men_4.jpeg",
         imageAlt: { en: "Red Cycling Bib 2024", es: "Pantalón de Ciclismo Rojo 2024" },
         price: "$109.99",
-        oldPrice: undefined,
+        oldPrice: null,
         mainVersion: true,
-        versionsIds: undefined,
+        versionsIds: null,
         href: "men-bib",
     },
     "womenbib": {
-        id: 3,
+        id: "womenbib",
         name: { en: "Women's Bib", es: "Pantalón de Ciclismo Para Mujeres" },
+        status: true,
         categoryIds: [2, 4, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21],
         description: {
             en: `
@@ -731,18 +736,19 @@ export let products: Record<string, Product> = {
             { label: { en: 'UV Protection', es: 'Protección UV' }, value: { en: 'UPF 50+ sun protection', es: 'Protección solar UPF 50+' } },
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine wash cold, hang to dry', es: 'Lavar a máquina en frío, colgar para secar' } },
         ],
-        imageSources: ["Resources/bib_women_1.jpeg", "Resources/bib_women_2.jpeg", "Resources/bib_women_3.jpeg", "Resources/bib_women_4.jpeg", "Resources/bib_women_5.jpeg"],
-        imageHoverSource: "Resources/bib_women_2.jpeg",
+        imageSources: ["Resources/bib_women_3.jpeg", "Resources/bib_women_4.jpeg", "Resources/bib_women_5.jpeg"],
+        imageHoverSource: "Resources/bib_women_4.jpeg",
         imageAlt: { en: "View Blue Cycling Bib 2024", es: "Ver Pantalón Azul de Ciclismo 2024" },
         price: "$109.99",
-        oldPrice: undefined,
+        oldPrice: null,
         mainVersion: true,
-        versionsIds: undefined,
+        versionsIds: null,
         href: "women-bib",
     },
     "radaSocks": {
-        id: 5,
+        id: "radaSocks",
         name: { en: "RADA Socks", es: "Calcetines RADA" },
+        status: true,
         categoryIds: [6, 7, 8, 9, 10, 11, 12, 13, 15],
         description: {
             en: `
@@ -762,17 +768,17 @@ export let products: Record<string, Product> = {
             { label: { en: 'Care Instructions', es: 'Instrucciones de cuidado' }, value: { en: 'Machine Wash Cold, Tumble Dry Low', es: 'Lavar a máquina en frío, secar en secadora a baja temperatura' } },
         ],
         imageSources: ["Resources/RadaSocks.webp"],
-        imageHoverSource: undefined,
+        imageHoverSource: null,
         imageAlt: { en: "RADA Socks", es: "Calcetines RADA" },
         price: "$18.00",
-        oldPrice: undefined,
+        oldPrice: null,
         mainVersion: true,
-        versionsIds: undefined,
+        versionsIds: null,
         href: "rada-socks",
     },
 };
 
-export function findProductsByIds(ids: number[]): Product[] {
+export function findProductsByIds(ids: string[]): Product[] {
     // Convert the products object to an array of products
     const productArray = Object.values(products);
 
@@ -824,7 +830,7 @@ export function findProductsByHrefs(hrefs: string[]): Product[] {
 
 // #region Reviews
 export type Review = {
-    productId: number,
+    productId: string,
     date: string,
     text: string,
     name: string,
@@ -835,7 +841,7 @@ export type Review = {
 export let reviews: Review[] = [
     // Jersey
     {
-        productId: 1,
+        productId: "menjersey",
         date: '01-20-2024',
         text:
             'Nice color and good fabric quality. This is the perfect size and the blue version matches my style perfectly.',
@@ -844,7 +850,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 0,
+        productId: 'menjersey',
         date: '01-25-2024',
         text:
             'Absolutely love the new Jersey 2024, the red color is vibrant and it feels very comfortable to wear.',
@@ -853,7 +859,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 0,
+        productId: 'menjersey',
         date: '02-01-2024',
         text:
             'The Jersey 2024 is amazing. It fits true to size and is very stylish for any event.',
@@ -862,7 +868,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 1,
+        productId: 'menjersey',
         date: '02-05-2024',
         text:
             'Great jersey, the material is high-quality and the blue is just the right shade. Highly recommend!',
@@ -871,7 +877,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 0,
+        productId: 'menjersey',
         date: '02-10-2024',
         text:
             'Picked up the Jersey 2024 for my workout sessions, and it’s been fantastic. Breathable and flexible!',
@@ -882,7 +888,7 @@ export let reviews: Review[] = [
 
     // Cycling Bib
     {
-        productId: 2,
+        productId: 'cyclingbib',
         date: '03-01-2024',
         text:
             'The Cycling Bib 2024 is a game-changer. The fit is exceptional, and it provides the comfort needed on long rides. Top-notch quality!',
@@ -891,7 +897,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 3,
+        productId: 'cyclingbib',
         date: '03-04-2024',
         text:
             'Just finished a century ride with the Cycling Bib 2024, and I couldn’t be happier. Supportive, stylish, and the blue color is stunning!',
@@ -900,7 +906,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 2,
+        productId: 'cyclingbib',
         date: '03-07-2024',
         text:
             'The red Cycling Bib 2024 fits like a glove and breathes so well. It\'s my new go-to for all my cycling tours.',
@@ -909,7 +915,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 3,
+        productId: 'cyclingbib',
         date: '03-10-2024',
         text:
             'Incredible comfort and sleek design! The Cycling Bib 2024 has made my rides more enjoyable. Highly recommend it to any cyclist!',
@@ -918,48 +924,9 @@ export let reviews: Review[] = [
         rating: 5,
     },
 
-    // Bib + Jersey + Socks Offer
-    {
-        productId: 4,
-        date: '01-30-2024',
-        text:
-            'The comfort level of the Bib + Jersey combo is unparalleled, and the free socks are a delightful bonus! Worth every penny.',
-        name: 'emilywright',
-        imageSrc: '/images/lawyers/Emily_Davis.jpg',
-        rating: 5,
-    },
-    {
-        productId: 4,
-        date: '02-15-2024',
-        text:
-            'Unbeatable deal! The jersey fits like a second skin, and the bibs are just the right amount of snug. Plus, free socks - amazing!',
-        name: 'jordanm',
-        imageSrc: '/images/lawyers/Brian_Mitchell.jpg',
-        rating: 5,
-    },
-    {
-        productId: 4,
-        date: '02-20-2024',
-        text:
-            'Fantastic set for any cyclist! The materials are top-notch and they look professional. The socks are the cherry on top.',
-        name: 'sophiag',
-        imageSrc: '/images/lawyers/Ji-Yeon_Kim.jpg',
-        rating: 5,
-    },
-    {
-        productId: 4,
-        date: '02-28-2024',
-        text:
-            'Just did a century ride in my new Bib + Jersey, and they performed excellently. The socks kept my feet comfy throughout.',
-        name: 'liammurphy',
-        imageSrc: '/images/lawyers/Marcus_Turner.jpg',
-        rating: 5,
-    },
-
-
     // Rada Socks
     {
-        productId: 5,
+        productId: 'radaSocks',
         date: '03-01-2024',
         text: 'These RADA Socks are a game-changer! Super comfortable for my daily runs and stylish enough for casual wear.',
         name: 'julianv',
@@ -967,7 +934,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 5,
+        productId: 'radaSocks',
         date: '03-03-2024',
         text: 'I was skeptical about the price, but these socks are worth every penny. They feel like walking on clouds!',
         name: 'emilyrose',
@@ -975,7 +942,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 5,
+        productId: 'radaSocks',
         date: '03-05-2024',
         text: 'Bought these for my hiking trips, and they’ve been fantastic. No blisters, and my feet stay dry!',
         name: 'mikejones',
@@ -983,7 +950,7 @@ export let reviews: Review[] = [
         rating: 5,
     },
     {
-        productId: 5,
+        productId: 'radaSocks',
         date: '03-07-2024',
         text: 'The comfort level of RADA Socks is unbeatable. Plus, they look great with all my shoes!',
         name: 'anna_k',
@@ -992,7 +959,7 @@ export let reviews: Review[] = [
     },
 ];
 
-export function findReviewsByProductId(productId: number): Review[] {
+export function findReviewsByProductId(productId: string): Review[] {
     return reviews.filter((review) => review.productId === productId);
 }
 
@@ -1012,7 +979,7 @@ export function calculateAverageRating(reviews: Review[]): string | undefined {
 export let deliveryFee = 8.18;
 
 export type DenormalizedCartItem = {
-    productId: number,
+    productId: string,
     sizeId?: number,
     quantity: number,
     name: string,
@@ -1051,7 +1018,7 @@ export function denormalizeCartItems(cartItems: CartItem[]): DenormalizedCartIte
     });
 }
 
-export function addToCart(productId: number, quantity: number, sizeId?: number, name?: string): void {
+export function addToCart(productId: string, quantity: number, sizeId?: number, name?: string): void {
     // Adds a product to the cart or updates the quantity if the product already exists.
     cartItems.update(items => {
         sizeId ||= 0
@@ -1088,7 +1055,7 @@ export function addToCart(productId: number, quantity: number, sizeId?: number, 
     });
 }
 
-export function removeFromCart(productId: number, name: string, sizeId?: number): void {
+export function removeFromCart(productId: string, name: string, sizeId?: number): void {
     sizeId ||= 0
 
     cartItems.update(items => items.filter(item => item.productId !== productId || item.sizeId !== sizeId));
@@ -1101,7 +1068,7 @@ export function removeFromCart(productId: number, name: string, sizeId?: number)
         })
 }
 
-export function getCartItemFromIDs(cartItemsStore: CartItem[], productId: number, sizeId?: number) {
+export function getCartItemFromIDs(cartItemsStore: CartItem[], productId: string, sizeId?: number) {
     sizeId ||= 0
 
     return Object.values(cartItemsStore).find(item => item.productId === productId && item.sizeId === sizeId)

@@ -5,8 +5,6 @@
 	import { baseImageRoute, baseRoute, language, dataReady, dictionary } from './stores';
 	import { sleep } from './functions';
 	import { Toaster } from 'svelte-french-toast';
-	import { goto } from '$app/navigation';
-	import { auth } from '$lib/firebase/journee';
 	import Preloader from './components/preloader.svelte';
 
 	let disappearAndAppear: boolean = false;

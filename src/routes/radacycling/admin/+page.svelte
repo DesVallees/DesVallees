@@ -1,16 +1,17 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { fade } from 'svelte/transition';
-
-	let code = $page.params.roomCode;
 </script>
 
-<div in:fade class="room">
+<div in:fade class="admin">
 	<span />
 </div>
 
+<svelte:head>
+	<title>Admin | Dashboard</title>
+</svelte:head>
+
 <style>
-	.room {
+	.admin {
 		display: grid;
 	}
 </style>

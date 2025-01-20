@@ -45,7 +45,7 @@
 			src: `${projectsImageRoute}/subito.webp`,
 		},
 		{
-			href: `https://www.ccsguitars.com/`,
+			href: `/ccs`,
 			name: `CCS Guitars`,
 			description: $dictionary.description_ccs,
 			src: `${projectsImageRoute}/ccsguitars.webp`,

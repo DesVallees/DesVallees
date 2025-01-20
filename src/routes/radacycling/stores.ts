@@ -38,7 +38,7 @@ userID.subscribe(async (value) => {
 })
 
 export type CartItem = {
-    productId: number,
+    productId: string,
     quantity: number,
     sizeId: number,
 }
