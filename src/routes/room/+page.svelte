@@ -1,6 +1,4 @@
 <script>
-	import { slide } from 'svelte/transition';
-
 	const baseRoute = '/images/room';
 
 	let galleryImages = [
@@ -25,6 +23,11 @@
 	let roomImage = `${baseRoute}/main_2.jpeg`;
 	let backgroundImage = `${baseRoute}/flyer.jpeg`;
 </script>
+
+<svelte:head>
+	<title>Looking for a roommate?</title>
+	<link rel="icon" href="https://fav.farm/🛏️" />
+</svelte:head>
 
 <div class="background">
 	<img src="{baseRoute}/house.jpeg" alt="background" loading="lazy" />
