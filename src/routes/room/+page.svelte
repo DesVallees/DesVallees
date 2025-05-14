@@ -16,6 +16,7 @@
 		`${baseRoute}/sink.jpeg`,
 		`${baseRoute}/bathroom.jpeg`,
 		`${baseRoute}/bath.jpeg`,
+		`${baseRoute}/parking.jpeg`,
 	];
 
 	let showAll = false;
