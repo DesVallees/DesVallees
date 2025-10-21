@@ -1,6 +1,8 @@
-<script>
-	// No need to import app.css as we have our own styles
-</script>
+svelte:<svelte:head>
+	<title>Apan | Flappy Bird</title>
+	<meta name="description" content="Apan Flappy Bird" />
+	<link rel="icon" href="https://fav.farm/🐤" />
+</svelte:head>
 
 <main>
 	<slot />
