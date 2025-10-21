@@ -46,6 +46,7 @@
 			startGameLoop();
 			setupEventListeners();
 			setupKeyboardControls();
+			setupTouchControls();
 		}
 	});
 
@@ -55,6 +56,7 @@
 		}
 		removeEventListeners();
 		removeKeyboardControls();
+		removeTouchControls();
 	});
 
 	// =====================
@@ -134,6 +136,33 @@
 			// Llamar directamente a la función de salto
 			jump();
 		}
+	}
+
+	// =====================
+	// CONTROLES TÁCTILES
+	// =====================
+	function setupTouchControls() {
+		if (!canvas) return;
+
+		canvas.addEventListener('touchstart', handleTouch, { passive: false });
+		canvas.addEventListener('click', handleClick);
+	}
+
+	function removeTouchControls() {
+		if (!canvas) return;
+
+		canvas.removeEventListener('touchstart', handleTouch);
+		canvas.removeEventListener('click', handleClick);
+	}
+
+	function handleTouch(event: TouchEvent) {
+		event.preventDefault();
+		jump();
+	}
+
+	function handleClick(event: MouseEvent) {
+		event.preventDefault();
+		jump();
 	}
 
 	function startGameLoop() {

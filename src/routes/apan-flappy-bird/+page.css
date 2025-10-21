@@ -201,7 +201,6 @@ body {
     top: calc(env(safe-area-inset-top) + 20px);
     right: calc(env(safe-area-inset-right) + 1rem);
     width: 160px;
-    height: 120px;
     border-radius: var(--border-radius);
     overflow: hidden;
     background: var(--card);
@@ -423,7 +422,6 @@ body {
 
     .pip {
         width: 132px;
-        height: 100px;
     }
 }
 
@@ -438,7 +436,6 @@ body {
     .pip {
         top: calc(env(safe-area-inset-top) + 5px);
         width: 100px;
-        height: 75px;
     }
 
     .modal .card {

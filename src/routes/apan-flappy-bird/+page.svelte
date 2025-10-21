@@ -164,17 +164,6 @@
 	function onJump() {
 		flap();
 	}
-
-	// =====================
-	// MANEJADORES DE CANVAS
-	// =====================
-	function handleCanvasClick() {
-		flap();
-	}
-
-	function handleCanvasDoubleClick() {
-		togglePause();
-	}
 </script>
 
 <!-- =====================
@@ -189,8 +178,6 @@
 		{bestScore}
 		on:scoreUpdate={onScoreUpdate}
 		on:gameOver={onGameOver}
-		on:click={handleCanvasClick}
-		on:dblclick={handleCanvasDoubleClick}
 	/>
 
 	<!-- HUD superior flotante -->
@@ -235,13 +222,13 @@
 				<ul class="tips">
 					<li>📸 Colócate a la vista de la cámara con un objeto rojo.</li>
 					<li>👆 También puedes tocar la pantalla o usar ESPACIO.</li>
-					<li>🔄 Doble toque para pausar/reanudar.</li>
+					<li>🕹️ Para empezar, haz clic en el botón o empieza a mover el objeto.</li>
 				</ul>
 				<button class="btn-primary" on:click={startGame}>🎮 Empezar</button>
 			{:else if currentGameState === 'paused'}
 				<h1>Juego en Pausa</h1>
 				<p class="sub">
-					El juego está pausado. Toca la pantalla o presiona ESPACIO para reanudar.
+					El juego está pausado. Haz clic en el botón o continúa moviéndote para reanudar.
 				</p>
 				<button class="btn-primary" on:click={resumeGame}>▶️ Reanudar</button>
 			{:else if currentGameState === 'gameover'}

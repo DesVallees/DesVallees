@@ -1,4 +1,4 @@
-svelte:<svelte:head>
+<svelte:head>
 	<title>Apan | Flappy Bird</title>
 	<meta name="description" content="Apan Flappy Bird" />
 	<link rel="icon" href="https://fav.farm/🐤" />
