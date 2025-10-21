@@ -19,6 +19,12 @@
 			description: $dictionary.description_journee,
 			src: `/images/journee/gufoLanding.webp`,
 		},
+		// {
+		// 	href: `https://vaqmas.com`,
+		// 	name: `VAQ+`,
+		// 	description: $dictionary.description_vaqmas,
+		// 	src: `${projectsImageRoute}/vaqmas.webp`,
+		// },
 		{
 			href: `https://eb2.cantolegal.com`,
 			name: `EB2`,
