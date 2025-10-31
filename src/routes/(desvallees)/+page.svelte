@@ -32,7 +32,7 @@
 			src: `${projectsImageRoute}/eb2.webp`,
 		},
 		{
-			href: `/radacycling`,
+			href: `https://radacycling.com`,
 			name: `RADA Cycling`,
 			description: $dictionary.description_rada,
 			src: `${projectsImageRoute}/rada.webp`,
