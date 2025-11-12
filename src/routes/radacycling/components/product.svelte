@@ -7,14 +7,14 @@
 
 	let name: translatableContent = product.name;
 	let imageSrc: string = product.imageSources[0];
-	let imageHoverSource: string | undefined = product.imageHoverSource;
+	let imageHoverSource: string | undefined = product.imageHoverSource ?? undefined;
 	let imageAlt: translatableContent = product.imageAlt;
-	let price: string = product.price;
-	let oldPrice: string | undefined = product.oldPrice;
+	let price: string = product.price ?? '';
+	let oldPrice: string | undefined = product.oldPrice ?? undefined;
 	let versions: Product[] | undefined = product.versionsIds
 		? findProductsByIds(product.versionsIds)
 		: undefined;
-	let href: string = product.href;
+	let href: string = product.href ?? '';
 
 	let img: HTMLImageElement;
 
@@ -68,12 +68,12 @@
 	let currentVersionSrc = imageSrc;
 	function changeVersion(version: Product) {
 		name = version.name;
-		imageSrc = version.imageSources[0];
-		imageHoverSource = version.imageHoverSource;
+		imageSrc = version.imageSources[0] ?? '';
+		imageHoverSource = version.imageHoverSource ?? undefined;
 		imageAlt = version.imageAlt;
-		price = version.price;
-		oldPrice = version.oldPrice;
-		href = version.href;
+		price = version.price ?? '';
+		oldPrice = version.oldPrice ?? undefined;
+		href = version.href ?? '';
 
 		currentVersionSrc = imageSrc;
 	}
